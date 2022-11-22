@@ -12,8 +12,10 @@ export function windowEnvPlugin (): PluginOption {
 
     name: 'window-env-plugin',
     transform (code) {
-      if (code.includes('import.meta.env.')) {
-        code = code.replace(/import\.meta\.env\./g, 'window.__env__.')
+      if (code.includes('import.meta.env.VITE_')) {
+        code = code.replace(/import\.meta\.env\.(VITE_.+)/g, (_, p1) => {
+          return `window.__env__.${p1}`
+        })
       }
       return code
     },
