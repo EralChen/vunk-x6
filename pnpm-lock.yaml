@@ -11,9 +11,9 @@ importers:
       '@lib-env/eslint-config': workspace:*
       '@lib-env/path': workspace:*
       '@lib-env/shared': workspace:*
-      '@skzz-app/components': workspace:*
-      '@skzz-app/shared': workspace:*
-      '@skzz/app': workspace:*
+      '@vunk-gsap/components': workspace:*
+      '@vunk-gsap/shared': workspace:*
+      '@vunk/gsap': workspace:*
       '@types/gulp': ^4.0.9
       '@types/node': ^18.0.4
       '@vunk/core': 0.0.0-alpha.31
@@ -34,9 +34,9 @@ importers:
       vue: ^3.2.38
     dependencies:
       '@element-plus/utils': link:packages/element-utils
-      '@skzz-app/components': link:packages/components
-      '@skzz-app/shared': link:packages/shared
-      '@skzz/app': link:packages/entry
+      '@vunk-gsap/components': link:packages/components
+      '@vunk-gsap/shared': link:packages/shared
+      '@vunk/gsap': link:packages/entry
       '@vunk/core': 0.0.0-alpha.31
       element-plus: 2.2.15_vue@3.2.38
       vue: 3.2.38
@@ -101,7 +101,7 @@ importers:
       '@docsearch/react': ^3.1.0
       '@element-plus/icons-vue': ^2.0.6
       '@iconify-json/ri': ^1.1.3
-      '@skzz/app': workspace:*
+      '@vunk/gsap': workspace:*
       '@types/markdown-it': ^12.2.3
       '@vitejs/plugin-vue-jsx': ^1.3.10
       '@vue/shared': ^3.2.37
@@ -132,7 +132,7 @@ importers:
     dependencies:
       '@docsearch/js': 3.1.1
       '@element-plus/icons-vue': 2.0.6
-      '@skzz/app': link:../packages/entry
+      '@vunk/gsap': link:../packages/entry
       '@vue/shared': 3.2.37
       '@vueuse/core': 8.9.4
       axios: 0.27.2

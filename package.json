@@ -24,9 +24,9 @@
 	},
 	"dependencies": {
 		"@element-plus/utils": "workspace:*",
-		"@skzz-app/components": "workspace:*",
-		"@skzz-app/shared": "workspace:*",
-		"@skzz/app": "workspace:*",
+		"@vunk-gsap/components": "workspace:*",
+		"@vunk-gsap/shared": "workspace:*",
+		"@vunk/gsap": "workspace:*",
 		"@vunk/core": "0.0.0-alpha.31",
 		"element-plus": "npm:element-plus@latest",
 		"vue": "^3.2.38"

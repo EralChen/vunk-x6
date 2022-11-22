@@ -34,7 +34,7 @@ const currentLink = computed(() => {
     <div class="header-container">
       <div class="logo-container">
         <a :href="currentLink">
-          @skzz/app
+          @vunk/gsap
           <!-- <img
             class="logo"
             src="/images/element-plus-logo.svg"
