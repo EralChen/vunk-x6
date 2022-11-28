@@ -11,6 +11,11 @@ export const routes: Array<RouteRecordRaw> = [
     component: () => import('_v/home.vue'),
   },
 
+  {
+    path: '/login',
+    component: () => import('_v/login/index.vue'),
+  },
+
 ]
 
 const router = createRouter({

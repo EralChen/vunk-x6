@@ -8,6 +8,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@vunk/form": "^0.0.1-alpha.39",
     "pinia": "^2.0.21",
     "qs": "^6.11.0",
     "vue-router": "^4.1.5"

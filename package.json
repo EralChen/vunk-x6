@@ -26,8 +26,8 @@
 		"@element-plus/utils": "workspace:*",
 		"@vunk-gsap/components": "workspace:*",
 		"@vunk-gsap/shared": "workspace:*",
+		"@vunk/core": "0.0.0-alpha.56",
 		"@vunk/gsap": "workspace:*",
-		"@vunk/core": "0.0.0-alpha.31",
 		"element-plus": "npm:element-plus@latest",
 		"vue": "^3.2.38"
 	},
