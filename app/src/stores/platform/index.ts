@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { PlatformInfo } from '@/types'
 import { setPlatform } from '@/utils'
-import { rPlatfromByCode } from '@/api/platform'
+import { rDefaultPlatfrom, rPlatfromByCode } from '@/api/platform'
 
 export const usePlatformStore = defineStore('platform', () => {
   const platformInfo = ref({} as PlatformInfo)
@@ -12,20 +12,27 @@ export const usePlatformStore = defineStore('platform', () => {
     setPlatform(res.code)
   }
 
-  const getPaltformInfo = () => { 
+  const getPlatformInfo =  () => {     
     return platformInfo.value
   }
 
-  const setPlatformInfoByCode = async (code: string) => { 
-    return rPlatfromByCode(code).then(res => {
-      setPlatformInfo(res)
-    })
+  const setPlatformInfoByCode = async (code?: string) => { 
+    if (!code) {
+      rDefaultPlatfrom().then(res => {
+        setPlatformInfo(res)
+      })
+    } else {
+      rPlatfromByCode(code).then(res => {
+        setPlatformInfo(res)
+      })
+    }
+
   }
 
   return { 
     platformInfo, 
     setPlatformInfoByCode,
-    getPaltformInfo,
+    getPlatformInfo,
     setPlatformInfo, 
   }
   

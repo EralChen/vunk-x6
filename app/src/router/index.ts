@@ -11,6 +11,7 @@ export const routes: Array<RouteRecordRaw> = [
     component: () => import('_v/home.vue'),
   },
 
+
   {
     path: '/login/:platform',
     props: true,

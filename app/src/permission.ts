@@ -1,5 +1,4 @@
 import { getToken, removeToken } from '@vunk/skzz/shared/utils-auth'
-import { getPlatform } from '@/utils'
 import { useUserStore } from '@/stores/user'
 import router from './router'
 import { usePlatformStore } from '@/stores/platform'
@@ -11,10 +10,12 @@ router.beforeEach(async (to, from, next) => {
   const platformStore = usePlatformStore()
   const userStore = useUserStore()
 
-  const loginPath = '/login/' + getPlatform()
+  // 获取当前所处平台
   const platform = to.params.platform as string
-
   await platformStore.setPlatformInfoByCode(platform)
+
+  // 当前平台 登录地址
+  const loginPath = '/login/' + platformStore.getPlatformInfo().code
 
   // determine whether the user has logged in
   const token = getToken()

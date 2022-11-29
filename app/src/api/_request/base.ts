@@ -9,7 +9,7 @@ export const restFetch = new RestFetch({
 
 export const request = async <T>(...args: Parameters<typeof restFetch.request>) => {
   const platformStore = usePlatformStore()
-  const platform = platformStore.getPaltformInfo()
+  const platform = platformStore.getPlatformInfo()
   restFetch.baseURL = platform.url
 
   const data = await restFetch.request<R<T>>(...args)
