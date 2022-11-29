@@ -1,20 +1,24 @@
-import { getApplication, getToken, removeToken, setApplication } from '@vunk/skzz/shared/utils-auth'
-import { useUserStore } from '@vunk/skzz/stores'
-import { rUserInfo } from './api'
+import { getToken, removeToken } from '@vunk/skzz/shared/utils-auth'
+import { getPlatform } from '@/utils'
+import { useUserStore } from '@/stores/user'
 import router from './router'
+import { usePlatformStore } from '@/stores/platform'
 
 const whiteList: (RegExp|string)[] = [/^\/login/] // no redirect whitelist
 
 
 router.beforeEach(async (to, from, next) => {
-  const loginPath = '/login/' + getApplication()
-  const appId = to.params.appId as string || 'platform'
-  setApplication(appId)
+  const platformStore = usePlatformStore()
+  const userStore = useUserStore()
 
+  const loginPath = '/login/' + getPlatform()
+  const platform = to.params.platform as string
+
+  await platformStore.setPlatformInfoByCode(platform)
 
   // determine whether the user has logged in
   const token = getToken()
-  const userStore = useUserStore()
+
 
   if (token) {
     if (to.path === loginPath) {
@@ -36,7 +40,7 @@ router.beforeEach(async (to, from, next) => {
           // const { roles } = await store.dispatch('user/getInfo')
           
           // TODO appId.value
-          await rUserInfo()
+          await userStore.setUserInfoByToken()
 
           // [TODO] if rUserInfo get roles.length ===  0
 
