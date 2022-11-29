@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import FormVue from './form.vue'
+import FormVue from './form/index.vue'
 </script>
 <template>
   <FormVue></FormVue>
