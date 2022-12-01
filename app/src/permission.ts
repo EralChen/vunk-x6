@@ -2,6 +2,7 @@ import { getToken, removeToken } from '@vunk/skzz/shared/utils-auth'
 import { useUserStore } from '@/stores/user'
 import router from './router'
 import { usePlatformStore } from '@/stores/platform'
+import { usePermissionStore } from '@/stores/permission'
 
 const whiteList: (RegExp|string)[] = [/^\/login/] // no redirect whitelist
 
@@ -9,6 +10,7 @@ const whiteList: (RegExp|string)[] = [/^\/login/] // no redirect whitelist
 router.beforeEach(async (to, from, next) => {
   const platformStore = usePlatformStore()
   const userStore = useUserStore()
+  const permissionStore = usePermissionStore()
 
   // 获取当前所处平台
   const platform = to.params.platform as string
@@ -25,7 +27,9 @@ router.beforeEach(async (to, from, next) => {
     if (to.path === loginPath) {
 
       // if is logged in, redirect to the home page
-      next({ path: '/' })
+      import.meta.env.DEV ? next() : next(
+        { path: '/' },
+      )
 
     } else {
       // determine whether the user has obtained his permission roles through getInfo
@@ -46,16 +50,17 @@ router.beforeEach(async (to, from, next) => {
           // [TODO] if rUserInfo get roles.length ===  0
 
           // generate accessible routes map based on roles
-          // const accessRoutes = await store.dispatch('permission/generateRoutes', roles)
-
+          await permissionStore.setMenusByToken()
+    
           // dynamically add accessible routes
-          // router.addRoutes(accessRoutes)
-
+          permissionStore.routes.forEach(route => {
+            router.addRoute(route)
+          })
 
           // hack method to ensure that addRoutes is complete
           // set the replace: true, so the navigation will not leave a history record
-          // next({ ...to, replace: true })
-          next()
+          next({ ...to, replace: true })
+          // next()
 
         } catch (error) {
           // remove token and go to login page to re-login

@@ -1,14 +1,22 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import DEMO_MASTER from './_demo-master'
+import Layout from '@/layouts/default/index.vue'
 export const routes: Array<RouteRecordRaw> = [
   ...DEMO_MASTER,
   {
     path: '/',
     redirect: '/home',
   },
+  
   {
     path: '/home',
-    component: () => import('_v/home.vue'),
+    component: Layout,
+    children: [
+      {
+        path: '',
+        component: () => import('_v/home/index.vue'),
+      },
+    ],
   },
 
 

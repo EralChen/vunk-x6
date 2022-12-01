@@ -33,3 +33,9 @@ export const loginByPassword = (data: FirstParameter<typeof restFetch.login>) =>
   })
 }
 
+export const rMenus = (client?: string) => {
+  return restFetch.rMenus(client).then(res => {
+    return res
+  })
+}
+

@@ -4,6 +4,7 @@ import { setData } from '@vunk/core'
 import { ref } from 'vue'
 import { LoginFormData } from './types'
 import { loginByPassword } from '@/api/login'
+
 const data = ref({} as LoginFormData)
 
 </script>
@@ -35,3 +36,16 @@ const data = ref({} as LoginFormData)
   height: 100%;
 }
 </style>
+
+<!-- <style>
+.el-form-item {
+  position: relative;
+}
+.el-form-item label{
+  position: absolute;
+  top: -24px;
+  left: 0;
+  font-size: 12px;
+  transition: .5s;
+}
+</style> -->

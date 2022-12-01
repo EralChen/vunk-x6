@@ -9,6 +9,7 @@ export const useUserStore = defineStore('user', () => {
   const setUserInfoByToken = async () => {
     return rUserInfo().then(res => {
       setUserInfo(res)
+      return res
     })
   }
   return { 

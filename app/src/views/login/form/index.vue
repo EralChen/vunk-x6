@@ -4,6 +4,7 @@ import { FormItemRendererSource, VkfForm } from '@vunk/form'
 import { PropType } from 'vue'
 import { LoginFormData } from '../types'
 import CaptchaVue from './captcha.vue'
+
 const props = defineProps({
   data: {
     type: Object as PropType<LoginFormData>,
@@ -23,14 +24,20 @@ const formItems: FormItemRendererSource<keyof LoginFormData>[] = [
     label: '用户名',
     labelWidth,
     prop: 'userCode',
-    required: true,
+    rules: {
+      required: true,
+      message: '请输入用户名',
+    },
   },
   {
     templateType: 'VkfInput',
     label: '密码',
     labelWidth,
     prop: 'password',
-    required: true,
+    rules: {
+      required: true,
+      message: '请输入密码',
+    },
   },
   {
     templateType: 'Component',
@@ -54,6 +61,7 @@ const formItems: FormItemRendererSource<keyof LoginFormData>[] = [
     },
   },
 ]
+
 </script>
 <template>
   <VkfForm 
