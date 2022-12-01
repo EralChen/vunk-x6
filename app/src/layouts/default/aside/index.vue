@@ -3,6 +3,7 @@ import { ElMenu } from 'element-plus'
 import { usePermissionStore } from '@/stores/permission'
 import { ref } from 'vue'
 import { VkRoutesMenuContent } from '@vunk/skzz/components/routes-menu-content'
+import LinkVue from './link.vue'
 const permissionStore = usePermissionStore()
 const collapse = ref(false)
 
@@ -13,11 +14,10 @@ const collapse = ref(false)
     :collapse="collapse"
   >
     <VkRoutesMenuContent :data="permissionStore.routes">
-      <template #default="{ data }">
-        <RouterLink :to="data.path" class="layout-default-aside-link">
-          <!-- {{ data.meta?.name }} -->
-          {{ data.path }}
-        </RouterLink>
+      <template #default="{ data, isMenu }">
+        <LinkVue :isMenu="isMenu" :data="data">
+          {{ data.meta?.name }}
+        </LinkVue>
       </template>
     </VkRoutesMenuContent>
   </ElMenu>
@@ -39,14 +39,6 @@ const collapse = ref(false)
   &.el-menu--vertical:not(.el-menu--collapse):not(.el-menu--popup-container) .el-menu-item{
     padding-left: initial;
   }
-}
-.layout-default-aside-link{
-  width: 100%;
-  padding-left: calc(
-    var(--el-menu-base-level-padding) 
-    + var(--el-menu-level) 
-    * var(--el-menu-level-padding)
-  );
 }
 
 </style>
