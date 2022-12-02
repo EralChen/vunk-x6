@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-import { defineComponent } from 'vue'
 import AsideVue from './aside/index.vue'
+import HeaderVue from './header/index.vue'
+import { VkDuplexCalc } from '@vunk/core'
 </script>
 <template>
   <div sk-flex class="layout-default">
@@ -8,18 +9,24 @@ import AsideVue from './aside/index.vue'
       <AsideVue></AsideVue>
     </div>
 
-    <div>
+    <VkDuplexCalc class="layout-default-main">
+      <template #one>
+        <HeaderVue></HeaderVue>
+      </template>
+      
       <RouterView></RouterView>
-    </div>
+    </VkDuplexCalc>
   
   </div>
 </template>
 <style>
 .layout-default {
   height: 100%;
-  width: 100%;
 }
 .layout-default-aside-x{
   height: 100%;
+}
+.layout-default-main{
+  width: 100%;
 }
 </style>

@@ -38,11 +38,9 @@ export default defineComponent({
       }"
     >
       <slot 
-        name="title" 
         :isActive="isActive" 
         :isExactActive="isExactActive"
       >
-
         {{ data.meta?.name }}
       </slot>
     </a>
@@ -51,16 +49,12 @@ export default defineComponent({
 </template>
 <style>
 .layout-default-aside-link{
-  width: 100%;
-  padding-left: calc(
-    var(--el-menu-base-level-padding) 
-    + var(--el-menu-level) 
-    * var(--el-menu-level-padding)
-  );
   text-decoration: none;
   color: var(--el-menu-text-color);
 }
+
 .layout-default-aside-link.is-active{
   color: var(--el-menu-item-active-color);
 }
 </style>
+

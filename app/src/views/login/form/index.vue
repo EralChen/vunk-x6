@@ -41,6 +41,7 @@ const formItems: FormItemRendererSource<keyof LoginFormData>[] = [
   },
   {
     templateType: 'Component',
+    // will set captchaId and captcha
     is: () => <CaptchaVue
       data={props.data}
       labelWidth={labelWidth}

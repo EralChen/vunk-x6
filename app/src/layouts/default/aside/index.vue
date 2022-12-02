@@ -1,24 +1,58 @@
 <script lang="ts" setup>
-import { ElMenu } from 'element-plus'
+import { ElMenu, ElIcon } from 'element-plus'
 import { usePermissionStore } from '@/stores/permission'
-import { ref } from 'vue'
 import { VkRoutesMenuContent } from '@vunk/skzz/components/routes-menu-content'
 import LinkVue from './link.vue'
-const permissionStore = usePermissionStore()
-const collapse = ref(false)
+import { useLayoutStore } from '@/stores/layout'
+import { Document } from '@element-plus/icons-vue'
+import { onUnmounted } from 'vue'
 
+
+const permissionStore = usePermissionStore()
+const layoutStore = useLayoutStore()
+
+
+document.addEventListener('click', upLinkClickToItem)
+onUnmounted(() => {
+  document.removeEventListener('click', upLinkClickToItem)
+})
+
+function upLinkClickToItem (e: MouseEvent) {
+  const path = e.composedPath()
+  const elMenuItem = path.find((item) => {
+    return item instanceof Element && item.classList.contains('el-menu-item')
+  }) as HTMLElement
+
+  if (elMenuItem) {
+    elMenuItem.getElementsByTagName('a')[0]?.click()
+  }
+}
 </script>
 <template>
   <ElMenu 
     class="layout-default-aside"
-    :collapse="collapse"
+    :collapse="layoutStore.asideInfo.menuCollapse"
   >
-    <VkRoutesMenuContent :data="permissionStore.routes">
-      <template #default="{ data, isMenu }">
-        <LinkVue :isMenu="isMenu" :data="data">
-          {{ data.meta?.name }}
+    <VkRoutesMenuContent :data="permissionStore.routes" :popperClass="'layout-default-aside-popper'">
+      <template #item="{ data }">
+        <LinkVue :isMenu="false" :data="data">
+          <ElIcon class="layout-default-aside-item-icon"><Document></Document></ElIcon>
         </LinkVue>
       </template>
+
+      <template #itemTitle="{ data }">
+        <span>{{ data.meta?.name }}</span> 
+      </template>
+
+      <template #menuTitle="{ data }">
+        <LinkVue :isMenu="true" :data="data">
+          <ElIcon class="layout-default-aside-item-icon"><Document></Document></ElIcon>
+        </LinkVue>
+
+        <span>{{ data.meta?.name }}</span> 
+
+      </template>
+
     </VkRoutesMenuContent>
   </ElMenu>
 </template>
@@ -31,14 +65,4 @@ const collapse = ref(false)
 }
 </style>
 
-<style lang="scss">
-.layout-default-aside{
-  &.el-menu--vertical:not(.el-menu--collapse):not(.el-menu--popup-container) .el-sub-menu__title{
-    padding-left: initial;
-  }
-  &.el-menu--vertical:not(.el-menu--collapse):not(.el-menu--popup-container) .el-menu-item{
-    padding-left: initial;
-  }
-}
 
-</style>
