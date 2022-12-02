@@ -6,6 +6,7 @@ import LinkVue from './link.vue'
 import { useLayoutStore } from '@/stores/layout'
 import { Document } from '@element-plus/icons-vue'
 import { onUnmounted } from 'vue'
+import CollapseVue from './Collapse.vue'
 
 
 const permissionStore = usePermissionStore()
@@ -29,8 +30,10 @@ function upLinkClickToItem (e: MouseEvent) {
 }
 </script>
 <template>
+<div class="layout-default-aside">
+
   <ElMenu 
-    class="layout-default-aside"
+    class="layout-default-aside-menu"
     :collapse="layoutStore.asideInfo.menuCollapse"
   >
     <VkRoutesMenuContent :data="permissionStore.routes" :popperClass="'layout-default-aside-popper'">
@@ -55,14 +58,40 @@ function upLinkClickToItem (e: MouseEvent) {
 
     </VkRoutesMenuContent>
   </ElMenu>
+  
+  <CollapseVue class="layout-default-aside-collapse"></CollapseVue>
+</div>
 </template>
+
 <style>
-.layout-default-aside{
-  height: 100%;
+.layout-default-aside-collapse{
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(100%, -50%);
+  cursor: pointer;
 }
-.layout-default-aside:not(.el-menu--collapse) {
+.layout-default-aside{
+  position: relative;
+}
+
+.layout-default-aside-menu:not(.el-menu--collapse) {
   width: 200px;
 }
 </style>
 
+<style>
+.layout-default-aside:hover .layout-default-aside-collapse{
+  opacity: 1;
+}
+.layout-default-aside-collapse{
+  opacity: 0;
+  transition: opacity 3s cubic-bezier(.15,.84,0,1.06);
+}
+</style>
 
+<style>
+.layout-default-aside-menu, .layout-default-aside{
+  height: 100%;
+}
+</style>

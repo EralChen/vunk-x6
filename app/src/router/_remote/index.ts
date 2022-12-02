@@ -5,6 +5,14 @@ export const createRemoteRoutes = () => {
   return {
     '/dashboard': {
       component: () => import('@/views/dashboard/index.vue'),
+      meta: {
+        
+      },
+    },
+    '/tenant-setup': {
+      meta: {
+        alwaysShow: true,
+      },
     },
     '/system': {
       component: Layout,

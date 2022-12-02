@@ -27,7 +27,8 @@ router.beforeEach(async (to, from, next) => {
     if (to.path === loginPath) {
 
       // if is logged in, redirect to the home page
-      import.meta.env.DEV ? next() : next(
+      // import.meta.env.DEV ? next() : 
+      next(
         { path: '/' },
       )
 
@@ -56,6 +57,7 @@ router.beforeEach(async (to, from, next) => {
           permissionStore.routes.forEach(route => {
             router.addRoute(route)
           })
+
 
           // hack method to ensure that addRoutes is complete
           // set the replace: true, so the navigation will not leave a history record

@@ -3,11 +3,7 @@ import DEMO_MASTER from './_demo-master'
 import Layout from '@/layouts/default/index.vue'
 export const routes: Array<RouteRecordRaw> = [
   ...DEMO_MASTER,
-  {
-    path: '/',
-    redirect: '/home',
-  },
-  
+
   {
     path: '/home',
     component: Layout,

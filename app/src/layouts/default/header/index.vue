@@ -3,6 +3,6 @@ import CollapseVue from './Collapse.vue'
 </script>
 <template>
   <div>
-    <CollapseVue></CollapseVue>
+    <!-- <CollapseVue></CollapseVue> -->
   </div>
 </template>
