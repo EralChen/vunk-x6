@@ -1,5 +1,5 @@
 {
-  "name": "@vunk-gsap/shared",
+  "name": "@skzz-platform/shared",
   "private": true,
   "module": "index.ts",
   "scripts": {

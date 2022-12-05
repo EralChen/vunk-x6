@@ -1,12 +1,14 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import DEMO_MASTER from './_demo-master'
 import Layout from '@/layouts/default/index.vue'
+import UI_CONFIG from './ui-config'
 export const routes: Array<RouteRecordRaw> = [
-  ...DEMO_MASTER,
 
   {
     path: '/home',
-    component: Layout,
+    component: (() => Layout)(),
+    meta: {
+      display: 0,
+    },
     children: [
       {
         path: '',
@@ -15,13 +17,16 @@ export const routes: Array<RouteRecordRaw> = [
     ],
   },
 
-
   {
     path: '/login/:platform',
     props: true,
+    meta: {
+      display: 0,
+    },
     component: () => import('_v/login/index.vue'),
   },
 
+  ...UI_CONFIG,
 ]
 
 const router = createRouter({

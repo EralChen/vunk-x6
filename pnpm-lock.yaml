@@ -13,10 +13,10 @@ importers:
       '@lib-env/shared': workspace:*
       '@types/gulp': ^4.0.9
       '@types/node': ^18.0.4
-      '@vunk-gsap/components': workspace:*
-      '@vunk-gsap/shared': workspace:*
-      '@vunk/core': 0.0.0-alpha.56
-      '@vunk/gsap': workspace:*
+      '@skzz-platform/components': workspace:*
+      '@skzz-platform/shared': workspace:*
+      '@vunk/core': 0.0.0-alpha.59
+      '@skzz/platform': workspace:*
       consola: ^2.15.3
       element-plus: npm:element-plus@latest
       eslint: ^8.19.0
@@ -34,10 +34,10 @@ importers:
       vue: ^3.2.38
     dependencies:
       '@element-plus/utils': link:packages/element-utils
-      '@vunk-gsap/components': link:packages/components
-      '@vunk-gsap/shared': link:packages/shared
-      '@vunk/core': 0.0.0-alpha.56
-      '@vunk/gsap': link:packages/entry
+      '@skzz-platform/components': link:packages/components
+      '@skzz-platform/shared': link:packages/shared
+      '@vunk/core': 0.0.0-alpha.59
+      '@skzz/platform': link:packages/entry
       element-plus: 2.2.25_vue@3.2.45
       vue: 3.2.45
     devDependencies:
@@ -113,7 +113,7 @@ importers:
       '@vitejs/plugin-vue-jsx': ^1.3.10
       '@vue/shared': ^3.2.37
       '@vueuse/core': ^8.7.5
-      '@vunk/gsap': workspace:*
+      '@skzz/platform': workspace:*
       axios: ^0.27.2
       chalk: ^4.1.2
       clipboard-copy: ^4.0.1
@@ -142,7 +142,7 @@ importers:
       '@element-plus/icons-vue': 2.0.10
       '@vue/shared': 3.2.45
       '@vueuse/core': 8.9.4
-      '@vunk/gsap': link:../packages/entry
+      '@skzz/platform': link:../packages/entry
       axios: 0.27.2
       clipboard-copy: 4.0.1
       markdown-it: 13.0.1
@@ -2893,18 +2893,14 @@ packages:
       - vue
     dev: false
 
-  /@vunk/core/0.0.0-alpha.56:
-    resolution: {integrity: sha512-QnGsLg/O8j3v8B7qRY9v/TxS8qXW7Igb4lJyvF/zAXLLjbQMGXsXIDicyiJ5QsDAG79NrlHfqOY3WMMoTy+8fw==}
-    dev: false
-
-  /@vunk/core/0.0.0-alpha.58:
-    resolution: {integrity: sha512-eNLARIcXK43XaOQqgsTIBoR+rbmih3TedvFNEeLUqxZ6XqyUtGvyFM4wkbWeFfymagkWCqqk/The67WMwsUnGg==}
+  /@vunk/core/0.0.0-alpha.59:
+    resolution: {integrity: sha512-P6wzp3EGk9rC1yxWy/0JGUB/PmwZbM7UiSCEBJiAZsynOoqgWycJxxSqLahOid7TkYjY6PfBR69Vd8U1miyNHA==}
     dev: false
 
   /@vunk/form/0.0.1-alpha.39:
     resolution: {integrity: sha512-9/DnYqIayQbbeTuiHjibQFASFBuNZeM+z5M1BwyGkHEKx1D1lTkdqrGiM1pQQ8INxheheMaZxsEzblsJ4mlaSA==}
     dependencies:
-      '@vunk/core': 0.0.0-alpha.58
+      '@vunk/core': 0.0.0-alpha.59
     dev: false
 
   /@vunk/skzz/0.0.0-alpha.48:

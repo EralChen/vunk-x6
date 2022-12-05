@@ -1,5 +1,5 @@
 {
-  "name": "@vunk-gsap/app",
+  "name": "@skzz-platform/app",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",

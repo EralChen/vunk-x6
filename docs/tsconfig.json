@@ -12,7 +12,7 @@
     "skipLibCheck": true,
     "lib": ["WebWorker"],
     "paths": {
-      "@vunk/gsap": ["../packages/entry"],
+      "@skzz/platform": ["../packages/entry"],
       "~/*": ["./.vitepress/vitepress/*"]
     },
 

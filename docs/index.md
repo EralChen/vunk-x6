@@ -1,5 +1,5 @@
 ---
-title: '@vunk/gsap'
+title: '@skzz/platform'
 lang: zh-CN
 page: true
 ---

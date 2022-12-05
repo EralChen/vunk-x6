@@ -7,6 +7,8 @@ import { useLayoutStore } from '@/stores/layout'
 import { Document } from '@element-plus/icons-vue'
 import { onUnmounted } from 'vue'
 import CollapseVue from './Collapse.vue'
+import { routes as constRoutes } from '@/router'
+
 
 
 const permissionStore = usePermissionStore()
@@ -36,15 +38,16 @@ function upLinkClickToItem (e: MouseEvent) {
     class="layout-default-aside-menu"
     :collapse="layoutStore.asideInfo.menuCollapse"
   >
-    <VkRoutesMenuContent :data="permissionStore.routes" :popperClass="'layout-default-aside-popper'">
+    <VkRoutesMenuContent :data="[...permissionStore.routes, ...constRoutes]" :popperClass="'layout-default-aside-popper'">
       <template #item="{ data }">
         <LinkVue :isMenu="false" :data="data">
           <ElIcon class="layout-default-aside-item-icon"><Document></Document></ElIcon>
+          {{ data }}
         </LinkVue>
       </template>
 
       <template #itemTitle="{ data }">
-        <span>{{ data.meta?.name }}</span> 
+        <span>{{ data.meta?.title || data.meta?.name }}</span> 
       </template>
 
       <template #menuTitle="{ data }">
@@ -52,7 +55,7 @@ function upLinkClickToItem (e: MouseEvent) {
           <ElIcon class="layout-default-aside-item-icon"><Document></Document></ElIcon>
         </LinkVue>
 
-        <span>{{ data.meta?.name }}</span> 
+        <span>{{ data.meta?.title || data.meta?.name }}</span> 
 
       </template>
 

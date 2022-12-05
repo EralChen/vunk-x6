@@ -1,5 +1,5 @@
 {
-  "name": "@vunk-gsap/components",
+  "name": "@skzz-platform/components",
   "scripts": {
     "build": "gulp -f gulpfile.ts"
   },
