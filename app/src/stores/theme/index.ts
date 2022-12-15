@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { computed, ref, shallowRef, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { loadStyleString } from '@vunk/core/shared/utils-dom'
 import { ToggleHandler } from '@vunk/core/shared/utils-class'
 import { NormalObject } from '@vunk/core'
@@ -50,7 +50,7 @@ const useRootStyles = (key: string) => {
   })
 
   const styles = ref<NormalObject>({})
-  
+
   watch(() => currentToggle.value, () => {
     styles.value = currentToggle.value.rCurrent()
   }, { immediate: true })
