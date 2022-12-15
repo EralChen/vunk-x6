@@ -57,7 +57,7 @@ const formItems: FormItemRendererSource<keyof typeof defaultConfig>[] = [
     </template>
     <div sk-flex="row" sub:ml-m>
 
-      <VkfForm :labelWidth="'6em'" :formItems="formItems" v-bind="$attrs"></VkfForm>
+      <VkfForm :formItems="formItems" v-bind="$attrs"></VkfForm>
 
       <div sub:mt-m>
         <div v-for="(v, k) in defaultConfig" :key="k">

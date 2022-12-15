@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { useSharedDark } from '@/composables'
+import { Moon, Sunny } from '@element-plus/icons-vue'
 const isDark = useSharedDark()
 </script>
 <template>
@@ -12,7 +13,13 @@ const isDark = useSharedDark()
 
       <template #extra>
       <div sk-flex="row_center" sub:ml-m>
-        <ElSwitch v-model="isDark"></ElSwitch>
+        <ElSwitch 
+          :inlinePrompt="true"
+          v-model="isDark" 
+          :activeIcon="Sunny"
+          :inactiveIcon="Moon"
+          :inactiveColor="'#000'"
+        ></ElSwitch>
         <el-avatar
           :size="32"
           class="mr-3"

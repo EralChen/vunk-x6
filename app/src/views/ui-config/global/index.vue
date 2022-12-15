@@ -10,6 +10,7 @@ const themeStore = useThemeStore()
     <ColorVue 
       :data="themeStore.globalStyles"
       @setData="setData(themeStore.globalStyles, $event)"
+      :labelWidth="150"
     ></ColorVue>
 
   </div>

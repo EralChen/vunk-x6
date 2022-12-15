@@ -72,6 +72,7 @@ function upLinkClickToItem (e: MouseEvent) {
   right: 0;
   transform: translate(100%, -50%);
   cursor: pointer;
+  z-index: 2;
 }
 .layout-default-aside{
   position: relative;
