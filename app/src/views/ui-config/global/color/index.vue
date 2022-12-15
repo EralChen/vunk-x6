@@ -1,6 +1,11 @@
 <script lang="ts" setup>
-import FormVue from './form.vue'
+import BaseVue from './base.vue'
+import NeutralVue from './neutral/index.vue'
 </script>
 <template>
-  <FormVue></FormVue>
+  <div sub-mt-xl>
+    <BaseVue v-bind="$attrs"></BaseVue>
+    <NeutralVue v-bind="$attrs"></NeutralVue>
+  </div>
+
 </template>

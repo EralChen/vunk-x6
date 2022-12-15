@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-import CollapseVue from './Collapse.vue'
+import { useSharedDark } from '@/composables'
+const isDark = useSharedDark()
 </script>
 <template>
   <div class="pa-1">
@@ -10,7 +11,8 @@ import CollapseVue from './Collapse.vue'
       </template>
 
       <template #extra>
-      <div class="flex items-center">
+      <div sk-flex="row_center" sub:ml-m>
+        <ElSwitch v-model="isDark"></ElSwitch>
         <el-avatar
           :size="32"
           class="mr-3"

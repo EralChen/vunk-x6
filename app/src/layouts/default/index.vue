@@ -13,8 +13,10 @@ import { VkDuplexCalc } from '@vunk/core'
       <template #one>
         <HeaderVue></HeaderVue>
       </template>
-      
-      <RouterView></RouterView>
+      <ElScrollbar>
+        <RouterView></RouterView>
+      </ElScrollbar>
+
     </VkDuplexCalc>
   
   </div>

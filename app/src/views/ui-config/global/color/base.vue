@@ -48,10 +48,16 @@ const formItems: FormItemRendererSource<keyof typeof defaultConfig>[] = [
 ]
 </script>
 <template>
-  <ElCard :header="'Color'">
+  <ElCard >
+    <template #header>
+      <a 
+        :href="'https://element-plus.gitee.io/zh-CN/component/color.html'" 
+        target="_blank"
+      >Base Color</a>
+    </template>
     <div sk-flex="row" sub:ml-m>
 
-      <VkfForm :formItems="formItems" v-bind="$attrs"></VkfForm>
+      <VkfForm :labelWidth="'6em'" :formItems="formItems" v-bind="$attrs"></VkfForm>
 
       <div sub:mt-m>
         <div v-for="(v, k) in defaultConfig" :key="k">

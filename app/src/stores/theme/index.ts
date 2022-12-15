@@ -1,18 +1,23 @@
 import { defineStore } from 'pinia'
-import { ref, watch } from 'vue'
+import { computed, ref, shallowRef, watch } from 'vue'
 import { loadStyleString } from '@vunk/core/shared/utils-dom'
 import { ToggleHandler } from '@vunk/core/shared/utils-class'
 import { NormalObject } from '@vunk/core'
-
+import { useSharedDark } from '@/composables'
 
 class ToggleRootStyles extends ToggleHandler {
   key: string
-  constructor (k: string) {
+  mode: 'dark' | 'default'
+ 
+  constructor (k: string, mode?: 'dark'|'default') {
     super()
-    this.key = k
+    this.mode = mode || 'default'
+    this.key = k + '_' + this.mode
   }
   add (v: NormalObject) {
-    this.removeHandler = loadStyleString(`:root{
+    this.removeHandler = loadStyleString(`${this.mode === 'default' 
+      ? ':root'
+      : `html.${this.mode}`}{
       ${
   Object.entries(v)
     .filter(([, v]) => !!v)
@@ -34,10 +39,24 @@ class ToggleRootStyles extends ToggleHandler {
 }
 
 const useRootStyles = (key: string) => {
-  const toggleMenuStyles = new ToggleRootStyles(key)
-  const styles = ref<NormalObject>(toggleMenuStyles.rCurrent())
+  const isDark = useSharedDark()
+  const toggleMenuStyles = {
+    default: new ToggleRootStyles(key),
+    dark: new ToggleRootStyles(key, 'dark'),
+  }
+  const currentToggle = computed(() => {
+    const mode = isDark.value ? 'dark' : 'default'
+    return toggleMenuStyles[mode]
+  })
+
+  const styles = ref<NormalObject>({})
+  
+  watch(() => currentToggle.value, () => {
+    styles.value = currentToggle.value.rCurrent()
+  }, { immediate: true })
+
   watch(() => styles.value, (v) => {
-    toggleMenuStyles.reset(v)
+    currentToggle.value.reset(v)
   }, { immediate: true, deep: true })
   return styles
 }
