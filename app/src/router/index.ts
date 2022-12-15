@@ -5,13 +5,16 @@ export const routes: Array<RouteRecordRaw> = [
 
   {
     path: '/home',
-    component: (() => Layout)(),
+    component: Layout,
     meta: {
       display: 0,
     },
     children: [
       {
         path: '',
+        meta: {
+          title: '首页',
+        },
         component: () => import('_v/home/index.vue'),
       },
     ],

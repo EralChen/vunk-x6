@@ -7,7 +7,7 @@ import ElementPlus from 'element-plus'
 
 import 'virtual:svg-icons-register'
 import 'uno.css'
-import './permission'
+// import './permission'
 import './styles'
 
 createApp(App)

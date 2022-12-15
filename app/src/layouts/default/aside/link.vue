@@ -2,7 +2,11 @@
 import { AnyFunc } from '@vunk/core'
 import { defineComponent, PropType } from 'vue'
 import { RouteRecordRaw } from 'vue-router'
+import SpreadToParent from '_c/SpreadToParent/index.vue'
 export default defineComponent({
+  components: {
+    SpreadToParent,
+  },
   props: {
     data: {
       type: Object as PropType<RouteRecordRaw>,
@@ -11,6 +15,10 @@ export default defineComponent({
     isMenu: {
       type: Boolean,
       default: false,
+    },
+    to: {
+      type: String,
+      default: '',
     },
   },
   setup (props) {
@@ -26,7 +34,7 @@ export default defineComponent({
 })
 </script>
 <template>
-<RouterLink :to="data.path" custom>
+<RouterLink :to="to" custom>
   <template #default="{ navigate, isActive, isExactActive, href }">
     <a
       @click.prevent="doNav(navigate)"
@@ -37,6 +45,14 @@ export default defineComponent({
         'is-exact-active': isExactActive,
       }"
     >
+      <SpreadToParent 
+        :type="'class'"
+        :data="{ 
+          'is-active': isActive, 
+          'is-exact-active': isExactActive,
+        }"
+      ></SpreadToParent>
+      
       <slot 
         :isActive="isActive" 
         :isExactActive="isExactActive"

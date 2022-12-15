@@ -39,10 +39,9 @@ function upLinkClickToItem (e: MouseEvent) {
     :collapse="layoutStore.asideInfo.menuCollapse"
   >
     <VkRoutesMenuContent :data="[...permissionStore.routes, ...constRoutes]" :popperClass="'layout-default-aside-popper'">
-      <template #item="{ data }">
-        <LinkVue :isMenu="false" :data="data">
+      <template #item="{ data, href }">
+        <LinkVue :isMenu="false" :data="data" :to="href">
           <ElIcon class="layout-default-aside-item-icon"><Document></Document></ElIcon>
-          {{ data }}
         </LinkVue>
       </template>
 
@@ -50,8 +49,8 @@ function upLinkClickToItem (e: MouseEvent) {
         <span>{{ data.meta?.title || data.meta?.name }}</span> 
       </template>
 
-      <template #menuTitle="{ data }">
-        <LinkVue :isMenu="true" :data="data">
+      <template #menuTitle="{ data, href }">
+        <LinkVue :isMenu="true" :data="data" :to="href">
           <ElIcon class="layout-default-aside-item-icon"><Document></Document></ElIcon>
         </LinkVue>
 

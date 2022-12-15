@@ -1,13 +1,14 @@
 <script lang="ts" setup>
 import FormVue from './form.vue'
-import { useLayoutStore } from '@/stores/layout'
+import { useThemeStore } from '@/stores/theme'
 import { setData } from '@vunk/core'
-const layoutStore = useLayoutStore()
+const themeStore = useThemeStore()
 
 </script>
 <template>
   <FormVue 
-    :data="layoutStore.menuStyles"
-    @setData="setData(layoutStore.menuStyles, $event)"
+    pa-m
+    :data="themeStore.menuStyles"
+    @setData="setData(themeStore.menuStyles, $event)"
   ></FormVue>
 </template>

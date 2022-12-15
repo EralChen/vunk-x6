@@ -10,12 +10,20 @@ export default [
     },
     children: [
       {
+        path: 'global',
+        meta: {
+          title: '全局配置',
+        },
+        component: () => import('_v/ui-config/global/index.vue'),
+      },
+      {
         path: 'menu',
         meta: {
-          title: '菜单配置1',
+          title: '菜单配置',
         },
         component: () => import('_v/ui-config/menu/index.vue'),
       },
+    
     ],
   },
 ] as RouteRecordRaw[]

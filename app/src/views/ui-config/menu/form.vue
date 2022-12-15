@@ -5,7 +5,6 @@ const defaultConfig = {
   '--el-menu-active-color': 'var(--el-color-primary)',
   '--el-menu-text-color': 'var(--el-text-color-primary)',
   '--el-menu-hover-text-color': 'var(--el-color-primary)',
-
   '--el-menu-bg-color': 'var(--el-fill-color-blank)',
   '--el-menu-hover-bg-color': 'var(--el-color-primary-light-9)',
   '--el-menu-item-height': '56px',
@@ -22,27 +21,32 @@ const defaultConfig = {
 const formItems: FormItemRendererSource<keyof typeof defaultConfig>[] = [
   {
     templateType: 'VkfColorPicker',
+    showAlpha: true,
     prop: '--el-menu-active-color',
     label: 'Active Color',
   },
   {
     templateType: 'VkfColorPicker',
+    showAlpha: true,
     prop: '--el-menu-text-color',
     label: 'Text Color',
 
   },
   {
     templateType: 'VkfColorPicker',
+    showAlpha: true,
     prop: '--el-menu-hover-text-color',
     label: 'Hover Text Color',
   },
   {
     templateType: 'VkfColorPicker',
+    showAlpha: true,
     prop: '--el-menu-bg-color',
     label: 'Background Color',
   },
   {
     templateType: 'VkfColorPicker',
+    showAlpha: true,
     prop: '--el-menu-hover-bg-color',
     label: 'Hover Background Color',
   },
@@ -72,18 +76,21 @@ const formItems: FormItemRendererSource<keyof typeof defaultConfig>[] = [
   },
   {
     templateType: 'VkfColorPicker',
+    showAlpha: true,
     prop: '--el-menu-item-hover-fill',
     label: 'Item Hover Fill',
 
   },
   {
     templateType: 'VkfColorPicker',
+    showAlpha: true,
     prop: '--el-menu-border-color',
     label: 'Border Color',
 
   },
   {
     templateType: 'VkfInput',
+    
     prop: '--el-menu-base-level-padding',
     label: 'Base Level Padding',
     placeholder: defaultConfig['--el-menu-base-level-padding'],

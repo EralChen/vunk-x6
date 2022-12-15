@@ -72,7 +72,7 @@ importers:
       '@vitejs/plugin-vue-jsx': ^1.3.10
       '@vue/compiler-sfc': ^3.2.38
       '@vunk/form': ^0.0.1-alpha.39
-      '@vunk/skzz': 0.0.0-alpha.49
+      '@vunk/skzz': 0.0.0-alpha.50
       js-cookie: ^3.0.1
       pinia: ^2.0.21
       qs: ^6.11.0
@@ -84,7 +84,7 @@ importers:
       vue-tsc: ^1.0.9
     dependencies:
       '@vunk/form': 0.0.1-alpha.39
-      '@vunk/skzz': 0.0.0-alpha.49
+      '@vunk/skzz': 0.0.0-alpha.50
       js-cookie: 3.0.1
       pinia: 2.0.27
       qs: 6.11.0
@@ -2903,8 +2903,8 @@ packages:
       '@vunk/core': 0.0.0-alpha.59
     dev: false
 
-  /@vunk/skzz/0.0.0-alpha.49:
-    resolution: {integrity: sha512-uwKZfXOjOg2T1uSfXATmCgH8BwUK0Z8ZlnBfrJWbzQkN1GtoUoSmvBut5cCKH+F/8xdPSANV8HKRCh0thCuOYw==}
+  /@vunk/skzz/0.0.0-alpha.50:
+    resolution: {integrity: sha512-tBr7drhxSqjkmaEl9WiTaCqijApu6c2DlpEQo5or9GNUvLeYmftbu8n5GF3tN7BrRDFDLq17knhAAfzP5dDc7g==}
     dev: false
 
   /acorn-jsx/5.3.2_acorn@8.8.1:
