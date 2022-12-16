@@ -37,8 +37,20 @@ class ToggleRootStyles extends ToggleHandler {
     this.add(v)
   }
 }
-
 const useRootStyles = (key: string) => {
+  const toggleMenuStyles = {
+    default: new ToggleRootStyles(key),
+  }
+  const currentToggle = toggleMenuStyles.default
+
+  const styles = ref<NormalObject>({})
+
+  watch(() => styles.value, (v) => {
+    currentToggle.reset(v)
+  }, { immediate: true, deep: true })
+  return styles
+}
+const useRootStylesWithMode = (key: string) => {
   const isDark = useSharedDark()
   const toggleMenuStyles = {
     default: new ToggleRootStyles(key),
@@ -62,12 +74,14 @@ const useRootStyles = (key: string) => {
 }
 
 export const useThemeStore = defineStore('theme', () => {
-  const menuStyles = useRootStyles('ZZ_PLATFORM_THEME_MENU_STYLES')
-  const globalStyles = useRootStyles('ZZ_PLATFORM_THEME_GLOBAL_STYLES')
+  const menuStyles = useRootStylesWithMode('ZZ_PLATFORM_THEME_MENU_STYLES')
+  const globalStyles = useRootStylesWithMode('ZZ_PLATFORM_THEME_GLOBAL_STYLES')
+  const fontSizeStyles = useRootStyles('ZZ_PLATFORM_THEME_FONT_SIZE_STYLES')
 
   return { 
     globalStyles,
     menuStyles,
+    fontSizeStyles,
   }
   
 })

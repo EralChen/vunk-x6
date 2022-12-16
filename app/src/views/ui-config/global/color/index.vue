@@ -1,11 +1,18 @@
 <script lang="ts" setup>
-import BaseVue from './base.vue'
-import NeutralVue from './neutral/index.vue'
+import CoreVue from './core.vue'
+import { useThemeStore } from '@/stores/theme'
+import { setData } from '@vunk/core'
+const themeStore = useThemeStore()
+
 </script>
 <template>
-  <div sub-mt-xl>
-    <BaseVue v-bind="$attrs"></BaseVue>
-    <NeutralVue v-bind="$attrs"></NeutralVue>
+  <div pa-m>
+    <CoreVue 
+      :data="themeStore.globalStyles"
+      @setData="setData(themeStore.globalStyles, $event)"
+      :labelWidth="150"
+    ></CoreVue>
+
   </div>
 
 </template>
