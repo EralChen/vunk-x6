@@ -16,7 +16,7 @@ importers:
       '@skzz/platform': workspace:*
       '@types/gulp': ^4.0.9
       '@types/node': ^18.0.4
-      '@vunk/core': 0.0.0-alpha.59
+      '@vunk/core': 0.0.0-alpha.60
       consola: ^2.15.3
       element-plus: npm:element-plus@latest
       eslint: ^8.19.0
@@ -37,8 +37,8 @@ importers:
       '@skzz-platform/components': link:packages/components
       '@skzz-platform/shared': link:packages/shared
       '@skzz/platform': link:packages/entry
-      '@vunk/core': 0.0.0-alpha.59
-      element-plus: 2.2.26_vue@3.2.45
+      '@vunk/core': 0.0.0-alpha.60
+      element-plus: 2.2.27_vue@3.2.45
       vue: 3.2.45
     devDependencies:
       '@lib-env/app-utils': link:internal/app-utils
@@ -2895,14 +2895,14 @@ packages:
       - vue
     dev: false
 
-  /@vunk/core/0.0.0-alpha.59:
-    resolution: {integrity: sha512-P6wzp3EGk9rC1yxWy/0JGUB/PmwZbM7UiSCEBJiAZsynOoqgWycJxxSqLahOid7TkYjY6PfBR69Vd8U1miyNHA==}
+  /@vunk/core/0.0.0-alpha.60:
+    resolution: {integrity: sha512-9cye+GKK2yx8yYsw8YNmpTs74VgiL4w3aqMzxO6ColrZ8grcJiJFSeyrbeFp23W6mx4nI+4tCH5tsH8GrlyImQ==}
     dev: false
 
   /@vunk/form/0.0.1-alpha.39:
     resolution: {integrity: sha512-9/DnYqIayQbbeTuiHjibQFASFBuNZeM+z5M1BwyGkHEKx1D1lTkdqrGiM1pQQ8INxheheMaZxsEzblsJ4mlaSA==}
     dependencies:
-      '@vunk/core': 0.0.0-alpha.59
+      '@vunk/core': 0.0.0-alpha.60
     dev: false
 
   /@vunk/skzz/0.0.0-alpha.50:
@@ -4019,8 +4019,8 @@ packages:
     resolution: {integrity: sha512-M8WEXFuKXMYMVr45fo8mq0wUrrJHheiKZf6BArTKk9ZBYCKJEOU5H8cdWgDT+qCVZf7Na4lVUaZsA+h6uA9+PA==}
     dev: true
 
-  /element-plus/2.2.26_vue@3.2.45:
-    resolution: {integrity: sha512-O/rdY5m9DkclpVg8r3GynyqCunm7MxSR142xSsjrZA77bi7bcwA3SIy6SPEDqHi5R4KqgkGYgKSp4Q4e3irbYg==}
+  /element-plus/2.2.27_vue@3.2.45:
+    resolution: {integrity: sha512-P04HDOZBYDdvlYuleuCZRULzAc5xJVOBfLDK9xWxVo0vyo8ntdaXS5sTU+/76vrNzuO3FhLn9kvrsbiJEVa1jg==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:

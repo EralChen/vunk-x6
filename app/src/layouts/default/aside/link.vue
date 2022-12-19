@@ -2,10 +2,10 @@
 import { AnyFunc } from '@vunk/core'
 import { defineComponent, PropType } from 'vue'
 import { RouteRecordRaw } from 'vue-router'
-import SpreadToParent from '_c/SpreadToParent/index.vue'
+import { VkSpreadTo } from '@vunk/core/components/spread-to'
 export default defineComponent({
   components: {
-    SpreadToParent,
+    VkSpreadTo,
   },
   props: {
     data: {
@@ -34,42 +34,31 @@ export default defineComponent({
 })
 </script>
 <template>
-<RouterLink :to="to" custom>
-  <template #default="{ navigate, isActive, isExactActive, href }">
-    <a
-      @click.prevent="doNav(navigate)"
-      class="layout-default-aside-link"
-      :href="href"
-      :class="{
+  <RouterLink :to="to" custom>
+    <template #default="{ navigate, isActive, isExactActive, href }">
+      <VkSpreadTo :type="'class'" :data="{
         'is-active': isActive,
         'is-exact-active': isExactActive,
-      }"
-    >
-      <SpreadToParent 
-        :type="'class'"
-        :data="{ 
-          'is-active': isActive, 
-          'is-exact-active': isExactActive,
-        }"
-      ></SpreadToParent>
-      
-      <slot 
-        :isActive="isActive" 
-        :isExactActive="isExactActive"
-      >
-        {{ data.meta?.name }}
-      </slot>
-    </a>
-  </template>
-</RouterLink>
+      }"></VkSpreadTo>
+
+      <a @click.prevent="doNav(navigate)" class="layout-default-aside-link" :href="href" :class="{
+        'is-active': isActive,
+        'is-exact-active': isExactActive,
+      }">
+        <slot :isActive="isActive" :isExactActive="isExactActive">
+          {{ data.meta?.name }}
+        </slot>
+      </a>
+    </template>
+  </RouterLink>
 </template>
 <style>
-.layout-default-aside-link{
+.layout-default-aside-link {
   text-decoration: none;
   color: var(--el-menu-text-color);
 }
 
-.layout-default-aside-link.is-active{
+.layout-default-aside-link.is-active {
   color: var(--el-menu-item-active-color);
 }
 </style>
