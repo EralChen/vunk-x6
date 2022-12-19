@@ -8,8 +8,8 @@ const themeStore = useThemeStore()
 <template>
   <div pa-m>
     <CoreVue 
-      :data="themeStore.globalStyles"
-      @setData="setData(themeStore.globalStyles, $event)"
+      :data="themeStore.colorStyles"
+      @setData="setData(themeStore.colorStyles, $event)"
       :labelWidth="150"
     ></CoreVue>
 

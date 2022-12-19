@@ -75,11 +75,13 @@ const useRootStylesWithMode = (key: string) => {
 
 export const useThemeStore = defineStore('theme', () => {
   const menuStyles = useRootStylesWithMode('ZZ_PLATFORM_THEME_MENU_STYLES')
-  const globalStyles = useRootStylesWithMode('ZZ_PLATFORM_THEME_GLOBAL_STYLES')
+  const colorStyles = useRootStylesWithMode('ZZ_PLATFORM_THEME_GLOBAL_STYLES')
   const fontSizeStyles = useRootStyles('ZZ_PLATFORM_THEME_FONT_SIZE_STYLES')
+  const gapStyles = useRootStyles('ZZ_PLATFORM_THEME_GAP_STYLES')
 
   return { 
-    globalStyles,
+    gapStyles,
+    colorStyles,
     menuStyles,
     fontSizeStyles,
   }

@@ -30,6 +30,14 @@ export default [
             },
             component: () => import('_v/ui-config/global/font/index.vue'),
           },
+
+          {
+            path: 'gap',
+            meta: {
+              title: '间距配置',
+            },
+            component: () => import('_v/ui-config/global/gap/index.vue'),
+          },
         ],
       },
       
