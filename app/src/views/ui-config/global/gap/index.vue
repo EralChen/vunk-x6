@@ -2,5 +2,5 @@
 import BaseVue from './base/index.vue'
 </script>
 <template>
-  <BaseVue></BaseVue>
+  <BaseVue labelWidth="6em"></BaseVue>
 </template>
