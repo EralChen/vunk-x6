@@ -43,7 +43,7 @@ const useRootStyles = (key: string) => {
   }
   const currentToggle = toggleMenuStyles.default
 
-  const styles = ref<NormalObject>({})
+  const styles = ref<NormalObject>(currentToggle.rCurrent())
 
   watch(() => styles.value, (v) => {
     currentToggle.reset(v)

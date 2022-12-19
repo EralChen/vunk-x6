@@ -22,10 +22,12 @@ import { VkDuplexCalc } from '@vunk/core'
   </div>
 </template>
 <style>
-.layout-default {
-  height: 100%;
+.layout-default-main > .vk-duplex-calc-two{
+  background-color: var(--el-fill-color);
 }
-.layout-default-aside-x{
+</style>
+<style>
+.layout-default-aside-x, .layout-default {
   height: 100%;
 }
 .layout-default-main{
