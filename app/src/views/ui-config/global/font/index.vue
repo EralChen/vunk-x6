@@ -3,7 +3,7 @@ import SizeVue from './size/index.vue'
 
 </script>
 <template>
-  <div pa-m>
+  <div pa-xxl>
     <SizeVue></SizeVue>
   </div>
 </template>

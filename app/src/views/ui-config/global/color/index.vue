@@ -6,7 +6,7 @@ const themeStore = useThemeStore()
 
 </script>
 <template>
-  <div pa-m>
+  <div pa-xxl>
     <CoreVue 
       :data="themeStore.colorStyles"
       @setData="setData(themeStore.colorStyles, $event)"

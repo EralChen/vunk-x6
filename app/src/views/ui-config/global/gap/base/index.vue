@@ -99,10 +99,10 @@ const formItems: FormItemRendererSource<keyof typeof defaultConfig>[] = [
 <template>
   <ElCard >
     <template #header>
-      Font Size
+     Gap
     </template>
 
-    <div sk-flex="row" sub:ml-m>
+    <div sk-flex="row" sub:ml-2r>
 
       <VkfForm 
         :formItems="formItems" 
@@ -112,12 +112,25 @@ const formItems: FormItemRendererSource<keyof typeof defaultConfig>[] = [
       >
       </VkfForm>
 
-      <div sub:mt-m>
-        <div v-for="(v, k) in defaultConfig" :key="k">
-          <div :style="{
-            fontSize: `var(${k})`,
-          }">{{ k }}</div>
-
+      <div >
+        <div 
+          v-for="(v, k) in defaultConfig" 
+          :key="k"
+          :style="{
+            height: '51px'
+          }"
+          sk-flex
+        >
+          <span>11</span>
+          <span :style="{
+            'marginLeft': `var(${k})`,
+          }">22</span>
+          <span
+            :style="{
+              'marginLeft': `var(${k})`,
+            }"
+          >33</span>
+          
         </div>
       </div>
 

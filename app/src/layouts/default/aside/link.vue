@@ -3,6 +3,7 @@ import { AnyFunc } from '@vunk/core'
 import { defineComponent, PropType } from 'vue'
 import { RouteRecordRaw } from 'vue-router'
 import { VkSpreadTo } from '@vunk/core/components/spread-to'
+
 export default defineComponent({
   components: {
     VkSpreadTo,
@@ -27,8 +28,12 @@ export default defineComponent({
         navigate()
       }
     }
+    const getSpreadTarget = (vnode: any) => {
+      return vnode.el?.parentElement
+    }
     return {
       doNav,
+      getSpreadTarget,
     }
   },
 })
@@ -36,7 +41,7 @@ export default defineComponent({
 <template>
   <RouterLink :to="to" custom>
     <template #default="{ navigate, isActive, isExactActive, href }">
-      <VkSpreadTo :type="'class'" :data="{
+      <VkSpreadTo :target="getSpreadTarget" :type="'class'" :data="{
         'is-active': isActive,
         'is-exact-active': isExactActive,
       }"></VkSpreadTo>

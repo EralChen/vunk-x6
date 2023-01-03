@@ -9,8 +9,6 @@ import { onUnmounted } from 'vue'
 import CollapseVue from './Collapse.vue'
 import { routes as constRoutes } from '@/router'
 
-
-
 const permissionStore = usePermissionStore()
 const layoutStore = useLayoutStore()
 
@@ -27,12 +25,12 @@ function upLinkClickToItem (e: MouseEvent) {
   }) as HTMLElement
 
   if (elMenuItem) {
-    elMenuItem.getElementsByTagName('a')[0]?.click()
+    elMenuItem.getElementsByTagName('a')[0]?.click()                 
   }
 }
 </script>
 <template>
-<div class="layout-default-aside">
+<div class="layout-default-aside" >
 
   <ElMenu 
     class="layout-default-aside-menu"
@@ -42,6 +40,7 @@ function upLinkClickToItem (e: MouseEvent) {
       <template #item="{ data, href }">
         <LinkVue :isMenu="false" :data="data" :to="href">
           <ElIcon class="layout-default-aside-item-icon"><Document></Document></ElIcon>
+        
         </LinkVue>
       </template>
 
@@ -79,7 +78,7 @@ function upLinkClickToItem (e: MouseEvent) {
 }
 
 .layout-default-aside-menu:not(.el-menu--collapse) {
-  width: 200px;
+  width: 250px;
 }
 </style>
 

@@ -9,7 +9,7 @@ import { appRoot } from '@lib-env/path'
 import legacy from '@vitejs/plugin-legacy'
 import { viteExternalsPlugin } from 'vite-plugin-externals'
 import unocss from 'unocss/vite'
-import { presetAttributify } from 'unocss'
+import { presetAttributify, presetWind } from 'unocss'
 import { presetFlex, presetFont, presetGap } from 'unocss-preset-vunk'
 
 const srcRoot = path.resolve(appRoot, './src')
@@ -48,10 +48,12 @@ export default defineConfig(({ mode }) => {
     plugins: [
       vue(),
       vueJSX(),
+  
       windowEnvPlugin(),
       unocss({
         presets: [
           presetAttributify(),
+          presetWind(),
           presetFont({
             theme: sizeTheme,
           }),
@@ -61,7 +63,16 @@ export default defineConfig(({ mode }) => {
           presetFlex({
             prefix: 'sk',
           }),
+        
         ],
+
+    
+        theme: {
+          colors: {
+            blue: 'var(--el-color-primary)',
+      
+          },
+        },
       }),
       legacy({
         modernPolyfills: ['esnext.array.at'],
