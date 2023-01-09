@@ -3,9 +3,10 @@ import Layout from '@/layouts/default/index.vue'
 export default [
   {
     path: '/ui-config',
-    component: (() => Layout)(),
+    component: Layout,
     meta: {
       title: 'UI 配置',
+      icon: 'Setting',
       alwaysShow: true,
     },
     children: [
@@ -13,6 +14,7 @@ export default [
         path: 'global',
         meta: {
           title: '全局配置',
+     
         },
         component: RouterView,
         children: [

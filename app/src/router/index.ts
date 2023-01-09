@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '@/layouts/default/index.vue'
 import UI_CONFIG from './ui-config'
+import TEMPLATE_PAGE from './template-page'
 export const routes: Array<RouteRecordRaw> = [
 
   {
@@ -30,6 +31,7 @@ export const routes: Array<RouteRecordRaw> = [
   },
 
   ...UI_CONFIG,
+  ...TEMPLATE_PAGE,
 ]
 
 const router = createRouter({

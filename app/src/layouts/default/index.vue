@@ -1,28 +1,33 @@
 <script lang="ts" setup>
-import AsideVue from './aside/index.vue'
-import HeaderVue from './header/index.vue'
+import AsideVue from '_c/LayoutAside/index.vue'
+import HeaderVue from '_c/LayoutHeader/index.vue'
 import { VkDuplexCalc } from '@vunk/core'
 </script>
 <template>
-  <div sk-flex class="layout-default">
-    <div class="layout-default-aside-x">
-      <AsideVue></AsideVue>
+  <VkDuplexCalc class="layout-default">
+    <template #one>
+      <HeaderVue></HeaderVue>
+    </template>
+    <div sk-flex class="h-100%">
+      <div class="layout-default-aside-x">
+        <AsideVue></AsideVue>
+      </div>
+      <div class="flex-1">
+        <ElScrollbar>
+          <RouterView></RouterView>
+        </ElScrollbar>
+
+      </div>
+
     </div>
 
-    <VkDuplexCalc class="layout-default-main">
-      <template #one>
-        <HeaderVue></HeaderVue>
-      </template>
-      <ElScrollbar>
-        <RouterView></RouterView>
-      </ElScrollbar>
-
-    </VkDuplexCalc>
-  
-  </div>
+  </VkDuplexCalc>
 </template>
 <style>
-.layout-default-main > .vk-duplex-calc-two{
+.layout-default {
+  --layout-aside-width: 250px;
+}
+.layout-default > .vk-duplex-calc-two{
   background-color: var(--el-fill-color);
 }
 </style>

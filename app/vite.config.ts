@@ -69,8 +69,36 @@ export default defineConfig(({ mode }) => {
     
         theme: {
           colors: {
-            blue: 'var(--el-color-primary)',
-      
+            primary: 'var(--el-color-primary)',
+            success: 'var(--el-color-success)',
+            warning: 'var(--el-color-warning)',
+            danger: 'var(--el-color-danger)',
+            info: 'var(--el-color-info)',
+
+            white: 'var(--el-color-white)',
+            black: 'var(--el-color-black)',
+
+            'tc-primary': 'var(--el-text-color-primary)',
+            'tc-secondary': 'var(--el-text-color-secondary)',
+            'tc-tertiary': 'var(--el-text-color-tertiary)',
+            'tc-placeholder': 'var(--el-text-color-placeholder)',
+            'tc-disabled': 'var(--el-text-color-disabled)',
+
+            'bc-base': 'var(--el-border-color)',
+            'bc-light': 'var(--el-border-color-light)',
+            'bc-lighter': 'var(--el-border-color-lighter)',
+            'bc-extra-light': 'var(--el-border-color-extra-light)',
+            'bc-dark': 'var(--el-border-color-dark)',
+            'bc-darker': 'var(--el-border-color-darker)',
+
+            'fc-base': 'var(--el-fill-color)',
+            'fc-light': 'var(--el-fill-color-light)',
+            'fc-lighter': 'var(--el-fill-color-lighter)',
+            'fc-extra-light': 'var(--el-fill-color-extra-light)',
+            'fc-dark': 'var(--el-fill-color-dark)',
+            'fc-darker': 'var(--el-fill-color-darker)',
+            'fc-blank': 'var(--el-fill-color-blank)',
+
           },
         },
       }),

@@ -78,7 +78,7 @@ function upLinkClickToItem (e: MouseEvent) {
 }
 
 .layout-default-aside-menu:not(.el-menu--collapse) {
-  width: 250px;
+  width: var(--layout-aside-width);
 }
 </style>
 
