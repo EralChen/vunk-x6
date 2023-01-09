@@ -2,14 +2,16 @@
 import { ElMenu, ElIcon } from 'element-plus'
 import { usePermissionStore } from '@/stores/permission'
 import { VkRoutesMenuContent } from '@vunk/skzz/components/routes-menu-content'
-import LinkVue from './link.vue'
+import LinkVue from '_c/MenuLink/index.vue'
 import { useLayoutStore } from '@/stores/layout'
 import { Document } from '@element-plus/icons-vue'
 import { onUnmounted } from 'vue'
 import CollapseVue from './Collapse.vue'
 import { routes as constRoutes } from '@/router'
+import { useViewsStore } from '@/stores/views'
 
-const permissionStore = usePermissionStore()
+// const permissionStore = usePermissionStore()
+const viewsStore = useViewsStore()
 const layoutStore = useLayoutStore()
 
 
@@ -36,7 +38,10 @@ function upLinkClickToItem (e: MouseEvent) {
     class="layout-default-aside-menu"
     :collapse="layoutStore.asideInfo.menuCollapse"
   >
-    <VkRoutesMenuContent :data="[...permissionStore.routes, ...constRoutes]" :popperClass="'layout-default-aside-popper'">
+    <VkRoutesMenuContent 
+    :data="viewsStore.baseView?.children || []" 
+    :basePath="viewsStore.baseView?.href || ''"
+    :popperClass="'layout-default-aside-popper'">
       <template #item="{ data, href }">
         <LinkVue :isMenu="false" :data="data" :to="href">
           <ElIcon class="layout-default-aside-item-icon"><Document></Document></ElIcon>

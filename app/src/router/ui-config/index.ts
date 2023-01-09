@@ -8,13 +8,14 @@ export default [
       title: 'UI 配置',
       icon: 'Setting',
       alwaysShow: true,
+      header: true,
     },
     children: [
       {
         path: 'global',
         meta: {
           title: '全局配置',
-     
+          header: true,
         },
         component: RouterView,
         children: [

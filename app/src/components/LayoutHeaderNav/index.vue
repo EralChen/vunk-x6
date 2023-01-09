@@ -3,25 +3,54 @@ import { ElMenu, ElIcon } from 'element-plus'
 import { usePermissionStore } from '@/stores/permission'
 import { VkRoutesMenuContent } from '@vunk/skzz/components/routes-menu-content'
 import LinkVue from '_c/MenuLink/index.vue'
-import { useLayoutStore } from '@/stores/layout'
-
 import { routes as constRoutes } from '@/router'
-import { computed } from 'vue'
+import { computed, onMounted, shallowReactive } from 'vue'
+import { filterDeep } from 'deepdash-es/standalone'
+import { RouteRecordRaw, useRoute } from 'vue-router'
+import { useViewsStore } from '@/stores/views'
 
+const route = useRoute()
 const permissionStore = usePermissionStore()
+const viewsStore = useViewsStore()
+
+const navRouteInfo = shallowReactive<Record<string, RouteRecordRaw>>({})
+const setNavRouteInfo = (href: string, v: RouteRecordRaw) => {
+  navRouteInfo[href] = v
+  return ''
+}
+
 const navRoutes = computed(() => {
-  return [...permissionStore.routes, ...constRoutes].map(item => {
-    return {
-      ...item,
-      children: [],
+  return filterDeep([...permissionStore.routes, ...constRoutes], (v) => {
+    if (v.meta?.header) {
+      v.meta._children = [...v.children]
+      return true
     }
+  }, {
+    childrenPath: ['children'],
   })
 })
 
-const layoutStore = useLayoutStore()
-const menuSelect = (index: string, indexPath: string[]) => {
-  console.log(index, indexPath)
+/* set base view */
+onMounted(() => {
+  const baseView = navRouteInfo[route.path]
+  if (navRouteInfo[route.path]) {
+    viewsStore.setBaseView({
+      ...baseView,
+      children: baseView.meta?._children as RouteRecordRaw[],
+      href: route.path,
+    })
+  }
+})
+const menuSelect = (index: string) => {
+  const baseView = navRouteInfo[index]
+  viewsStore.setBaseView({
+    ...baseView,
+    children: baseView.meta?._children as RouteRecordRaw[],
+    href: index,
+  })
 }
+/* set base view /> */
+
 
 </script>
 <template>
@@ -29,13 +58,13 @@ const menuSelect = (index: string, indexPath: string[]) => {
     mode="horizontal"
     @select="menuSelect"
   >
-    <VkRoutesMenuContent :data="navRoutes" :popperClass="'layout-default-aside-popper'">
+    <VkRoutesMenuContent :data="navRoutes">
       <template #item="{ data, href }">
         <LinkVue :isMenu="false" :data="data" :to="href">
-          <ElIcon class="layout-default-aside-item-icon" v-if="data.meta?.icon"> 
-            <!-- <component :is="IconComponents[data.meta.icon]"></component> -->
+          <ElIcon v-if="data.meta?.icon"> 
+            <component :is="data.meta.icon"></component>
           </ElIcon>
-        
+          {{ setNavRouteInfo(href, data) }}
         </LinkVue>
       </template>
 
@@ -45,15 +74,18 @@ const menuSelect = (index: string, indexPath: string[]) => {
 
       <template #menuTitle="{ data, href }">
         <LinkVue :isMenu="true" :data="data" :to="href">
-          <ElIcon class="layout-default-aside-item-icon" v-if="data.meta?.icon"> 
-            <!-- <component :is="IconComponents[data.meta.icon]"></component> -->
+          <ElIcon v-if="data.meta?.icon"> 
+            <component :is="data.meta.icon"></component>
           </ElIcon>
         </LinkVue>
 
-        <span>{{ data.meta?.title || data.meta?.name }}</span> 
+        <span> 
+          {{ data.meta?.title || data.meta?.name }} 
+          {{ setNavRouteInfo(href, data) }}
+        </span> 
 
       </template>
-
+      
     </VkRoutesMenuContent>
   </ElMenu>
 </template>

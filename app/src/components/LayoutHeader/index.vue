@@ -1,8 +1,7 @@
 <script lang="ts" setup>
 import DarkSwitch from '_c/DarkSwitch/index.vue'
-import { ElMenu } from 'element-plus'
-import { VkRoutesMenuContent } from '@vunk/skzz/components/routes-menu-content'
-import LayoutHeaderNav from '_c/LayoutHeaderNav/index.vue'
+import { defineAsyncComponent } from 'vue'
+const LayoutHeaderNav = defineAsyncComponent(() => import('_c/LayoutHeaderNav/index.vue'))
 </script>
 <template>
   <div class="bg-primary text-white" sk-flex="row-between-center">

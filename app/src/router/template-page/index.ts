@@ -7,6 +7,8 @@ export default [
     meta: {
       title: '模板页面',
       alwaysShow: true,
+      icon: 'Document',
+      header: true,
     },
     children: [
       {
