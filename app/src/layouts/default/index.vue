@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import AsideVue from '_c/LayoutAside/index.vue'
 import HeaderVue from '_c/LayoutHeader/index.vue'
+import TagsView from '_c/TagsView/index.vue'
 import { VkDuplexCalc } from '@vunk/core'
 </script>
 <template>
@@ -8,19 +9,24 @@ import { VkDuplexCalc } from '@vunk/core'
     <template #one>
       <HeaderVue></HeaderVue>
     </template>
+    
     <div sk-flex class="h-100%">
+
       <div class="layout-default-aside-x">
         <AsideVue></AsideVue>
       </div>
-      <div class="flex-1">
+    
+      <VkDuplexCalc class="flex-1">
+        <template #one>
+          <TagsView></TagsView>
+        </template>
+
         <ElScrollbar>
           <RouterView></RouterView>
         </ElScrollbar>
-
-      </div>
+      </VkDuplexCalc>
 
     </div>
-
   </VkDuplexCalc>
 </template>
 <style>

@@ -7,9 +7,12 @@ import { Document } from '@element-plus/icons-vue'
 import { onUnmounted } from 'vue'
 import CollapseVue from './Collapse.vue'
 import { useViewsStore } from '@/stores/views'
+import { usePermissionStore } from '@/stores/permission'
+import { routes as constRoutes } from '@/router'
 
 const viewsStore = useViewsStore()
 const layoutStore = useLayoutStore()
+const permissionStore = usePermissionStore()
 
 
 document.addEventListener('click', upLinkClickToItem)
@@ -36,7 +39,7 @@ function upLinkClickToItem (e: MouseEvent) {
     :collapse="layoutStore.asideInfo.menuCollapse"
   >
     <VkRoutesMenuContent 
-    :data="viewsStore.baseView?.children || []" 
+    :data="viewsStore.baseView?.children || [...permissionStore.routes, ...constRoutes]" 
     :basePath="viewsStore.baseView?.href || ''"
     :popperClass="'layout-default-aside-popper'">
       <template #item="{ data, href }">

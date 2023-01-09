@@ -22,6 +22,7 @@ const setNavRouteInfo = (href: string, v: RouteRecordRaw) => {
 const navRoutes = computed(() => {
   return filterDeep([...permissionStore.routes, ...constRoutes], (v) => {
     if (v.meta?.header) {
+      // 暂存原始 children
       v.meta._children = [...v.children]
       return true
     }
@@ -54,9 +55,14 @@ const menuSelect = (index: string) => {
 
 </script>
 <template>
+  <!-- 
+      :textColor="'var(--el-color-white)'"
+    :activeTextColor="'var(--el-color-white)'"
+   -->
   <ElMenu 
     mode="horizontal"
     @select="menuSelect"
+    :backgroundColor="'transparent'"
   >
     <VkRoutesMenuContent :data="navRoutes">
       <template #item="{ data, href }">

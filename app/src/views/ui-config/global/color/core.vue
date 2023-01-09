@@ -1,3 +1,8 @@
+<script lang="ts">
+export default {
+  inheritAttrs: false,
+}
+</script>
 <script lang="ts" setup>
 import BaseVue from './base.vue'
 import NeutralVue from './neutral/index.vue'
