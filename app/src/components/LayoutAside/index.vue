@@ -1,16 +1,13 @@
 <script lang="ts" setup>
 import { ElMenu, ElIcon } from 'element-plus'
-import { usePermissionStore } from '@/stores/permission'
 import { VkRoutesMenuContent } from '@vunk/skzz/components/routes-menu-content'
 import LinkVue from '_c/MenuLink/index.vue'
 import { useLayoutStore } from '@/stores/layout'
 import { Document } from '@element-plus/icons-vue'
 import { onUnmounted } from 'vue'
 import CollapseVue from './Collapse.vue'
-import { routes as constRoutes } from '@/router'
 import { useViewsStore } from '@/stores/views'
 
-// const permissionStore = usePermissionStore()
 const viewsStore = useViewsStore()
 const layoutStore = useLayoutStore()
 
