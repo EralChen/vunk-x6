@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '@/layouts/default/index.vue'
 import UI_CONFIG from './ui-config'
 import TEMPLATE_PAGE from './template-page'
@@ -35,7 +35,7 @@ export const routes: Array<RouteRecordRaw> = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.VITE_BASE_URL + '/'),
+  history: createWebHashHistory(import.meta.env.VITE_BASE_URL + '/'),
   routes,
 })
 

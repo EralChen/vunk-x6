@@ -1,13 +1,15 @@
 <script lang="ts" setup>
 import AsideVue from '_c/LayoutAside/index.vue'
-import HeaderVue from '_c/LayoutHeader/index.vue'
 import TagsView from '_c/TagsView/index.vue'
 import { VkDuplexCalc } from '@vunk/core'
+import { defineAsyncComponent } from 'vue'
+
+const LayoutHeader = defineAsyncComponent(() => import('_c/LayoutHeader/index.vue'))
 </script>
 <template>
   <VkDuplexCalc class="layout-default">
     <template #one>
-      <HeaderVue></HeaderVue>
+      <LayoutHeader></LayoutHeader>
     </template>
     
     <div sk-flex class="h-100%">
@@ -36,6 +38,9 @@ import { VkDuplexCalc } from '@vunk/core'
 .layout-default > .vk-duplex-calc-two{
   background-color: var(--el-fill-color);
 }
+.layout-default .el-scrollbar__view{
+  content-visibility: auto;
+} 
 </style>
 <style>
 .layout-default-aside-x, .layout-default {

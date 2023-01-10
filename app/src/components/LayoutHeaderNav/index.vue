@@ -4,7 +4,7 @@ import { usePermissionStore } from '@/stores/permission'
 import { VkRoutesMenuContent } from '@vunk/skzz/components/routes-menu-content'
 import LinkVue from '_c/MenuLink/index.vue'
 import { routes as constRoutes } from '@/router'
-import { computed, onMounted, ref, shallowReactive } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { filterDeep } from 'deepdash-es/standalone'
 import { RouteRecordRaw, useRoute } from 'vue-router'
 import { useViewsStore } from '@/stores/views'
@@ -13,11 +13,7 @@ const route = useRoute()
 const permissionStore = usePermissionStore()
 const viewsStore = useViewsStore()
 
-const navRouteInfo = shallowReactive<Record<string, RouteRecordRaw>>({})
-const setNavRouteInfo = (href: string, v: RouteRecordRaw) => {
-  navRouteInfo[href] = v
-  return ''
-}
+
 
 const navRoutes = computed(() => {
   return filterDeep([...permissionStore.routes, ...constRoutes], (v) => {
@@ -35,7 +31,7 @@ const navRoutes = computed(() => {
 const defaultHref = ref('')
 onMounted(() => {
   // 从 navRouteInfo 的 keys 中, 获取与 route.path 前面相同的 最长的 key
-  const keys = Object.keys(navRouteInfo)
+  const keys = Object.keys(viewsStore.baseViewsRecord)
   // 最长的 key
   defaultHref.value = ''
   keys.forEach((k) => {
@@ -45,22 +41,21 @@ onMounted(() => {
   })
   
   if (defaultHref.value) {
-    const baseView = navRouteInfo[defaultHref.value]
-    viewsStore.setBaseView({
+    const baseView = viewsStore.baseViewsRecord[defaultHref.value]
+    viewsStore.setCurrentBaseView({
       ...baseView,
       children: baseView.meta?._children as RouteRecordRaw[],
-      href: defaultHref.value,
+      fullpath: defaultHref.value,
     })
   }
 
 })
 const menuSelect = (index: string) => {
-  
-  const baseView = navRouteInfo[index]
-  viewsStore.setBaseView({
+  const baseView = viewsStore.baseViewsRecord[index]
+  viewsStore.setCurrentBaseView({
     ...baseView,
     children: baseView.meta?._children as RouteRecordRaw[],
-    href: index,
+    fullpath: index,
   })
 }
 /* set base view /> */
@@ -77,6 +72,7 @@ const menuSelect = (index: string) => {
     @select="menuSelect"
     :backgroundColor="'transparent'"
     :defaultActive="defaultHref"
+    
   >
     <VkRoutesMenuContent :data="navRoutes">
       <template #item="{ data, href }">
@@ -84,7 +80,7 @@ const menuSelect = (index: string) => {
           <ElIcon v-if="data.meta?.icon"> 
             <component :is="data.meta.icon"></component>
           </ElIcon>
-          {{ setNavRouteInfo(href, data) }}
+          {{  viewsStore.addBaseViewToRecord(href, data)  }}
         </LinkVue>
       </template>
 
@@ -101,7 +97,7 @@ const menuSelect = (index: string) => {
 
         <span> 
           {{ data.meta?.title || data.meta?.name }} 
-          {{ setNavRouteInfo(href, data) }}
+          {{  viewsStore.addBaseViewToRecord(href, data)  }}
         </span> 
 
       </template>

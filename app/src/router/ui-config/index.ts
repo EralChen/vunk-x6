@@ -10,12 +10,12 @@ export default [
       alwaysShow: true,
       header: true,
     },
+    redirect: '/ui-config/global/color',
     children: [
       {
         path: 'global',
         meta: {
           title: '全局配置',
-          header: true,
         },
         component: RouterView,
         children: [

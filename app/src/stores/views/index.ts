@@ -1,16 +1,32 @@
 import { defineStore } from 'pinia'
-import { shallowRef } from 'vue'
-import { RouteRecordRaw } from 'vue-router'
+import { ref, shallowRef } from 'vue'
+import { RouteLocationNormalizedLoaded, RouteRecordRaw } from 'vue-router'
+type BaseView = RouteRecordRaw & { fullpath: string }
 
 export const useViewsStore = defineStore('views', () => {
-  const baseView = shallowRef<RouteRecordRaw & { href: string }>()
-  const setBaseView = (route: RouteRecordRaw & { href: string }) => {
-    baseView.value = route
+  const currentBaseView = shallowRef<BaseView>()
+  const setCurrentBaseView = (route: BaseView) => {
+    currentBaseView.value = route
   }
+
+  const baseViewsRecord = shallowRef<Record<string, BaseView>>({})
+  const addBaseViewToRecord = (fullPath: string, route: RouteRecordRaw) => {
+    baseViewsRecord.value[fullPath] = {
+      ...route,
+      fullpath: fullPath,
+    }
+  }
+
+
   
-  const visitedViews = shallowRef<RouteRecordRaw[]>([])
-  const addVisitedView = (route: RouteRecordRaw) => {
-    if (visitedViews.value.some((v) => v.path === route.path)) return
+  const visitedViews = ref<RouteLocationNormalizedLoaded[]>([])
+  const addVisitedView = (route: RouteLocationNormalizedLoaded) => {
+    if (visitedViews.value.some((v) => {
+      return v.path === route.path
+    })) {
+      return
+    }
+    
     visitedViews.value.push(route)
   }
 
@@ -18,8 +34,11 @@ export const useViewsStore = defineStore('views', () => {
   // const cachedViews = shallowRef<RouteRecordRaw[]>([])
 
   return { 
-    baseView,
-    setBaseView,
+    currentBaseView,
+    setCurrentBaseView,
+
+    baseViewsRecord,
+    addBaseViewToRecord,
 
     visitedViews,
     addVisitedView,

@@ -6,7 +6,7 @@ import { windowEnvPlugin } from '@lib-env/app-utils'
 import { getEnv } from '@lib-env/app-utils'
 import path from 'path'
 import { appRoot } from '@lib-env/path'
-import legacy from '@vitejs/plugin-legacy'
+// import legacy from '@vitejs/plugin-legacy'
 import { viteExternalsPlugin } from 'vite-plugin-externals'
 import unocss from 'unocss/vite'
 import { presetAttributify, presetWind } from 'unocss'
@@ -77,34 +77,50 @@ export default defineConfig(({ mode }) => {
 
             white: 'var(--el-color-white)',
             black: 'var(--el-color-black)',
+         
+            
 
-            'tc-primary': 'var(--el-text-color-primary)',
-            'tc-secondary': 'var(--el-text-color-secondary)',
-            'tc-tertiary': 'var(--el-text-color-tertiary)',
-            'tc-placeholder': 'var(--el-text-color-placeholder)',
-            'tc-disabled': 'var(--el-text-color-disabled)',
+            text: {
+              primary: 'var(--el-text-color-primary)',
+              secondary: 'var(--el-text-color-secondary)',
+              tertiary: 'var(--el-text-color-tertiary)',
+              placeholder: 'var(--el-text-color-placeholder)',
+              disabled: 'var(--el-text-color-disabled)',
+            },
 
-            'bc-base': 'var(--el-border-color)',
-            'bc-light': 'var(--el-border-color-light)',
-            'bc-lighter': 'var(--el-border-color-lighter)',
-            'bc-extra-light': 'var(--el-border-color-extra-light)',
-            'bc-dark': 'var(--el-border-color-dark)',
-            'bc-darker': 'var(--el-border-color-darker)',
 
-            'fc-base': 'var(--el-fill-color)',
-            'fc-light': 'var(--el-fill-color-light)',
-            'fc-lighter': 'var(--el-fill-color-lighter)',
-            'fc-extra-light': 'var(--el-fill-color-extra-light)',
-            'fc-dark': 'var(--el-fill-color-dark)',
-            'fc-darker': 'var(--el-fill-color-darker)',
-            'fc-blank': 'var(--el-fill-color-blank)',
+            border: {
+              base: 'var(--el-border-color)',
+              light: 'var(--el-border-color-light)',
+              lighter: 'var(--el-border-color-lighter)',
+              extraLight: 'var(--el-border-color-extra-light)',
+              dark: 'var(--el-border-color-dark)',
+              darker: 'var(--el-border-color-darker)',
+            },
+
+    
+            fill: {
+              base: 'var(--el-fill-color)',
+              light: 'var(--el-fill-color-light)',
+              lighter: 'var(--el-fill-color-lighter)',
+              extraLight: 'var(--el-fill-color-extra-light)',
+              dark: 'var(--el-fill-color-dark)',
+              darker: 'var(--el-fill-color-darker)',
+              blank: 'var(--el-fill-color-blank)',
+            },
+
+            bg: {
+              base: 'var(--el-bg-color)',
+              page: 'var(--el-bg-color-page)',
+              overlay: 'var(--el-bg-color-overlay)',
+            },
 
           },
         },
       }),
-      legacy({
-        modernPolyfills: ['esnext.array.at'],
-      }),
+      // legacy({
+      //   modernPolyfills: ['esnext.array.at'],
+      // }),
       viteExternalsPlugin(),
       createSvgIconsPlugin({
         // Specify the icon folder to be cached

@@ -8,7 +8,9 @@ export default [
       title: '模板页面',
       alwaysShow: true,
       icon: 'Document',
+      header: true,
     },
+    redirect: '/template-page/table',
     children: [
       {
         path: 'table',
