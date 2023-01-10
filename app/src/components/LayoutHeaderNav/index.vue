@@ -4,7 +4,7 @@ import { usePermissionStore } from '@/stores/permission'
 import { VkRoutesMenuContent } from '@vunk/skzz/components/routes-menu-content'
 import LinkVue from '_c/MenuLink/index.vue'
 import { routes as constRoutes } from '@/router'
-import { computed, onMounted, shallowReactive } from 'vue'
+import { computed, onMounted, ref, shallowReactive } from 'vue'
 import { filterDeep } from 'deepdash-es/standalone'
 import { RouteRecordRaw, useRoute } from 'vue-router'
 import { useViewsStore } from '@/stores/views'
@@ -32,23 +32,24 @@ const navRoutes = computed(() => {
 })
 
 /* set base view */
+const defaultHref = ref('')
 onMounted(() => {
   // 从 navRouteInfo 的 keys 中, 获取与 route.path 前面相同的 最长的 key
   const keys = Object.keys(navRouteInfo)
   // 最长的 key
-  let key = ''
+  defaultHref.value = ''
   keys.forEach((k) => {
-    if (route.path.startsWith(k) && k.length > key.length) {
-      key = k
+    if (route.path.startsWith(k) && k.length > defaultHref.value.length) {
+      defaultHref.value = k
     }
   })
   
-  if (key) {
-    const baseView = navRouteInfo[key]
+  if (defaultHref.value) {
+    const baseView = navRouteInfo[defaultHref.value]
     viewsStore.setBaseView({
       ...baseView,
       children: baseView.meta?._children as RouteRecordRaw[],
-      href: key,
+      href: defaultHref.value,
     })
   }
 
@@ -75,6 +76,7 @@ const menuSelect = (index: string) => {
     mode="horizontal"
     @select="menuSelect"
     :backgroundColor="'transparent'"
+    :defaultActive="defaultHref"
   >
     <VkRoutesMenuContent :data="navRoutes">
       <template #item="{ data, href }">
