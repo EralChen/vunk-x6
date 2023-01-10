@@ -33,16 +33,28 @@ const navRoutes = computed(() => {
 
 /* set base view */
 onMounted(() => {
-  const baseView = navRouteInfo[route.path]
-  if (navRouteInfo[route.path]) {
+  // 从 navRouteInfo 的 keys 中, 获取与 route.path 前面相同的 最长的 key
+  const keys = Object.keys(navRouteInfo)
+  // 最长的 key
+  let key = ''
+  keys.forEach((k) => {
+    if (route.path.startsWith(k) && k.length > key.length) {
+      key = k
+    }
+  })
+  
+  if (key) {
+    const baseView = navRouteInfo[key]
     viewsStore.setBaseView({
       ...baseView,
       children: baseView.meta?._children as RouteRecordRaw[],
-      href: route.path,
+      href: key,
     })
   }
+
 })
 const menuSelect = (index: string) => {
+  
   const baseView = navRouteInfo[index]
   viewsStore.setBaseView({
     ...baseView,

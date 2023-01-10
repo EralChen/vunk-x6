@@ -9,7 +9,10 @@ declare module 'vue-router' {
     hidden?: boolean
     noCache?: boolean
     
-    header?: boolean
+    /**
+     * 如果有路由被 header标记, 侧边菜单则仅展示该路由下的子路由
+     * */ 
+    header?: boolean 
   }
 }
 

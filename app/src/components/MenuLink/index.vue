@@ -1,6 +1,6 @@
 <script lang="ts">
 import { AnyFunc } from '@vunk/core'
-import { defineComponent, PropType } from 'vue'
+import { defineComponent, nextTick, PropType } from 'vue'
 import { RouteRecordRaw } from 'vue-router'
 import { VkSpreadTo } from '@vunk/core/components/spread-to'
 
@@ -28,7 +28,10 @@ export default defineComponent({
         navigate()
       }
     }
-    const getSpreadTarget = (vnode: any) => {
+    const getSpreadTarget = async (vnode: any) => {
+      if (!vnode.el) {
+        await nextTick()
+      }
       return vnode.el?.parentElement
     }
     return {
