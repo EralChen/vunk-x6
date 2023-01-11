@@ -9,6 +9,8 @@ export const useViewsStore = defineStore('views', () => {
     currentBaseView.value = route
   }
 
+
+
   const baseViewsRecord = shallowRef<Record<string, BaseView>>({})
   const addBaseViewToRecord = (fullPath: string, route: RouteRecordRaw) => {
     baseViewsRecord.value[fullPath] = {
@@ -16,6 +18,22 @@ export const useViewsStore = defineStore('views', () => {
       fullpath: fullPath,
     }
   }
+
+  const findBaseViewByFullpath = (fullPath: string) => {
+    const keys = Object.keys(baseViewsRecord.value)
+    // 最长的 key
+    let key = ''
+    keys.forEach((k) => {
+      if (fullPath.startsWith(k) && k.length > key.length) {
+        key = k
+      }
+    })
+    if (key) {
+      return baseViewsRecord.value[key]
+    } 
+
+  }
+
 
 
   
@@ -39,6 +57,7 @@ export const useViewsStore = defineStore('views', () => {
 
     baseViewsRecord,
     addBaseViewToRecord,
+    findBaseViewByFullpath,
 
     visitedViews,
     addVisitedView,
