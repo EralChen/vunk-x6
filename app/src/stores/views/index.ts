@@ -1,6 +1,8 @@
 import { defineStore } from 'pinia'
 import { ref, shallowRef } from 'vue'
 import { RouteLocationNormalizedLoaded, RouteRecordRaw } from 'vue-router'
+import { pickObject } from '@vunk/core/shared/utils-object'
+
 type BaseView = RouteRecordRaw & { fullPath: string }
 
 export const useViewsStore = defineStore('views', () => {
@@ -45,17 +47,29 @@ export const useViewsStore = defineStore('views', () => {
     })) {
       return
     }
-    
-    visitedViews.value.push(route)
+
+    visitedViews.value.push( 
+      pickObject(route, {
+        // [TODO] 持久化储存的数据是否需要这部分
+        excludes: ['matched', 'redirectedFrom'],
+      }) as RouteLocationNormalizedLoaded,
+    )
   }
 
   const delVisitedViewByFullpath = (fullPath: string) => {
     const index = visitedViews.value.findIndex((v) => {
       return v.fullPath === fullPath
     })
+    let item: RouteLocationNormalizedLoaded | undefined
     if (index >= 0) {
-      visitedViews.value.splice(index, 1)
+      item = visitedViews.value.splice(index, 1)[0]
     }
+
+    return {
+      index,
+      item, 
+    }
+   
   }
 
   

@@ -6,7 +6,7 @@ const LayoutHeaderNav = defineAsyncComponent(() => import('_c/LayoutHeaderNav/in
 <template>
 
     <!-- class="bg-primary text-white" -->
-    <div sk-flex="row-between-center">
+    <div sk-flex="row-between-center" class="border-b border-b-border-base">
       <div sk-flex="row_center">
         <div class="layout-header-title f-xxxl font-600 plr-l ptb-s">
           智子开发平台

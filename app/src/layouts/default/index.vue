@@ -1,10 +1,9 @@
 <script lang="ts" setup>
-import AsideVue from '_c/LayoutAside/index.vue'
-import TagsView from '_c/TagsView/index.vue'
 import { VkDuplexCalc } from '@vunk/core'
 import { defineAsyncComponent } from 'vue'
-
 const LayoutHeader = defineAsyncComponent(() => import('_c/LayoutHeader/index.vue'))
+const TagsView = defineAsyncComponent(() => import('_c/TagsView/index.vue'))
+const LayoutAside = defineAsyncComponent(() => import('_c/LayoutAside/index.vue'))
 </script>
 <template>
   <VkDuplexCalc class="layout-default">
@@ -15,7 +14,7 @@ const LayoutHeader = defineAsyncComponent(() => import('_c/LayoutHeader/index.vu
     <div sk-flex class="h-100%">
 
       <div class="layout-default-aside-x">
-        <AsideVue></AsideVue>
+        <LayoutAside></LayoutAside>
       </div>
     
       <VkDuplexCalc class="flex-1">

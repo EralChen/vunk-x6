@@ -3,8 +3,9 @@ import { useViewsStore } from '@/stores/views'
 import { Close } from '@element-plus/icons-vue'
 import { AnyFunc } from '@vunk/core'
 import { watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 const route = useRoute()
+const router = useRouter()
 const viewsStore = useViewsStore()
 
 /* vue3 监听路由变化 */
@@ -15,7 +16,27 @@ watch(route, (newRoute) => {
 const linkClose = (e: MouseEvent, fullPath: string) => {
   e.preventDefault()
   e.stopPropagation()
-  viewsStore.delVisitedViewByFullpath(route.fullPath)
+  const { item, index }  = viewsStore.delVisitedViewByFullpath(fullPath)
+  if (item) {
+    console.log(item.fullPath, route.fullPath, 'item.fullPath, route.fullPath')
+    if (item.fullPath === route.fullPath) { // 将要关闭的路由是当前路由
+      // 将路由跳转到 该路由的上一个路由
+      const prevItem = viewsStore.visitedViews[index - 1]
+      if (prevItem) {
+        router.push(prevItem.fullPath)
+      } else {
+        // 如果没有上一个路由，跳转到后面的路由
+        const nextItem = viewsStore.visitedViews[index]
+        if (nextItem) {
+          router.push(nextItem.fullPath)
+        } else {
+          // 如果没有后面的路由，跳转到首页
+          router.push('/')
+        }
+
+      }
+    }
+  }
 }
 const linkClick = (e: MouseEvent, navigate: AnyFunc) => {
   e.preventDefault()

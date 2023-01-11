@@ -59,10 +59,10 @@ onMounted(() => {
 
   <ElMenu 
     mode="horizontal"
-
-    :backgroundColor="'transparent'"
+    class="layout-header-nav-menu"
     :defaultActive="defaultHref"
-    
+  
+  
   >
     <VkRoutesMenuContent :data="navRoutes">
       <template #item="{ data, href }">
@@ -97,3 +97,9 @@ onMounted(() => {
 </template>
 
 
+<style>
+.layout-header-nav-menu.el-menu--horizontal{
+  border-bottom: none;
+  margin-bottom: -1px;
+}
+</style>

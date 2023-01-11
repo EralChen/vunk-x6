@@ -3,6 +3,13 @@ import Layout from '@/layouts/default/index.vue'
 import UI_CONFIG from './ui-config'
 import TEMPLATE_PAGE from './template-page'
 export const routes: Array<RouteRecordRaw> = [
+  {
+    path: '/',
+    redirect: '/home',
+    meta: {
+      display: 0,
+    },
+  },
 
   {
     path: '/home',

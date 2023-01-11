@@ -3,5 +3,6 @@
 + 颜色配置： 添加 `Bg Color`
 
 ## 1.11
-+ `layout` 顶部目录： 路由改变时 `baseView` 响应逻辑
-+ `tagsView` 浏览标签： 持久化储存; 关闭按钮;                  
++ `layoutHeaderNav` 顶部目录： 路由改变时 `baseView` 响应逻辑; 样式统一；
++ `tagsView` 浏览标签： 持久化储存; 关闭按钮;  关闭当前页跳转逻辑；
+               
