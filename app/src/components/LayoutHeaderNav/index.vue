@@ -31,19 +31,19 @@ const navRoutes = computed(() => {
 const defaultHref = ref('')
 onMounted(() => {
   watch(route, (v) => {
-    const baseView = viewsStore.findBaseViewByFullpath(v.fullPath)
+    const baseView = viewsStore.findBaseViewByFullPath(v.fullPath)
 
 
     if (baseView) {
      
-      if (viewsStore.currentBaseView?.fullpath !== baseView.fullpath) {
+      if (viewsStore.currentBaseView?.fullPath !== baseView.fullPath) {
 
-        defaultHref.value = baseView.fullpath 
+        defaultHref.value = baseView.fullPath 
 
         viewsStore.setCurrentBaseView({
           ...baseView,
           children: baseView.meta?._children as RouteRecordRaw[],
-          fullpath: baseView.fullpath,
+          fullPath: baseView.fullPath,
         })
 
       }

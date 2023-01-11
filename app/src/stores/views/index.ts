@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, shallowRef } from 'vue'
 import { RouteLocationNormalizedLoaded, RouteRecordRaw } from 'vue-router'
-type BaseView = RouteRecordRaw & { fullpath: string }
+type BaseView = RouteRecordRaw & { fullPath: string }
 
 export const useViewsStore = defineStore('views', () => {
   const currentBaseView = shallowRef<BaseView>()
@@ -15,11 +15,12 @@ export const useViewsStore = defineStore('views', () => {
   const addBaseViewToRecord = (fullPath: string, route: RouteRecordRaw) => {
     baseViewsRecord.value[fullPath] = {
       ...route,
-      fullpath: fullPath,
+      fullPath: fullPath,
     }
   }
 
-  const findBaseViewByFullpath = (fullPath: string) => {
+
+  const findBaseViewByFullPath = (fullPath: string) => {
     const keys = Object.keys(baseViewsRecord.value)
     // 最长的 key
     let key = ''
@@ -48,6 +49,15 @@ export const useViewsStore = defineStore('views', () => {
     visitedViews.value.push(route)
   }
 
+  const delVisitedViewByFullpath = (fullPath: string) => {
+    const index = visitedViews.value.findIndex((v) => {
+      return v.fullPath === fullPath
+    })
+    if (index >= 0) {
+      visitedViews.value.splice(index, 1)
+    }
+  }
+
   
   // const cachedViews = shallowRef<RouteRecordRaw[]>([])
 
@@ -57,10 +67,11 @@ export const useViewsStore = defineStore('views', () => {
 
     baseViewsRecord,
     addBaseViewToRecord,
-    findBaseViewByFullpath,
+    findBaseViewByFullPath,
 
     visitedViews,
     addVisitedView,
+    delVisitedViewByFullpath,
 
   }
 }, {

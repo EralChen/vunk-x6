@@ -40,7 +40,7 @@ function upLinkClickToItem (e: MouseEvent) {
   >
     <VkRoutesMenuContent 
     :data="viewsStore.currentBaseView?.children || [...permissionStore.routes, ...constRoutes]" 
-    :basePath="viewsStore.currentBaseView?.fullpath || ''"
+    :basePath="viewsStore.currentBaseView?.fullPath || ''"
     :popperClass="'layout-default-aside-popper'">
       <template #item="{ data, href }">
         <LinkVue :isMenu="false" :data="data" :to="href">
