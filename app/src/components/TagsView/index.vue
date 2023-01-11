@@ -21,17 +21,11 @@ watch(route, (newRoute) => {
       class="decoration-none text-text-secondary block pa-m tags-view-item"
     >
       <span>{{  item.meta.title || '未命名'  }}</span>    
-
     </RouterLink>
 
   </div>
 
-  <!-- <div>
-    {{  viewsStore.visitedViews.map(item => item.fullPath) }}
-  </div>
-  <div>
-    {{  viewsStore.visitedViews.map(item => item.meta.title) }}
-  </div> -->
+
 </template>
 
 <style>

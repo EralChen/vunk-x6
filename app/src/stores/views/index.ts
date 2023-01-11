@@ -22,7 +22,7 @@ export const useViewsStore = defineStore('views', () => {
   const visitedViews = ref<RouteLocationNormalizedLoaded[]>([])
   const addVisitedView = (route: RouteLocationNormalizedLoaded) => {
     if (visitedViews.value.some((v) => {
-      return v.path === route.path
+      return v.fullPath === route.fullPath
     })) {
       return
     }
@@ -44,4 +44,13 @@ export const useViewsStore = defineStore('views', () => {
     addVisitedView,
 
   }
+}, {
+  persist: {
+    enabled: true,
+    strategies: [
+      {
+        paths: ['visitedViews'],
+      },
+    ],
+  },
 })
