@@ -4,7 +4,7 @@ import { usePermissionStore } from '@/stores/permission'
 import { VkRoutesMenuContent } from '@vunk/skzz/components/routes-menu-content'
 import LinkVue from '_c/MenuLink/index.vue'
 import { routes as constRoutes } from '@/router'
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { filterDeep } from 'deepdash-es/standalone'
 import { RouteRecordRaw, useRoute } from 'vue-router'
 import { useViewsStore } from '@/stores/views'
@@ -30,46 +30,36 @@ const navRoutes = computed(() => {
 /* set base view */
 const defaultHref = ref('')
 onMounted(() => {
-  // 从 navRouteInfo 的 keys 中, 获取与 route.path 前面相同的 最长的 key
-  const keys = Object.keys(viewsStore.baseViewsRecord)
-  // 最长的 key
-  defaultHref.value = ''
-  keys.forEach((k) => {
-    if (route.path.startsWith(k) && k.length > defaultHref.value.length) {
-      defaultHref.value = k
-    }
-  })
-  
-  if (defaultHref.value) {
-    const baseView = viewsStore.baseViewsRecord[defaultHref.value]
-    viewsStore.setCurrentBaseView({
-      ...baseView,
-      children: baseView.meta?._children as RouteRecordRaw[],
-      fullpath: defaultHref.value,
-    })
-  }
+  watch(route, (v) => {
+    const baseView = viewsStore.findBaseViewByFullpath(v.fullPath)
 
+
+    if (baseView) {
+     
+      if (viewsStore.currentBaseView?.fullpath !== baseView.fullpath) {
+
+        defaultHref.value = baseView.fullpath 
+
+        viewsStore.setCurrentBaseView({
+          ...baseView,
+          children: baseView.meta?._children as RouteRecordRaw[],
+          fullpath: baseView.fullpath,
+        })
+
+      }
+
+    }
+  },  { immediate: true })
 })
-const menuSelect = (index: string) => {
-  const baseView = viewsStore.baseViewsRecord[index]
-  viewsStore.setCurrentBaseView({
-    ...baseView,
-    children: baseView.meta?._children as RouteRecordRaw[],
-    fullpath: index,
-  })
-}
 /* set base view /> */
 
 
 </script>
 <template>
-  <!-- 
-      :textColor="'var(--el-color-white)'"
-    :activeTextColor="'var(--el-color-white)'"
-   -->
+
   <ElMenu 
     mode="horizontal"
-    @select="menuSelect"
+
     :backgroundColor="'transparent'"
     :defaultActive="defaultHref"
     
