@@ -100,6 +100,10 @@ onMounted(() => {
 <style>
 .layout-header-nav-menu.el-menu--horizontal{
   border-bottom: none;
-  margin-bottom: -1px;
+  /* margin-bottom: -1px; */
+}
+
+.layout-header-nav-menu.el-menu--horizontal>.el-menu-item{
+    border-bottom: none;
 }
 </style>

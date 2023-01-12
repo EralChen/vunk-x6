@@ -44,24 +44,27 @@ const linkClick = (e: MouseEvent, navigate: AnyFunc) => {
 }
 </script>
 <template>
-  <div sk-flex class="bg-bg-overlay">
+  <div sk-flex class="bg-bg-overlay border-b border-b-border-base" 
+
+  >
 
     <RouterLink 
       v-for="item of viewsStore.visitedViews" 
       :key="item.fullPath" :to="item.fullPath"
+   
       :custom="true"
     >
       <template #default="{ navigate, href,  isActive, isExactActive  }">
         <a 
           :href="href" 
           @click="linkClick($event, navigate)"
-          class="decoration-none text-text-secondary pa-m tags-view-item" 
+          class="decoration-none text-text-secondary ptb-xxs plr-m f-xxxs tags-view-item" 
           sk-flex="row_center" 
           :class="{
             'router-link-active': isActive,
             'router-link-exact-active': isExactActive
           }"
-          sub:ml-m
+          sub:ml-xxs
         >
           <span>{{ item.meta.title || '未命名' }}</span>
 
@@ -89,7 +92,12 @@ const linkClick = (e: MouseEvent, navigate: AnyFunc) => {
 
 <style>
 .tags-view-item.router-link-exact-active {
-  color: var(--el-color-primary);
+  /* color: var(--el-color-primary); */
+  background-color: var(--el-color-primary);
+  color: var(--el-color-white);
+}
+.tags-view-item.router-link-exact-active .tags-view-icon-close:hover{
+  color: var(--el-text-color-secondary);
 }
 .tags-view-icon-close{
   box-sizing: content-box;
@@ -97,4 +105,5 @@ const linkClick = (e: MouseEvent, navigate: AnyFunc) => {
   border-radius: 50%;
 
 }
+
 </style>
