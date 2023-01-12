@@ -12,11 +12,11 @@ const LayoutAside = defineAsyncComponent(() => import('_c/LayoutAside/index.vue'
     </template>
     
     <div sk-flex class="h-100%">
-
+  
       <div class="layout-default-aside-x">
         <LayoutAside></LayoutAside>
       </div>
-    
+
       <VkDuplexCalc class="flex-1">
         <template #one>
           <TagsView></TagsView>
@@ -42,8 +42,11 @@ const LayoutAside = defineAsyncComponent(() => import('_c/LayoutAside/index.vue'
 } 
 </style>
 <style>
+
+
 .layout-default-aside-x, .layout-default {
   height: 100%;
+
 }
 .layout-default-main{
   width: 100%;

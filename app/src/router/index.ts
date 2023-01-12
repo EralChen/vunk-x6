@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '@/layouts/default/index.vue'
 import UI_CONFIG from './ui-config'
 import TEMPLATE_PAGE from './template-page'
+import _PLAY from './_play'
 export const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
@@ -39,6 +40,7 @@ export const routes: Array<RouteRecordRaw> = [
 
   ...UI_CONFIG,
   ...TEMPLATE_PAGE,
+  ..._PLAY,
 ]
 
 const router = createRouter({
