@@ -1,9 +1,11 @@
 <script lang="ts" setup>
 import BaseVue from './base/index.vue'
+import NameVue from './name/index.vue'
 </script>
 <template>
-  <div pa-xxl>
-    <BaseVue labelWidth="6em"></BaseVue>
+  <div pa-page sub:mt-m>
+    <BaseVue labelWidth="10em"></BaseVue>
+    <NameVue labelWidth="10em"></NameVue>
   </div>
 
 </template>

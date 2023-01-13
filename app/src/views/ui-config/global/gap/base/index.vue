@@ -11,14 +11,14 @@ import { NormalObject, setData, SetDataEvent } from '@vunk/core'
 const themeStore = useThemeStore()
 
 const defaultConfig = {
-  '--gap-xxxs': '0.7rem',
+  // '--gap-xxxs': '0.7rem',
   '--gap-xxs': '0.8rem',
   '--gap-s': '0.9rem',
   '--gap-m': '1rem',
   '--gap-l': '1.1rem',
   '--gap-xl': '1.2rem',
   '--gap-xxl': '1.3rem',
-  '--gap-xxxl': '1.4rem',
+  // '--gap-xxxl': '1.4rem',
 }
 const formData = computed(() => {
   const obj:NormalObject = {}
@@ -46,12 +46,12 @@ Object.entries(defaultConfig).forEach(([k, v]) => {
 })
 
 const formItems: FormItemRendererSource<keyof typeof defaultConfig>[] = [
-  {
-    templateType: 'VkfInputNumber',
-    prop: '--gap-xxxs',
-    label: 'gap-xxxs',
-    step: 0.1,
-  },
+  // {
+  //   templateType: 'VkfInputNumber',
+  //   prop: '--gap-xxxs',
+  //   label: 'gap-xxxs',
+  //   step: 0.1,
+  // },
   {
     templateType: 'VkfInputNumber',
     prop: '--gap-xxs',
@@ -88,12 +88,12 @@ const formItems: FormItemRendererSource<keyof typeof defaultConfig>[] = [
     label: 'gap-xxl',
     step: 0.1,
   },
-  {
-    templateType: 'VkfInputNumber',
-    prop: '--gap-xxxl',
-    label: 'gap-xxxl',
-    step: 0.1,
-  },
+  // {
+  //   templateType: 'VkfInputNumber',
+  //   prop: '--gap-xxxl',
+  //   label: 'gap-xxxl',
+  //   step: 0.1,
+  // },
 ]
 </script>
 <template>

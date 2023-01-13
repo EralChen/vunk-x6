@@ -27,7 +27,10 @@ const colSource:__VkTableColumns.Source[] = [
 ]
 </script>
 <template>
-  <ElTable :data="data">
-    <VkTableColumns :source="colSource"></VkTableColumns>
-  </ElTable>
+  <div pa-page>
+    <ElTable :data="data" :border="true">
+      <VkTableColumns :source="colSource"></VkTableColumns>
+    </ElTable>
+  </div>
+
 </template>

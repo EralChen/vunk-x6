@@ -58,14 +58,17 @@ export default defineConfig(({ mode }) => {
             theme: sizeTheme,
           }),
           presetGap({
-            theme: sizeTheme,
+            theme: {
+              ...sizeTheme,
+              page: 'var(--gap-page)',
+            },
           }),
           presetFlex({
             prefix: 'sk',
           }),
         
         ],
-
+    
     
         theme: {
           colors: {

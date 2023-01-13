@@ -28,7 +28,10 @@ const handleLink = (item:RouteLocationMatched) => {
 }
 </script>
 <template>
-  <ElBreadcrumb class="pa-s bg-bg-overlay" :separator="'>'">
+  <ElBreadcrumb 
+    class="pa-s bg-bg-overlay border-b border-b-border-base" 
+    :separator="'>'"
+  >
     <!-- <TransitionGroup name="breadcrumb"> -->
       <el-breadcrumb-item v-for="(item) in levelList" :key="item.path">
         <a 
