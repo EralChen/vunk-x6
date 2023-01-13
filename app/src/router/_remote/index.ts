@@ -4,7 +4,7 @@ import Layout from '@/layouts/default/index.vue'
 export const createRemoteRoutes = () => { 
   return {
     '/dashboard': {
-      component: () => import('@/views/dashboard/index.vue'),
+      component: () => import('@/views/home/index.vue'),
       meta: {
         
       },

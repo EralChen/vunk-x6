@@ -4,6 +4,7 @@ import { defineAsyncComponent } from 'vue'
 const LayoutHeader = defineAsyncComponent(() => import('_c/LayoutHeader/index.vue'))
 const TagsView = defineAsyncComponent(() => import('_c/TagsView/index.vue'))
 const LayoutAside = defineAsyncComponent(() => import('_c/LayoutAside/index.vue'))
+const BreadcrumbVue = defineAsyncComponent(() => import('_c/Breadcrumb/index.vue'))
 </script>
 <template>
   <VkDuplexCalc class="layout-default">
@@ -20,6 +21,7 @@ const LayoutAside = defineAsyncComponent(() => import('_c/LayoutAside/index.vue'
       <VkDuplexCalc class="flex-1">
         <template #one>
           <TagsView></TagsView>
+          <BreadcrumbVue></BreadcrumbVue>
         </template>
 
         <ElScrollbar>

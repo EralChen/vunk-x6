@@ -76,6 +76,7 @@ importers:
       '@vunk/skzz': 0.0.0-alpha.50
       deepdash-es: ^5.3.9
       js-cookie: ^3.0.1
+      path-to-regexp: ^6.2.1
       pinia: ^2.0.21
       pinia-plugin-persist: ^1.0.0
       qs: ^6.11.0
@@ -91,6 +92,7 @@ importers:
       '@vunk/skzz': 0.0.0-alpha.50
       deepdash-es: 5.3.9
       js-cookie: 3.0.1
+      path-to-regexp: 6.2.1
       pinia: 2.0.27
       pinia-plugin-persist: 1.0.0_pinia@2.0.27
       qs: 6.11.0
@@ -6860,6 +6862,10 @@ packages:
     dependencies:
       path-root-regex: 0.1.2
     dev: true
+
+  /path-to-regexp/6.2.1:
+    resolution: {integrity: sha512-JLyh7xT1kizaEvcaXOQwOc2/Yhw6KZOvPf1S8401UyLk86CU79LN3vl7ztXGm/pZ+YjoyAJ4rxmHwbkBXJX+yw==}
+    dev: false
 
   /path-type/1.1.0:
     resolution: {integrity: sha512-S4eENJz1pkiQn9Znv33Q+deTOKmbl+jj1Fl+qiP/vYezj+S8x+J3Uo0ISrx/QoEvIlOaDWJhPaRd1flJ9HXZqg==}
