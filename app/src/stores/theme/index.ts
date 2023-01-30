@@ -75,17 +75,23 @@ const useRootStylesWithMode = (key: string) => {
 }
 
 export const useThemeStore = defineStore('theme', () => {
-  const menuStyles = useRootStylesWithMode('ZZ_PLATFORM_THEME_MENU_STYLES')
+  const menuStyles = useRootStylesWithMode('ZZPT_MENU_STYLES')
 
   const headerMenuClassName = 'zz-platform-header-menu'
-  const headerMenuStyles = useRootStyles('ZZ_PLATFORM_THEME_HEADER_MENU_STYLES', `.${headerMenuClassName}`)
+  const headerMenuStyles = useRootStyles('ZZPT_HEADER_MENU_STYLES', `.${headerMenuClassName}`)
 
-  const colorStyles = useRootStylesWithMode('ZZ_PLATFORM_THEME_GLOBAL_STYLES')
-  const fontSizeStyles = useRootStyles('ZZ_PLATFORM_THEME_FONT_SIZE_STYLES')
-  const gapStyles = useRootStyles('ZZ_PLATFORM_THEME_GAP_STYLES')
+  const colorStyles = useRootStylesWithMode('ZZPT_GLOBAL_STYLES')
+  const fontSizeStyles = useRootStyles('ZZPT_FONT_SIZE_STYLES')
+
+
+  const gapBaseStyles = useRootStyles('ZZPT_GAP_BASE_STYLES')
+  const gapNamedStyles = useRootStyles('ZZPT_GAP_NAMED_STYLES')
+
+
 
   return { 
-    gapStyles,
+    gapBaseStyles,
+    gapNamedStyles,
 
     headerMenuClassName,
     headerMenuStyles,

@@ -18,7 +18,7 @@ const BreadcrumbVue = defineAsyncComponent(() => import('_c/Breadcrumb/index.vue
         <LayoutAside></LayoutAside>
       </div>
 
-      <VkDuplexCalc class="flex-1 overflow-hidden" >
+      <VkDuplexCalc class="flex-1 overflow-hidden" :heightProperty="'--zz-main-height'">
         <template #one>
           <TagsView></TagsView>
           <BreadcrumbVue></BreadcrumbVue>

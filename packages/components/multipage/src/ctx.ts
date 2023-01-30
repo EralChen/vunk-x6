@@ -14,6 +14,10 @@ export const props = {
     type: Boolean,
     default: true,
   },
+  tabXClass: {
+    type: [String, Object],
+    default: '',
+  },
 
 }
 

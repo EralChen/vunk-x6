@@ -52,7 +52,7 @@ const gapOptions =  [
 ]
 const formItems: FormItemRendererSource<keyof typeof defaultConfig>[] = [
   {
-    templateType: 'VkfRadio',
+    templateType: 'VkfSelect',
     prop: '--gap-page',
     label: '页面间距 gap-page',
     options: gapOptions,
@@ -60,46 +60,39 @@ const formItems: FormItemRendererSource<keyof typeof defaultConfig>[] = [
 ]
 </script>
 <template>
-  <ElCard >
-    <template #header>
-     Name Gap
-    </template>
+  <div sk-flex="row" sub:ml-2r>
 
-    <div sk-flex="row" sub:ml-2r>
+    <VkfForm 
+      :formItems="formItems" 
+      :data="themeStore.gapNamedStyles"
+      @setData="setData(themeStore.gapNamedStyles, $event)"
+      v-bind="$attrs"
+    >
+    </VkfForm>
 
-      <VkfForm 
-        :formItems="formItems" 
-        :data="themeStore.gapStyles"
-        @setData="setData(themeStore.gapStyles, $event)"
-        v-bind="$attrs"
+    <!-- <div >
+      <div 
+        v-for="(v, k) in defaultConfig" 
+        :key="k"
+        :style="{
+          height: '51px'
+        }"
+        sk-flex
       >
-      </VkfForm>
-
-      <div >
-        <div 
-          v-for="(v, k) in defaultConfig" 
-          :key="k"
+        <span>{{k}}</span>
+        <span :style="{
+          'marginLeft': `var(${k})`,
+        }">{{k}}</span>
+        <span
           :style="{
-            height: '51px'
-          }"
-          sk-flex
-        >
-          <span>{{k}}</span>
-          <span :style="{
             'marginLeft': `var(${k})`,
-          }">{{k}}</span>
-          <span
-            :style="{
-              'marginLeft': `var(${k})`,
-            }"
-          >{{k}}</span>
-          
-        </div>
+          }"
+        >{{k}}</span>
+        
       </div>
+    </div> -->
 
-    </div>
-  </ElCard>
-
+  </div>
 </template>
 <style>
 

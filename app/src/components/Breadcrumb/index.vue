@@ -28,8 +28,9 @@ const handleLink = (item:RouteLocationMatched) => {
 }
 </script>
 <template>
+  <!-- bg-bg-overlay border-b border-b-border-base -->
   <ElBreadcrumb 
-    class="pa-s bg-bg-overlay border-b border-b-border-base" 
+    class="pt-page plr-page" 
     :separator="'>'"
   >
     <!-- <TransitionGroup name="breadcrumb"> -->

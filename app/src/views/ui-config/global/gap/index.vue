@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { SkMultipage } from '@skzz-platform/components/multipage'
 import { ref } from 'vue'
+import BaseVue from './base/index.vue'
+import NameVue from './name/index.vue'
 const currentPage = ref('base')
 const modules = ref([
   { label: '基础间距', value: 'base' },
@@ -8,16 +10,28 @@ const modules = ref([
 ])
 </script>
 <template>
-  <div plr-page>
+  <div pa-page class="h-main">
+    <SkMultipage 
+      v-model="currentPage" 
+      :modules="modules"
+      bg-bg-overlay
+      class="h-100%"
+      tabXClass="pl-form-pl"
+    >
+      <template #base>
+        <div class="ptb-form-ptb pl-form-pl-simple">
+          <BaseVue></BaseVue>
+        </div>
+      </template>
+      <template #name>
+        <div class="ptb-form-ptb pl-form-pl-simple">
+          <NameVue></NameVue>
+        </div>
+      </template>
 
-
-  <SkMultipage 
-    v-model="currentPage" 
-    :modules="modules"
-    bg-bg-overlay
-    class="pl-form-pl"
-  >
-  
-  </SkMultipage>
-</div>
+    </SkMultipage>
+  </div>
 </template>
+<style>
+
+</style>

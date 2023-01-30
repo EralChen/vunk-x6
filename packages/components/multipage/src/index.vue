@@ -32,7 +32,7 @@ export default defineComponent({
         @update:modelValue="$emit('update:modelValue', $event)"
       >
         <div class="sk-multipage-header">
-          <div class="sk-multipage-tab-x">
+          <div class="sk-multipage-tab-x" :class="tabXClass">
             <VkCheckLogic 
               v-for="item of modules" 
               :key="item.value"
@@ -41,7 +41,7 @@ export default defineComponent({
               :clearable="false"
               @active="visitedTabs.add(item.value)"
             >
-              {{  item.label }} 
+              {{ item.label }} 
             </VkCheckLogic>
           </div>
 

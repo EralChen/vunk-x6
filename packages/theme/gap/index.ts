@@ -10,11 +10,11 @@ export const baseGap = {
 export const namedGap = {
   page: 'var(--gap-page)',
 
-  'form-ptb': 'var(--gap-form-ptb)',
-  'form-pl-simple': 'var(--gap-form-l-simple)',
-  'form-pl': 'var(--gap-form-l)',
+  'form-ptb': '14px',
+  'form-pl-simple': '140px',
+  'form-pl': '70px',
 
-  'multipage-tab-ptb': 'var(--gap-multipage-tab-ptb)',
-  'multipage-tab-ml': 'var(--gap-multipage-tab-ml)',
+  'multipage-tab-ptb': '24px',
+  'multipage-tab-ml': '70px',
   
 }

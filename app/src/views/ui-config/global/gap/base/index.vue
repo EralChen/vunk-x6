@@ -14,7 +14,8 @@ const defaultConfig = { ...baseGap }
 
 const formData = computed(() => {
   const obj:NormalObject = {}
-  Object.entries(themeStore.gapStyles).forEach(([k, v]) => {
+  Object.entries(themeStore.gapBaseStyles).forEach(([k, v]) => {
+
     if (k.startsWith('--gap-')) {
       obj[k] = +v.replace('rem', '')
     } else {
@@ -28,12 +29,12 @@ const setFormData = (e: SetDataEvent) => {
   if (e.k.startsWith('--gap-')) {
     e.v = `${e.v}rem`
   } 
-  setData(themeStore.gapStyles, e)
+  setData(themeStore.gapBaseStyles, e)
 }
 
 Object.entries(defaultConfig).forEach(([k, v]) => {
-  if (!themeStore.gapStyles[k]) {
-    themeStore.gapStyles[k] = v
+  if (!themeStore.gapBaseStyles[k]) {
+    themeStore.gapBaseStyles[k] = v
   }
 })
 
@@ -78,46 +79,41 @@ const formItems: FormItemRendererSource<keyof typeof defaultConfig>[] = [
 ]
 </script>
 <template>
-  <ElCard>
-    <template #header>
-     Gap
-    </template>
+  <div sk-flex="row" sub:ml-2r>
 
-    <div sk-flex="row" sub:ml-2r>
+    <VkfForm 
+      :labelWidth="70"
+      :formItems="formItems" 
+      :data="formData"
+      @setData="setFormData"
+      v-bind="$attrs"
+    >
+    
+    </VkfForm>
 
-      <VkfForm 
-        :formItems="formItems" 
-        :data="formData"
-        @setData="setFormData"
-        v-bind="$attrs"
+    <!-- <div >
+      <div 
+        v-for="(v, k) in defaultConfig" 
+        :key="k"
+        :style="{
+          height: '51px'
+        }"
+        sk-flex
       >
-      </VkfForm>
-
-      <div >
-        <div 
-          v-for="(v, k) in defaultConfig" 
-          :key="k"
+        <span>11</span>
+        <span :style="{
+          'marginLeft': `var(${k})`,
+        }">22</span>
+        <span
           :style="{
-            height: '51px'
-          }"
-          sk-flex
-        >
-          <span>11</span>
-          <span :style="{
             'marginLeft': `var(${k})`,
-          }">22</span>
-          <span
-            :style="{
-              'marginLeft': `var(${k})`,
-            }"
-          >33</span>
-          
-        </div>
+          }"
+        >33</span>
+        
       </div>
+    </div> -->
 
-    </div>
-  </ElCard>
-
+  </div>
 </template>
 <style>
 
