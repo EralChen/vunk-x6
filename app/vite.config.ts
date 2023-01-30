@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJSX from '@vitejs/plugin-vue-jsx'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
-import { windowEnvPlugin } from '@lib-env/app-utils'
+import { windowEnvPlugin, zzTheme } from '@lib-env/app-utils'
 import { getEnv } from '@lib-env/app-utils'
 import path from 'path'
 import { appRoot } from '@lib-env/path'
@@ -11,6 +11,7 @@ import { viteExternalsPlugin } from 'vite-plugin-externals'
 import unocss from 'unocss/vite'
 import { presetAttributify, presetWind } from 'unocss'
 import { presetFlex, presetFont, presetGap } from 'unocss-preset-vunk'
+
 
 const srcRoot = path.resolve(appRoot, './src')
 
@@ -59,8 +60,8 @@ export default defineConfig(({ mode }) => {
           }),
           presetGap({
             theme: {
-              ...sizeTheme,
-              page: 'var(--gap-page)',
+              ...zzTheme.baseGap, 
+              ...zzTheme.namedGap,
             },
           }),
           presetFlex({

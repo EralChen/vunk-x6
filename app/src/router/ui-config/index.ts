@@ -49,7 +49,24 @@ export default [
         meta: {
           title: '菜单配置',
         },
-        component: () => import('_v/ui-config/menu/index.vue'),
+        children: [
+          {
+            path: 'base',
+            meta: {
+              title: '基础配置',
+            },
+            component: () => import('_v/ui-config/menu/base/index.vue'),
+
+          },
+          {
+            path: 'header',
+            meta: {
+              title: '头部配置',
+            },
+            component: () => import('_v/ui-config/menu/header/index.vue'),
+          },
+        ],
+        
       },
     
     ],

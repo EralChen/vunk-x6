@@ -2,16 +2,19 @@
   "basic": {
     "text": "basic 基础组件",
     "children": [
+    ]
+  },
+  "layout": {
+    "text": "layout 布局",
+    "children": [
       {
-        "link": "/hello",
-        "text": "hello 你好"
+        "link": "/multipage",
+        "text": "Multipage"
       }
     ]
   },
   "shared": {
     "text": "Shared 共享",
-    "children": [
-
-    ]
+    "children": []
   }
 }

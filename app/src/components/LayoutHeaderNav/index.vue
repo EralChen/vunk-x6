@@ -8,10 +8,12 @@ import { computed, onMounted, ref, watch } from 'vue'
 import { filterDeep } from 'deepdash-es/standalone'
 import { RouteRecordRaw, useRoute } from 'vue-router'
 import { useViewsStore } from '@/stores/views'
+import { useThemeStore } from '@/stores/theme'
 
 const route = useRoute()
 const permissionStore = usePermissionStore()
 const viewsStore = useViewsStore()
+const { headerMenuClassName } = useThemeStore()
 
 
 
@@ -60,8 +62,10 @@ onMounted(() => {
   <ElMenu 
     mode="horizontal"
     class="layout-header-nav-menu"
+    :class="{
+      [headerMenuClassName]: true
+    }"
     :defaultActive="defaultHref"
-  
   
   >
     <VkRoutesMenuContent :data="navRoutes">

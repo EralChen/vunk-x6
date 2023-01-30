@@ -112,5 +112,5 @@ const formItems: FormItemRendererSource<keyof typeof defaultConfig>[] = [
 ]
 </script>
 <template>
-  <VkfForm :labelWidth="'14em'" :formItems="formItems"></VkfForm>
+  <VkfForm class="bg-bg-overlay" :labelWidth="'14em'" :formItems="formItems"></VkfForm>
 </template>
