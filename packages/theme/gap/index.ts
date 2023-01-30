@@ -10,9 +10,9 @@ export const baseGap = {
 export const namedGap = {
   page: 'var(--gap-page)',
 
-  'form-tb': 'var(--gap-form-tb)',
-  'form-l-simple': 'var(--gap-form-simple)',
-  'form-l': 'var(--gap-form-l)',
+  'form-ptb': 'var(--gap-form-ptb)',
+  'form-pl-simple': 'var(--gap-form-l-simple)',
+  'form-pl': 'var(--gap-form-l)',
 
   'multipage-tab-ptb': 'var(--gap-multipage-tab-ptb)',
   'multipage-tab-ml': 'var(--gap-multipage-tab-ml)',
