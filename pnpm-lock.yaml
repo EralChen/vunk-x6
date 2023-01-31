@@ -18,7 +18,7 @@ importers:
       '@types/gulp': ^4.0.9
       '@types/node': ^18.0.4
       '@vunk/core': 0.0.0-alpha.68
-      '@vunk/form': 0.0.1-alpha.42
+      '@vunk/form': 0.0.1-alpha.43
       consola: ^2.15.3
       element-plus: npm:element-plus@latest
       eslint: ^8.19.0
@@ -41,7 +41,7 @@ importers:
       '@skzz-platform/theme': link:packages/theme
       '@skzz/platform': link:packages/entry
       '@vunk/core': 0.0.0-alpha.68
-      '@vunk/form': 0.0.1-alpha.42
+      '@vunk/form': 0.0.1-alpha.43
       element-plus: 2.2.28_vue@3.2.45
       vue: 3.2.45
     devDependencies:
@@ -2910,8 +2910,8 @@ packages:
     resolution: {integrity: sha512-UoYez4zm7lRISrbNB36YkO+i7VjRirQONrDBGadzCgQdncBurz6mrEq7CuhzWBpuvRYS0fcdXiKxso2v6+xtoA==}
     dev: false
 
-  /@vunk/form/0.0.1-alpha.42:
-    resolution: {integrity: sha512-Z4OErSc9iHzC/PFV0N9OuX2n1sGKjBYZxutuP6aP9k89dGIO5aD6/7WiawfZR1ElKmH7rT480sd8IyRv4UdBEA==}
+  /@vunk/form/0.0.1-alpha.43:
+    resolution: {integrity: sha512-fBxI7O7bwqbK89Xu+4Bh16Nat39WK/UYxSS96UPxpNGOnE/dgw+tgLVpTx+iBxGqXZ8iv1cbLyDJZ7/UE052Gw==}
     dependencies:
       '@vunk/core': 0.0.0-alpha.68
     dev: false

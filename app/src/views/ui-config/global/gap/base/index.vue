@@ -1,14 +1,15 @@
-<script lang="ts">
+<script lang="tsx">
 export default {
   inheritAttrs: false,
 }
 </script>
-<script lang="ts" setup>
-import { FormItemRendererSource, VkfForm } from '@vunk/form'
+<script lang="tsx" setup>
+// import { FormItemRendererSource, VkfForm } from '@vunk/form'
 import { useThemeStore } from '@/stores/theme'
 import { computed } from 'vue'
 import { NormalObject, setData, SetDataEvent } from '@vunk/core'
 import { baseGap } from '@skzz-platform/theme'
+import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
 const themeStore = useThemeStore()
 const defaultConfig = { ...baseGap }
 
@@ -38,7 +39,7 @@ Object.entries(defaultConfig).forEach(([k, v]) => {
   }
 })
 
-const formItems: FormItemRendererSource<keyof typeof defaultConfig>[] = [
+const formItems: __SkAppForm.FormItem<keyof typeof defaultConfig>[] = [
   {
     templateType: 'VkfInputNumber',
     prop: '--gap-xxs',
@@ -77,19 +78,48 @@ const formItems: FormItemRendererSource<keyof typeof defaultConfig>[] = [
   },
 
 ]
+
+const formItemWithLayout = computed(() => {
+  return formItems.map((_item) => {
+    const item = _item as __SkAppForm.CoreFormItem
+    return {
+      templateType: 'VkfFlex',
+      direction: 'row',
+      align: 'baseline',
+      templateSlots: [
+        item,
+        {
+          templateType: 'Component',
+          is: () => {
+            return <div class="ml-4r">
+              <span> {item.label} </span>
+              <span style={
+                {
+                  marginLeft: `var(${item.prop})`,
+                }
+              }> {item.label} </span>
+              <span style={
+                {
+                  marginLeft: `var(${item.prop})`,
+                }
+              }> {item.label} </span>
+            </div>
+          },  
+        },
+      ],
+    } as __SkAppForm.FormItem
+  })
+})
 </script>
 <template>
-  <div sk-flex="row" sub:ml-2r>
-
-    <VkfForm 
+    <SkAppForm 
       :labelWidth="70"
-      :formItems="formItems" 
+      :formItems="formItemWithLayout" 
       :data="formData"
       @setData="setFormData"
       v-bind="$attrs"
     >
-    
-    </VkfForm>
+    </SkAppForm>
 
     <!-- <div >
       <div 
@@ -113,7 +143,7 @@ const formItems: FormItemRendererSource<keyof typeof defaultConfig>[] = [
       </div>
     </div> -->
 
-  </div>
+
 </template>
 <style>
 
