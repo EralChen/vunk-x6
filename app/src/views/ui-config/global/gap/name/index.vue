@@ -30,6 +30,7 @@ const formItems: __SkAppForm.FormItem<`--gap-${keyof typeof namedGap}`>[] = [
       页面间距: 系统页面主体的间距， 如：页面主体周围的间距
     </p>,
   },
+
   {
     templateType: 'VkfSelect',
     prop: '--gap-form-pl',
@@ -39,7 +40,6 @@ const formItems: __SkAppForm.FormItem<`--gap-${keyof typeof namedGap}`>[] = [
     allowCreate: true,
     filterable: true,
   },
-
   {
     templateType: 'Component',
     is: () => <p class='text-text-secondary mb-xl'>
@@ -56,7 +56,6 @@ const formItems: __SkAppForm.FormItem<`--gap-${keyof typeof namedGap}`>[] = [
     allowCreate: true,
     filterable: true,
   },
-
   {
     templateType: 'Component',
     is: () => <p class='text-text-secondary mb-xl'>
@@ -73,7 +72,6 @@ const formItems: __SkAppForm.FormItem<`--gap-${keyof typeof namedGap}`>[] = [
     allowCreate: true,
     filterable: true,
   },
-
   {
     templateType: 'Component',
     is: () => <p class='text-text-secondary mb-xl'>
@@ -90,7 +88,6 @@ const formItems: __SkAppForm.FormItem<`--gap-${keyof typeof namedGap}`>[] = [
     allowCreate: true,
     filterable: true,
   },
-
   {
     templateType: 'Component',
     is: () => <p class='text-text-secondary mb-xl'>
