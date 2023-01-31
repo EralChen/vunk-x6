@@ -8,13 +8,15 @@ export const baseGap = {
 }
 
 export const namedGap = {
-  page: 'var(--gap-page)',
+  page: 'var(--gap-m)',
+ 
+  'form-ptb': '14px', 
 
-  'form-ptb': '14px',
-  'form-pl-simple': '140px',
+  'form-pl-plain': '140px',
   'form-pl': '70px',
 
+
   'multipage-tab-ptb': '24px',
-  'multipage-tab-ml': '70px',
+  'multipage-tab-space': '70px',
   
 }

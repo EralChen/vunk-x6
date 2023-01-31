@@ -1,98 +1,132 @@
-<script lang="ts">
+<script lang="tsx">
 export default {
   inheritAttrs: false,
 }
 </script>
-<script lang="ts" setup>
-import { FormItemRendererSource, VkfForm } from '@vunk/form'
+<script lang="tsx" setup>
 import { useThemeStore } from '@/stores/theme'
 import { setData } from '@vunk/core'
+import { namedGap, baseGap } from '@skzz-platform/theme'
+import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
 const themeStore = useThemeStore()
 
-const defaultConfig = {
-  '--gap-page': 'var(--gap-xxl)',
-}
-const gapOptions =  [
-  {
-    label: 'gap-xxxs',
-    value: 'var(--gap-xxxs)',
-  },
-  {
-    label: 'gap-xxs',
-    value: 'var(--gap-xxs)',
-  },
-  {
-    label: 'gap-xs',
-    value: 'var(--gap-xs)',
-  },
-  {
-    label: 'gap-s',
-    value: 'var(--gap-s)',
-  },
-  {
-    label: 'gap-m',
-    value: 'var(--gap-m)',
-  },
-  {
-    label: 'gap-l',
-    value: 'var(--gap-l)',
-  },
-  {
-    label: 'gap-xl',
-    value: 'var(--gap-xl)',
-  },
-  {
-    label: 'gap-xxl',
-    value: 'var(--gap-xxl)',
-  },
-  {
-    label: 'gap-xxxl',
-    value: 'var(--gap-xxxl)',
-  },
-]
-const formItems: FormItemRendererSource<keyof typeof defaultConfig>[] = [
+const gapOptions =  Object.keys(baseGap).map(item => {
+  return {
+    label: item,
+    value: `var(--gap-${item})`,
+  }
+})
+
+const formItems: __SkAppForm.FormItem<`--gap-${keyof typeof namedGap}`>[] = [
   {
     templateType: 'VkfSelect',
     prop: '--gap-page',
-    label: '页面间距 gap-page',
+    label: 'gap-page',
     options: gapOptions,
   },
+  {
+    templateType: 'Component',
+    is: () => <p class='text-text-secondary mb-xl'>
+      页面间距: 系统页面主体的间距， 如：页面主体周围的间距
+    </p>,
+  },
+  {
+    templateType: 'VkfSelect',
+    prop: '--gap-form-pl',
+    label: 'gap-form-pl',
+    options: gapOptions,
+    clearable: true,
+    allowCreate: true,
+    filterable: true,
+  },
+
+  {
+    templateType: 'Component',
+    is: () => <p class='text-text-secondary mb-xl'>
+      表单左间距: 表单左侧的间距
+    </p>,
+  },
+
+  {
+    templateType: 'VkfSelect',
+    prop: '--gap-form-pl-plain',
+    label: 'gap-form-pl-plain',
+    options: gapOptions,
+    clearable: true,
+    allowCreate: true,
+    filterable: true,
+  },
+
+  {
+    templateType: 'Component',
+    is: () => <p class='text-text-secondary mb-xl'>
+      表单左间距: 表单左侧的间距, 更加简洁的。多用于简短的表单页
+    </p>,
+  },
+
+  {
+    templateType: 'VkfSelect',
+    prop: '--gap-form-ptb',
+    label: 'gap-form-ptb',
+    options: gapOptions,
+    clearable: true,
+    allowCreate: true,
+    filterable: true,
+  },
+
+  {
+    templateType: 'Component',
+    is: () => <p class='text-text-secondary mb-xl'>
+      表单上下间距: 表单上下的间距
+    </p>,
+  },
+
+  {
+    templateType: 'VkfSelect',
+    prop: '--gap-multipage-tab-ptb',
+    label: 'gap-multipage-tab-ptb',
+    options: gapOptions,
+    clearable: true,
+    allowCreate: true,
+    filterable: true,
+  },
+
+  {
+    templateType: 'Component',
+    is: () => <p class='text-text-secondary mb-xl'>
+      多页签上下间距: 多页签上下的间距
+    </p>,
+  },
+
+  
+  {
+    templateType: 'VkfSelect',
+    prop: '--gap-multipage-tab-space',
+    label: 'gap-multipage-tab-space',
+    options: gapOptions,
+    clearable: true,
+    allowCreate: true,
+    filterable: true,
+  },
+  {
+    templateType: 'Component',
+    is: () => <p class='text-text-secondary mb-xl'>
+      多页签间距: 多页签之间的间距
+    </p>,
+  },
+
 ]
 </script>
 <template>
-  <div sk-flex="row" sub:ml-2r>
-
-    <VkfForm 
-      :formItems="formItems" 
-      :data="themeStore.gapNamedStyles"
-      @setData="setData(themeStore.gapNamedStyles, $event)"
-      v-bind="$attrs"
-    >
-    </VkfForm>
-
-    <!-- <div >
-      <div 
-        v-for="(v, k) in defaultConfig" 
-        :key="k"
-        :style="{
-          height: '51px'
-        }"
-        sk-flex
-      >
-        <span>{{k}}</span>
-        <span :style="{
-          'marginLeft': `var(${k})`,
-        }">{{k}}</span>
-        <span
-          :style="{
-            'marginLeft': `var(${k})`,
-          }"
-        >{{k}}</span>
-        
-      </div>
-    </div> -->
-
-  </div>
+  <SkAppForm 
+    :labelWidth="200"
+    :labelPosition="'left'"
+    :formItems="formItems" 
+    :data="themeStore.gapNamedStyles"
+    @setData="setData(themeStore.gapNamedStyles, $event)"
+    v-bind="$attrs"
+  >
+  </SkAppForm>
 </template>
 <style>
 

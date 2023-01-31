@@ -89,7 +89,7 @@ export default defineComponent({
   font-weight: bold;
 }
 .sk-multipage-tab + .sk-multipage-tab{
-  margin-left: var(--gap-multipage-tab-ml, 70px);
+  margin-left: var(--gap-multipage-tab-space, 70px);
 }
 
 </style>
