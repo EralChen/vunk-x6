@@ -1,13 +1,13 @@
-<script lang="ts">
+<script lang="tsx">
 export default {
   inheritAttrs: false,
 }
 </script>
-<script lang="ts" setup>
-import { FormItemRendererSource, VkfForm } from '@vunk/form'
+<script lang="tsx" setup>
 import { useThemeStore } from '@/stores/theme'
 import { computed } from 'vue'
 import { NormalObject, setData, SetDataEvent } from '@vunk/core'
+import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
 const themeStore = useThemeStore()
 
 const defaultConfig = {
@@ -46,7 +46,7 @@ Object.entries(defaultConfig).forEach(([k, v]) => {
   }
 })
 
-const formItems: FormItemRendererSource<keyof typeof defaultConfig>[] = [
+const formItems: __SkAppForm.CoreFormItem<keyof typeof defaultConfig>[] = [
   {
     templateType: 'VkfInput',
     prop: 'font-size',
@@ -101,35 +101,45 @@ const formItems: FormItemRendererSource<keyof typeof defaultConfig>[] = [
     step: 0.1,
   },
 ]
+
+const formItemsWithDemo = computed(() => {
+  return formItems.map(item => {
+    return {
+      templateType: 'VkfFlex',
+      align: 'baseline',
+      templateSlots: [
+        {
+          templateType: 'VkfFlex',
+          basis: '400px',
+          templateSlots: [
+            item,
+          ],
+        },
+       
+        {
+          templateType: 'Component',
+          is: () => <div style={
+            {
+              fontSize: `var(${item.prop})`,
+            }
+          }>{item.label}</div>,
+        },
+      ],
+    } as __SkAppForm.FormItem
+  })
+})
+
+
 </script>
 <template>
-  <ElCard >
-    <template #header>
-      Font Size
-    </template>
-
-    <div sk-flex="row" sub:ml-m>
-
-      <VkfForm 
-        :formItems="formItems" 
-        :data="formData"
-        @setData="setFormData"
-        v-bind="$attrs"
-      >
-      </VkfForm>
-
-      <div sub:mt-m>
-        <div v-for="(v, k) in defaultConfig" :key="k">
-          <div :style="{
-            fontSize: `var(${k})`,
-          }">{{ k }}</div>
-
-        </div>
-      </div>
-
-    </div>
-  </ElCard>
-
+  <SkAppForm 
+    :labelWidth="100"
+    :formItems="formItemsWithDemo" 
+    :data="formData"
+    @setData="setFormData"
+    v-bind="$attrs"
+  >
+  </SkAppForm>
 </template>
 <style>
 
