@@ -1,9 +1,9 @@
-<script lang="ts">
+<script lang="tsx">
 export default {
   inheritAttrs: false,
 }
 </script>
-<script lang="ts" setup>
+<script lang="tsx" setup>
 import { computed } from 'vue'
 import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
 
@@ -50,9 +50,30 @@ const formItems: __SkAppForm.CoreFormItem<keyof typeof defaultConfig>[] = [
 
 const formItemsWithDemo = computed(() => {
   return formItems.map((item) => {
-    
+  
     return {
+      templateType: 'VkfFlex',
+      align: 'baseline',
+      templateSlots: [
+        {
+          templateType: 'VkfFlex',
+          basis: '150px',
+          templateSlots: [
+            item,
+          ],
+        },
       
+        {
+          templateType: 'Component',
+          is: () => <div
+            style={
+              {
+                color: `var(${item.prop})`,
+              }
+            }
+          >{item.prop}</div>,
+        },
+      ],
     } as __SkAppForm.FormItem
   })
 })
