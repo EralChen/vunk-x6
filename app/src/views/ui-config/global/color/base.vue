@@ -86,14 +86,4 @@ const formItemsWithDemo = computed(() => {
     v-bind="$attrs"
   >
   </SkAppForm>
-
-  <!-- <div sub:mt-m>
-    <div v-for="(v, k) in defaultConfig" :key="k">
-      <div :style="{
-        color: `var(${k})`,
-      }">{{ k }}</div>
-
-    </div>
-  </div> -->
-
 </template> 

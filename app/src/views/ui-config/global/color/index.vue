@@ -1,11 +1,10 @@
 <script lang="ts" setup>
-import { useThemeStore } from '@/stores/theme'
-import { setData } from '@vunk/core'
 import { SkMultipage } from '@skzz-platform/components/multipage'
 import { ref } from 'vue'
 import BaseVue from './base.vue'
-
-const themeStore = useThemeStore()
+// import { useThemeStore } from '@/stores/theme'
+// import { setData } from '@vunk/core'
+// const themeStore = useThemeStore()
 
 const currentPage = ref('base')
 const modules = ref([
