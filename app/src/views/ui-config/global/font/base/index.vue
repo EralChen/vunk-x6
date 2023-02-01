@@ -110,7 +110,7 @@ const formItemsWithDemo = computed(() => {
       templateSlots: [
         {
           templateType: 'VkfFlex',
-          basis: '400px',
+          basis: '350px',
           templateSlots: [
             item,
           ],

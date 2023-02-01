@@ -13,7 +13,7 @@ const modules = ref([
 <div plr-page pb-page class="h-main">
   <SkMultipage class="bg-bg-overlay h-100%" :tabXClass="'plr-form-pl'" v-model="currentPage" :modules="modules">
     <template #base>
-      <div class="plr-form-pl-plain">
+      <div class="plr-form-pl ptb-form-ptb">
         <BaseVue />
       </div>
     </template>

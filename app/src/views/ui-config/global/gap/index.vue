@@ -19,12 +19,12 @@ const modules = ref([
       tabXClass="pl-form-pl"
     >
       <template #base>
-        <div class="ptb-form-ptb plr-form-pl-plain">
+        <div class="ptb-form-ptb plr-form-pl">
           <BaseVue></BaseVue>
         </div>
       </template>
       <template #name>
-        <div class="ptb-form-ptb plr-form-pl-plain">
+        <div class="ptb-form-ptb plr-form-pl">
           <NameVue></NameVue>
         </div>
       </template>

@@ -49,6 +49,7 @@ export default [
         meta: {
           title: '菜单配置',
         },
+        redirect: '/ui-config/global',
         children: [
           {
             path: 'base',

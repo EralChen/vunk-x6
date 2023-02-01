@@ -4,7 +4,8 @@ export default {
 }
 </script>
 <script lang="ts" setup>
-import { FormItemRendererSource, VkfForm } from '@vunk/form'
+import { computed } from 'vue'
+import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
 
 const defaultConfig = {
   '--el-color-primary': '#409EFF',
@@ -14,7 +15,7 @@ const defaultConfig = {
   '--el-color-info': '#909399',
 }
 
-const formItems: FormItemRendererSource<keyof typeof defaultConfig>[] = [
+const formItems: __SkAppForm.CoreFormItem<keyof typeof defaultConfig>[] = [
   {
     templateType: 'VkfColorPicker',
     showAlpha: true,
@@ -46,32 +47,32 @@ const formItems: FormItemRendererSource<keyof typeof defaultConfig>[] = [
     label: 'Info',
   },
 ]
+
+const formItemsWithDemo = computed(() => {
+  return formItems.map((item) => {
+    
+    return {
+      
+    } as __SkAppForm.FormItem
+  })
+})
+
 </script>
 <template>
-  <ElCard >
-    <template #header>
-      <a 
-        :href="'https://element-plus.gitee.io/zh-CN/component/color.html'" 
-        target="_blank"
-      >Base Color</a>
-    </template>
-    <div sk-flex="row" sub:ml-m>
+  <SkAppForm 
+    :labelWidth="80" 
+    :formItems="formItemsWithDemo" 
+    v-bind="$attrs"
+  >
+  </SkAppForm>
 
-      <VkfForm :formItems="formItems" v-bind="$attrs"></VkfForm>
-
-      <div sub:mt-m>
-        <div v-for="(v, k) in defaultConfig" :key="k">
-          <div :style="{
-            color: `var(${k})`,
-          }">{{ k }}</div>
-
-        </div>
-      </div>
+  <!-- <div sub:mt-m>
+    <div v-for="(v, k) in defaultConfig" :key="k">
+      <div :style="{
+        color: `var(${k})`,
+      }">{{ k }}</div>
 
     </div>
-  </ElCard>
+  </div> -->
 
-</template>
-<style>
-
-</style>
+</template> 
