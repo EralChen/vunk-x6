@@ -7,6 +7,17 @@ export const baseGap = {
   'xxl': '2.5rem',
 }
 
+
+
+
+export const baseGapOptions = Object.keys(baseGap).map(key => {
+  return {
+    label: key,
+    value: `var(--gap-${key})`,
+  }
+})
+
+
 export const namedGap = {
   page: 'var(--gap-m)',
  
@@ -16,7 +27,7 @@ export const namedGap = {
   'form-pl': '70px',
 
 
-  'multipage-tab-ptb': '24px',
-  'multipage-tab-space': '70px',
+  'tab-ptb': '24px',
+  'tab-space': '70px',
   
 }

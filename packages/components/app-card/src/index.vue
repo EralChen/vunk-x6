@@ -12,17 +12,23 @@ export default defineComponent({
     <div class="sk-app-card__header" :class="`is-${type}`">
       {{  title  }}
     </div>
-    <div class="sk-app-card__body">
+    <div class="sk-app-card__body" :class="`is-${type}`">
       <slot></slot>
     </div>
   </div>
 </template>
+
 <style>
 .sk-app-card__header{
   color: var(--el-color-primary);
   font-weight: bold;
 }
 .sk-app-card__header.is-form {
-  padding: var(--gap-form-ptb, 24px) var(--gap-form-pl, 70px);
+  font-size: var(--f-card-title, 18px);
+  padding: var(--gap-tab-ptb, 24px) var(--gap-form-pl, 70px);
+}
+
+.sk-app-card__body.is-form {
+  padding: var(--gap-form-ptb, 14px) var(--gap-form-pl, 70px);
 }
 </style>

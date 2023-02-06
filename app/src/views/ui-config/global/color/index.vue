@@ -1,32 +1,24 @@
 <script lang="ts" setup>
-import { SkMultipage } from '@skzz-platform/components/multipage'
-import { ref } from 'vue'
 import BaseVue from './base.vue'
+import { SkAppCard } from '@skzz-platform/components/app-card'
+import { useThemeStore } from '@/stores/theme'
+import { setData } from '@vunk/core'
+const themeStore = useThemeStore()
 
-// import { useThemeStore } from '@/stores/theme'
-// import { setData } from '@vunk/core'
-// const themeStore = useThemeStore()
-
-const currentPage = ref('base')
-const modules = ref([
-  { label: '基础色彩', value: 'base' },
-
-])
 </script>
 <template>
   <div plr-page pb-page class="h-main">
-    <SkMultipage  
-      class="bg-bg-overlay h-100%" 
-      tabXClass="plr-form-pl"
-      v-model="currentPage" :modules="modules"
-    >
-      <template #base>
-        <div class="plr-form-pl ptb-form-ptb">
-          <BaseVue></BaseVue>
-        </div>
-    
-      </template>
-    </SkMultipage>
+    <div class="bg-bg-overlay">
+      <SkAppCard :title="'基础颜色'">
+        <BaseVue 
+          :data="themeStore.colorStyles"
+          @setData="setData(themeStore.colorStyles, $event)"
+        />
+      </SkAppCard>
+
+
+    </div>
+
   
 
   </div>

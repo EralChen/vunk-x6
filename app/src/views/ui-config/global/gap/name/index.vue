@@ -6,23 +6,17 @@ export default {
 <script lang="tsx" setup>
 import { useThemeStore } from '@/stores/theme'
 import { setData } from '@vunk/core'
-import { namedGap, baseGap } from '@skzz-platform/theme'
+import { namedGap, baseGapOptions } from '@skzz-platform/theme'
 import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
 const themeStore = useThemeStore()
-
-const gapOptions =  Object.keys(baseGap).map(item => {
-  return {
-    label: item,
-    value: `var(--gap-${item})`,
-  }
-})
 
 const formItems: __SkAppForm.FormItem<`--gap-${keyof typeof namedGap}`>[] = [
   {
     templateType: 'VkfSelect',
     prop: '--gap-page',
     label: 'gap-page',
-    options: gapOptions,
+    options: baseGapOptions,
+    
   },
   {
     templateType: 'Component',
@@ -35,7 +29,7 @@ const formItems: __SkAppForm.FormItem<`--gap-${keyof typeof namedGap}`>[] = [
     templateType: 'VkfSelect',
     prop: '--gap-form-pl',
     label: 'gap-form-pl',
-    options: gapOptions,
+    options: baseGapOptions,
     clearable: true,
     allowCreate: true,
     filterable: true,
@@ -51,7 +45,7 @@ const formItems: __SkAppForm.FormItem<`--gap-${keyof typeof namedGap}`>[] = [
     templateType: 'VkfSelect',
     prop: '--gap-form-pl-plain',
     label: 'gap-form-pl-plain',
-    options: gapOptions,
+    options: baseGapOptions,
     clearable: true,
     allowCreate: true,
     filterable: true,
@@ -67,7 +61,7 @@ const formItems: __SkAppForm.FormItem<`--gap-${keyof typeof namedGap}`>[] = [
     templateType: 'VkfSelect',
     prop: '--gap-form-ptb',
     label: 'gap-form-ptb',
-    options: gapOptions,
+    options: baseGapOptions,
     clearable: true,
     allowCreate: true,
     filterable: true,
@@ -81,9 +75,9 @@ const formItems: __SkAppForm.FormItem<`--gap-${keyof typeof namedGap}`>[] = [
 
   {
     templateType: 'VkfSelect',
-    prop: '--gap-multipage-tab-ptb',
-    label: 'gap-multipage-tab-ptb',
-    options: gapOptions,
+    prop: '--gap-tab-ptb',
+    label: 'gap-tab-ptb',
+    options: baseGapOptions,
     clearable: true,
     allowCreate: true,
     filterable: true,
@@ -91,16 +85,16 @@ const formItems: __SkAppForm.FormItem<`--gap-${keyof typeof namedGap}`>[] = [
   {
     templateType: 'Component',
     is: () => <p class='text-text-secondary mb-xl'>
-      多页签上下间距: 多页签上下的间距
+      页签上下间距: 页签上下的间距
     </p>,
   },
 
   
   {
     templateType: 'VkfSelect',
-    prop: '--gap-multipage-tab-space',
-    label: 'gap-multipage-tab-space',
-    options: gapOptions,
+    prop: '--gap-tab-space',
+    label: 'gap-tab-space',
+    options: baseGapOptions,
     clearable: true,
     allowCreate: true,
     filterable: true,
@@ -108,11 +102,12 @@ const formItems: __SkAppForm.FormItem<`--gap-${keyof typeof namedGap}`>[] = [
   {
     templateType: 'Component',
     is: () => <p class='text-text-secondary mb-xl'>
-      多页签间距: 多页签之间的间距
+      页签间距: 页签之间的间距
     </p>,
   },
 
 ]
+
 </script>
 <template>
   <SkAppForm 

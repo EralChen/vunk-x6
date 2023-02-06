@@ -79,8 +79,8 @@ export default defineComponent({
 }
 .sk-multipage-tab{
   font-size: var(--f-multipage-tab, var(--f-card-title, 18px));
-  padding-top: var(--gap-multipage-tab-ptb, 24px);
-  padding-bottom: var(--gap-multipage-tab-ptb, 24px);
+  padding-top: var(--gap-tab-ptb, 24px);
+  padding-bottom: var(--gap-tab-ptb, 24px);
   color: var(--el-text-color-secondary);
   cursor: pointer;
 }
@@ -89,7 +89,7 @@ export default defineComponent({
   font-weight: bold;
 }
 .sk-multipage-tab + .sk-multipage-tab{
-  margin-left: var(--gap-multipage-tab-space, 70px);
+  margin-left: var(--gap-tab-space, 70px);
 }
 
 </style>
