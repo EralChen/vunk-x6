@@ -1,6 +1,6 @@
 import { restFetch } from '../_request/base'
 import { setToken, removeToken, removeTenant, getApplication } from '@vunk/skzz/shared/utils-auth'
-import { ApiReturnType, FirstParameter } from '@vunk/core'
+import { FirstParameter } from '@vunk/core'
 
 export const rCaptcha = () => {
   return restFetch.captcha().then(res => {

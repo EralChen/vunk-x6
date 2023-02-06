@@ -9,6 +9,7 @@ const themeStore = useThemeStore()
 <template>
   <div plr-page pb-page class="h-main">
     <div class="bg-bg-overlay">
+
       <SkAppCard :title="'基础颜色'">
         <BaseVue 
           :data="themeStore.colorStyles"
@@ -17,9 +18,11 @@ const themeStore = useThemeStore()
       </SkAppCard>
 
 
-    </div>
+      <SkAppCard :title="'背景颜色'">
 
-  
+      </SkAppCard>
+
+    </div>
 
   </div>
 

@@ -2,11 +2,11 @@
   <router-view></router-view>
 </template>
 <script>
-import { useThemeStore } from '@/stores/theme'
+import { useElementPlusTheme } from '@/styles'
 export default {
   name: 'App',
   mounted () {
-    useThemeStore()
+    useElementPlusTheme()
   },
 }
 </script>

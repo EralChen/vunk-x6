@@ -20,7 +20,7 @@ app.use(store)
   .component('SvgIcon', VkSvgIcon)
   .mount('#app')
 
-  
+
 for (const [key, component] of Object.entries(ElIconsVue)) {
   app.component(key, component)
 }
