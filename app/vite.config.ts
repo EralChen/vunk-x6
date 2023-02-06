@@ -15,18 +15,6 @@ import { presetFlex, presetFont, presetGap } from 'unocss-preset-vunk'
 
 const srcRoot = path.resolve(appRoot, './src')
 
-const sizeTheme = {
-  xxxl: '1.4rem',
-  xxl: '1.3rem',
-  xl: '1.2rem',
-  l: '1.1rem',
-  m: '1rem',
-  s: '.9rem',
-  xs: '.8rem',
-  xxs: '.7rem',
-  xxxs: '.5rem',
-}
-
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   const env = getEnv(mode)
@@ -56,7 +44,10 @@ export default defineConfig(({ mode }) => {
           presetAttributify(),
           presetWind(),
           presetFont({
-            theme: sizeTheme,
+            theme: {
+              ...zzTheme.baseFontSize,
+              ...zzTheme.namedFontSize,
+            },
           }),
           presetGap({
             theme: {

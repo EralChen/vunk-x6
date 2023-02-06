@@ -81,7 +81,9 @@ export const useThemeStore = defineStore('theme', () => {
   const headerMenuStyles = useRootStyles('ZZPT_HEADER_MENU_STYLES', `.${headerMenuClassName}`)
 
   const colorStyles = useRootStylesWithMode('ZZPT_GLOBAL_STYLES')
+
   const fontSizeStyles = useRootStyles('ZZPT_FONT_SIZE_STYLES')
+  const fontSizeNamedStyles = useRootStyles('ZZPT_FONT_SIZE_NAMED_STYLES')
 
 
   const gapBaseStyles = useRootStyles('ZZPT_GAP_BASE_STYLES')
@@ -98,7 +100,9 @@ export const useThemeStore = defineStore('theme', () => {
     
     colorStyles,
     menuStyles,
+    
     fontSizeStyles,
+    fontSizeNamedStyles,
   }
   
 })

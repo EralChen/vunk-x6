@@ -18,7 +18,10 @@ export const props = {
     type: [String, Object],
     default: '',
   },
-
+  headerClass: {
+    type: [String, Object],
+    default: '',
+  },
 }
 
 export const emits = {

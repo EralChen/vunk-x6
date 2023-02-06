@@ -1,7 +1,15 @@
 {
   "basic": {
     "text": "basic 基础组件",
+    "children": []
+  },
+  "app": {
+    "text": "app 应用组件",
     "children": [
+      {
+        "link": "/app-card",
+        "text": "AppCard"
+      }
     ]
   },
   "layout": {

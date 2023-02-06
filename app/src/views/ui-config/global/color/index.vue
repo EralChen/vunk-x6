@@ -2,6 +2,7 @@
 import { SkMultipage } from '@skzz-platform/components/multipage'
 import { ref } from 'vue'
 import BaseVue from './base.vue'
+
 // import { useThemeStore } from '@/stores/theme'
 // import { setData } from '@vunk/core'
 // const themeStore = useThemeStore()

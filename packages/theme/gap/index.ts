@@ -1,10 +1,10 @@
 export const baseGap = {
-  '--gap-xxs': '0.3rem',
-  '--gap-s': '0.5rem',
-  '--gap-m': '1rem',
-  '--gap-l': '1.5rem',
-  '--gap-xl': '2rem',
-  '--gap-xxl': '2.5rem',
+  'xxs': '0.3rem',
+  's': '0.5rem',
+  'm': '1rem',
+  'l': '1.5rem',
+  'xl': '2rem',
+  'xxl': '2.5rem',
 }
 
 export const namedGap = {

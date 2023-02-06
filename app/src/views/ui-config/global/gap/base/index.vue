@@ -33,13 +33,7 @@ const setFormData = (e: SetDataEvent) => {
   setData(themeStore.gapBaseStyles, e)
 }
 
-Object.entries(defaultConfig).forEach(([k, v]) => {
-  if (!themeStore.gapBaseStyles[k]) {
-    themeStore.gapBaseStyles[k] = v
-  }
-})
-
-const formItems: __SkAppForm.FormItem<keyof typeof defaultConfig>[] = [
+const formItems: __SkAppForm.FormItem<`--gap-${keyof typeof defaultConfig}`>[] = [
   {
     templateType: 'VkfInputNumber',
     prop: '--gap-xxs',

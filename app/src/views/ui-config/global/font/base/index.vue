@@ -8,19 +8,9 @@ import { useThemeStore } from '@/stores/theme'
 import { computed } from 'vue'
 import { NormalObject, setData, SetDataEvent } from '@vunk/core'
 import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
+import { baseFontSize } from '@skzz-platform/theme'
 const themeStore = useThemeStore()
 
-const defaultConfig = {
-  'font-size': '14px',
-  '--f-xxxs': '0.7rem',
-  '--f-xxs': '0.8rem',
-  '--f-s': '0.9rem',
-  '--f-m': '1rem',
-  '--f-l': '1.1rem',
-  '--f-xl': '1.2rem',
-  '--f-xxl': '1.3rem',
-  '--f-xxxl': '1.4rem',
-}
 const formData = computed(() => {
   const obj:NormalObject = {}
   Object.entries(themeStore.fontSizeStyles).forEach(([k, v]) => {
@@ -40,13 +30,7 @@ const setFormData = (e: SetDataEvent) => {
   setData(themeStore.fontSizeStyles, e)
 }
 
-Object.entries(defaultConfig).forEach(([k, v]) => {
-  if (!themeStore.fontSizeStyles[k]) {
-    themeStore.fontSizeStyles[k] = v
-  }
-})
-
-const formItems: __SkAppForm.CoreFormItem<keyof typeof defaultConfig>[] = [
+const formItems: __SkAppForm.CoreFormItem<`--f-${keyof typeof baseFontSize}`| 'font-size'>[] = [
   {
     templateType: 'VkfInput',
     prop: 'font-size',

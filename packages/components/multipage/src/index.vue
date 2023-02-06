@@ -31,7 +31,7 @@ export default defineComponent({
       <VkCheckLogicProvider :modelValue="modelValue"
         @update:modelValue="$emit('update:modelValue', $event)"
       >
-        <div class="sk-multipage-header">
+        <div class="sk-multipage-header" :class="headerClass">
           <div class="sk-multipage-tab-x" :class="tabXClass">
             <VkCheckLogic 
               v-for="item of modules" 
@@ -78,7 +78,7 @@ export default defineComponent({
   display: flex;
 }
 .sk-multipage-tab{
-  font-size: var(--f-multipage-tab, 18px);
+  font-size: var(--f-multipage-tab, var(--f-card-title, 18px));
   padding-top: var(--gap-multipage-tab-ptb, 24px);
   padding-bottom: var(--gap-multipage-tab-ptb, 24px);
   color: var(--el-text-color-secondary);
