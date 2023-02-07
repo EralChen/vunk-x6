@@ -9,7 +9,7 @@ export default defineComponent({
   name: 'ThemeClipboardButton',
   props: {
     target: {
-      type: String as PropType<'fontSizeStyles'>,
+      type: String as PropType<'fontSizeStyles'|'colorStyles'>,
       required: true,
     },
   },

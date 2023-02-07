@@ -8,26 +8,33 @@ import { SkAppModule } from '@skzz-platform/components/app-module'
 import { useThemeStore } from '@/stores/theme'
 import { setData, SetDataEvent } from '@vunk/core'
 import { SkAppCard } from '@skzz-platform/components/app-card'
-
+import ThemeClipboardButton from '@/components/ThemeClipboardButton/index.vue'
+import { computed } from '@vue/reactivity'
 const themeStore = useThemeStore()
 
-const formVueProps = {
-  labelWidth: 150,
-  formItemBasis: '250px',
-  data: themeStore.colorStyles,
-  setData: (event: SetDataEvent) => {
-    setData(themeStore.colorStyles, event)
-  },
-}
+const formVueProps = computed(() => {
+  return {
+    labelWidth: 150,
+    formItemBasis: '250px',
+    data: themeStore.colorStyles,
+    onSetData: (event: SetDataEvent) => {
+      setData(themeStore.colorStyles, event)
+    },
+  }
+})
+
 
 </script>
 <template>
   <div plr-page pb-page class="h-main">
     <div class="bg-bg-overlay h-100%">
       <SkAppCard class="h-100%" :shadow="'never'" :header="'ElementPlus 颜色'">
+        <template #header__options>
+          <ThemeClipboardButton :target="'colorStyles'"></ThemeClipboardButton>
+        </template>
         <ElScrollbar>
-
           
+
           <SkAppModule :title="'基础颜色'">
             <BaseVue v-bind="formVueProps" />
           </SkAppModule>
