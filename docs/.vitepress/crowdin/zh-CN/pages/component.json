@@ -9,6 +9,10 @@
       {
         "link": "/app-module",
         "text": "AppModule"
+      },
+      {
+        "link": "/app-card",
+        "text": "AppCard"
       }
     ]
   },

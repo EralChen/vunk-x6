@@ -28,5 +28,7 @@ export const namedGap = {
 
   'tab-ptb': '24px',
   'tab-space': '70px',
+
+  
   
 }

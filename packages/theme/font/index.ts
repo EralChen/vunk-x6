@@ -18,5 +18,5 @@ export const baseFontSizeOptions = Object.keys(baseFontSize).map(item => {
 
 export const namedFontSize = {
   'module-title': 'var(--f-xl)',
-  
+  'card-title': 'var(--f-xl)', 
 }

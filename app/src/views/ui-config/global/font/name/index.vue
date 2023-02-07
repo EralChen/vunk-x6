@@ -28,6 +28,22 @@ const formItems: __SkAppForm.FormItem<`--f-${keyof typeof namedFontSize}`>[] = [
     </p>,
   },
 
+  {
+    templateType: 'VkfSelect',
+    prop: '--f-card-title',
+    label: 'f-card-title',
+    allowCreate: true,
+    filterable: true,
+    clearable: true,
+    options: baseFontSizeOptions,
+  },
+  {
+    templateType: 'Component',
+    is: () => <p class='text-text-secondary mb-xl'>
+      卡片标题字体大小
+    </p>,
+  },
+
 
 ]
 
