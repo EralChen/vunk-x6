@@ -49,24 +49,7 @@ export default [
         meta: {
           title: '菜单配置',
         },
-        redirect: '/_ui-config/global',
-        children: [
-          {
-            path: 'base',
-            meta: {
-              title: '基础配置',
-            },
-            component: () => import('_v/_ui-config/menu/base/index.vue'),
-
-          },
-          {
-            path: 'header',
-            meta: {
-              title: '头部配置',
-            },
-            component: () => import('_v/_ui-config/menu/header/index.vue'),
-          },
-        ],
+        component: () => import('_v/_ui-config/menu/index.vue'),
         
       },
     
