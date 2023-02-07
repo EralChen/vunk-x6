@@ -41,21 +41,7 @@ const formItems: __SkAppForm.FormItem<`--gap-${keyof typeof namedGap}`>[] = [
     </p>,
   },
 
-  {
-    templateType: 'VkfSelect',
-    prop: '--gap-form-pl-plain',
-    label: 'gap-form-pl-plain',
-    options: baseGapOptions,
-    clearable: true,
-    allowCreate: true,
-    filterable: true,
-  },
-  {
-    templateType: 'Component',
-    is: () => <p class='text-text-secondary mb-xl'>
-      表单左间距: 表单左侧的间距, 更加简洁的。多用于简短的表单页
-    </p>,
-  },
+
 
   {
     templateType: 'VkfSelect',

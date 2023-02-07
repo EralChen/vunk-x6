@@ -23,7 +23,6 @@ export const namedGap = {
  
   'form-ptb': '14px', 
 
-  'form-pl-plain': '140px',
   'form-pl': '70px',
 
 
