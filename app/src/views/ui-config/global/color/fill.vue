@@ -5,7 +5,7 @@ export default {
 </script>
 <script lang="tsx" setup>
 import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
-import { elBgColor } from '@skzz-platform/theme'
+import { elFillColor } from '@skzz-platform/theme'
 import { computed } from 'vue'
 const props = defineProps({
   formItemBasis: {
@@ -13,27 +13,50 @@ const props = defineProps({
     default: '150px',
   },
 })
-const formItems: __SkAppForm.CoreFormItem <'--el-bg-color'|`--el-bg-color-${keyof typeof elBgColor['default']}`>[] = [
+const formItems: __SkAppForm.CoreFormItem<'--el-fill-color'|`--el-fill-color-${keyof typeof elFillColor['default']}`>[] = [
   {
     templateType: 'VkfColorPicker',
     showAlpha: true,
-    prop: '--el-bg-color-page',
-    label: 'Page',
+    prop: '--el-fill-color',
+    label: 'Fill',
   },
   {
     templateType: 'VkfColorPicker',
     showAlpha: true,
-    prop: '--el-bg-color',
-    label: 'Background',
+    prop: '--el-fill-color-light',
+    label: 'Fill Light',
   },
   {
     templateType: 'VkfColorPicker',
     showAlpha: true,
-    prop: '--el-bg-color-overlay',
-    label: 'Overlay',
+    prop: '--el-fill-color-lighter',
+    label: 'Fill Lighter',
+  },
+  {
+    templateType: 'VkfColorPicker',
+    showAlpha: true,
+    prop: '--el-fill-color-extra-light',
+    label: 'Fill Extra Light',
+  },
+  {
+    templateType: 'VkfColorPicker',
+    showAlpha: true,
+    prop: '--el-fill-color-dark',
+    label: 'Fill Dark',
+  },
+  {
+    templateType: 'VkfColorPicker',
+    showAlpha: true,
+    prop: '--el-fill-color-darker',
+    label: 'Fill Darker',
+  },
+  {
+    templateType: 'VkfColorPicker',
+    showAlpha: true,
+    prop: '--el-fill-color-blank',
+    label: 'Fill Blank',
   },
 ]
-
 const formItemsWithDemo = computed(() => {
   return formItems.map(item => {
     return {
@@ -54,18 +77,17 @@ const formItemsWithDemo = computed(() => {
               {
                 background: `var(${item.prop})`,
               }
-      
+        
             }>
               { item.prop }
             </div>
           </div>,
         },
       ],
-
+  
     } as __SkAppForm.FormItem
   })
 })
-
 </script>
 <template>
   <SkAppForm  :formItems="formItemsWithDemo" v-bind="$attrs"></SkAppForm>

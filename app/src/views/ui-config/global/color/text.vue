@@ -4,59 +4,50 @@ export default {
 }
 </script>
 <script lang="tsx" setup>
-import { computed } from 'vue'
 import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
+import { elTextColor } from '@skzz-platform/theme'
+import { computed } from 'vue'
 const props = defineProps({
   formItemBasis: {
     type: String,
     default: '150px',
   },
 })
-
-const defaultConfig = {
-  '--el-color-primary': '#409EFF',
-  '--el-color-success': '#67C23A',
-  '--el-color-warning': '#E6A23C',
-  '--el-color-danger': '#F56C6C',
-  '--el-color-info': '#909399',
-}
-
-const formItems: __SkAppForm.CoreFormItem<keyof typeof defaultConfig>[] = [
+const formItems: __SkAppForm.CoreFormItem<`--el-text-color-${keyof typeof elTextColor['default']}`>[] = [
   {
     templateType: 'VkfColorPicker',
     showAlpha: true,
-    prop: '--el-color-primary',
+    prop: '--el-text-color-primary',
     label: 'Primary',
   },
   {
     templateType: 'VkfColorPicker',
     showAlpha: true,
-    prop: '--el-color-success',
-    label: 'Success',
+    prop: '--el-text-color-regular',
+    label: 'Regular',
   },
   {
     templateType: 'VkfColorPicker',
     showAlpha: true,
-    prop: '--el-color-warning',
-    label: 'Warning',
+    prop: '--el-text-color-secondary',
+    label: 'Secondary',
   },
   {
     templateType: 'VkfColorPicker',
     showAlpha: true,
-    prop: '--el-color-danger',
-    label: 'Danger',
+    prop: '--el-text-color-placeholder',
+    label: 'Placeholder',
   },
   {
     templateType: 'VkfColorPicker',
     showAlpha: true,
-    prop: '--el-color-info',
-    label: 'Info',
+    prop: '--el-text-color-disabled',
+    label: 'Disabled',
   },
-]
 
+]
 const formItemsWithDemo = computed(() => {
-  return formItems.map((item) => {
-  
+  return formItems.map(item => {
     return {
       templateType: 'VkfFlex',
       align: 'baseline',
@@ -68,28 +59,29 @@ const formItemsWithDemo = computed(() => {
             item,
           ],
         },
-      
         {
           templateType: 'Component',
-          is: () => <div
-            style={
+          is: () => <div class="plr-m ptb-xxs">
+            <div style={
               {
                 color: `var(${item.prop})`,
               }
-            }
-          >{item.prop}</div>,
+        
+            }>
+              { item.prop }
+            </div>
+          </div>,
         },
       ],
+  
     } as __SkAppForm.FormItem
   })
 })
-
 </script>
 <template>
-  <SkAppForm 
-    :labelWidth="80" 
-    :formItems="formItemsWithDemo" 
-    v-bind="$attrs"
-  >
-  </SkAppForm>
-</template> 
+  <SkAppForm :formItems="formItemsWithDemo" v-bind="$attrs"></SkAppForm>
+</template>
+
+<style>
+
+</style>

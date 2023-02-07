@@ -1,7 +1,7 @@
 import { useSharedDark } from '@/composables'
 import { useThemeStore } from '@/stores/theme'
-import { elColor, elBgColor,  baseFontSize, namedFontSize, baseGap, namedGap  } from '@skzz-platform/theme'
-import { NormalObject } from '@vunk/core'
+import { elColor, elBgColor, elTextColor, elFillColor, elBorderColor,  baseFontSize, namedFontSize, baseGap, namedGap  } from '@skzz-platform/theme'
+import { NormalObject } from '@vunk/core' 
 import { nextTick, watch } from 'vue'
 
 export const useElementPlusTheme = () => {
@@ -24,7 +24,9 @@ export const useElementPlusTheme = () => {
     nextTick(() => {
       setElColor(v ? elColor.dark : elColor.default, '--el-color-')
       setElColor(v ? elBgColor.dark : elBgColor.default, '--el-bg-color-')
-
+      setElColor(v ? elTextColor.dark : elTextColor.default, '--el-text-color-')
+      setElColor(v ? elFillColor.dark : elFillColor.default, '--el-fill-color-')
+      setElColor(v ? elBorderColor.dark : elBorderColor.default, '--el-border-color-')
     })
   
   }, { immediate: true })
