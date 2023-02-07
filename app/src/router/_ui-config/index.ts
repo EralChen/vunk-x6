@@ -2,7 +2,7 @@ import { RouteRecordRaw, RouterView } from 'vue-router'
 import Layout from '@/layouts/default/index.vue'
 export default [
   {
-    path: '/ui-config',
+    path: '/_ui-config',
     component: Layout,
     meta: {
       title: 'UI 配置',
@@ -10,7 +10,7 @@ export default [
       alwaysShow: true,
       header: true,
     },
-    redirect: '/ui-config/global/color',
+    redirect: '/_ui-config/global/color',
     children: [
       {
         path: 'global',
@@ -24,14 +24,14 @@ export default [
             meta: { 
               title: '颜色配置',
             },
-            component: () => import('_v/ui-config/global/color/index.vue'),
+            component: () => import('_v/_ui-config/global/color/index.vue'),
           },
           {
             path: 'font',
             meta: {
               title: '字体配置',
             },
-            component: () => import('_v/ui-config/global/font/index.vue'),
+            component: () => import('_v/_ui-config/global/font/index.vue'),
           },
 
           {
@@ -39,7 +39,7 @@ export default [
             meta: {
               title: '间距配置',
             },
-            component: () => import('_v/ui-config/global/gap/index.vue'),
+            component: () => import('_v/_ui-config/global/gap/index.vue'),
           },
         ],
       },
@@ -49,14 +49,14 @@ export default [
         meta: {
           title: '菜单配置',
         },
-        redirect: '/ui-config/global',
+        redirect: '/_ui-config/global',
         children: [
           {
             path: 'base',
             meta: {
               title: '基础配置',
             },
-            component: () => import('_v/ui-config/menu/base/index.vue'),
+            component: () => import('_v/_ui-config/menu/base/index.vue'),
 
           },
           {
@@ -64,7 +64,7 @@ export default [
             meta: {
               title: '头部配置',
             },
-            component: () => import('_v/ui-config/menu/header/index.vue'),
+            component: () => import('_v/_ui-config/menu/header/index.vue'),
           },
         ],
         

@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '@/layouts/default/index.vue'
-import UI_CONFIG from './ui-config'
+import _UI_CONFIG from './_ui-config'
 import TEMPLATE_PAGE from './template-page'
 import _PLAY from './_play'
 export const routes: Array<RouteRecordRaw> = [
@@ -38,7 +38,7 @@ export const routes: Array<RouteRecordRaw> = [
     component: () => import('_v/login/index.vue'),
   },
 
-  ...UI_CONFIG,
+  ..._UI_CONFIG,
   ...TEMPLATE_PAGE,
   ..._PLAY,
 ]
