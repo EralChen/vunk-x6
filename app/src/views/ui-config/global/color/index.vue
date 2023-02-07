@@ -7,6 +7,7 @@ import BorderVue from './border.vue'
 import { SkAppModule } from '@skzz-platform/components/app-module'
 import { useThemeStore } from '@/stores/theme'
 import { setData, SetDataEvent } from '@vunk/core'
+import { SkAppCard } from '@skzz-platform/components/app-card'
 
 const themeStore = useThemeStore()
 
@@ -23,8 +24,10 @@ const formVueProps = {
 <template>
   <div plr-page pb-page class="h-main">
     <div class="bg-bg-overlay h-100%">
-      <ElCard class="h-100%" :shadow="'never'" :header="'ElementPlus 颜色'">
+      <SkAppCard class="h-100%" :shadow="'never'" :header="'ElementPlus 颜色'">
         <ElScrollbar>
+
+          
           <SkAppModule :title="'基础颜色'">
             <BaseVue v-bind="formVueProps" />
           </SkAppModule>
@@ -48,7 +51,7 @@ const formVueProps = {
           </SkAppModule>
 
         </ElScrollbar>
-      </ElCard>
+      </SkAppCard>
       
 
     </div>
