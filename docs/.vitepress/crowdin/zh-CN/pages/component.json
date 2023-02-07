@@ -7,8 +7,8 @@
     "text": "app 应用组件",
     "children": [
       {
-        "link": "/app-card",
-        "text": "AppCard"
+        "link": "/app-module",
+        "text": "AppModule"
       }
     ]
   },

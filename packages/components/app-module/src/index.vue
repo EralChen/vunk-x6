@@ -2,33 +2,33 @@
 import { props, emits } from './ctx'
 import { defineComponent } from 'vue'
 export default defineComponent({
-  name: 'SkAppCard',
+  name: 'SkAppModule',
   emits,
   props,
 })
 </script>
 <template>
-  <div class="sk-app-card"> 
-    <div class="sk-app-card__header" :class="`is-${type}`">
+  <div class="sk-app-module"> 
+    <div class="sk-app-module__header" :class="`is-${type}`">
       {{  title  }}
     </div>
-    <div class="sk-app-card__body" :class="`is-${type}`">
+    <div class="sk-app-module__body" :class="`is-${type}`">
       <slot></slot>
     </div>
   </div>
 </template>
 
 <style>
-.sk-app-card__header{
+.sk-app-module__header{
   color: var(--el-color-primary);
   font-weight: bold;
 }
-.sk-app-card__header.is-form {
+.sk-app-module__header.is-form {
   font-size: var(--f-card-title, 18px);
   padding: var(--gap-tab-ptb, 24px) var(--gap-form-pl, 70px);
 }
 
-.sk-app-card__body.is-form {
+.sk-app-module__body.is-form {
   padding: var(--gap-form-ptb, 14px) var(--gap-form-pl, 70px);
 }
 </style>
