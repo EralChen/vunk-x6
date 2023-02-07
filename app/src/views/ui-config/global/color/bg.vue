@@ -1,23 +1,13 @@
-<script lang="ts">
+<script lang="tsx">
 export default {
   inheritAttrs: false,
 }
 </script>
-<script lang="ts" setup>
-import { FormItemRendererSource, VkfForm } from '@vunk/form'
-
-/* 
-    --el-bg-color-page: #0a0a0a;
-    --el-bg-color: #141414;
-    --el-bg-color-overlay: #1d1e1f;
-*/
-const defaultConfig = {
-  '--el-bg-color-page': '#0a0a0a',
-  '--el-bg-color': '#141414',
-  '--el-bg-color-overlay': '#1d1e1f',
-}
-
-const formItems: FormItemRendererSource<keyof typeof defaultConfig>[] = [
+<script lang="tsx" setup>
+import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
+import { elBgColor } from '@skzz-platform/theme'
+import { computed } from 'vue'
+const formItems: __SkAppForm.CoreFormItem <'--el-bg-color'|`--el-bg-color-${keyof typeof elBgColor['default']}`>[] = [
   {
     templateType: 'VkfColorPicker',
     showAlpha: true,
@@ -37,33 +27,42 @@ const formItems: FormItemRendererSource<keyof typeof defaultConfig>[] = [
     label: 'Overlay',
   },
 ]
+
+const formItemsWithDemo = computed(() => {
+  return formItems.map(item => {
+    return {
+      templateType: 'VkfFlex',
+      align: 'baseline',
+      templateSlots: [
+        {
+          templateType: 'VkfFlex',
+          basis: '150px',
+          templateSlots: [
+            item,
+          ],
+        },
+        {
+          templateType: 'Component',
+          is: () => <div class="bg-info plr-m ptb-xxs">
+            <div style={
+              {
+                background: `var(${item.prop})`,
+              }
+      
+            }>
+              { item.prop }
+            </div>
+          </div>,
+        },
+      ],
+
+    } as __SkAppForm.FormItem
+  })
+})
+
 </script>
 <template>
-  <ElCard >
-    <template #header>
-      <a 
-        :href="'https://element-plus.gitee.io/zh-CN/component/color.html'" 
-        target="_blank"
-      >Bg Color</a>
-    </template>
-    <div sk-flex="row" sub:ml-m>
-
-      <VkfForm  :formItems="formItems" v-bind="$attrs"></VkfForm>
-
-      <div sub:mt-m>
-        <div v-for="(v, k) in defaultConfig" :key="k">
-          <div :style="{
-            background: `var(${k})`,
-          }">
-            {{ k }}
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-  </ElCard>
-
+  <SkAppForm  :formItems="formItemsWithDemo" v-bind="$attrs"></SkAppForm>
 </template>
 <style>
 

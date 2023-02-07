@@ -1,32 +1,37 @@
 import { useSharedDark } from '@/composables'
 import { useThemeStore } from '@/stores/theme'
-import { elColor, baseFontSize, namedFontSize, baseGap, namedGap  } from '@skzz-platform/theme'
+import { elColor, elBgColor,  baseFontSize, namedFontSize, baseGap, namedGap  } from '@skzz-platform/theme'
+import { NormalObject } from '@vunk/core'
 import { nextTick, watch } from 'vue'
 
 export const useElementPlusTheme = () => {
   const themeStore = useThemeStore()
   const isDark = useSharedDark()
 
-  function setElColor (obj: typeof elColor['dark' | 'default']) { 
+  function setElColor (obj: NormalObject, prefix = '--el-color-') { 
     Object.keys(obj).forEach((_key) => {
       const key = _key as keyof typeof obj
-
-      if (themeStore.colorStyles[`--el-color-${key}`]) {
+      const themeKey = key ? `${prefix}${key}` : prefix.slice(0, -1)
+      if (themeStore.colorStyles[themeKey]) {
         return
       }
-      themeStore.colorStyles[`--el-color-${key}`] = obj[key]
+      themeStore.colorStyles[themeKey] = obj[key]
     })
   }
 
-  watch(() => isDark.value, () => {
+  watch(() => isDark.value, (v) => {
 
     nextTick(() => {
-      setElColor(isDark.value ? elColor.dark : elColor.default)
+      setElColor(v ? elColor.dark : elColor.default, '--el-color-')
+      setElColor(v ? elBgColor.dark : elBgColor.default, '--el-bg-color-')
+
     })
   
   }, { immediate: true })
 
 }
+
+
 
 
 export const useFontSizeTheme = () => {

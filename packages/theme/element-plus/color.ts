@@ -18,3 +18,16 @@ export const elColor = {
     black: '#000000',
   },
 }
+
+export const elBgColor = {
+  dark: {
+    '': '#141414',
+    page: '#0a0a0a',
+    overlay: '#1d1e1f',
+  },
+  default: {
+    '': '#ffffff',
+    page: '#f2f3f5',
+    overlay: '#ffffff',
+  },
+}
