@@ -24,7 +24,7 @@ export default defineComponent({
   font-weight: bold;
 }
 .sk-app-module__header.is-form {
-  font-size: var(--f-card-title, 18px);
+  font-size: var(--f-module-title, 18px);
   padding: var(--gap-tab-ptb, 24px) var(--gap-form-pl, 70px);
 }
 

@@ -14,8 +14,8 @@ const themeStore = useThemeStore()
 const formItems: __SkAppForm.FormItem<`--f-${keyof typeof namedFontSize}`>[] = [
   {
     templateType: 'VkfSelect',
-    prop: '--f-card-title',
-    label: 'f-card-title',
+    prop: '--f-module-title',
+    label: 'f-module-title',
     allowCreate: true,
     filterable: true,
     clearable: true,
@@ -24,7 +24,7 @@ const formItems: __SkAppForm.FormItem<`--f-${keyof typeof namedFontSize}`>[] = [
   {
     templateType: 'Component',
     is: () => <p class='text-text-secondary mb-xl'>
-      卡片标题: 卡片标题的字体大小
+      模块标题字体大小
     </p>,
   },
 
@@ -35,7 +35,7 @@ const formItems: __SkAppForm.FormItem<`--f-${keyof typeof namedFontSize}`>[] = [
 <template>
 
   <SkAppForm 
-    :labelWidth="100"
+    :labelWidth="110"
     :formItems="formItems" 
     :data="themeStore.fontSizeNamedStyles"
     @setData="setData(themeStore.fontSizeNamedStyles, $event)"

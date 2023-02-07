@@ -78,7 +78,7 @@ export default defineComponent({
   display: flex;
 }
 .sk-multipage-tab{
-  font-size: var(--f-multipage-tab, var(--f-card-title, 18px));
+  font-size: var(--f-multipage-tab, var(--f-module-title, 18px));
   padding-top: var(--gap-tab-ptb, 24px);
   padding-bottom: var(--gap-tab-ptb, 24px);
   color: var(--el-text-color-secondary);
