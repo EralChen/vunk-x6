@@ -52,7 +52,10 @@ export default defineComponent({
 
 </template>
 <style>
-.is-sub-form-item label{
+.el-form-item.is-sub-form-item{
+  margin-top: -10px;
+}
+.el-form-item.is-sub-form-item label{
   visibility: hidden;
 }
 </style>

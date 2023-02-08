@@ -8,8 +8,13 @@ extends VueComponentPropsType<typeof SkCssColorPicker>, BasicSource {
   prop: P,
 }
 
+
+type CoreSourcePlugin<P extends string = string> = 
+  SkCssColorPickerSource<P>
+
+
 export type FormItem<P extends string = string> = FormItemRendererSource<P>
-  | SkCssColorPickerSource<P>
+  | CoreSourcePlugin<P>
   | ElRowSource<FormItem<P>> 
   | ElColSource<FormItem<P>> 
   | VkfFlexSource<FormItem<P>>
@@ -19,6 +24,7 @@ export type CoreFormItem<P  extends string = string> =
   Exclude<FormItemRendererSource<P>, 
     ComponentSource | VkfButtonSource<P>
   >
+  | CoreSourcePlugin<P>
 
 
 

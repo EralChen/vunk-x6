@@ -1,36 +1,36 @@
 <script lang="ts" setup>
-import { FormItemRendererSource, VkfForm } from '@vunk/form'
 import { layoutTopTheme } from '@skzz-platform/theme'
+import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
 
-const formItems: FormItemRendererSource<keyof typeof layoutTopTheme>[] = [
+const formItems: __SkAppForm.CoreFormItem<keyof typeof layoutTopTheme>[] = [
   {
-    templateType: 'VkfInput',
+    templateType: 'SkCssColorPicker',
     prop: '--layout-top-bg',
     label: '--layout-top-bg',
   },
 
   {
-    templateType: 'VkfInput',
+    templateType: 'SkCssColorPicker',
     prop: '--el-menu-active-color',
     label: '--el-menu-active-color',
   },
   {
-    templateType: 'VkfColorPicker',
+    templateType: 'SkCssColorPicker',
     prop: '--el-menu-text-color',
-    showAlpha: true,
+
     label: '--el-menu-text-color',
 
   },
 
   {
-    templateType: 'VkfColorPicker',
+    templateType: 'SkCssColorPicker',
     prop: '--el-menu-hover-bg-color',
-    showAlpha: true,
+
     label: '--el-menu-hover-bg-color',
   },
 
   {
-    templateType: 'VkfInput',
+    templateType: 'SkCssColorPicker',
     prop: '--el-menu-hover-text-color',
     label: '--el-menu-hover-text-color',
   },
@@ -42,5 +42,5 @@ const formItems: FormItemRendererSource<keyof typeof layoutTopTheme>[] = [
 
 </script>
 <template>
-  <VkfForm   :formItems="formItems"></VkfForm>
+  <SkAppForm  :formItems="formItems"></SkAppForm>
 </template>
