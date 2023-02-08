@@ -44,22 +44,23 @@ const linkClick = (e: MouseEvent, navigate: AnyFunc) => {
 }
 </script>
 <template>
-  <div sk-flex class="bg-bg-overlay border-b border-b-border-base" 
+  <div sk-flex class="bg-bg-overlay" 
 
   >
 
     <RouterLink 
       v-for="item of viewsStore.visitedViews" 
       :key="item.fullPath" :to="item.fullPath"
-   
+      
       :custom="true"
     >
       <template #default="{ navigate, href,  isActive, isExactActive  }">
         <a 
           :href="href" 
           @click="linkClick($event, navigate)"
-          class="decoration-none text-text-secondary ptb-xxs plr-m f-xxxs tags-view-item" 
-          sk-flex="row_center" 
+          class="decoration-none text-text-secondary ptb-s plr-m 
+           tags-view-item" 
+          sk-flex="row-around-center" 
           :class="{
             'router-link-active': isActive,
             'router-link-exact-active': isExactActive
@@ -91,10 +92,30 @@ const linkClick = (e: MouseEvent, navigate: AnyFunc) => {
 </template>
 
 <style>
+.tags-view-item{
+  width: 130px;
+}
+
+.tags-view-icon-close {
+  visibility: hidden;
+}
+
+.tags-view-item:hover .tags-view-icon-close{
+  visibility: initial;
+}
+.tags-view-item:hover {
+  color: var(--el-color-primary);
+}
+
+
 .tags-view-item.router-link-exact-active {
-  /* color: var(--el-color-primary); */
-  background-color: var(--el-color-primary);
-  color: var(--el-color-white);
+  color: var(--el-color-primary);
+  font-weight: bold;
+}
+
+.tags-view-item.router-link-exact-active  .tags-view-icon-close{
+  color: var(--el-text-color-secondary);
+  visibility: initial;
 }
 .tags-view-item.router-link-exact-active .tags-view-icon-close:hover{
   color: var(--el-text-color-secondary);
