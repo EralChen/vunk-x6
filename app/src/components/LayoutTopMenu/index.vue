@@ -8,12 +8,10 @@ import { computed, onMounted, ref, watch } from 'vue'
 import { filterDeep } from 'deepdash-es/standalone'
 import { RouteRecordRaw, useRoute } from 'vue-router'
 import { useViewsStore } from '@/stores/views'
-import { useThemeStore } from '@/stores/theme'
 
 const route = useRoute()
 const permissionStore = usePermissionStore()
 const viewsStore = useViewsStore()
-const { topMenuClassName } = useThemeStore()
 
 
 
@@ -61,11 +59,8 @@ onMounted(() => {
   <ElMenu 
     mode="horizontal"
     class="layout-top-menu"
-    :class="{
-      [topMenuClassName]: true
-    }"
     :defaultActive="defaultHref"
-
+    :backgroundColor="'transparent'"
   >
     <VkRoutesMenuContent :data="navRoutes">
       <template #item="{ data, href }">

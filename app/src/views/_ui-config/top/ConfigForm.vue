@@ -1,18 +1,24 @@
 <script lang="ts" setup>
 import { FormItemRendererSource, VkfForm } from '@vunk/form'
-import { elMenuTheme } from '@skzz-platform/theme'
+import { layoutTopTheme } from '@skzz-platform/theme'
 
-const formItems: FormItemRendererSource<`--el-menu-${keyof typeof elMenuTheme['default']}`>[] = [
+const formItems: FormItemRendererSource<keyof typeof layoutTopTheme>[] = [
+  {
+    templateType: 'VkfInput',
+    prop: '--layout-top-bg',
+    label: '--layout-top-bg',
+  },
+
   {
     templateType: 'VkfInput',
     prop: '--el-menu-active-color',
-    label: 'Active Color',
+    label: '--el-menu-active-color',
   },
   {
     templateType: 'VkfColorPicker',
     prop: '--el-menu-text-color',
     showAlpha: true,
-    label: 'Text Color',
+    label: '--el-menu-text-color',
 
   },
 
@@ -20,13 +26,13 @@ const formItems: FormItemRendererSource<`--el-menu-${keyof typeof elMenuTheme['d
     templateType: 'VkfColorPicker',
     prop: '--el-menu-hover-bg-color',
     showAlpha: true,
-    label: 'Hover Background Color',
+    label: '--el-menu-hover-bg-color',
   },
 
   {
     templateType: 'VkfInput',
     prop: '--el-menu-hover-text-color',
-    label: 'Hover Text Color',
+    label: '--el-menu-hover-text-color',
   },
 
   

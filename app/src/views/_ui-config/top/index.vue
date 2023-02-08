@@ -12,13 +12,13 @@ const themeStore = useThemeStore()
     <div class="bg-bg-overlay h-100%">
       <SkAppCard class="h-100%" :header="'顶部配置'">
         <template #header__options>
-          <!-- <ThemeClipboardButton></ThemeClipboardButton> -->
+          <ThemeClipboardButton :target="'layoutTopStyles'"></ThemeClipboardButton>
         </template>
         <div class="ptb-form-ptb plr-form-pl">
           <ConfigForm
-            :labelWidth="180"
-            :data="themeStore.topMenuStyles"
-            @setData="setData(themeStore.topMenuStyles, $event)"
+            :labelWidth="200"
+            :data="themeStore.layoutTopStyles"
+            @setData="setData(themeStore.layoutTopStyles, $event)"
           ></ConfigForm>
 
         </div>

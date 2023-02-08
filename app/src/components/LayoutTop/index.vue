@@ -1,12 +1,18 @@
 <script lang="ts" setup>
 import DarkSwitch from '_c/DarkSwitch/index.vue'
 import { defineAsyncComponent } from 'vue'
+import { useThemeStore } from '@/stores/theme'
 const LayoutTopMenu = defineAsyncComponent(() => import('_c/LayoutTopMenu/index.vue'))
+const { layoutTopClassName } = useThemeStore()
+
 </script>
 <template>
 
-    <!-- class="bg-primary text-white" -->
-    <div sk-flex="row-between-center" class="layout-top text-white">
+    <div sk-flex="row-between-center" class="layout-top text-white"
+      :class="{
+        [layoutTopClassName]: true
+      }"
+    >
       <div sk-flex="row_center">
         <div class="layout-top-title f-xxxl font-600 plr-l ptb-s">
           智子开发平台
