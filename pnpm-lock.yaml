@@ -15,10 +15,12 @@ importers:
       '@skzz-platform/shared': workspace:*
       '@skzz-platform/theme': workspace:*
       '@skzz/platform': workspace:*
+      '@types/chroma-js': ^2.1.4
       '@types/gulp': ^4.0.9
       '@types/node': ^18.0.4
       '@vunk/core': 0.0.0-alpha.68
       '@vunk/form': 0.0.1-alpha.43
+      chroma-js: ^2.4.2
       consola: ^2.15.3
       element-plus: npm:element-plus@latest
       eslint: ^8.19.0
@@ -42,7 +44,8 @@ importers:
       '@skzz/platform': link:packages/entry
       '@vunk/core': 0.0.0-alpha.68
       '@vunk/form': 0.0.1-alpha.43
-      element-plus: 2.2.28_vue@3.2.45
+      chroma-js: 2.4.2
+      element-plus: 2.2.29_vue@3.2.45
       vue: 3.2.45
     devDependencies:
       '@lib-env/app-utils': link:internal/app-utils
@@ -51,6 +54,7 @@ importers:
       '@lib-env/eslint-config': link:internal/eslint-config
       '@lib-env/path': link:internal/path
       '@lib-env/shared': link:internal/shared
+      '@types/chroma-js': 2.1.4
       '@types/gulp': 4.0.10
       '@types/node': 18.11.9
       consola: 2.15.3
@@ -2266,6 +2270,10 @@ packages:
     resolution: {integrity: sha512-KnRanxnpfpjUTqTCXslZSEdLfXExwgNxYPdiO2WGUj8+HDjFi8R3k5RVKPeSCzLjCcshCAtVO2QBbVuAV4kTnw==}
     dev: true
 
+  /@types/chroma-js/2.1.4:
+    resolution: {integrity: sha512-l9hWzP7cp7yleJUI7P2acmpllTJNYf5uU6wh50JzSIZt3fFHe+w2FM6w9oZGBTYzjjm2qHdnQvI+fF/JF/E5jQ==}
+    dev: true
+
   /@types/estree/0.0.39:
     resolution: {integrity: sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==}
     dev: true
@@ -3525,6 +3533,10 @@ packages:
     resolution: {integrity: sha512-jJ0bqzaylmJtVnNgzTeSOs8DPavpbYgEr/b0YL8/2GO3xJEhInFmhKMUnEJQjZumK7KXGFhUy89PrsJWlakBVg==}
     dev: true
 
+  /chroma-js/2.4.2:
+    resolution: {integrity: sha512-U9eDw6+wt7V8z5NncY2jJfZa+hUH8XEj8FQHgFJTrUFnJfXYf4Ml4adI2vXZOjqRDpFWtYVWypDfZwnJ+HIR4A==}
+    dev: false
+
   /class-utils/0.3.6:
     resolution: {integrity: sha512-qOhPa/Fj7s6TY8H8esGu5QNpMMQxz79h+urzrNYN6mn+9BnxlDGf5QZ+XeCDsxSjPqsSR56XOZOJmpeurnLMeg==}
     engines: {node: '>=0.10.0'}
@@ -4036,8 +4048,8 @@ packages:
     resolution: {integrity: sha512-M8WEXFuKXMYMVr45fo8mq0wUrrJHheiKZf6BArTKk9ZBYCKJEOU5H8cdWgDT+qCVZf7Na4lVUaZsA+h6uA9+PA==}
     dev: true
 
-  /element-plus/2.2.28_vue@3.2.45:
-    resolution: {integrity: sha512-BsxF7iEaBydmRfw1Tt++EO9jRBjbtJr7ZRIrnEwz4J3Cwa1IzHCNCcx3ZwcYTlJq9CYFxv94JnbNr1EbkTou3A==}
+  /element-plus/2.2.29_vue@3.2.45:
+    resolution: {integrity: sha512-g4dcrURrKkR5uUX8n5RVnnqGnimoki9HfqS4yHHG6XwCHBkZGozdq4x+478BzeWUe31h++BO+7dakSx4VnM8RQ==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:

@@ -1,12 +1,15 @@
 <script lang="ts">
 import { props, emits } from './ctx'
 import { defineComponent } from 'vue'
-import { VkfForm, _VkfFormCtx } from '@vunk/form'
+import { VkfForm, _VkfFormCtx, VkfFormItemRendererTemplate } from '@vunk/form'
 import { VkfFormItemRendererTemplateLayout } from '@vunk/form/components/form-item-renderer-template-layout'
+import { SkCssColorPicker } from '@skzz-platform/components/css-color-picker'
 export default defineComponent({
   name: 'SkAppForm',
   components: {
     VkfForm, VkfFormItemRendererTemplateLayout,
+    VkfFormItemRendererTemplate,
+    SkCssColorPicker,
   },
   emits,
   props,
@@ -27,6 +30,18 @@ export default defineComponent({
   >
     <template #rendererTemplate>
       <VkfFormItemRendererTemplateLayout></VkfFormItemRendererTemplateLayout>
+      <VkfFormItemRendererTemplate :type="'SkCssColorPicker'">
+        <template #default="{ data: bindProps }">
+          <SkCssColorPicker
+            v-bind="bindProps"
+            :modelValue="data[bindProps.prop]"
+            @update:modelValue="$emit('setData', {
+              k: bindProps.prop,
+              v: $event,
+            })"
+          ></SkCssColorPicker>
+        </template>
+      </VkfFormItemRendererTemplate>
     </template>
   </VkfForm>
 </template>

@@ -1,10 +1,10 @@
 {
   "basic": {
-    "text": "basic 基础组件",
+    "text": "Basic 基础组件",
     "children": []
   },
   "app": {
-    "text": "app 应用组件",
+    "text": "App 应用组件",
     "children": [
       {
         "link": "/app-module",
@@ -22,6 +22,15 @@
       {
         "link": "/multipage",
         "text": "Multipage"
+      }
+    ]
+  },
+  "formPlugin": {
+    "text": "FormPlugin 表单插件",
+    "children": [
+      {
+        "link": "/css-color-picker",
+        "text": "CssColorPicker"
       }
     ]
   },
