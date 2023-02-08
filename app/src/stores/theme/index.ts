@@ -77,8 +77,8 @@ const useRootStylesWithMode = (key: string) => {
 export const useThemeStore = defineStore('theme', () => {
   const menuStyles = useRootStylesWithMode('ZZPT_MENU_STYLES')
 
-  const headerMenuClassName = 'zz-platform-header-menu'
-  const headerMenuStyles = useRootStyles('ZZPT_HEADER_MENU_STYLES', `.${headerMenuClassName}`)
+  const topMenuClassName = 'zz-platform-top-menu'
+  const topMenuStyles = useRootStyles('ZZPT_HEADER_MENU_STYLES', `.${topMenuClassName}`)
 
   const colorStyles = useRootStylesWithMode('ZZPT_COLOR_STYLES')
 
@@ -95,8 +95,8 @@ export const useThemeStore = defineStore('theme', () => {
     gapBaseStyles,
     gapNamedStyles,
 
-    headerMenuClassName,
-    headerMenuStyles,
+    topMenuClassName,
+    topMenuStyles,
     
     colorStyles,
     menuStyles,

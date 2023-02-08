@@ -52,6 +52,14 @@ export default [
         component: () => import('_v/_ui-config/menu/index.vue'),
         
       },
+
+      {
+        path: 'top',
+        meta: {
+          title: '顶部配置',
+        },
+        component: () => import('_v/_ui-config/top/index.vue'),
+      },
     
     ],
   },

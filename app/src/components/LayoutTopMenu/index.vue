@@ -13,7 +13,7 @@ import { useThemeStore } from '@/stores/theme'
 const route = useRoute()
 const permissionStore = usePermissionStore()
 const viewsStore = useViewsStore()
-const { headerMenuClassName } = useThemeStore()
+const { topMenuClassName } = useThemeStore()
 
 
 
@@ -58,15 +58,14 @@ onMounted(() => {
 
 </script>
 <template>
-
   <ElMenu 
     mode="horizontal"
-    class="layout-header-nav-menu"
+    class="layout-top-menu"
     :class="{
-      [headerMenuClassName]: true
+      [topMenuClassName]: true
     }"
     :defaultActive="defaultHref"
-  
+
   >
     <VkRoutesMenuContent :data="navRoutes">
       <template #item="{ data, href }">
@@ -102,12 +101,15 @@ onMounted(() => {
 
 
 <style>
-.layout-header-nav-menu.el-menu--horizontal{
+.layout-top-menu .el-menu-item.is-active{
+  font-weight: bold;
+}
+.layout-top-menu.el-menu--horizontal{
   border-bottom: none;
   /* margin-bottom: -1px; */
 }
 
-.layout-header-nav-menu.el-menu--horizontal>.el-menu-item{
+.layout-top-menu.el-menu--horizontal>.el-menu-item{
     border-bottom: none;
 }
 </style>

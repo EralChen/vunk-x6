@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { VkDuplexCalc } from '@vunk/core'
 import { defineAsyncComponent } from 'vue'
-const LayoutHeader = defineAsyncComponent(() => import('_c/LayoutHeader/index.vue'))
+const LayoutHeader = defineAsyncComponent(() => import('_c/LayoutTop/index.vue'))
 const TagsView = defineAsyncComponent(() => import('_c/TagsView/index.vue'))
 const LayoutAside = defineAsyncComponent(() => import('_c/LayoutAside/index.vue'))
 const BreadcrumbVue = defineAsyncComponent(() => import('_c/Breadcrumb/index.vue'))
