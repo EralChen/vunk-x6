@@ -11,7 +11,7 @@ import { namedFontSize, baseFontSizeOptions } from '@skzz-platform/theme'
 const themeStore = useThemeStore()
 
 
-const formItems: __SkAppForm.FormItem<`--f-${keyof typeof namedFontSize}`>[] = [
+const formItems: __SkAppForm.FormItem<keyof typeof namedFontSize>[] = [
   {
     templateType: 'VkfSelect',
     prop: '--f-module-title',

@@ -30,22 +30,23 @@ const setFormData = (e: SetDataEvent) => {
   setData(themeStore.fontSizeStyles, e)
 }
 
-const formItems: __SkAppForm.CoreFormItem<`--f-${keyof typeof baseFontSize}`| 'font-size'>[] = [
+const formItems: __SkAppForm.CoreFormItem<'font-size'|keyof typeof baseFontSize>[] = [
   {
     templateType: 'VkfInput',
     prop: 'font-size',
     label: 'font-size',
   },
-  {
-    templateType: 'VkfInputNumber',
-    prop: '--f-xxxs',
-    label: 'f-xxxs',
-    step: 0.1,
-  },
+
   {
     templateType: 'VkfInputNumber',
     prop: '--f-xxs',
     label: 'f-xxs',
+    step: 0.1,
+  },
+  {
+    templateType: 'VkfInputNumber',
+    prop: '--f-xs',
+    label: 'f-xs',
     step: 0.1,
   },
   {
@@ -78,12 +79,7 @@ const formItems: __SkAppForm.CoreFormItem<`--f-${keyof typeof baseFontSize}`| 'f
     label: 'f-xxl',
     step: 0.1,
   },
-  {
-    templateType: 'VkfInputNumber',
-    prop: '--f-xxxl',
-    label: 'f-xxxl',
-    step: 0.1,
-  },
+
 ]
 
 const formItemsWithDemo = computed(() => {

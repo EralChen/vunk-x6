@@ -10,7 +10,7 @@ import { namedGap, baseGapOptions } from '@skzz-platform/theme'
 import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
 const themeStore = useThemeStore()
 
-const formItems: __SkAppForm.FormItem<`--gap-${keyof typeof namedGap}`>[] = [
+const formItems: __SkAppForm.FormItem<keyof typeof namedGap>[] = [
   {
     templateType: 'VkfSelect',
     prop: '--gap-page',

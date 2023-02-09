@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJSX from '@vitejs/plugin-vue-jsx'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
-import { windowEnvPlugin, zzTheme } from '@lib-env/app-utils'
+import { windowEnvPlugin, vunkPresetsTheme } from '@lib-env/app-utils'
 import { getEnv } from '@lib-env/app-utils'
 import path from 'path'
 import { appRoot } from '@lib-env/path'
@@ -45,14 +45,14 @@ export default defineConfig(({ mode }) => {
           presetWind(),
           presetFont({
             theme: {
-              ...zzTheme.baseFontSize,
-              ...zzTheme.namedFontSize,
+              ...vunkPresetsTheme.baseFontSize,
+              ...vunkPresetsTheme.namedFontSize,
             },
           }),
           presetGap({
             theme: {
-              ...zzTheme.baseGap, 
-              ...zzTheme.namedGap,
+              ...vunkPresetsTheme.baseGap, 
+              ...vunkPresetsTheme.namedGap,
             },
           }),
           presetFlex({

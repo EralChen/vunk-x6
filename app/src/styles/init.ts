@@ -32,9 +32,6 @@ export const useElementPlusTheme = () => {
 
 }
 
-
-
-
 export const useFontSizeTheme = () => {
   const themeStore = useThemeStore()
 
@@ -44,10 +41,10 @@ export const useFontSizeTheme = () => {
     }
     Object.keys(baseFontSize).forEach((_key) => {
       const key = _key as keyof typeof baseFontSize
-      if (themeStore.fontSizeStyles[`--f-${key}`]) {
+      if (themeStore.fontSizeStyles[key]) {
         return
       }
-      themeStore.fontSizeStyles[`--f-${key}`] = baseFontSize[key]
+      themeStore.fontSizeStyles[key] = baseFontSize[key]
     })
   }
   setFontSize()
@@ -59,10 +56,10 @@ export const useNamedFontSizeTheme = () => {
   const setFontSize = () => {
     Object.keys(namedFontSize).forEach((_key) => {
       const key = _key as keyof typeof namedFontSize
-      if (themeStore.fontSizeNamedStyles[`--f-${key}`]) {
+      if (themeStore.fontSizeNamedStyles[key]) {
         return
       }
-      themeStore.fontSizeNamedStyles[`--f-${key}`] = namedFontSize[key]
+      themeStore.fontSizeNamedStyles[key] = namedFontSize[key]
     })
   }
   setFontSize()
@@ -73,10 +70,10 @@ export const useBaseGapTheme = () => {
   const setBaseGap = () => {
     Object.keys(baseGap).forEach((_key) => {
       const key = _key as keyof typeof baseGap
-      if (themeStore.gapBaseStyles[`--gap-${key}`]) {
+      if (themeStore.gapBaseStyles[key]) {
         return
       }
-      themeStore.gapBaseStyles[`--gap-${key}`] = baseGap[key]
+      themeStore.gapBaseStyles[key] = baseGap[key]
     })
   }
   setBaseGap()
@@ -87,10 +84,10 @@ export const useNamedGapTheme = () => {
   const setNamedGap = () => {
     Object.keys(namedGap).forEach((_key) => {
       const key = _key as keyof typeof namedGap
-      if (themeStore.gapNamedStyles[`--gap-${key}`]) {
+      if (themeStore.gapNamedStyles[key]) {
         return
       }
-      themeStore.gapNamedStyles[`--gap-${key}`] = namedGap[key]
+      themeStore.gapNamedStyles[key] = namedGap[key]
     })
   }
   setNamedGap()

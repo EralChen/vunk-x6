@@ -11,7 +11,6 @@ import { NormalObject, setData, SetDataEvent } from '@vunk/core'
 import { baseGap } from '@skzz-platform/theme'
 import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
 const themeStore = useThemeStore()
-const defaultConfig = { ...baseGap }
 
 const formData = computed(() => {
   const obj:NormalObject = {}
@@ -33,7 +32,7 @@ const setFormData = (e: SetDataEvent) => {
   setData(themeStore.gapBaseStyles, e)
 }
 
-const formItems: __SkAppForm.FormItem<`--gap-${keyof typeof defaultConfig}`>[] = [
+const formItems: __SkAppForm.FormItem<keyof typeof baseGap>[] = [
   {
     templateType: 'VkfInputNumber',
     prop: '--gap-xxs',
@@ -114,30 +113,6 @@ const formItemWithLayout = computed(() => {
       v-bind="$attrs"
     >
     </SkAppForm>
-
-    <!-- <div >
-      <div 
-        v-for="(v, k) in defaultConfig" 
-        :key="k"
-        :style="{
-          height: '51px'
-        }"
-        sk-flex
-      >
-        <span>11</span>
-        <span :style="{
-          'marginLeft': `var(${k})`,
-        }">22</span>
-        <span
-          :style="{
-            'marginLeft': `var(${k})`,
-          }"
-        >33</span>
-        
-      </div>
-    </div> -->
-
-
 </template>
 <style>
 
