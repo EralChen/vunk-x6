@@ -29,6 +29,7 @@
 		"@skzz-platform/shared": "workspace:*",
 		"@skzz-platform/theme": "workspace:*",
 		"@skzz/platform": "workspace:*",
+		"@vueuse/core": "^9.12.0",
 		"@vunk/core": "0.0.0-alpha.68",
 		"@vunk/form": "0.0.1-alpha.43",
 		"chroma-js": "^2.4.2",
