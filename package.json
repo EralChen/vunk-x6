@@ -20,7 +20,7 @@
 		"sucrase": "^3.24.0",
 		"tsx": "^3.8.0",
 		"unbuild": "^0.7.4",
-		"vite": "^3.0.9",
+		"vite": "^4.1.1",
 		"vitest": "^0.18.1"
 	},
 	"dependencies": {
