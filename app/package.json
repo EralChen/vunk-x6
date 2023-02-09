@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@vueuse/core": "^8.7.5",
-    "@vunk/skzz": "0.0.0-alpha.50",
+    "@vunk/skzz": "0.0.0-alpha.58",
     "deepdash-es": "^5.3.9",
     "js-cookie": "^3.0.1",
     "path-to-regexp": "^6.2.1",

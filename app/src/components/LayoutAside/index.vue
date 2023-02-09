@@ -39,9 +39,10 @@ function upLinkClickToItem (e: MouseEvent) {
     :collapse="layoutStore.asideInfo.menuCollapse"
   >
     <VkRoutesMenuContent 
-    :data="viewsStore.currentBaseView?.children || [...permissionStore.routes, ...constRoutes]" 
-    :basePath="viewsStore.currentBaseView?.fullPath || ''"
-    :popperClass="'layout-default-aside-popper'">
+      :data="viewsStore.currentBaseView?.children || [...permissionStore.routes, ...constRoutes]" 
+      :basePath="viewsStore.currentBaseView?.fullPath || ''"
+      :popperClass="'layout-default-aside-popper'"
+    >
       <template #item="{ data, href }">
         <LinkVue :isMenu="false" :data="data" :to="href">
           <ElIcon class="layout-default-aside-item-icon"><Document></Document></ElIcon>

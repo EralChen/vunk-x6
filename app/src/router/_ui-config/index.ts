@@ -43,16 +43,34 @@ export default [
           },
         ],
       },
-      
-      {
-        path: 'menu',
-        meta: {
-          title: '菜单配置',
-        },
-        component: () => import('_v/_ui-config/menu/index.vue'),
-        
-      },
 
+      {
+        path: 'components',
+        meta: {
+          title: '组件配置',
+        },
+        component: RouterView,
+        children: [
+          {
+            path: 'menu',
+            meta: {
+              title: '菜单配置',
+            },
+            component: () => import('_v/_ui-config/menu/index.vue'),
+          },
+
+          {
+            path: 'card',
+            meta: {
+              title: '卡片配置',
+            },
+            component: () => import('_v/_ui-config/card/index.vue'),
+          },
+    
+        ],
+      },
+      
+    
       {
         path: 'top',
         meta: {

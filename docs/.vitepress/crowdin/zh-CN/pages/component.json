@@ -13,6 +13,10 @@
       {
         "link": "/app-card",
         "text": "AppCard"
+      },
+      {
+        "link": "/app-tables",
+        "text": "AppTables"
       }
     ]
   },

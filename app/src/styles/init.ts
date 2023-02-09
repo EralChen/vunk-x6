@@ -1,6 +1,6 @@
 import { useSharedDark } from '@/composables'
 import { useThemeStore } from '@/stores/theme'
-import { elColor, elBgColor, elTextColor, elFillColor, elBorderColor, layoutTopTheme, baseFontSize, namedFontSize, baseGap, namedGap   } from '@skzz-platform/theme'
+import { elColorWithMode, elBgColorWithMode, elTextColorWithMode, elFillColorWithMode, elBorderColorWithMode, layoutTopTheme, baseFontSize, namedFontSize, baseGap, namedGap   } from '@skzz-platform/theme'
 import { NormalObject } from '@vunk/core' 
 import { nextTick, watch } from 'vue'
 
@@ -8,25 +8,24 @@ export const useElementPlusTheme = () => {
   const themeStore = useThemeStore()
   const isDark = useSharedDark()
 
-  function setElColor (obj: NormalObject, prefix = '--el-color-') { 
+  function setElColor (obj: NormalObject) { 
     Object.keys(obj).forEach((_key) => {
       const key = _key as keyof typeof obj
-      const themeKey = key ? `${prefix}${key}` : prefix.slice(0, -1)
-      if (themeStore.colorStyles[themeKey]) {
+      if (themeStore.colorStyles[key]) {
         return
       }
-      themeStore.colorStyles[themeKey] = obj[key]
+      themeStore.colorStyles[key] = obj[key]
     })
   }
 
   watch(() => isDark.value, (v) => {
 
     nextTick(() => {
-      setElColor(v ? elColor.dark : elColor.default, '--el-color-')
-      setElColor(v ? elBgColor.dark : elBgColor.default, '--el-bg-color-')
-      setElColor(v ? elTextColor.dark : elTextColor.default, '--el-text-color-')
-      setElColor(v ? elFillColor.dark : elFillColor.default, '--el-fill-color-')
-      setElColor(v ? elBorderColor.dark : elBorderColor.default, '--el-border-color-')
+      setElColor(v ? elColorWithMode.dark : elColorWithMode.default)
+      setElColor(v ? elBgColorWithMode.dark : elBgColorWithMode.default)
+      setElColor(v ? elTextColorWithMode.dark : elTextColorWithMode.default)
+      setElColor(v ? elFillColorWithMode.dark : elFillColorWithMode.default)
+      setElColor(v ? elBorderColorWithMode.dark : elBorderColorWithMode.default)
     })
   
   }, { immediate: true })

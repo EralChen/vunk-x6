@@ -5,7 +5,7 @@ export default {
 </script>
 <script lang="tsx" setup>
 import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
-import { elBgColor } from '@skzz-platform/theme'
+import { elBgColorWithMode } from '@skzz-platform/theme'
 import { computed } from 'vue'
 const props = defineProps({
   formItemBasis: {
@@ -13,7 +13,7 @@ const props = defineProps({
     default: '150px',
   },
 })
-const formItems: __SkAppForm.CoreFormItem <'--el-bg-color'|`--el-bg-color-${keyof typeof elBgColor['default']}`>[] = [
+const formItems: __SkAppForm.CoreFormItem <keyof typeof elBgColorWithMode['default']>[] = [
   {
     templateType: 'VkfColorPicker',
     showAlpha: true,
