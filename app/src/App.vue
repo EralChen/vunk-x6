@@ -2,7 +2,7 @@
   <router-view></router-view>
 </template>
 <script>
-import { useInitTheme } from '@/styles'
+import { useInitTheme } from '@skzz-platform/composables'
 export default {
   name: 'App',
   mounted () {

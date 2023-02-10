@@ -4,7 +4,7 @@ import { elColorWithMode, elBgColorWithMode, elTextColorWithMode, elFillColorWit
 import { NormalObject } from '@vunk/core' 
 import { nextTick, watch } from 'vue'
 
-export const useElementPlusTheme = () => {
+const useElementPlusTheme = () => {
   const themeStore = useThemeStore()
   const isDark = useSharedDark()
 
@@ -32,7 +32,7 @@ export const useElementPlusTheme = () => {
 
 }
 
-export const useFontSizeTheme = () => {
+const useFontSizeTheme = () => {
   const themeStore = useThemeStore()
 
   function setFontSize () {
@@ -51,7 +51,7 @@ export const useFontSizeTheme = () => {
 
 }
 
-export const useNamedFontSizeTheme = () => {
+const useNamedFontSizeTheme = () => {
   const themeStore = useThemeStore()
   const setFontSize = () => {
     Object.keys(namedFontSize).forEach((_key) => {
@@ -65,7 +65,7 @@ export const useNamedFontSizeTheme = () => {
   setFontSize()
 }
 
-export const useBaseGapTheme = () => {
+const useBaseGapTheme = () => {
   const themeStore = useThemeStore()
   const setBaseGap = () => {
     Object.keys(baseGap).forEach((_key) => {
@@ -79,7 +79,7 @@ export const useBaseGapTheme = () => {
   setBaseGap()
 }
 
-export const useNamedGapTheme = () => {
+const useNamedGapTheme = () => {
   const themeStore = useThemeStore()
   const setNamedGap = () => {
     Object.keys(namedGap).forEach((_key) => {
@@ -93,7 +93,7 @@ export const useNamedGapTheme = () => {
   setNamedGap()
 }
 
-export const useLayoutTopTheme = () => {
+const useLayoutTopTheme = () => {
   const themeStore = useThemeStore()
   const setLayoutTop = () => {
     Object.keys(layoutTopTheme).forEach((_key) => {
