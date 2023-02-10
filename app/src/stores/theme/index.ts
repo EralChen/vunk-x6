@@ -90,6 +90,9 @@ export const useThemeStore = defineStore('theme', () => {
   const gapNamedStyles = useRootStyles('ZZPT_GAP_NAMED_STYLES')
 
 
+  const cardStyles = useRootStyles('ZZPT_CARD_STYLES', '.el-card')
+
+
 
   return { 
     gapBaseStyles,
@@ -103,6 +106,8 @@ export const useThemeStore = defineStore('theme', () => {
     
     fontSizeStyles,
     fontSizeNamedStyles,
+
+    cardStyles,
   }
   
 })
