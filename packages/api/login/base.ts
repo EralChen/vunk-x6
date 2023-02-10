@@ -29,7 +29,7 @@ export const loginByPassword = (data: FirstParameter<typeof restFetch.login>) =>
     loading: true,
   }).then((res) => {    
     setToken(res.token)  
-    // window.location.reload()
+    window.location.reload()
     return res
   })
 }

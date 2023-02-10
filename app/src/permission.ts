@@ -26,8 +26,6 @@ router.beforeEach(async (to, from, next) => {
   if (token) {
     if (to.path === loginPath) {
 
-      // if is logged in, redirect to the home page
-      // import.meta.env.DEV ? next() : 
       next(
         { path: '/' },
       )
@@ -35,7 +33,6 @@ router.beforeEach(async (to, from, next) => {
     } else {
       // determine whether the user has obtained his permission roles through getInfo
       const roles = userStore.getRoleIds()
-      
 
       if (roles?.length) {
         next()
