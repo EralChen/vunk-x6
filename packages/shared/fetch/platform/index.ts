@@ -3,14 +3,9 @@ import type { R } from '@vunk/skzz/shared'
 import { usePlatformStore } from '@skzz-platform/stores/platform'
 import { AnyFunc } from '@vunk/core'
 
-export const restFetchConfig = {
-  DEV: false,
-}
 
 export const restFetch = new RestFetch({
   baseURL: '',
-  DEV: restFetchConfig.DEV,
-
 })
 
 // 可以根据平台信息动态修改请求地址

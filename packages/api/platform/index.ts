@@ -6,6 +6,9 @@ export const rPlatfroms = async () => {
   return request<PlatformInfo[]>({
     method: 'GET',
     url: '/platforms.json',
+    cache: {
+      id: 'platforms',
+    },
   }).then(res => {
     return res
   })

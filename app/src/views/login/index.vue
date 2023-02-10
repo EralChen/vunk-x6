@@ -4,9 +4,17 @@ import { setData } from '@vunk/core'
 import { ref } from 'vue'
 import { LoginFormData } from './types'
 import { loginByPassword } from '@skzz-platform/api/login'
-
-const data = ref({} as LoginFormData)
-
+import { useRouter } from 'vue-router'
+const router = useRouter()
+const data = ref({
+  userCode: 'root',
+  password: '123456',
+} as LoginFormData)
+const login = () => {
+  loginByPassword(data.value).then(() => {
+    router.push({ path: '/home' })
+  })
+}
 </script>
 <template>
   <div class="login-page">
@@ -14,7 +22,7 @@ const data = ref({} as LoginFormData)
       class="login-form"
       :data="data"
       @setData="setData(data, $event)"
-      @login="loginByPassword"
+      @login="login"
     ></FormVue>
   </div>
 </template>

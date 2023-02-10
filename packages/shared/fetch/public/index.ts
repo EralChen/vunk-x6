@@ -1,11 +1,8 @@
 import { RestFetch } from '@vunk/core/shared/utils-fetch'
 
-export const restFetchConfig = {
-  baseURL: '/data',
-}
 
 export const restFetch = new RestFetch({
-  baseURL: restFetchConfig.baseURL,
+  baseURL: '/data',
 })
 
 export const request = async <T>(...args: Parameters<typeof restFetch.request>) => {
