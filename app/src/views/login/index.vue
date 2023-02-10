@@ -3,7 +3,7 @@ import FormVue from './form/index.vue'
 import { setData } from '@vunk/core'
 import { ref } from 'vue'
 import { LoginFormData } from './types'
-import { loginByPassword } from '@/api/login'
+import { loginByPassword } from '@skzz-platform/api/login'
 
 const data = ref({} as LoginFormData)
 

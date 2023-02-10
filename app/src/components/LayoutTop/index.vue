@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import DarkSwitch from '_c/DarkSwitch/index.vue'
 import { defineAsyncComponent } from 'vue'
-import { useThemeStore } from '@/stores/theme'
+import { useThemeStore } from '@skzz-platform/stores/theme'
 const LayoutTopMenu = defineAsyncComponent(() => import('_c/LayoutTopMenu/index.vue'))
 const { layoutTopClassName } = useThemeStore()
 

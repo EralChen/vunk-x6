@@ -5,7 +5,7 @@ export default {
 </script>
 <script lang="tsx" setup>
 // import { FormItemRendererSource, VkfForm } from '@vunk/form'
-import { useThemeStore } from '@/stores/theme'
+import { useThemeStore } from '@skzz-platform/stores/theme'
 import { computed } from 'vue'
 import { NormalObject, setData, SetDataEvent } from '@vunk/core'
 import { baseGap } from '@skzz-platform/theme'

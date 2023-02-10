@@ -1,5 +1,5 @@
-import { useSharedDark } from '@/composables'
-import { useThemeStore } from '@/stores/theme'
+import { useSharedDark } from '@skzz-platform/composables'
+import { useThemeStore } from '@skzz-platform/stores/theme'
 import { elColorWithMode, elBgColorWithMode, elTextColorWithMode, elFillColorWithMode, elBorderColorWithMode, layoutTopTheme, baseFontSize, namedFontSize, baseGap, namedGap   } from '@skzz-platform/theme'
 import { NormalObject } from '@vunk/core' 
 import { nextTick, watch } from 'vue'

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useSharedDark } from '@/composables'
+import { useSharedDark } from '@skzz-platform/composables'
 import { Sunny, Moon } from '@element-plus/icons-vue'
 import { ElSwitch } from 'element-plus'
 const isDark = useSharedDark()

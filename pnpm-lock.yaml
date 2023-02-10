@@ -13,6 +13,7 @@ importers:
       '@lib-env/shared': workspace:*
       '@skzz-platform/api': workspace:*
       '@skzz-platform/components': workspace:*
+      '@skzz-platform/composables': workspace:*
       '@skzz-platform/shared': workspace:*
       '@skzz-platform/stores': workspace:*
       '@skzz-platform/theme': workspace:*
@@ -45,6 +46,7 @@ importers:
       '@element-plus/utils': link:packages/element-utils
       '@skzz-platform/api': link:packages/api
       '@skzz-platform/components': link:packages/components
+      '@skzz-platform/composables': link:packages/composables
       '@skzz-platform/shared': link:packages/shared
       '@skzz-platform/stores': link:packages/stores
       '@skzz-platform/theme': link:packages/theme
@@ -229,6 +231,9 @@ importers:
     specifiers: {}
 
   packages/components:
+    specifiers: {}
+
+  packages/composables:
     specifiers: {}
 
   packages/element-utils:

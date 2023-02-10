@@ -1,4 +1,4 @@
-import { rUserInfo } from '@/api/login'
+import { rUserInfo } from '@skzz-platform/api/login'
 import { useUserStore as useVkUserStore } from '@vunk/skzz/stores'
 import { defineStore } from 'pinia'
 

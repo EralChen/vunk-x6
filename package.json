@@ -28,6 +28,7 @@
 	"dependencies": {
 		"@element-plus/utils": "workspace:*",
 		"@skzz-platform/api": "workspace:*",
+		"@skzz-platform/composables": "workspace:*",
 		"@skzz-platform/components": "workspace:*",
 		"@skzz-platform/shared": "workspace:*",
 		"@skzz-platform/stores": "workspace:*",

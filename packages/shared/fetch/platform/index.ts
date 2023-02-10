@@ -13,6 +13,7 @@ export const restFetch = new RestFetch({
 
 })
 
+// 可以根据平台信息动态修改请求地址
 export function withPlatform <T extends AnyFunc> (fn: T) {
   return (async (...args) => {
     const platformStore = usePlatformStore()
@@ -27,5 +28,5 @@ const baseRequest = async <T>(...args: Parameters<typeof restFetch.request>) => 
   return data 
 }
 
+// 携带平台信息的请求
 export const request = withPlatform(baseRequest)
-

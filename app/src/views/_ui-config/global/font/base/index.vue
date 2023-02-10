@@ -4,7 +4,7 @@ export default {
 }
 </script>
 <script lang="tsx" setup>
-import { useThemeStore } from '@/stores/theme'
+import { useThemeStore } from '@skzz-platform/stores/theme'
 import { computed } from 'vue'
 import { NormalObject, setData, SetDataEvent } from '@vunk/core'
 import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'

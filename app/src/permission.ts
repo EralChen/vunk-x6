@@ -1,7 +1,7 @@
 import { getToken, removeToken } from '@vunk/skzz/shared/utils-auth'
-import { useUserStore } from '@/stores/user'
+import { useUserStore } from '@skzz-platform/stores/user'
 import router from './router'
-import { usePlatformStore } from '@/stores/platform'
+import { usePlatformStore } from '@skzz-platform/stores/platform'
 import { usePermissionStore } from '@/stores/permission'
 
 const whiteList: (RegExp|string)[] = [/^\/login/] // no redirect whitelist

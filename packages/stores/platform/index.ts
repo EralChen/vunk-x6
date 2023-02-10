@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { PlatformInfo } from '@/types'
+import { PlatformInfo } from '@skzz-platform/shared/types'
 import { setPlatform } from '@skzz-platform/shared/auth'
 import { rDefaultPlatfrom, rPlatfromByCode } from '@skzz-platform/api/platform'
 
@@ -22,9 +22,17 @@ export const usePlatformStore = defineStore('platform', () => {
         setPlatformInfo(res)
       })
     } else {
+
       rPlatfromByCode(code).then(res => {
-        setPlatformInfo(res)
+        if (res) {
+          setPlatformInfo(res)
+        } else {
+          // eslint-disable-next-line no-console
+          console.warn('平台不存在')
+        }
       })
+
+
     }
 
   }

@@ -6,6 +6,8 @@ export const rPlatfroms = async () => {
   return request<PlatformInfo[]>({
     method: 'GET',
     url: '/platforms.json',
+  }).then(res => {
+    return res
   })
 }
 
@@ -13,8 +15,10 @@ export const rPlatfromByCode = async (code: string) => {
   return rPlatfroms().then(res => {
     return res.find(item => item.code === code) 
   }).then(res => {
-    const platformStore = usePlatformStore()
-    platformStore.setPlatformInfo(res)
+    if (res) {
+      const platformStore = usePlatformStore()
+      platformStore.setPlatformInfo(res)
+    }
     return res
   })
 }

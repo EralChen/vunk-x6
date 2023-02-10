@@ -1,4 +1,4 @@
-import { restFetch } from '../_request/base'
+import { restFetch } from '@skzz-platform/shared/fetch/platform'
 import { setToken, removeToken, removeTenant, getApplication } from '@vunk/skzz/shared/utils-auth'
 import { FirstParameter } from '@vunk/core'
 
@@ -23,13 +23,14 @@ export const logout = () => {
 }
 
 export const loginByPassword = (data: FirstParameter<typeof restFetch.login>) => {
-  data.application = getApplication()  
+  data.applicationId = getApplication()  
   return restFetch.login(data, {
-    msg: import.meta.env.DEV ? '登录成功' : false,
+    msg: restFetch.DEV ? '登录成功' : false,
     loading: true,
   }).then((res) => {    
     setToken(res.token)  
     window.location.reload()
+    
   })
 }
 
