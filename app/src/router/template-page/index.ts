@@ -16,8 +16,10 @@ export default [
         path: 'table',
         meta: {
           title: '表格页面',
+          
         },
         component: () => import('_v/template-page/table/index.vue'),
+        
       },
     
     ],

@@ -11,8 +11,10 @@ importers:
       '@lib-env/eslint-config': workspace:*
       '@lib-env/path': workspace:*
       '@lib-env/shared': workspace:*
+      '@skzz-platform/api': workspace:*
       '@skzz-platform/components': workspace:*
       '@skzz-platform/shared': workspace:*
+      '@skzz-platform/stores': workspace:*
       '@skzz-platform/theme': workspace:*
       '@skzz/platform': workspace:*
       '@types/chroma-js': ^2.1.4
@@ -31,6 +33,8 @@ importers:
       gulp: ^4.0.2
       gulp-concat: ^2.6.1
       mri: ^1.2.0
+      pinia: ^2.0.21
+      pinia-plugin-persist: ^1.0.0
       sucrase: ^3.24.0
       tsx: ^3.8.0
       unbuild: ^0.7.4
@@ -39,8 +43,10 @@ importers:
       vue: ^3.2.38
     dependencies:
       '@element-plus/utils': link:packages/element-utils
+      '@skzz-platform/api': link:packages/api
       '@skzz-platform/components': link:packages/components
       '@skzz-platform/shared': link:packages/shared
+      '@skzz-platform/stores': link:packages/stores
       '@skzz-platform/theme': link:packages/theme
       '@skzz/platform': link:packages/entry
       '@vueuse/core': registry.npmmirror.com/@vueuse/core/9.12.0_vue@3.2.45
@@ -67,6 +73,8 @@ importers:
       gulp: 4.0.2
       gulp-concat: 2.6.1
       mri: 1.2.0
+      pinia: 2.0.27_vue@3.2.45
+      pinia-plugin-persist: 1.0.0_pinia@2.0.27+vue@3.2.45
       sucrase: 3.29.0
       tsx: 3.12.1
       unbuild: 0.7.6
@@ -85,8 +93,6 @@ importers:
       deepdash-es: ^5.3.9
       js-cookie: ^3.0.1
       path-to-regexp: ^6.2.1
-      pinia: ^2.0.21
-      pinia-plugin-persist: ^1.0.0
       qs: ^6.11.0
       unocss: 0.33.5
       unocss-preset-vunk: ^1.0.3
@@ -99,8 +105,6 @@ importers:
       deepdash-es: 5.3.9
       js-cookie: 3.0.1
       path-to-regexp: 6.2.1
-      pinia: 2.0.27
-      pinia-plugin-persist: 1.0.0_pinia@2.0.27
       qs: 6.11.0
       vue-router: 4.1.6
     devDependencies:
@@ -221,6 +225,9 @@ importers:
   internal/shared:
     specifiers: {}
 
+  packages/api:
+    specifiers: {}
+
   packages/components:
     specifiers: {}
 
@@ -241,6 +248,9 @@ importers:
       qs: 6.11.0
     devDependencies:
       '@types/qs': 6.9.7
+
+  packages/stores:
+    specifiers: {}
 
   packages/theme:
     specifiers: {}
@@ -3005,7 +3015,6 @@ packages:
 
   /@vue/devtools-api/6.4.5:
     resolution: {integrity: sha512-JD5fcdIuFxU4fQyXUu3w2KpAJHzTVdN+p4iOX2lMWSHMOoQdMAcpFLZzm9Z/2nmsoZ1a96QEhZ26e50xLBsgOQ==}
-    dev: false
 
   /@vue/reactivity-transform/3.2.45:
     resolution: {integrity: sha512-BHVmzYAvM7vcU5WmuYqXpwaBHjsS8T63jlKGWVtHxAHIoMIlmaMyurUSEs1Zcg46M4AYT5MtB1U274/2aNzjJQ==}
@@ -7058,7 +7067,7 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /pinia-plugin-persist/1.0.0_pinia@2.0.27:
+  /pinia-plugin-persist/1.0.0_pinia@2.0.27+vue@3.2.45:
     resolution: {integrity: sha512-M4hBBd8fz/GgNmUPaaUsC29y1M09lqbXrMAHcusVoU8xlQi1TqgkWnnhvMikZwr7Le/hVyMx8KUcumGGrR6GVw==}
     peerDependencies:
       '@vue/composition-api': ^1.0.0
@@ -7068,11 +7077,12 @@ packages:
       '@vue/composition-api':
         optional: true
     dependencies:
-      pinia: 2.0.27
-      vue-demi: 0.12.5
-    dev: false
+      pinia: 2.0.27_vue@3.2.45
+      vue: 3.2.45
+      vue-demi: 0.12.5_vue@3.2.45
+    dev: true
 
-  /pinia/2.0.27:
+  /pinia/2.0.27_vue@3.2.45:
     resolution: {integrity: sha512-nOnXP0OFeL8R4WjAHsterU+11vptda643gH02xKNtSCDPiRzVfRYodOLihLDoa0gL1KKuQKV+KOzEgdt3YvqEw==}
     peerDependencies:
       '@vue/composition-api': ^1.4.0
@@ -7085,8 +7095,9 @@ packages:
         optional: true
     dependencies:
       '@vue/devtools-api': 6.4.5
-      vue-demi: 0.13.11
-    dev: false
+      vue: 3.2.45
+      vue-demi: 0.13.11_vue@3.2.45
+    dev: true
 
   /pinkie-promise/2.0.1:
     resolution: {integrity: sha512-0Gni6D4UcLTbv9c57DfxDGdr41XfgUjqWZu492f0cIGr16zDU06BWP/RAEvOuo7CQ0CNjHaLlM59YJJFm3NWlw==}
@@ -8878,7 +8889,7 @@ packages:
       - terser
     dev: true
 
-  /vue-demi/0.12.5:
+  /vue-demi/0.12.5_vue@3.2.45:
     resolution: {integrity: sha512-BREuTgTYlUr0zw0EZn3hnhC3I6gPWv+Kwh4MCih6QcAeaTlaIX0DwOVN0wHej7hSvDPecz4jygy/idsgKfW58Q==}
     engines: {node: '>=12'}
     hasBin: true
@@ -8889,20 +8900,9 @@ packages:
     peerDependenciesMeta:
       '@vue/composition-api':
         optional: true
-    dev: false
-
-  /vue-demi/0.13.11:
-    resolution: {integrity: sha512-IR8HoEEGM65YY3ZJYAjMlKygDQn25D5ajNFNoKh9RSDMQtlzCxtfQjdQgv9jjK+m3377SsJXY8ysq8kLCZL25A==}
-    engines: {node: '>=12'}
-    hasBin: true
-    requiresBuild: true
-    peerDependencies:
-      '@vue/composition-api': ^1.0.0-rc.1
-      vue: ^3.0.0-0 || ^2.6.0
-    peerDependenciesMeta:
-      '@vue/composition-api':
-        optional: true
-    dev: false
+    dependencies:
+      vue: 3.2.45
+    dev: true
 
   /vue-demi/0.13.11_vue@3.2.45:
     resolution: {integrity: sha512-IR8HoEEGM65YY3ZJYAjMlKygDQn25D5ajNFNoKh9RSDMQtlzCxtfQjdQgv9jjK+m3377SsJXY8ysq8kLCZL25A==}
@@ -8917,7 +8917,6 @@ packages:
         optional: true
     dependencies:
       vue: 3.2.45
-    dev: false
 
   /vue-eslint-parser/9.1.0_eslint@8.28.0:
     resolution: {integrity: sha512-NGn/iQy8/Wb7RrRa4aRkokyCZfOUWk19OP5HP6JEozQFX5AoS/t+Z0ZN7FY4LlmWc4FNI922V7cvX28zctN8dQ==}

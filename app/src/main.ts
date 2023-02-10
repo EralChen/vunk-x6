@@ -4,8 +4,10 @@ import router from './router'
 import store from './stores'
 import { VkSvgIcon } from '@vunk/core'
 import ElementPlus from 'element-plus'
-
 import * as ElIconsVue from '@element-plus/icons-vue'
+
+// 初始化 api 配置
+import '@/api/init'
 
 import 'virtual:svg-icons-register'
 import 'uno.css'
