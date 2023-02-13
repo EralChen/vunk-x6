@@ -4,18 +4,21 @@ import { VkRoutesMenuContent } from '@vunk/skzz/components/routes-menu-content'
 import LinkVue from '_c/MenuLink/index.vue'
 import { useLayoutStore } from '@/stores/layout'
 import { Document } from '@element-plus/icons-vue'
-import { nextTick, onMounted, onUnmounted } from 'vue'
+import { nextTick, onMounted, onUnmounted, Ref, ref, watch } from 'vue'
 import CollapseVue from './Collapse.vue'
 import { useViewsStore } from '@/stores/views'
 import { usePermissionStore } from '@/stores/permission'
 import { routes as constRoutes } from '@/router'
+import { AnyFunc } from '@vunk/core'
+import { useRoute } from 'vue-router'
 const emit = defineEmits({
   'load': null,
 })
 const viewsStore = useViewsStore()
 const layoutStore = useLayoutStore()
 const permissionStore = usePermissionStore()
-
+const route = useRoute()
+const menuNode = ref() as Ref<{ open: AnyFunc }>
 
 document.addEventListener('click', upLinkClickToItem)
 onUnmounted(() => {
@@ -33,8 +36,25 @@ function upLinkClickToItem (e: MouseEvent) {
   }
 }
 
+const initOpenMenu = () => {
+  const testIndex = route.matched.map(item => item.path)
+  for (let i = 0; i < testIndex.length; i++) {
+    const index = testIndex[i]
+    try {
+      menuNode.value.open(index)
+      break
+    } catch {
+      continue
+    }
+       
+  }
+}
+
 onMounted(async () => {
-  await nextTick()
+  watch(() => viewsStore.currentBaseView, async () => {
+    await nextTick()
+    initOpenMenu()
+  }, { immediate: true })
   emit('load')
 })
 </script>
@@ -44,6 +64,7 @@ onMounted(async () => {
     <ElMenu 
       class="layout-default-aside-menu"
       :collapse="layoutStore.asideInfo.menuCollapse"
+      ref="menuNode"
     >
       <VkRoutesMenuContent 
         :data="viewsStore.currentBaseView?.children || [...permissionStore.routes, ...constRoutes]" 
