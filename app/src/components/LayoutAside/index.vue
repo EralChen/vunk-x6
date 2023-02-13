@@ -4,12 +4,14 @@ import { VkRoutesMenuContent } from '@vunk/skzz/components/routes-menu-content'
 import LinkVue from '_c/MenuLink/index.vue'
 import { useLayoutStore } from '@/stores/layout'
 import { Document } from '@element-plus/icons-vue'
-import { onUnmounted } from 'vue'
+import { nextTick, onMounted, onUnmounted } from 'vue'
 import CollapseVue from './Collapse.vue'
 import { useViewsStore } from '@/stores/views'
 import { usePermissionStore } from '@/stores/permission'
 import { routes as constRoutes } from '@/router'
-
+const emit = defineEmits({
+  'load': null,
+})
 const viewsStore = useViewsStore()
 const layoutStore = useLayoutStore()
 const permissionStore = usePermissionStore()
@@ -30,42 +32,49 @@ function upLinkClickToItem (e: MouseEvent) {
     elMenuItem.getElementsByTagName('a')[0]?.click()                 
   }
 }
+
+onMounted(async () => {
+  await nextTick()
+  emit('load')
+})
 </script>
 <template>
-<div class="layout-default-aside" >
-
-  <ElMenu 
-    class="layout-default-aside-menu"
-    :collapse="layoutStore.asideInfo.menuCollapse"
-  >
-    <VkRoutesMenuContent 
-      :data="viewsStore.currentBaseView?.children || [...permissionStore.routes, ...constRoutes]" 
-      :basePath="viewsStore.currentBaseView?.fullPath || ''"
-      :popperClass="'layout-default-aside-popper'"
+<div class="layout-default-aside h-100%" >
+  <ElScrollbar>
+    <ElMenu 
+      class="layout-default-aside-menu"
+      :collapse="layoutStore.asideInfo.menuCollapse"
     >
-      <template #item="{ data, href }">
-        <LinkVue :isMenu="false" :data="data" :to="href">
-          <ElIcon class="layout-default-aside-item-icon"><Document></Document></ElIcon>
-        
-        </LinkVue>
-      </template>
+      <VkRoutesMenuContent 
+        :data="viewsStore.currentBaseView?.children || [...permissionStore.routes, ...constRoutes]" 
+        :basePath="viewsStore.currentBaseView?.fullPath || ''"
+        :popperClass="'layout-default-aside-popper'"
+      >
+        <template #item="{ data, href }">
+          <LinkVue :isMenu="false" :data="data" :to="href">
+            <ElIcon class="layout-default-aside-item-icon"><Document></Document></ElIcon>
+          
+          </LinkVue>
+        </template>
 
-      <template #itemTitle="{ data }">
-        <span>{{ data.meta?.title || data.meta?.name }}</span> 
-      </template>
+        <template #itemTitle="{ data }">
+          <span>{{ data.meta?.title || data.meta?.name }}</span> 
+        </template>
 
-      <template #menuTitle="{ data, href }">
-        <LinkVue :isMenu="true" :data="data" :to="href">
-          <ElIcon class="layout-default-aside-item-icon"><Document></Document></ElIcon>
-        </LinkVue>
+        <template #menuTitle="{ data, href }">
+          <LinkVue :isMenu="true" :data="data" :to="href">
+            <ElIcon class="layout-default-aside-item-icon"><Document></Document></ElIcon>
+          </LinkVue>
 
-        <span>{{ data.meta?.title || data.meta?.name }}</span> 
+          <span>{{ data.meta?.title || data.meta?.name }}</span> 
 
-      </template>
+        </template>
 
-    </VkRoutesMenuContent>
-  </ElMenu>
+      </VkRoutesMenuContent>
+    </ElMenu>
   
+  </ElScrollbar>
+
   <CollapseVue class="layout-default-aside-collapse"></CollapseVue>
 </div>
 </template>
@@ -86,6 +95,9 @@ function upLinkClickToItem (e: MouseEvent) {
 .layout-default-aside-menu:not(.el-menu--collapse) {
   width: var(--layout-aside-width);
 }
+.layout-default-aside-menu {
+  min-height: var(--vk-duplex-calc-resize-height);
+}
 </style>
 
 <style>
@@ -98,8 +110,4 @@ function upLinkClickToItem (e: MouseEvent) {
 }
 </style>
 
-<style>
-.layout-default-aside-menu, .layout-default-aside{
-  height: 100%;
-}
-</style>
+

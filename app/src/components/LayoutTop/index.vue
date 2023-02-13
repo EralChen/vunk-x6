@@ -2,6 +2,9 @@
 import DarkSwitch from '_c/DarkSwitch/index.vue'
 import { defineAsyncComponent } from 'vue'
 import { useThemeStore } from '@skzz-platform/stores/theme'
+defineEmits({
+  'load': null,
+})
 const LayoutTopMenu = defineAsyncComponent(() => import('_c/LayoutTopMenu/index.vue'))
 const { layoutTopClassName } = useThemeStore()
 
@@ -17,7 +20,9 @@ const { layoutTopClassName } = useThemeStore()
         <div class="layout-top-title f-xxxl font-600 plr-l ptb-s">
           智子开发平台
         </div>
-        <LayoutTopMenu></LayoutTopMenu>
+        <LayoutTopMenu
+          @load="$emit('load')"
+        ></LayoutTopMenu>
       </div>
       
       

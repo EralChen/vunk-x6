@@ -2,7 +2,7 @@ import { RouteRecordRaw } from 'vue-router'
 import Layout from '@/layouts/default/index.vue'
 export default [
   {
-    path: '/template-page',
+    path: '/_template-page',
     component: Layout,
     meta: {
       title: '模板页面',
@@ -10,7 +10,7 @@ export default [
       icon: 'Document',
       header: true,
     },
-    redirect: '/template-page/table',
+    redirect: '/_template-page/table',
     children: [
       {
         path: 'table',
@@ -18,7 +18,7 @@ export default [
           title: '表格页面',
           
         },
-        component: () => import('_v/template-page/table/index.vue'),
+        component: () => import('_v/_template-page/table/index.vue'),
         
       },
     
