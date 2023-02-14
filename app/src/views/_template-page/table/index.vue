@@ -86,6 +86,7 @@ const colSource:__SkAppTables.Column[] = [
         <SkAppForm :inline="true" :formItems="formItems">
         </SkAppForm>
         <SkAppTables
+          class="h-100%"
           :data="data"
           :columns="colSource"
         >

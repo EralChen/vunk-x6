@@ -17,6 +17,10 @@
       {
         "link": "/app-tables",
         "text": "AppTables"
+      },
+      {
+        "link": "/app-query-form",
+        "text": "AppQueryForm"
       }
     ]
   },

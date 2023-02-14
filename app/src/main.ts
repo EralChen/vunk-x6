@@ -10,9 +10,9 @@ import * as ElIconsVue from '@element-plus/icons-vue'
 import '@/api'
 
 import 'virtual:svg-icons-register'
-import 'uno.css'
 import './permission'
 import './styles'
+import 'uno.css'
 
 const app = createApp(App)
 
