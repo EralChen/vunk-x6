@@ -20,3 +20,12 @@ app-query-form/basic
 |-|-|-|-|
 |:fixes|Number|-|固定的 `formItem` 数量|
 
+
+## AppQueryForm Slots
+
+|name|arguments|descriptions|
+|-|-|-|
+|options| forms: InstanceType\<typeof ElForm\>[]  | 表单实例 |
+
+
+

@@ -3,7 +3,10 @@ import { props, emits } from './ctx'
 import { computed, defineComponent, ref } from 'vue'
 import { SkAppForm, _SkAppFormCtx } from '@skzz-platform/components/app-form'
 import { ArrowDown } from '@element-plus/icons-vue'
-import { ElIcon } from 'element-plus'
+import { ElForm, ElIcon } from 'element-plus'
+import { Deferred } from '@vunk/core/shared/utils-promise'
+import { useReady } from '@skzz-platform/composables'
+
 export default defineComponent({
   name: 'SkAppQueryForm',
   components: {
@@ -22,6 +25,12 @@ export default defineComponent({
     const moreFormItems = computed(() => {
       return props.formItems.slice(props.fixes)
     })
+    const fixedFormDef = new Deferred<InstanceType<typeof ElForm>>()
+    const moreFormDef = new Deferred<InstanceType<typeof ElForm>>()
+    const { ready, result: forms } = useReady(Promise.all(
+      [fixedFormDef.promise, moreFormDef.promise],
+    ))
+
     const showMore = ref(false)
     return {
       formProps,
@@ -29,6 +38,10 @@ export default defineComponent({
       fixedFormItems,
       moreFormItems,
       showMore,
+      fixedFormDef,
+      moreFormDef,
+      ready,
+      forms,
     }
   },
 })
@@ -38,12 +51,21 @@ export default defineComponent({
   <div class="sk-app-query-form__fixed">
     <SkAppForm 
       v-bind="formProps" 
+      v-on="formEmits"
       :formItems="fixedFormItems"
+      :elRef="fixedFormDef.resolve"
     >
     </SkAppForm>
-    <slot name="options">
+    <div>
+      <slot 
+       name="options"
+       v-if="ready" 
+        :forms="forms"
+      >
       <ElButton type="primary">查询</ElButton>
     </slot>
+    </div>
+
   </div>
 
   <div 
@@ -66,7 +88,9 @@ export default defineComponent({
     <SkAppForm 
       v-show="showMore"
       v-bind="formProps" 
+      v-on="formEmits"
       :formItems="moreFormItems"
+      :elRef="moreFormDef.resolve"
     >
     </SkAppForm>
   </ElCollapseTransition>
