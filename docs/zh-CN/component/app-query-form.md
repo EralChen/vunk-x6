@@ -14,4 +14,9 @@ AppQueryForm
 app-query-form/basic
 :::
 
-## AppQueryForm 其他
+## AppQueryForm Props
+
+|prop|type|default|descriptions|
+|-|-|-|-|
+|:fixes|Number|-|固定的 `formItem` 数量|
+
