@@ -10,7 +10,7 @@ const modules = ref([
 ])
 </script>
 <template>
-  <div plr-page pb-page class="h-main">
+  <div plr-page pb-page class="h-page">
     <SkMultipage 
       v-model="currentPage" 
       :modules="modules"

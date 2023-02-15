@@ -104,6 +104,7 @@ export default defineComponent({
 <style>
 .sk-app-query-form{
   position: relative;
+  padding-bottom: 1em;
 }
 .sk-app-query-form__fixed{
   display: flex;
@@ -114,7 +115,7 @@ export default defineComponent({
   color: var(--el-text-color-secondary);
   position: absolute;
   cursor: pointer;
-  bottom: -1em;
+  bottom: 0;
   right: 0;
   left: 0;
   display: flex;

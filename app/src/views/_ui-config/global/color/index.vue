@@ -26,7 +26,7 @@ const formVueProps = computed(() => {
 
 </script>
 <template>
-  <div plr-page pb-page class="h-main">
+  <div plr-page pb-page class="h-page">
     <div class="bg-bg-overlay h-100%">
       <SkAppCard class="h-100%" :shadow="'never'" :header="'ElementPlus 颜色'">
         <template #header__options>

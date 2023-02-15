@@ -8,7 +8,7 @@ const themeStore = useThemeStore()
 
 </script>
 <template>
-  <div class="h-main plr-page pb-page">
+  <div class="h-page plr-page pb-page">
     <div class="bg-bg-overlay h-100%">
       <SkAppCard class="h-100%" :header="'顶部配置'">
         <template #header__options>

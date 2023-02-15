@@ -1,8 +1,11 @@
 <script lang="tsx" setup>
+import PageX from '_c/PageX/index.vue'
 import { SkAppCard } from '@skzz-platform/components/app-card'
+import { VkDuplexCalc } from '@vunk/core'
 import { SkAppTables, __SkAppTables } from '@skzz-platform/components/app-tables'
-import { SkAppForm, __SkAppForm } from '@skzz/platform'
-const formItems:__SkAppForm.FormItem[] = [
+import { SkAppQueryForm, __SkAppQueryForm } from '@skzz-platform/components/app-query-form'
+
+const formItems: __SkAppQueryForm.FormItem[] = [
   {
     templateType: 'VkfInput',
     prop: 'name',
@@ -58,7 +61,7 @@ const data = [
     name: 'cx',
   },
 ]
-const colSource:__SkAppTables.Column[] = [
+const colSource: __SkAppTables.Column[] = [
   {
     key: 'name',
     dataKey: 'name',
@@ -79,22 +82,19 @@ const colSource:__SkAppTables.Column[] = [
 ]
 </script>
 <template>
-  <div plr-page pb-page class="h-main">
-    <div class="bg-bg-overlay h-100%">
-      <SkAppCard :header="'表格'" class="h-100%">
+  <PageX>
+    <SkAppCard :header="'表格'" class="h-100%">
+      <VkDuplexCalc class="plr-page ptb-tab-ptb">
+        <template #one>
+          <SkAppQueryForm :formItems="formItems" :fixes="4"></SkAppQueryForm>
 
-        <SkAppForm :inline="true" :formItems="formItems">
-        </SkAppForm>
-        <SkAppTables
-          class="h-100%"
-          :data="data"
-          :columns="colSource"
-        >
+          <div>1111</div>
+        </template>
+
+        <SkAppTables class="h-100%" :data="data" :columns="colSource">
         </SkAppTables>
-      </SkAppCard>
+      </VkDuplexCalc>
 
-
-    </div>
-  </div>
-
+    </SkAppCard>
+  </PageX>
 </template>

@@ -13,7 +13,7 @@ const modules = ref([
 
 </script>
 <template>
-<div plr-page pb-page class="h-main">
+<div plr-page pb-page class="h-page">
   <SkMultipage class="bg-bg-overlay h-100%" :headerClass="'plr-form-pl'" v-model="currentPage" :modules="modules">
     
     <template #base>

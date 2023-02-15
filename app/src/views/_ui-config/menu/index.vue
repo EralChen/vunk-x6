@@ -7,7 +7,7 @@ const themeStore = useThemeStore()
 
 </script>
 <template>
-  <div plr-page pb-page class="h-main">
+  <div plr-page pb-page class="h-page">
     <SkAppCard class="h-100%" :header="'菜单配置'">
       <div plr-form-pl ptb-form-ptb>
         <ElMenuConfigForm
