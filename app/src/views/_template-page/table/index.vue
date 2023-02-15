@@ -109,7 +109,7 @@ const data = [
 
       <VkDuplexCalc class="plr-page ptb-main-ptb">
         <template #one>
-          <SkAppQueryForm :fixes="100"  :data="formData" @setData="setData(formData, $event)" :formItems="formItems">
+          <SkAppQueryForm :fixes="2"  :data="formData" @setData="setData(formData, $event)" :formItems="formItems">
           </SkAppQueryForm>
           <div sk-flex="row-between-center" ptb-page>
             <SkCheckTags v-model="formData.type" :options="typeOptions"></SkCheckTags>
