@@ -4,9 +4,12 @@ import {
   SkAppCard, SkCheckTags,
   SkAppTables, __SkAppTables, 
   SkAppQueryForm, __SkAppQueryForm, 
+  SkAppOperations,
 } from '@skzz/platform'
 import { NormalObject, setData, VkDuplexCalc } from '@vunk/core'
 import { ref } from 'vue'
+import { FixedDir } from 'element-plus/es/components/table-v2/src/constants'
+
 
 
 const formItems: __SkAppQueryForm.FormItem[] = [
@@ -80,12 +83,13 @@ const colSource: __SkAppTables.Column[] = [
   {
     key: 'operations',
     title: '操作',
-    width: 160,
+    width: 260,
+    fixed: FixedDir.RIGHT,
     cellRenderer: () => {
-      return <div>
-        <el-button>编辑</el-button>
-        <el-button>删除</el-button>
-      </div>
+      return <SkAppOperations 
+        modules={[ 'r', 'u', 'd']}
+
+      ></SkAppOperations>
     },
   },
 ]
@@ -120,6 +124,7 @@ const data = [
         </template>
 
         <SkAppTables 
+          
           class="h-100%" 
           :data="data"
           :columns="colSource"
