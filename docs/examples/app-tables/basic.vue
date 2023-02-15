@@ -33,6 +33,7 @@ const colSource:__SkAppTables.Column[] = [
     }" 
     :columns="colSource" 
     :data="data"
+    :total="100"
   >
   </SkAppTables>
 </template>

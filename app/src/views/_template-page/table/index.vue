@@ -122,7 +122,12 @@ const data = [
 
         </template>
 
-        <SkAppTables class="h-100%" :data="data" :columns="colSource">
+        <SkAppTables 
+          class="h-100%" 
+          :data="data"
+          :columns="colSource"
+          :total="100"
+        >
         </SkAppTables>
       </VkDuplexCalc>
 

@@ -5,6 +5,8 @@ import { define } from '../utils/types'
 import 'uno.css'
 import './style.css'
 import type { Theme } from 'vitepress'
+import '@vunk/core/index.css'
+
 
 export default define<Theme>({
   NotFound,
