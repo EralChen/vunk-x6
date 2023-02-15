@@ -101,10 +101,27 @@ const formItems: __SkAppForm.FormItem<keyof typeof namedGap>[] = [
     allowCreate: true,
     filterable: true,
   },
+
   {
     templateType: 'Component',
     is: () => <p class='text-text-secondary mb-xl'>
       页签间距: 页签之间的间距
+    </p>,
+  },
+
+  {
+    templateType: 'VkfSelect',
+    prop: '--gap-widget-space',
+    label: 'gap-widget-space',
+    options: baseGapOptions,
+    clearable: true,
+    allowCreate: true,
+    filterable: true,
+  },
+  {
+    templateType: 'Component',
+    is: () => <p class='text-text-secondary mb-xl'>
+      小部件间距: 小部件之间的间距。如button、tag 等
     </p>,
   },
 

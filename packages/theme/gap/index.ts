@@ -23,5 +23,6 @@ export const namedGap = {
 
   '--gap-form-pl': '70px',
   '--gap-tab-space': '70px',
+  '--gap-widget-space': 'var(--gap-m)',
 
 }

@@ -39,6 +39,10 @@
       {
         "link": "/css-color-picker",
         "text": "CssColorPicker"
+      },
+      {
+        "link": "/check-tags",
+        "text": "CheckTags"
       }
     ]
   },
