@@ -19,8 +19,9 @@ router.beforeEach(async (to, from, next) => {
   }
 
   // 当前平台 登录地址
-  const loginPath = '/login/' + platformStore.getPlatformInfo().code
-
+  const platformInfo  = await platformStore.getPlatformInfo()
+  const loginPath = '/login/' +  platformInfo.code
+  
   // determine whether the user has logged in
   const token = getToken()
 

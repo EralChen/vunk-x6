@@ -12,7 +12,7 @@ export const restFetch = new RestFetch({
 export function withPlatform <T extends AnyFunc> (fn: T) {
   return (async (...args) => {
     const platformStore = usePlatformStore()
-    const platform = platformStore.getPlatformInfo()
+    const platform = await platformStore.getPlatformInfo()
     restFetch.baseURL = platform.url
     return fn(...args)
   }) as T

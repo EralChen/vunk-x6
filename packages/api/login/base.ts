@@ -10,7 +10,6 @@ export const rCaptcha = () => {
 }
 
 export const rUserInfo = () => {
-  console.log(restFetch.baseURL, 'restFetch.baseURL')
   return restFetch.rUserInfo()
 }
 
@@ -19,7 +18,7 @@ export const logout = () => {
   return restFetch.logout().finally(() => {
     removeTenant()
     removeToken()
-    removePlatform()
+    // removePlatform()
     window.location.reload()
   })
 

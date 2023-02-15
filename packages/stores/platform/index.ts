@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { PlatformInfo } from '@skzz-platform/shared/types'
-import { setPlatform } from '@skzz-platform/shared/auth'
+import { setPlatform, getPlatform } from '@skzz-platform/shared/auth'
 import { rDefaultPlatfrom, rPlatfromByCode } from '@skzz-platform/api/platform'
 
 export const usePlatformStore = defineStore('platform', () => {
@@ -12,9 +12,7 @@ export const usePlatformStore = defineStore('platform', () => {
     setPlatform(res.code)
   }
 
-  const getPlatformInfo =  () => {     
-    return platformInfo.value
-  }
+
 
   const setPlatformInfoByCode = async (code?: string) => { 
     
@@ -36,6 +34,13 @@ export const usePlatformStore = defineStore('platform', () => {
 
     }
 
+  }
+
+  const getPlatformInfo = async () => {     
+    if (!platformInfo.value.code) {
+      await setPlatformInfoByCode(getPlatform() || '')
+    }
+    return platformInfo.value
   }
 
   return { 
