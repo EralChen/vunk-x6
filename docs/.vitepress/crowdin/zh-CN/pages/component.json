@@ -21,6 +21,10 @@
       {
         "link": "/app-query-form",
         "text": "AppQueryForm"
+      },
+      {
+        "link": "/app-operations",
+        "text": "AppOperations"
       }
     ]
   },
