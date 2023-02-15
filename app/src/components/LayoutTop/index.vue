@@ -2,6 +2,7 @@
 import DarkSwitch from '_c/DarkSwitch/index.vue'
 import { defineAsyncComponent } from 'vue'
 import { useThemeStore } from '@skzz-platform/stores/theme'
+import { logout } from '@skzz-platform/api/login'
 defineEmits({
   'load': null,
 })
@@ -25,8 +26,11 @@ const { layoutTopClassName } = useThemeStore()
         ></LayoutTopMenu>
       </div>
       
-      
-      <DarkSwitch></DarkSwitch>
+      <div class="pr-l sub-ml-widget-space">
+        <DarkSwitch></DarkSwitch>
+        <ElButton @click="logout">退出</ElButton>
+      </div>
+
     </div>
 
 

@@ -13,8 +13,10 @@ router.beforeEach(async (to, from, next) => {
   const permissionStore = usePermissionStore()
 
   // 获取当前所处平台
-  const platform = to.params.platform as string
-  await platformStore.setPlatformInfoByCode(platform)
+  if (to.path.includes('/login')) {
+    const platform = to.params.platform as string
+    await platformStore.setPlatformInfoByCode(platform)
+  }
 
   // 当前平台 登录地址
   const loginPath = '/login/' + platformStore.getPlatformInfo().code

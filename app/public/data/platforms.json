@@ -2,5 +2,9 @@
   { 
     "code": "scene", 
     "url": "http://t1.zjsophon.com:10000/scene-server"
-  } 
+  },
+  {
+    "code": "capital",
+    "url": "http://t1.zjsophon.com:10000/capital-server"
+  }
 ]
