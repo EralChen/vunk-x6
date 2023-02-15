@@ -1,9 +1,12 @@
 <script lang="tsx" setup>
 import PageX from '_c/PageX/index.vue'
-import { SkAppCard } from '@skzz-platform/components/app-card'
-import { VkDuplexCalc } from '@vunk/core'
-import { SkAppTables, __SkAppTables } from '@skzz-platform/components/app-tables'
-import { SkAppQueryForm, __SkAppQueryForm } from '@skzz-platform/components/app-query-form'
+import { 
+  SkAppCard, SkCheckTags,
+  SkAppTables, __SkAppTables, 
+  SkAppQueryForm, __SkAppQueryForm, 
+} from '@skzz/platform'
+import { NormalObject, setData, VkDuplexCalc } from '@vunk/core'
+import { ref } from 'vue'
 
 const formItems: __SkAppQueryForm.FormItem[] = [
   {
@@ -56,9 +59,18 @@ const formItems: __SkAppQueryForm.FormItem[] = [
     buttonLabel: '查询',
   },
 ]
-const data = [
+const typeOptions = [
   {
-    name: 'cx',
+    label: '全部',
+    value: 'all',
+  },
+  {
+    label: '已发布',
+    value: 'published',
+  },
+  {
+    label: '未发布',
+    value: 'unpublished',
   },
 ]
 const colSource: __SkAppTables.Column[] = [
@@ -80,15 +92,34 @@ const colSource: __SkAppTables.Column[] = [
     },
   },
 ]
+
+
+const formData = ref({
+  type: 'all',
+} as NormalObject)
+
+const data = [
+  ...Array.from({ length: 100 }).map((_, i) => {
+    return {
+      name: `cx${i}`,
+    }
+  }),
+]
+
 </script>
 <template>
   <PageX>
     <SkAppCard :header="'表格'" class="h-100%">
-      <VkDuplexCalc class="plr-page ptb-tab-ptb">
-        <template #one>
-          <SkAppQueryForm :formItems="formItems" :fixes="4"></SkAppQueryForm>
 
-          <div>1111</div>
+      <VkDuplexCalc class="plr-page ptb-main-ptb">
+        <template #one>
+          <SkAppQueryForm :data="formData" @setData="setData(formData, $event)" :formItems="formItems" :fixes="2">
+          </SkAppQueryForm>
+          <div sk-flex="row-between-center" ptb-page>
+            <SkCheckTags v-model="formData.type" :options="typeOptions"></SkCheckTags>
+            <ElButton type="primary">新增</ElButton>
+          </div>
+
         </template>
 
         <SkAppTables class="h-100%" :data="data" :columns="colSource">

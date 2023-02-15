@@ -4,3 +4,11 @@ export const install = installer.install
 export default installer
 
 /* [PLACEHOLDER] components export */
+export * from '@skzz-platform/components/app-card'
+export * from '@skzz-platform/components/app-form'
+export * from '@skzz-platform/components/app-module'
+export * from '@skzz-platform/components/app-query-form'
+export * from '@skzz-platform/components/app-tables'
+export * from '@skzz-platform/components/check-tags'
+export * from '@skzz-platform/components/css-color-picker'
+export * from '@skzz-platform/components/multipage'
