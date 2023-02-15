@@ -38,7 +38,7 @@ export default defineComponent({
         @confirm="crud(item)"
       >
         <template #reference>
-          <el-button :type="'danger'">
+          <el-button :size="'small'" :type="'danger'">
             {{ lables[item] }}
           </el-button>
         </template>
@@ -48,6 +48,7 @@ export default defineComponent({
       <el-button 
         v-else-if="lables[item]" 
         :type="'primary'" 
+        :size="'small'"
         @click="crud(item)"
       >{{ lables[item] }}
       </el-button>
