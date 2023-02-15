@@ -1,7 +1,7 @@
 <template>
   <div class="layout-default-aside-collapse"   @click="layoutStore.asideInfo.menuCollapse = !layoutStore.asideInfo.menuCollapse">
     <el-icon 
-      :size="20"
+      :size="'1.2em'"
     >
       <component :is="layoutStore.asideInfo.menuCollapse ? ArrowRight : ArrowLeft" />
     </el-icon>
