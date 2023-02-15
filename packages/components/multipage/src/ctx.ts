@@ -22,6 +22,10 @@ export const props = {
     type: [String, Object],
     default: '',
   },
+  bodyClass: {
+    type: [String, Object],
+    default: '',
+  },
 }
 
 export const emits = {

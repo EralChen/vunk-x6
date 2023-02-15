@@ -3,6 +3,3 @@ import { restFetch as platformRestFetch } from '@skzz-platform/shared/fetch/plat
 
 publicRestFetch.baseURL = import.meta.env.VITE_BASE_URL + '/data'
 platformRestFetch.DEV = import.meta.env.DEV
-
-
-

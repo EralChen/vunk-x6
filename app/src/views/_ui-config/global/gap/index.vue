@@ -17,16 +17,17 @@ const modules = ref([
       bg-bg-overlay
       class="h-100%"
       tabXClass="pl-form-pl"
+      bodyClass="h-100%"
     >
       <template #base>
-        <div class="ptb-form-ptb plr-form-pl">
+        <ElScrollbar class="ptb-form-ptb plr-form-pl">
           <BaseVue></BaseVue>
-        </div>
+        </ElScrollbar>
       </template>
       <template #name>
-        <div class="ptb-form-ptb plr-form-pl">
+        <ElScrollbar class="ptb-form-ptb plr-form-pl">
           <NameVue></NameVue>
-        </div>
+        </ElScrollbar>
       </template>
 
     </SkMultipage>

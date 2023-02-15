@@ -63,6 +63,8 @@ export default defineComponent({
       v-for="item of visitedModules" 
       :key="item.value"
       v-show="modelValue === item.value"
+      class="sk-multipage-body"
+      :class="bodyClass"
     >
       <slot v-bind="item" :name="item.value"></slot>
     </div>

@@ -17,8 +17,11 @@ export const baseGapOptions = Object.keys(baseGap).map(key => {
 
 export const namedGap = {
   '--gap-page': 'var(--gap-m)',
-  '--gap-form-ptb': '14px',
+  '--gap-main-ptb': 'var(--gap-l)',
+  '--gap-form-ptb': 'var(--gap-main-ptb)',
+  '--gap-tab-ptb': 'var(--gap-main-ptb)',
+
   '--gap-form-pl': '70px',
-  '--gap-tab-ptb': '24px',
   '--gap-tab-space': '70px',
+
 }
