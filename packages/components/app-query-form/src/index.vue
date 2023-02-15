@@ -1,12 +1,12 @@
 <script lang="ts">
 import { props, emits } from './ctx'
-import { computed, defineComponent, ref } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { SkAppForm, _SkAppFormCtx } from '@skzz-platform/components/app-form'
 import { ArrowDown } from '@element-plus/icons-vue'
 import { ElForm, ElIcon } from 'element-plus'
 import { Deferred } from '@vunk/core/shared/utils-promise'
 import { useReady } from '@skzz-platform/composables'
-
+import { useModelComputed } from '@vunk/core/composables'
 export default defineComponent({
   name: 'SkAppQueryForm',
   components: {
@@ -31,13 +31,17 @@ export default defineComponent({
       [fixedFormDef.promise, moreFormDef.promise],
     ))
 
-    const showMore = ref(false)
+    const expand = useModelComputed({
+      default: false,
+      key: 'expand',
+    }, props, emit) 
+
     return {
       formProps,
       formEmits,
       fixedFormItems,
       moreFormItems,
-      showMore,
+      expand,
       fixedFormDef,
       moreFormDef,
       ready,
@@ -70,15 +74,15 @@ export default defineComponent({
 
   <div 
     class="sk-app-query-form__more"
-    @click="showMore = !showMore"
+    @click="expand = !expand"
   >
     <span>
-      {{ showMore ? '收起' : '更多' }}
+      {{ expand ? '收起' : '更多' }}
     </span>
     <ElIcon>
       <ArrowDown class="sk-app-query-form__arrow"
         :class="{
-          'is-reverse': showMore,
+          'is-reverse': expand,
         }"
       ></ArrowDown>
     </ElIcon>
@@ -86,7 +90,7 @@ export default defineComponent({
 
   <ElCollapseTransition>
     <SkAppForm 
-      v-show="showMore"
+      v-show="expand"
       v-bind="formProps" 
       v-on="formEmits"
       :formItems="moreFormItems"

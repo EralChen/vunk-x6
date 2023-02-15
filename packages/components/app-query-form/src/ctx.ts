@@ -9,8 +9,13 @@ export const props = {
     type: Boolean,
     default: true,
   },
+  expand: {
+    type: Boolean,
+    default: undefined,
+  },
 }
 
 export const emits = {
   ..._SkAppFormCtx.emits,
+  'update:expand': (expand: boolean) => typeof expand === 'boolean',
 }
