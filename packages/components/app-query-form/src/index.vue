@@ -26,7 +26,7 @@ export default defineComponent({
       return props.formItems.slice(props.fixes)
     })
     const fixedFormDef = new Deferred<InstanceType<typeof ElForm>>()
-    const moreFormDef = new Deferred<InstanceType<typeof ElForm>>()
+    const moreFormDef = new Deferred<InstanceType<typeof ElForm>|null>()
     const { ready, result: forms } = useReady(Promise.all(
       [fixedFormDef.promise, moreFormDef.promise],
     ))
@@ -34,7 +34,7 @@ export default defineComponent({
     const expand = useModelComputed({
       default: false,
       key: 'expand',
-    }, props, emit) 
+    }, props, emit)
 
     return {
       formProps,
@@ -51,66 +51,55 @@ export default defineComponent({
 })
 </script>
 <template>
-<div class="sk-app-query-form">
-  <div class="sk-app-query-form__fixed">
-    <SkAppForm 
-      v-bind="formProps" 
-      v-on="formEmits"
-      :formItems="fixedFormItems"
-      :elRef="fixedFormDef.resolve"
-    >
-    </SkAppForm>
-    <div>
-      <slot 
-       name="options"
-       v-if="ready" 
-        :forms="forms"
-      >
-      <ElButton type="primary">查询</ElButton>
-    </slot>
+  <div class="sk-app-query-form">
+    <div class="sk-app-query-form__fixed">
+      <SkAppForm v-bind="formProps" v-on="formEmits" :formItems="fixedFormItems" :elRef="fixedFormDef.resolve">
+      </SkAppForm>
+      <div>
+        <slot name="options" v-if="ready" :forms="forms">
+          <ElButton type="primary">查询</ElButton>
+        </slot>
+      </div>
+
     </div>
+    <template v-if="moreFormItems.length">
+      <div class="sk-app-query-form__more" @click="expand = !expand">
+        <span>
+          {{ expand? '收起': '更多' }}
+        </span>
+        <ElIcon>
+          <ArrowDown class="sk-app-query-form__arrow" :class="{
+            'is-reverse': expand,
+          }"></ArrowDown>
+        </ElIcon>
+      </div>
+
+      <ElCollapseTransition>
+        <SkAppForm v-show="expand" v-bind="formProps" v-on="formEmits" :formItems="moreFormItems"
+          :elRef="moreFormDef.resolve">
+        </SkAppForm>
+      </ElCollapseTransition>
+
+    </template>
+
+    <template v-else>
+      {{  moreFormDef.resolve(null)  }}
+    </template>
 
   </div>
-
-  <div 
-    class="sk-app-query-form__more"
-    @click="expand = !expand"
-  >
-    <span>
-      {{ expand ? '收起' : '更多' }}
-    </span>
-    <ElIcon>
-      <ArrowDown class="sk-app-query-form__arrow"
-        :class="{
-          'is-reverse': expand,
-        }"
-      ></ArrowDown>
-    </ElIcon>
-  </div>
-
-  <ElCollapseTransition>
-    <SkAppForm 
-      v-show="expand"
-      v-bind="formProps" 
-      v-on="formEmits"
-      :formItems="moreFormItems"
-      :elRef="moreFormDef.resolve"
-    >
-    </SkAppForm>
-  </ElCollapseTransition>
-
-</div>
 </template>
 <style>
-.sk-app-query-form{
+.sk-app-query-form {
   position: relative;
   padding-bottom: 1em;
 }
-.sk-app-query-form__fixed{
+
+.sk-app-query-form__fixed {
   display: flex;
   justify-content: space-between;
 }
-.sk-app-query-form__more{
+
+.sk-app-query-form__more {
   font-size: var(--f-xxs, 12px);
   color: var(--el-text-color-secondary);
   position: absolute;
@@ -127,17 +116,20 @@ export default defineComponent({
   align-items: center;
 }
 
-.sk-app-query-form__more:hover{
+.sk-app-query-form__more:hover {
   background: var(--el-fill-color);
   color: var(--el-color-primary);
 }
-.sk-app-query-form__more > * + * {
+
+.sk-app-query-form__more>*+* {
   margin-left: var(--gap-xxs, 4px);
 }
-.sk-app-query-form__arrow{
+
+.sk-app-query-form__arrow {
   transition: transform .5s;
 }
-.sk-app-query-form__arrow.is-reverse{
+
+.sk-app-query-form__arrow.is-reverse {
   transform: rotate(-180deg);
 }
 </style>

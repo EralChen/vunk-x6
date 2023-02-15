@@ -54,10 +54,6 @@ const formItems: __SkAppQueryForm.FormItem[] = [
     prop: 'city',
     label: '城市',
   },
-  {
-    templateType: 'VkfButton',
-    buttonLabel: '查询',
-  },
 ]
 const typeOptions = [
   {
@@ -113,7 +109,7 @@ const data = [
 
       <VkDuplexCalc class="plr-page ptb-main-ptb">
         <template #one>
-          <SkAppQueryForm :data="formData" @setData="setData(formData, $event)" :formItems="formItems" :fixes="2">
+          <SkAppQueryForm :fixes="100"  :data="formData" @setData="setData(formData, $event)" :formItems="formItems">
           </SkAppQueryForm>
           <div sk-flex="row-between-center" ptb-page>
             <SkCheckTags v-model="formData.type" :options="typeOptions"></SkCheckTags>
