@@ -1,4 +1,5 @@
 export const baseFontSize = {
+  'font-size': '14px',
   '--f-xxxs': '0.6rem',
   '--f-xxs': '0.7rem',
   '--f-xs': '0.8rem',

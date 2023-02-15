@@ -17,6 +17,9 @@ export const vunkPresetsTheme = {
   }, {} as NormalObject),
 
   baseFontSize: Object.keys(baseFontSize).reduce((a, c) => {
+    if (c === 'font-size') {
+      return a
+    }
     const key = c.replace('--f-', '')
     a[key] = baseFontSize[key]
     return a

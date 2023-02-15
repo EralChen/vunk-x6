@@ -36,9 +36,7 @@ const useFontSizeTheme = () => {
   const themeStore = useThemeStore()
 
   function setFontSize () {
-    if (!themeStore.fontSizeStyles['font-size']) {
-      themeStore.fontSizeStyles['font-size'] = '14px'
-    }
+
     Object.keys(baseFontSize).forEach((_key) => {
       const key = _key as keyof typeof baseFontSize
       if (themeStore.fontSizeStyles[key]) {
