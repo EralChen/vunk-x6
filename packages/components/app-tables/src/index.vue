@@ -1,12 +1,14 @@
 <script lang="tsx">
-import { 
-  props, emits, 
-  createTableV2BindProps, 
+import {
+  props, emits,
+  createTableV2BindProps,
   createPaginationBindProps, createPaginationOnEmits,
 } from './ctx'
 import { defineComponent, computed } from 'vue'
 import { ElTableV2, ElAutoResizer, ElPagination, Column } from 'element-plus'
 import { VkDuplexCalc } from '@vunk/core'
+import { SkAppOperations } from '@skzz-platform/components/app-operations'
+import { pickObject } from '@vunk/core/shared/utils-object'
 export default defineComponent({
   name: 'SkAppTables',
   components: {
@@ -14,38 +16,46 @@ export default defineComponent({
     ElAutoResizer,
     VkDuplexCalc,
     ElPagination,
+
   },
   emits,
   props,
   setup (props, { emit }) {
-    const tableBindProps = createTableV2BindProps(props,  ['columns'])
+    const tableBindProps = createTableV2BindProps(props, ['columns'])
     const paginationBindProps = createPaginationBindProps(props)
     const paginationOnEmits = createPaginationOnEmits(emit)
 
     const columns = computed(() => {
       return props.columns.reduce((a, c) => {
-        
+
         if (c.type) {
-          if (c.type === 'index'){
+          const colProps = pickObject(c, {
+            excludes: ['type'],
+          })
+          if (c.type === 'index') {
             a.push({
-              title: c.title ?? '序号',
-              width: c.width ?? 50,
+              key: 'index',
+              title: '序号',
+              width: 50,
+              ...colProps,
               cellRenderer: ({ rowIndex }) => <span>{`${rowIndex + 1}`}</span>,
             })
           } else if (c.type === 'selection') {
             a.push({
-              type: 'selection',
               width: 60,
-              align: 'center',
+              ...colProps,
             })
           } else if (c.type === 'button') {
             a.push({
-              title: c.title ?? '操作',
-              width: c.width ?? 50,
-              cellRenderer: () => <el-button>操作</el-button>,
+              title: '操作',
+              width: 150,
+              ...colProps,
+              cellRenderer: () => <SkAppOperations
+
+              ></SkAppOperations>,
             })
           }
-          
+
         } else {
           a.push(c)
         }
@@ -66,31 +76,22 @@ export default defineComponent({
     <template #one>
       <ElAutoResizer>
         <template #default="{ height, width }">
-          <ElTableV2 
-            v-bind="tableBindProps"
-            :class="tableClass"
-            :style="tableStyle"
-            :width="tableBindProps.width ?? width"
-            :height="tableBindProps.width ?? height"
-            :columns="columns"
-          >
+          <ElTableV2 v-bind="tableBindProps" :class="tableClass" :style="tableStyle"
+            :width="tableBindProps.width ?? width" :height="tableBindProps.width ?? height" :columns="columns">
             <slot></slot>
           </ElTableV2>
-          </template>
+        </template>
       </ElAutoResizer>
-     
+
     </template>
     <div class="sk-app-tables-pagination-x">
-      <ElPagination
-        v-bind="paginationBindProps"
-        v-on="paginationOnEmits"
-      ></ElPagination>
+      <ElPagination v-bind="paginationBindProps" v-on="paginationOnEmits"></ElPagination>
     </div>
 
   </VkDuplexCalc>
 </template>
 <style>
-.sk-app-tables-pagination-x{
+.sk-app-tables-pagination-x {
   display: flex;
   justify-content: center;
 }

@@ -9,7 +9,8 @@ export const genColumns = (cols: RDatasCol[]) => {
       title: item.label,
       fixed: item.fixed,
       
-
+      type: item.type,
+      
     } as __SkAppTables.Column
   })
 }

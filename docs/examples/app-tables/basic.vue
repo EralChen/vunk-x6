@@ -12,11 +12,12 @@ const colSource:__SkAppTables.Column[] = [
   {
     type: 'index',
     width: 50,
+    flexGrow: 0,
     title: '序号',
   },
   {
     type: 'button',
-    width: 50,
+    width: 150,
     title: '操作',
   },
   {
