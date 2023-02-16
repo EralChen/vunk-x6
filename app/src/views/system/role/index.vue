@@ -9,7 +9,7 @@ import {
 } from '@skzz/platform'
 import { ApiReturnType, NormalObject, setData, VkDuplexCalc } from '@vunk/core'
 import { reactive, ref, watch } from 'vue'
-import { rRoles } from '@skzz-platform/api/system/role'
+import { rRoles, dRoles } from '@skzz-platform/api/system/role'
 import { genColumn } from '@skzz-platform/shared/utils-data'
 type Res = ApiReturnType<typeof rRoles>
 
@@ -41,18 +41,32 @@ function r () {
     tableState.columns = res.columns.reduce((a, c) => {
       if (c.type === 'selection') {
 
-        return a
+  
+      } else if (c.type === 'button') {
+        a.push({
+          title: '操作',
+          width: 150,
+          flexGrow: 1,
+          align: 'center',
+          cellRenderer: ({ rowData }) => <SkAppOperations
+            modules={['d']}
+            onD={ () => { d([rowData.id]) } }
+          ></SkAppOperations>,
+        })
+
       } else {
         a.push(genColumn(c))
       }
   
       return a
     }, [] as __SkAppTables.Column[])
-    console.log(tableState.columns, 'tableState.columns')
-    
+
     tableState.data = res.rows
     tableState.total = res.total
   })
+}
+function d (ids: string[]) {
+  dRoles(ids).then(r)
 }
 </script>
 <template>
