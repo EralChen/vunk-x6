@@ -8,7 +8,7 @@ import * as vueCompiler from '@vue/compiler-sfc'
 import { bold } from 'chalk'
 import { fixPath } from './alias'
 import consola from 'consola'
-
+import { JsxEmit } from 'typescript'
 export async function genTypes (opts = {} as {
   filesRoot: string
   source?: string
@@ -25,6 +25,7 @@ export async function genTypes (opts = {} as {
       emitDeclarationOnly: true,
       noEmitOnError: true,
       strict: false,
+      jsx: JsxEmit.Preserve,
       disableSizeLimit: true,
       esModuleInterop: true,
       outDir: distTypesDir,

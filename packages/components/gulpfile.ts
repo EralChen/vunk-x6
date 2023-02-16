@@ -27,38 +27,38 @@ export default series(
     ),
 
   
-    // taskWithName('bundleComponentsSrcTs', async () => {
+    taskWithName('bundleComponentsSrcTs', async () => {
     
-    //   const getOutputFile = (filePath: string) => path.resolve(
-    //     distDir, 
-    //     `./components/${path.relative(
-    //       path.resolve(__dirname, './'), filePath,
-    //     )
-    //       .replace('.ts', '.js')}`,
-    //   )
+      const getOutputFile = (filePath: string) => path.resolve(
+        distDir, 
+        `./components/${path.relative(
+          path.resolve(__dirname, './'), filePath,
+        )
+          .replace('.ts', '.js')}`,
+      )
     
-    //   const filePaths = await glob('**/src/**/*.ts', {
-    //     cwd: path.resolve(__dirname, './'),
-    //     onlyFiles: true,
-    //     absolute: true,
-    //     ignore: [...filePathIgnore],
-    //   })
+      const filePaths = await glob('**/src/**/*.ts', {
+        cwd: path.resolve(__dirname, './'),
+        onlyFiles: true,
+        absolute: true,
+        ignore: [...filePathIgnore],
+      })
 
-    //   filePaths.forEach(item => {
-    //     rollupFile({
-    //       inputFile: item,
-    //       outputFile: getOutputFile(item),
-    //       format: 'esm',
-    //       external: libExternal,
-    //     })
-    //   })
+      filePaths.forEach(item => {
+        rollupFile({
+          inputFile: item,
+          outputFile: getOutputFile(item),
+          format: 'esm',
+          external: libExternal,
+        })
+      })
 
-    // }),
+    }),
 
 
-    // taskWithName('genTypes', () => genTypes({
-    //   filesRoot: path.resolve(__dirname, './'),
-    // })),
+    taskWithName('genTypes', () => genTypes({
+      filesRoot: path.resolve(__dirname, './'),
+    })),
   
   ),
 
