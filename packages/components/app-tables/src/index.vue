@@ -62,6 +62,7 @@ export default defineComponent({
         return a
       }, [] as Column[])
     })
+    
     // currentPage 通过 start 和 pageSize 计算
     const currentPage = computed(() => {
       return Math.floor(props.start / props.pageSize) + 1
@@ -101,7 +102,7 @@ export default defineComponent({
         v-bind="paginationBindProps" 
         v-on="paginationOnEmits"
         :currentPage="currentPage"
-        @update:currentPage="updateStart"
+        @update:current-page="updateStart"
       ></ElPagination>
     </div>
 

@@ -7,11 +7,11 @@ import {
   SkAppOperations,
   Pagination,
 } from '@skzz/platform'
-import { NormalObject, setData, VkDuplexCalc } from '@vunk/core'
-import { ref } from 'vue'
+import { ApiReturnType, NormalObject, setData, VkDuplexCalc } from '@vunk/core'
+import { reactive, ref, watch } from 'vue'
 import { FixedDir } from 'element-plus/es/components/table-v2/src/constants'
 import { rRoles } from '@skzz-platform/api/system/role'
-
+type Res = ApiReturnType<typeof rRoles>
 
 const formItems: __SkAppQueryForm.FormItem[] = [
   {
@@ -19,61 +19,8 @@ const formItems: __SkAppQueryForm.FormItem[] = [
     prop: 'name',
     label: '姓名',
   },
-  {
-    templateType: 'VkfInput',
-    prop: 'age',
-    label: '年龄',
-  },
-  {
-    templateType: 'VkfSelect',
-    prop: 'city',
-    label: '城市',
-  },
-  {
-    templateType: 'VkfInput',
-    prop: 'name',
-    label: '姓名',
-  },
-  {
-    templateType: 'VkfInput',
-    prop: 'age',
-    label: '年龄',
-  },
-  {
-    templateType: 'VkfSelect',
-    prop: 'city',
-    label: '城市',
-  },
-  {
-    templateType: 'VkfInput',
-    prop: 'name',
-    label: '姓名',
-  },
-  {
-    templateType: 'VkfInput',
-    prop: 'age',
-    label: '年龄',
-  },
-  {
-    templateType: 'VkfSelect',
-    prop: 'city',
-    label: '城市',
-  },
 ]
-const typeOptions = [
-  {
-    label: '全部',
-    value: 'all',
-  },
-  {
-    label: '已发布',
-    value: 'published',
-  },
-  {
-    label: '未发布',
-    value: 'unpublished',
-  },
-]
+
 const colSource: __SkAppTables.Column[] = [
   {
     type: 'index',
@@ -99,26 +46,25 @@ const colSource: __SkAppTables.Column[] = [
   },
 ]
 
-
-const formData = ref({
-  type: 'all',
-} as NormalObject)
-
+const formData = ref({} as NormalObject)
 const pagination = ref<Pagination>({
   pageSize: 10,
   start: 0,
 })
+const tableState = reactive({
+  data: [] as Res['rows'],
+  total: 0,
+})
 
-const data = [
-  ...Array.from({ length: 100 }).map((_, i) => {
-    return {
-      name: `cx${i}`,
-    }
-  }),
-]
+watch(pagination, r, { deep: true , immediate: true })
+// watch(formData, r, { deep: true , immediate: true })
 
-rRoles({}, pagination.value)
-
+function r () {
+  rRoles(formData.value, pagination.value).then(res => {
+    tableState.data = res.rows
+    tableState.total = res.total
+  })
+}
 </script>
 <template>
   <PageX>
@@ -129,20 +75,27 @@ rRoles({}, pagination.value)
           @setData="setData(formData, $event)" 
           :formItems="formItems"
         >
+          <template #options>
+            <ElButton type="primary" @click="r">查询</ElButton>
+            <ElButton type="primary">新增</ElButton>
+            
+          </template>
         </SkAppQueryForm>
-        <div sk-flex="row-between-center" ptb-page>
-          <SkCheckTags v-model="formData.type" :options="typeOptions"></SkCheckTags>
-          <ElButton type="primary">新增</ElButton>
-        </div>
+        <!-- <div sk-flex="row-between-center" ptb-page> -->
+          <!-- <SkCheckTags v-model="formData.type" :options="typeOptions"></SkCheckTags> -->
+         
+        <!-- </div> -->
 
       </template>
 
       <SkAppTables 
-        
         class="h-100%" 
-        :data="data"
+        :data="tableState.data"
         :columns="colSource"
-        :total="100"
+        :total="tableState.total"
+
+        v-model:start="pagination.start"
+        v-model:pageSize="pagination.pageSize"
       >
       </SkAppTables>
     </VkDuplexCalc>

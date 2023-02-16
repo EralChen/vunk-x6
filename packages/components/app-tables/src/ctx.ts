@@ -1,6 +1,10 @@
 import { bindPropsFactory, onEmitsFactory } from '@vunk/core/shared/utils-vue'
 import { pickObject } from '@vunk/core/shared/utils-object'
-import { tableV2Props as _tableV2Props, paginationProps, paginationEmits } from 'element-plus'
+import { 
+  tableV2Props as _tableV2Props, 
+  paginationProps as _paginationProps,
+  paginationEmits as _paginationEmits,
+} from 'element-plus'
 
 const tableV2Props = pickObject({
   ..._tableV2Props,
@@ -16,15 +20,23 @@ const tableV2Props = pickObject({
   excludes: ['style', 'class'],
 })
 
+const paginationProps = pickObject(
+  _paginationProps,
+  {
+    excludes: ['currentPage'],
+  },
+)
+
+const paginationEmits = pickObject(
+  _paginationEmits,
+  {
+    excludes: ['update:current-page'],
+  },
+)
+
 export const props = {
   ...tableV2Props,
-  ...pickObject(
-    paginationProps,
-    {
-      excludes: ['currentPage'],
-    },
-  ),
-
+  ...paginationProps,
   tableClass: {
     type: [String, Object, Array],
     default: 'sk-app-tables-table',
@@ -54,9 +66,7 @@ export const createTableV2BindProps = bindPropsFactory(tableV2Props)
 export const createPaginationBindProps = bindPropsFactory(paginationProps)
 
 export const emits = {
-  ...pickObject(paginationEmits, {
-    excludes: ['update:current-page'],
-  }),
+  ...paginationEmits,
   'update:start': (val: number) => typeof val === 'number',
 }
 export const createPaginationOnEmits = onEmitsFactory(paginationEmits)

@@ -23,14 +23,16 @@ export const rRoles = (
   query: NormalObject = {}, 
   pagination?: Pagination,
 ) => {
-  return request<QueryRData<Role>>({
+  return request<[
+    QueryRData<Role>
+  ]>({
     method: 'POST',
     url: '/core/busi/query',
     data: {
       menuId: 'role',
       modelId: 'role',
       dir: 'system',
-      datasetIds: ['1', 'btn'],
+      datasetIds: ['1'],
       condition: {
         1: {
           ...query,
@@ -39,6 +41,6 @@ export const rRoles = (
       },
     },
   } as RestFetchQueryOptions).then(res => {
-    return res.datas
+    return res.datas[0]
   })
 }

@@ -54,7 +54,11 @@ export default defineComponent({
 })
 </script>
 <template>
-  <div class="sk-app-query-form">
+  <div class="sk-app-query-form"
+    :class="{
+      'has-more': moreFormItems.length,
+    }"
+  >
     <div class="sk-app-query-form__fixed">
       <SkAppForm v-bind="formProps" v-on="formEmits" :formItems="fixedFormItems" :elRef="fixedFormDef.resolve">
       </SkAppForm>
@@ -94,6 +98,8 @@ export default defineComponent({
 <style>
 .sk-app-query-form {
   position: relative;
+}
+.sk-app-query-form.has-more {
   padding-bottom: 1em;
 }
 
