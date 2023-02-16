@@ -110,29 +110,25 @@ const data = [
 </script>
 <template>
   <PageX>
+    <VkDuplexCalc class="plr-page ptb-main-ptb">
+      <template #one>
+        <SkAppQueryForm :data="formData" @setData="setData(formData, $event)" :formItems="formItems">
+        </SkAppQueryForm>
+        <div sk-flex="row-between-center" ptb-page>
+          <SkCheckTags v-model="formData.type" :options="typeOptions"></SkCheckTags>
+          <ElButton type="primary">新增</ElButton>
+        </div>
 
+      </template>
 
-      <VkDuplexCalc class="plr-page ptb-main-ptb">
-        <template #one>
-          <SkAppQueryForm :fixes="2"  :data="formData" @setData="setData(formData, $event)" :formItems="formItems">
-          </SkAppQueryForm>
-          <div sk-flex="row-between-center" ptb-page>
-            <SkCheckTags v-model="formData.type" :options="typeOptions"></SkCheckTags>
-            <ElButton type="primary">新增</ElButton>
-          </div>
-
-        </template>
-
-        <SkAppTables 
-          
-          class="h-100%" 
-          :data="data"
-          :columns="colSource"
-          :total="100"
-        >
-        </SkAppTables>
-      </VkDuplexCalc>
-
-
+      <SkAppTables 
+        
+        class="h-100%" 
+        :data="data"
+        :columns="colSource"
+        :total="100"
+      >
+      </SkAppTables>
+    </VkDuplexCalc>
   </PageX>
 </template>
