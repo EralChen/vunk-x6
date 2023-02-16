@@ -1,4 +1,7 @@
-import type { Column } from 'element-plus'
-export {
-  Column,
+import type { Column as _Column } from 'element-plus'
+
+export interface Column extends _Column {
+  type?: 'selection' | 'button' | 'index'
+
 }
+

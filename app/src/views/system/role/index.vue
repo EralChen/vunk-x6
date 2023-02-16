@@ -5,11 +5,12 @@ import {
   SkAppTables, __SkAppTables, 
   SkAppQueryForm, __SkAppQueryForm, 
   SkAppOperations,
+  Pagination,
 } from '@skzz/platform'
 import { NormalObject, setData, VkDuplexCalc } from '@vunk/core'
 import { ref } from 'vue'
 import { FixedDir } from 'element-plus/es/components/table-v2/src/constants'
-
+import { rRoles } from '@skzz-platform/api/system/role'
 
 
 const formItems: __SkAppQueryForm.FormItem[] = [
@@ -75,6 +76,10 @@ const typeOptions = [
 ]
 const colSource: __SkAppTables.Column[] = [
   {
+    type: 'index',
+    width: 50,
+  },
+  {
     key: 'name',
     dataKey: 'name',
     width: 100,
@@ -99,6 +104,10 @@ const formData = ref({
   type: 'all',
 } as NormalObject)
 
+const pagination = ref<Pagination>({
+  currentPage: 1,
+  pageSize: 10,
+})
 const data = [
   ...Array.from({ length: 100 }).map((_, i) => {
     return {
@@ -106,6 +115,8 @@ const data = [
     }
   }),
 ]
+
+rRoles({}, pagination.value)
 
 </script>
 <template>

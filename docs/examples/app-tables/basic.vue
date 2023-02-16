@@ -2,11 +2,23 @@
 import { SkAppTables, __SkAppTables } from '@skzz-platform/components/app-tables'
 
 const data = [
-  {
-    name: 'cx',
-  },
+  ...Array.from({ length: 100 }).map((_, i) => {
+    return {
+      name: `name-${i}`,
+    }
+  }),
 ]
 const colSource:__SkAppTables.Column[] = [
+  {
+    type: 'index',
+    width: 50,
+    title: '序号',
+  },
+  {
+    type: 'button',
+    width: 50,
+    title: '操作',
+  },
   {
     key: 'name',
     dataKey: 'name',

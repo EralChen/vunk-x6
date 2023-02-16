@@ -1,11 +1,11 @@
-<script lang="ts">
+<script lang="tsx">
 import { 
   props, emits, 
   createTableV2BindProps, 
   createPaginationBindProps, createPaginationOnEmits,
 } from './ctx'
-import { defineComponent } from 'vue'
-import { ElTableV2, ElAutoResizer, ElPagination } from 'element-plus'
+import { defineComponent, computed } from 'vue'
+import { ElTableV2, ElAutoResizer, ElPagination, Column } from 'element-plus'
 import { VkDuplexCalc } from '@vunk/core'
 export default defineComponent({
   name: 'SkAppTables',
@@ -18,13 +18,45 @@ export default defineComponent({
   emits,
   props,
   setup (props, { emit }) {
-    const tableBindProps = createTableV2BindProps(props)
+    const tableBindProps = createTableV2BindProps(props,  ['columns'])
     const paginationBindProps = createPaginationBindProps(props)
     const paginationOnEmits = createPaginationOnEmits(emit)
+
+    const columns = computed(() => {
+      return props.columns.reduce((a, c) => {
+        
+        if (c.type) {
+          if (c.type === 'index'){
+            a.push({
+              title: c.title ?? '序号',
+              width: c.width ?? 50,
+              cellRenderer: ({ rowIndex }) => <span>{`${rowIndex + 1}`}</span>,
+            })
+          } else if (c.type === 'selection') {
+            a.push({
+              type: 'selection',
+              width: 60,
+              align: 'center',
+            })
+          } else if (c.type === 'button') {
+            a.push({
+              title: c.title ?? '操作',
+              width: c.width ?? 50,
+              cellRenderer: () => <el-button>操作</el-button>,
+            })
+          }
+          
+        } else {
+          a.push(c)
+        }
+        return a
+      }, [] as Column[])
+    })
     return {
       tableBindProps,
       paginationBindProps,
       paginationOnEmits,
+      columns,
     }
   },
 })
@@ -40,6 +72,7 @@ export default defineComponent({
             :style="tableStyle"
             :width="tableBindProps.width ?? width"
             :height="tableBindProps.width ?? height"
+            :columns="columns"
           >
             <slot></slot>
           </ElTableV2>

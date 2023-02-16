@@ -32,6 +32,7 @@ export const props = {
     type: String,
     default: 'total, sizes, prev, pager, next, jumper',
   },
+
 }
 
 export const createTableV2BindProps = bindPropsFactory(tableV2Props)
