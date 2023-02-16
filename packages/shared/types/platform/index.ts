@@ -4,6 +4,7 @@ export interface PlatformInfo {
 }
 
 export interface Pagination {
-  currentPage: number
   pageSize: number
+  start: number
+
 }

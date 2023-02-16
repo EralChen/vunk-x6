@@ -105,9 +105,10 @@ const formData = ref({
 } as NormalObject)
 
 const pagination = ref<Pagination>({
-  currentPage: 1,
   pageSize: 10,
+  start: 0,
 })
+
 const data = [
   ...Array.from({ length: 100 }).map((_, i) => {
     return {
@@ -123,7 +124,11 @@ rRoles({}, pagination.value)
   <PageX>
     <VkDuplexCalc class="plr-page ptb-main-ptb">
       <template #one>
-        <SkAppQueryForm :data="formData" @setData="setData(formData, $event)" :formItems="formItems">
+        <SkAppQueryForm 
+          :data="formData" 
+          @setData="setData(formData, $event)" 
+          :formItems="formItems"
+        >
         </SkAppQueryForm>
         <div sk-flex="row-between-center" ptb-page>
           <SkCheckTags v-model="formData.type" :options="typeOptions"></SkCheckTags>

@@ -18,7 +18,12 @@ const tableV2Props = pickObject({
 
 export const props = {
   ...tableV2Props,
-  ...paginationProps,
+  ...pickObject(
+    paginationProps,
+    {
+      excludes: ['currentPage'],
+    },
+  ),
 
   tableClass: {
     type: [String, Object, Array],
@@ -33,12 +38,25 @@ export const props = {
     default: 'total, sizes, prev, pager, next, jumper',
   },
 
+  start: {
+    type: Number,
+    default: 0,
+  },
+  
+  pageSize: {
+    type: Number,
+    default: 10,
+  },
+
 }
 
 export const createTableV2BindProps = bindPropsFactory(tableV2Props)
 export const createPaginationBindProps = bindPropsFactory(paginationProps)
 
 export const emits = {
-  ...paginationEmits,
+  ...pickObject(paginationEmits, {
+    excludes: ['update:current-page'],
+  }),
+  'update:start': (val: number) => typeof val === 'number',
 }
 export const createPaginationOnEmits = onEmitsFactory(paginationEmits)

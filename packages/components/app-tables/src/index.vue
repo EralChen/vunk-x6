@@ -62,11 +62,23 @@ export default defineComponent({
         return a
       }, [] as Column[])
     })
+    // currentPage 通过 start 和 pageSize 计算
+    const currentPage = computed(() => {
+      return Math.floor(props.start / props.pageSize) + 1
+    })
+
+    // updateStart 通过 currentPage 和 pageSize 计算
+    const updateStart = (val: number) => {
+      emit('update:start', (val - 1) * props.pageSize)
+    }
+
     return {
       tableBindProps,
       paginationBindProps,
       paginationOnEmits,
       columns,
+      currentPage,
+      updateStart,
     }
   },
 })
@@ -85,7 +97,12 @@ export default defineComponent({
 
     </template>
     <div class="sk-app-tables-pagination-x">
-      <ElPagination v-bind="paginationBindProps" v-on="paginationOnEmits"></ElPagination>
+      <ElPagination 
+        v-bind="paginationBindProps" 
+        v-on="paginationOnEmits"
+        :currentPage="currentPage"
+        @update:currentPage="updateStart"
+      ></ElPagination>
     </div>
 
   </VkDuplexCalc>
