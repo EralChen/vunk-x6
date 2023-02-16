@@ -74,8 +74,10 @@ export const dRoles = (ids: string[]) => {
   })
 }
 
-export const cRole = (data: {
+export const cuRole = (data: {
+  id?: string;
   name: string;
+  roleId: string;
 }) => {
   return request({
     method: 'POST',
@@ -90,13 +92,13 @@ export const cRole = (data: {
           rows: [
             {
               ...data,
-              op: RestFetchOp.c,
+              op: data.id ? RestFetchOp.u : RestFetchOp.c,
             },
           ],
         },
       ],
     },
   } as RestFetchSaveOptions, {
-    msg: '创建角色成功',
+    msg: data.id ? '修改角色成功' : '新增角色成功',
   })
 }

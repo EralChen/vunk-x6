@@ -8,12 +8,12 @@ import {
 } from '@skzz/platform'
 import { ApiReturnType, NormalObject, setData, VkDuplexCalc } from '@vunk/core'
 import { reactive, ref, watch } from 'vue'
-import { rRoles, dRoles } from '@skzz-platform/api/system/role'
+import { rRoles, dRoles, cuRole } from '@skzz-platform/api/system/role'
 import { genColumn } from '@skzz-platform/shared/utils-data'
-import FormVue from './form.vue'
-
+import FormVue, { Data as FormVueData } from './form.vue'
 type Res = ApiReturnType<typeof rRoles>
 
+/* query */
 const queryItems: __SkAppQueryForm.FormItem[] = [
   {
     templateType: 'VkfInput',
@@ -22,48 +22,53 @@ const queryItems: __SkAppQueryForm.FormItem[] = [
   },
 ]
 const queryData = ref({} as NormalObject)
+
 const pagination = ref<Pagination>({
   pageSize: 10,
   start: 0,
 })
+watch(pagination, r, { deep: true , immediate: true })
+// watch(queryData, r, { deep: true , immediate: true })
+/* query end */
+
 const tableState = reactive({
   columns: [] as  __SkAppTables.Column[],
   data: [] as Res['rows'],
   total: 0,
 })
-watch(pagination, r, { deep: true , immediate: true })
-// watch(formData, r, { deep: true , immediate: true })
 
 const cuIState = reactive({
   visible: false,
-  formData: {} as NormalObject,
+  formData: {} as Partial<FormVueData>,
 })
 
 function r () {
   rRoles(queryData.value, pagination.value).then(res => {
-    tableState.columns = res.columns.reduce((a, c) => {
-      if (c.type === 'selection') {
+    if (!tableState.columns.length) {
+      tableState.columns = res.columns.reduce((a, c) => {
+        if (c.type === 'selection') {
 
   
-      } else if (c.type === 'button') {
-        a.push({
-          title: '操作',
-          width: 150,
-          flexGrow: 1,
-          align: 'center',
-          cellRenderer: ({ rowData }) => <SkAppOperations
-            modules={['d']}
-            onD={ () => { d([rowData.id]) } }
-          ></SkAppOperations>,
-        })
+        } else if (c.type === 'button') {
+          a.push({
+            title: '操作',
+            width: 150,
+            flexGrow: 1,
+            align: 'center',
+            cellRenderer: ({ rowData }) => <SkAppOperations
+              modules={['u','d']}
+              onD={ () => { d([rowData.id]) } }
+              onU={ () => { preu(rowData) } }
+            ></SkAppOperations>,
+          })
 
-      } else {
-        a.push(genColumn(c))
-      }
+        } else {
+          a.push(genColumn(c))
+        }
   
-      return a
-    }, [] as __SkAppTables.Column[])
-
+        return a
+      }, [] as __SkAppTables.Column[])
+    }
     tableState.data = res.rows
     tableState.total = res.total
   })
@@ -74,6 +79,15 @@ function d (ids: string[]) {
 function prec () {
   cuIState.visible = true
   cuIState.formData = {}
+}
+function preu (data: FormVueData) {
+  cuIState.visible = true
+  cuIState.formData = {...data}
+}
+function cuI () {
+  cuRole(cuIState.formData as FormVueData).then(r).then(() => {
+    cuIState.visible = false
+  })
 }
 
 </script>
@@ -109,6 +123,7 @@ function prec () {
       <FormVue
         :data="cuIState.formData"
         @setData="setData(cuIState.formData, $event)"
+        @submit="cuI"
       ></FormVue>
     </ElDialog>
 
