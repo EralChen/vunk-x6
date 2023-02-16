@@ -24,7 +24,7 @@ importers:
       '@vueuse/core': ^9.12.0
       '@vunk/core': 0.0.0-alpha.70
       '@vunk/form': 0.0.1-alpha.43
-      '@vunk/skzz': 0.0.0-alpha.60
+      '@vunk/skzz': 0.0.0-alpha.61
       chroma-js: ^2.4.2
       consola: ^2.15.3
       element-plus: npm:element-plus@latest
@@ -56,7 +56,7 @@ importers:
       '@vueuse/core': registry.npmmirror.com/@vueuse/core/9.12.0_vue@3.2.45
       '@vunk/core': 0.0.0-alpha.70
       '@vunk/form': 0.0.1-alpha.43
-      '@vunk/skzz': 0.0.0-alpha.60
+      '@vunk/skzz': 0.0.0-alpha.61
       chroma-js: 2.4.2
       element-plus: 2.2.30_vue@3.2.45
       vue: 3.2.45
@@ -3197,8 +3197,8 @@ packages:
       '@vunk/core': 0.0.0-alpha.70
     dev: false
 
-  /@vunk/skzz/0.0.0-alpha.60:
-    resolution: {integrity: sha512-dPXeKJpOWBdA7kG/jQ6D37OLCazx7dQHpSyIuO28GNN+5GkS5zlXlyKHg3SqELdjVZjujqQVlfGZplC8G1LZVA==}
+  /@vunk/skzz/0.0.0-alpha.61:
+    resolution: {integrity: sha512-Axyjw8YS9qT02c64u0fpbk4zw6gqvyERIYhFcAw1Ohi527LOlwAzc968Vl8SBx0SAqDNgJIJfmfaZEyfDUHGyw==}
     dev: false
 
   /acorn-jsx/5.3.2_acorn@8.8.1:

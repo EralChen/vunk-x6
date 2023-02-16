@@ -44,6 +44,7 @@ export default defineComponent({
             a.push({
               width: 60,
               ...colProps,
+              
             })
           } else if (c.type === 'button') {
             a.push({
@@ -89,7 +90,7 @@ export default defineComponent({
     <template #one>
       <ElAutoResizer>
         <template #default="{ height, width }">
-          <ElTableV2 v-bind="tableBindProps" :class="tableClass" :style="tableStyle"
+          <ElTableV2  v-bind="tableBindProps" :class="tableClass" :style="tableStyle"
             :width="tableBindProps.width ?? width" :height="tableBindProps.width ?? height" :columns="columns">
             <slot></slot>
           </ElTableV2>

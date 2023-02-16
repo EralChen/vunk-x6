@@ -9,8 +9,8 @@ import {
 } from '@skzz/platform'
 import { ApiReturnType, NormalObject, setData, VkDuplexCalc } from '@vunk/core'
 import { reactive, ref, watch } from 'vue'
-import { FixedDir } from 'element-plus/es/components/table-v2/src/constants'
 import { rRoles } from '@skzz-platform/api/system/role'
+import { genColumn } from '@skzz-platform/shared/utils-data'
 type Res = ApiReturnType<typeof rRoles>
 
 const formItems: __SkAppQueryForm.FormItem[] = [
@@ -21,30 +21,6 @@ const formItems: __SkAppQueryForm.FormItem[] = [
   },
 ]
 
-const colSource: __SkAppTables.Column[] = [
-  {
-    type: 'index',
-    width: 50,
-  },
-  {
-    key: 'name',
-    dataKey: 'name',
-    width: 100,
-    title: '姓名',
-  },
-  {
-    key: 'operations',
-    title: '操作',
-    width: 260,
-    fixed: FixedDir.RIGHT,
-    cellRenderer: () => {
-      return <SkAppOperations 
-        modules={[ 'r', 'u', 'd']}
-
-      ></SkAppOperations>
-    },
-  },
-]
 
 const formData = ref({} as NormalObject)
 const pagination = ref<Pagination>({
@@ -52,6 +28,7 @@ const pagination = ref<Pagination>({
   start: 0,
 })
 const tableState = reactive({
+  columns: [] as  __SkAppTables.Column[],
   data: [] as Res['rows'],
   total: 0,
 })
@@ -61,6 +38,18 @@ watch(pagination, r, { deep: true , immediate: true })
 
 function r () {
   rRoles(formData.value, pagination.value).then(res => {
+    tableState.columns = res.columns.reduce((a, c) => {
+      if (c.type === 'selection') {
+
+        return a
+      } else {
+        a.push(genColumn(c))
+      }
+  
+      return a
+    }, [] as __SkAppTables.Column[])
+    console.log(tableState.columns, 'tableState.columns')
+    
     tableState.data = res.rows
     tableState.total = res.total
   })
@@ -90,10 +79,7 @@ function r () {
 
       <SkAppTables 
         class="h-100%" 
-        :data="tableState.data"
-        :columns="colSource"
-        :total="tableState.total"
-
+        v-bind="tableState"
         v-model:start="pagination.start"
         v-model:pageSize="pagination.pageSize"
       >
