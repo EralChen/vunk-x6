@@ -2,7 +2,6 @@ import { restFetch } from '@skzz-platform/shared/fetch/platform'
 import { setToken, removeToken, removeTenant, getApplication } from '@vunk/skzz/shared/utils-auth'
 import { FirstParameter } from '@vunk/core'
 import { sleep } from '@vunk/core/shared/utils-promise'
-import { removePlatform } from '@skzz-platform/shared/auth'
 export const rCaptcha = () => {
   return restFetch.captcha().then(res => {
     return res.datas
@@ -39,6 +38,9 @@ export const loginByPassword = (data: FirstParameter<typeof restFetch.login>) =>
 
 export const rMenus = async (client?: string) => {
   return restFetch.rMenus(client).then(res => {
-    return res
+    return res.map(item => ({
+      ...item,
+      title: item.name,
+    }))
   })
 }

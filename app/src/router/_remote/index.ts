@@ -3,6 +3,7 @@ import Layout from '@/layouts/default/index.vue'
 
 export const createRemoteRoutes = () => { 
   return {
+
     '/dashboard': {
       component: () => import('@/views/home/index.vue'),
       meta: {
@@ -16,6 +17,12 @@ export const createRemoteRoutes = () => {
     },
     '/system': {
       component: Layout,
+      meta: {
+        header: true,
+      },
+    },
+    '/system/role': {
+      component: () => import('@/views/system/role/index.vue'),
     },
     '/system/menu': {
       component: () => import('@/views/system/menu/index.vue'),

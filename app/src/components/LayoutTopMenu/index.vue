@@ -56,6 +56,7 @@ onMounted(() => {
 })
 /* set base view /> */
 
+console.log(permissionStore.routes)
 
 </script>
 <template>
