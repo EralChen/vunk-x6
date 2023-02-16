@@ -1,7 +1,6 @@
 <script lang="tsx" setup>
 import PageX from '_c/PageX/index.vue'
 import { 
-  SkAppCard, SkCheckTags,
   SkAppTables, __SkAppTables, 
   SkAppQueryForm, __SkAppQueryForm, 
   SkAppOperations,
@@ -11,18 +10,18 @@ import { ApiReturnType, NormalObject, setData, VkDuplexCalc } from '@vunk/core'
 import { reactive, ref, watch } from 'vue'
 import { rRoles, dRoles } from '@skzz-platform/api/system/role'
 import { genColumn } from '@skzz-platform/shared/utils-data'
+import FormVue from './form.vue'
+
 type Res = ApiReturnType<typeof rRoles>
 
-const formItems: __SkAppQueryForm.FormItem[] = [
+const queryItems: __SkAppQueryForm.FormItem[] = [
   {
     templateType: 'VkfInput',
     prop: 'name',
     label: '姓名',
   },
 ]
-
-
-const formData = ref({} as NormalObject)
+const queryData = ref({} as NormalObject)
 const pagination = ref<Pagination>({
   pageSize: 10,
   start: 0,
@@ -32,12 +31,16 @@ const tableState = reactive({
   data: [] as Res['rows'],
   total: 0,
 })
-
 watch(pagination, r, { deep: true , immediate: true })
 // watch(formData, r, { deep: true , immediate: true })
 
+const cuIState = reactive({
+  visible: false,
+  formData: {} as NormalObject,
+})
+
 function r () {
-  rRoles(formData.value, pagination.value).then(res => {
+  rRoles(queryData.value, pagination.value).then(res => {
     tableState.columns = res.columns.reduce((a, c) => {
       if (c.type === 'selection') {
 
@@ -68,27 +71,29 @@ function r () {
 function d (ids: string[]) {
   dRoles(ids).then(r)
 }
+function prec () {
+  cuIState.visible = true
+  cuIState.formData = {}
+}
+
 </script>
 <template>
   <PageX>
     <VkDuplexCalc class="plr-page ptb-main-ptb">
       <template #one>
         <SkAppQueryForm 
-          :data="formData" 
-          @setData="setData(formData, $event)" 
-          :formItems="formItems"
+          :data="queryData" 
+          @setData="setData(queryData, $event)" 
+          :formItems="queryItems"
         >
           <template #options>
             <ElButton type="primary" @click="r">查询</ElButton>
-            <ElButton type="primary">新增</ElButton>
+            <ElButton type="primary" 
+              @click="prec"
+            >新增</ElButton>
             
           </template>
         </SkAppQueryForm>
-        <!-- <div sk-flex="row-between-center" ptb-page> -->
-          <!-- <SkCheckTags v-model="formData.type" :options="typeOptions"></SkCheckTags> -->
-         
-        <!-- </div> -->
-
       </template>
 
       <SkAppTables 
@@ -99,5 +104,13 @@ function d (ids: string[]) {
       >
       </SkAppTables>
     </VkDuplexCalc>
+
+    <ElDialog v-model="cuIState.visible">
+      <FormVue
+        :data="cuIState.formData"
+        @setData="setData(cuIState.formData, $event)"
+      ></FormVue>
+    </ElDialog>
+
   </PageX>
 </template>

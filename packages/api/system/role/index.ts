@@ -73,3 +73,30 @@ export const dRoles = (ids: string[]) => {
     msg: '删除角色成功',
   })
 }
+
+export const cRole = (data: {
+  name: string;
+}) => {
+  return request({
+    method: 'POST',
+    url: '/core/busi/save',
+    data: {
+      menuId: 'role',
+      modelId: 'role',
+      dir: 'system',
+      datas: [
+        {
+          datasetId: '1',
+          rows: [
+            {
+              ...data,
+              op: RestFetchOp.c,
+            },
+          ],
+        },
+      ],
+    },
+  } as RestFetchSaveOptions, {
+    msg: '创建角色成功',
+  })
+}

@@ -4,7 +4,7 @@ import {
   createTableV2BindProps,
   createPaginationBindProps, createPaginationOnEmits,
 } from './ctx'
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, watch } from 'vue'
 import { ElTableV2, ElAutoResizer, ElPagination, Column } from 'element-plus'
 import { VkDuplexCalc } from '@vunk/core'
 import { SkAppOperations } from '@skzz-platform/components/app-operations'
@@ -74,6 +74,11 @@ export default defineComponent({
       emit('update:start', (val - 1) * props.pageSize)
     }
 
+    // 调整 props.pageSize 时，更新 start
+    watch(() => props.pageSize, () => {
+      updateStart(currentPage.value)
+    })
+
     return {
       tableBindProps,
       paginationBindProps,
@@ -104,6 +109,7 @@ export default defineComponent({
         v-on="paginationOnEmits"
         :currentPage="currentPage"
         @update:current-page="updateStart"
+        @current-change="updateStart"
       ></ElPagination>
     </div>
 
