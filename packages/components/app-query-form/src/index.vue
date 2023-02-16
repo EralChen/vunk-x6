@@ -23,7 +23,10 @@ export default defineComponent({
       return props.formItems.slice(0, props.fixes)
     })
     const moreFormItems = computed(() => {
-      return props.formItems.slice(props.fixes)
+      if (props.fixes) {
+        return props.formItems.slice(props.fixes)
+      }
+      return []
     })
     const fixedFormDef = new Deferred<InstanceType<typeof ElForm>>()
     const moreFormDef = new Deferred<InstanceType<typeof ElForm>|null>()

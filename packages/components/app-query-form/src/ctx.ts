@@ -3,7 +3,7 @@ export const props = {
   ..._SkAppFormCtx.props,
   fixes: {
     type: Number,
-    default: 3,
+    default: undefined,
   },
   inline: {
     type: Boolean,
