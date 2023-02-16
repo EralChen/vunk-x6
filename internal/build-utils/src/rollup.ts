@@ -7,7 +7,7 @@ import { nodeResolve } from '@rollup/plugin-node-resolve'
 import esbuild from 'rollup-plugin-esbuild'
 import { libExternal } from '@lib-env/build-constants'
 import commonjs from '@rollup/plugin-commonjs'
-
+import vueJsx from 'unplugin-vue-jsx/rollup'
 export function rollupComponents (opts: {
   files: string[],
   entry: (file: string) => string,
@@ -22,13 +22,16 @@ export function rollupComponents (opts: {
         css({
           output: 'index.css',
         }),
+        
         vue({
           preprocessStyles: false,
         }),
+        vueJsx(),
         nodeResolve({
           extensions: ['.json', '.js',  '.ts'],
         }),
         esbuild(),
+        commonjs(),
       ],
       external: [
         ...libExternal, 
