@@ -42,6 +42,18 @@ const cuIState = reactive({
   formData: {} as Partial<FormVueData>,
 })
 
+const operationsCol: __SkAppTables.Column = {
+  title: '操作',
+  key: 'operations',
+  width: 150,
+  flexGrow: 1,
+  align: 'center',
+  cellRenderer: ({ rowData }) => <SkAppOperations
+    modules={['u','d']}
+    onD={ () => { d([rowData.id]) } }
+    onU={ () => { preuI(rowData) } }
+  ></SkAppOperations>,
+} 
 function r () {
   rRoles(queryData.value, pagination.value).then(res => {
     if (!tableState.columns.length) {
@@ -50,18 +62,7 @@ function r () {
 
   
         } else if (c.type === 'button') {
-          a.push({
-            title: '操作',
-            width: 150,
-            flexGrow: 1,
-            align: 'center',
-            cellRenderer: ({ rowData }) => <SkAppOperations
-              modules={['u','d']}
-              onD={ () => { d([rowData.id]) } }
-              onU={ () => { preu(rowData) } }
-            ></SkAppOperations>,
-          })
-
+          a.push(operationsCol)
         } else {
           a.push(genColumn(c))
         }
@@ -76,11 +77,11 @@ function r () {
 function d (ids: string[]) {
   dRoles(ids).then(r)
 }
-function prec () {
+function precI () {
   cuIState.visible = true
   cuIState.formData = {}
 }
-function preu (data: FormVueData) {
+function preuI (data: FormVueData) {
   cuIState.visible = true
   cuIState.formData = {...data}
 }
@@ -103,7 +104,7 @@ function cuI () {
           <template #options>
             <ElButton type="primary" @click="r">查询</ElButton>
             <ElButton type="primary" 
-              @click="prec"
+              @click="precI"
             >新增</ElButton>
             
           </template>
