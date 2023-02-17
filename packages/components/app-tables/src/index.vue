@@ -109,7 +109,6 @@ export default defineComponent({
         v-on="paginationOnEmits"
         :currentPage="currentPage"
         @update:current-page="updateStart"
-        @current-change="updateStart"
       ></ElPagination>
     </div>
 
