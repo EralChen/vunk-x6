@@ -68,10 +68,10 @@ export default defineComponent({
     const currentPage = computed(() => {
       return Math.floor(props.start / props.pageSize) + 1
     })
-
+    
     // updateStart 通过 currentPage 和 pageSize 计算
-    const updateStart = (val: number) => {
-      emit('update:start', (val - 1) * props.pageSize)
+    const updateStart = (currentPage: number) => {
+      emit('update:start', (currentPage - 1) * props.pageSize)
     }
 
     // 调整 props.pageSize 时，更新 start
