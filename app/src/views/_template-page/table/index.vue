@@ -11,8 +11,7 @@ import { ref } from 'vue'
 import { FixedDir } from 'element-plus/es/components/table-v2/src/constants'
 
 
-
-const formItems: __SkAppQueryForm.FormItem[] = [
+const queryItems: __SkAppQueryForm.FormItem[] = [
   {
     templateType: 'VkfInput',
     prop: 'name',
@@ -114,7 +113,7 @@ const data = [
 
       <VkDuplexCalc class="plr-page ptb-main-ptb">
         <template #one>
-          <SkAppQueryForm :fixes="2" :data="formData" @setData="setData(formData, $event)" :formItems="formItems">
+          <SkAppQueryForm :fixes="2" :data="formData" @setData="setData(formData, $event)" :formItems="queryItems">
           </SkAppQueryForm>
           <div sk-flex="row-between-center" ptb-page>
             <SkCheckTags v-model="formData.type" :options="typeOptions"></SkCheckTags>
