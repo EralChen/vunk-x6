@@ -44,7 +44,7 @@ const linkClick = (e: MouseEvent, navigate: AnyFunc) => {
 }
 </script>
 <template>
-  <ElScrollbar >
+  <ElScrollbar>
     <div sk-flex class="bg-bg-overlay">
 
       <RouterLink v-for="item of viewsStore.visitedViews" :key="item.fullPath" :to="item.fullPath" :custom="true">
