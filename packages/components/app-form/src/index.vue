@@ -16,9 +16,13 @@ export default defineComponent({
   setup (props, { emit }) {
     const coreProps = _VkfFormCtx.createBindProps(props)
     const coreEmits = _VkfFormCtx.createOnEmits(emit)
+    
     return {
       coreProps,
       coreEmits,
+      log (e) {
+        console.log('log', e)
+      },
     }
   },
 })
@@ -27,6 +31,7 @@ export default defineComponent({
   <VkfForm 
     v-bind="coreProps" 
     v-on="coreEmits"
+    @keydown.enter.prevent="log"
   >
     <template #rendererTemplate>
       <VkfFormItemRendererTemplateLayout></VkfFormItemRendererTemplateLayout>

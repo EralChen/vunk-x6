@@ -38,9 +38,12 @@ export const loginByPassword = (data: FirstParameter<typeof restFetch.login>) =>
 
 export const rMenus = async (client?: string) => {
   return restFetch.rMenus(client).then(res => {
+    
     return res.map(item => ({
       ...item,
       title: item.name,
+      name: item.menuId,
     }))
+
   })
 }

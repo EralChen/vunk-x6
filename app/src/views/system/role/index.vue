@@ -100,6 +100,7 @@ function cuI () {
           :data="queryData" 
           @setData="setData(queryData, $event)" 
           :formItems="queryItems"
+        
         >
           <template #options>
             <ElButton type="primary" @click="r">查询</ElButton>

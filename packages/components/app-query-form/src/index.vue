@@ -60,7 +60,13 @@ export default defineComponent({
     }"
   >
     <div class="sk-app-query-form__fixed">
-      <SkAppForm v-bind="formProps" v-on="formEmits" :formItems="fixedFormItems" :elRef="fixedFormDef.resolve">
+      <SkAppForm 
+        v-bind="formProps" 
+        v-on="formEmits" 
+        :formItems="fixedFormItems" 
+        :elRef="fixedFormDef.resolve"
+        
+      >
       </SkAppForm>
       <div>
         <slot name="options" v-if="ready" :forms="forms">
