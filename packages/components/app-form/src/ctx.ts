@@ -10,6 +10,7 @@ export const createBindProps = bindPropsFactory(props)
 export const emits = {
   ..._VkfFormCtx.emits,
   setData: (e: SetDataEvent) => e,
+  enter: (e: KeyboardEvent) => e,
 }
 
 export const createOnEmits = onEmitsFactory(emits)

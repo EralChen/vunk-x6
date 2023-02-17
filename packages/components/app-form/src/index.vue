@@ -20,9 +20,6 @@ export default defineComponent({
     return {
       coreProps,
       coreEmits,
-      log (e) {
-        console.log('log', e)
-      },
     }
   },
 })
@@ -31,7 +28,7 @@ export default defineComponent({
   <VkfForm 
     v-bind="coreProps" 
     v-on="coreEmits"
-    @keydown.enter.prevent="log"
+    @keydown.enter.prevent="$emit('enter', $event)"
   >
     <template #rendererTemplate>
       <VkfFormItemRendererTemplateLayout></VkfFormItemRendererTemplateLayout>

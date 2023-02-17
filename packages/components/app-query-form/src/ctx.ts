@@ -1,4 +1,5 @@
 import { _SkAppFormCtx } from '@skzz-platform/components/app-form'
+import { Form } from './types'
 export const props = {
   ..._SkAppFormCtx.props,
   fixes: {
@@ -18,4 +19,5 @@ export const props = {
 export const emits = {
   ..._SkAppFormCtx.emits,
   'update:expand': (expand: boolean) => typeof expand === 'boolean',
+  'enter': (e: (Form|null)[]) => e,
 }

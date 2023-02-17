@@ -18,7 +18,7 @@ export default defineComponent({
   props,
   setup (props, { emit }) {
     const formProps = _SkAppFormCtx.createBindProps(props, ['formItems'])
-    const formEmits = _SkAppFormCtx.createOnEmits(emit)
+    const formEmits = _SkAppFormCtx.createOnEmits(emit, ['enter'])
     const fixedFormItems = computed(() => {
       return props.formItems.slice(0, props.fixes)
     })
@@ -39,6 +39,10 @@ export default defineComponent({
       key: 'expand',
     }, props, emit)
 
+    const formEnter = () => {
+      emit('enter', forms.value)
+    }
+
     return {
       formProps,
       formEmits,
@@ -49,6 +53,7 @@ export default defineComponent({
       moreFormDef,
       ready,
       forms,
+      formEnter,
     }
   },
 })
@@ -65,7 +70,7 @@ export default defineComponent({
         v-on="formEmits" 
         :formItems="fixedFormItems" 
         :elRef="fixedFormDef.resolve"
-        
+        @enter="formEnter"
       >
       </SkAppForm>
       <div>
@@ -89,7 +94,9 @@ export default defineComponent({
 
       <ElCollapseTransition>
         <SkAppForm v-show="expand" v-bind="formProps" v-on="formEmits" :formItems="moreFormItems"
-          :elRef="moreFormDef.resolve">
+          :elRef="moreFormDef.resolve"
+            @enter="formEnter"
+          >
         </SkAppForm>
       </ElCollapseTransition>
 
