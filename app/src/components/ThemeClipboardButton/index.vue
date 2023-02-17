@@ -32,7 +32,7 @@ export default defineComponent({
 })
 </script>
 <template>
-  <ElButton @click="clipboard.copy()"> 
+  <ElButton :type="'primary'" @click="clipboard.copy()"> 
     <span>复制</span> 
   </ElButton> 
 </template>

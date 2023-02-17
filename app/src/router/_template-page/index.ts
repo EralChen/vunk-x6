@@ -21,6 +21,14 @@ export default [
         component: () => import('_v/_template-page/table/index.vue'),
         
       },
+
+      {
+        path: 'form',
+        meta: {
+          title: '表单页面',
+        },
+        component: () => import('_v/_template-page/form/index.vue'),
+      },
     
     ],
   },
