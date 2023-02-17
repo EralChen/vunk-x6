@@ -9,7 +9,7 @@ import { SkAppModule, SkAppCard } from '@skzz/platform'
 import { useThemeStore } from '@skzz-platform/stores/theme'
 import { setData, SetDataEvent } from '@vunk/core'
 import ThemeClipboardButton from '@/components/ThemeClipboardButton/index.vue'
-import { computed } from '@vue/reactivity'
+import { computed } from 'vue'
 const themeStore = useThemeStore()
 
 const formVueProps = computed(() => {
