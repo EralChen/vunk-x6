@@ -6,13 +6,13 @@ export const vunkPresetsTheme = {
 
   baseGap: Object.keys(baseGap).reduce((a, c) => {
     const key = c.replace('--gap-', '')
-    a[key] = baseGap[key]
+    a[key] = baseGap[c]
     return a
   }, {} as NormalObject),
 
   namedGap: Object.keys(namedGap).reduce((a, c) => {
     const key = c.replace('--gap-', '')
-    a[key] = namedGap[key]
+    a[key] = namedGap[c]
     return a
   }, {} as NormalObject),
 
@@ -21,7 +21,7 @@ export const vunkPresetsTheme = {
       return a
     }
     const key = c.replace('--f-', '')
-    a[key] = baseFontSize[key]
+    a[key] = baseFontSize[c]
     return a
   }, {} as NormalObject),
 
@@ -29,7 +29,7 @@ export const vunkPresetsTheme = {
 
   namedFontSize: Object.keys(namedFontSize).reduce((a, c) => {
     const key = c.replace('--f-', '')
-    a[key] = namedFontSize[key]
+    a[key] = namedFontSize[c]
     return a
   }, {} as NormalObject),
 

@@ -22,7 +22,7 @@ importers:
       '@types/gulp': ^4.0.9
       '@types/node': ^18.0.4
       '@vueuse/core': ^9.12.0
-      '@vunk/core': 0.0.0-alpha.70
+      '@vunk/core': 0.0.0-alpha.72
       '@vunk/form': 0.0.1-alpha.43
       '@vunk/skzz': 0.0.0-alpha.61
       chroma-js: ^2.4.2
@@ -54,11 +54,11 @@ importers:
       '@skzz-platform/theme': link:packages/theme
       '@skzz/platform': link:packages/entry
       '@vueuse/core': registry.npmmirror.com/@vueuse/core/9.12.0_vue@3.2.45
-      '@vunk/core': 0.0.0-alpha.70
+      '@vunk/core': 0.0.0-alpha.72
       '@vunk/form': 0.0.1-alpha.43
       '@vunk/skzz': 0.0.0-alpha.61
       chroma-js: 2.4.2
-      element-plus: 2.2.30_vue@3.2.45
+      element-plus: 2.2.32_vue@3.2.45
       vue: 3.2.45
     devDependencies:
       '@lib-env/app-utils': link:internal/app-utils
@@ -3187,14 +3187,14 @@ packages:
       - vue
     dev: false
 
-  /@vunk/core/0.0.0-alpha.70:
-    resolution: {integrity: sha512-kjU3wW8U/DhrgKpXn+GeZ1Y8f/8QZ7DpaXev7yUxPG3chyzXZa+LZunO5NptEliZ7wuE636xOXpp0r379OKyOg==}
+  /@vunk/core/0.0.0-alpha.72:
+    resolution: {integrity: sha512-Hq2oF7cD1nQavR20Omda4PykeEgGzAizKitgE8+MysIIPSzAlE0oVbmM+2VSxCjJSiO2VPkrVLag5oZXfWVxaw==}
     dev: false
 
   /@vunk/form/0.0.1-alpha.43:
     resolution: {integrity: sha512-fBxI7O7bwqbK89Xu+4Bh16Nat39WK/UYxSS96UPxpNGOnE/dgw+tgLVpTx+iBxGqXZ8iv1cbLyDJZ7/UE052Gw==}
     dependencies:
-      '@vunk/core': 0.0.0-alpha.70
+      '@vunk/core': 0.0.0-alpha.72
     dev: false
 
   /@vunk/skzz/0.0.0-alpha.61:
@@ -4326,8 +4326,8 @@ packages:
     resolution: {integrity: sha512-M8WEXFuKXMYMVr45fo8mq0wUrrJHheiKZf6BArTKk9ZBYCKJEOU5H8cdWgDT+qCVZf7Na4lVUaZsA+h6uA9+PA==}
     dev: true
 
-  /element-plus/2.2.30_vue@3.2.45:
-    resolution: {integrity: sha512-HYSnmf2VMGa0gmw03evxevodPy3WimbAd4sfenOAhNs7Wl8IdT+YJjQyGAQjgEjRvhmujN4O/CZqhuEffRyOZg==}
+  /element-plus/2.2.32_vue@3.2.45:
+    resolution: {integrity: sha512-DTJMhYOy6MApbmh6z/95hPTK5WrBiNHGzV4IN+uEkup1WoimQ+Qyt8RxKdTe/X1LWEJ8YgWv/Cl8P4ocrt5z5g==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
