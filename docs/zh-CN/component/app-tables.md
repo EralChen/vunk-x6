@@ -14,4 +14,10 @@ AppTables
 app-tables/basic
 :::
 
+## Selection
+
+:::demo 
+app-tables/selection/index
+:::
+
 ## AppTables 其他

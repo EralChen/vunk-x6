@@ -60,6 +60,11 @@ export const props = {
     default: 10,
   },
 
+  modelValue: null,
+  oidField: {
+    type: String,
+    default: 'id',
+  },
 }
 
 export const createTableV2BindProps = bindPropsFactory(tableV2Props)
@@ -68,5 +73,7 @@ export const createPaginationBindProps = bindPropsFactory(paginationProps)
 export const emits = {
   ...paginationEmits,
   'update:start': (val: number) => typeof val === 'number',
+  'update:modelValue': null,
 }
+
 export const createPaginationOnEmits = onEmitsFactory(paginationEmits)

@@ -1,14 +1,21 @@
 <script lang="tsx" setup>
 import { SkAppTables, __SkAppTables } from '@skzz-platform/components/app-tables'
 import { SkAppOperations } from '@skzz-platform/components/app-operations'
+import { ref } from 'vue'
 const data = [
   ...Array.from({ length: 100 }).map((_, i) => {
     return {
       name: `name-${i}`,
+      id: i,
     }
   }),
 ]
 const colSource:__SkAppTables.Column[] = [
+  {
+    type: 'selection',
+    width: 60,
+    flexGrow: 0,
+  },
   {
     type: 'index',
     width: 50,
@@ -33,9 +40,12 @@ const colSource:__SkAppTables.Column[] = [
 
 
 ]
+const currentSelect = ref([])
 </script>
 <template>
+
   <SkAppTables 
+    v-model="currentSelect"
     :style="{
       height: '500px',
     }" 
@@ -44,6 +54,8 @@ const colSource:__SkAppTables.Column[] = [
     :total="100"
   >
   </SkAppTables>
+
+  <p>  {{  currentSelect  }}</p>
 </template>
 <style>
 

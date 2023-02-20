@@ -5,10 +5,13 @@ import {
   createPaginationBindProps, createPaginationOnEmits,
 } from './ctx'
 import { defineComponent, computed, watch } from 'vue'
-import { ElTableV2, ElAutoResizer, ElPagination, Column } from 'element-plus'
+import { ElTableV2, ElAutoResizer, ElPagination, Column, ElCheckbox } from 'element-plus'
 import { VkDuplexCalc } from '@vunk/core'
 import { SkAppOperations } from '@skzz-platform/components/app-operations'
 import { pickObject } from '@vunk/core/shared/utils-object'
+import { VkCheckRecordLogicProvider, VkCheckRecordLogic } from '@vunk/core'
+import { vOn } from '@vunk/core/shared/utils-vue'
+
 export default defineComponent({
   name: 'SkAppTables',
   components: {
@@ -16,7 +19,7 @@ export default defineComponent({
     ElAutoResizer,
     VkDuplexCalc,
     ElPagination,
-
+    VkCheckRecordLogicProvider,
   },
   emits,
   props,
@@ -42,18 +45,40 @@ export default defineComponent({
             })
           } else if (c.type === 'selection') {
             a.push({
+              key: 'selection',
               width: 60,
-              ...colProps,
+              ...colProps, 
+              cellRenderer: ({ rowData }) => {
+                return <VkCheckRecordLogic
+                  name={rowData}
+                  clearable={ true }
+                  custom={ true }
+                  v-slots={
+                    {
+                      default: ({ isActive, toggle }) => {
+                        return <ElCheckbox modelValue={isActive}
+                          {
+                            ...vOn({
+                              'update:modelValue': toggle,
+                            })
+                          }
+                        ></ElCheckbox>
+                        
+                      },
+                    }
+                  }
+                >
               
+                </VkCheckRecordLogic>
+              },
             })
           } else if (c.type === 'button') {
             a.push({
               title: '操作',
               width: 150,
+              cellRenderer: () => <SkAppOperations></SkAppOperations>,
               ...colProps,
-              cellRenderer: () => <SkAppOperations
 
-              ></SkAppOperations>,
             })
           }
 
@@ -95,10 +120,16 @@ export default defineComponent({
     <template #one>
       <ElAutoResizer>
         <template #default="{ height, width }">
-          <ElTableV2  v-bind="tableBindProps" :class="tableClass" :style="tableStyle"
-            :width="tableBindProps.width ?? width" :height="tableBindProps.width ?? height" :columns="columns">
-            <slot></slot>
-          </ElTableV2>
+          <VkCheckRecordLogicProvider 
+            :modelValue="modelValue"
+            @update:modelValue="$emit('update:modelValue', $event)"
+            :oidField="oidField"
+          >
+            <ElTableV2  v-bind="tableBindProps" :class="tableClass" :style="tableStyle"
+              :width="tableBindProps.width ?? width" :height="tableBindProps.width ?? height" :columns="columns">
+              <slot></slot>
+            </ElTableV2>
+          </VkCheckRecordLogicProvider>
         </template>
       </ElAutoResizer>
 
