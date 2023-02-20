@@ -16,6 +16,8 @@ const queryItems: __SkAppQueryForm.FormItem[] = [
     templateType: 'VkfInput',
     prop: 'name',
     label: '姓名',
+    clearable: true,
+    class: 'w-200px',
   },
   {
     templateType: 'VkfInput',
