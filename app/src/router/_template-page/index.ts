@@ -10,15 +10,23 @@ export default [
       icon: 'Document',
       header: true,
     },
-    redirect: '/_template-page/table',
+    redirect: '/_template-page/table/basic',
     children: [
       {
         path: 'table',
         meta: {
           title: '表格页面',
-          
         },
-        component: () => import('_v/_template-page/table/index.vue'),
+        children: [
+          {
+            path: 'basic',
+            meta: {
+              title: '基础表格',
+            },
+            component: () => import('@/views/_template-page/table/basic/index.vue'),
+          },
+        ],
+       
         
       },
 
@@ -27,9 +35,27 @@ export default [
         meta: {
           title: '表单页面',
         },
-        component: () => import('_v/_template-page/form/index.vue'),
+        children: [
+          {
+            path: 'basic',
+            meta: {
+              title: '基础表单',
+            },
+            component: () => import('@/views/_template-page/form/basic/index.vue'),
+          },
+          {
+          
+            meta: {
+              title: '多列表单',
+            },
+            path: 'multiple',
+            component: () => import('@/views/_template-page/form/multiple/index.vue'),
+          },
+        ],
+        
       },
-    
+      
+
     ],
   },
 ] as RouteRecordRaw[]
