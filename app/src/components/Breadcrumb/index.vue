@@ -7,7 +7,10 @@ import { compile } from 'path-to-regexp'
 const router = useRouter()
 const route = useRoute()
 const levelList = computed(() => {
-  let matched = route.matched.filter(item => item.meta && item.meta.title)
+  let matched = route.matched.filter(item => item.meta 
+    && item.meta.title
+    && (item.meta.breadcrumb ?? true),
+  )
   return matched
 })
 

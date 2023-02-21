@@ -38,7 +38,7 @@
 		"@vueuse/core": "^9.12.0",
 		"@vunk/core": "0.0.0-alpha.72",
 		"@vunk/form": "0.0.1-alpha.43",
-		"@vunk/skzz": "0.0.0-alpha.61",
+		"@vunk/skzz": "0.0.0-alpha.63",
 		"chroma-js": "^2.4.2",
 		"element-plus": "npm:element-plus@latest",
 		"vue": "^3.2.38"
