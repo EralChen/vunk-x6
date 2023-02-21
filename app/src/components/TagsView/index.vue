@@ -44,10 +44,10 @@ const linkClick = (e: MouseEvent, navigate: AnyFunc) => {
 }
 </script>
 <template>
-  <ElScrollbar>
-    <div sk-flex class="bg-bg-overlay">
+  <ElScrollbar class="bg-bg-overlay" >
+    <div sk-flex  class="tags-view " >
 
-      <RouterLink v-for="item of viewsStore.visitedViews" :key="item.fullPath" :to="item.fullPath" :custom="true">
+        <RouterLink v-for="item of viewsStore.visitedViews" :key="item.fullPath" :to="item.fullPath" :custom="true">
         <template #default="{ navigate, href, isActive, isExactActive }">
           <a :href="href" @click="linkClick($event, navigate)" class="decoration-none text-text-secondary ptb-s plr-m 
            tags-view-item" sk-flex="row-around-center" :class="{
@@ -70,6 +70,7 @@ const linkClick = (e: MouseEvent, navigate: AnyFunc) => {
 
 
 
+
     </div>
   </ElScrollbar>
 </template>
@@ -78,6 +79,7 @@ const linkClick = (e: MouseEvent, navigate: AnyFunc) => {
 .tags-view-item {
   flex-shrink: 0;
   width: 130px;
+  /* padding-bottom: var(--gap-page); */
 }
 
 .tags-view-icon-close {

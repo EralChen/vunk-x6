@@ -57,9 +57,10 @@ const asideReady = ref(false)
   background-color: var(--el-fill-color);
 }
 
-.layout-default .el-scrollbar__view {
+/* 【?】该行导致横向滚动失效 */
+/* .layout-default .el-scrollbar__view {
   content-visibility: auto;
-}
+} */
 </style>
 
 
