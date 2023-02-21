@@ -34,6 +34,10 @@
       {
         "link": "/multipage",
         "text": "Multipage"
+      },
+      {
+        "link": "/multipage-renderer",
+        "text": "MultipageRenderer"
       }
     ]
   },

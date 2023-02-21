@@ -1,9 +1,14 @@
 import { PropType } from 'vue'
 
 export const props = {
-  modelValue: {
-    type: Object as PropType<unknown>,
-    default: () => ({}),
+  label: {
+    type: String as PropType<string>,
+    default: '',
+  },
+  value: {
+    type: [String, Number],
+    default: '',
+    required: true,
   },
 }
 

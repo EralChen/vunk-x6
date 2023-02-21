@@ -1,4 +1,5 @@
 import { Media } from '@vunk/core'
+import { bindPropsFactory, onEmitsFactory } from '@vunk/core/shared/utils-vue'
 import { PropType } from 'vue'
 
 export const props = {
@@ -28,6 +29,10 @@ export const props = {
   },
 }
 
+export const createBindProps = bindPropsFactory(props)
+
 export const emits = {
   'update:modelValue': (value: string) => value,
 }
+
+export const createOnEmits = onEmitsFactory(emits)

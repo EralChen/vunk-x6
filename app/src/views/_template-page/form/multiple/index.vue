@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { SkAppForm } from '@skzz-platform/components/app-form'
 import PageX from '_c/PageX/index.vue'
 import { SkAppCard, SkMultipage, __SkMultipage } from '@skzz/platform'
+
 const modules: __SkMultipage.Module[] = [
   {
     label: '选项一',
