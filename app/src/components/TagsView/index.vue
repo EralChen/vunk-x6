@@ -18,7 +18,6 @@ const linkClose = (e: MouseEvent, fullPath: string) => {
   e.stopPropagation()
   const { item, index } = viewsStore.delVisitedViewByFullpath(fullPath)
   if (item) {
-    console.log(item.fullPath, route.fullPath, 'item.fullPath, route.fullPath')
     if (item.fullPath === route.fullPath) { // 将要关闭的路由是当前路由
       // 将路由跳转到 该路由的上一个路由
       const prevItem = viewsStore.visitedViews[index - 1]
@@ -44,10 +43,10 @@ const linkClick = (e: MouseEvent, navigate: AnyFunc) => {
 }
 </script>
 <template>
-  <ElScrollbar class="bg-bg-overlay" >
-    <div sk-flex  class="tags-view " >
+  <ElScrollbar class="bg-bg-overlay tags-view" >
+    <div sk-flex >
 
-        <RouterLink v-for="item of viewsStore.visitedViews" :key="item.fullPath" :to="item.fullPath" :custom="true">
+      <RouterLink v-for="item of viewsStore.visitedViews" :key="item.fullPath" :to="item.fullPath" :custom="true">
         <template #default="{ navigate, href, isActive, isExactActive }">
           <a :href="href" @click="linkClick($event, navigate)" class="decoration-none text-text-secondary ptb-s plr-m 
            tags-view-item" sk-flex="row-around-center" :class="{
@@ -74,12 +73,19 @@ const linkClick = (e: MouseEvent, navigate: AnyFunc) => {
     </div>
   </ElScrollbar>
 </template>
-
+<style scoped>
+.tags-view{
+  overflow: initial;
+}
+.tags-view :deep(.el-scrollbar__bar.is-horizontal){
+  margin-bottom: -8px;
+}
+</style>
 <style>
+
 .tags-view-item {
   flex-shrink: 0;
   width: 130px;
-  /* padding-bottom: var(--gap-page); */
 }
 
 .tags-view-icon-close {
