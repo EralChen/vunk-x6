@@ -19,6 +19,22 @@ export default [
         },
         component: () => import('_v/_play/test1/index.vue'),
       },
+
+      {
+        path: 'vuesri',
+        meta: {
+          title: 'vuesri',
+        },
+        children: [
+          {
+            path: 'basemap',
+            meta: {
+              title: 'basemap',
+            },
+            component: () => import('_v/_play/vuesri/basemap/index.vue'),
+          },
+        ],
+      },
     
     ],
   },
