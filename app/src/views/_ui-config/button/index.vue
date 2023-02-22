@@ -4,6 +4,9 @@ import { SkMultipageRenderer } from '@skzz-platform/components/multipage-rendere
 import { SkMultipageTemplate } from '@skzz-platform/components/multipage-template'
 import { ref } from 'vue'
 import PrimaryVue from './primary.vue'
+import { useThemeStore } from '@skzz-platform/stores/theme'
+import { setData } from '@vunk/core'
+const themeStore = useThemeStore()
 const currentPage = ref('primary')
 </script>
 <template>
@@ -11,14 +14,25 @@ const currentPage = ref('primary')
     <SkAppCard class="h-100%" :header="'按钮配置'">
       <SkMultipageRenderer v-model="currentPage"
         :headerClass="'plr-form-pl'"
+        :bodyClass="'h-100%'"
+        class="h-100%"
       >
         <SkMultipageTemplate 
-          :label="'primary'"
+          :label="'主要按钮'"
           :value="'primary'"
         >
+        <ElScrollbar>
+          <PrimaryVue
+            :data="themeStore.buttonPrimaryStyles"
+            @setData="setData(themeStore.buttonPrimaryStyles, $event)"
+          ></PrimaryVue>
           
-          <PrimaryVue></PrimaryVue>
-          
+        </ElScrollbar>
+
+        <template #options>
+          <ElButton type="primary">TEST</ElButton>
+        </template>
+
         </SkMultipageTemplate>
       </SkMultipageRenderer>
     </SkAppCard>

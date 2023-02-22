@@ -7,6 +7,7 @@ import { AnyFunc } from '@vunk/core'
 
 export default defineComponent({
   name: 'SkMultipageRenderer',
+  inheritAttrs: false,
   components: {
     SkMultipage,
   },
@@ -52,9 +53,13 @@ export default defineComponent({
 </script>
 <template>
   <SkMultipage
-    v-bind="coreProps"
+    v-bind="{
+      ...coreProps,
+      ...$attrs,
+    }"
     v-on="coreEmits"
     :modules="modules"
+
   >
     <template 
       v-for="item of slots"
