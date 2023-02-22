@@ -66,6 +66,14 @@ export default [
             },
             component: () => import('_v/_ui-config/card/index.vue'),
           },
+
+          {
+            path: 'button',
+            meta: {
+              title: '按钮配置',
+            },
+            component: () => import('_v/_ui-config/button/index.vue'),
+          },
     
         ],
       },

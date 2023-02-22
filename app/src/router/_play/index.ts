@@ -35,6 +35,22 @@ export default [
           },
         ],
       },
+
+      {
+        path: 'table',
+        meta: {
+          title: 'table',
+        },
+        children: [
+          {
+            path: 'scroll',
+            meta: {
+              title: 'table-scroll',
+            },
+            component: () => import('_v/_play/table/scroll/index.vue'),
+          },
+        ],
+      },
     
     ],
   },

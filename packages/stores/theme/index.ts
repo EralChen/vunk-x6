@@ -75,23 +75,27 @@ const useRootStylesWithMode = (key: string) => {
 }
 
 export const useThemeStore = defineStore('theme', () => {
-  const menuStyles = useRootStylesWithMode('ZZPT_MENU_STYLES')
+ 
 
-  const layoutTopClassName = 'zz-platform-top-menu'
-  const layoutTopStyles = useRootStyles('ZZPT_LAYOUT_TOP_STYLES', `.${layoutTopClassName}`)
-
+  /* globalll */
   const colorStyles = useRootStylesWithMode('ZZPT_COLOR_STYLES')
-
   const fontSizeStyles = useRootStyles('ZZPT_FONT_SIZE_STYLES')
   const fontSizeNamedStyles = useRootStyles('ZZPT_FONT_SIZE_NAMED_STYLES')
-
-
   const gapBaseStyles = useRootStyles('ZZPT_GAP_BASE_STYLES')
   const gapNamedStyles = useRootStyles('ZZPT_GAP_NAMED_STYLES')
+  /* globalll /> */
 
 
+  /* el components */
+  const menuStyles = useRootStylesWithMode('ZZPT_MENU_STYLES')
   const cardStyles = useRootStyles('ZZPT_CARD_STYLES', '.el-card')
+  const buttonPrimaryStyles = useRootStyles('ZZPT_BUTTON_PRIMARY_STYLES', '.el-button--primary')
+  /* el components /> */
 
+  /* custom component */
+  const layoutTopClassName = 'zz-platform-top-menu'
+  const layoutTopStyles = useRootStyles('ZZPT_LAYOUT_TOP_STYLES', `.${layoutTopClassName}`)
+  /* custom component /> */
 
 
   return { 
@@ -108,6 +112,8 @@ export const useThemeStore = defineStore('theme', () => {
     fontSizeNamedStyles,
 
     cardStyles,
+    buttonPrimaryStyles,
+
   }
   
 })

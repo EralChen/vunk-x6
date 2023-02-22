@@ -1,5 +1,4 @@
 <script lang="tsx" setup>
-import PageX from '_c/PageX/index.vue'
 import { 
   SkAppCard, SkCheckTags,
   SkAppTables, __SkAppTables, 
@@ -10,7 +9,35 @@ import { NormalObject, setData, VkDuplexCalc } from '@vunk/core'
 import { ref } from 'vue'
 import { FixedDir } from 'element-plus/es/components/table-v2/src/constants'
 
+const generateColumns = (length = 10, prefix = 'column-', props?: any) =>
+  Array.from({ length }).map((_, columnIndex) => ({
+    ...props,
+    key: `${prefix}${columnIndex}`,
+    dataKey: `${prefix}${columnIndex}`,
+    title: `Column ${columnIndex}`,
+    width: 150,
+  }))
 
+const generateData = (
+  columns: ReturnType<typeof generateColumns>,
+  length = 200,
+  prefix = 'row-',
+) =>
+  Array.from({ length }).map((_, rowIndex) => {
+    return columns.reduce(
+      (rowData, column, columnIndex) => {
+        rowData[column.dataKey] = `Row ${rowIndex} - Col ${columnIndex}`
+        return rowData
+      },
+      {
+        id: `${prefix}${rowIndex}`,
+        parentId: null,
+      },
+    )
+  })
+
+const columns = generateColumns(10)
+const data = generateData(columns, 1000)
 
 const queryItems: __SkAppQueryForm.FormItem[] = [
   {
@@ -76,12 +103,7 @@ const typeOptions = [
   },
 ]
 const colSource: __SkAppTables.Column[] = [
-  {
-    key: 'name',
-    dataKey: 'name',
-    width: 100,
-    title: '姓名',
-  },
+  ...columns,
   {
     key: 'operations',
     title: '操作',
@@ -101,13 +123,7 @@ const formData = ref({
   type: 'all',
 } as NormalObject)
 
-const data = [
-  ...Array.from({ length: 100 }).map((_, i) => {
-    return {
-      name: `cx${i}`,
-    }
-  }),
-]
+
 
 </script>
 <template>
@@ -126,7 +142,7 @@ const data = [
         </template>
 
         <SkAppTables 
-          
+          :fixed="true"
           class="h-100%" 
           :data="data"
           :columns="colSource"
