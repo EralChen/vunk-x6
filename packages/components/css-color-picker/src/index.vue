@@ -58,4 +58,7 @@ export default defineComponent({
 .el-form-item.is-sub-form-item label{
   visibility: hidden;
 }
+.el-form--label-top .el-form-item.is-sub-form-item label{
+  display: none;
+}
 </style>

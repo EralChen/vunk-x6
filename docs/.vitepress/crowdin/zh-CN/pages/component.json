@@ -25,6 +25,10 @@
       {
         "link": "/app-operations",
         "text": "AppOperations"
+      },
+      {
+        "link": "/app-form",
+        "text": "AppForm"
       }
     ]
   },
