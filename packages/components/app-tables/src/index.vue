@@ -125,7 +125,7 @@ export default defineComponent({
             @update:modelValue="$emit('update:modelValue', $event)"
             :oidField="oidField"
           >
-            <ElTableV2  v-bind="tableBindProps" :class="tableClass" :style="tableStyle"
+            <ElTableV2   v-bind="tableBindProps" :class="tableClass" :style="tableStyle"
               :width="tableBindProps.width ?? width" :height="tableBindProps.width ?? height" :columns="columns">
               <slot></slot>
             </ElTableV2>
