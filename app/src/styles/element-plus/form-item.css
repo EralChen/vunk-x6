@@ -1,0 +1,4 @@
+.el-form-item__label{
+  font-weight: bold;
+  font-size: var(--f-m);
+}

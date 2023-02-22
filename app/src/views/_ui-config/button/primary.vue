@@ -97,6 +97,8 @@ const formItems: __SkAppForm.CoreFormItem<keyof typeof elButtonPrimaryTheme>[] =
 <template>
 
     <SkAppForm 
+      :labelPosition="'top'"
+      :layout="true"
       :labelWidth="150"
       class="plr-form-pl ptb-form-ptb"
       :formItems="formItems"
