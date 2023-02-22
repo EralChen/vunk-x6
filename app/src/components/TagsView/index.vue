@@ -48,7 +48,7 @@ const linkClick = (e: MouseEvent, navigate: AnyFunc) => {
 
       <RouterLink v-for="item of viewsStore.visitedViews" :key="item.fullPath" :to="item.fullPath" :custom="true">
         <template #default="{ navigate, href, isActive, isExactActive }">
-          <a :href="href" @click="linkClick($event, navigate)" class="decoration-none text-text-secondary ptb-s plr-m 
+          <a draggable="false" :href="href" @click="linkClick($event, navigate)" class="decoration-none text-text-secondary ptb-s plr-m 
            tags-view-item" sk-flex="row-around-center" :class="{
              'router-link-active': isActive,
              'router-link-exact-active': isExactActive
