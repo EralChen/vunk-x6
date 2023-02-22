@@ -88,6 +88,10 @@ export default defineComponent({
     v-bind="coreProps" 
     v-on="coreEmits"
     :formItems="formItems"
+    :class="{
+      'sk-app-form': true,
+      'is-layout': layout,
+    }"
     @keydown.enter.prevent="$emit('enter', $event)"
   >
     <template #rendererTemplate>
@@ -107,3 +111,8 @@ export default defineComponent({
     </template>
   </VkfForm>
 </template>
+<style>
+.sk-app-form.is-layout{
+  overflow-x: hidden;
+}
+</style>

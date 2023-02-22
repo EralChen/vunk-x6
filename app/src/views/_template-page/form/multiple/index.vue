@@ -1,24 +1,19 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
-import { SkAppForm } from '@skzz-platform/components/app-form'
+import { reactive, ref } from 'vue'
 import PageX from '_c/PageX/index.vue'
-import { SkAppCard, SkMultipage, __SkMultipage } from '@skzz/platform'
+import {
+  SkAppCard,
+  SkMultipageRenderer, SkMultipageTemplate,
+} from '@skzz/platform'
 
-const modules: __SkMultipage.Module[] = [
-  {
-    label: '选项一',
-    value: '1',
-  },
-  {
-    label: '选项二',
-    value: '2',
-  },
-  {
-    label: '选项三',
-    value: '3',
-  },
-]
-const currentPage = ref('1')
+import FirstVue from './first.vue'
+import { setData } from '@vunk/core'
+
+const currentPage = ref('first')
+const firstFormData = reactive({
+
+})
+
 
 </script>
 <template>
@@ -27,12 +22,26 @@ const currentPage = ref('1')
       <template #header__options>
         <ElButton type="primary">提交</ElButton>
       </template>
-      <SkMultipage  v-model="currentPage" :modules="modules" 
-        :tabXClass="'plr-form-pl'">
+      <SkMultipageRenderer
+        v-model="currentPage"
+        :tabXClass="'plr-form-pl'"
+        :bodyClass="'h-100% '"
+        :class="'h-100%'"
+       >
+        <SkMultipageTemplate :label="'选项1'" :value="'first'">
+          <ElScrollbar >
+            <FirstVue
+              class="ptb-form-ptb plr-form-pl"
+              :data="firstFormData"
+              @setData="setData(firstFormData, $event)"
+            ></FirstVue>
+          </ElScrollbar>
+        </SkMultipageTemplate>
 
-
-
-      </SkMultipage>
+        <SkMultipageTemplate :label="'选项2'" :value="'second'">
+          <div>form</div>
+        </SkMultipageTemplate>
+      </SkMultipageRenderer>
     </SkAppCard>
   </PageX>
 </template>
