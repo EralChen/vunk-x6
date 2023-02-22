@@ -6,6 +6,7 @@
 		"@lib-env/eslint-config": "workspace:*",
 		"@lib-env/path": "workspace:*",
 		"@lib-env/shared": "workspace:*",
+		"@types/arcgis-js-api": "^4.25.0",
 		"@types/chroma-js": "^2.1.4",
 		"@types/gulp": "^4.0.9",
 		"@types/node": "^18.0.4",
@@ -27,6 +28,7 @@
 		"vitest": "^0.18.1"
 	},
 	"dependencies": {
+		"@arcgis/core": "^4.25.5",
 		"@element-plus/utils": "workspace:*",
 		"@skzz-platform/api": "workspace:*",
 		"@skzz-platform/components": "workspace:*",
@@ -35,6 +37,7 @@
 		"@skzz-platform/stores": "workspace:*",
 		"@skzz-platform/theme": "workspace:*",
 		"@skzz/platform": "workspace:*",
+		"@vuesri/core": "^0.0.3",
 		"@vueuse/core": "^9.12.0",
 		"@vunk/core": "0.0.0-alpha.72",
 		"@vunk/form": "0.0.1-alpha.43",
