@@ -25,6 +25,13 @@ export default [
             },
             component: () => import('@/views/_template-page/table/basic/index.vue'),
           },
+          {
+            path: 'with-map',
+            meta: {
+              title: '地图+表格',
+            },
+            component: () => import('@/views/_template-page/table/with-map/index.vue'),
+          },
         ],
        
         
