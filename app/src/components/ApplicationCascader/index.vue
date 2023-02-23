@@ -1,7 +1,21 @@
 <script lang="ts" setup>
-import { ElAvatar, ElCascaderPanel } from 'element-plus'
+import { CascaderValue, ElAvatar, ElCascaderPanel } from 'element-plus'
+import { PropType } from 'vue'
+import { useModelComputed } from '@vunk/core/composables'
+const props = defineProps({
+  size: null,
+  modelValue: {
+    type: Array as PropType<CascaderValue>,
+    default: () => [],
+  },
+})
+const emit = defineEmits(['update:modelValue'])
 
-defineProps<{ size: number }>()
+const cascaderValue = useModelComputed({
+  default: [],
+  key: 'modelValue',
+}, props, emit) 
+
 const options = [ 
   {
     value: 'guide',
@@ -270,6 +284,7 @@ const options = [
     ],
   },
 ] 
+
 </script>
 <template>
   <ElDropdown  :trigger="'click'"  :placement="'bottom-end'">
@@ -280,6 +295,7 @@ const options = [
     <template #dropdown>
       <div class="w-540px">
         <ElCascaderPanel 
+          v-model="cascaderValue"
           :border="false"
           :options="options"
           
