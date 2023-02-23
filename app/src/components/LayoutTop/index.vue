@@ -40,6 +40,6 @@ const { layoutTopClassName } = useThemeStore()
   background: var(--layout-top-bg, var(--el-color-primary));
 }
 .layout-top-title{
-  width: var(--layout-aside-width);
+  min-width: var(--layout-aside-width);
 }
 </style>
