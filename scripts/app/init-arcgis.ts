@@ -18,4 +18,12 @@ export default series([
       dest(path.resolve(appPublicDir, 'Esri')),
     )
   }),
+  taskWithName('addThemes', async () => {
+
+    src(
+      path.resolve(appPublicDir, 'Esri/esri/themes/**/*'),
+    ).pipe(
+      dest(path.resolve(appRoot, 'src/styles/esri/_themes')),
+    )
+  }),
 ])
