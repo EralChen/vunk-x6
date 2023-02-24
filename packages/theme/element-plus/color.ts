@@ -1,6 +1,6 @@
 export const elColorWithMode = {
   dark: {
-    '--el-color-primary': '#409EFF',
+    '--el-color-primary': '#2470B0',
     '--el-color-success': '#67C23A',
     '--el-color-warning': '#E6A23C',
     '--el-color-danger': '#F56C6C',
@@ -10,7 +10,7 @@ export const elColorWithMode = {
   },
 
   default: {
-    '--el-color-primary': '#409EFF',
+    '--el-color-primary': '#2470B0',
     '--el-color-success': '#67C23A',
     '--el-color-warning': '#E6A23C',
     '--el-color-danger': '#F56C6C',
