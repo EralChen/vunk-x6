@@ -23,7 +23,7 @@ importers:
       '@types/chroma-js': ^2.1.4
       '@types/gulp': ^4.0.9
       '@types/node': ^18.0.4
-      '@vuesri/core': ^0.0.3
+      '@vuesri/core': ^0.0.5
       '@vueuse/core': ^9.12.0
       '@vunk/core': 0.0.0-alpha.72
       '@vunk/form': 0.0.1-alpha.43
@@ -57,7 +57,7 @@ importers:
       '@skzz-platform/stores': link:packages/stores
       '@skzz-platform/theme': link:packages/theme
       '@skzz/platform': link:packages/entry
-      '@vuesri/core': 0.0.3
+      '@vuesri/core': 0.0.5
       '@vueuse/core': registry.npmmirror.com/@vueuse/core/9.12.0_vue@3.2.45
       '@vunk/core': 0.0.0-alpha.72
       '@vunk/form': 0.0.1-alpha.43
@@ -3243,8 +3243,8 @@ packages:
   /@vue/shared/3.2.45:
     resolution: {integrity: sha512-Ewzq5Yhimg7pSztDV+RH1UDKBzmtqieXQlpTVm2AwraoRL/Rks96mvd8Vgi7Lj+h+TH8dv7mXD3FRZR3TUvbSg==}
 
-  /@vuesri/core/0.0.3:
-    resolution: {integrity: sha512-fSc/RskUI9w+eJhWy5D2J/RUfsKmaCyq5hYHA3i0oOAx6EGN2keXEO8H31Vlnl/7b8qXcFwzjHsxrRHe+1GU6Q==}
+  /@vuesri/core/0.0.5:
+    resolution: {integrity: sha512-8wxuiyQ044xpHC0Nx/9EiZeuvY5R4K+lXxws5azWRXPSimP2cIetsc5npwjcqvxPkMkQooVkMBzFzwb6nBWwTQ==}
     dev: false
 
   /@vueuse/core/9.12.0_vue@3.2.45:

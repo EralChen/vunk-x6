@@ -10,7 +10,8 @@ import {
 import { NormalObject, setData, VkDuplexCalc } from '@vunk/core'
 import { ref } from 'vue'
 import { FixedDir } from 'element-plus/es/components/table-v2/src/constants'
-import ViewerVue from './viewer.vue'
+// import ViewerVue from './viewer.vue'
+import MapView from '_c/MapView/index.vue'
 
 const queryItems: __SkAppQueryForm.FormItem[] = [
   {
@@ -133,7 +134,7 @@ const data = [
 
 
         <div class="flex-1 h-100%">
-          <ViewerVue></ViewerVue>
+          <MapView></MapView>
         </div>
 
       </GoldX>
