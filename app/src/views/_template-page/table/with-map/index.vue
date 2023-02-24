@@ -116,7 +116,7 @@ const data = [
     <SkAppCard class="h-100%" :header="'地图+表格'">
       <GoldX :type="'ltr'" class="h-100%">
         <template #one>
-          <VkDuplexCalc class="flex-1 h-100% plr-page ptb-main-ptb">
+          <VkDuplexCalc class="h-100% plr-page ptb-main-ptb">
             <template #one>
               <SkAppQueryForm :fixes="2" :data="formData" @setData="setData(formData, $event)" :formItems="queryItems">
               </SkAppQueryForm>
@@ -131,12 +131,7 @@ const data = [
             </SkAppTables>
           </VkDuplexCalc>
         </template>
-
-
-        <div class="flex-1 h-100%">
-          <MapView></MapView>
-        </div>
-
+        <MapView></MapView>
       </GoldX>
 
     </SkAppCard>

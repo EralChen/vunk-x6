@@ -1,10 +1,14 @@
 <script lang="ts">
-import { computed, defineComponent, PropType } from 'vue'
+import { computed, defineComponent, PropType, normalizeClass } from 'vue'
 export default defineComponent({
   props: {
     type: {
       type: String as PropType<'rtl'| 'ltr' | 'ttb'| 'btt'>,
       default: 'ltr', 
+    },
+    itemClass: {
+      type: [String, Object, Array],
+      default: '',
     },
   },
   setup (props) {
@@ -22,6 +26,7 @@ export default defineComponent({
     return {
       skFlex,
       isFirstMain,
+      normalizeClass,
     }
   },
 })
@@ -30,19 +35,18 @@ export default defineComponent({
   <div :class="{
     [skFlex]: true,
   }">
-    <div :class="{
-      'overflow-hidden': true,
+    <div :class="normalizeClass({
       'g-618': isFirstMain,
       'g-382': !isFirstMain,
-    }">
+    }) + ' ' + normalizeClass(itemClass)">
+
       <slot name="one"></slot>
     </div>
 
-    <div :class="{
-      'overflow-hidden': true,
+    <div :class="normalizeClass({
       'g-382': isFirstMain,
       'g-618': !isFirstMain,
-    }">
+    }) + ' ' + normalizeClass(itemClass)">
       <slot name="two"></slot>
       <slot></slot>
     </div>
@@ -51,9 +55,9 @@ export default defineComponent({
 <style scoped>
 
 .g-618{
-  flex: 0.618;
+  flex: .618;
 }
 .g-382{
-  flex: 0.382;
+  flex: .382;
 }
 </style>
