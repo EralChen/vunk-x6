@@ -10,7 +10,7 @@ defineProps({
 const isDark = useSharedDark()
 </script>
 <template>
-  <VaMapView>
+  <VaMapView :defaultOptions="defaultOptions">
     <VaTdtBasemap :type="isDark ? 'img_c' : 'vec_c'" />
     <VaZoom :position="'top-trailing'"></VaZoom>
     <slot></slot>

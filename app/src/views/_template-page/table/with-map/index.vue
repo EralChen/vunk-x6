@@ -1,5 +1,5 @@
 <script lang="tsx" setup>
-import GoldX from '_c/GoldX'
+import GoldMapX from '_c/GoldMapX/index.vue'
 import {
   SkAppCard,
   SkCheckTags,
@@ -10,8 +10,6 @@ import {
 import { NormalObject, setData, VkDuplexCalc } from '@vunk/core'
 import { ref } from 'vue'
 import { FixedDir } from 'element-plus/es/components/table-v2/src/constants'
-// import ViewerVue from './viewer.vue'
-import MapView from '_c/MapView/index.vue'
 
 const queryItems: __SkAppQueryForm.FormItem[] = [
   {
@@ -114,8 +112,8 @@ const data = [
 <template>
   <page-x>
     <SkAppCard class="h-100%" :header="'地图+表格'">
-      <GoldX :type="'ltr'" class="h-100%">
-        <template #one>
+      <GoldMapX :viewer-index="2" :type="'ltr'" class="h-100%">
+
           <VkDuplexCalc class="h-100% plr-page ptb-main-ptb">
             <template #one>
               <SkAppQueryForm :fixes="2" :data="formData" @setData="setData(formData, $event)" :formItems="queryItems">
@@ -130,9 +128,8 @@ const data = [
             <SkAppTables class="h-100%" :data="data" :columns="colSource" :total="100">
             </SkAppTables>
           </VkDuplexCalc>
-        </template>
-        <MapView></MapView>
-      </GoldX>
+ 
+      </GoldMapX>
 
     </SkAppCard>
   </page-x>
