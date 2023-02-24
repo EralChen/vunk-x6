@@ -14,7 +14,7 @@ export const props = {
   },
   rowGutter: {
     type: Number,
-    default: 14,
+    default: 110,
   },
 
 }

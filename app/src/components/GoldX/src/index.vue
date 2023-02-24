@@ -1,16 +1,8 @@
 <script lang="ts">
 import { computed, defineComponent, PropType, normalizeClass } from 'vue'
+import { props } from './ctx'
 export default defineComponent({
-  props: {
-    type: {
-      type: String as PropType<'rtl'| 'ltr' | 'ttb'| 'btt'>,
-      default: 'ltr', 
-    },
-    itemClass: {
-      type: [String, Object, Array],
-      default: '',
-    },
-  },
+  props,
   setup (props) {
     const skFlex = computed(() => {
       if (['rtl', 'ltr'].includes(props.type))  {

@@ -1,5 +1,5 @@
 <script lang="tsx" setup>
-import GoldX from '_c/GoldX/index.vue'
+import GoldX from '_c/GoldX'
 import {
   SkAppCard,
   SkCheckTags,

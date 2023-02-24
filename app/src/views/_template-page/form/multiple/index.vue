@@ -18,7 +18,7 @@ const firstFormData = reactive({
 </script>
 <template>
   <PageX>
-    <SkAppCard :header="'多列表单'" :class="'h-100%'">
+    <SkAppCard :header="'多列表单'"  :class="'h-100%'">
       <template #header__options>
         <ElButton type="primary">提交</ElButton>
       </template>
