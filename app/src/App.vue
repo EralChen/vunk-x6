@@ -4,7 +4,7 @@
   </el-config-provider>
 </template>
 <script>
-import { useInitTheme, useArcgisTheme } from '@skzz-platform/composables'
+import { useInitTheme } from '@skzz-platform/composables'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 export default {
   name: 'App',
@@ -15,7 +15,7 @@ export default {
   },
   mounted () {
     useInitTheme()
-    useArcgisTheme(import.meta.env.VITE_BASE_URL + '/Esri')
+
 
   },
 }
