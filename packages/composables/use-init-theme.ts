@@ -1,6 +1,6 @@
 import { useSharedDark } from '@skzz-platform/composables'
 import { useThemeStore } from '@skzz-platform/stores/theme'
-import { elColorWithMode, elBgColorWithMode, elTextColorWithMode, elFillColorWithMode, elBorderColorWithMode, layoutTopTheme, baseFontSize, namedFontSize, baseGap, namedGap   } from '@skzz-platform/theme'
+import { elColorWithMode, elBgColorWithMode, elTextColorWithMode, elFillColorWithMode, elBorderColorWithMode, layoutTopTheme, baseFontSize, namedFontSize, baseGap, namedGap, elTableV2Theme  } from '@skzz-platform/theme'
 import { NormalObject } from '@vunk/core' 
 import { nextTick, watch } from 'vue'
 
@@ -105,6 +105,19 @@ const useLayoutTopTheme = () => {
   setLayoutTop()
 }
 
+const useTableV2Theme = () => {
+  const themeStore = useThemeStore()
+  const setTableV2 = () => {
+    Object.keys(elTableV2Theme).forEach((_key) => {
+      const key = _key as keyof typeof elTableV2Theme
+      if (themeStore.tableV2Styles[key]) {
+        return
+      }
+      themeStore.tableV2Styles[key] = elTableV2Theme[key]
+    })
+  }
+  setTableV2()
+}
 
 export const useInitTheme = () => {   
   useElementPlusTheme()
@@ -113,4 +126,5 @@ export const useInitTheme = () => {
   useBaseGapTheme()
   useNamedGapTheme()
   useLayoutTopTheme()
+  useTableV2Theme()
 }

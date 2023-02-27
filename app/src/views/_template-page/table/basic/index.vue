@@ -77,15 +77,26 @@ const typeOptions = [
 ]
 const colSource: __SkAppTables.Column[] = [
   {
+    key: 'id',
+    dataKey: 'id',
+    width: 50,
+    title: 'ID',
+    
+  },
+  {
     key: 'name',
     dataKey: 'name',
     width: 100,
     title: '姓名',
+    flexGrow: 1,
+    align: 'center',
   },
   {
     key: 'operations',
     title: '操作',
     width: 260,
+
+    align: 'center',
     fixed: FixedDir.RIGHT,
     cellRenderer: () => {
       return <SkAppOperations 
@@ -105,6 +116,7 @@ const data = [
   ...Array.from({ length: 100 }).map((_, i) => {
     return {
       name: `cx${i}`,
+      id: i,
     }
   }),
 ]

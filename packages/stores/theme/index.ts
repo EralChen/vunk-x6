@@ -90,6 +90,7 @@ export const useThemeStore = defineStore('theme', () => {
   const menuStyles = useRootStylesWithMode('ZZPT_MENU_STYLES')
   const cardStyles = useRootStyles('ZZPT_CARD_STYLES', '.el-card')
   const buttonPrimaryStyles = useRootStyles('ZZPT_BUTTON_PRIMARY_STYLES', '.el-button--primary')
+  const tableV2Styles = useRootStyles('ZZPT_TABLE_V2_STYLES', '.el-table-v2')
   /* el components /> */
 
   /* custom component */
@@ -112,6 +113,7 @@ export const useThemeStore = defineStore('theme', () => {
     fontSizeNamedStyles,
 
     cardStyles,
+    tableV2Styles,
     buttonPrimaryStyles,
 
   }

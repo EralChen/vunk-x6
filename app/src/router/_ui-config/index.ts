@@ -74,6 +74,14 @@ export default [
             },
             component: () => import('_v/_ui-config/button/index.vue'),
           },
+
+          {
+            path: 'table',
+            meta: {
+              title: '表格配置',
+            },
+            component: () => import('_v/_ui-config/table/index.vue'),
+          },
     
         ],
       },
