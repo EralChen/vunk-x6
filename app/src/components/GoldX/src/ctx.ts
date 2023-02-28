@@ -8,7 +8,7 @@ export const props = {
   },
   itemClass: {
     type: [String, Object, Array],
-    default: '',
+    default: 'overflow-hidden',
   },
 }
 

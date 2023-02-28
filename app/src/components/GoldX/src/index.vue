@@ -28,16 +28,16 @@ export default defineComponent({
     [skFlex]: true,
   }">
     <div :class="normalizeClass({
-      'g-618': isFirstMain,
-      'g-382': !isFirstMain,
+      'g-1125': isFirstMain,
+      'g-568': !isFirstMain,
     }) + ' ' + normalizeClass(itemClass)">
 
       <slot name="one"></slot>
     </div>
 
     <div :class="normalizeClass({
-      'g-382': isFirstMain,
-      'g-618': !isFirstMain,
+      'g-568': isFirstMain,
+      'g-1125': !isFirstMain,
     }) + ' ' + normalizeClass(itemClass)">
       <slot name="two"></slot>
       <slot></slot>
@@ -46,10 +46,10 @@ export default defineComponent({
 </template>
 <style scoped>
 
-.g-618{
-  flex: .618;
+.g-1125{
+  flex: 1125;
 }
-.g-382{
-  flex: .382;
+.g-568{
+  flex: 568;
 }
 </style>
