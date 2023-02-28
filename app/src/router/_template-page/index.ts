@@ -69,6 +69,13 @@ export default [
             path: 'multiple',
             component: () => import('@/views/_template-page/form/multiple/index.vue'),
           },
+          {
+            path: 'with-map',
+            meta: {
+              title: '地图+表单',
+            },
+            component: () => import('@/views/_template-page/form/with-map/index.vue'),
+          },
         ],
         
       },
