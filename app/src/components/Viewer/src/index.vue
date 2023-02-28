@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { VaMapView, VaTdtBasemap } from '@vuesri/core'
+import { VaMapView, VaTdtBasemap, VaBasemapToggle } from '@vuesri/core'
 import { useSharedDark } from '@skzz-platform/composables'
 import { VaZoom } from '@vuesri/core/components/zoom'
 import { props as dProps } from './ctx'
@@ -11,8 +11,12 @@ const isDark = useSharedDark()
 </script>
 <template>
   <VaMapView :defaultOptions="defaultOptions">
-    <VaTdtBasemap :type="isDark ? 'img_c' : 'vec_c'" />
-    <VaZoom :position="'top-leading'"></VaZoom>
+    <VaTdtBasemap :type="'img_c'" :thumbnailUrl="'http://lbs.tianditu.gov.cn/images/img_c.png'" />
+    <VaZoom :position="'bottom-trailing'"></VaZoom>
+
+    <VaBasemapToggle :position="'bottom-leading'">
+      <VaTdtBasemap :type="'vec_c'" />
+    </VaBasemapToggle>
     <slot></slot>
   </VaMapView>
 </template>

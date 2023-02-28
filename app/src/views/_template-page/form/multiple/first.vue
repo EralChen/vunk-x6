@@ -6,7 +6,7 @@ const formItems: __SkAppForm.CoreFormItem[] = [
     prop: '--el-button-text-color',
     label: '文字颜色',
 
-    span: 24,
+    // span: 24,
   },
   {
     templateType: 'VkfInput',

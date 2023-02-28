@@ -3,7 +3,11 @@
   border-radius: var(--el-border-radius-base);
   overflow: hidden;
 }
-.esri-ui-corner .esri-component{
+.esri-ui-corner .esri-component:not(.esri-basemap-toggle){
   box-shadow: none;
   border: var(--el-border);
+}
+.esri-basemap-thumbnail{
+  border-radius: var(--el-border-radius-base);
+  overflow: hidden;
 }

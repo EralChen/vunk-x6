@@ -37,7 +37,7 @@
 		"@skzz-platform/stores": "workspace:*",
 		"@skzz-platform/theme": "workspace:*",
 		"@skzz/platform": "workspace:*",
-		"@vuesri/core": "^0.0.5",
+		"@vuesri/core": "^0.0.6",
 		"@vueuse/core": "^9.12.0",
 		"@vunk/core": "0.0.0-alpha.72",
 		"@vunk/form": "0.0.1-alpha.43",
