@@ -125,7 +125,11 @@ export default defineComponent({
             @update:modelValue="$emit('update:modelValue', $event)"
             :oidField="oidField"
           >
-            <ElTableV2   v-bind="tableBindProps" :class="tableClass" :style="tableStyle"
+            <ElTableV2   
+              class="sk-app-tables__table"
+              v-bind="tableBindProps" 
+              :class="tableClass" 
+              :style="tableStyle"
               :width="tableBindProps.width ?? width" :height="tableBindProps.width ?? height" :columns="columns">
               <slot></slot>
             </ElTableV2>
@@ -145,7 +149,22 @@ export default defineComponent({
 
   </VkDuplexCalc>
 </template>
-<style>
+<style lang="scss">
+
+.sk-app-tables__table .el-table-v2__table {
+  border-left: var(--el-border);
+  border-right: var(--el-border);
+}
+.el-table-v2__header-cell{
+  border-top: var(--el-border);
+}
+.sk-app-tables__table .el-table-v2__header-cell:not(:first-child){
+  border-left: var(--el-border);
+}
+.sk-app-tables__table .el-table-v2__row-cell:not(:first-child){
+  border-left: var(--el-border);
+}
+
 .sk-app-tables-pagination-x {
   display: flex;
   justify-content: center;
