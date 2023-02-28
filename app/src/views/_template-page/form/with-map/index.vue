@@ -29,7 +29,7 @@ const formVueProps = computed(() => {
       <template #header__options>
         <ThemeClipboardButton :target="'colorStyles'"></ThemeClipboardButton>
       </template>
-      <GoldMapX :viewerIndex="2">
+      <GoldMapX :viewerIndex="2" class="h-100%">
         <ElScrollbar>
           <SkAppModule :title="'基础颜色'">
             <BaseVue v-bind="formVueProps" />
