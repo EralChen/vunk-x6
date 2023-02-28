@@ -9,7 +9,7 @@ const themeStore = useThemeStore()
 <template>
   <div plr-page pb-page class="h-page">
     <SkAppCard class="h-100%" :header="'菜单配置'">
-      <div plr-form-pl ptb-form-ptb>
+      <div plr-form-pl ptb-form-pt>
         <ElMenuConfigForm
           :data="themeStore.menuStyles"
           @setData="setData(themeStore.menuStyles, $event)"

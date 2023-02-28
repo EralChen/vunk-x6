@@ -128,7 +128,7 @@ const data = [
   <PageX>
     <SkAppCard :header="'表格'" class="h-100%">
 
-      <VkDuplexCalc class="plr-page ptb-main-ptb">
+      <VkDuplexCalc class="plr-page ptb-main-pt">
         <template #one>
           <SkAppQueryForm :fixes="2" :data="formData" @setData="setData(formData, $event)" :formItems="queryItems">
           </SkAppQueryForm>

@@ -31,7 +31,7 @@ const firstFormData = reactive({
         <SkMultipageTemplate :label="'选项1'" :value="'first'">
           <ElScrollbar >
             <FirstVue
-              class="ptb-form-ptb plr-form-pl"
+              class="ptb-form-pt plr-form-pl"
               :data="firstFormData"
               @setData="setData(firstFormData, $event)"
             ></FirstVue>

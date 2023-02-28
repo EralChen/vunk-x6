@@ -37,7 +37,7 @@ const formItems: __SkAppForm.CoreFormItem<keyof typeof elCardTheme>[] = [
 
       <SkAppForm 
         :labelWidth="100"
-        class="plr-form-pl ptb-form-ptb"
+        class="plr-form-pl ptb-form-pt"
         :formItems="formItems"
         :data="themeStore.cardStyles"
         @setData="setData(themeStore.cardStyles, $event)"

@@ -81,8 +81,8 @@ export default defineComponent({
 }
 .sk-multipage-tab{
   font-size: var(--f-multipage-tab, var(--f-module-title, 18px));
-  padding-top: var(--gap-tab-ptb, 24px);
-  padding-bottom: var(--gap-tab-ptb, 24px);
+  padding-top: var(--gap-tab-pt, 24px);
+  padding-bottom: var(--gap-tab-pt, 24px);
   color: var(--el-text-color-secondary);
   cursor: pointer;
 }

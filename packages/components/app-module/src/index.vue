@@ -25,10 +25,10 @@ export default defineComponent({
 }
 .sk-app-module__header.is-form {
   font-size: var(--f-module-title, 18px);
-  padding: var(--gap-tab-ptb, 24px) var(--gap-form-pl, 70px);
+  padding: var(--gap-tab-pt, 24px) var(--gap-form-pl, 70px);
 }
 
 .sk-app-module__body.is-form {
-  padding: var(--gap-form-ptb, 14px) var(--gap-form-pl, 70px);
+  padding: var(--gap-form-pt, 14px) var(--gap-form-pl, 70px);
 }
 </style>

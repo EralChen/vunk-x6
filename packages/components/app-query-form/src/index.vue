@@ -75,7 +75,7 @@ export default defineComponent({
       </SkAppForm>
       <div>
         <slot name="options" v-if="ready" :forms="forms">
-          <ElButton type="primary">查询</ElButton>
+          <!-- <ElButton type="primary">查询</ElButton> -->
         </slot>
       </div>
 

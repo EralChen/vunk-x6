@@ -20,12 +20,12 @@ const modules = ref([
       bodyClass="h-100%"
     >
       <template #base>
-        <ElScrollbar class="ptb-form-ptb plr-form-pl">
+        <ElScrollbar class="ptb-form-pt plr-form-pl">
           <BaseVue></BaseVue>
         </ElScrollbar>
       </template>
       <template #name>
-        <ElScrollbar class="ptb-form-ptb plr-form-pl">
+        <ElScrollbar class="ptb-form-pt plr-form-pl">
           <NameVue></NameVue>
         </ElScrollbar>
       </template>

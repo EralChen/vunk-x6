@@ -27,8 +27,8 @@ const formItems: __SkAppForm.FormItem<keyof typeof namedGap>[] = [
 
   {
     templateType: 'VkfSelect',
-    prop: '--gap-main-ptb',
-    label: 'gap-main-ptb',
+    prop: '--gap-main-pt',
+    label: 'gap-main-pt',
     options: baseGapOptions,
     clearable: true,
     allowCreate: true,
@@ -61,8 +61,8 @@ const formItems: __SkAppForm.FormItem<keyof typeof namedGap>[] = [
 
   {
     templateType: 'VkfSelect',
-    prop: '--gap-form-ptb',
-    label: 'gap-form-ptb',
+    prop: '--gap-form-pt',
+    label: 'gap-form-pt',
     options: baseGapOptions,
     clearable: true,
     allowCreate: true,
@@ -77,8 +77,8 @@ const formItems: __SkAppForm.FormItem<keyof typeof namedGap>[] = [
 
   {
     templateType: 'VkfSelect',
-    prop: '--gap-tab-ptb',
-    label: 'gap-tab-ptb',
+    prop: '--gap-tab-pt',
+    label: 'gap-tab-pt',
     options: baseGapOptions,
     clearable: true,
     allowCreate: true,

@@ -14,7 +14,7 @@ const themeStore = useThemeStore()
         <template #header__options>
           <ThemeClipboardButton :target="'layoutTopStyles'"></ThemeClipboardButton>
         </template>
-        <div class="ptb-form-ptb plr-form-pl">
+        <div class="ptb-form-pt plr-form-pl">
           <ConfigForm
             :labelWidth="205"
             :data="themeStore.layoutTopStyles"

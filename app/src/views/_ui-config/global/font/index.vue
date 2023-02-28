@@ -17,7 +17,7 @@ const modules = ref([
   <SkMultipage class="bg-bg-overlay h-100%" :headerClass="'plr-form-pl'" v-model="currentPage" :modules="modules">
     
     <template #base>
-      <div class="plr-form-pl ptb-form-ptb">
+      <div class="plr-form-pl ptb-form-pt">
         <BaseVue />
       </div>
     </template>
@@ -28,7 +28,7 @@ const modules = ref([
     </template>
 
     <template #name>
-      <div class="plr-form-pl ptb-form-ptb">
+      <div class="plr-form-pl ptb-form-pt">
         <NameVue></NameVue>
       </div>
     </template>

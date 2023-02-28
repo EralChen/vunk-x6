@@ -94,7 +94,7 @@ function cuI () {
 </script>
 <template>
   <PageX>
-    <VkDuplexCalc class="plr-page ptb-main-ptb">
+    <VkDuplexCalc class="plr-page ptb-main-pt">
       <template #one>
         <SkAppQueryForm 
           :data="queryData" 
