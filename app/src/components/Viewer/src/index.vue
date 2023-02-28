@@ -12,7 +12,7 @@ const isDark = useSharedDark()
 <template>
   <VaMapView :defaultOptions="defaultOptions">
     <VaTdtBasemap :type="isDark ? 'img_c' : 'vec_c'" />
-    <VaZoom :position="'top-trailing'"></VaZoom>
+    <VaZoom :position="'top-leading'"></VaZoom>
     <slot></slot>
   </VaMapView>
 </template>

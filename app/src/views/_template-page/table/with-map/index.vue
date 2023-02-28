@@ -1,8 +1,8 @@
 <script lang="tsx" setup>
+import PageX from '_c/PageX/index.vue'
 import GoldMapX from '_c/GoldMapX/index.vue'
 import {
-  SkAppCard,
-  SkCheckTags,
+  SkAppCard, SkCheckTags,
   SkAppTables, __SkAppTables,
   SkAppQueryForm, __SkAppQueryForm,
   SkAppOperations,
@@ -10,6 +10,8 @@ import {
 import { NormalObject, setData, VkDuplexCalc } from '@vunk/core'
 import { ref } from 'vue'
 import { FixedDir } from 'element-plus/es/components/table-v2/src/constants'
+
+
 
 const queryItems: __SkAppQueryForm.FormItem[] = [
   {
@@ -76,15 +78,26 @@ const typeOptions = [
 ]
 const colSource: __SkAppTables.Column[] = [
   {
+    key: 'id',
+    dataKey: 'id',
+    width: 50,
+    title: 'ID',
+
+  },
+  {
     key: 'name',
     dataKey: 'name',
     width: 100,
     title: '姓名',
+    flexGrow: 1,
+    align: 'center',
   },
   {
     key: 'operations',
     title: '操作',
     width: 260,
+
+    align: 'center',
     fixed: FixedDir.RIGHT,
     cellRenderer: () => {
       return <SkAppOperations
@@ -104,33 +117,33 @@ const data = [
   ...Array.from({ length: 100 }).map((_, i) => {
     return {
       name: `cx${i}`,
+      id: i,
     }
   }),
 ]
 
 </script>
 <template>
-  <page-x>
-    <SkAppCard class="h-100%" :header="'地图+表格'">
-      <GoldMapX :viewer-index="2" :type="'ltr'" class="h-100%">
+  <PageX>
+    <SkAppCard :header="'地图+表格'" class="h-100%">
+      <GoldMapX :viewerIndex="1" :type="'rtl'" class="h-100%">
+        <VkDuplexCalc class="plr-page ptb-main-ptb">
+          <template #one>
+            <SkAppQueryForm :fixes="2" :data="formData" @setData="setData(formData, $event)" :formItems="queryItems">
+            </SkAppQueryForm>
+            <div sk-flex="row-between-center" ptb-page>
+              <SkCheckTags v-model="formData.type" :options="typeOptions"></SkCheckTags>
+              <ElButton type="primary">新增</ElButton>
+            </div>
 
-          <VkDuplexCalc class="h-100% plr-page ptb-main-ptb">
-            <template #one>
-              <SkAppQueryForm :fixes="2" :data="formData" @setData="setData(formData, $event)" :formItems="queryItems">
-              </SkAppQueryForm>
-              <div sk-flex="row-between-center" ptb-page>
-                <SkCheckTags v-model="formData.type" :options="typeOptions"></SkCheckTags>
-                <ElButton type="primary">新增</ElButton>
-              </div>
+          </template>
 
-            </template>
-
-            <SkAppTables class="h-100%" :data="data" :columns="colSource" :total="100">
-            </SkAppTables>
-          </VkDuplexCalc>
- 
+          <SkAppTables class="h-100%" :data="data" :columns="colSource" :total="100">
+          </SkAppTables>
+        </VkDuplexCalc>
       </GoldMapX>
 
+
     </SkAppCard>
-  </page-x>
+  </PageX>
 </template>
