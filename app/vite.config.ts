@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJSX from '@vitejs/plugin-vue-jsx'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
-import { windowEnvPlugin, vunkPresetsTheme } from '@lib-env/app-utils'
+import { windowEnvPlugin, vunkPresetsTheme, vunkPresetsShortcuts } from '@lib-env/app-utils'
 import { getEnv } from '@lib-env/app-utils'
 import path from 'path'
 import { appRoot } from '@lib-env/path'
@@ -61,6 +61,9 @@ export default defineConfig(({ mode }) => {
           }),
         
         ],
+        shortcuts: {
+          ...vunkPresetsShortcuts,
+        },
     
     
         theme: {

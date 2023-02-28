@@ -26,3 +26,7 @@ export const namedGap = {
   '--gap-widget-space': 'var(--gap-m)',
 
 }
+
+export const gapShortcuts = {
+  'gap-main-x': 'plr-page pt-main-pt pb-page',
+}
