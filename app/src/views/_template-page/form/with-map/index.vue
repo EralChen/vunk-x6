@@ -25,7 +25,7 @@ const formVueProps = computed(() => {
 </script>
 <template>
   <PageX>
-    <SkAppCard class="h-100%" :header="'地图 + 表单'">
+    <SkAppCard class="h-100%" :header="'地图+表单'">
       <template #header__options>
         <ThemeClipboardButton :target="'colorStyles'"></ThemeClipboardButton>
       </template>
