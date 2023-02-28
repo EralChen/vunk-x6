@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { VaMapView, VaTdtBasemap, VaBasemapToggle, VaBasemapToggleNextBasemap, __VaBasemapToggle } from '@vuesri/core'
+import { VaMapView, VaTdtBasemap, VaBasemapToggle, VaBasemapToggleNextBasemap } from '@vuesri/core'
 import { useSharedDark } from '@skzz-platform/composables'
 import { VaZoom } from '@vuesri/core/components/zoom'
 import { props as dProps } from './ctx'
@@ -35,7 +35,7 @@ watch(isDark, (val) => {
       @load="toggleDef.resolve($event.basemapToggle)"
     >
       <VaTdtBasemap :orphan="true" :type="'vec_c'" 
-      
+    
         @load="vecDef.resolve($event.basemap)"
       >
         <VaBasemapToggleNextBasemap></VaBasemapToggleNextBasemap>
