@@ -17,6 +17,7 @@ export default [
         meta: {
           title: '表格页面',
         },
+        redirect: '/_template-page/table/basic',
         children: [
           {
             path: 'basic',
@@ -42,6 +43,7 @@ export default [
         meta: {
           title: '表单页面',
         },
+        redirect: '/_template-page/form/basic',
         children: [
           {
             path: 'basic',
