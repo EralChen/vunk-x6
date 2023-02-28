@@ -82,16 +82,18 @@ const colSource: __SkAppTables.Column[] = [
     dataKey: 'id',
     width: 50,
     title: 'ID',
-
-  },
-  {
-    key: 'name',
-    dataKey: 'name',
-    width: 100,
-    title: '姓名',
-    flexGrow: 1,
     align: 'center',
   },
+  ...Array.from({ length: 10 }).map((_, i) => {
+    return {
+      key: 'name',
+      dataKey: 'name',
+      width: 100,
+      title: `姓名${i}`,
+      flexGrow: 1,
+      align: 'center',
+    } as __SkAppTables.Column
+  }),
   {
     key: 'operations',
     title: '操作',
@@ -138,7 +140,7 @@ const data = [
 
           </template>
 
-          <SkAppTables class="h-100%" :data="data" :columns="colSource" :total="100">
+          <SkAppTables :fixed="true" class="h-100%" :data="data" :columns="colSource" :total="100">
           </SkAppTables>
         </VkDuplexCalc>
       </GoldMapX>

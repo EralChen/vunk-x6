@@ -3,8 +3,6 @@ import {
   SkAppTables, __SkAppTables, 
   SkAppOperations,
 } from '@skzz/platform'
-import { NormalObject } from '@vunk/core'
-import { ref } from 'vue'
 import { FixedDir } from 'element-plus/es/components/table-v2/src/constants'
 
 const generateColumns = (length = 10, prefix = 'column-', props?: any) =>

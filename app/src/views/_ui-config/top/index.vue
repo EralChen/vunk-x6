@@ -16,7 +16,7 @@ const themeStore = useThemeStore()
         </template>
         <div class="ptb-form-ptb plr-form-pl">
           <ConfigForm
-            :labelWidth="200"
+            :labelWidth="205"
             :data="themeStore.layoutTopStyles"
             @setData="setData(themeStore.layoutTopStyles, $event)"
           ></ConfigForm>

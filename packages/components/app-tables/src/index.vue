@@ -152,16 +152,15 @@ export default defineComponent({
 <style lang="scss">
 
 .sk-app-tables__table .el-table-v2__table {
-  border-left: var(--el-border);
   border-right: var(--el-border);
 }
 .el-table-v2__header-cell{
   border-top: var(--el-border);
 }
-.sk-app-tables__table .el-table-v2__header-cell:not(:first-child){
+.sk-app-tables__table .el-table-v2__header-cell{
   border-left: var(--el-border);
 }
-.sk-app-tables__table .el-table-v2__row-cell:not(:first-child){
+.sk-app-tables__table .el-table-v2__row-cell{
   border-left: var(--el-border);
 }
 

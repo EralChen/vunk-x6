@@ -115,7 +115,7 @@ const formData = ref({
 } as NormalObject)
 
 const data = [
-  ...Array.from({ length: 100 }).map((_, i) => {
+  ...Array.from({ length: 3 }).map((_, i) => {
     return {
       name: `cx${i}`,
       id: i,
