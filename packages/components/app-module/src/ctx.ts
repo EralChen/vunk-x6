@@ -6,7 +6,7 @@ export const props = {
     default: '',
   },
   type: {
-    type: String as PropType<'form'>,
+    type: String as PropType<'form'|'default'>,
     default: 'form',
   },
 }
