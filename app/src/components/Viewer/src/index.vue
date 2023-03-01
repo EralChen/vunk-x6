@@ -5,6 +5,7 @@ import { VaZoom } from '@vuesri/core/components/zoom'
 import { props as dProps } from './ctx'
 import { Deferred } from '@vunk/core/shared/utils-promise'
 import { watch } from 'vue'
+
 defineProps({
   ...dProps,
 })
@@ -12,31 +13,32 @@ const imgDef = new Deferred<__esri.Basemap>()
 const vecDef = new Deferred<__esri.Basemap>()
 const toggleDef = new Deferred<__esri.BasemapToggle>()
 const isDark = useSharedDark()
-watch(isDark, (val) => {
+
+watch(isDark,  () => {
+  toggle()
+})
+function toggle () {
   Promise.all([imgDef.promise, vecDef.promise, toggleDef.promise])
-    .then(([img, vec, toggle]) => {
-      if (val) { // 如果 isDark 则底图为 img_c'
+    .then(async ([img, vec, toggle]) => {
+      if (isDark.value) { // 如果 isDark 则底图为 img_c'
         toggle.activeBasemap !== img && toggle.toggle()  
       } else { // 如果不是 isDark 则底图为 vec_c
         toggle.activeBasemap !== vec && toggle.toggle()
       }
     })
-}, {
-  immediate: true,
-})
-
+}
 </script>
 <template>
   <VaMapView :defaultOptions="defaultOptions">
-    <VaTdtBasemap :type="'img_c'" @load="imgDef.resolve($event.basemap)"  />
+    <VaTdtBasemap :type="'vec_c'" @load="vecDef.resolve($event.basemap)"  />
     <VaZoom :position="'bottom-trailing'"></VaZoom>
 
     <VaBasemapToggle :position="'bottom-leading'"
       @load="toggleDef.resolve($event.basemapToggle)"
     >
-      <VaTdtBasemap :orphan="true" :type="'vec_c'" 
+      <VaTdtBasemap :orphan="true" :type="'img_c'" 
     
-        @load="vecDef.resolve($event.basemap)"
+        @load="imgDef.resolve($event.basemap)"
       >
         <VaBasemapToggleNextBasemap></VaBasemapToggleNextBasemap>
       </VaTdtBasemap>
