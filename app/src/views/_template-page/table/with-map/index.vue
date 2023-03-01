@@ -104,7 +104,7 @@ const colSource: __SkAppTables.Column[] = [
     cellRenderer: () => {
       return <SkAppOperations
         modules={['r', 'u', 'd']}
-
+  
       ></SkAppOperations>
     },
   },
@@ -131,7 +131,12 @@ const data = [
       <GoldMapX :viewerIndex="1" :type="'rtl'" class="h-100%">
         <VkDuplexCalc class="gap-main-x">
           <template #one>
-            <SkAppQueryForm :fixes="2" :data="formData" @setData="setData(formData, $event)" :formItems="queryItems">
+            <SkAppQueryForm 
+              :fixes="2" 
+              :data="formData" 
+              @setData="setData(formData, $event)" 
+              :formItems="queryItems"
+            >
             </SkAppQueryForm>
             <div sk-flex="row-between-center" ptb-page>
               <SkCheckTags v-model="formData.type" :options="typeOptions"></SkCheckTags>

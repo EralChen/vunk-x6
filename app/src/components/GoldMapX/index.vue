@@ -45,12 +45,14 @@ export default defineComponent({
 <template>
   <GoldX v-bind="goldProps">
     <template #one>
-
-      <component :is="viewer" v-if="viewerIndex === 1"
+      <div class="h-100% ptb-page pl-page" v-if="viewerIndex === 1">
+        <component :is="viewer" 
         @load="viewLoad"
-      >
-        <slot name="map"></slot>
-      </component>
+        >
+          <slot name="map"></slot>
+        </component>
+      </div>
+
 
       <slot v-else-if="ready"></slot>
 
@@ -58,12 +60,13 @@ export default defineComponent({
     </template>
 
     <template #two>
-
-      <component :is="viewer" v-if="viewerIndex === 2"
+      <div class="h-100% ptb-page pr-page"  v-if="viewerIndex === 2">
+      <component :is="viewer"
         @load="viewLoad"
       >
         <slot name="map"></slot>
       </component>
+      </div>
 
       <slot v-else-if="ready"></slot>
 
