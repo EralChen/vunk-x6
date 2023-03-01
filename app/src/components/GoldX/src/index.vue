@@ -1,5 +1,5 @@
 <script lang="ts">
-import { computed, defineComponent, PropType, normalizeClass } from 'vue'
+import { computed, defineComponent, normalizeClass } from 'vue'
 import { props } from './ctx'
 export default defineComponent({
   props,
@@ -29,14 +29,14 @@ export default defineComponent({
   }">
     <div :class="normalizeClass({
       'g-primary': isFirstMain,
-      'g-secord': !isFirstMain,
+      'g-second': !isFirstMain,
     }) + ' ' + normalizeClass(itemClass)">
 
       <slot name="one"></slot>
     </div>
 
     <div :class="normalizeClass({
-      'g-secord': isFirstMain,
+      'g-second': isFirstMain,
       'g-primary': !isFirstMain,
     }) + ' ' + normalizeClass(itemClass)">
       <slot name="two"></slot>
@@ -49,7 +49,7 @@ export default defineComponent({
 .g-primary{
   flex: 1125;
 }
-.g-secord{
+.g-second{
   flex: 568;
 }
 </style>
