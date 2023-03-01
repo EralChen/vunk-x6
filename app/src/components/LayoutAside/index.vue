@@ -4,7 +4,7 @@ import { VkRoutesMenuContent } from '@vunk/skzz/components/routes-menu-content'
 import LinkVue from '_c/MenuLink/index.vue'
 import { useLayoutStore } from '@/stores/layout'
 import { Document } from '@element-plus/icons-vue'
-import { nextTick, onMounted, onUnmounted, Ref, ref, watch } from 'vue'
+import { nextTick, onMounted, Ref, ref, watch } from 'vue'
 import CollapseVue from './Collapse.vue'
 import { useViewsStore } from '@/stores/views'
 import { usePermissionStore } from '@/stores/permission'
@@ -16,6 +16,7 @@ import { useSharedMenuClick } from '@/composables'
 const emit = defineEmits({
   'load': null,
 })
+
 const viewsStore = useViewsStore()
 const layoutStore = useLayoutStore()
 const permissionStore = usePermissionStore()
