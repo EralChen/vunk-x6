@@ -28,7 +28,6 @@ module.exports = defineConfig({
       'named': 'always',
       'asyncArrow': 'always',
     }],
-    'func-call-spacing': ['error', 'never'],
     'keyword-spacing': ['error',{
       'before': true,
       'after': true,
@@ -41,8 +40,10 @@ module.exports = defineConfig({
     '@typescript-eslint/no-var-requires': 'off',
     // for ts
     '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/func-call-spacing': ['error', 'never'],
     // for vue
     'vue/multi-word-component-names': 'off',
     'vue/prefer-import-from-vue': 'off',
+   
   },
 })
