@@ -27,7 +27,3 @@ export const namedGap = {
 
 }
 
-export const gapShortcuts = {
-  'gap-main-x': 'plr-page ptb-main-pt',
-  'gap-form-x': 'plr-form-pl ptb-form-pt',
-}

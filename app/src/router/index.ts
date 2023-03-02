@@ -10,7 +10,7 @@ export const routes: Array<RouteRecordRaw> = [
     meta: {
       display: 0,
     },
-  },
+  }, 
 
   {
     path: '/home',
@@ -35,7 +35,7 @@ export const routes: Array<RouteRecordRaw> = [
     meta: {
       display: 0,
     },
-    component: () => import('_v/login/index.vue'),
+    component: () => import('_v/_login/index.vue'),
   },
 
   ..._UI_CONFIG,

@@ -67,18 +67,19 @@ onMounted(async () => {
         </template>
 
         <template #itemTitle="{ data }">
-          <span>{{ data.meta?.title || data.meta?.name }}</span> 
+          <span >{{ data.meta?.title || data.meta?.name }}</span> 
         </template>
 
         <template #menuTitle="{ data, href }">
+ 
           <LinkVue :isMenu="true" :data="data" :to="href">
             <ElIcon class="layout-default-aside-item-icon"><Document></Document></ElIcon>
           </LinkVue>
 
-          <span>{{ data.meta?.title || data.meta?.name }}</span> 
+          <span class="layout-default-aside-item-span"> {{ data.meta?.title || data.meta?.name }}</span> 
+
 
         </template>
-
       </VkRoutesMenuContent>
     </ElMenu>
   
@@ -89,6 +90,10 @@ onMounted(async () => {
 </template>
 
 <style>
+
+.layout-default-aside-menu[style*="--el-menu-level:0"] > li .layout-default-aside-item-span {
+  font-weight: bold;
+}
 .layout-default-aside-collapse{
   position: absolute;
   top: 50%;

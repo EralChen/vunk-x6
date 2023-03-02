@@ -1,4 +1,4 @@
-import { baseGap, namedGap, baseFontSize, namedFontSize,gapShortcuts } from '@skzz-platform/theme'
+import { baseGap, namedGap, baseFontSize, namedFontSize, unoShortcuts } from '@skzz-platform/theme'
 import { NormalObject } from '@vunk/core/shared/types'
 
 
@@ -38,7 +38,7 @@ export const vunkPresetsTheme = {
 }
 
 export const vunkPresetsShortcuts = {
-  ...gapShortcuts,
+  ...unoShortcuts,
 }
 
 export default vunkPresetsTheme
