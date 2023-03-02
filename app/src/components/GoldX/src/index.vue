@@ -10,7 +10,6 @@ export default defineComponent({
       } else {
         return 'sk-flex-col'
       }
-      
     })
     const isFirstMain = computed(() => {
       return ['ltr', 'ttb'].includes(props.type)

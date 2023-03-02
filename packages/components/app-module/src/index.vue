@@ -20,7 +20,7 @@ export default defineComponent({
 
 <style>
 .sk-app-module__header{
-  color: var(--el-color-primary);
+  /* color: var(--el-color-primary); */
   font-weight: bold;
 }
 .sk-app-module__header.is-form {
