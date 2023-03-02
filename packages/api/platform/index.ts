@@ -1,6 +1,7 @@
 import { PlatformInfo } from '@skzz-platform/shared/types'
 import { usePlatformStore } from '@skzz-platform/stores/platform'
 import { request } from '@skzz-platform/shared/fetch/public'
+import { restFetch as platformRestFetch } from '@skzz-platform/shared/fetch/platform'
 
 export const rPlatfroms = async () => { 
   return request<PlatformInfo[]>({
@@ -10,6 +11,11 @@ export const rPlatfroms = async () => {
       id: 'platforms',
     },
   }).then(res => {
+    res.forEach(item => {
+      if (item.code === 'default') {
+        item.url = platformRestFetch.baseURL
+      }
+    })
     return res
   })
 }

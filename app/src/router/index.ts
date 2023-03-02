@@ -28,6 +28,14 @@ export const routes: Array<RouteRecordRaw> = [
       },
     ],
   },
+  
+  {
+    path: '/login',
+    meta: {
+      display: 0,
+    },
+    redirect: '/login/default',
+  },
 
   {
     path: '/login/:platform',
