@@ -18,13 +18,19 @@ const login = () => {
 </script>
 <template>
   <div sk-flex="col-center2" class="h-100% bg-bg-page">
-    <div class="w-1200px h-680px bg-bg-overlay rd-16px">
-      <FormVue 
-      class="login-form"
-      :data="data"
-      @setData="setData(data, $event)"
-      @login="login"
-    ></FormVue>
+    <div class="w-1200px h-680px bg-bg-overlay rd-16px" sk-flex>
+      <div class="flex-1">
+
+      </div>
+      <div class="flex-1" sk-flex="col-center">
+        <FormVue 
+          class="login-form"
+          :data="data"
+          @setData="setData(data, $event)"
+          @login="login"
+        ></FormVue>
+      </div>
+
     </div>
   </div>
 </template>
