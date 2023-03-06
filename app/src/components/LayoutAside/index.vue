@@ -88,12 +88,16 @@ onMounted(async () => {
   <CollapseVue class="layout-default-aside-collapse"></CollapseVue>
 </div>
 </template>
-
-<style>
-
-.layout-default-aside-menu[style*="--el-menu-level:0"] > li .layout-default-aside-item-span {
+<slyle lang="scss">
+.layout-default-aside-menu[style*="--el-menu-level:0"] > li{
   font-weight: bold;
 }
+.layout-default-aside-menu[style*="--el-menu-level:0"] > li > ul{
+  font-weight: initial;
+}
+</slyle>
+
+<style>
 .layout-default-aside-collapse{
   position: absolute;
   top: 50%;

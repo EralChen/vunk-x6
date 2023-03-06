@@ -6,9 +6,9 @@ const allColor = {
   '--el-color-info': 'rgba(150, 151, 153, 1)',
   '--el-color-white': '#FFFFFF',
   '--el-color-black': '#000000',
-  
+
   '--el-bg-color': '#ffffff',
-  '--el-bg-color-page': 'rgba(255, 255, 255, 1)',
+  '--el-bg-color-page': '#0a0a0a',
   '--el-bg-color-overlay': '#ffffff',
 
   '--el-text-color-primary': 'rgba(50, 50, 51, 1)',
