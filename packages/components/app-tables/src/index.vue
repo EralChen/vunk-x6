@@ -130,7 +130,10 @@ export default defineComponent({
               v-bind="tableBindProps" 
               :class="tableClass" 
               :style="tableStyle"
-              :width="tableBindProps.width ?? width" :height="tableBindProps.width ?? height" :columns="columns">
+              :width="tableBindProps.width ?? width" 
+              :height="tableBindProps.height ?? height" 
+              :columns="columns"
+            >
               <slot></slot>
             </ElTableV2>
           </VkCheckRecordLogicProvider>
