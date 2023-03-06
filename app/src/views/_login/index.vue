@@ -1,22 +1,9 @@
 <script lang="ts" setup>
-import FormVue from './form/index.vue'
-import { setData } from '@vunk/core'
+import ByPassword from './by-password/index.vue'
+import ByPhone from './by-phone/index.vue'
 import { ref } from 'vue'
-import { LoginFormData } from './types'
-import { loginByPassword } from '@skzz-platform/api/login'
-import { useRouter } from 'vue-router'
-import { ElTabs, ElTabPane } from 'element-plus'
-const router = useRouter()
 const currentPage = ref('1')
-const data = ref({
-  userCode: 'root',
-  password: '123456',
-} as LoginFormData)
-const login = () => {
-  loginByPassword(data.value).then(() => {
-    router.push({ path: '/home' })
-  })
-}
+
 </script>
 <template>
   <div sk-flex="col-center2" class="h-100% bg-bg-page">
@@ -38,16 +25,11 @@ const login = () => {
 
           <ElTabs  v-model="currentPage" class="login-tabs">
             <ElTabPane label="账号密码登录" name="1">
-              <FormVue 
-                class="login-form"
-                :data="data"
-                @setData="setData(data, $event)"
-                @login="login"
-              ></FormVue>
+              <ByPassword></ByPassword>
             </ElTabPane>
 
             <ElTabPane label="手机验证码登录" name="2">
-      
+              <ByPhone></ByPhone>
             </ElTabPane>
 
             <ElTabPane label="扫码登录" name="3">

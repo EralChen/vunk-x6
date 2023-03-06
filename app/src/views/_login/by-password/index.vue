@@ -1,29 +1,40 @@
 <script lang="tsx" setup>
-import { SetDataEvent } from '@vunk/core'
-import { FormItemRendererSource, VkfForm } from '@vunk/form'
-import { PropType } from 'vue'
+import { loginByPassword } from '@skzz-platform/api/login'
+import { setData, SetDataEvent } from '@vunk/core'
+import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { LoginFormData } from '../types'
 import CaptchaVue from './captcha.vue'
 
-const props = defineProps({
-  data: {
-    type: Object as PropType<LoginFormData>,
-    default: () => ({}),
-  },
-})
+// const props = defineProps({
+// })
 const emit = defineEmits({
   setData: (e: SetDataEvent<keyof LoginFormData>) => e,
   login: (e: LoginFormData) => e,
 })
 /* --------------------- */
+const router = useRouter()
 
+
+
+const formData = ref({
+  userCode: 'root',
+  password: '123456',
+} as LoginFormData)
+
+const login = () => {
+  loginByPassword(formData.value).then(() => {
+    router.push({ path: '/home' })
+  })
+}
 
 const defaultFormItemProps = {
   labelWidth: 0,
   size: 'large' as const,
   class: 'mb-28px',
 }
-const formItems: FormItemRendererSource<keyof LoginFormData>[] = [
+const formItems: __SkAppForm.FormItem<keyof LoginFormData>[] = [
   {
     templateType: 'VkfInput',
     ...defaultFormItemProps,
@@ -47,12 +58,12 @@ const formItems: FormItemRendererSource<keyof LoginFormData>[] = [
     templateType: 'Component',
     // will set captchaId and captcha
     is: () => <CaptchaVue
-      data={props.data}
+      data={formData.value}
       prop="captcha"
       {
         ...defaultFormItemProps
       }
-      onSetData={e => emit('setData', e)}
+      onSetData={e => setData(formData.value, e)}
     ></CaptchaVue>,
   },
   {
@@ -64,17 +75,18 @@ const formItems: FormItemRendererSource<keyof LoginFormData>[] = [
     
     validate: true,
     onClick: () => {
-      emit('login', props.data)
+      login()
+      emit('login', formData.value)
     },
   },
 ]
 
 </script>
 <template>
-  <VkfForm 
-    :data="data"
+  <SkAppForm 
+    :data="formData"
     :formItems="formItems"
     @setData="$emit('setData', $event)"
   >
-  </VkfForm>
+  </SkAppForm>
 </template>
