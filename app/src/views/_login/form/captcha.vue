@@ -41,6 +41,7 @@ function r () {
   <div sk-flex="row_center" class="login-form-captcha-x">
     <VkfInput
       v-bind="$attrs"
+      
       :modelValue="data[prop]"
       @update:modelValue="$emit('setData', {
         k: 'captcha',
