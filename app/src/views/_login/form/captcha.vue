@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script lang="tsx" setup>
 import { PropType, ref } from 'vue'
 import { VkfInput } from '@vunk/form/components/input'
 import { rCaptcha } from '@skzz-platform/api/login'
@@ -35,24 +35,33 @@ function r () {
     })
   })
 }
+const append = () => {
+  return <img src={captcha.value.captcha} onClick={r} />
+}
 </script>
 
 <template>
-  <div sk-flex="row_center" class="login-form-captcha-x">
     <VkfInput
       v-bind="$attrs"
-      
+      class="captcha-input"
       :modelValue="data[prop]"
       @update:modelValue="$emit('setData', {
         k: 'captcha',
         v: $event
       })"
+      :inputSlots="{
+        append
+      }"
     ></VkfInput>
-    <img :src="captcha.captcha" @click="r" />
-  </div>
+
 </template>
-<style>
-.login-form-captcha-x img{
-  margin-bottom: 18px;
+<style lang="scss">
+.captcha-input {
+  .el-input-group__append{
+    padding: 2px;
+    img{
+      height: 40px;
+    }
+  }
 }
 </style>

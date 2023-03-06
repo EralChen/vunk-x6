@@ -55,9 +55,10 @@ const formItems: FormItemRendererSource<keyof LoginFormData>[] = [
   {
     templateType: 'VkfButton',
     buttonLabel: '登录',
-    class: 'login-form-vkbtn',
+    class: 'sub-btn-full pt-56px',
     type: 'primary',
     size: 'large',
+    
     validate: true,
     onClick: () => {
       emit('login', props.data)
@@ -74,9 +75,3 @@ const formItems: FormItemRendererSource<keyof LoginFormData>[] = [
   >
   </VkfForm>
 </template>
-<style>
-.login-form-vkbtn > .el-form-item__content{
-  display: flex;
-  justify-content: flex-end;
-}
-</style>
