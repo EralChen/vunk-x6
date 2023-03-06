@@ -6,7 +6,9 @@ import _PLAY from './_play'
 export const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    redirect: '/home',
+    redirect: {
+      name: 'home',
+    },
     meta: {
       display: 0,
     },
@@ -15,12 +17,14 @@ export const routes: Array<RouteRecordRaw> = [
   {
     path: '/home',
     component: Layout,
+
     meta: {
       display: 0,
     },
     children: [
       {
         path: '',
+        name: 'home',
         meta: {
           title: '首页',
         },

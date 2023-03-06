@@ -30,7 +30,7 @@ router.beforeEach(async (to, from, next) => {
     if (to.path === loginPath) {
 
       next(
-        { path: '/' },
+        { name: 'home' },
       )
 
     } else {

@@ -8,6 +8,7 @@ import { setData, SetDataEvent } from '@vunk/core'
 import ThemeClipboardButton from '@/components/ThemeClipboardButton/index.vue'
 import { computed } from 'vue'
 import GoldMapX from '_c/GoldMapX/index.vue'
+import { VaSketch } from '@vuesri/core'
 const themeStore = useThemeStore()
 
 const formVueProps = computed(() => {
@@ -39,6 +40,11 @@ const formVueProps = computed(() => {
           </SkAppModule>
 
         </ElScrollbar>
+
+        <template #map>
+          <VaSketch></VaSketch>
+        </template>
+
       </GoldMapX>
   
     </SkAppCard>
