@@ -17,24 +17,26 @@ const emit = defineEmits({
 })
 /* --------------------- */
 
-const labelWidth = '0'
+
+const defaultFormItemProps = {
+  labelWidth: 0,
+  size: 'large' as const,
+  class: 'mb-28px',
+}
 const formItems: FormItemRendererSource<keyof LoginFormData>[] = [
   {
     templateType: 'VkfInput',
-    // label: '用户名',
-    labelWidth,
+    ...defaultFormItemProps,
     prop: 'userCode',
-    size: 'large',
     rules: {
       required: true,
       message: '请输入用户名',
     },
+    
   },
   {
     templateType: 'VkfInput',
-    // label: '密码',
-    size: 'large',
-    labelWidth,
+    ...defaultFormItemProps,
     prop: 'password',
     rules: {
       required: true,
@@ -46,9 +48,10 @@ const formItems: FormItemRendererSource<keyof LoginFormData>[] = [
     // will set captchaId and captcha
     is: () => <CaptchaVue
       data={props.data}
-      labelWidth={labelWidth}
       prop="captcha"
-      size="large"
+      {
+        ...defaultFormItemProps
+      }
       onSetData={e => emit('setData', e)}
     ></CaptchaVue>,
   },
