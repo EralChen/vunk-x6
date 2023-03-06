@@ -88,6 +88,7 @@ onMounted(async () => {
   <CollapseVue class="layout-default-aside-collapse"></CollapseVue>
 </div>
 </template>
+
 <slyle lang="scss">
 .layout-default-aside-menu[style*="--el-menu-level:0"] > li{
   font-weight: bold;
@@ -115,6 +116,9 @@ onMounted(async () => {
 }
 .layout-default-aside-menu {
   min-height: var(--vk-duplex-calc-resize-height);
+}
+.layout-default-aside-item-icon{
+  margin-bottom: .2em;
 }
 </style>
 

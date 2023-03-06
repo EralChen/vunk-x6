@@ -10,7 +10,6 @@ export const baseFontSize = {
   '--f-xxl': '1.5rem',
   '--f-xxxl': '1.7rem',
 }
-
 export const baseFontSizeOptions = Object.keys(baseFontSize).map(item => {
   return {
     label: item,
@@ -19,6 +18,6 @@ export const baseFontSizeOptions = Object.keys(baseFontSize).map(item => {
 })
 
 export const namedFontSize = {
-  '--f-module-title': 'var(--f-xl)',
-  '--f-card-title': 'var(--f-xl)',
+  '--f-module-title': 'var(--f-l)',
+  '--f-card-title': 'var(--f-l)',
 }

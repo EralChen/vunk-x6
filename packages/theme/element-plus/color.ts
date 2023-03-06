@@ -8,7 +8,7 @@ const allColor = {
   '--el-color-black': '#000000',
 
   '--el-bg-color': '#ffffff',
-  '--el-bg-color-page': '#0a0a0a',
+  '--el-bg-color-page': '#f2f3f5',
   '--el-bg-color-overlay': '#ffffff',
 
   '--el-text-color-primary': 'rgba(50, 50, 51, 1)',
