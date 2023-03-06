@@ -22,11 +22,11 @@ export function windowEnvPlugin (): PluginOption {
     transformIndexHtml (html) {
       const obj = getEnv(mode)
       Reflect.deleteProperty(obj, 'NODE_ENV')
-      Reflect.deleteProperty(obj, 'VITE_BASE_URL')
+      // Reflect.deleteProperty(obj, 'VITE_BASE_URL')
       
       return html.replace(`<script id="env"></script>`,
         `<script id="env">
-          ${'window.__env__ =' + JSON.stringify(getEnv(mode), null, 2)}
+          ${'window.__env__ =' + JSON.stringify(obj, null, 2)}
         </script>`)
     },
   }
