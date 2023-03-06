@@ -3,6 +3,9 @@ import Layout from '@/layouts/default/index.vue'
 
 export const createRemoteRoutes = () => { 
   return {
+    '': {
+      redirect: '/home',
+    },
     '/dashboard': {
       component: () => import('@/views/home/index.vue'),
       meta: {
