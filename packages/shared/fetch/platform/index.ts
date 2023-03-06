@@ -13,7 +13,9 @@ export function withPlatform <T extends AnyFunc> (fn: T) {
   return (async (...args) => {
     const platformStore = usePlatformStore()
     const platform = await platformStore.getPlatformInfo()
-    restFetch.baseURL = platform.url
+    if (platform.url) {
+      restFetch.baseURL = platform.url
+    }
     return fn(...args)
   }) as T
 }

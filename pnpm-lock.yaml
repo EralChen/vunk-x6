@@ -26,7 +26,7 @@ importers:
       '@vuesri/core': ^0.0.6
       '@vueuse/core': ^9.12.0
       '@vunk/core': 0.0.0-alpha.72
-      '@vunk/form': 0.0.1-alpha.43
+      '@vunk/form': 0.0.1-alpha.45
       '@vunk/skzz': 0.0.0-alpha.64
       chroma-js: ^2.4.2
       consola: ^2.15.3
@@ -60,10 +60,10 @@ importers:
       '@vuesri/core': 0.0.6
       '@vueuse/core': registry.npmmirror.com/@vueuse/core/9.12.0_vue@3.2.45
       '@vunk/core': 0.0.0-alpha.72
-      '@vunk/form': 0.0.1-alpha.43
+      '@vunk/form': 0.0.1-alpha.45
       '@vunk/skzz': 0.0.0-alpha.64
       chroma-js: 2.4.2
-      element-plus: 2.2.32_vue@3.2.45
+      element-plus: 2.2.33_vue@3.2.45
       vue: 3.2.45
     devDependencies:
       '@lib-env/app-utils': link:internal/app-utils
@@ -3282,8 +3282,8 @@ packages:
     resolution: {integrity: sha512-Hq2oF7cD1nQavR20Omda4PykeEgGzAizKitgE8+MysIIPSzAlE0oVbmM+2VSxCjJSiO2VPkrVLag5oZXfWVxaw==}
     dev: false
 
-  /@vunk/form/0.0.1-alpha.43:
-    resolution: {integrity: sha512-fBxI7O7bwqbK89Xu+4Bh16Nat39WK/UYxSS96UPxpNGOnE/dgw+tgLVpTx+iBxGqXZ8iv1cbLyDJZ7/UE052Gw==}
+  /@vunk/form/0.0.1-alpha.45:
+    resolution: {integrity: sha512-uFXuHYEYkoGCRFzqml2GeK3jwnYG57e/bxacNgikT72+ZX+9f49O5y0XX/2lf/NFnQPJ6Npch0akKVGJSMrpdw==}
     dependencies:
       '@vunk/core': 0.0.0-alpha.72
     dev: false
@@ -4433,8 +4433,8 @@ packages:
     resolution: {integrity: sha512-M8WEXFuKXMYMVr45fo8mq0wUrrJHheiKZf6BArTKk9ZBYCKJEOU5H8cdWgDT+qCVZf7Na4lVUaZsA+h6uA9+PA==}
     dev: true
 
-  /element-plus/2.2.32_vue@3.2.45:
-    resolution: {integrity: sha512-DTJMhYOy6MApbmh6z/95hPTK5WrBiNHGzV4IN+uEkup1WoimQ+Qyt8RxKdTe/X1LWEJ8YgWv/Cl8P4ocrt5z5g==}
+  /element-plus/2.2.33_vue@3.2.45:
+    resolution: {integrity: sha512-E/PmMnv4+4I9Ue0ZDfx2gGgGj4iBlTCWcES3o4jxfYjayFlcQO3UvElJzhaJZ8vDm9yfNN7t2w/xYOhsSYCNNg==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
