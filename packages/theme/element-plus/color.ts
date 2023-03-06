@@ -1,23 +1,52 @@
-export const elColorWithMode = {
-  dark: {
-    '--el-color-primary': '#2470B0',
-    '--el-color-success': '#67C23A',
-    '--el-color-warning': '#E6A23C',
-    '--el-color-danger': '#F56C6C',
-    '--el-color-info': '#909399',
-    '--el-color-white': '#FFFFFF',
-    '--el-color-black': '#000000',
-  },
+const allColor = {
+  '--el-color-primary': 'rgba(25, 81, 193, 1)',
+  '--el-color-success': 'rgba(45, 166, 65, 1)',
+  '--el-color-warning': 'rgba(237, 106, 12, 1)',
+  '--el-color-danger': 'rgba(212, 0, 0, 1)',
+  '--el-color-info': 'rgba(150, 151, 153, 1)',
+  '--el-color-white': '#FFFFFF',
+  '--el-color-black': '#000000',
+  
+  '--el-bg-color': '#ffffff',
+  '--el-bg-color-page': 'rgba(255, 255, 255, 1)',
+  '--el-bg-color-overlay': '#ffffff',
 
-  default: {
-    '--el-color-primary': '#2470B0',
-    '--el-color-success': '#67C23A',
-    '--el-color-warning': '#E6A23C',
-    '--el-color-danger': '#F56C6C',
-    '--el-color-info': '#909399',
-    '--el-color-white': '#FFFFFF',
-    '--el-color-black': '#000000',
-  },
+  '--el-text-color-primary': 'rgba(50, 50, 51, 1)',
+  '--el-text-color-regular': 'rgba(100, 101, 102, 1)',
+  '--el-text-color-secondary': 'rgba(150, 151, 153, 1)',
+  '--el-text-color-placeholder': 'rgba(200, 201, 204, 1)',
+  '--el-text-color-disabled': 'rgba(220, 222, 224, 1)',
+
+  '--el-fill-color': 'rgba(242, 243, 245, 1)',
+  '--el-fill-color-light': 'rgba(247, 248, 250, 1)',
+  '--el-fill-color-lighter': '#fafafa',
+  '--el-fill-color-extra-light': '#fafcff',
+  '--el-fill-color-dark': '#ebedf0',
+  '--el-fill-color-darker': '#e6e8eb',
+  '--el-fill-color-blank': '#ffffff',
+
+  '--el-border-color': 'rgba(220, 222, 224, 1)',
+  '--el-border-color-light': 'rgba(235, 237, 240, 1)',
+  '--el-border-color-lighter': '#ebeef5',
+  '--el-border-color-extra-light': '#f2f6fc',
+  '--el-border-color-dark': '#d4d7de',
+  '--el-border-color-darker': '#cdd0d6',
+}
+
+export const elColorWithMode = {
+  dark: Object.keys(allColor).reduce((acc, cur) => {
+    if (cur.startsWith('--el-color-')) {
+      acc[cur] = allColor[cur]
+    }
+    return acc
+  }, {}),
+  // 从 allColor 中取出来 --el-color- 开头的
+  default: Object.keys(allColor).reduce((acc, cur) => {
+    if (cur.startsWith('--el-color-')) {
+      acc[cur] = allColor[cur]
+    }
+    return acc
+  }, {}),
 }
 
 export const elBgColorWithMode = {
@@ -36,11 +65,12 @@ export const elBgColorWithMode = {
     page: '#f2f3f5',
     overlay: '#ffffff',
   */
-  default: {
-    '--el-bg-color': '#ffffff',
-    '--el-bg-color-page': '#f2f3f5',
-    '--el-bg-color-overlay': '#ffffff',
-  },
+  default: Object.keys(allColor).reduce((acc, cur) => {
+    if (cur.startsWith('--el-bg-color')) {
+      acc[cur] = allColor[cur]
+    }
+    return acc
+  }, {}),
 }
 
 
@@ -52,13 +82,12 @@ export const elTextColorWithMode = {
     '--el-text-color-placeholder': '#8D9095',
     '--el-text-color-disabled': '#6C6E72',
   },
-  default: {
-    '--el-text-color-primary': '#303133',
-    '--el-text-color-regular': '#606266',
-    '--el-text-color-secondary': '#909399',
-    '--el-text-color-placeholder': '#a8abb2',
-    '--el-text-color-disabled': '#c0c4cc',
-  },
+  default: Object.keys(allColor).reduce((acc, cur) => {
+    if (cur.startsWith('--el-text-color')) {
+      acc[cur] = allColor[cur]
+    }
+    return acc
+  }, {}),
 }
 
 export const elFillColorWithMode = {
@@ -71,15 +100,12 @@ export const elFillColorWithMode = {
     '--el-fill-color-darker': '#424243',
     '--el-fill-color-blank': 'transparent',
   },
-  default: {
-    '--el-fill-color': '#f0f2f5',
-    '--el-fill-color-light': '#f5f7fa',
-    '--el-fill-color-lighter': '#fafafa',
-    '--el-fill-color-extra-light': '#fafcff',
-    '--el-fill-color-dark': '#ebedf0',
-    '--el-fill-color-darker': '#e6e8eb',
-    '--el-fill-color-blank': '#ffffff',
-  },
+  default: Object.keys(allColor).reduce((acc, cur) => {
+    if (cur.startsWith('--el-fill-color')) {
+      acc[cur] = allColor[cur]
+    }
+    return acc
+  }, {}),
 }
 
 export const elBorderColorWithMode = {
@@ -91,12 +117,11 @@ export const elBorderColorWithMode = {
     '--el-border-color-dark': '#58585B',
     '--el-border-color-darker': '#636466',
   },
-  default: {
-    '--el-border-color': '#dcdfe6',
-    '--el-border-color-light': '#e4e7ed',
-    '--el-border-color-lighter': '#ebeef5',
-    '--el-border-color-extra-light': '#f2f6fc',
-    '--el-border-color-dark': '#d4d7de',
-    '--el-border-color-darker': '#cdd0d6',
-  },
+  default: Object.keys(allColor).reduce((acc, cur) => {
+    if (cur.startsWith('--el-border-color')) {
+      acc[cur] = allColor[cur]
+    }
+    return acc
+  }, {}),
 }
+
