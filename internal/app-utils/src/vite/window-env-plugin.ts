@@ -20,6 +20,10 @@ export function windowEnvPlugin (): PluginOption {
       return code
     },
     transformIndexHtml (html) {
+      const obj = getEnv(mode)
+      Reflect.deleteProperty(obj, 'NODE_ENV')
+      Reflect.deleteProperty(obj, 'VITE_BASE_URL')
+      
       return html.replace(`<script id="env"></script>`,
         `<script id="env">
           ${'window.__env__ =' + JSON.stringify(getEnv(mode), null, 2)}
