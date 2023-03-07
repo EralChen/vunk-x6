@@ -10,7 +10,13 @@ const viewsStore = useViewsStore()
 
 /* vue3 监听路由变化 */
 watch(route, (newRoute) => {
-  viewsStore.addVisitedView({ ...newRoute })
+  if (
+    newRoute.meta?.title
+    && newRoute.meta?.tagsView !== false
+  ) {
+    viewsStore.addVisitedView({ ...newRoute })
+  }
+  
 }, { immediate: true })
 
 const linkClose = (e: MouseEvent, fullPath: string) => {
@@ -46,7 +52,11 @@ const linkClick = (e: MouseEvent, navigate: AnyFunc) => {
   <ElScrollbar class="bg-bg-overlay tags-view" >
     <div sk-flex >
 
-      <RouterLink v-for="item of viewsStore.visitedViews" :key="item.fullPath" :to="item.fullPath" :custom="true">
+      <RouterLink 
+      v-for="item of viewsStore.visitedViews"
+      :key="item.fullPath" :to="item.fullPath"
+       :custom="true"
+       >
         <template #default="{ navigate, href, isActive, isExactActive }">
           <a draggable="false" :href="href" @click="linkClick($event, navigate)" class="decoration-none text-text-secondary ptb-s plr-m 
            tags-view-item" sk-flex="row-around-center" :class="{

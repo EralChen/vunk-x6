@@ -37,6 +37,11 @@ declare module 'vue-router' {
      * */ 
     header?: boolean 
 
+    /**
+     *  控制当前路由是否出现在标签页
+     */
+    tagsView?: boolean
+
 
   }
 }

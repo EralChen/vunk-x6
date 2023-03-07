@@ -27,12 +27,13 @@ export default [
             component: () => import('@/views/_template-page/table/basic/index.vue'),
             children: [
               {
-                path: 'detail',
+                path: 'create',
                 meta: {
-                  title: '详情',
+                  title: '创建',
                   hidden: true,
+                  tagsView: false,
                 },
-                component: () => import('@/views/_template-page/table/basic/detail.vue'),
+                component: () => import('@/views/_template-page/table/basic/create.vue'),
               },
             ],
           },
