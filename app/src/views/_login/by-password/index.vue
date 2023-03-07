@@ -87,6 +87,7 @@ const formItems: __SkAppForm.FormItem<keyof LoginFormData>[] = [
     :data="formData"
     :formItems="formItems"
     @setData="$emit('setData', $event)"
+    @enter="login"
   >
   </SkAppForm>
 </template>
