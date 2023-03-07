@@ -29,6 +29,10 @@
       {
         "link": "/app-form",
         "text": "AppForm"
+      },
+      {
+        "link": "/app-dialog",
+        "text": "AppDialog"
       }
     ]
   },
