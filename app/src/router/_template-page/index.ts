@@ -25,17 +25,6 @@ export default [
               title: '基础表格',
             },
             component: () => import('@/views/_template-page/table/basic/index.vue'),
-            children: [
-              {
-                path: 'create',
-                meta: {
-                  title: '创建',
-                  hidden: true,
-                  tagsView: false,
-                },
-                component: () => import('@/views/_template-page/table/basic/create.vue'),
-              },
-            ],
           },
           {
       
@@ -91,6 +80,22 @@ export default [
         
       },
       
+      {
+        path: '填报页面',
+        meta: {
+          title: '填报页面',
+        },
+        redirect: '/_template-page/report/basic',
+        children: [
+          {
+            path: 'dialog',
+            meta: {
+              title: '弹窗填报',
+            },
+            component: () => import('@/views/_template-page/report/dialog/index.vue'),
+          },
+        ],
+      },
 
     ],
   },
