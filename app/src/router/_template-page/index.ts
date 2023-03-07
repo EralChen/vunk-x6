@@ -25,6 +25,16 @@ export default [
               title: '基础表格',
             },
             component: () => import('@/views/_template-page/table/basic/index.vue'),
+            children: [
+              {
+                path: 'detail',
+                meta: {
+                  title: '详情',
+                  hidden: true,
+                },
+                component: () => import('@/views/_template-page/table/basic/detail.vue'),
+              },
+            ],
           },
           {
       

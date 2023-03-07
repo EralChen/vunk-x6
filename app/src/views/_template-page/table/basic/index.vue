@@ -150,5 +150,7 @@ const data = [
       </VkDuplexCalc>
 
     </SkAppCard>
+
+   
   </PageX>
 </template>

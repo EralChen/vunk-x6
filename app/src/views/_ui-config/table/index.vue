@@ -24,5 +24,6 @@ const themeStore = useThemeStore()
       </ElScrollbar>
    
     </SkAppCard>
+    
   </page-x>
 </template>

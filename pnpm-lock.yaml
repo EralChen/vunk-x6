@@ -27,7 +27,7 @@ importers:
       '@vueuse/core': ^9.12.0
       '@vunk/core': 0.0.0-alpha.72
       '@vunk/form': 0.0.1-alpha.45
-      '@vunk/skzz': 0.0.0-alpha.64
+      '@vunk/skzz': 0.0.0-alpha.65
       chroma-js: ^2.4.2
       consola: ^2.15.3
       element-plus: npm:element-plus@latest
@@ -61,9 +61,9 @@ importers:
       '@vueuse/core': registry.npmmirror.com/@vueuse/core/9.12.0_vue@3.2.45
       '@vunk/core': 0.0.0-alpha.72
       '@vunk/form': 0.0.1-alpha.45
-      '@vunk/skzz': 0.0.0-alpha.64
+      '@vunk/skzz': 0.0.0-alpha.65
       chroma-js: 2.4.2
-      element-plus: 2.2.33_vue@3.2.45
+      element-plus: 2.2.34_vue@3.2.45
       vue: 3.2.45
     devDependencies:
       '@lib-env/app-utils': link:internal/app-utils
@@ -3288,8 +3288,8 @@ packages:
       '@vunk/core': 0.0.0-alpha.72
     dev: false
 
-  /@vunk/skzz/0.0.0-alpha.64:
-    resolution: {integrity: sha512-Dt83rLUoKTZmuR3VPaR+fGohemXkp79Dx4LjY/Ho3RbcC9rzQ6gQ6ENaLaT/W0Q2IAdXTRtKz5FR/5wLKzKGCw==}
+  /@vunk/skzz/0.0.0-alpha.65:
+    resolution: {integrity: sha512-03ShZHWnMT0FOfgGGWcdNb3d1hcP265tCZ9z7rGVeOvHSXMAipqxcPLEINrFBQyAVHwpEhPuasuypoloeryhgg==}
     dev: false
 
   /acorn-jsx/5.3.2_acorn@8.8.1:
@@ -4433,8 +4433,8 @@ packages:
     resolution: {integrity: sha512-M8WEXFuKXMYMVr45fo8mq0wUrrJHheiKZf6BArTKk9ZBYCKJEOU5H8cdWgDT+qCVZf7Na4lVUaZsA+h6uA9+PA==}
     dev: true
 
-  /element-plus/2.2.33_vue@3.2.45:
-    resolution: {integrity: sha512-E/PmMnv4+4I9Ue0ZDfx2gGgGj4iBlTCWcES3o4jxfYjayFlcQO3UvElJzhaJZ8vDm9yfNN7t2w/xYOhsSYCNNg==}
+  /element-plus/2.2.34_vue@3.2.45:
+    resolution: {integrity: sha512-StHCEKC5+B4aa4yTHPnqamqtDMNngbZ3Vz+w3K7u20JVBaZF/Uj0T3Uz4LNOCAY8gWUyrTS0t4Ig5L0KXZDr0A==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
