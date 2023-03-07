@@ -11,6 +11,8 @@ import { reactive, ref, watch } from 'vue'
 import { rRoles, dRoles, cuRole } from '@skzz-platform/api/system/role'
 import { genColumn } from '@skzz-platform/shared/utils-data'
 import FormVue, { Data as FormVueData } from './form.vue'
+import { SkAppDialog } from '@skzz-platform/components/app-dialog'
+
 type Res = ApiReturnType<typeof rRoles>
 
 /* query */
@@ -40,6 +42,7 @@ const tableState = reactive({
 const cuIState = reactive({
   visible: false,
   formData: {} as Partial<FormVueData>,
+  title: '新增角色',
 })
 
 const operationsCol: __SkAppTables.Column = {
@@ -80,10 +83,12 @@ function d (ids: string[]) {
 function precI () {
   cuIState.visible = true
   cuIState.formData = {}
+  cuIState.title = '新增角色'
 }
 function preuI (data: FormVueData) {
   cuIState.visible = true
   cuIState.formData = {...data}
+  cuIState.title = '修改角色'
 }
 function cuI () {
   cuRole(cuIState.formData as FormVueData).then(r).then(() => {
@@ -121,13 +126,13 @@ function cuI () {
       </SkAppTables>
     </VkDuplexCalc>
 
-    <ElDialog v-model="cuIState.visible">
+    <SkAppDialog :title="cuIState.title" v-model="cuIState.visible">
       <FormVue
         :data="cuIState.formData"
         @setData="setData(cuIState.formData, $event)"
         @submit="cuI"
       ></FormVue>
-    </ElDialog>
+    </SkAppDialog>
 
   </PageX>
 </template>

@@ -81,7 +81,7 @@ export default [
       },
       
       {
-        path: '填报页面',
+        path: 'report',
         meta: {
           title: '填报页面',
         },

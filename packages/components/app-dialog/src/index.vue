@@ -21,6 +21,7 @@ export default defineComponent({
 </script>
 <template>
   <ElDialog
+    class="app-dialog"
     v-bind="coreProps"
     v-on="coreEmits"
   >
@@ -29,10 +30,5 @@ export default defineComponent({
     </template>
     
     <slot></slot>
-
-    <template #footer>
-      <slot name="footer"></slot>
-    </template>
-    
   </ElDialog>
 </template>

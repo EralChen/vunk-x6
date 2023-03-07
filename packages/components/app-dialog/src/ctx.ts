@@ -6,10 +6,15 @@ export const props = {
     type: Boolean,
     default: true,
   },
-  modal: {
+  closeOnClickModal: {
     type: Boolean,
     default: false,
   },
+
+  // modal: {
+  //   type: Boolean,
+  //   default: false,
+  // },
 }
 export const createBindProps = bindPropsFactory(props)
 
