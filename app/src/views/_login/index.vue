@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import ByPassword from './by-password/index.vue'
 import ByPhone from './by-phone/index.vue'
+import ByDing from './by-ding/index.vue'
 import { ref } from 'vue'
 const currentPage = ref('1')
 
@@ -33,7 +34,7 @@ const currentPage = ref('1')
             </ElTabPane>
 
             <ElTabPane label="扫码登录" name="3">
-              
+              <ByDing></ByDing>
             </ElTabPane>
           </ElTabs>
      
