@@ -6,6 +6,7 @@ import { VkSvgIcon } from '@vunk/core'
 import ElementPlus from 'element-plus'
 import * as ElIconsVue from '@element-plus/icons-vue'
 import PageX from '_c/PageX/index.vue'
+import PageOver from '_c/PageOver/index.vue'
 // 初始化 api 配置
 import '@/api'
 
@@ -21,6 +22,7 @@ app.use(store)
   .use(ElementPlus)
   .component('SvgIcon', VkSvgIcon)
   .component('PageX', PageX)
+  .component('PageOver', PageOver)
   .mount('#app')
 
 

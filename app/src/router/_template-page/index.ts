@@ -94,8 +94,28 @@ export default [
             },
             component: () => import('@/views/_template-page/report/dialog/index.vue'),
           },
+          {
+            path: 'route',
+            meta: {
+              title: '路由填报',
+            },
+            component: () => import('@/views/_template-page/report/route/index.vue'),
+            children: [
+              {
+                path: 'create',
+                meta: {
+                  title: '新增',
+                  tagsView: false,
+                  hidden: true,
+                },
+                component: () => import('@/views/_template-page/report/route/create/index.vue'),
+              },
+            ],
+          },
         ],
       },
+
+      
 
     ],
   },

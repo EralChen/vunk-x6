@@ -3,7 +3,7 @@ import Cookie from 'js-cookie'
 const PLATFORM_KEY = 'VUNK_SKZZ_REST_PLATFORM'
 
 export function getPlatform () {
-  return Cookie.get(PLATFORM_KEY) || ''
+  return Cookie.get(PLATFORM_KEY) || 'default'
 }
 
 export function setPlatform (platform: string) {
