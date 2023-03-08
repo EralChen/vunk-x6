@@ -111,6 +111,8 @@ console.log(permissionStore.routes)
 
 .layout-top-menu.el-menu--horizontal>.el-menu-item{
     border-bottom: none;
-    margin-left: var(--layout-top-menu-item-space, 50px);
+    padding-left: var(--layout-top-menu-item-space, 50px);
+    padding-right: var(--layout-top-menu-item-space, 50px);
+    /* margin-left: var(--layout-top-menu-item-space, 50px); */
 }
 </style>

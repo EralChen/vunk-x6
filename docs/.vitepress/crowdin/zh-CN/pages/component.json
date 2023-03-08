@@ -33,6 +33,10 @@
       {
         "link": "/app-dialog",
         "text": "AppDialog"
+      },
+      {
+        "link": "/app-tables-v1",
+        "text": "AppTablesV1"
       }
     ]
   },
