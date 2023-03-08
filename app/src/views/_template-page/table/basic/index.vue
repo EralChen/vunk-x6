@@ -9,9 +9,6 @@ import {
 import { NormalObject, setData, VkDuplexCalc } from '@vunk/core'
 import { ref } from 'vue'
 import { FixedDir } from 'element-plus/es/components/table-v2/src/constants'
-import { useRouterTo } from '@skzz-platform/composables'
-
-const { routerNext } = useRouterTo()
 
 const queryItems: __SkAppQueryForm.FormItem[] = [
   {
@@ -135,12 +132,7 @@ const data = [
           </SkAppQueryForm>
           <div sk-flex="row-between-center" ptb-page>
             <SkCheckTags v-model="formData.type" :options="typeOptions"></SkCheckTags>
-            <ElButton type="primary"
-              @click="routerNext({
-                mode: 'replace',
-                path: 'create',
-              })"
-            >新增</ElButton>
+            <ElButton type="primary">新增</ElButton>
           </div>
 
         </template>
