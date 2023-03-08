@@ -73,7 +73,6 @@ function d (ids: string[]) {
   dRoles(ids).then(r)
 }
 function precI () {
-  // 
   routerNext({
     path: 'create',
     mode: 'push',

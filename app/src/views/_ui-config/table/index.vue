@@ -3,7 +3,7 @@ import { SkAppCard, SkAppModule } from '@skzz/platform'
 import ConfigVue from './config.vue'
 import BasicVue from './basic.vue'
 
-import { useThemeStore } from '@skzz-platform/stores/theme'
+import { useThemeStore } from '@/stores/theme'
 import { setData } from '@vunk/core'
 const themeStore = useThemeStore()
 

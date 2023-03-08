@@ -1,9 +1,8 @@
-import { defineStore } from 'pinia'
-import { computed, ref, watch } from 'vue'
-import { loadStyleString } from '@vunk/core/shared/utils-dom'
-import { ToggleHandler } from '@vunk/core/shared/utils-class'
 import { NormalObject } from '@vunk/core'
-import { useSharedDark } from '@skzz-platform/composables'
+import { ToggleHandler } from '@vunk/core/shared/utils-class'
+import { loadStyleString } from '@vunk/core/shared/utils-dom'
+import { computed, ref, watch } from 'vue'
+import { useSharedDark } from '@skzz-platform/composables/use-shared-dark'
 
 class ToggleRootStyles extends ToggleHandler {
   key: string
@@ -38,7 +37,7 @@ class ToggleRootStyles extends ToggleHandler {
     this.add(v)
   }
 }
-const useRootStyles = (key: string, selector?: string) => {
+export const useRootStyles = (key: string, selector?: string) => {
   const toggleMenuStyles = {
     default: new ToggleRootStyles(key, 'default', selector),
   }
@@ -51,7 +50,7 @@ const useRootStyles = (key: string, selector?: string) => {
   }, { immediate: true, deep: true })
   return styles
 }
-const useRootStylesWithMode = (key: string) => {
+export const useRootStylesWithMode = (key: string) => {
   const isDark = useSharedDark()
   const toggleMenuStyles = {
     default: new ToggleRootStyles(key),
@@ -74,48 +73,46 @@ const useRootStylesWithMode = (key: string) => {
   return styles
 }
 
-export const useThemeStore = defineStore('theme', () => {
- 
-
+export const useTheme = (pre = 'ZZPT') => {
   /* globalll */
-  const colorStyles = useRootStylesWithMode('ZZPT_COLOR_STYLES')
-  const fontSizeStyles = useRootStyles('ZZPT_FONT_SIZE_STYLES')
-  const fontSizeNamedStyles = useRootStyles('ZZPT_FONT_SIZE_NAMED_STYLES')
-  const gapBaseStyles = useRootStyles('ZZPT_GAP_BASE_STYLES')
-  const gapNamedStyles = useRootStyles('ZZPT_GAP_NAMED_STYLES')
+  const colorStyles = useRootStylesWithMode(`${pre}_COLOR_STYLES`)
+  const fontSizeStyles = useRootStyles(`${pre}_FONT_SIZE_STYLES`)
+  const fontSizeNamedStyles = useRootStyles(`${pre}_FONT_SIZE_NAMED_STYLES`)
+  const gapBaseStyles = useRootStyles(`${pre}_GAP_BASE_STYLES`)
+  const gapNamedStyles = useRootStyles(`${pre}_GAP_NAMED_STYLES`)
   /* globalll /> */
-
-
+  
+  
   /* el components */
-  const menuStyles = useRootStylesWithMode('ZZPT_MENU_STYLES')
-  const cardStyles = useRootStyles('ZZPT_CARD_STYLES', '.el-card')
-  const buttonPrimaryStyles = useRootStyles('ZZPT_BUTTON_PRIMARY_STYLES', '.el-button--primary')
-  const tableV2Styles = useRootStyles('ZZPT_TABLE_V2_STYLES', '.el-table-v2')
+  const menuStyles = useRootStylesWithMode(`${pre}_MENU_STYLES`)
+  const cardStyles = useRootStyles(`${pre}_CARD_STYLES`, '.el-card')
+  const buttonPrimaryStyles = useRootStyles(`${pre}_BUTTON_PRIMARY_STYLES`, '.el-button--primary')
+  const tableV2Styles = useRootStyles(`${pre}_TABLE_V2_STYLES`, '.el-table-v2')
   /* el components /> */
-
+  
   /* custom component */
   const layoutTopClassName = 'zz-platform-top-menu'
-  const layoutTopStyles = useRootStyles('ZZPT_LAYOUT_TOP_STYLES', `.${layoutTopClassName}`)
+  const layoutTopStyles = useRootStyles(`${pre}_LAYOUT_TOP_STYLES`, `.${layoutTopClassName}`)
   /* custom component /> */
-
-
+  
+  
   return { 
     gapBaseStyles,
     gapNamedStyles,
-
+  
     layoutTopClassName,
     layoutTopStyles,
-    
+      
     colorStyles,
     menuStyles,
-    
+      
     fontSizeStyles,
     fontSizeNamedStyles,
-
+  
     cardStyles,
     tableV2Styles,
     buttonPrimaryStyles,
-
-  }
   
-})
+  }
+}
+

@@ -32,6 +32,9 @@ export const useRouterTo = () => {
   }
 
   const routerBack = (opts:{
+    /**
+     * path: 要减去的路径
+     */
     path: string,
     mode?: Mode,
   } & RouteLocationPathRaw) => {

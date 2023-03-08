@@ -5,7 +5,7 @@ import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { windowEnvPlugin, vunkPresetsTheme, vunkPresetsShortcuts } from '@lib-env/app-utils'
 import { getEnv } from '@lib-env/app-utils'
 import path from 'path'
-import { appRoot } from '@lib-env/path'
+import { appRoot, packagesDir } from '@lib-env/path'
 // import legacy from '@vitejs/plugin-legacy'
 import { viteExternalsPlugin } from 'vite-plugin-externals'
 import unocss from 'unocss/vite'
@@ -123,7 +123,7 @@ export default defineConfig(({ mode }) => {
       viteExternalsPlugin(),
       createSvgIconsPlugin({
         // Specify the icon folder to be cached
-        iconDirs: [path.resolve(srcRoot,'./icons/svg')],
+        iconDirs: [path.resolve(packagesDir,'./icons/svg')],
         // Specify symbolId format
         symbolId: 'icon-[dir]-[name]',
       }),

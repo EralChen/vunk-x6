@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent, PropType, watch } from 'vue'
-import { useThemeStore } from '@skzz-platform/stores/theme'
+import { useThemeStore } from '@/stores/theme'
 import { useClipboard } from '@vueuse/core'
 import { ElMessage } from 'element-plus'
 

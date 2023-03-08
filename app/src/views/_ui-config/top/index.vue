@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { SkAppCard } from '@skzz-platform/components/app-card'
 import ConfigForm from './ConfigForm.vue'
-import { useThemeStore } from '@skzz-platform/stores/theme'
+import { useThemeStore } from '@/stores/theme'
 import { setData } from '@vunk/core'
 import ThemeClipboardButton from '_c/ThemeClipboardButton/index.vue'
 const themeStore = useThemeStore()

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import DarkSwitch from '_c/DarkSwitch/index.vue'
 import { defineAsyncComponent } from 'vue'
-import { useThemeStore } from '@skzz-platform/stores/theme'
+import { useThemeStore } from '@/stores/theme'
 import { ElAvatar } from 'element-plus'
 import { logout } from '@skzz-platform/api/login'
 import ApplicationCascader from '_c/ApplicationCascader/index.vue'

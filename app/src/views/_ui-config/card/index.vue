@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import PageX from '_c/PageX/index.vue'
 import { SkAppCard, SkAppForm, __SkAppForm } from '@skzz/platform'
-import { useThemeStore } from '@skzz-platform/stores/theme'
+import { useThemeStore } from '@/stores/theme'
 import { baseGapOptions, elCardTheme } from '@skzz-platform/theme'
 import { setData } from '@vunk/core'
 const themeStore = useThemeStore()

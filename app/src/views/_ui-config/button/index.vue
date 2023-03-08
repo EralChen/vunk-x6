@@ -4,7 +4,7 @@ import { SkMultipageRenderer } from '@skzz-platform/components/multipage-rendere
 import { SkMultipageTemplate } from '@skzz-platform/components/multipage-template'
 import { ref } from 'vue'
 import PrimaryVue from './primary.vue'
-import { useThemeStore } from '@skzz-platform/stores/theme'
+import { useThemeStore } from '@/stores/theme'
 import { setData } from '@vunk/core'
 const themeStore = useThemeStore()
 const currentPage = ref('primary')

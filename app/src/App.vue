@@ -4,7 +4,7 @@
   </el-config-provider>
 </template>
 <script>
-import { useInitTheme } from '@skzz-platform/composables'
+import { useInitTheme } from '@/composables'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 export default {
   name: 'App',
