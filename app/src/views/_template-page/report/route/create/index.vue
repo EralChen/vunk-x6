@@ -2,13 +2,18 @@
 import PageOver from '_c/PageOver/index.vue'
 import { SkAppCard } from '@skzz-platform/components/app-card'
 import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
-
+import { cuRole } from '@skzz-platform/api/system/role'
+import { ref } from 'vue'
+import { FirstParameter, setData } from '@vunk/core'
+import { useRouterTo } from '@skzz-platform/composables'
 defineProps({
   uid: {
     type: String,
     default: '',
   },
 })
+const { routerBack } = useRouterTo()
+const formData = ref({} as FirstParameter<typeof cuRole>)
 
 const formItems:__SkAppForm.CoreFormItem[] = [
   {
@@ -22,13 +27,26 @@ const formItems:__SkAppForm.CoreFormItem[] = [
     label: '编码',
   },
 ]
+
+
+function c () {
+  cuRole(formData.value).then(() => {
+    routerBack({
+      path: 'create',
+      query: {
+        u: '1',
+      },
+    })
+  })
+}
+
 </script>
 <template>
   <PageOver>
     <SkAppCard :header="'新增角色'" class="h-full">
       <template #header__options>
         <ElButton type="primary"
-        
+          @click="c"
         >提交</ElButton>
       </template>
       <div class="gap-form-x"> 
@@ -36,6 +54,8 @@ const formItems:__SkAppForm.CoreFormItem[] = [
           :layout="true"
           :labelPosition="'top'"
           :formItems="formItems"
+          :data="formData"
+          @setData="setData(formData, $event)"
         ></SkAppForm>
       </div>
     </SkAppCard>

@@ -10,9 +10,10 @@ import { ApiReturnType, NormalObject, setData, VkDuplexCalc } from '@vunk/core'
 import { reactive, ref, watch } from 'vue'
 import { rRoles, dRoles } from '@skzz-platform/api/system/role'
 import { genColumn } from '@skzz-platform/shared/utils-data'
-import { useRouterTo } from '@skzz-platform/composables'
+import { useRouterTo, useResolveQueryU } from '@skzz-platform/composables'
+import { pickObject } from '@vunk/core/shared/utils-object'
 type Res = ApiReturnType<typeof rRoles>
-const { routerNext } = useRouterTo()
+const { route, routerNext, router } = useRouterTo()
 /* query */
 const queryItems: __SkAppQueryForm.FormItem[] = [
   {
@@ -50,7 +51,7 @@ const operationsCol: __SkAppTables.Column = {
   ></SkAppOperations>,
 } 
 function r () {
-  rRoles(queryData.value, pagination.value).then(res => {
+  return rRoles(queryData.value, pagination.value).then(res => {
     if (!tableState.columns.length) {
       tableState.columns = res.columns.reduce((a, c) => {
         if (c.type === 'selection') {
@@ -79,6 +80,10 @@ function precI () {
   })
 }
 
+/* when router back */
+useResolveQueryU(() => {
+  r()
+})
 
 </script>
 <template>
