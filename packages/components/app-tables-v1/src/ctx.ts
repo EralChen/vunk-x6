@@ -8,7 +8,7 @@ import {
 import { PropType } from 'vue'
 import { Column } from './types'
 import { _VkTableColumnsElCtx } from '@vunk/skzz/components/table-columns'
-import { tableProps, tableEmits } from './el-ctx'
+import { tableProps as _tableProps, tableEmits } from './el-ctx'
 const paginationProps = pickObject(
   _paginationProps,
   {
@@ -26,14 +26,18 @@ const paginationEmits = pickObject(
 export const createPaginationOnEmits = onEmitsFactory(paginationEmits)
 
 
+const tableProps = pickObject(_tableProps, {
+  excludes: ['style', 'className'],
+})
+export const createTableBindProps = bindPropsFactory(tableProps)
 
 export const props = {
   ..._VkTableColumnsElCtx.tableColumnProps,
   ...paginationProps,
   ...tableProps,
   tableClass: {
-    type: [String, Object, Array],
-    default: 'sk-app-tables-table',
+    type: String,
+    default: 'sk-app-tables-v1-table',
   },
   tableStyle: {
     type: [String, Object, Array],

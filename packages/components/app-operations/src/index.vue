@@ -10,18 +10,35 @@ export default defineComponent({
   emits,
   props,
   setup (props, { emit }) {
-    const lables = {
-      c: '创建',
-      r: '查看',
-      u: '编辑',
-      d: '删除',
-    } 
-    const crud = (e: string) => {
-      emit('click', e)
-      emit(e as any)
+
+    const moduleInfo = {
+      c: {
+        label: '创建',
+        eventName: 'c',
+      },
+      r: {
+        label: '查看',
+        eventName: 'r',
+      },
+      u: {
+        label: '编辑',
+        eventName: 'u',
+      },
+      d: {
+        label: '删除',
+        eventName: 'd',
+      },
+    } as Record<string, { label: string, eventName: string } | undefined>
+    const crud = (key: string) => {
+      const e = moduleInfo[key]?.eventName
+      if (e) {
+        emit('click', e)
+        emit(e as any)
+      }
+
     }
     return {
-      lables,
+      moduleInfo,
       crud,
     }
   },
@@ -33,24 +50,24 @@ export default defineComponent({
       <slot :name="item"></slot>
       
       <el-popconfirm 
-        v-if="item === 'd'"
+        v-if="moduleInfo[item]?.eventName === 'd'"
         title="确认删除吗?"
         @confirm="crud(item)"
       >
         <template #reference>
           <el-button :size="'small'" :type="'danger'">
-            {{ lables[item] }}
+            {{ moduleInfo[item]?.label }}
           </el-button>
         </template>
       </el-popconfirm>
   
     
       <el-button 
-        v-else-if="lables[item]" 
+        v-else-if="moduleInfo[item]" 
         :type="'primary'" 
         :size="'small'"
         @click="crud(item)"
-      >{{ lables[item] }}
+      >{{ moduleInfo[item]?.label }}
       </el-button>
       
     </template>

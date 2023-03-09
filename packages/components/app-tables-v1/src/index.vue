@@ -1,11 +1,11 @@
 <script lang="ts">
-import { props, emits, createPaginationBindProps, createPaginationOnEmits } from './ctx'
+import { props, emits, createPaginationBindProps, createPaginationOnEmits, createTableBindProps } from './ctx'
 import { computed, defineComponent, watch } from 'vue'
 import { VkDuplexCalc } from '@vunk/core'
 import { ElPagination } from 'element-plus'
 import { ElTable } from 'element-plus'
 import { VkTableColumns, _VkTableColumnsElCtx } from '@vunk/skzz/components/table-columns'
-import { createElTableBindProps, createElTableOnEmits } from './el-ctx'
+import { createElTableOnEmits } from './el-ctx'
 export default defineComponent({
   name: 'SkAppTablesV1',
   components: {
@@ -20,7 +20,7 @@ export default defineComponent({
     const paginationBindProps = createPaginationBindProps(props)
     const paginationOnEmits = createPaginationOnEmits(emit)
     const columnsProps = _VkTableColumnsElCtx.createTableColumnBindProps(props, [])
-    const tableProps = createElTableBindProps(props)
+    const tableProps = createTableBindProps(props)
     const tableOnEmits = createElTableOnEmits(emit)
     /*   currentPage => start */
     const currentPage = computed(() => {
@@ -50,6 +50,9 @@ export default defineComponent({
   <VkDuplexCalc :withResize="'one'" :gap="'var(--gap-page, 14px)'">
     <template #one>
       <ElTable 
+        :style="tableStyle"
+        :className="tableClass"
+  
         v-bind="tableProps"
         v-on="tableOnEmits"
       >

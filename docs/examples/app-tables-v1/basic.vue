@@ -16,7 +16,8 @@ const columns: __SkAppTablesV1.Column[] = [
 </script>
 <template>
   <SkAppTablesV1
-    :height="'500px'"
+    :style="{ height: '500px' }"
+    :total="100"
     :columns="columns"
     :data="data"
   ></SkAppTablesV1>

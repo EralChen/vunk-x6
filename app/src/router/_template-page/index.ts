@@ -27,6 +27,13 @@ export default [
             component: () => import('@/views/_template-page/table/basic/index.vue'),
           },
           {
+            meta: {
+              title: '经典表格',
+            },
+            path: 'classic',
+            component: () => import('@/views/_template-page/table/classic/index.vue'),
+          },
+          {
       
             meta: {
               title: '少量表格',
