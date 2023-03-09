@@ -11,6 +11,7 @@ import { reactive, ref, watch } from 'vue'
 import { rRoles, dRoles } from '@skzz-platform/api/system/role'
 import { genColumn } from '@skzz-platform/shared/utils-data'
 import { useRouterTo } from '@skzz-platform/composables'
+import { SkAppTablesV1, __SkAppTablesV1 } from '@skzz-platform/components/app-tables-v1'
 type Res = ApiReturnType<typeof rRoles>
 const { routerNext } = useRouterTo()
 /* query */
@@ -32,22 +33,27 @@ watch(pagination, r, { deep: true , immediate: true })
 /* query end */
 
 const tableState = reactive({
-  columns: [] as  __SkAppTables.Column[],
+  columns: [] as  __SkAppTablesV1.Column[],
   data: [] as Res['rows'],
   total: 0,
 })
 
 
-const operationsCol: __SkAppTables.Column = {
-  title: '操作',
-  key: 'operations',
+const operationsCol: __SkAppTablesV1.Column = {
+  // title: '操作',
+  label: '操作',
+  prop: 'operations',
+  // key: 'operations',
   width: 150,
-  flexGrow: 1,
+  // flexGrow: 1,
   align: 'center',
-  cellRenderer: ({ rowData }) => <SkAppOperations
-    modules={['u','d']}
-    onD={ () => { d([rowData.id]) } }
-  ></SkAppOperations>,
+  slots: {
+    default: ({ row }) => <SkAppOperations
+      modules={['u','d']}
+      onD={ () => { d([row.id]) } }
+    ></SkAppOperations>,
+  },
+  
 } 
 function r () {
   rRoles(queryData.value, pagination.value).then(res => {
@@ -59,11 +65,15 @@ function r () {
         } else if (c.type === 'button') {
           a.push(operationsCol)
         } else {
-          a.push(genColumn(c))
+          a.push({
+            label: c.label,
+            prop: c.prop,
+            align: c.align,
+          })
         }
   
         return a
-      }, [] as __SkAppTables.Column[])
+      }, [] as __SkAppTablesV1.Column[])
     }
     tableState.data = res.rows
     tableState.total = res.total
@@ -101,13 +111,13 @@ function precI () {
         </SkAppQueryForm>
       </template>
 
-      <SkAppTables 
+      <SkAppTablesV1 
         class="h-100%" 
         v-bind="tableState"
         v-model:start="pagination.start"
         v-model:pageSize="pagination.pageSize"
       >
-      </SkAppTables>
+      </SkAppTablesV1>
       
     </VkDuplexCalc>
   </PageX>

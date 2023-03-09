@@ -21,6 +21,7 @@ export const createRemoteRoutes = () => {
       component: Layout,
       meta: {
         header: true,
+        icon: '',
       },
     },
     '/system/role': {

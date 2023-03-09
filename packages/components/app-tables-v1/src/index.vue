@@ -49,32 +49,25 @@ export default defineComponent({
 <template>
   <VkDuplexCalc :withResize="'one'" :gap="'var(--gap-page, 14px)'">
     <template #one>
+
       <ElTable 
-        :style="tableStyle"
-        :className="tableClass"
-  
-        v-bind="tableProps"
-        v-on="tableOnEmits"
-      >
-        <VkTableColumns 
-          v-bind="columnsProps"
-          :source="columns"
-        ></VkTableColumns>
+      :style="tableStyle"
+       :className="'sk-app-tables-v1-table ' + tableClass" v-bind="tableProps" v-on="tableOnEmits">
+        <VkTableColumns v-bind="columnsProps" :source="columns"></VkTableColumns>
       </ElTable>
     </template>
 
     <div class="sk-app-tables-v1-pagination-x">
-      <ElPagination 
-        v-bind="paginationBindProps" 
-        v-on="paginationOnEmits"
-        :currentPage="currentPage"
-        @update:current-page="updateStart"
-      ></ElPagination>
+      <ElPagination v-bind="paginationBindProps" v-on="paginationOnEmits" :currentPage="currentPage"
+        @update:current-page="updateStart"></ElPagination>
     </div>
 
   </VkDuplexCalc>
 </template>
 <style>
+.sk-app-tables-v1-table{
+  height: 100%;
+}
 .sk-app-tables-v1-pagination-x {
   display: flex;
   justify-content: center;

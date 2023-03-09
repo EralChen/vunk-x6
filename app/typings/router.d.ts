@@ -11,7 +11,7 @@ declare module 'vue-router' {
     /**
      * 图标
      */
-    icon?: keyof typeof Icons
+    icon?: keyof typeof Icons | string
     /**
      * 是否一直显示，不会收到路由合并的影响
      */

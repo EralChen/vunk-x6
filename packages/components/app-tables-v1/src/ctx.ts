@@ -35,6 +35,10 @@ export const props = {
   ..._VkTableColumnsElCtx.tableColumnProps,
   ...paginationProps,
   ...tableProps,
+  border: {
+    type: Boolean,
+    default: true,
+  },
   tableClass: {
     type: String,
     default: 'sk-app-tables-v1-table',
