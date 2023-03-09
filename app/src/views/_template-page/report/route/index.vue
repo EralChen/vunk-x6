@@ -11,9 +11,13 @@ import { reactive, ref, watch } from 'vue'
 import { rRoles, dRoles } from '@skzz-platform/api/system/role'
 import { genColumn } from '@skzz-platform/shared/utils-data'
 import { useRouterTo, useResolveQueryU } from '@skzz-platform/composables'
-import { pickObject } from '@vunk/core/shared/utils-object'
 type Res = ApiReturnType<typeof rRoles>
-const { route, routerNext, router } = useRouterTo()
+const { routerNext } = useRouterTo()
+// when router back 
+useResolveQueryU(() => {
+  r()
+})
+
 /* query */
 const queryItems: __SkAppQueryForm.FormItem[] = [
   {
@@ -30,6 +34,8 @@ const pagination = ref<Pagination>({
 })
 watch(pagination, r, { deep: true , immediate: true })
 // watch(queryData, r, { deep: true , immediate: true })
+
+
 /* query end */
 
 const tableState = reactive({
@@ -80,10 +86,7 @@ function precI () {
   })
 }
 
-/* when router back */
-useResolveQueryU(() => {
-  r()
-})
+
 
 </script>
 <template>
