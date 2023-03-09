@@ -28,14 +28,14 @@ export default defineComponent({
         label: '删除',
         eventName: 'd',
       },
-    } as Record<string, { label: string, eventName: string } | undefined>
+    } as Record<string, { label: string, eventName: string }>
+
     const crud = (key: string) => {
       const e = moduleInfo[key]?.eventName
       if (e) {
         emit('click', e)
         emit(e as any)
       }
-
     }
     return {
       moduleInfo,
@@ -56,7 +56,7 @@ export default defineComponent({
       >
         <template #reference>
           <el-button :size="'small'" :type="'danger'">
-            {{ moduleInfo[item]?.label }}
+            {{ moduleInfo[item].label }}
           </el-button>
         </template>
       </el-popconfirm>
@@ -67,7 +67,7 @@ export default defineComponent({
         :type="'primary'" 
         :size="'small'"
         @click="crud(item)"
-      >{{ moduleInfo[item]?.label }}
+      >{{ moduleInfo[item].label }}
       </el-button>
       
     </template>
