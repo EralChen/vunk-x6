@@ -28,6 +28,22 @@ export default defineComponent({
         label: '删除',
         eventName: 'd',
       },
+      increase: {
+        label: '创建',
+        eventName: 'c',
+      },
+      modify: {
+        label: '编辑',
+        eventName: 'u',
+      },
+      remove: {
+        label: '删除',
+        eventName: 'd',
+      },
+      detail: {
+        label: '查看',
+        eventName: 'r',
+      },
     } as Record<string, { label: string, eventName: string }>
 
     const crud = (key: string) => {
