@@ -5,6 +5,7 @@ import { useThemeStore } from '@/stores/theme'
 import { ElAvatar } from 'element-plus'
 import { logout } from '@skzz-platform/api/login'
 import ApplicationCascader from '_c/ApplicationCascader/index.vue'
+import SizeCtrl from '_c/SizeCtrl/index.vue'
 defineEmits({
   'load': null,
 })
@@ -29,11 +30,14 @@ const { layoutTopClassName } = useThemeStore()
       </div>
       
       <div class="pr-l sub-ml-widget-space " sk-flex="row_center">
+        
         <DarkSwitch></DarkSwitch>
+                
+        <SizeCtrl></SizeCtrl>
+
         <ApplicationCascader
           :size="32"
         ></ApplicationCascader>
-        
 
         <ElDropdown>
           <ElAvatar

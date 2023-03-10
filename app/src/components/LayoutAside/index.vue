@@ -25,6 +25,9 @@ const menuNode = ref() as Ref<{ open: AnyFunc }>
 useSharedMenuClick()
 
 const initOpenMenu = () => {
+  if (layoutStore.asideInfo.menuCollapse) {
+    return
+  }
   const testIndex = route.matched.map(item => item.path)
   for (let i = 0; i < testIndex.length; i++) {
     const index = testIndex[i]

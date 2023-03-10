@@ -95,7 +95,7 @@ const linkClick = (e: MouseEvent, navigate: AnyFunc) => {
 
 .tags-view-item {
   flex-shrink: 0;
-  width: 130px;
+  width: 10em;
 }
 
 .tags-view-icon-close {

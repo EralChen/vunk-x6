@@ -70,7 +70,10 @@ export const elBgColorWithMode = {
       acc[cur] = allColor[cur]
     }
     return acc
-  }, {}),
+  }, {} as Record<
+    '--el-bg-color' | '--el-bg-color-page' | '--el-bg-color-overlay', 
+    string
+  >),
 }
 
 
