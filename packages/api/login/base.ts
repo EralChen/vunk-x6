@@ -47,3 +47,22 @@ export const rMenus = async (client?: string) => {
 
   })
 }
+
+export const rDefaultTAInfo = () => {
+  return restFetch.rDefaultTAInfo().then(res => {
+    res.tenants = res.tenants.map(item => {
+      return {
+        ...item,
+        value: item.tenantId,
+        label: item.name,
+        children: item.applications.map(app => {
+          return {
+            value: app.applicationId,
+            label: app.name,
+          }
+        }),
+      }
+    })
+    return res
+  })
+}

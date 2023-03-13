@@ -3,6 +3,10 @@
     "code": "default",
     "url": ""
   },
+  {
+    "code": "scene_dev",
+    "url": "http://192.168.110.185:30100/scene-server"
+  },
   { 
     "code": "scene", 
     "url": "http://t1.zjsophon.com:10000/scene-server"

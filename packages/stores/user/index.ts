@@ -12,6 +12,7 @@ export const useUserStore = defineStore('user', () => {
       return res
     })
   }
+  
   return { 
     getUserInfo, setUserInfo, getPowerfulRoleId, getRoleIds,
     setUserInfoByToken,
