@@ -2,8 +2,9 @@
 import { CascaderValue, ElAvatar, ElCascaderPanel } from 'element-plus'
 import { PropType, ref } from 'vue'
 import { useModelComputed } from '@vunk/core/composables'
-import { rDefaultTAInfo } from '@skzz-platform/api/login'
+import { rTAInfo } from '@skzz-platform/api/login'
 import { ApiReturnType } from '@vunk/core'
+import { useUserStore } from '@skzz-platform/stores/user'
 const props = defineProps({
   size: null,
   modelValue: {
@@ -19,9 +20,9 @@ const cascaderValue = useModelComputed({
 }, props, emit) 
 
 
-const options = ref<ApiReturnType<typeof rDefaultTAInfo>['tenants']>([])
-rDefaultTAInfo().then(res => {
-  options.value = res.tenants.filter(item => item.applications.length)
+const options = ref<ApiReturnType<typeof rTAInfo>['tenants']>([])
+rTAInfo().then(res => {
+  options.value = res.tenants
   cascaderValue.value = [res.defaultTenantId, res.defaultApplicationId]
 })
 

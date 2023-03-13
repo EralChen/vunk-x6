@@ -1,6 +1,7 @@
 import { restFetch } from '@skzz-platform/shared/fetch/platform'
 import { setToken, removeToken, removeTenant, getApplication } from '@vunk/skzz/shared/utils-auth'
 import { FirstParameter } from '@vunk/core'
+import { useUserStore } from '@skzz-platform/stores/user'
 // import { sleep } from '@vunk/core/shared/utils-promise'
 export const rCaptcha = () => {
   return restFetch.captcha().then(res => {
@@ -48,8 +49,23 @@ export const rMenus = async (client?: string) => {
   })
 }
 
-export const rDefaultTAInfo = () => {
+export const rTAInfo = () => {
   return restFetch.rDefaultTAInfo().then(res => {
+
+    const userStore = useUserStore()
+    const puppet = userStore.getPuppet()
+    const theTenant = res.tenants.find(item => item.tenantId === puppet.tenantId)
+    
+    if (theTenant && theTenant.applications.find(item => item.applicationId === puppet.applicationId)) {
+      res.defaultApplicationId = puppet.applicationId
+      res.defaultTenantId = puppet.tenantId
+    } else {
+      userStore.setPuppet({
+        tenantId: res.defaultTenantId,
+        applicationId: res.defaultApplicationId,
+      })
+    }
+
     res.tenants = res.tenants.map(item => {
       return {
         ...item,
