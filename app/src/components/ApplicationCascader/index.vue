@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { CascaderValue, ElAvatar, ElCascaderPanel } from 'element-plus'
-import { PropType, ref } from 'vue'
+import { nextTick, PropType, ref } from 'vue'
 import { useModelComputed } from '@vunk/core/composables'
 import { rTAInfo } from '@skzz-platform/api/login'
 import { ApiReturnType } from '@vunk/core'
@@ -13,7 +13,7 @@ const props = defineProps({
   },
 })
 const emit = defineEmits(['update:modelValue'])
-
+const userStore = useUserStore()
 const cascaderValue = useModelComputed({
   default: [] as string[],
   key: 'modelValue',
@@ -22,9 +22,16 @@ const cascaderValue = useModelComputed({
 
 const options = ref<ApiReturnType<typeof rTAInfo>['tenants']>([])
 rTAInfo().then(res => {
-  options.value = res.tenants
+  options.value = res.tenants.filter(t => t.applications.length > 0)
   cascaderValue.value = [res.defaultTenantId, res.defaultApplicationId]
 })
+const appChange = ([tenantId, applicationId]: string[]) => {
+  userStore.setPuppet({
+    applicationId,
+    tenantId,
+  })
+  window.location.reload()
+}
 
 </script>
 <template>
@@ -38,6 +45,7 @@ rTAInfo().then(res => {
       <div class="w-500px application-cascader-panel-x">
         <ElCascaderPanel 
           v-model="cascaderValue"
+          @change="appChange"
           :border="false"
           :options="options"
           :props="{
