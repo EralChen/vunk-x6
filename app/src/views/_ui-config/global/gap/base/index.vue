@@ -106,7 +106,7 @@ const formItemWithLayout = computed(() => {
 </script>
 <template>
     <SkAppForm 
-      :labelWidth="70"
+      :labelWidth="'6em'"
       :formItems="formItemWithLayout" 
       :data="formData"
       @setData="setFormData"
