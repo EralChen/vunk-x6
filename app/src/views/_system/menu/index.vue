@@ -1,10 +1,11 @@
-<script lang="ts" setup>
+<script lang="tsx" setup>
 import { VkCheckboxTree, __VkCheckboxTree } from '@vunk/skzz/components/checkbox-tree'
 import { computed, reactive, watch } from 'vue'
-import { rMenus } from '@skzz-platform/api/system/menu'
+import { dMenus, rMenus } from '@skzz-platform/api/system/menu'
 import { listToTree } from '@vunk/core/shared/utils-data'
-import { SkCheckTags, __SkCheckTags, SkAppTablesV1, __SkAppTablesV1 } from '@skzz/platform'
-import { ApiReturnType, setData, unsetData, VkDuplexCalc } from '@vunk/core'
+import { SkAppOperations, SkCheckTags, __SkCheckTags, SkAppTablesV1, __SkAppTablesV1 } from '@skzz/platform'
+import { ApiReturnType, setData, unsetData, VkDuplexCalc, VkDuplex } from '@vunk/core'
+
 type Row = ApiReturnType<typeof rMenus>[number]
 
 const checkTagsState = reactive({
@@ -53,6 +54,17 @@ const tableState = reactive({
       prop: 'icon',
       label: '图标',
     },
+    {
+      prop: undefined,
+      label: '操作',
+      slots: ({ row }) => <SkAppOperations
+        modules={['c', 'u', 'd']}
+        onC={ precI }
+        onD={ () => dMenus([row.id])  }
+      >
+        
+      </SkAppOperations>,
+    },
   ] as __SkAppTablesV1.Column<Row>[],
   query: {},
 })
@@ -82,6 +94,9 @@ function r () {
     tableState.data = listToTree(res)
   })
 }
+function precI () {
+  //
+}
 </script>
 <template>
   <page-x>
@@ -104,15 +119,15 @@ function r () {
       </template>
  
   
-      <div sk-flex sub:ml-m h-full>
-   
-      
-        <VkCheckboxTree 
-          :modules="['filter', 'srcollbar']"
-          :defaultExpandAll="true"
-          :data="treeState.data" 
-          v-model="treeState.checked"
-        ></VkCheckboxTree>
+      <VkDuplex :gap="'var(--gap-page)'" :direction="'row'"  h-full >
+        <template #one>
+          <VkCheckboxTree 
+            :modules="['filter', 'srcollbar']"
+            :defaultExpandAll="true"
+            :data="treeState.data" 
+            v-model="treeState.checked"
+          ></VkCheckboxTree>
+        </template>
 
         <SkAppTablesV1 
           :defaultExpandAll="true"
@@ -124,7 +139,7 @@ function r () {
         >
         </SkAppTablesV1>
 
-      </div>
+      </VkDuplex>
 
     </VkDuplexCalc>
 
