@@ -29,7 +29,9 @@ const asideReady = ref(false)
           ></LayoutAside>
         </div>
 
-        <VkDuplexCalc class="flex-1 overflow-hidden" :heightProperty="'--zz-page-height'"
+        <VkDuplexCalc 
+          class="flex-1 overflow-hidden" 
+          :heightProperty="'--zz-page-height'"
           v-if="asideReady"
         >
           <template #one>

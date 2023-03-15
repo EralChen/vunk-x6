@@ -49,6 +49,7 @@ router.beforeEach(async (to, from, next) => {
           
           // TODO appId.value
           await userStore.setUserInfoByToken()
+          await userStore.setPuppet()
 
           // [TODO] if rUserInfo get roles.length ===  0
 

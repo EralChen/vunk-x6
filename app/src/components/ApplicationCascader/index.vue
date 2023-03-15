@@ -19,14 +19,17 @@ const cascaderValue = useModelComputed({
   key: 'modelValue',
 }, props, emit) 
 
-
+const { tenantId, applicationId } = userStore.getPuppet()
 const options = ref<ApiReturnType<typeof rTAInfo>['tenants']>([])
 rTAInfo().then(res => {
   options.value = res.tenants.filter(t => t.applications.length > 0)
-  cascaderValue.value = [res.defaultTenantId, res.defaultApplicationId]
+  cascaderValue.value = [
+    tenantId, applicationId, 
+  ]
 })
-const appChange = ([tenantId, applicationId]: string[]) => {
-  userStore.setPuppet({
+
+const appChange = async ([tenantId, applicationId]: string[]) => {
+  await userStore.setPuppet({
     applicationId,
     tenantId,
   })
