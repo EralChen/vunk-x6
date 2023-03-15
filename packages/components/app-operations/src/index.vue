@@ -89,3 +89,8 @@ export default defineComponent({
     </template>
   </div>
 </template>
+<style>
+.sk-app-operations{
+  white-space: nowrap;
+}
+</style>

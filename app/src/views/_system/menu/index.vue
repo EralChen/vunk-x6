@@ -57,10 +57,11 @@ const tableState = reactive({
     {
       prop: undefined,
       label: '操作',
+      width: '200em',
       slots: ({ row }) => <SkAppOperations
         modules={['c', 'u', 'd']}
         onC={ precI }
-        onD={ () => dMenus([row.id])  }
+        onD={ () => dMenus([row.menuId])  }
       >
         
       </SkAppOperations>,
@@ -100,22 +101,27 @@ function precI () {
 </script>
 <template>
   <page-x>
-    <VkDuplexCalc class="pa-page sub-mt-page h-full">
+
+    <VkDuplexCalc :gap="'var(--gap-page)'" class="pa-page h-full">
       <template #one>
-        <SkCheckTags 
-          :modules="['creatable']"
-          :options="checkTagsState.options"
-          @setData:options="setData(
-            checkTagsState.options,
-            $event,
-          )"
-          @unsetData:options="unsetData(
-            checkTagsState.options,
-            $event,
-          )"
-          v-model="checkTagsState.value"
-        >
-        </SkCheckTags>
+        <div sk-flex="row-between-center">
+          <SkCheckTags 
+            :modules="['creatable']"
+            :options="checkTagsState.options"
+            @setData:options="setData(
+              checkTagsState.options,
+              $event,
+            )"
+            @unsetData:options="unsetData(
+              checkTagsState.options,
+              $event,
+            )"
+            v-model="checkTagsState.value"
+          >
+          </SkCheckTags>
+          
+        </div>
+
       </template>
  
   

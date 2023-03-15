@@ -51,9 +51,9 @@ export const dMenus = (ids: string[]) => {
       datas: [
         {
           datasetId: '1',
-          rows: ids.map(id => {
+          rows: ids.map(menuId => {
             return {
-              id,
+              menuId,
               op: RestFetchOp.d,
             }
           }),
