@@ -57,7 +57,9 @@ export default defineComponent({
       </ElTable>
     </template>
 
-    <div class="sk-app-tables-v1-pagination-x">
+    <div class="sk-app-tables-v1-pagination-x"
+      v-if="modules.includes('pagination')"
+    >
       <ElPagination v-bind="paginationBindProps" v-on="paginationOnEmits" :currentPage="currentPage"
         @update:current-page="updateStart"></ElPagination>
     </div>

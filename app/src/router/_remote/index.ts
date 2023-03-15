@@ -1,6 +1,5 @@
 import { RouteRecordRaw } from 'vue-router'
-import Layout from '@/layouts/default/index.vue'
-
+import GEN_SYSTEM from './_system'
 export const createRemoteRoutes = () => { 
   return {
     '': {
@@ -17,18 +16,8 @@ export const createRemoteRoutes = () => {
         alwaysShow: true,
       },
     },
-    '/system': {
-      component: Layout,
-      meta: {
-        header: true,
-        icon: '',
-      },
-    },
-    '/system/role': {
-      component: () => import('@/views/system/role/index.vue'),
-    },
-    '/system/menu': {
-      component: () => import('@/views/system/menu/index.vue'),
-    },
+    
+    ...GEN_SYSTEM(),
+
   } as Record<string, Partial<RouteRecordRaw>>
 }

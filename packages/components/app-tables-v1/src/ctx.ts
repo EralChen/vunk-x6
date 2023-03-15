@@ -63,8 +63,13 @@ export const props = {
   },
 
   columns: {
-    type: Array as PropType<Column[]>,
+    type: Array as PropType<Column<any>[]>,
     default: () => [],
+  },
+
+  modules: {
+    type: Array as PropType<('pagination')[]>,
+    default: () => ['pagination'],
   },
   
 

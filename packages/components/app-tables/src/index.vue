@@ -141,7 +141,9 @@ export default defineComponent({
       </ElAutoResizer>
 
     </template>
-    <div class="sk-app-tables-pagination-x">
+    <div class="sk-app-tables-pagination-x"
+      v-if="modules.includes('pagination')"
+    >
       <ElPagination 
         v-bind="paginationBindProps" 
         v-on="paginationOnEmits"

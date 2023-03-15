@@ -42,6 +42,7 @@ export const rMenus = async (client?: string) => {
     
     return res.map(item => ({
       ...item,
+      
       title: item.name,
       name: item.menuId,
     }))

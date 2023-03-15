@@ -65,6 +65,12 @@ export const props = {
     type: String,
     default: 'id',
   },
+
+  modules: {
+    type: Array<'pagination'>,
+    default: () => ['pagination'],
+  },
+
 }
 
 export const createTableV2BindProps = bindPropsFactory(tableV2Props)
