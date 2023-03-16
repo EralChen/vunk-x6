@@ -263,6 +263,9 @@ export {}
 + 基于 [VkfForm](http://192.168.110.130:4444/zh-CN/component/form.html) 封装
 + `props.layout` ： 若为`true`, 开启自动栅格排列（24span为一行）。`props.formItems` 中表单项中的 span 将生效，由此排列，默认为 `props.span`;
 + `props.span`: 每项排列默认值,  默认为 8；
++ 在表单内 可以使用，（pl-form-label）为自定义内容添加偏移
+
+  ![image-20230316104653209](README.assets/image-20230316104653209.png)
 
 ##### 多模块（[AppModule](#AppModule)）
 

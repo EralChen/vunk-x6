@@ -9,6 +9,8 @@ import { filterDeep } from 'deepdash-es/standalone'
 import { RouteRecordRaw, useRoute } from 'vue-router'
 import { useViewsStore } from '@/stores/views'
 import { useSharedMenuClick } from '@/composables'
+import { SkAppIcon } from '@skzz-platform/components/app-icon'
+
 const emit = defineEmits({
   'load': null,
 })
@@ -70,9 +72,12 @@ console.log(permissionStore.routes)
     <VkRoutesMenuContent :data="navRoutes">
       <template #item="{ data, href }">
         <LinkVue :isMenu="false" :data="data" :to="href">
-          <ElIcon v-if="data.meta?.icon"> 
-            <component :is="data.meta.icon"></component>
-          </ElIcon>
+          <SkAppIcon 
+            class="mb-.2"
+            v-if="data.meta?.icon" 
+            :icon="data.meta.icon"
+          ></SkAppIcon>
+    
           {{  viewsStore.addBaseViewToRecord(href, data)  }}
         </LinkVue>
       </template>
@@ -83,9 +88,11 @@ console.log(permissionStore.routes)
 
       <template #menuTitle="{ data, href }">
         <LinkVue :isMenu="true" :data="data" :to="href">
-          <ElIcon v-if="data.meta?.icon"> 
-            <component :is="data.meta.icon"></component>
-          </ElIcon>
+          <SkAppIcon 
+            class="mb-.2"
+            v-if="data.meta?.icon" 
+            :icon="data.meta.icon"
+          ></SkAppIcon>
         </LinkVue>
 
         <span> 

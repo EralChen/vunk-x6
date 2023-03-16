@@ -24,6 +24,7 @@ export const rMenus = (query: {
         '1': {
           // parentMenuId: 0,
           ...query,
+          menuId: query.menuId?.join(','),
         },
       },
       ...MENU_DATA,
@@ -61,11 +62,13 @@ export const dMenus = (ids: string[]) => {
       ],
       ...MENU_DATA,
     },
-  } as RestFetchSaveOptions)
+  } as RestFetchSaveOptions, {
+    msg: '删除菜单成功',
+  })
 
 }
 
-export const uMenu = (data: MenuInfo) => {
+export const cuMenu = (data: Partial<MenuInfo>) => {
   return request({
     method: 'POST',
     url: '/core/busi/save',
@@ -76,13 +79,15 @@ export const uMenu = (data: MenuInfo) => {
           rows: [
             {
               ...data,
-              op: RestFetchOp.u,
+              op: data.id ? RestFetchOp.u : RestFetchOp.c,
             },
           ],
         },
       ],
       ...MENU_DATA,
     },
-  } as RestFetchSaveOptions)
+  } as RestFetchSaveOptions, {
+    msg: data.id ? '修改菜单成功' : '新增菜单成功',
+  })
 }
 

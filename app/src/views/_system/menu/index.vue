@@ -1,12 +1,13 @@
 <script lang="tsx" setup>
 import { VkCheckboxTree, __VkCheckboxTree } from '@vunk/skzz/components/checkbox-tree'
 import { computed, reactive, watch } from 'vue'
-import { dMenus, rMenus } from '@skzz-platform/api/system/menu'
+import { dMenus, rMenus, cuMenu } from '@skzz-platform/api/system/menu'
 import { listToTree } from '@vunk/core/shared/utils-data'
-import { SkAppOperations, SkCheckTags, __SkCheckTags, SkAppTablesV1, __SkAppTablesV1 } from '@skzz/platform'
-import { ApiReturnType, setData, unsetData, VkDuplexCalc, VkDuplex } from '@vunk/core'
-
-type Row = ApiReturnType<typeof rMenus>[number]
+import { SkAppDialog, SkAppOperations, SkCheckTags, __SkCheckTags, SkAppTablesV1, __SkAppTablesV1 } from '@skzz/platform'
+import { setData, unsetData, VkDuplexCalc, VkDuplex } from '@vunk/core'
+import CUForm from './cu-form/index.vue'
+import { Row } from './types'
+import SkAppIcon from '@skzz-platform/components/app-icon'
 
 const checkTagsState = reactive({
   options: [  
@@ -53,6 +54,10 @@ const tableState = reactive({
     {
       prop: 'icon',
       label: '图标',
+      slots: ({ row }) => row.icon ? <SkAppIcon icon={row.icon} /> : '',
+      width: '100em',
+      align: 'center',
+      headerAlign: 'start',
     },
     {
       prop: undefined,
@@ -60,15 +65,30 @@ const tableState = reactive({
       width: '200em',
       slots: ({ row }) => <SkAppOperations
         modules={['c', 'u', 'd']}
-        onC={ precI }
-        onD={ () => dMenus([row.menuId])  }
+        onC={ () => precI(row.menuId) }
+        onD={ () => d([row.menuId])  }
+        onU={ () => preuI(row) }
+        
       >
         
       </SkAppOperations>,
+      align: 'center',
+      headerAlign: 'start',
     },
   ] as __SkAppTablesV1.Column<Row>[],
   query: {},
 })
+const cuState = reactive({
+  type: '' as 'c' | 'u' | '',
+  data: {} as Partial<Row>,
+})
+const cuData = computed(() => {
+  return {
+    ...cuState.data,
+    client: checkTagsState.value,
+  }
+})
+
 
 watch(() => checkTagsState.value, () => {
   // 切换标签时，清空选中的树节点
@@ -95,13 +115,35 @@ function r () {
     tableState.data = listToTree(res)
   })
 }
-function precI () {
-  //
+function d (menuIds: string[]) {
+  dMenus(menuIds).then(() => {
+    rTree()
+    r()
+  })
+}
+function precI (parentMenuId?: string) {
+  cuState.type = 'c'
+  cuState.data = {}
+  if (parentMenuId) {
+    cuState.data.parentMenuId = parentMenuId
+  }
+}
+function preuI (row: Row) {
+  cuState.type = 'u'
+  
+  cuState.data = {...row}
+}
+function cuI () {
+  cuMenu(cuData.value).then(() => {
+    rTree()
+    r()
+    cuState.type = ''
+    cuState.data = {}
+  })
 }
 </script>
 <template>
   <page-x>
-
     <VkDuplexCalc :gap="'var(--gap-page)'" class="pa-page h-full">
       <template #one>
         <div sk-flex="row-between-center">
@@ -119,7 +161,12 @@ function precI () {
             v-model="checkTagsState.value"
           >
           </SkCheckTags>
-          
+          <ElButton type="primary" sk-flex="row_center"
+            @click="precI()"
+          >
+            <!-- <el-icon><Plus /></el-icon>   -->
+            <span>新增</span>
+          </ElButton>
         </div>
 
       </template>
@@ -149,6 +196,17 @@ function precI () {
 
     </VkDuplexCalc>
 
-
+    <SkAppDialog
+      :modelValue="!!cuState.type"
+      @update:modelValue="cuState.type = ''"
+      :title="cuState.type === 'u' ? '编辑' : '新增'"
+    >
+      <CUForm
+        :type="cuState.type"
+        :data="cuState.data"
+        @setData="setData(cuState.data, $event)"
+        @submit="cuI"
+      ></CUForm>
+    </SkAppDialog>
   </page-x>
 </template>

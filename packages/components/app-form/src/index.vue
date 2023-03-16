@@ -93,6 +93,9 @@ export default defineComponent({
       'is-layout': layout,
     }"
     @keydown.enter.prevent="$emit('enter', $event)"
+    :style="{
+      '--gap-form-label': `calc(${labelWidth} + 16px)`,
+    }"
   >
     <template #rendererTemplate>
       <VkfFormItemRendererTemplateLayout></VkfFormItemRendererTemplateLayout>

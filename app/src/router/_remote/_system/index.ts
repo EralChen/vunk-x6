@@ -7,7 +7,6 @@ export default function () {
       component: Layout,
       meta: {
         header: true,
-        icon: '',
       },
       redirect: '/system/role',
     },

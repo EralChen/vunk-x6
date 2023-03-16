@@ -12,6 +12,7 @@ import { routes as constRoutes } from '@/router'
 import { AnyFunc } from '@vunk/core'
 import { useRoute } from 'vue-router'
 import { useSharedMenuClick } from '@/composables'
+import { SkAppIcon } from '@skzz-platform/components/app-icon'
 
 const emit = defineEmits({
   'load': null,
@@ -64,7 +65,12 @@ onMounted(async () => {
       >
         <template #item="{ data, href }">
           <LinkVue :isMenu="false" :data="data" :to="href">
-            <ElIcon class="layout-default-aside-item-icon"><Document></Document></ElIcon>
+            <SkAppIcon 
+              class="layout-default-aside-item-icon"
+              v-if="data.meta?.icon" 
+              :icon="data.meta.icon"
+            ></SkAppIcon>
+
           
           </LinkVue>
         </template>
@@ -76,7 +82,12 @@ onMounted(async () => {
         <template #menuTitle="{ data, href }">
  
           <LinkVue :isMenu="true" :data="data" :to="href">
-            <ElIcon class="layout-default-aside-item-icon"><Document></Document></ElIcon>
+            <SkAppIcon 
+              class="layout-default-aside-item-icon"
+              v-if="data.meta?.icon" 
+              :icon="data.meta.icon"
+            ></SkAppIcon>
+
           </LinkVue>
 
           <span class="layout-default-aside-item-span"> {{ data.meta?.title || data.meta?.name }}</span> 
