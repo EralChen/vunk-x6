@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import { VkDuplexCalc } from '@vunk/core'
-import { defineAsyncComponent, ref } from 'vue'
-
+import { defineAsyncComponent, Ref, ref } from 'vue'
+import { ElScrollbar } from 'element-plus'
+import { onBeforeRouteUpdate } from 'vue-router'
 const LayoutHeader = defineAsyncComponent(() => import('_c/LayoutTop/index.vue'))
 const TagsView = defineAsyncComponent(() => import('_c/TagsView/index.vue'))
 const LayoutAside = defineAsyncComponent(() => import('_c/LayoutAside/index.vue'))
@@ -9,7 +10,13 @@ const BreadcrumbVue = defineAsyncComponent(() => import('_c/Breadcrumb/index.vue
 
 const headerReady = ref(false)
 const asideReady = ref(false)
+const scrollbarNode = ref() as Ref<InstanceType<typeof ElScrollbar>>
 
+onBeforeRouteUpdate(() => {
+  setTimeout(() => {
+    scrollbarNode.value?.update()
+  })
+})
 </script>
 <template>
   <VkDuplexCalc class="layout-default">
@@ -39,7 +46,7 @@ const asideReady = ref(false)
             <BreadcrumbVue></BreadcrumbVue>
           </template>
 
-          <ElScrollbar>
+          <ElScrollbar ref="scrollbarNode">
             <RouterView></RouterView>
           </ElScrollbar>
         </VkDuplexCalc>
