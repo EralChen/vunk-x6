@@ -1,57 +1,37 @@
 <script lang="tsx" setup>
 import { VkCheckboxTree, __VkCheckboxTree } from '@vunk/skzz/components/checkbox-tree'
 import { computed, reactive, watch } from 'vue'
-import { dMenus, rMenus, cuMenu } from '@skzz-platform/api/system/menu'
+import { rDataModels, dDataModels } from '@skzz-platform/api/system/data-model'
 import { SkAppDialog, SkAppOperations, SkCheckTags, __SkCheckTags, SkAppTablesV1, __SkAppTablesV1 } from '@skzz/platform'
 import { setData, unsetData, VkDuplexCalc, VkDuplex } from '@vunk/core'
 import CUForm from './cu-form/index.vue'
 import { Row } from './types'
 import SkAppIcon from '@skzz-platform/components/app-icon'
-
+type Col = __SkAppTablesV1.Column<Row>
 
 const tableState = reactive({
   data: [] as Row[],
-  colums: [
-    {
-      prop: 'menuId',
-      label: '菜单ID',
-    },
-    {
-      prop: 'label',
-      label: '菜单名称',
-    },
-    {
-      prop: 'path',
-      label: '路径',
-    },
-    {
-      prop: 'icon',
-      label: '图标',
-      slots: ({ row }) => row.icon 
-        ? <SkAppIcon icon={row.icon} /> 
-        : '',
-      width: '100em',
-      align: 'center',
-      headerAlign: 'start',
-    },
+  _columns: [
     {
       prop: undefined,
       label: '操作',
       width: '200em',
       slots: ({ row }) => <SkAppOperations
-        modules={['c', 'u', 'd']}
-        onC={ () => precI() }
-        onD={ () => d([row.menuId])  }
+        modules={[ 'u', 'd']}
+        onD={ () => d([row.modelId])  }
         onU={ () => preuI(row) }
-        
       >
-        
       </SkAppOperations>,
       align: 'center',
-      headerAlign: 'start',
+      headerAlign: 'center',
     },
-  ] as __SkAppTablesV1.Column<Row>[],
+  ] as Col[],
+  columns: [] as Col[],
   query: {},
+  pagination: {
+    pageSize: 10,
+    start: 0,
+  },
 })
 const cuState = reactive({
   type: '' as 'c' | 'u' | '',
@@ -63,12 +43,20 @@ const cuData = computed(() => {
   }
 })
 
-
+r()
 function r () {
-  //
+  return rDataModels({}, tableState.pagination).then(res => {
+    if (!tableState.columns.length) {
+      tableState.columns = [
+        ...res.columns as Col[],
+        ...tableState._columns,
+      ]
+    }
+    tableState.data = res.rows
+  })
 }
-function d (menuIds: string[]) {
-  dMenus(menuIds).then(() => {
+function d (ids: string[]) {
+  dDataModels(ids).then(() => {
     r()
   })
 }
@@ -82,11 +70,7 @@ function preuI (row: Row) {
   cuState.data = {...row}
 }
 function cuI () {
-  cuMenu(cuData.value).then(() => {
-    r()
-    cuState.type = ''
-    cuState.data = {}
-  })
+  //
 }
 </script>
 <template>
@@ -107,10 +91,11 @@ function cuI () {
       <SkAppTablesV1 
         :defaultExpandAll="true"
         flex-1
-        :modules="[]"
         :rowKey="'menuId'"
-        :columns="tableState.colums"
+        :columns="tableState.columns"
         :data="tableState.data"
+        v-model:page-size="tableState.pagination.pageSize"
+        v-model:start="tableState.pagination.start"
       >
       </SkAppTablesV1>
 

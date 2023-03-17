@@ -38,7 +38,7 @@ const treeCheckedMenuIds = computed(() => {
 
 const tableState = reactive({
   data: [] as Row[],
-  colums: [
+  columns: [
     {
       prop: 'menuId',
       label: '菜单ID',
@@ -188,7 +188,7 @@ function cuI () {
           flex-1
           :modules="[]"
           :rowKey="'menuId'"
-          :columns="tableState.colums"
+          :columns="tableState.columns"
           :data="tableState.data"
         >
         </SkAppTablesV1>

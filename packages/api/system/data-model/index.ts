@@ -1,7 +1,9 @@
 
 
+import { Pagination } from '@skzz-platform/shared'
 import { request } from '@skzz-platform/shared/fetch/platform'
-import { QueryRData, RestFetchQueryOptions } from '@vunk/skzz'
+import { NormalObject } from '@vunk/core'
+import { QueryRData, RestFetchExecOptions, RestFetchQueryOptions } from '@vunk/skzz'
 import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
 
 const MENU_DATA = {
@@ -10,28 +12,35 @@ const MENU_DATA = {
   'menuId': 'model',
 } as const
 
-export const rDataModels = (query) => {
-  return request<[QueryRData]>({
+export const rDataModels = (
+  query: NormalObject = {}, 
+  pagination?: Pagination,
+) => {
+  return request<{
+    '1.2': QueryRData<{
+      path: string;
+      modelId: string;
+      // id: string;
+    }>
+  }>({
     method: 'POST',
-    url: '/core/busi/query',
+    url: '/core/busi/exec',
     data: {
-      'datasetIds': [
-        '1',
-      ],
-      'condition': {
-        '1': {
-          ...query,
-        },
+      datasetId: '1',
+      condition: {
+        ...(pagination ? { pagination } : {}),
+        ...query,
+        op: 'query',
       },
       ...MENU_DATA,
-      'buttonId': 'search',
     },
-  } as RestFetchQueryOptions).then(res => {
-    return res.datas[0].rows
+  
+  } as RestFetchExecOptions).then(res => {
+    return res.datas['1.2']
   })
 }
 
-export const dDataModels = (ids: string[]) => {
+export const dDataModels = (modelIds: string[]) => {
   return request({
     method: 'POST',
     url: '/core/busi/save',
@@ -39,9 +48,9 @@ export const dDataModels = (ids: string[]) => {
       datas: [
         {
           datasetId: '1',
-          rows: ids.map(id => {
+          rows: modelIds.map(modelId => {
             return {
-              id,
+              modelId,
               op: RestFetchOp.d,
             }
           },
