@@ -27,7 +27,7 @@ importers:
       '@vueuse/core': ^9.12.0
       '@vunk/core': 0.0.0-alpha.73
       '@vunk/form': 0.0.1-alpha.45
-      '@vunk/skzz': 0.0.0-alpha.73
+      '@vunk/skzz': 0.0.0-alpha.74
       chroma-js: ^2.4.2
       consola: ^2.15.3
       element-plus: npm:element-plus@latest
@@ -61,7 +61,7 @@ importers:
       '@vueuse/core': registry.npmmirror.com/@vueuse/core/9.12.0_vue@3.2.45
       '@vunk/core': 0.0.0-alpha.73
       '@vunk/form': 0.0.1-alpha.45
-      '@vunk/skzz': 0.0.0-alpha.73
+      '@vunk/skzz': 0.0.0-alpha.74
       chroma-js: 2.4.2
       element-plus: 2.3.0_vue@3.2.45
       vue: 3.2.45
@@ -3291,8 +3291,8 @@ packages:
       '@vunk/core': 0.0.0-alpha.73
     dev: false
 
-  /@vunk/skzz/0.0.0-alpha.73:
-    resolution: {integrity: sha512-iq3Vt4ClDG92PydrULmYMgMQ0G3ZGiqcsHE5YRwsnwm0q3xaIQKykcMHpAibFUjDZQzHrjcQZbQS2uGx/dX5qA==}
+  /@vunk/skzz/0.0.0-alpha.74:
+    resolution: {integrity: sha512-k5sao85vvKrmgfxYfnx4P8+jC2KqoiWeuK0nWyB+hEzbsLVEL55cKMzXMSivhMD9DL/0nEKYKFANauBYSDFx0g==}
     dev: false
 
   /acorn-jsx/5.3.2_acorn@8.8.1:
@@ -3564,7 +3564,7 @@ packages:
   /axios/0.21.4_debug@4.3.4:
     resolution: {integrity: sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==}
     dependencies:
-      follow-redirects: 1.15.2
+      follow-redirects: 1.15.2_debug@4.3.4
     transitivePeerDependencies:
       - debug
     dev: true
@@ -5402,6 +5402,19 @@ packages:
     peerDependenciesMeta:
       debug:
         optional: true
+    dev: false
+
+  /follow-redirects/1.15.2_debug@4.3.4:
+    resolution: {integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
+    dependencies:
+      debug: 4.3.4
+    dev: true
 
   /for-in/1.0.2:
     resolution: {integrity: sha512-7EwmXrOjyL+ChxMhmG5lnW9MPt1aIeZEwKhQzoBUdTV0N3zuwWDZYVJatDvZ2OyzPUvdIAZDsCetk3coyMfcnQ==}
