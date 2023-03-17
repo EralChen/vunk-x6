@@ -34,7 +34,8 @@ export default defineComponent({
 
   <VkSvgIcon
     v-else-if="icon.includes('/')"
-    :iconClass="icon"
+    :url="icon"
+    
     :style="{
       color: color,
       'font-size': size
