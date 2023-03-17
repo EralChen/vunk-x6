@@ -54,7 +54,9 @@ const tableState = reactive({
     {
       prop: 'icon',
       label: '图标',
-      slots: ({ row }) => row.icon ? <SkAppIcon icon={row.icon} /> : '',
+      slots: ({ row }) => row.icon 
+        ? <SkAppIcon icon={row.icon} /> 
+        : '',
       width: '100em',
       align: 'center',
       headerAlign: 'start',

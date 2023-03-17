@@ -12,6 +12,11 @@ export default defineComponent({
   },
   emits,
   props,
+  setup () {
+    return {
+
+    }
+  },
 })
 </script>
 <template>
@@ -19,6 +24,17 @@ export default defineComponent({
   <VkSvgIcon
     v-if="icon.startsWith(customPrefix)"
     :iconClass="icon.replace(customPrefix, '')"
+    :style="{
+      color: color,
+      'font-size': size
+    }"
+    v-bind="$attrs"
+  >
+  </VkSvgIcon>
+
+  <VkSvgIcon
+    v-else-if="icon.includes('/')"
+    :iconClass="icon"
     :style="{
       color: color,
       'font-size': size
@@ -35,6 +51,13 @@ export default defineComponent({
   >
     <span v-html="icon" class="sk-app-icon-svg__inner"></span>
   </ElIcon>
+
+  <span 
+    v-else-if="/^\d/.test(icon)"
+    v-bind="$attrs"
+  >
+    {{ icon }}
+  </span>
 
   <ElIcon 
     v-else 
