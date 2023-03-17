@@ -102,7 +102,6 @@ watch(() => treeCheckedMenuIds.value, () => {
 function rTree () {
   rMenus({
     client: checkTagsState.value,
-    menuId: treeCheckedMenuIds.value,
   }).then(res => {
     treeState.data = listToTree(res)
   })
