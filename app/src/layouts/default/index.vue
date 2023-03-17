@@ -15,7 +15,7 @@ const scrollbarNode = ref() as Ref<InstanceType<typeof ElScrollbar>>
 onBeforeRouteUpdate(() => {
   setTimeout(() => {
     scrollbarNode.value?.update()
-  })
+  }, 400)
 })
 </script>
 <template>

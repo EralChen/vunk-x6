@@ -80,7 +80,7 @@ declare module 'vue-router' {
      */
     icon?: keyof typeof Icons
     /**
-     * 是否一直显示，不会收到路由合并的影响
+     * 是否一直显示，不会受到路由合并的影响
      */
     alwaysShow?: boolean
 

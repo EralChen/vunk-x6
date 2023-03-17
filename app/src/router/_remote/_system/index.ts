@@ -20,5 +20,8 @@ export default function () {
     '/system/menu': {
       component: () => import('@/views/_system/menu/index.vue'),
     },
+    '/system/workflow': {
+      component: () => import('@/views/_system/workflow/index.vue'),
+    },
   } as Record<string, Partial<RouteRecordRaw>>
 }

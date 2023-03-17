@@ -37,33 +37,51 @@ export const loginByPassword = (data: FirstParameter<typeof restFetch.login>) =>
 }
 
 export const rMenus = async (client?: string) => {
-  return restFetch.rMenus(client).then(res => {
+  return restFetch.rMenus(client)
+    .catch(() => { // 兼容旧版本
+      return restFetch.rMenus(client, {
+        data: {
+          'datasetId': '1',
+          'buttonId': 'init',
+          'condition': {
+            'op': 'initMenu',
+            client,
+          },
+          'dir': 'system',
+          'modelId': 'init',
+          'menuId': 'init',
+        },
+      })
+    })
+    .then(res => {
   
-    return res.map(item => ({
-      ...item,
+      return res.map(item => ({
+        ...item,
       
-      title: item.name,
-      name: item.menuId,
-    }))
+        title: item.name,
+        name: item.menuId,
+      }))
 
-  })
+    })
 }
 
 export const rTAInfo = () => {
   return restFetch.rDefaultTAInfo().then(res => {
-    res.tenants = res.tenants.map(item => {
-      return {
-        ...item,
-        value: item.tenantId,
-        label: item.name,
-        children: item.applications.map(app => {
-          return {
-            value: app.applicationId,
-            label: app.name,
-          }
-        }),
-      }
-    })
+    if (res?.tenants) {
+      res.tenants = res.tenants.map(item => {
+        return {
+          ...item,
+          value: item.tenantId,
+          label: item.name,
+          children: item.applications.map(app => {
+            return {
+              value: app.applicationId,
+              label: app.name,
+            }
+          }),
+        }
+      })
+    }
     return res
   })
 }

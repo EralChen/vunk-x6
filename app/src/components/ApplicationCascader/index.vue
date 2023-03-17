@@ -22,7 +22,9 @@ const cascaderValue = useModelComputed({
 const { tenantId, applicationId } = userStore.getPuppet()
 const options = ref<ApiReturnType<typeof rTAInfo>['tenants']>([])
 rTAInfo().then(res => {
-  options.value = res.tenants.filter(t => t.applications.length > 0)
+  if (res) {
+    options.value = res.tenants.filter(t => t.applications.length > 0)
+  }
   cascaderValue.value = [
     tenantId, applicationId, 
   ]
@@ -38,7 +40,9 @@ const appChange = async ([tenantId, applicationId]: string[]) => {
 
 </script>
 <template>
-  <ElDropdown  :trigger="'click'"  :placement="'bottom-end'">
+  <ElDropdown  :trigger="'click'"  :placement="'bottom-end'"
+    v-if="options.length"
+  >
    
     <ElAvatar :size="size"  class="cursor-pointer">
       <span class="f-xxs">App</span>

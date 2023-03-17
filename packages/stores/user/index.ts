@@ -30,17 +30,25 @@ export const useUserStore = defineStore('user', () => {
     } else {
       const localPuppet = getPuppet()
       const res = await rTAInfo()
-      const theTenant = res.tenants.find(item => item.tenantId === localPuppet.tenantId)
+      if (res) { // 本地有权限的租户和应用 是否在返回的租户和应用中。如果不在设置为默认租户和应用
+        const theTenant = res.tenants.find(item => item.tenantId === localPuppet.tenantId)
       
-      if (theTenant && theTenant.applications.find(item => item.applicationId === localPuppet.applicationId)) {
-        res.defaultApplicationId = localPuppet.applicationId
-        res.defaultTenantId = localPuppet.tenantId
-      } 
-  
-      _setPuppet({
-        tenantId: res.defaultTenantId,
-        applicationId: res.defaultApplicationId,
-      })
+        if (theTenant && theTenant.applications.find(item => item.applicationId === localPuppet.applicationId)) {
+          res.defaultApplicationId = localPuppet.applicationId
+          res.defaultTenantId = localPuppet.tenantId
+        } 
+    
+        _setPuppet({
+          tenantId: res.defaultTenantId,
+          applicationId: res.defaultApplicationId,
+        })
+      } else {
+        _setPuppet({
+          tenantId: 'default',
+          applicationId: 'platform',
+        })
+      }
+
     }
 
   }
