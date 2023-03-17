@@ -13,8 +13,6 @@ export default function () {
     '/platform/tenant': {
       component: () => import('@/views/_platform/tenant/index.vue'),
     },
-    '/system/data-model': {
-      component: () => import('@/views/_system/data-model/index.vue'),
-    },
+
   } as Record<string, Partial<RouteRecordRaw>>
 }

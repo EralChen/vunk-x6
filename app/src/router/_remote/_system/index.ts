@@ -23,5 +23,8 @@ export default function () {
     '/system/workflow': {
       component: () => import('@/views/_system/workflow/index.vue'),
     },
+    '/system/data-model': {
+      component: () => import('@/views/_system/data-model/index.vue'),
+    },
   } as Record<string, Partial<RouteRecordRaw>>
 }
