@@ -37,5 +37,17 @@ export default function () {
     '/system/data-model': {
       component: () => import('@/views/_system/data-model/index.vue'),
     },
+    '/system/message': {
+      redirect: '/system/message/list',
+    },
+    '/system/message/list': {
+      component: () => import('@/views/_system/message/list/index.vue'),
+    },
+    '/system/message/template': {
+      component: () => import('@/views/_system/message/template/index.vue'),
+    },
+    '/system/message/config': {
+      component: () => import('@/views/_system/message/config/index.vue'),
+    },
   } as Record<string, Partial<RouteRecordRaw>>
 }

@@ -3,6 +3,7 @@ import Layout from '@/layouts/default/index.vue'
 import _UI_CONFIG from './_ui-config'
 import _TEMPLATE_PAGE from './_template-page'
 import _PLAY from './_play'
+import _MESSAGE from './_message'
 import { getPlatform } from '@/utils'
 
 export const routes: Array<RouteRecordRaw> = [
@@ -51,10 +52,27 @@ export const routes: Array<RouteRecordRaw> = [
     },
     component: () => import('_v/_login/index.vue'),
   },
-
+  {
+    path: '/g6',
+    meta: {
+      title: 'G6',
+      header: true,
+    },
+    component: Layout,
+    children: [
+      {
+        path: '',
+        meta: {
+          title: 'G6',
+        },
+        component: () => import('_v/_system/g6/index.vue'),
+      },
+    ],
+  },
   ..._UI_CONFIG,
   ..._TEMPLATE_PAGE,
   ..._PLAY,
+  ..._MESSAGE,
 ]
 
 const router = createRouter({

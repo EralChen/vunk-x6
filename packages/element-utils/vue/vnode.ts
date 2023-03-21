@@ -37,26 +37,26 @@ export enum PatchFlags {
 
 export function isFragment(node: VNode): boolean
 export function isFragment(node: unknown): node is VNode
-export function isFragment(node: unknown): node is VNode {
+export function isFragment (node: unknown): node is VNode {
   return isVNode(node) && node.type === Fragment
 }
 
 export function isText(node: VNode): boolean
 export function isText(node: unknown): node is VNode
-export function isText(node: unknown): node is VNode {
+export function isText (node: unknown): node is VNode {
   return isVNode(node) && node.type === Text
 }
 
 export function isComment(node: VNode): boolean
 export function isComment(node: unknown): node is VNode
-export function isComment(node: unknown): node is VNode {
+export function isComment (node: unknown): node is VNode {
   return isVNode(node) && node.type === Comment
 }
 
 const TEMPLATE = 'template'
 export function isTemplate(node: VNode): boolean
 export function isTemplate(node: unknown): node is VNode
-export function isTemplate(node: unknown): node is VNode {
+export function isTemplate (node: unknown): node is VNode {
   return isVNode(node) && node.type === TEMPLATE
 }
 
@@ -66,7 +66,7 @@ export function isTemplate(node: unknown): node is VNode {
  */
 export function isValidElementNode(node: VNode): boolean
 export function isValidElementNode(node: unknown): node is VNode
-export function isValidElementNode(node: unknown): node is VNode {
+export function isValidElementNode (node: unknown): node is VNode {
   return isVNode(node) && !isFragment(node) && !isComment(node)
 }
 
@@ -75,9 +75,9 @@ export function isValidElementNode(node: unknown): node is VNode {
  * @param node {VNode} node to be searched
  * @param depth {number} depth to be searched
  */
-function getChildren(
+function getChildren (
   node: VNodeNormalizedChildren | VNodeChild,
-  depth: number
+  depth: number,
 ): VNodeNormalizedChildren | VNodeChild {
   if (isComment(node)) return
   if (isFragment(node) || isTemplate(node)) {
@@ -88,7 +88,7 @@ function getChildren(
 
 export const getFirstValidNode = (
   nodes: VNodeNormalizedChildren,
-  maxDepth = 3
+  maxDepth = 3,
 ) => {
   if (Array.isArray(nodes)) {
     return getChildren(nodes[0], maxDepth)
@@ -97,14 +97,14 @@ export const getFirstValidNode = (
   }
 }
 
-export function renderIf(
+export function renderIf (
   condition: boolean,
   ...args: Parameters<typeof createBlock>
 ) {
   return condition ? renderBlock(...args) : createCommentVNode('v-if', true)
 }
 
-export function renderBlock(...args: Parameters<typeof createBlock>) {
+export function renderBlock (...args: Parameters<typeof createBlock>) {
   return openBlock(), createBlock(...args)
 }
 
