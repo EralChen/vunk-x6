@@ -51,7 +51,13 @@ export default [
           },
         ],
       },
-    
+      {
+        path: 'g6',
+        meta: {
+          title: 'G6',
+        },
+        component: () => import('_v/_play/g6/index.vue'),
+      },
     ],
   },
 ] as RouteRecordRaw[]
