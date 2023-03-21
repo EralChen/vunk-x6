@@ -58,6 +58,14 @@ export default [
         },
         component: () => import('_v/_play/g6/index.vue'),
       },
+      
+      {
+        path: 'g6-test',
+        meta: {
+          title: 'G6-test',
+        },
+        component: () => import('_v/_play/g6-test/index.vue'),
+      },
     ],
   },
 ] as RouteRecordRaw[]
