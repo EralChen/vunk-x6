@@ -38,29 +38,29 @@ const ops: SGraphOptions = {
       'click-select',
       'drag-canvas', 
       'zoom-canvas',
-      {
-        type: 'drag-node',
-        shouldBegin: e => {
-          if (e.target.get('name') === 'link-point-right') return false
-          if (e.target.get('name') === 'link-point-left') return false
-          return true
-        },
-      },
+      // {
+      //   type: 'drag-node',
+      //   shouldBegin: e => {
+      //     if (e.target.get('name') === 'link-point-right') return false
+      //     if (e.target.get('name') === 'link-point-left') return false
+      //     return true
+      //   },
+      // },
       {
         type: 'create-edge',
         trigger: 'drag',
-        shouldBegin: e => {
-          if (e.target && e.target.get('name') !== 'link-point-right') return false
-          return true
-        },
-        shouldEnd: e => {
-          if (e.target && e.target.get('name') !== 'link-point-left') return false
-          if (e.target) {
-            e.target.set('links', e.target.get('links') + 1)
-            return true
-          }
-          return true
-        },
+        // shouldBegin: e => {
+        //   if (e.target && e.target.get('name') !== 'link-point-right') return false
+        //   return true
+        // },
+        // shouldEnd: e => {
+        //   if (e.target && e.target.get('name') !== 'link-point-left') return false
+        //   if (e.target) {
+        //     e.target.set('links', e.target.get('links') + 1)
+        //     return true
+        //   }
+        //   return true
+        // },
       },
     ],
     altSelect: [
@@ -78,9 +78,6 @@ const ops: SGraphOptions = {
     controlPoints: true,
     nodesepFunc: () => 1,
     ranksep: 100,
-  },
-  defaultNode: {
-    type: 'zzRect',
   },
   defaultEdge: {
     style: {
