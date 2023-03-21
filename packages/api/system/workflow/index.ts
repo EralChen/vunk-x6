@@ -34,7 +34,9 @@ export const rWorkflows = (query, pagination?: Pagination) => {
 
 export const rWorkflow = (id: string) => {
   return rWorkflows({ id }).then(res => {
-    return res.rows[0]
+    const doc = res.rows[0]
+    doc.nodes = JSON.parse(doc.nodes as unknown as string)
+    return doc
   })
 }
 
@@ -87,3 +89,4 @@ export const cuWorkflow = async (data: Partial<Workflow>) => {
   })
 }
 
+export * from './types'
