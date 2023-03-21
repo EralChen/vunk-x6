@@ -19,7 +19,8 @@ import GraphCp from './Graph/index.vue'
 import RightPanel from './RightPanel/index.vue'
 import Material from './Material/index.vue'
 import Menu from './Menu/index.vue'
-import { genRect } from './Nodes'
+import { registerNodes } from './Nodes'
+import { initBehavior } from './Behavior'
 
 
 const def = new Deferred()
@@ -29,46 +30,40 @@ const minimap = new Minimap({
   type: 'delegate',
 })
 const grid = new Grid()
-
-genRect()
+registerNodes()
 const ops: SGraphOptions = {
   plugins: [grid, minimap],
   modes: {
     default: [
-      'click-select',
+      {
+        type: 'click-select',
+        selectEdge: true,
+      },
       'drag-canvas', 
       'zoom-canvas',
-      // {
-      //   type: 'drag-node',
-      //   shouldBegin: e => {
-      //     if (e.target.get('name') === 'link-point-right') return false
-      //     if (e.target.get('name') === 'link-point-left') return false
-      //     return true
-      //   },
-      // },
+      {
+        type: 'drag-node',
+        shouldBegin: e => {
+          if (e.target.get('name') === 'anchor-point') return false
+          return true
+        },
+      },
       {
         type: 'create-edge',
         trigger: 'drag',
-        // shouldBegin: e => {
-        //   if (e.target && e.target.get('name') !== 'link-point-right') return false
-        //   return true
-        // },
-        // shouldEnd: e => {
-        //   if (e.target && e.target.get('name') !== 'link-point-left') return false
-        //   if (e.target) {
-        //     e.target.set('links', e.target.get('links') + 1)
-        //     return true
-        //   }
-        //   return true
-        // },
+        shouldBegin: e => {
+          if (e.target && e.target.get('name') !== 'anchor-point') return false
+          return true
+        },
+        shouldEnd: e => {
+          if (e.target && e.target.get('name') !== 'anchor-point') return false
+          if (e.target) {
+            e.target.set('links', e.target.get('links') + 1)
+            return true
+          }
+          return true
+        },
       },
-    ],
-    altSelect: [
-      {
-        type: 'click-select',
-        trigger: 'alt',
-      },
-      'drag-node',
     ],
   },
   layout: {
@@ -94,10 +89,10 @@ const ops: SGraphOptions = {
     },
   },
   nodeStateStyles: {
-    selected: {
-      stroke: '#5B8FF9',
-      lineWidth: 3,
-    },
+    // selected: {
+    //   stroke: '#5B8FF9',
+    //   lineWidth: 3,
+    // },
   },
 }
 
@@ -113,7 +108,14 @@ async function init () {
       // {'source': '0', 'target': '2', 'label': 'e0-2', 'weight': 2 },
     ],
   }
-
+  graph.on('nodeselectchange', (e) => {
+  // 当前操作的 item
+    // console.log(e.target)
+    // 当前操作后，所有被选中的 items 集合
+    // console.log(e.selectedItems)
+    // 当前操作时选中(true)还是取消选中(false)
+    // console.log(e.select)
+  })
   graph.data(data)
   graph.render()
 }

@@ -2,13 +2,12 @@ import { ModelStyle } from '@antv/g6'
 
 export enum MaterialNode {
   'zzRect' = 'zzRect',
-  'circle' = 'circle',
-  'diamond' = 'diamond'
+  'zzCircle' = 'zzCircle',
+  'zzDiamond' = 'zzDiamond'
 }
 export const nodeStyleMap: Record<MaterialNode, ModelStyle> = {
-  zzRect: {
+  [MaterialNode.zzRect]: {
     style: {
-      color: '#2196f4',
     },
     description: '',
     label: '节点',
@@ -19,33 +18,21 @@ export const nodeStyleMap: Record<MaterialNode, ModelStyle> = {
       [0.5, 1],
       [0, 0.5],
     ],
-    linkPoints: {
-      left: true,
-      right: true,
-      top: true,
-      bottom: true,
-    },
   },
-  circle: {
+  [MaterialNode.zzCircle]: {
     label: '起始',
     class: '', 
     anchorPoints: [
-      [0.5, 0],
-      [1, 0.5],
-      [0.5, 1],
       [0, 0.5],
+      [1, 0.5],
     ],
     size: 40,
-    linkPoints: {
-      left: true,
-      right: true,
-    },
   },
-  diamond: {
+  [MaterialNode.zzDiamond]: {
     label: '判断',
     class: '', 
     anchorPoints: [
-      [0.5, 0],
+      [0, 0.5],
       [1, 0.5],
     ],
     size: 80,
