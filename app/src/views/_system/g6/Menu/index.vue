@@ -6,6 +6,7 @@
 
 <script setup lang="ts">
 import { Menu } from '@antv/g6'
+import { nextTick, onMounted, ref } from 'vue'
 import { useGraph } from '../ctx'
 
 const menuNode = ref<HTMLDivElement>()

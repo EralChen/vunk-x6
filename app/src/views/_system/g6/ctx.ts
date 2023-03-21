@@ -1,5 +1,5 @@
 import { Graph } from '@antv/g6'
-import { ShallowRef } from 'vue'
+import { inject, ShallowRef } from 'vue'
 
 export const graphSymbol = Symbol('graph')
 

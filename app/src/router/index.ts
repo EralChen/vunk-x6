@@ -58,7 +58,16 @@ export const routes: Array<RouteRecordRaw> = [
       title: 'G6',
       header: true,
     },
-    component: () => import('_v/_system/g6/index.vue'),
+    component: Layout,
+    children: [
+      {
+        path: '',
+        meta: {
+          title: 'G6',
+        },
+        component: () => import('_v/_system/g6/index.vue'),
+      },
+    ],
   },
   ..._UI_CONFIG,
   ..._TEMPLATE_PAGE,

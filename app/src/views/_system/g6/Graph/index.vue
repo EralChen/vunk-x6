@@ -10,6 +10,7 @@
 <script setup lang="ts">
 import { Graph } from '@antv/g6'
 import { debounce } from 'lodash-es'
+import { onBeforeMount, onMounted, provide, ref, shallowRef } from 'vue'
 import { graphSymbol } from '../ctx'
 import { propsOpts } from './ctx'
 
