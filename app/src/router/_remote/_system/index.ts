@@ -22,6 +22,17 @@ export default function () {
     },
     '/system/workflow': {
       component: () => import('@/views/_system/workflow/index.vue'),
+      meta: {
+        alwaysShow: true,
+      },
+    },
+    '/system/workflow/read/:id': {
+      component: () => import('@/views/_system/workflow/read/index.vue'),
+      props: true,
+      meta: {
+        hidden: true,
+
+      },
     },
     '/system/data-model': {
       component: () => import('@/views/_system/data-model/index.vue'),

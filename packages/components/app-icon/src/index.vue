@@ -20,7 +20,7 @@ export default defineComponent({
 })
 </script>
 <template>
-
+<template v-if="icon">
   <VkSvgIcon
     v-if="icon.startsWith(customPrefix)"
     :iconClass="icon.replace(customPrefix, '')"
@@ -72,6 +72,7 @@ export default defineComponent({
     </component>
     
   </ElIcon>
+</template>
 </template>
 <style>
 .sk-app-icon-svg__inner{

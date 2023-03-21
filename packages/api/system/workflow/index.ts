@@ -10,7 +10,7 @@ const MENU_DATA = {
   'menuId': 'capitalFlow',
 } as const
 
-export const rWorkflows = (query, pagination: Pagination) => {
+export const rWorkflows = (query, pagination?: Pagination) => {
   return request<[QueryRData<Workflow>]>({
     method: 'POST',
     url: '/core/busi/query',
@@ -29,6 +29,12 @@ export const rWorkflows = (query, pagination: Pagination) => {
     },
   } as RestFetchQueryOptions).then(res => {
     return res.datas[0]
+  })
+}
+
+export const rWorkflow = (id: string) => {
+  return rWorkflows({ id }).then(res => {
+    return res.rows[0]
   })
 }
 

@@ -1,12 +1,13 @@
 <script lang="tsx" setup>
-import { computed, reactive } from 'vue'
+import { computed, reactive, watch } from 'vue'
 import { rWorkflows, cuWorkflow, dWorkflows } from '@skzz-platform/api/system/workflow'
 import { SkAppDialog, SkAppOperations, SkAppTablesV1, __SkAppTablesV1 } from '@skzz/platform'
 import { setData, VkDuplexCalc } from '@vunk/core'
 import CUForm from './cu-form/index.vue'
 import { Row } from './types'
+import { useRouterTo } from '@skzz-platform/composables'
 type Col = __SkAppTablesV1.Column<Row>
-
+const { routerNext }  = useRouterTo()
 const tableState = reactive({
   data: [] as Row[],
   _columns: [
@@ -23,7 +24,8 @@ const tableState = reactive({
       label: '操作',
       width: '200em',
       slots: ({ row }) => <SkAppOperations
-        modules={[ 'u', 'd']}
+        modules={[ 'r', 'u', 'd']}
+        onR={ () => rI(row.id) }
         onD={ () => d([row.id])  }
         onU={ () => preuI(row) }
       >
@@ -38,6 +40,7 @@ const tableState = reactive({
     pageSize: 10,
     start: 0,
   },
+  total: 0,
 })
 const cuState = reactive({
   type: '' as 'c' | 'u' | '',
@@ -49,7 +52,8 @@ const cuData = computed(() => {
   }
 })
 
-r()
+
+watch(() => tableState.pagination, r, { deep: true, immediate: true })
 function r () {
   return rWorkflows({}, tableState.pagination).then(res => {
     if (!tableState.columns.length) {
@@ -59,6 +63,7 @@ function r () {
       ]
     }
     tableState.data = res.rows
+    tableState.total = res.total
   })
 }
 function d (ids: string[]) {
@@ -78,6 +83,12 @@ function cuI () {
   cuWorkflow(cuData.value).then(() => {
     r()
     cuState.type = ''
+  })
+}
+function rI (id: string) {
+  routerNext({
+    path: 'read/' + id,
+    
   })
 }
 </script>
@@ -102,6 +113,7 @@ function cuI () {
         :rowKey="'menuId'"
         :columns="tableState.columns"
         :data="tableState.data"
+        :total="tableState.total"
         v-model:page-size="tableState.pagination.pageSize"
         v-model:start="tableState.pagination.start"
       >

@@ -1,4 +1,5 @@
-import { useRouter, useRoute, RouteLocationPathRaw }  from 'vue-router'
+import { useRouter, useRoute, RouteLocationPathRaw, createRouterMatcher }  from 'vue-router'
+
 import { lintPath, resolveFullPath } from '@vunk/skzz/shared/utils-route'
 import { pickObject } from '@vunk/core/shared/utils-object'
 export const useRouterTo = () => { 
@@ -6,22 +7,28 @@ export const useRouterTo = () => {
   const route = useRoute()
   const currentMatched = route.matched[route.matched.length - 1]
   const children = currentMatched.children ?? []
- 
+
   type Mode = 'push' | 'replace'
   const routerNext = (opts: {
     path: string,
     mode?: Mode,
   } & RouteLocationPathRaw) => {
+    const fullPath = resolveFullPath(opts.path, currentMatched.path)
     // 如果children中没有相同path，就不跳转。
-    if (children && !children.find((item) => item.path === opts.path)) {
-      // eslint-disable-next-line no-console
-      console.warn(`[routerTo] ${opts.path} not found in children`)
-      return
+    if (children) {
+      const childrenMatched = createRouterMatcher([currentMatched], {})
+      const childrenMatchedRoutes = childrenMatched.getRoutes()
+      if (!childrenMatchedRoutes.find(item => item.re.test(fullPath))) {
+        // eslint-disable-next-line no-console
+        console.warn(`[routerTo] ${opts.path} not found in children`, children)
+        return
+      }
     }
+
     const e = {
       mode: 'replace' as Mode,
       ...opts,
-      path: resolveFullPath(opts.path, currentMatched.path),
+      path: fullPath,
     }
     router[e.mode]({
       

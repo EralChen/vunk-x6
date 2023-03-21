@@ -33,7 +33,7 @@ module.exports = defineConfig({
       'after': true,
     }],
     'space-infix-ops': ['error', { 'int32Hint': false }],
-    eqeqeq: ['error', 'smart'],
+    // eqeqeq: ['error', 'smart'],
     semi: ['error', 'never'],
     'no-whitespace-before-property': 'error',
     'key-spacing': ['error', { 'afterColon': true }],
