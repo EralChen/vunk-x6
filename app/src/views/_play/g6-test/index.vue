@@ -4,14 +4,10 @@ import { Grid, ToolBar } from '@antv/g6-plugin'
 import { SkG6Graph } from '@skzz-platform/components/g6-graph'
 import { SkG6Render } from '@skzz-platform/components/g6-render'
 import { SkG6Minimap } from '@skzz-platform/components/g6-minimap'
+import { SkG6ToolBar } from '@skzz-platform/components/g6-tool-bar'
 import { ref } from 'vue'
 const grid = new Grid()
-const toolbar = new ToolBar({
-  position: {
-    x: 100,
-    y: 100,
-  },
-})
+
 const data = ref({
   nodes: [
     {'id': '0', 'label': 'n0', 'class': 'c0','x': 1000, 'y': -100, description: '描述' },
@@ -24,7 +20,7 @@ const data = ref({
 })
 const defaultOptions: Partial<GraphOptions> = {
   
-  plugins: [grid, toolbar],
+  plugins: [grid],
   modes: {
     default: [
       'click-select',
@@ -100,13 +96,11 @@ const defaultOptions: Partial<GraphOptions> = {
         ...defaultOptions,
       }"
     >
-      <SkG6Minimap
-        
-      ></SkG6Minimap>
+      <SkG6Minimap></SkG6Minimap>
+      <SkG6ToolBar></SkG6ToolBar>
       <SkG6Render
         :data="data"
       ></SkG6Render>
-      <div>12312</div>
     </SkG6Graph>
   </div>
 </template>

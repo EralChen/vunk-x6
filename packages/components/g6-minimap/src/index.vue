@@ -1,6 +1,6 @@
 <script lang="ts">
 import { props, emits } from './ctx'
-import { defineComponent, onMounted, Ref, ref } from 'vue'
+import { defineComponent, onBeforeUnmount, onMounted, Ref, ref } from 'vue'
 import { Minimap } from '@antv/g6'
 import { useGraph } from '@skzz-platform/composables/use-graph'
 
@@ -24,6 +24,11 @@ export default defineComponent({
       emit('load', {
         graph, minimap,
       })
+
+      onBeforeUnmount(() => {
+        graph.removePlugin(minimap)
+      })
+      
     })
 
     return {
@@ -41,8 +46,8 @@ export default defineComponent({
 <style>
 .sk-g6-minimap{
   position: absolute;
-  bottom: -1px;
-  left: -1px;
+  bottom: var(--gap-page, 14px);
+  left: var(--gap-page, 14px);
   border: var(--el-border);
   border-radius: var(--el-border-radius-base);
 }
