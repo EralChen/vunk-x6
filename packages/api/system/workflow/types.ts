@@ -4,6 +4,6 @@ export interface Workflow {
   flowId: string,
   itemId: string,
   memo: string,
-  node: string,
+  nodes: any[],
   connections: string
 }

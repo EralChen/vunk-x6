@@ -31,7 +31,7 @@ export default function () {
       props: true,
       meta: {
         hidden: true,
-
+        tagsView: false,
       },
     },
     '/system/data-model': {
