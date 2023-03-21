@@ -28,6 +28,7 @@
 		"vitest": "^0.18.1"
 	},
 	"dependencies": {
+		"@antv/g6": "^4.8.7",
 		"@arcgis/core": "^4.25.5",
 		"@element-plus/utils": "workspace:*",
 		"@skzz-platform/api": "workspace:*",
