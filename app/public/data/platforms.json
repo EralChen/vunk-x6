@@ -18,6 +18,14 @@
   {
     "code": "capital",
     "url": "http://t1.zjsophon.com:10000/capital-server"
+  },
+  {
+    "code": "cy_dev",
+    "url":  "http://183.249.87.107:10000/scenebuilder-flow"
+  },
+  {
+    "code": "local",
+    "url": "http://localhost:30100/scene-server"
   }
-
+  
 ]

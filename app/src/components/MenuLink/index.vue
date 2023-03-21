@@ -54,7 +54,8 @@ export default defineComponent({
         'is-exact-active': isExactActive,
       }">
         <slot :isActive="isActive" :isExactActive="isExactActive">
-          {{ data.meta?.name }}
+          <!-- {{ data.meta?.name }} -->
+          <span></span>
         </slot>
       </a>
     </template>
