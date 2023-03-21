@@ -8,6 +8,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@antv/g6": "^4.8.7",
     "deepdash-es": "^5.3.9",
     "js-cookie": "^3.0.1",
     "path-to-regexp": "^6.2.1",

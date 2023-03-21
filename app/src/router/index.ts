@@ -52,7 +52,14 @@ export const routes: Array<RouteRecordRaw> = [
     },
     component: () => import('_v/_login/index.vue'),
   },
-
+  {
+    path: '/g6',
+    meta: {
+      title: 'G6',
+      header: true,
+    },
+    component: () => import('_v/_system/g6/index.vue'),
+  },
   ..._UI_CONFIG,
   ..._TEMPLATE_PAGE,
   ..._PLAY,
