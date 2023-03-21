@@ -15,7 +15,7 @@ const graph = useGraph()
 const menu = new Menu({
   offsetX: 6,
   offsetY: 10,
-  itemTypes: ['node'],
+  itemTypes: ['node', 'edge'],
   getContent () {
     if (menuNode.value)
       return menuNode.value

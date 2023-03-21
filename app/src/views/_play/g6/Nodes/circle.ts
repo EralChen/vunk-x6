@@ -2,10 +2,10 @@ import { registerNode } from '@antv/g6'
 import { registerSecondParams } from './common'
 import { MaterialNode } from './ctx'
 
-export function genRect () {
+export function genCircle () {
   registerNode(
-    MaterialNode.zzRect,
+    MaterialNode.zzCircle,
     registerSecondParams,
-    'rect',
+    'circle',
   )
 }

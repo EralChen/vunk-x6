@@ -11,12 +11,12 @@
     <div
       class="drag-node-item circle"
       draggable="true"
-      @dragend="drageEnd($event, MaterialNode.circle)"
+      @dragend="drageEnd($event, MaterialNode.zzCircle)"
     ></div>
     <div
       class="drag-node-item diamond"
       draggable="true"
-      @dragend="drageEnd($event, MaterialNode.diamond)"
+      @dragend="drageEnd($event, MaterialNode.zzDiamond)"
     ></div>
   </div>
 </template>
@@ -41,6 +41,7 @@ const addNode = (point: IPoint, type: MaterialNode) => {
 
 const drageEnd = (e: DragEvent, type: MaterialNode) => {
   const point = graph?.value.getPointByClient(e.x, e.y)
+
   if (point)
     addNode(point, type)
 }
