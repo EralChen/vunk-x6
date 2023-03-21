@@ -5,14 +5,14 @@
       @load="def.resolve"
     >
       <Material></Material>
-      <RightPanel></RightPanel>
+      <RightPanel :node="currentNode"></RightPanel>
       <Menu></Menu>
     </GraphCp>
   </div>
 </template>
 
 <script setup lang="ts">
-import { Graph, Grid, Minimap } from '@antv/g6'
+import { ComboConfig, EdgeConfig, Graph, Grid, ICanvas, IShapeBase, Minimap, Node, NodeConfig } from '@antv/g6'
 import { Deferred } from '@vunk/core/shared/utils-promise'
 import { SGraphOptions } from './Graph/ctx'
 import GraphCp from './Graph/index.vue'
@@ -20,7 +20,7 @@ import RightPanel from './RightPanel/index.vue'
 import Material from './Material/index.vue'
 import Menu from './Menu/index.vue'
 import { registerNodes } from './Nodes'
-import { initBehavior } from './Behavior'
+import { ref } from 'vue'
 
 
 const def = new Deferred()
@@ -95,7 +95,7 @@ const ops: SGraphOptions = {
     // },
   },
 }
-
+const currentNode = ref<Node | null | undefined>(null)
 async function init () {
   const graph = await def.promise as Graph
   const data = {
@@ -110,11 +110,11 @@ async function init () {
   }
   graph.on('nodeselectchange', (e) => {
   // 当前操作的 item
-    // console.log(e.target)
-    // 当前操作后，所有被选中的 items 集合
-    // console.log(e.selectedItems)
-    // 当前操作时选中(true)还是取消选中(false)
-    // console.log(e.select)
+    if (e.target)
+      currentNode.value = e.target as unknown as Node
+    else {
+      currentNode.value = null
+    }
   })
   graph.data(data)
   graph.render()
