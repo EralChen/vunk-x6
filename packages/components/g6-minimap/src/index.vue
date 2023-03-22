@@ -46,6 +46,7 @@ export default defineComponent({
 <style>
 .sk-g6-minimap{
   position: absolute;
+  z-index: 2;
   bottom: var(--gap-page, 14px);
   left: var(--gap-page, 14px);
   border: var(--el-border);

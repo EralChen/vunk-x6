@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 import { GraphOptions } from '@antv/g6'
-import { Grid, ToolBar } from '@antv/g6-plugin'
 import { SkG6Graph } from '@skzz-platform/components/g6-graph'
 import { SkG6Render } from '@skzz-platform/components/g6-render'
 import { SkG6Minimap } from '@skzz-platform/components/g6-minimap'
 import { SkG6ToolBar } from '@skzz-platform/components/g6-tool-bar'
+import { SkG6Grid } from '@skzz-platform/components/g6-grid'
 import { ref } from 'vue'
-const grid = new Grid()
+
 
 const data = ref({
   nodes: [
@@ -19,8 +19,6 @@ const data = ref({
   ],
 })
 const defaultOptions: Partial<GraphOptions> = {
-  
-  plugins: [grid],
   modes: {
     default: [
       'click-select',
@@ -96,6 +94,7 @@ const defaultOptions: Partial<GraphOptions> = {
         ...defaultOptions,
       }"
     >
+      <SkG6Grid></SkG6Grid>
       <SkG6Minimap></SkG6Minimap>
       <SkG6ToolBar></SkG6ToolBar>
       <SkG6Render

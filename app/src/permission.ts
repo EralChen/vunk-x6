@@ -47,8 +47,8 @@ router.beforeEach(async (to, from, next) => {
           // note: roles must be a object array! such as: ['admin'] or ,['developer','editor']
           // const { roles } = await store.dispatch('user/getInfo')
           
-          // TODO appId.value
           await userStore.setUserInfoByToken()
+          
           await userStore.setPuppet()
 
           // [TODO] if rUserInfo get roles.length ===  0
