@@ -1,11 +1,12 @@
 <script lang="tsx" setup>
 import { computed, reactive, watch } from 'vue'
-import { rWorkflows, cuWorkflow, dWorkflows } from '@skzz-platform/api/system/workflow'
+import { rWorkflows, cuWorkflow, dWorkflows, runWorkflow } from '@skzz-platform/api/system/workflow'
 import { SkAppDialog, SkAppOperations, SkAppTablesV1, __SkAppTablesV1 } from '@skzz/platform'
 import { setData, VkDuplexCalc } from '@vunk/core'
 import CUForm from './cu-form/index.vue'
 import { Row } from './types'
 import { useRouterTo } from '@skzz-platform/composables'
+import { ElButton } from 'element-plus'
 type Col = __SkAppTablesV1.Column<Row>
 const { routerNext }  = useRouterTo()
 const tableState = reactive({
@@ -16,18 +17,29 @@ const tableState = reactive({
       label: '名称',
     },
     {
-      prop: 'memo',
-      label: '备注',
+      prop: 'itemId',
+      label: '关联业务ID',
     },
+
     {
       prop: undefined,
       label: '操作',
-      width: '200em',
+      width: '400em',
       slots: ({ row }) => <SkAppOperations
-        modules={[ 'r', 'u', 'd']}
+        modules={[ 'r', 'u', 'run', 'nodes','d']}
         onR={ () => rI(row.id) }
         onD={ () => d([row.id])  }
         onU={ () => preuI(row) }
+        v-slots={{
+          run: () => <ElButton type="primary" size="small"
+            onClick={ () => runWorkflow(row.itemId) }
+          >运行</ElButton>,
+          nodes: () => <ElButton type="primary" size="small"
+            onClick={ () => routerNext({
+              path: 'nodes/' + row.flowId,
+            }) } 
+          >节点</ElButton>,
+        }}
       >
       </SkAppOperations>,
       align: 'center',
@@ -91,6 +103,7 @@ function rI (id: string) {
     
   })
 }
+
 </script>
 <template>
   <page-x>

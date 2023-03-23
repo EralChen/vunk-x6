@@ -34,9 +34,18 @@ export default function () {
         tagsView: false,
       },
     },
+    '/system/workflow/nodes/:flowId': {
+      component: () => import('@/views/_system/workflow/nodes/index.vue'),
+      props: true,
+      meta: {
+        hidden: true,
+        tagsView: false,
+      },
+    },
     '/system/data-model': {
       component: () => import('@/views/_system/data-model/index.vue'),
     },
+    
     '/system/message': {
       redirect: '/system/message/list',
     },

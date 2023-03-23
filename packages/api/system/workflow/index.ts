@@ -1,14 +1,10 @@
 import { Pagination } from '@skzz-platform/shared'
-import { request, restFetch } from '@skzz-platform/shared/fetch/platform'
-import { QueryRData, RestFetchQueryOptions } from '@vunk/skzz'
+import { request } from '@skzz-platform/shared/fetch/platform'
+import { QueryRData, RestFetchExecOptions, RestFetchQueryOptions } from '@vunk/skzz'
 import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
 import { Workflow } from './types'
-
-const MENU_DATA = {
-  'dir': 'system',
-  'modelId': 'flow',
-  'menuId': 'capitalFlow',
-} as const
+import { snowFlake } from '@skzz-platform/api/basic'
+import { MENU_DATA } from './const'
 
 export const rWorkflows = (query, pagination?: Pagination) => {
   return request<[QueryRData<Workflow>]>({
@@ -64,7 +60,7 @@ export const dWorkflows = (ids: string[]) => {
 
 export const cuWorkflow = async (data: Partial<Workflow>) => {
   if (!data.flowId) {
-    data.flowId = await restFetch.snowFlake()
+    data.flowId = await snowFlake()
   }
   return request({
     method: 'POST',
@@ -89,4 +85,30 @@ export const cuWorkflow = async (data: Partial<Workflow>) => {
   })
 }
 
+/**
+ * https://www.apifox.cn/link/project/1903413/apis/api-69105530
+ * @param itemId 绑定的业务id
+ */
+export const runWorkflow = (itemId: string) => {
+  return request({
+    method: 'POST',
+    DEV_NAME: 'runWorkflow',
+    url: '/core/busi/exec',
+    data: {
+      datasetId: '5',
+      condition: {
+        flow: {
+          itemId,
+          op: 'startAndSubmit',
+        },
+      },
+      ...MENU_DATA,
+    },
+
+  } as RestFetchExecOptions, {
+    msg: '流程启动成功',
+  })
+
+}
+export * from './node'
 export * from './types'

@@ -1,11 +1,12 @@
 <script lang="tsx" setup>
 import { SkAppForm, __SkAppForm } from '@skzz/platform'
-import { Row } from '../types'
-import { ElButton, ElLink } from 'element-plus'
+import { ElButton } from 'element-plus'
 import { computed, PropType, ref  } from 'vue'
-import { SkAppIcon } from '@skzz-platform/components/app-icon'
-import { SetDataEvent } from '@vunk/core'
+import { Media, SetDataEvent } from '@vunk/core'
 import { snowFlake } from '@skzz-platform/api/basic'
+import { WorkflowNode } from '@skzz-platform/api/system/workflow'
+
+type Row = WorkflowNode
 
 const props = defineProps({
   data: {
@@ -16,6 +17,10 @@ const props = defineProps({
     type: String as PropType<'c' | 'u' | ''>,
     default: '',
   },
+  nodes: {
+    type: Array as PropType<WorkflowNode[]>,
+    default: () => [],
+  },
 })
 const emit = defineEmits({
   'submit': (data: Partial<Row>) => data,
@@ -23,37 +28,37 @@ const emit = defineEmits({
 })
 
 const isU = computed(() => props.type === 'u')
+const options = computed(() => props.nodes.map((node) => ({
+  label: node.name,
+  value: node.id,
+})))
 const formItems = ref<__SkAppForm.FormItem<keyof Row>[]>([
   {
-    templateType: 'VkfInput',
     prop: 'name',
     label: '名称',
+    templateType: 'VkfInput',
   },
   {
-    templateType: 'VkfInput',
-    prop: 'memo',
-    label: '备注',
+    prop: 'isJointly',
+    label: '是否会签',
+    templateType: 'VkfSwitch',
+    activeValue: 1,
+    inactiveValue: 0,
   },
-
   {
-    templateType: 'VkfInput',
-    prop: 'itemId',
-    label: '业务关联ID',
-    inputSlots: {
-      append: () => <ElButton
-        onClick={ async () =>  {
-          const itemId = await snowFlake()
-          emit('setData', {
-            k: 'itemId',
-            v: itemId,
-          })
-        } }
-      >
-        生成
-      </ElButton>,
-    },
+    prop: 'prevNodes',
+    label: '上一节点',
+    templateType: 'VkfSelect',
+    multiple: true,
+    options: options as unknown as Media[],
   },
-
+  {
+    prop: 'nextNodes',
+    label: '下一节点',
+    templateType: 'VkfSelect',
+    multiple: true,
+    options: options as unknown as Media[],
+  },
 
   {
     templateType: 'VkfButton',
@@ -66,6 +71,7 @@ const formItems = ref<__SkAppForm.FormItem<keyof Row>[]>([
       emit('submit', props.data)
     },
   },
+
 ])
 
 </script>

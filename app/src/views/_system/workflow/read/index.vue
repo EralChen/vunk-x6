@@ -19,10 +19,14 @@ function r () {
 </script>
 <template>
   <PageOver>
-    <SkAppCard :header="data.name"
-      class="h-full"
-    >
-
+    <SkAppCard :header="data.name" class="h-full">
+      <ElScrollbar>
+        <div gap-main-x sub:mt-page>
+          <el-descriptions v-for="(item, index) of data.nodes" :key="index" :title="item['data-id']" border>
+            <el-descriptions-item v-for="(v, k) of item" :key="k" :label="k + ''">{{ v }}</el-descriptions-item>
+          </el-descriptions>
+        </div>
+      </ElScrollbar>
     </SkAppCard>
   </PageOver>
 </template>

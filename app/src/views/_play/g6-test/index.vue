@@ -1,12 +1,13 @@
 <script lang="ts" setup>
 import { GraphOptions } from '@antv/g6'
-import { SkG6Graph } from '@skzz-platform/components/g6-graph'
-import { SkG6Render } from '@skzz-platform/components/g6-render'
-import { SkG6Minimap } from '@skzz-platform/components/g6-minimap'
-import { SkG6ToolBar } from '@skzz-platform/components/g6-tool-bar'
-import { SkG6Grid } from '@skzz-platform/components/g6-grid'
-import { ref } from 'vue'
 
+import { ZzGraph } from '@zzg6/flow/components/graph'
+import { ZzGrid } from '@zzg6/flow/components/grid'
+import { ZzMinimap } from '@zzg6/flow/components/minimap'
+import { ZzRender } from '@zzg6/flow/components/render'
+import { ZzToolBar } from '@zzg6/flow/components/tool-bar'
+import { ref } from 'vue'
+import '@zzg6/flow/index.css'
 
 const data = ref({
   nodes: [
@@ -85,21 +86,17 @@ const defaultOptions: Partial<GraphOptions> = {
       lineWidth: 3,
     },
   },
-} as Partial<GraphOptions>
+}
 </script>
 <template>
   <div class="h-page overflow-hidden">
-    <SkG6Graph
-      :defaultOptions="{
-        ...defaultOptions,
-      }"
+    <ZzGraph
+      :defaultOptions="defaultOptions"
     >
-      <SkG6Grid></SkG6Grid>
-      <SkG6Minimap></SkG6Minimap>
-      <SkG6ToolBar></SkG6ToolBar>
-      <SkG6Render
-        :data="data"
-      ></SkG6Render>
-    </SkG6Graph>
+      <ZzGrid></ZzGrid>
+      <ZzMinimap></ZzMinimap>
+      <ZzToolBar></ZzToolBar>
+      <ZzRender></ZzRender>
+    </ZzGraph>
   </div>
 </template>
