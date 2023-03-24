@@ -31,7 +31,7 @@ export const rWorkflows = (query, pagination?: Pagination) => {
 export const rWorkflow = (id: string) => {
   return rWorkflows({ id }).then(res => {
     const doc = res.rows[0]
-    doc.nodes = JSON.parse(doc.nodes as unknown as string)
+    // doc.nodes = JSON.parse(doc.nodes as unknown as string)
     return doc
   })
 }

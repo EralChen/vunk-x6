@@ -1,9 +1,10 @@
 <script lang="ts" setup>
-import { reactive, ref, watch } from 'vue'
+import { computed, reactive, ref, watch } from 'vue'
 import { rWorkflowNode, WorkflowNode, cuWorkflowNode } from '@skzz-platform/api/system/workflow'
 import { SkAppDialog } from '@skzz/platform'
 import CuForm from './cu-form/index.vue'
-import { setData } from '@vunk/core'
+import { setData, VkDuplex } from '@vunk/core'
+import { pickObject } from '@vunk/core/shared/utils-object'
 type Row = Partial<WorkflowNode>
 const props = defineProps({
   flowId: {
@@ -11,7 +12,39 @@ const props = defineProps({
     required: true,
   },
 })
-const data = ref<Row[]>([])
+const data = ref<WorkflowNode[]>([])
+const idToNode = computed(() => {
+  return data.value.reduce((acc, cur) => {
+    acc[cur.id] = cur
+    return acc
+  }, {} as {[key: string]: WorkflowNode})
+})
+const getNodePath = (node: WorkflowNode) => {
+
+  const pre = node.prevNodes.reduce((acc, cur) => {
+
+    if (idToNode.value[cur]) {
+      acc.push(idToNode.value[cur])
+    }
+    return acc
+  }, [] as WorkflowNode[])
+  const next = node.nextNodes.reduce((acc, cur) => {
+    if (idToNode.value[cur]) {
+      acc.push(idToNode.value[cur])
+    }
+    return acc
+  }, [] as WorkflowNode[]) 
+  const data = [node.name]
+  if (pre.length) {
+    data.unshift(pre.map(item => item.name).join('、'))
+  }
+  if (next.length) {
+    data.push(next.map(item => item.name).join('、'))
+  }
+
+  return  data.join(' -> ')
+}
+
 
 const cuState = reactive({
   type: '' as 'c' | 'u' | '',
@@ -47,17 +80,38 @@ function cuI () {
 <template>
   <PageOver>
 
-    <div gap-main-x>
-      <div sk-flex="row-between-center">
+    <VkDuplex class="h-full" :gap="'var(--gap-page)'" gap-main-x>
+      <template #one>
+        <div sk-flex="row-between-center">
         <span></span>
         <ElButton type="primary"
           @click="precI"
         >新建</ElButton>
       </div>
+      </template>
 
-      <div>{{ data }}</div>
-      <div>{{ flowId }}</div>
-    </div>
+      <ElScrollbar>
+        <div sub:mt-page>
+        
+        <el-descriptions v-for="(item, index) of data" :key="index" :title="getNodePath(item)" border
+        >
+          <template #extra>
+            <el-button type="primary" size="small"
+              @click="preuI(item)"
+            >修改</el-button>
+          </template>
+          <el-descriptions-item v-for="(v, k) of pickObject(item, {
+            includes: ['name', 'id', 'isJointly',  'nextNodes', 'prevNodes']
+          })" :key="k" :label="k + ''">
+            {{ v }}
+          </el-descriptions-item>
+        </el-descriptions>
+      </div>
+      </ElScrollbar>
+
+
+
+    </VkDuplex>
 
     <SkAppDialog 
       :modelValue="!!cuState.type"
@@ -65,6 +119,7 @@ function cuI () {
       @update:modelValue="cuState.type = ''"
     >
       <CuForm
+        :nodes="data"
         :type="cuState.type"
         :data="cuState.data"
         @setData="setData(cuState.data, $event)"

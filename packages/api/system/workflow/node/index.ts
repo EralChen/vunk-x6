@@ -9,26 +9,57 @@ import { snowFlake } from '@skzz-platform/api/basic'
 export const rWorkflowNode = (query: {
   flowId: string,
 }) => {
-  return request<[QueryRData<WorkflowNode>]>({
+  return request<{'7.1': [QueryRData<WorkflowNode>]}>({
     method: 'POST',
-    url: '/core/busi/query',
+    url: '/core/busi/exec',
     DEV_NAME: 'rWorkflowNode',
     data: {
-      'datasetIds': [
-        '2',
-      ],
-      'condition': {
-        '2': {
+      'datasetIds': ['2'],
+      'datasetId': '7',
+      condition: {
+        2: {
           ...query,
         },
       },
       ...MENU_DATA,
-      'buttonId': 'search',
     },
-  } as RestFetchQueryOptions).then(res => {
-    return res.datas[0]
+  } as RestFetchExecOptions).then(res => {
+    return res.datas['7.1'][0]
   })
 }
+
+// export const rWorkflowNode = (query: {
+//   flowId: string,
+// }) => {
+//   return request<[QueryRData<WorkflowNode>]>({
+//     method: 'POST',
+//     url: '/core/busi/query',
+//     DEV_NAME: 'rWorkflowNode',
+//     data: {
+//       'datasetIds': [
+//         '2',
+//       ],
+//       'condition': {
+//         '2': {
+//           ...query,
+//         },
+//       },
+//       ...MENU_DATA,
+//       'buttonId': 'search',
+//     },
+//   } as RestFetchQueryOptions).then(res => {
+//     res.datas[0].rows.forEach(row => {
+//       if (typeof  row.prevNodes === 'string') {
+//         row.prevNodes = JSON.parse(row.prevNodes)
+//       }
+//       if (typeof  row.nextNodes === 'string') { 
+//         row.nextNodes = JSON.parse(row.nextNodes)
+//       }
+     
+//     })
+//     return res.datas[0]
+//   })
+// }
 
 export const cuWorkflowNode = async (data: Partial<WorkflowNode>) => {
   const op = data.id ? RestFetchOp.u : RestFetchOp.c
@@ -45,8 +76,8 @@ export const cuWorkflowNode = async (data: Partial<WorkflowNode>) => {
           'datasetId': '2',
           'rows': [
             {
-              op,
               ...data,
+              op,
             },
           ],
         },

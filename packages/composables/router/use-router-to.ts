@@ -5,14 +5,15 @@ import { pickObject } from '@vunk/core/shared/utils-object'
 export const useRouterTo = () => { 
   const router = useRouter()
   const route = useRoute()
-  const currentMatched = route.matched[route.matched.length - 1]
-  const children = currentMatched.children ?? []
+
 
   type Mode = 'push' | 'replace'
   const routerNext = (opts: {
     path: string,
     mode?: Mode,
   } & RouteLocationPathRaw) => {
+    const currentMatched = route.matched[route.matched.length - 1]
+    const children = currentMatched.children ?? []
     const fullPath = resolveFullPath(opts.path, currentMatched.path)
     // 如果children中没有相同path，就不跳转。
     if (children) {
