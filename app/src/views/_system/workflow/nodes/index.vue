@@ -1,17 +1,20 @@
 <script lang="ts" setup>
 import { computed, reactive, ref, watch } from 'vue'
-import { rWorkflowNode, WorkflowNode, cuWorkflowNode } from '@skzz-platform/api/system/workflow'
+import { rWorkflowNode, WorkflowNode, dWorkflowNodes,cuWorkflowNode } from '@skzz-platform/api/system/workflow'
 import { SkAppDialog } from '@skzz/platform'
 import CuForm from './cu-form/index.vue'
 import { setData, VkDuplex } from '@vunk/core'
 import { pickObject } from '@vunk/core/shared/utils-object'
+
 type Row = Partial<WorkflowNode>
+ 
 const props = defineProps({
   flowId: {
     type: String,
     required: true,
   },
 })
+
 const data = ref<WorkflowNode[]>([])
 const idToNode = computed(() => {
   return data.value.reduce((acc, cur) => {
@@ -59,6 +62,11 @@ function r () {
     data.value = res.rows
   })
 }
+function d (ids: string[]) {
+  dWorkflowNodes(ids).then(() => {
+    r()
+  })
+}
 function precI () {
   cuState.type = 'c'
   cuState.data = {}
@@ -96,9 +104,12 @@ function cuI () {
         <el-descriptions v-for="(item, index) of data" :key="index" :title="getNodePath(item)" border
         >
           <template #extra>
-            <el-button type="primary" size="small"
+            <el-button type="primary" 
               @click="preuI(item)"
             >修改</el-button>
+            <el-button @click="d([item.id])"
+              :type="'danger'"
+            >删除</el-button>
           </template>
           <el-descriptions-item v-for="(v, k) of pickObject(item, {
             includes: ['name', 'id', 'isJointly',  'nextNodes', 'prevNodes']

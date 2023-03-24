@@ -61,6 +61,28 @@ export const rWorkflowNode = (query: {
 //   })
 // }
 
+export const dWorkflowNodes  = (ids: string[]) => {
+  return request({
+    method: 'POST',
+    url: '/core/busi/save',
+    data: {
+      'datas': [
+        {
+          'datasetId': '2',
+          'rows': ids.map(id => ({
+            id,
+            op: RestFetchOp.d,
+          })),
+        },
+      ],
+      ...MENU_DATA,
+    },
+  } as RestFetchSaveOptions, {
+    msg: '删除成功',
+  })
+}
+
+
 export const cuWorkflowNode = async (data: Partial<WorkflowNode>) => {
   const op = data.id ? RestFetchOp.u : RestFetchOp.c
   if (op === RestFetchOp.c) {
