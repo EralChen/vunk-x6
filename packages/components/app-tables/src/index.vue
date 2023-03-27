@@ -48,6 +48,56 @@ export default defineComponent({
               key: 'selection',
               width: 60,
               ...colProps, 
+              headerCellRenderer: () => {
+
+                const getCurrentPageCheckInfo = () => {
+                  const oidField = props.oidField
+                  const allCheckedId = props.modelValue.map((d) => d[oidField])
+                  const checkedNodes = [] as any[]
+                  const uncheckedNodes = [] as any[]
+
+                  props.data.forEach((d) => {
+                    if (allCheckedId.includes(d[oidField])) {
+                      checkedNodes.push(d)
+                    } else {
+                      uncheckedNodes.push(d)
+                    }
+                  })
+
+                  return {
+                    checkedNodes,
+                    uncheckedNodes,
+                  }
+                }
+                const { checkedNodes, uncheckedNodes } = getCurrentPageCheckInfo()
+
+                return <ElCheckbox
+                  indeterminate={ checkedNodes.length > 0 && checkedNodes.length < props.data.length }
+                  modelValue={ checkedNodes.length === props.data.length }
+                  {
+                    ...vOn({
+                      'update:modelValue': (checked) => {
+          
+                        if (checked) { // 把当页没勾上的都勾上
+                          emit('update:modelValue', [
+                            ...props.modelValue,
+                            ...uncheckedNodes,
+                          ])
+                        } else { // 把当页勾上的都去掉
+                          emit('update:modelValue', [
+                            ...props.modelValue.filter((d) => {
+                              const id = d[props.oidField]
+                              return !props.data.some((d) => d[props.oidField] === id)
+                            }),
+                          ])
+                        }
+                      },
+                    })
+                  }
+                >
+                  
+                </ElCheckbox>
+              },
               cellRenderer: ({ rowData }) => {
                 return <VkCheckRecordLogic
                   name={rowData}

@@ -5,7 +5,7 @@ import { SkAppDialog } from '@skzz/platform'
 import CuForm from './cu-form/index.vue'
 import { setData, VkDuplex } from '@vunk/core'
 import { pickObject } from '@vunk/core/shared/utils-object'
-
+import { SkUserTablesSelect } from '@skzz-platform/components/user-tables-select'
 type Row = Partial<WorkflowNode>
  
 const props = defineProps({
@@ -54,6 +54,11 @@ const cuState = reactive({
   data: {} as Row,
 })
 
+const bindState = reactive({
+  nodeId: '',
+  data: [] as Row[],
+})
+
 watch(() => props.flowId, r, { immediate: true })
 function r () {
   rWorkflowNode({
@@ -84,6 +89,10 @@ function cuI () {
     cuState.type = ''
   })
 }
+
+function preBind (row: Row) {
+  bindState.nodeId = row.id || ''
+}
 </script>
 <template>
   <PageOver>
@@ -106,8 +115,8 @@ function cuI () {
           <template #extra>
             <el-button 
               type="primary" 
+              @click="preBind(item)"
             >绑定</el-button>
-
             <el-button type="primary" 
               @click="preuI(item)"
             >修改</el-button>
@@ -140,6 +149,17 @@ function cuI () {
         @setData="setData(cuState.data, $event)"
         @submit="cuI"
       ></CuForm>
+    </SkAppDialog>
+
+    <SkAppDialog
+      :modelValue="!!bindState.nodeId"
+      @update:modelValue="bindState.nodeId = ''"
+      :title="'绑定操作人'"
+    >
+      <SkUserTablesSelect
+        v-model="bindState.data"
+        class="h-40em"
+      ></SkUserTablesSelect>
     </SkAppDialog>
 
   </PageOver>

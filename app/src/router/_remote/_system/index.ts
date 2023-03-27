@@ -20,6 +20,10 @@ export default function () {
     '/system/menu': {
       component: () => import('@/views/_system/menu/index.vue'),
     },
+    '/system/user': {
+      component: () => import('@/views/_system/user/index.vue'),
+    },
+
     '/system/workflow': {
       redirect: '/system/workflow/list',
     },
