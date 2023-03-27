@@ -17,3 +17,8 @@ export interface WorkflowNode {
   flowId: string;
 }
 
+export interface WorkflowOper {
+  operId: string;
+  operName: string;
+}
+

@@ -198,6 +198,7 @@ function cuI () {
     </VkDuplexCalc>
 
     <SkAppDialog
+      :modal="false"
       :modelValue="!!cuState.type"
       @update:modelValue="cuState.type = ''"
       :title="cuState.type === 'u' ? '编辑' : '新增'"

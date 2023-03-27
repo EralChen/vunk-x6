@@ -1,10 +1,9 @@
 <script lang="tsx" setup>
 import { SkAppForm, __SkAppForm } from '@skzz/platform'
+import { WorkflowOper as Row } from '../../types'
 import { computed, PropType, ref  } from 'vue'
-import { Media, SetDataEvent } from '@vunk/core'
-import { WorkflowNode } from '@skzz-platform/api/system/workflow'
+import { SetDataEvent } from '@vunk/core'
 
-type Row = WorkflowNode
 
 const props = defineProps({
   data: {
@@ -15,10 +14,6 @@ const props = defineProps({
     type: String as PropType<'c' | 'u' | ''>,
     default: '',
   },
-  nodes: {
-    type: Array as PropType<WorkflowNode[]>,
-    default: () => [],
-  },
 })
 const emit = defineEmits({
   'submit': (data: Partial<Row>) => data,
@@ -26,36 +21,11 @@ const emit = defineEmits({
 })
 
 const isU = computed(() => props.type === 'u')
-const options = computed(() => props.nodes.map((node) => ({
-  label: node.name,
-  value: node.id,
-})))
 const formItems = ref<__SkAppForm.FormItem<keyof Row>[]>([
   {
-    prop: 'name',
-    label: '名称',
     templateType: 'VkfInput',
-  },
-  {
-    prop: 'isJointly',
-    label: '是否会签',
-    templateType: 'VkfSwitch',
-    activeValue: 1,
-    inactiveValue: 0,
-  },
-  {
-    prop: 'prevNodes',
-    label: '上一节点',
-    templateType: 'VkfSelect',
-    multiple: true,
-    options: options as unknown as Media[],
-  },
-  {
-    prop: 'nextNodes',
-    label: '下一节点',
-    templateType: 'VkfSelect',
-    multiple: true,
-    options: options as unknown as Media[],
+    prop: 'operName',
+    label: '名称',
   },
 
   {
@@ -69,7 +39,6 @@ const formItems = ref<__SkAppForm.FormItem<keyof Row>[]>([
       emit('submit', props.data)
     },
   },
-
 ])
 
 </script>

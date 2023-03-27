@@ -21,12 +21,15 @@ export default function () {
       component: () => import('@/views/_system/menu/index.vue'),
     },
     '/system/workflow': {
+      redirect: '/system/workflow/list',
+    },
+    '/system/workflow/list': {
       component: () => import('@/views/_system/workflow/index.vue'),
       meta: {
         alwaysShow: true,
       },
     },
-    '/system/workflow/read/:id': {
+    '/system/workflow/list/read/:id': {
       component: () => import('@/views/_system/workflow/read/index.vue'),
       props: true,
       meta: {
@@ -34,7 +37,7 @@ export default function () {
         tagsView: false,
       },
     },
-    '/system/workflow/nodes/:flowId': {
+    '/system/workflow/list/nodes/:flowId': {
       component: () => import('@/views/_system/workflow/nodes/index.vue'),
       props: true,
       meta: {
@@ -42,6 +45,10 @@ export default function () {
         tagsView: false,
       },
     },
+    '/system/workflow/oper': {
+      component: () => import('@/views/_system/workflow/oper/index.vue'),
+    },
+
     '/system/data-model': {
       component: () => import('@/views/_system/data-model/index.vue'),
     },

@@ -104,6 +104,10 @@ function cuI () {
         <el-descriptions v-for="(item, index) of data" :key="index" :title="getNodePath(item)" border
         >
           <template #extra>
+            <el-button 
+              type="primary" 
+            >绑定</el-button>
+
             <el-button type="primary" 
               @click="preuI(item)"
             >修改</el-button>

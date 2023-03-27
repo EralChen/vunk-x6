@@ -48,12 +48,16 @@ const formItems = ref<__SkAppForm.FormItem<keyof Row>[]>([
   {
     prop: 'path',
     templateType: 'VkfInput',
-    rules: {
-      required: true,
-      message: '路径不能为空',
-    },
     placeholder: '请输入路径',
     label: 'URL路径',
+  },
+  {
+    prop: 'display',
+    templateType: 'VkfSwitch',
+    label: '是否隐藏',
+    activeValue: 0,
+    inactiveValue: 1,
+    defaultModelValue: false, 
   },
   {
     prop: 'icon',
@@ -62,6 +66,7 @@ const formItems = ref<__SkAppForm.FormItem<keyof Row>[]>([
     rows: 5,
     label: '图标',
   },
+
   {
     templateType: 'Component',
     is: () => <div sk-flex="row_center" 
