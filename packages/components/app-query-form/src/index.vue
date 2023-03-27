@@ -95,7 +95,7 @@ export default defineComponent({
       <ElCollapseTransition>
         <SkAppForm v-show="expand" v-bind="formProps" v-on="formEmits" :formItems="moreFormItems"
           :elRef="moreFormDef.resolve"
-            @enter="formEnter"
+          @enter="formEnter"
           >
         </SkAppForm>
       </ElCollapseTransition>

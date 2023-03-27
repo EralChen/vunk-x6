@@ -1,7 +1,8 @@
 
 import { _VkfFormCtx } from '@vunk/form'
-import type { SetDataEvent } from '@vunk/core'
+import type { AnyFunc, SetDataEvent } from '@vunk/core'
 import { bindPropsFactory, onEmitsFactory } from '@vunk/core/shared/utils-vue'
+import { PropType } from 'vue'
 export const props = {
   ..._VkfFormCtx.props,
   layout: {
@@ -15,6 +16,10 @@ export const props = {
   rowGutter: {
     type: Number,
     default: 110,
+  },
+  elRef: {
+    type: Function as PropType<AnyFunc>,
+    default: undefined,
   },
 
 }
