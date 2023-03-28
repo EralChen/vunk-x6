@@ -28,7 +28,7 @@ importers:
       '@vueuse/core': ^9.12.0
       '@vunk/core': 0.0.0-alpha.73
       '@vunk/form': 0.0.1-alpha.45
-      '@vunk/skzz': 0.0.0-alpha.75
+      '@vunk/skzz': 0.0.0-alpha.76
       '@zzg6/flow': 0.0.0-alpha.2
       chroma-js: ^2.4.2
       consola: ^2.15.3
@@ -64,7 +64,7 @@ importers:
       '@vueuse/core': 9.12.0_vue@3.2.45
       '@vunk/core': 0.0.0-alpha.73
       '@vunk/form': 0.0.1-alpha.45
-      '@vunk/skzz': 0.0.0-alpha.75
+      '@vunk/skzz': 0.0.0-alpha.76
       '@zzg6/flow': 0.0.0-alpha.2
       chroma-js: 2.4.2
       element-plus: 2.3.1_vue@3.2.45
@@ -3546,8 +3546,8 @@ packages:
       '@vunk/core': 0.0.0-alpha.73
     dev: false
 
-  /@vunk/skzz/0.0.0-alpha.75:
-    resolution: {integrity: sha512-Z3WC6Vf11xemUYwvmtoz1pdGM8T+W1i3PpbHlx2Qd3gOz+NKgQNSmFrnTNiLtsRhevNxS+C7VKsPOBUHywMmFg==}
+  /@vunk/skzz/0.0.0-alpha.76:
+    resolution: {integrity: sha512-qWnLu/mddmJmpHwRkNiGCE5DNmKBBRx2mVbkYZVrQ3MP0bgSkU/lLyOYYwW8VpLA1J3rIkTpkVagLYaF0tvJsA==}
     dev: false
 
   /@zzg6/flow/0.0.0-alpha.2:

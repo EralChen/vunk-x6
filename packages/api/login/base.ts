@@ -24,11 +24,14 @@ export const logout = () => {
 }
 
 export const loginByPassword = (data: FirstParameter<typeof restFetch.login>) => {
-  data.applicationId = getApplication()  || 'platform'
-
+  data.applicationId = 'platform'
+  data.tenantId = 'default'
   return restFetch.login(data, {
     msg: restFetch.DEV ? '登录成功' : false,
     loading: true,
+  }, {
+    setApplication: false,
+    setTenant: false,
   }).then((res) => {    
     setToken(res.token)  
     // return sleep(2000)

@@ -8,5 +8,3 @@ export const logout = withPlatform(baseLogin.logout)
 export const loginByPassword = withPlatform(baseLogin.loginByPassword)
 export const rMenus = withPlatform(baseLogin.rMenus)
 export const rTAInfo  = withPlatform(baseLogin.rTAInfo)
-
-
