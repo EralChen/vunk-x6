@@ -1,3 +1,4 @@
+
 export interface Workflow {
   name: string,
   id: string,
@@ -12,9 +13,19 @@ export interface WorkflowNode {
   id: string;
   name: string;
   isJointly: 0|1;
-  prevNodes: string[];
-  nextNodes: string[];
-  flowId: string;
+
+  label: string;
+  [k: string]: any
+}
+
+export interface WorkflowData {
+  edges: {
+    id: string;
+    source: string;
+    target: string;
+    [key: string]: any;
+  }[]
+  nodes: WorkflowNode[]
 }
 
 export interface WorkflowOper {

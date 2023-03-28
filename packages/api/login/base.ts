@@ -25,6 +25,7 @@ export const logout = () => {
 
 export const loginByPassword = (data: FirstParameter<typeof restFetch.login>) => {
   data.applicationId = getApplication()  || 'platform'
+
   return restFetch.login(data, {
     msg: restFetch.DEV ? '登录成功' : false,
     loading: true,

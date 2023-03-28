@@ -6,6 +6,12 @@ import { Workflow } from './types'
 import { snowFlake } from '@skzz-platform/api/basic'
 import { MENU_DATA } from './const'
 
+/**
+ * https://www.apifox.cn/link/project/1903413/apis/api-69170149
+ * @param query 
+ * @param pagination 
+ * @returns 
+ */
 export const rWorkflows = (query, pagination?: Pagination) => {
   return request<[QueryRData<Workflow>]>({
     method: 'POST',

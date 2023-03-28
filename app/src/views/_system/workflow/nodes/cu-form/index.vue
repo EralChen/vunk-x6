@@ -30,7 +30,7 @@ const options = computed(() => props.nodes.map((node) => ({
   label: node.name,
   value: node.id,
 })))
-const formItems = ref<__SkAppForm.FormItem<keyof Row>[]>([
+const formItems = ref<__SkAppForm.FormItem[]>([
   {
     prop: 'name',
     label: '名称',
