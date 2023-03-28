@@ -7,6 +7,7 @@ export interface Workflow {
   memo: string,
   nodes: any[],
   connections: string
+  isStart: 0|1,
 }
 
 export interface WorkflowNode { 

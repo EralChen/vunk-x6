@@ -26,6 +26,10 @@
   {
     "code": "local",
     "url": "http://localhost:30100/scene-server"
+  },
+  {
+    "code": "tpl",
+    "url": "http://192.168.110.232:30000/tpl-server"
   }
   
 ]

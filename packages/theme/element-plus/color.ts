@@ -1,3 +1,4 @@
+import chroma from 'chroma-js'
 const allColor = {
   '--el-color-primary': 'rgba(25, 81, 193, 1)',
   '--el-color-success': 'rgba(45, 166, 65, 1)',
@@ -12,6 +13,7 @@ const allColor = {
   '--el-bg-color-overlay': '#ffffff',
 
   '--el-text-color-primary': 'rgba(50, 50, 51, 1)',
+  
   '--el-text-color-regular': 'rgba(100, 101, 102, 1)',
   '--el-text-color-secondary': 'rgba(150, 151, 153, 1)',
   '--el-text-color-placeholder': 'rgba(200, 201, 204, 1)',
@@ -32,6 +34,8 @@ const allColor = {
   '--el-border-color-dark': '#d4d7de',
   '--el-border-color-darker': '#cdd0d6',
 }
+allColor['--el-color-primary-light-3'] = chroma(allColor['--el-color-primary']).brighten(0.3 * 3).hex()
+allColor['--el-color-primary-light-5'] = chroma(allColor['--el-color-primary']).brighten(0.5 * 3).hex()
 
 export const elColorWithMode = {
   dark: Object.keys(allColor).reduce((acc, cur) => {
