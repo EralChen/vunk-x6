@@ -1,5 +1,5 @@
 import { restFetch } from '@skzz-platform/shared/fetch/platform'
-import { setToken, removeToken, removeTenant, getApplication } from '@vunk/skzz/shared/utils-auth'
+import { setToken, removeToken } from '@vunk/skzz/shared/utils-auth'
 import { FirstParameter } from '@vunk/core'
 // import { sleep } from '@vunk/core/shared/utils-promise'
 export const rCaptcha = () => {
@@ -15,7 +15,7 @@ export const rUserInfo = () => {
 export const logout = () => {
 
   return restFetch.logout().finally(() => {
-    removeTenant()
+    // removeTenant()
     removeToken()
     // removePlatform()
     window.location.reload()
@@ -33,7 +33,7 @@ export const loginByPassword = (data: FirstParameter<typeof restFetch.login>) =>
     setApplication: false,
     setTenant: false,
   }).then((res) => {    
-    setToken(res.token)  
+    setToken(res.token)                                                            
     // return sleep(2000)
   }).then(() => {
     // window.location.reload()
