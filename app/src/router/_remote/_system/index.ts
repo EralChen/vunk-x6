@@ -18,7 +18,13 @@ export default function () {
       component: () => import('@/views/_system/role/index.vue'),
     },
     '/system/menu': {
-      component: () => import('@/views/_system/menu/index.vue'),
+      redirect: '/system/menu/config',
+    },
+    '/system/menu/config': {
+      component: () => import('@/views/_system/menu/page-config/index.vue'),
+    },
+    '/system/menu/auth': {
+      component: () => import('@/views/_system/menu/page-auth/index.vue'),
     },
     '/system/user': {
       component: () => import('@/views/_system/user/index.vue'),
