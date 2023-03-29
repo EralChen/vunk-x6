@@ -14,10 +14,20 @@ export interface WorkflowNode {
   id: string;
   name: string;
   isJointly: 0|1;
-
+  isCurrentNode: 0|1;
   label: string;
   [k: string]: any
 }
+
+export interface WorkflowNodeRaw {
+  nextNodes: string;
+  currentNodeInstId: string;
+  name: string;
+  prevNodes: string;
+  isCurrentNode: 0|1;
+  id: string;
+}
+
 
 export interface WorkflowData {
   edges: {

@@ -34,8 +34,12 @@ export const rWorkflows = (query, pagination?: Pagination) => {
   })
 }
 
-export const rWorkflow = (id: string) => {
-  return rWorkflows({ id }).then(res => {
+export const rWorkflow = (query: {
+  id?: string,
+  flowId?: string,
+  itemId?: string,
+}) => {
+  return rWorkflows(query).then(res => {
     const doc = res.rows[0]
     // doc.nodes = JSON.parse(doc.nodes as unknown as string)
     return doc

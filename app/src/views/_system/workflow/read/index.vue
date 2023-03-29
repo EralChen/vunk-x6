@@ -1,32 +1,38 @@
 <script lang="ts" setup>
-import { ref, watch } from 'vue'
-import { rWorkflow, Workflow } from '@skzz-platform/api/system/workflow'
+import { reactive, ref, watch } from 'vue'
+import { rWorkflow, rWorkflowNodeRaw, rWorkflowNodesWithRaw, Workflow, WorkflowData } from '@skzz-platform/api/system/workflow'
 import { SkAppCard } from '@skzz/platform'
+import G6Viewer from './g6-viewer/index.vue'
+
 const props = defineProps({
   id: {
     type: String,
     required: true,
   },
 })
-const data = ref({} as Workflow)
+const rState = reactive({
+  info: {} as Workflow,
+  data: {} as WorkflowData,
+})
 watch(() => props.id, r, { immediate: true })
 
 function r () {
-  rWorkflow(props.id).then((res) => {
-    data.value = res
+  rWorkflowNodesWithRaw({
+    id: props.id,
+  }).then(res => {
+    rState.info = res.info
+    rState.data = res.data
   })
 }
 </script>
 <template>
   <PageOver>
-    <SkAppCard :header="data.name" class="h-full">
-      <ElScrollbar>
-        <div gap-main-x sub:mt-page>
-          <el-descriptions v-for="(item, index) of data.nodes" :key="index" :title="item['data-id']" border>
-            <el-descriptions-item v-for="(v, k) of item" :key="k" :label="k + ''">{{ v }}</el-descriptions-item>
-          </el-descriptions>
+    <SkAppCard :header="rState.info.name" class="h-full">
+
+        <div gap-main-x sub:mt-page h-full>
+          <G6Viewer :data="rState.data"></G6Viewer>
         </div>
-      </ElScrollbar>
+
     </SkAppCard>
   </PageOver>
 </template>

@@ -29,9 +29,6 @@ export default function () {
     },
     '/system/workflow/list': {
       component: () => import('@/views/_system/workflow/index.vue'),
-      meta: {
-        alwaysShow: true,
-      },
     },
     '/system/workflow/list/read/:id': {
       component: () => import('@/views/_system/workflow/read/index.vue'),
@@ -48,9 +45,6 @@ export default function () {
         hidden: true,
         tagsView: false,
       },
-    },
-    '/system/workflow/oper': {
-      component: () => import('@/views/_system/workflow/oper/index.vue'),
     },
 
     '/system/data-model': {
