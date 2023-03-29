@@ -5,6 +5,7 @@ import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
 import { WorkflowNode, WorkflowData, WorkflowNodeRaw } from '../types'
 import { snowFlake } from '@skzz-platform/api/basic'
 import { rWorkflow } from '@skzz-platform/api/system/workflow'
+import { GraphData, TreeGraphData } from '@antv/g6'
 
 /**
  * https://www.apifox.cn/link/project/1903413/apis/api-71032252
@@ -157,7 +158,7 @@ export const cuWorkflowNode = async (data: Partial<WorkflowNode>) => {
  * https://www.apifox.cn/link/project/1903413/apis/api-71028238
  * @param data 
  */
-export const cWorkflowNodeByJson = async (flowId: string, flowJson: string) => {
+export const cWorkflowNodeByJson = async (flowId: string, flowData: GraphData | TreeGraphData) => {
 
   return request({
     method: 'POST',
@@ -167,16 +168,7 @@ export const cWorkflowNodeByJson = async (flowId: string, flowJson: string) => {
       condition: {
         op: 4,
         flowId: flowId,
-        flow: JSON.parse(flowJson
-          .replaceAll(
-            'zzg6-zzRect-0.331608056656901741679880010746',
-            await snowFlake(),
-          ).replaceAll('zzg6-zzRect-0.081158092120446221679880017945',
-            await snowFlake(),
-          ).replaceAll('edge-0.187535099745061331679880018820',
-            await snowFlake(),
-          ),
-        ),
+        flow: flowData,
       },
       buttonId: 'import',
       ...MENU_DATA,

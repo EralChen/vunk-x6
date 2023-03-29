@@ -33,7 +33,7 @@ const tableState = reactive({
       slots: ({ row }) => <SkAppOperations
         modules={[ 'r', 'u', 'run', 'nodes','d']}
         onR={ () => rI(row.id) }
-        onD={ () => d([row.id])  }
+        onD={ () => d([row.id]) }
         onU={ () => preuI(row) }
         v-slots={{
           run: () => <ElButton type="primary" size="small"
