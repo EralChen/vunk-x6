@@ -105,7 +105,10 @@ function rTree () {
   rMenus({
     client: checkTagsState.value,
   }).then(res => {
-    treeState.data = listToTree(res)
+    treeState.data = listToTree(res, {
+      id: 'menuId',
+      pId: 'parentMenuId',
+    })
   })
 }
 function r () {
@@ -113,7 +116,10 @@ function r () {
     client: checkTagsState.value,
     menuId: treeCheckedMenuIds.value,
   }).then(res => {
-    tableState.data = listToTree(res)
+    tableState.data = listToTree(res, {
+      id: 'menuId',
+      pId: 'parentMenuId',
+    })
   })
 }
 function d (menuIds: string[]) {
