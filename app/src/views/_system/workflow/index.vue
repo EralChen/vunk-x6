@@ -1,5 +1,5 @@
 <script lang="tsx" setup>
-import { computed, reactive, ref, watch } from 'vue'
+import { computed, reactive, watch } from 'vue'
 import { rWorkflows, cuWorkflow, dWorkflows, runWorkflow } from '@skzz-platform/api/system/workflow'
 import { SkAppDialog, SkAppOperations, SkAppTablesV1, __SkAppTablesV1 } from '@skzz/platform'
 import { setData, VkDuplexCalc } from '@vunk/core'
@@ -37,8 +37,8 @@ const tableState = reactive({
         onU={ () => preuI(row) }
         v-slots={{
           run: () => <ElButton type="primary" size="small"
-            disabled={!row.isStart}
-            onClick={ () => runWorkflow(row.itemId) }
+            disabled={!!row.isStart}
+            onClick={ () => runWorkflow(row.itemId).then(r) }
           >运行</ElButton>,
           nodes: () => <ElButton type="primary" size="small"
             onClick={ () => routerNext({

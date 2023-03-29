@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed, reactive, ref, watch } from 'vue'
-import { rWorkflowNode, WorkflowNode, dWorkflowNodes,cuWorkflowNode, bindOpersToNode, cWorkflowNodeByJson } from '@skzz-platform/api/system/workflow'
+import { rWorkflowNodes, WorkflowNode, dWorkflowNodes,cuWorkflowNode, bindOpersToNode, cWorkflowNodeByJson } from '@skzz-platform/api/system/workflow'
 import { SkAppDialog } from '@skzz/platform'
 import CuForm from './cu-form/index.vue'
 import { setData, VkDuplex } from '@vunk/core'
@@ -29,7 +29,7 @@ const jsonLoadState = reactive({
 
 watch(() => props.flowId, r, { immediate: true })
 function r () {
-  rWorkflowNode({
+  rWorkflowNodes({
     flowId: props.flowId,
   }).then((res) => {
     data.value = res.nodes

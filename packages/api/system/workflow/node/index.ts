@@ -2,16 +2,16 @@ import { MENU_DATA } from '../const'
 import { request } from '@skzz-platform/shared/fetch/platform'
 import { QueryRData, RestFetchExecOptions, RestFetchQueryOptions, RestFetchSaveOptions } from '@vunk/skzz'
 import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
-import { WorkflowNode, WorkflowData } from '../types'
+import { WorkflowNode, WorkflowData, WorkflowNodeRaw } from '../types'
 import { snowFlake } from '@skzz-platform/api/basic'
-
+import { rWorkflow } from '@skzz-platform/api/system/workflow'
 
 /**
  * https://www.apifox.cn/link/project/1903413/apis/api-71032252
  * @param query 
  * @returns 
  */
-export const rWorkflowNode = (query: {
+export const rWorkflowNodes = (query: {
   flowId: string,
 }) => {
   return request<{'8.1': WorkflowData}>({
@@ -32,38 +32,75 @@ export const rWorkflowNode = (query: {
   })
 }
 
-// export const rWorkflowNode = (query: {
-//   flowId: string,
-// }) => {
-//   return request<[QueryRData<WorkflowNode>]>({
-//     method: 'POST',
-//     url: '/core/busi/query',
-//     DEV_NAME: 'rWorkflowNode',
-//     data: {
-//       'datasetIds': [
-//         '2',
-//       ],
-//       'condition': {
-//         '2': {
-//           ...query,
-//         },
-//       },
-//       ...MENU_DATA,
-//       'buttonId': 'search',
-//     },
-//   } as RestFetchQueryOptions).then(res => {
-//     res.datas[0].rows.forEach(row => {
-//       if (typeof  row.prevNodes === 'string') {
-//         row.prevNodes = JSON.parse(row.prevNodes)
-//       }
-//       if (typeof  row.nextNodes === 'string') { 
-//         row.nextNodes = JSON.parse(row.nextNodes)
-//       }
-     
-//     })
-//     return res.datas[0]
-//   })
-// }
+/**
+ * https://www.apifox.cn/link/project/1903413/apis/api-69112632
+ * @param query 
+ */
+export const rWorkflowNodeRaw = (query: {
+  itemId: string,
+}) => {
+  return request<{
+    '5.1': WorkflowNodeRaw[]
+  }>({
+    method: 'POST',
+    url: '/core/busi/exec',
+    data: {
+      'datasetId': '5',
+      'condition': {
+        'flow': {
+          ...query,
+          'op': 'totalFlow',
+        },
+      },
+      ...MENU_DATA,
+    },
+  } as RestFetchExecOptions).then(res => {
+    return res.datas['5.1']
+  })
+}
+
+
+export const rWorkflowNodesWithRaw = (query: {
+  flowId?: string,
+  id?: string,
+  itemId?: string,
+}) => {
+  return rWorkflow(query).then(res => {
+    return Promise.all(
+      [
+        rWorkflowNodes({ flowId: res.flowId }), 
+        rWorkflowNodeRaw({ itemId: res.itemId }),
+        res,
+      ],
+    ).then(res => {
+      const [data, raws, info] = res
+      const idToRaw = raws.reduce((acc, cur) => {
+        acc[cur.id] = cur
+        return acc
+      }, {} as Record<string, WorkflowNodeRaw>)
+
+      data.nodes.forEach(item => {
+        
+        if (idToRaw[item.id]) { 
+          item.isCurrentNode = idToRaw[item.id].isCurrentNode
+        }
+       
+      })
+
+
+      return {
+        data,
+        info,
+      }
+      
+    
+    })
+  })
+}
+
+
+
+
 
 export const dWorkflowNodes  = (ids: string[]) => {
   return request({
