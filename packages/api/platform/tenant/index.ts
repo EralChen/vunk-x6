@@ -10,7 +10,7 @@ export const rTenants = (
   pagination?: Pagination,
 ) => {
   return request<[
-    QueryRData<Tenant[]>
+    QueryRData<Tenant>
   ]>({
     method: 'POST',
     url: '/core/busi/query',
