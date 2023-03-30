@@ -1,5 +1,6 @@
 import { RouteRecordRaw } from 'vue-router'
 import GEN_SYSTEM from './_system'
+import GEN_PLATFORM from './_platform'
 export const createRemoteRoutes = () => { 
   return {
     '': {
@@ -18,6 +19,7 @@ export const createRemoteRoutes = () => {
     },
     
     ...GEN_SYSTEM(),
+    ...GEN_PLATFORM(),
 
   } as Record<string, Partial<RouteRecordRaw>>
 }
