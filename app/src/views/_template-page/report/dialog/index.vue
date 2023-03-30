@@ -6,14 +6,13 @@ import {
   SkAppOperations,
   Pagination,
 } from '@skzz/platform'
-import { ApiReturnType, NormalObject, setData, VkDuplexCalc } from '@vunk/core'
+import { NormalObject, setData, VkDuplexCalc } from '@vunk/core'
 import { reactive, ref, watch } from 'vue'
 import { rRoles, dRoles, cuRole } from '@skzz-platform/api/system/role'
 import { genColumn } from '@skzz-platform/shared/utils-data'
-import FormVue, { Data as FormVueData } from './form.vue'
+import CuForm from './cu-form/index.vue'
 import { SkAppDialog } from '@skzz-platform/components/app-dialog'
-
-type Res = ApiReturnType<typeof rRoles>
+import { Row } from './types'
 
 /* query */
 const queryItems: __SkAppQueryForm.FormItem[] = [
@@ -35,13 +34,13 @@ watch(pagination, r, { deep: true , immediate: true })
 
 const tableState = reactive({
   columns: [] as  __SkAppTables.Column[],
-  data: [] as Res['rows'],
+  data: [] as Row[],
   total: 0,
 })
 
 const cuIState = reactive({
   visible: false,
-  formData: {} as Partial<FormVueData>,
+  formData: {} as Partial<Row>,
   title: '新增角色',
 })
 
@@ -85,13 +84,13 @@ function precI () {
   cuIState.formData = {}
   cuIState.title = '新增角色'
 }
-function preuI (data: FormVueData) {
+function preuI (data: Row) {
   cuIState.visible = true
   cuIState.formData = {...data}
   cuIState.title = '修改角色'
 }
 function cuI () {
-  cuRole(cuIState.formData as FormVueData).then(r).then(() => {
+  cuRole(cuIState.formData as Row).then(r).then(() => {
     cuIState.visible = false
   })
 }
@@ -127,11 +126,11 @@ function cuI () {
     </VkDuplexCalc>
 
     <SkAppDialog :title="cuIState.title" v-model="cuIState.visible">
-      <FormVue
+      <CuForm
         :data="cuIState.formData"
         @setData="setData(cuIState.formData, $event)"
         @submit="cuI"
-      ></FormVue>
+      ></CuForm>
     </SkAppDialog>
 
   </PageX>
