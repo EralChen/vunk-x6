@@ -19,12 +19,6 @@ export default defineComponent({
         label: '姓名',
       },
       {
-        templateType: 'VkfInput',
-        prop: 'roleId',
-        label: '编码',
-      },
-
-      {
         templateType: 'VkfButton',
         buttonLabel: '提交',
         type: 'primary',
