@@ -1,72 +1,61 @@
+import { Pagination } from '@skzz-platform/shared'
 import { request } from '@skzz-platform/shared/fetch/platform'
-import { MenuInfo, RestFetchSaveOptions } from '@vunk/skzz'
-import { RestFetchQueryOptions, QueryRData } from '@vunk/skzz'
+import { RestFetchQueryOptions, QueryRData, RestFetchSaveOptions } from '@vunk/skzz'
 import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
-const MENU_DATA = {
-  'dir': 'system',
-  'modelId': 'menu',
-  'menuId': 'menu',
-} as const
+import { MENU_DATA } from './const'
+import { Tenant } from './types'
 
-export const rMenus = (query: {
-  client?: string,
-  parentMenuId?: string,
-  menuId?: string[],
-}) => {
-  return request<[QueryRData<MenuInfo>]>({
+export const rTenants = (
+  query: Partial<Tenant> = {}, 
+  pagination?: Pagination,
+) => {
+  return request<[
+    QueryRData<Tenant>
+  ]>({
     method: 'POST',
     url: '/core/busi/query',
     data: {
-      'datasetIds': [
-        '1',
-      ],
-      'condition': {
-        '1': {
-          // parentMenuId: 0,
+      datasetIds: ['1'],
+      condition: {
+        1: {
           ...query,
-          menuId: query.menuId?.join(','),
+          ...(pagination ? { pagination } : {}),
         },
       },
       ...MENU_DATA,
-      'buttonId': 'search',
     },
   } as RestFetchQueryOptions).then(res => {
-
-    return res.datas[0].rows.map(item => {
-      return {
-        ...item,
-        label: item.name,
-      }
-    })
+    return res.datas[0]
   })
-
 }
 
-export const dMenus = (ids: string[]) => {
+export const dTenants = (ids: string[]) => {
   return request({
     method: 'POST',
     url: '/core/busi/save',
     data: {
+ 
       datas: [
         {
           datasetId: '1',
-          rows: ids.map(menuId => {
+          rows: ids.map(id => {
             return {
-              menuId,
+              id,
               op: RestFetchOp.d,
             }
           }),
+
+
         },
       ],
       ...MENU_DATA,
     },
   } as RestFetchSaveOptions, {
-    msg: '删除菜单成功',
+    msg: '删除角色成功',
   })
-
 }
 
-export const cuMenu = (data: Partial<MenuInfo>) => {
+export const cuTenant = (data: Partial<Tenant>) => {
   return request({
     method: 'POST',
     url: '/core/busi/save',
@@ -85,7 +74,6 @@ export const cuMenu = (data: Partial<MenuInfo>) => {
       ...MENU_DATA,
     },
   } as RestFetchSaveOptions, {
-    msg: data.id ? '修改菜单成功' : '新增菜单成功',
+    msg: data.id ? '修改角色成功' : '新增角色成功',
   })
 }
-

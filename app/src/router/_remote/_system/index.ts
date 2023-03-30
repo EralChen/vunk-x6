@@ -20,6 +20,7 @@ export default function () {
     '/system/menu': {
       component: () => import('@/views/_system/menu/index.vue'),
     },
+
     '/system/user': {
       component: () => import('@/views/_system/user/index.vue'),
     },
@@ -62,6 +63,10 @@ export default function () {
     },
     '/system/message/config': {
       component: () => import('@/views/_system/message/config/index.vue'),
+    },
+
+    '/system/auth': {
+      component: () => import('@/views/_system/auth/index.vue'),
     },
   } as Record<string, Partial<RouteRecordRaw>>
 }
