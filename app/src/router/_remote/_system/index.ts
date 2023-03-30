@@ -18,14 +18,9 @@ export default function () {
       component: () => import('@/views/_system/role/index.vue'),
     },
     '/system/menu': {
-      redirect: '/system/menu/config',
+      component: () => import('@/views/_system/menu/index.vue'),
     },
-    '/system/menu/config': {
-      component: () => import('@/views/_system/menu/page-config/index.vue'),
-    },
-    '/system/menu/auth': {
-      component: () => import('@/views/_system/menu/page-auth/index.vue'),
-    },
+
     '/system/user': {
       component: () => import('@/views/_system/user/index.vue'),
     },
@@ -68,6 +63,10 @@ export default function () {
     },
     '/system/message/config': {
       component: () => import('@/views/_system/message/config/index.vue'),
+    },
+
+    '/system/auth': {
+      component: () => import('@/views/_system/auth/index.vue'),
     },
   } as Record<string, Partial<RouteRecordRaw>>
 }

@@ -6,11 +6,11 @@ import { computed, reactive, watch } from 'vue'
 import { rMenus } from '@skzz-platform/api/system/menu'
 import { listToTree } from '@vunk/core/shared/utils-data'
 import { SkCheckTags, __SkCheckTags  } from '@skzz-platform/components/check-tags'
-import { SkAppTablesV1 } from '@skzz-platform/components/app-tables-v1'
+import { SkAppTablesV1, __SkAppTablesV1 } from '@skzz-platform/components/app-tables-v1'
 import { setData, unsetData, VkDuplexCalc, VkDuplex } from '@vunk/core'
 import { Row } from './types'
-import SkAppIcon from '@skzz-platform/components/app-icon'
-
+import { SkAppQueryForm } from '@skzz-platform/components/app-query-form'
+import { __SkAppForm } from '@skzz-platform/shared'
 export default defineComponent({
   name: 'SkMenuSelect',
   emits,
@@ -19,7 +19,7 @@ export default defineComponent({
     SkCheckTags,
     VkCheckboxTree,
     SkAppTablesV1,
-    VkDuplexCalc, VkDuplex,
+    VkDuplexCalc, VkDuplex, SkAppQueryForm,
   },
   setup (props, { emit }) {
     const checkTagsState = reactive({
@@ -47,35 +47,44 @@ export default defineComponent({
     const tableState = reactive({
       data: [] as Row[],
       columns: [
-        {
-          prop: 'menuId',
-          label: '菜单ID',
-        },
+
         {
           prop: 'label',
           label: '菜单名称',
         },
         {
           prop: 'path',
-          label: '路径',
-        },
-        {
-          prop: 'icon',
-          label: '图标',
-          slots: ({ row }) => row.icon 
-            ? <SkAppIcon icon={row.icon} /> 
-            : '',
-          width: '100em',
-          align: 'center',
-          headerAlign: 'start',
+          label: '菜单路径',
         },
       ] as any[],
       query: {},
+    })
+    const tableColumns = computed(() => {
+      return [
+        ...tableState.columns,
+        ...props.tableColumns,
+      ]
     })
 
     const treeCheckedMenuIds = computed(() => {
       return props.modelValue.map((item) => item.menuId)
     })
+    
+    const queryState = reactive({
+      query: {},
+    })
+    const queryFormItems:__SkAppForm.CoreFormItem<keyof Row>[] = [
+      {
+        prop: 'name',
+        templateType: 'VkfInput',
+        label: '菜单名称',
+      },
+      {
+        prop: 'path',
+        templateType: 'VkfInput',
+        label: '菜单路径',
+      },
+    ]
 
     watch(() => checkTagsState.value, () => {
       // 切换标签时，清空选中的树节点
@@ -85,6 +94,9 @@ export default defineComponent({
     watch(() => treeCheckedMenuIds.value, () => {
       r()
     })
+    watch(() => queryState.query, () => {
+      r()
+    }, { deep: true })
 
     function rTree () {
       rMenus({
@@ -100,6 +112,7 @@ export default defineComponent({
       rMenus({
         client: checkTagsState.value,
         menuId: treeCheckedMenuIds.value,
+        ...queryState.query,
       }).then(res => {
         tableState.data = listToTree(res, {
           id: 'menuId',
@@ -114,12 +127,15 @@ export default defineComponent({
       checkTagsState,
       treeState,
       tableState,
+      tableColumns,
+      queryFormItems,
+      queryState,
     }
   },
 })
 </script>
 <template>
-    <VkDuplexCalc :gap="'var(--gap-page)'" class="h-full">
+    <VkDuplexCalc :gap="'var(--gap-page)'">
       <template #one>
         <div sk-flex="row-between-center">
           <SkCheckTags 
@@ -152,15 +168,26 @@ export default defineComponent({
           ></VkCheckboxTree>
         </template>
 
-        <SkAppTablesV1 
-          :defaultExpandAll="true"
-          flex-1
-          :modules="[]"
-          :rowKey="'menuId'"
-          :columns="tableState.columns"
-          :data="tableState.data"
-        >
-        </SkAppTablesV1>
+        <VkDuplexCalc>
+          <template #one>
+            <SkAppQueryForm
+              :formItems="queryFormItems"
+              :data="queryState.query"
+              @setData="setData(queryState.query, $event)"
+            ></SkAppQueryForm>
+          </template>
+
+          <SkAppTablesV1 
+            :defaultExpandAll="true"
+            flex-1
+            :modules="[]"
+            :rowKey="'menuId'"
+            :columns="tableColumns"
+            :data="tableState.data"
+          >
+          </SkAppTablesV1>
+
+        </VkDuplexCalc>
 
       </VkDuplex>
 
