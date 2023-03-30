@@ -75,26 +75,11 @@ export const rWorkflowNodesWithRaw = (query: {
       ],
     ).then(res => {
       const [data, raws, info] = res
-      const idToRaw = raws.reduce((acc, cur) => {
-        acc[cur.id] = cur
-        return acc
-      }, {} as Record<string, WorkflowNodeRaw>)
-
-      data.nodes.forEach(item => {
-        
-        if (idToRaw[item.id]) { 
-          item.isCurrentNode = idToRaw[item.id].isCurrentNode
-        }
-       
-      })
-
-
       return {
         data,
+        raws,
         info,
       }
-      
-    
     })
   })
 }
@@ -158,7 +143,7 @@ export const cuWorkflowNode = async (data: Partial<WorkflowNode>) => {
  * https://www.apifox.cn/link/project/1903413/apis/api-71028238
  * @param data 
  */
-export const cWorkflowNodeByJson = async (flowId: string, flowData: GraphData | TreeGraphData) => {
+export const cWorkflowNodeByJson = async (flowId: string, flowData: GraphData | TreeGraphData, ieEdit = false) => {
 
   return request({
     method: 'POST',
@@ -166,15 +151,18 @@ export const cWorkflowNodeByJson = async (flowId: string, flowData: GraphData | 
     data: {
       datasetId: '8',
       condition: {
-        op: 4,
+        op: ieEdit ? 8 : 4,
         flowId: flowId,
         flow: flowData,
       },
       buttonId: 'import',
       ...MENU_DATA,
     },
-  } as RestFetchExecOptions)
+  } as RestFetchExecOptions, {
+    msg: '保存成功！',
+  })
 }
+
 
 
 /**

@@ -30,7 +30,7 @@ type Row = Partial<WorkflowNode>
 //   prop: 'peopleNode',
 //   label: '操作人',
 // }])
-
+let isEdit = true
 const props = defineProps({
   flowId: {
     type: String,
@@ -46,12 +46,18 @@ function r () {
   rWorkflowNodes({
     flowId: props.flowId,
   }).then((res) => {
+    if (!res.nodes.length) {
+      isEdit = false
+    }
     editData.value = res
   })
 }
 
 function jsonLoad () {
-  cWorkflowNodeByJson(props.flowId, backData.value)
+  cWorkflowNodeByJson(props.flowId, backData.value, isEdit)
+    .then(() => {
+      isEdit = true
+    })
 }
 </script>
 
