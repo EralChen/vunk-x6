@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { SkRoleTreesSelect } from '@skzz-platform/components/role-trees-select'
+import { SkMenuSelect } from '@skzz-platform/components/menu-select'
 import { VkDuplex } from '@vunk/core'
 import { reactive } from 'vue'
 const treeState = reactive({
@@ -18,7 +19,7 @@ const treeState = reactive({
       </template>
       <!-- 右侧放菜单table -->
       <ElEmpty h-full v-if="!treeState.current.length"></ElEmpty>
-      
+      <SkMenuSelect v-else></SkMenuSelect>
     </VkDuplex>
 
   </page-x>

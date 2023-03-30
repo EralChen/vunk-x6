@@ -1,5 +1,5 @@
 <script lang="ts">
-import { props, emits } from './ctx'
+import { emits } from './ctx'
 import { defineComponent, reactive } from 'vue'
 import { VkCheckboxTree, __VkCheckboxTree } from '@vunk/skzz/components/checkbox-tree'
 import { rRoles } from '@skzz-platform/api/system/role'
