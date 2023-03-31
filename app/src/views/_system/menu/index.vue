@@ -143,6 +143,11 @@ function preuI (row: Row) {
 function cuI () {
   cuMenu(cuData.value).then(() => {
     rTree()
+    if (cuState.type === 'c') {
+      treeState.checked.push(cuData.value as Row)
+    }
+   
+  }).then(() => {
     r()
     cuState.type = ''
     cuState.data = {}

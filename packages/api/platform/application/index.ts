@@ -77,3 +77,5 @@ export const cuApplication = (data: Partial<Row>) => {
     msg: data.id ? '修改角色成功' : '新增角色成功',
   })
 }
+
+export * from './types'

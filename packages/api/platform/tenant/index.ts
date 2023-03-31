@@ -77,3 +77,5 @@ export const cuTenant = (data: Partial<Tenant>) => {
     msg: data.id ? '修改角色成功' : '新增角色成功',
   })
 }
+
+export * from './types'
