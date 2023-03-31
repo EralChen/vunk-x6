@@ -1,7 +1,8 @@
 import { request } from '@skzz-platform/shared/fetch/platform'
-import { MenuInfo, RestFetchSaveOptions } from '@vunk/skzz'
+import { RestFetchExecOptions, RestFetchSaveOptions } from '@vunk/skzz'
 import { RestFetchQueryOptions, QueryRData } from '@vunk/skzz'
 import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
+import { Menu } from './types'
 const MENU_DATA = {
   'dir': 'system',
   'modelId': 'menu',
@@ -13,7 +14,7 @@ export const rMenus = (query: {
   parentMenuId?: string,
   menuId?: string[],
 }) => {
-  return request<[QueryRData<MenuInfo>]>({
+  return request<[QueryRData<Menu>]>({
     method: 'POST',
     url: '/core/busi/query',
     data: {
@@ -42,6 +43,32 @@ export const rMenus = (query: {
 
 }
 
+export const rMenusWithButtons = (
+  query: {
+    client?: string,
+    ids: string[],
+  },
+) => {
+  return request<{
+    '2.1': Menu[]
+  }>({
+    method: 'POST',
+    url: '/core/busi/exec',
+    data: {
+      // 'datasetIds': ['2'],
+      datasetId: '2',
+      'condition': {
+        op: 'getMenuButtonsByIds',
+        ...query,
+        ids: query.ids.join(','),
+      },
+      ...MENU_DATA,
+    },
+  } as RestFetchExecOptions).then(res => {
+    return res.datas['2.1']
+  })
+}
+
 export const dMenus = (ids: string[]) => {
   return request({
     method: 'POST',
@@ -50,9 +77,9 @@ export const dMenus = (ids: string[]) => {
       datas: [
         {
           datasetId: '1',
-          rows: ids.map(menuId => {
+          rows: ids.map(id => {
             return {
-              menuId,
+              id,
               op: RestFetchOp.d,
             }
           }),
@@ -66,7 +93,7 @@ export const dMenus = (ids: string[]) => {
 
 }
 
-export const cuMenu = (data: Partial<MenuInfo>) => {
+export const cuMenu = (data: Partial<Menu>) => {
   return request({
     method: 'POST',
     url: '/core/busi/save',
@@ -88,4 +115,6 @@ export const cuMenu = (data: Partial<MenuInfo>) => {
     msg: data.id ? '修改菜单成功' : '新增菜单成功',
   })
 }
+
+export * from './types'
 
