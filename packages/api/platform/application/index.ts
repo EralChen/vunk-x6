@@ -3,14 +3,14 @@ import { request } from '@skzz-platform/shared/fetch/platform'
 import { RestFetchQueryOptions, QueryRData, RestFetchSaveOptions } from '@vunk/skzz'
 import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
 import { MENU_DATA } from './const'
-import { Tenant } from './types'
+import { Application as Row } from './types'
 
-export const rTenants = (
-  query: Partial<Tenant> = {}, 
+export const rApplications = (
+  query: Partial<Row> = {}, 
   pagination?: Pagination,
 ) => {
   return request<[
-    QueryRData<Tenant>
+    QueryRData<Row>
   ]>({
     method: 'POST',
     url: '/core/busi/query',
@@ -29,7 +29,7 @@ export const rTenants = (
   })
 }
 
-export const dTenants = (ids: string[]) => {
+export const dApplications = (ids: string[]) => {
   return request({
     method: 'POST',
     url: '/core/busi/save',
@@ -55,7 +55,7 @@ export const dTenants = (ids: string[]) => {
   })
 }
 
-export const cuTenant = (data: Partial<Tenant>) => {
+export const cuApplication = (data: Partial<Row>) => {
   return request({
     method: 'POST',
     url: '/core/busi/save',

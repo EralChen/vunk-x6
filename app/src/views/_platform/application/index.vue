@@ -8,7 +8,7 @@ import {
 } from '@skzz/platform'
 import { NormalObject, setData, VkDuplexCalc } from '@vunk/core'
 import { reactive, ref, watch } from 'vue'
-import { cuTenant, dTenants, rTenants } from '@skzz-platform/api/platform/tenant'
+import { cuApplication, dApplications, rApplications } from '@skzz-platform/api/platform/application'
 import { genColumn } from '@skzz-platform/shared/utils-data'
 import CuForm from './cu-form/index.vue'
 import { SkAppDialog } from '@skzz-platform/components/app-dialog'
@@ -41,7 +41,7 @@ const tableState = reactive({
 const cuIState = reactive({
   visible: false,
   formData: {} as Partial<Row>,
-  title: '新增角色',
+  title: '新增应用',
 })
 
 const operationsCol: __SkAppTables.Column = {
@@ -57,7 +57,7 @@ const operationsCol: __SkAppTables.Column = {
   ></SkAppOperations>,
 } 
 function r () {
-  rTenants(queryData.value, pagination.value).then(res => {
+  rApplications(queryData.value, pagination.value).then(res => {
     if (!tableState.columns.length) {
       tableState.columns = res.columns.reduce((a, c) => {
         if (c.type === 'selection') {
@@ -78,20 +78,20 @@ function r () {
   })
 }
 function d (ids: string[]) {
-  dTenants(ids).then(r)
+  dApplications(ids).then(r)
 }
 function precI () {
   cuIState.visible = true
   cuIState.formData = {}
-  cuIState.title = '新增租户'
+  cuIState.title = '新增应用'
 }
 function preuI (data: Row) {
   cuIState.visible = true
   cuIState.formData = {...data}
-  cuIState.title = '修改租户'
+  cuIState.title = '修改应用'
 }
 function cuI () {
-  cuTenant(cuIState.formData as Row).then(r).then(() => {
+  cuApplication(cuIState.formData as Row).then(r).then(() => {
     cuIState.visible = false
   })
 }
