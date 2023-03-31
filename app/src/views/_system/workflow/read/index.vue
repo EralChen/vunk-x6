@@ -1,8 +1,23 @@
-<script lang="ts" setup>
-import { reactive, ref, watch } from 'vue'
-import { rWorkflow, rWorkflowNodeRaw, rWorkflowNodesWithRaw, Workflow, WorkflowData } from '@skzz-platform/api/system/workflow'
+<template>
+  <PageOver>
+    <SkAppCard class="h-full">
+      <div class="editor-x" sk-flex="row">
+        <div class="editor">
+          <ZzEditor :mode="'default'" :model-value="model" @nodeselectchange="nodeSelectChange"></ZzEditor>
+        </div>
+        <div class="form"></div>
+      </div>
+    </SkAppCard>
+
+  </PageOver>
+</template>
+
+<script setup lang="ts">
+import { ZzEditor } from '@zzg6/flow'
+import { rWorkflowNodesWithRaw, Workflow, WorkflowData } from '@skzz-platform/api/system/workflow'
+import { reactive, shallowRef, watch } from 'vue'
 import { SkAppCard } from '@skzz/platform'
-import G6Viewer from './g6-viewer/index.vue'
+
 
 const props = defineProps({
   id: {
@@ -10,6 +25,7 @@ const props = defineProps({
     required: true,
   },
 })
+const model = shallowRef({})
 const rState = reactive({
   info: {} as Workflow,
   data: {} as WorkflowData,
@@ -20,19 +36,27 @@ function r () {
   rWorkflowNodesWithRaw({
     id: props.id,
   }).then(res => {
-    rState.info = res.info
-    rState.data = res.data
+    model.value = res.data
   })
 }
+
+const nodeSelectChange = (e: any) => {
+  if (e.target)
+    console.log(e.target.getModel())
+}
+
 </script>
-<template>
-  <PageOver>
-    <SkAppCard :header="rState.info.name" class="h-full">
 
-        <div gap-main-x sub:mt-page h-full>
-          <G6Viewer :data="rState.data"></G6Viewer>
-        </div>
+<style lang="scss" scoped>
+.editor-x{
+  height: 100%;
+}
+.editor {
+  width: 80%;
+}
 
-    </SkAppCard>
-  </PageOver>
-</template>
+.form {
+  width: 20%;
+  border: 1px solid var(--el-border-color);
+}
+</style>

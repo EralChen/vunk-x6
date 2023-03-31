@@ -105,7 +105,7 @@ importers:
       '@vitejs/plugin-vue': ^2.3.3
       '@vitejs/plugin-vue-jsx': ^1.3.10
       '@vue/compiler-sfc': ^3.2.38
-      '@zzg6/flow': 0.0.0-alpha.4
+      '@zzg6/flow': 0.0.0-alpha.9
       deepdash-es: ^5.3.9
       js-cookie: ^3.0.1
       path-to-regexp: ^6.2.1
@@ -117,7 +117,7 @@ importers:
       vue-router: ^4.1.5
       vue-tsc: ^1.0.9
     dependencies:
-      '@zzg6/flow': 0.0.0-alpha.4
+      '@zzg6/flow': 0.0.0-alpha.9
       deepdash-es: 5.3.9
       js-cookie: 3.0.1
       path-to-regexp: 6.2.1
@@ -3556,8 +3556,8 @@ packages:
     resolution: {integrity: sha512-f+PN51a7FPVMt1E95II23fo/NDUb4IVD4HOZhJtP0atW5MjIFQnVSRQgOrEYfT6dSGBDkB/brbvfTSJ1XQi9EA==}
     dev: false
 
-  /@zzg6/flow/0.0.0-alpha.4:
-    resolution: {integrity: sha512-2OF+HDO0jq1Etmkwhh8bWQkBPrLQYi2tb4Pd5K/Q/SLwc6Nskwmbz2EzzMgKm7ReoV9mHZW30OX7O5f2UFk19A==}
+  /@zzg6/flow/0.0.0-alpha.9:
+    resolution: {integrity: sha512-dUG/8CwlUY1+cxVYOZiZB0mQB5WVk9SD8T84xzC+H5fIFKIjHvUKLeyXUWwXK7JKqJegpAMn1hWbl7JRMIAWBA==}
     dependencies:
       '@antv/g6': 4.8.7
       '@vunk/form': 0.0.1-alpha.45

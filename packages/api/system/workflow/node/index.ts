@@ -5,6 +5,7 @@ import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
 import { WorkflowNode, WorkflowData, WorkflowNodeRaw } from '../types'
 import { snowFlake } from '@skzz-platform/api/basic'
 import { rWorkflow } from '@skzz-platform/api/system/workflow'
+import { GraphData, TreeGraphData } from '@antv/g6'
 
 /**
  * https://www.apifox.cn/link/project/1903413/apis/api-71032252
@@ -74,26 +75,11 @@ export const rWorkflowNodesWithRaw = (query: {
       ],
     ).then(res => {
       const [data, raws, info] = res
-      const idToRaw = raws.reduce((acc, cur) => {
-        acc[cur.id] = cur
-        return acc
-      }, {} as Record<string, WorkflowNodeRaw>)
-
-      data.nodes.forEach(item => {
-        
-        if (idToRaw[item.id]) { 
-          item.isCurrentNode = idToRaw[item.id].isCurrentNode
-        }
-       
-      })
-
-
       return {
         data,
+        raws,
         info,
       }
-      
-    
     })
   })
 }
@@ -157,7 +143,7 @@ export const cuWorkflowNode = async (data: Partial<WorkflowNode>) => {
  * https://www.apifox.cn/link/project/1903413/apis/api-71028238
  * @param data 
  */
-export const cWorkflowNodeByJson = async (flowId: string, flowJson: string) => {
+export const cWorkflowNodeByJson = async (flowId: string, flowData: GraphData | TreeGraphData, ieEdit = false) => {
 
   return request({
     method: 'POST',
@@ -165,24 +151,18 @@ export const cWorkflowNodeByJson = async (flowId: string, flowJson: string) => {
     data: {
       datasetId: '8',
       condition: {
-        op: 4,
+        op: ieEdit ? 8 : 4,
         flowId: flowId,
-        flow: JSON.parse(flowJson
-          .replaceAll(
-            'zzg6-zzRect-0.331608056656901741679880010746',
-            await snowFlake(),
-          ).replaceAll('zzg6-zzRect-0.081158092120446221679880017945',
-            await snowFlake(),
-          ).replaceAll('edge-0.187535099745061331679880018820',
-            await snowFlake(),
-          ),
-        ),
+        flow: flowData,
       },
       buttonId: 'import',
       ...MENU_DATA,
     },
-  } as RestFetchExecOptions)
+  } as RestFetchExecOptions, {
+    msg: '保存成功！',
+  })
 }
+
 
 
 /**
