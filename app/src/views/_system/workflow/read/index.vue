@@ -61,7 +61,7 @@ function r () {
   rWorkflowNodesWithRaw({
     id: props.id,
   }).then(res => {
-    model.value = res.data
+    model.value = res.raws
   })
 }
 
@@ -96,7 +96,7 @@ function doApprovel (type: WorkFlowNodeState) {
     ElMessage.warning('请先选择节点')
     return 
   }
-  // doApproveNode(props.id, type, bindState.nodeId, memo.value)
+  doApproveNode(props.id, type, bindState.nodeId, memo.value)
   console.log('doApprovel', type)
 }
 

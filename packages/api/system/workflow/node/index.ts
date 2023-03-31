@@ -41,7 +41,9 @@ export const rWorkflowNodeRaw = (query: {
   itemId: string,
 }) => {
   return request<{
-    '5.1': WorkflowNodeRaw[]
+    '5.1': GraphData & {
+      currentNodeInstIds: string[],
+    }
   }>({
     method: 'POST',
     url: '/core/busi/exec',
@@ -69,7 +71,7 @@ export const rWorkflowNodesWithRaw = (query: {
   return rWorkflow(query).then(res => {
     return Promise.all(
       [
-        rWorkflowNodes({ flowId: res.flowId }), 
+        rWorkflowNodes({ flowId: res.flowId }),
         rWorkflowNodeRaw({ itemId: res.itemId }),
         res,
       ],
@@ -83,9 +85,6 @@ export const rWorkflowNodesWithRaw = (query: {
     })
   })
 }
-
-
-
 
 
 export const dWorkflowNodes  = (ids: string[]) => {
