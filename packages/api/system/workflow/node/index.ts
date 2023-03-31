@@ -2,7 +2,7 @@ import { MENU_DATA } from '../const'
 import { request } from '@skzz-platform/shared/fetch/platform'
 import { QueryRData, RestFetchExecOptions, RestFetchQueryOptions, RestFetchSaveOptions } from '@vunk/skzz'
 import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
-import { WorkflowNode, WorkflowData, WorkflowNodeRaw } from '../types'
+import { WorkflowNode, WorkflowData, WorkflowNodeRaw, WorkFlowNodeState } from '../types'
 import { snowFlake } from '@skzz-platform/api/basic'
 import { rWorkflow } from '@skzz-platform/api/system/workflow'
 import { GraphData, TreeGraphData } from '@antv/g6'
@@ -186,4 +186,32 @@ export const bindOpersToNode = (nodeId: string, operIds: string[]) => {
   } as RestFetchExecOptions, {
     msg: '绑定角色成功',
   })
+}
+
+/**
+ * https://www.apifox.cn/link/project/1903413/apis/api-69116505
+ * @param itemId 
+ * @param status 
+ * @param nodeInstId 
+ * @returns 
+ */
+export const doApproveNode = (itemId: string, status: WorkFlowNodeState, nodeInstId: string, memo: string) => {
+  return request({
+    method: 'POST',
+    url: '/core/busi/exec',
+    data: {
+      'datasetId': '5',
+      'condition': {
+        'flow': {
+          'op': 'audit',
+          itemId,
+          status,
+          nodeInstId,
+          memo,
+        },
+      },
+      ...MENU_DATA,
+    },
+
+  } as RestFetchExecOptions)
 }

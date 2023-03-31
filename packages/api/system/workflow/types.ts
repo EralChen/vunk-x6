@@ -44,3 +44,8 @@ export interface WorkflowOper {
   operName: string;
 }
 
+export enum WorkFlowNodeState {
+  '待审核' = 0,
+  '通过' = 10,
+  '驳回' = -10,
+}
