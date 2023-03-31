@@ -68,7 +68,7 @@ const tableState = reactive({
       slots: ({ row }) => <SkAppOperations
         modules={['c', 'u', 'd']}
         onC={ () => precI(row.menuId) }
-        onD={ () => d([row.menuId])  }
+        onD={ () => d([row.id])  }
         onU={ () => preuI(row) }
         
       >
@@ -122,8 +122,8 @@ function r () {
     })
   })
 }
-function d (menuIds: string[]) {
-  dMenus(menuIds).then(() => {
+function d (ids: string[]) {
+  dMenus(ids).then(() => {
     rTree()
     r()
   })

@@ -3,7 +3,7 @@ import { props, emits } from './ctx'
 import { defineComponent } from 'vue'
 import { VkCheckboxTree, __VkCheckboxTree } from '@vunk/skzz/components/checkbox-tree'
 import { computed, reactive, watch } from 'vue'
-import { rMenus } from '@skzz-platform/api/system/menu'
+import { rMenus, rMenusWithButtons } from '@skzz-platform/api/system/menu'
 import { listToTree } from '@vunk/core/shared/utils-data'
 import { SkCheckTags, __SkCheckTags  } from '@skzz-platform/components/check-tags'
 import { SkAppTablesV1, __SkAppTablesV1 } from '@skzz-platform/components/app-tables-v1'
@@ -66,8 +66,8 @@ export default defineComponent({
       ]
     })
 
-    const treeCheckedMenuIds = computed(() => {
-      return props.modelValue.map((item) => item.menuId)
+    const treeCheckedIds = computed(() => {
+      return props.modelValue.map((item) => item.id)
     })
     
     const queryState = reactive({
@@ -91,7 +91,7 @@ export default defineComponent({
       rTree()
       r()
     }, { immediate: true })
-    watch(() => treeCheckedMenuIds.value, () => {
+    watch(() => treeCheckedIds.value, () => {
       r()
     })
     watch(() => queryState.query, () => {
@@ -109,15 +109,13 @@ export default defineComponent({
       })
     }
     function r () {
-      rMenus({
+
+      rMenusWithButtons({
         client: checkTagsState.value,
-        menuId: treeCheckedMenuIds.value,
+        ids: treeCheckedIds.value,
         ...queryState.query,
       }).then(res => {
-        tableState.data = listToTree(res, {
-          id: 'menuId',
-          pId: 'parentMenuId',
-        })
+        tableState.data = listToTree(res)
       })
     }
 
@@ -160,6 +158,7 @@ export default defineComponent({
       <VkDuplex :gap="'var(--gap-page)'" :direction="'row'"  h-full >
         <template #one>
           <VkCheckboxTree 
+            :checkStrictly="true"
             :modules="['filter', 'srcollbar']"
             :defaultExpandAll="true"
             :data="treeState.data" 

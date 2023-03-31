@@ -1,4 +1,4 @@
-import { rMenus } from '@skzz-platform/api/system/menu'
-import { ApiReturnType } from '@vunk/core'
+import { Menu } from '@skzz-platform/api/system/menu'
 
-export type Row = ApiReturnType<typeof rMenus>[number]
+
+export type Row = Menu
