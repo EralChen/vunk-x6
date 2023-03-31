@@ -15,9 +15,16 @@ export default defineComponent({
     const formItems: __SkAppForm.FormItem<keyof Row>[] = [
       {
         templateType: 'VkfInput',
+        prop: 'tenantId',
+        label: '租户ID',
+        required: true,
+      },
+      {
+        templateType: 'VkfInput',
         prop: 'name',
         label: '姓名',
       },
+
       {
         templateType: 'VkfButton',
         buttonLabel: '提交',
@@ -37,6 +44,7 @@ export default defineComponent({
 </script>
 <template>
   <SkAppForm 
+    :labelWidth="'5em'"
     :data="data"
     :formItems="formItems"
   ></SkAppForm>
