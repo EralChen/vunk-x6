@@ -67,7 +67,7 @@ importers:
       '@vunk/skzz': 0.0.0-alpha.78
       '@zzg6/flow': 0.0.0-alpha.2
       chroma-js: 2.4.2
-      element-plus: 2.3.1_vue@3.2.45
+      element-plus: 2.3.2_vue@3.2.45
       vue: 3.2.45
     devDependencies:
       '@lib-env/app-utils': link:internal/app-utils
@@ -105,7 +105,7 @@ importers:
       '@vitejs/plugin-vue': ^2.3.3
       '@vitejs/plugin-vue-jsx': ^1.3.10
       '@vue/compiler-sfc': ^3.2.38
-      '@zzg6/flow': 0.0.0-alpha.12
+      '@zzg6/flow': 0.0.0-alpha.13
       deepdash-es: ^5.3.9
       js-cookie: ^3.0.1
       path-to-regexp: ^6.2.1
@@ -117,7 +117,7 @@ importers:
       vue-router: ^4.1.5
       vue-tsc: ^1.0.9
     dependencies:
-      '@zzg6/flow': 0.0.0-alpha.12
+      '@zzg6/flow': 0.0.0-alpha.13
       deepdash-es: 5.3.9
       js-cookie: 3.0.1
       path-to-regexp: 6.2.1
@@ -3552,12 +3552,12 @@ packages:
     resolution: {integrity: sha512-NbE8nlT1BVivYg4vvL1fdHIYCkEoXfydP9JJho9X6v7byueiCwGFm0cJJc7Lrovu8Q7VWGaWccWna1FXM9jJog==}
     dev: false
 
-  /@zzg6/flow/0.0.0-alpha.12:
-    resolution: {integrity: sha512-HTv1XmU/y8cw9jM3CZMVOIc/B3mDx9GEeyGSIFzS4dHrGDiU/j1zuLwfOJPHDOH9FAiffFOuOJvrmDznklzuhg==}
+  /@zzg6/flow/0.0.0-alpha.13:
+    resolution: {integrity: sha512-xkvApgf18hKGAboP3oAerR8hiztHDpIELE7s7ZvHAboVzBfyqoM+EkSYdwAff62i4FPfgoWBT1wp/mfapA95IQ==}
     dependencies:
       '@antv/g6': 4.8.7
       '@vunk/form': 0.0.1-alpha.45
-      element-plus: 2.3.1_vue@3.2.45
+      element-plus: 2.3.2_vue@3.2.45
       vue: 3.2.45
     transitivePeerDependencies:
       - '@vue/composition-api'
@@ -4777,8 +4777,8 @@ packages:
     resolution: {integrity: sha512-M8WEXFuKXMYMVr45fo8mq0wUrrJHheiKZf6BArTKk9ZBYCKJEOU5H8cdWgDT+qCVZf7Na4lVUaZsA+h6uA9+PA==}
     dev: true
 
-  /element-plus/2.3.1_vue@3.2.45:
-    resolution: {integrity: sha512-IBS7ic1mRyDXpOreRkredV4ByZSuax5HPb0zNOHm4qwKC4wm927yQv+Is0JbzxPzCW5zWaV4PLy9/Gl3E3v59w==}
+  /element-plus/2.3.2_vue@3.2.45:
+    resolution: {integrity: sha512-NIK0QckKKagdlMm3eLoVoD4Lkfj5ECzpZAxwrRLdm1Yi5qiTU9Guor33+IbIa52z4gHMuhMxgSVS2xAGmjLHsw==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:

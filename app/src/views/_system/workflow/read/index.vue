@@ -7,16 +7,20 @@
         </div>
         <div class="form">
           <ElForm label-position="top">
-            <ElFormItem :label="`绑定人员(${bindState.data.length ? '已绑定' : '未绑定'})`">
+            <ElFormItem v-show="bindState.nodeId" :label="`绑定人员(${bindState.data.length ? '已绑定' : '未绑定'})`">
               <el-button :disabled="!bindState.nodeId" type="primary" @click="preBind()">绑定</el-button>
             </ElFormItem>
-            <ElFormItem label="审批">
+            <ElFormItem label="开始流程" v-show="!bindState.currentNodeInstIds.length">
+              <el-button type="primary" @click="doRunWorkflow">运行</el-button>
+            </ElFormItem>
+            <ElFormItem label="审批" v-show="bindState.currentNodeInstIds.length">
               <div mt-page mb-page w-100>
                 <el-input type="textarea" v-model="memo"></el-input>
               </div>
-              <el-button type="primary" @click="doApprovel(WorkFlowNodeState.通过)">通过</el-button>
-              <el-button type="warning" @click="doApprovel(WorkFlowNodeState.驳回)">驳回</el-button>
-              <el-button type="success" @click="doApprovel(WorkFlowNodeState.驳回)">退回</el-button>
+              <el-button type="primary" @click="doApprovel(WorkFlowNodeState.通过, 'pass')">通过</el-button>
+              <el-button type="warning" @click="doApprovel(WorkFlowNodeState.驳回, 'bh')">驳回</el-button>
+              <el-button v-show="bindState.nodeId && bindState.currentNodeData.auditStatus" type="success"
+                @click="doApprovel(WorkFlowNodeState.驳回, 'th')">退回</el-button>
             </ElFormItem>
           </ElForm>
         </div>
@@ -33,11 +37,11 @@
 
 <script setup lang="ts">
 import { ZzEditor } from '@zzg6/flow'
-import { bindOpersToNode, doApproveNode, rWorkflowNodesWithRaw, WorkflowNode, WorkFlowNodeState } from '@skzz-platform/api/system/workflow'
+import { bindOpersToNode, doApproveNode, rWorkflowNodesWithRaw, WorkflowNode, WorkFlowNodeState, runWorkflow, Workflow } from '@skzz-platform/api/system/workflow'
 import { reactive, ref, shallowRef, watch } from 'vue'
 import { SkAppCard, SkAppDialog } from '@skzz/platform'
 import { SkUserTablesSelect } from '@skzz-platform/components/user-tables-select'
-import { ElMessage } from 'element-plus'
+import { User } from '@skzz-platform/api/system/user'
 
 
 type Row = Partial<WorkflowNode>
@@ -50,9 +54,12 @@ const props = defineProps({
 })
 const model = shallowRef({})
 const showdialog = ref(false)
+const flowData = ref({} as Workflow)
 const bindState = reactive({
   nodeId: '',
-  data: [] as WorkflowNode[],
+  data: [] as User[],
+  currentNodeInstIds: [] as string[],
+  currentNodeData: {} as WorkflowNode,
 })
 const memo = ref('')
 watch(() => props.id, r, { immediate: true })
@@ -62,14 +69,18 @@ function r () {
     id: props.id,
   }).then(res => {
     model.value = res.raws
+    bindState.currentNodeInstIds = res.raws.currentNodeInstIds
+    flowData.value = res.info
   })
 }
 
 
 const nodeSelectChange = (e: any) => {
   if (e.target) {
-    bindState.nodeId = e.target.getModel().id
-    bindState.data = e.target.getModel().opers?.map((id: string) => ({id})) || []
+    const m = e.target.getModel()
+    bindState.nodeId = m.id
+    bindState.currentNodeData = m
+    bindState.data = m.opers?.map((id: string) => ({ id })) || []
   } else {
     bindState.nodeId = ''
     bindState.data = []
@@ -91,13 +102,20 @@ function bindOpers () {
   })
 }
 
-function doApprovel (type: WorkFlowNodeState) {
-  if (!bindState.nodeId) {
-    ElMessage.warning('请先选择节点')
-    return 
+function doApprovel (type: WorkFlowNodeState, e: string) {
+  let currentBackId
+  if (e === 'th') {
+    currentBackId = bindState.nodeId
   }
-  doApproveNode(props.id, type, bindState.nodeId, memo.value)
-  console.log('doApprovel', type)
+  doApproveNode(props.id, type, memo.value, bindState.currentNodeInstIds[0], currentBackId)
+    .then(() => {
+      r()
+    })
+}
+
+function doRunWorkflow () {
+  if (flowData.value.itemId)
+    runWorkflow(flowData.value.itemId).then(r)
 }
 
 </script>
