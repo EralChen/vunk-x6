@@ -17,11 +17,11 @@
   },
   {
     "code": "capital",
-    "url": "http://t1.zjsophon.com:10000/capital-server"
+    "url": "http://t1.zjsophon.com:10000./capital-server"
   },
   {
     "code": "cy_dev",
-    "url":  "http://183.249.87.107:10000/scenebuilder-flow"
+    "url":  "http://223.95.194.18:10000/scenebuilder-flow"
   },
   {
     "code": "local",
