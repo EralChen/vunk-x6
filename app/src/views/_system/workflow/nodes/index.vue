@@ -14,10 +14,11 @@
 
 <script setup lang="ts">
 import { ZzEditor } from '@zzg6/flow'
-import {  shallowRef, watch } from 'vue'
+import { defineComponent, shallowRef, watch } from 'vue'
 import { rWorkflowNodes, WorkflowNode, cWorkflowNodeByJson, WorkflowData } from '@skzz-platform/api/system/workflow'
 import { GraphData, TreeGraphData } from '@antv/g6'
 import { snowFlake } from '@skzz-platform/api/basic'
+
 
 type Row = Partial<WorkflowNode>
 
@@ -59,6 +60,11 @@ function jsonLoad () {
       isEdit = true
     })
 }
+
+
+// onBeforeRouteLeave((to, from, next) => {
+//   console.log(to, from)
+// })
 </script>
 
 <style lang="scss" scoped>

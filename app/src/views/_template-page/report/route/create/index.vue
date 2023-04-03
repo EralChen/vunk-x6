@@ -33,9 +33,8 @@ function c () {
   cuRole(formData.value).then(() => {
     routerBack({
       path: 'create',
-      query: {
-        u: '1',
-      },
+    }, {
+      addQueryU: true,
     })
   })
 }

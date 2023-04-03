@@ -2,6 +2,7 @@ import { useRouter, useRoute, RouteLocationPathRaw, createRouterMatcher }  from 
 
 import { lintPath, resolveFullPath } from '@vunk/skzz/shared/utils-route'
 import { pickObject } from '@vunk/core/shared/utils-object'
+import { QUERY_U } from './use-resolve-query-u'
 export const useRouterTo = () => { 
   const router = useRouter()
   const route = useRoute()
@@ -45,7 +46,12 @@ export const useRouterTo = () => {
      */
     path: string,
     mode?: Mode,
-  } & RouteLocationPathRaw) => {
+  } & RouteLocationPathRaw, custom: {
+    /**
+     * 是否更新最新的路由
+     */
+    addQueryU?: boolean,
+  } = {}) => {
     const path = lintPath(route.path.replace(opts.path, ''))
     // 如果route.matched中没有相同path，就不跳转。
     if (route.matched && !route.matched.find((item) => item.path === path)) {
@@ -58,11 +64,17 @@ export const useRouterTo = () => {
       ...opts,
       path,
     }
-    
+ 
     router[e.mode]({
       ...pickObject(e, {
         excludes: ['mode'],
       }),
+      query: {
+        ...route.query,
+        ...(custom.addQueryU ? {
+          [QUERY_U]: 1,
+        } : {}),
+      },
     })
 
   }
