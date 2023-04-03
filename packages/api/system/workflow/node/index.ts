@@ -41,7 +41,9 @@ export const rWorkflowNodeRaw = (query: {
   itemId: string,
 }) => {
   return request<{
-    '5.1': WorkflowNodeRaw[]
+    '5.1': GraphData & {
+      currentNodeInstIds: string[],
+    }
   }>({
     method: 'POST',
     url: '/core/busi/exec',
@@ -69,23 +71,18 @@ export const rWorkflowNodesWithRaw = (query: {
   return rWorkflow(query).then(res => {
     return Promise.all(
       [
-        rWorkflowNodes({ flowId: res.flowId }), 
         rWorkflowNodeRaw({ itemId: res.itemId }),
         res,
       ],
     ).then(res => {
-      const [data, raws, info] = res
+      const [raws, info] = res
       return {
-        data,
         raws,
         info,
       }
     })
   })
 }
-
-
-
 
 
 export const dWorkflowNodes  = (ids: string[]) => {
@@ -195,7 +192,7 @@ export const bindOpersToNode = (nodeId: string, operIds: string[]) => {
  * @param nodeInstId 
  * @returns 
  */
-export const doApproveNode = (itemId: string, status: WorkFlowNodeState, nodeInstId: string, memo: string) => {
+export const doApproveNode = (itemId: string, status: WorkFlowNodeState, memo?: string, nodeInstId?: string, backNodeId?: string) => {
   return request({
     method: 'POST',
     url: '/core/busi/exec',
@@ -208,10 +205,13 @@ export const doApproveNode = (itemId: string, status: WorkFlowNodeState, nodeIns
           status,
           nodeInstId,
           memo,
+          backNodeId,
         },
       },
       ...MENU_DATA,
     },
 
-  } as RestFetchExecOptions)
+  } as RestFetchExecOptions, {
+    msg: '操作成功',
+  })
 }

@@ -37,7 +37,7 @@
   },
   {
     "code": "wyy_dev",
-    "url": "http://223.95.194.18:10000/scenebuilder-flow"
+    "url": "http://192.168.110.244:30100/scene-server"
   }
   
 ]
