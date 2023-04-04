@@ -22,7 +22,7 @@
     "@vitejs/plugin-vue": "^2.3.3",
     "@vitejs/plugin-vue-jsx": "^1.3.10",
     "@vue/compiler-sfc": "^3.2.38",
-    "unocss": "0.33.5",
+    "unocss": "^0.50.6",
     "unocss-preset-vunk": "^1.0.3",
     "vite-plugin-externals": "^0.6.2",
     "vite-plugin-svg-icons": "^2.0.1",
