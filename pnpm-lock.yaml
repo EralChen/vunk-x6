@@ -42,12 +42,13 @@ importers:
       mri: ^1.2.0
       pinia: ^2.0.21
       pinia-plugin-persist: ^1.0.0
+      sass: ^1.60.0
       sucrase: ^3.24.0
       tsx: ^3.8.0
       unbuild: ^0.7.4
       unocss: ^0.50.6
       unplugin-vue-jsx: ^0.1.2
-      vite: ^4.1.1
+      vite: ^4.2.1
       vitest: ^0.18.1
       vue: ^3.2.38
     dependencies:
@@ -91,13 +92,14 @@ importers:
       mri: 1.2.0
       pinia: 2.0.33_vue@3.2.47
       pinia-plugin-persist: 1.0.0_pinia@2.0.33+vue@3.2.47
+      sass: 1.60.0
       sucrase: 3.31.0
       tsx: 3.12.6
       unbuild: 0.7.6
       unocss: 0.50.6_vite@4.2.1
       unplugin-vue-jsx: 0.1.2_vite@4.2.1+vue@3.2.47
-      vite: 4.2.1_@types+node@18.15.11
-      vitest: 0.18.1
+      vite: 4.2.1_hghbulspu73jfdazs4i6yiqype
+      vitest: 0.18.1_sass@1.60.0
 
   app:
     specifiers:
@@ -3285,7 +3287,7 @@ packages:
       chokidar: 3.5.3
       fast-glob: 3.2.12
       magic-string: 0.30.0
-      vite: 4.2.1_@types+node@18.15.11
+      vite: 4.2.1_hghbulspu73jfdazs4i6yiqype
     transitivePeerDependencies:
       - rollup
     dev: true
@@ -9287,7 +9289,7 @@ packages:
       acorn: 8.8.2
       chokidar: 3.5.3
       esbuild: 0.14.54
-      vite: 4.2.1_@types+node@18.15.11
+      vite: 4.2.1_hghbulspu73jfdazs4i6yiqype
       webpack-sources: 3.2.3
       webpack-virtual-modules: 0.4.6
     dev: true
@@ -9503,30 +9505,6 @@ packages:
       - supports-color
     dev: true
 
-  /vite/2.9.15:
-    resolution: {integrity: sha512-fzMt2jK4vQ3yK56te3Kqpkaeq9DkcZfBbzHwYpobasvgYmP2SoAr6Aic05CsB4CzCZbsDv4sujX3pkEGhLabVQ==}
-    engines: {node: '>=12.2.0'}
-    hasBin: true
-    peerDependencies:
-      less: '*'
-      sass: '*'
-      stylus: '*'
-    peerDependenciesMeta:
-      less:
-        optional: true
-      sass:
-        optional: true
-      stylus:
-        optional: true
-    dependencies:
-      esbuild: 0.14.54
-      postcss: 8.4.21
-      resolve: 1.22.1
-      rollup: 2.77.3
-    optionalDependencies:
-      fsevents: 2.3.2
-    dev: true
-
   /vite/2.9.15_sass@1.60.0:
     resolution: {integrity: sha512-fzMt2jK4vQ3yK56te3Kqpkaeq9DkcZfBbzHwYpobasvgYmP2SoAr6Aic05CsB4CzCZbsDv4sujX3pkEGhLabVQ==}
     engines: {node: '>=12.2.0'}
@@ -9552,7 +9530,7 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vite/4.2.1_@types+node@18.15.11:
+  /vite/4.2.1_hghbulspu73jfdazs4i6yiqype:
     resolution: {integrity: sha512-7MKhqdy0ISo4wnvwtqZkjke6XN4taqQ2TBaTccLIpOKv7Vp2h4Y+NpmWCnGDeSvvn45KxvWgGyb0MkHvY1vgbg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -9582,6 +9560,7 @@ packages:
       postcss: 8.4.21
       resolve: 1.22.1
       rollup: 3.20.2
+      sass: 1.60.0
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
@@ -9607,7 +9586,7 @@ packages:
       - stylus
     dev: true
 
-  /vitest/0.18.1:
+  /vitest/0.18.1_sass@1.60.0:
     resolution: {integrity: sha512-4F/1K/Vn4AvJwe7i2YblR02PT5vMKcw9KN4unDq2KD0YcSxX0B/6D6Qu9PJaXwVuxXMFTQ5ovd4+CQaW3bwofA==}
     engines: {node: '>=v14.16.0'}
     hasBin: true
@@ -9637,7 +9616,7 @@ packages:
       local-pkg: 0.4.3
       tinypool: 0.2.4
       tinyspy: 1.1.1
-      vite: 2.9.15
+      vite: 2.9.15_sass@1.60.0
     transitivePeerDependencies:
       - less
       - sass
