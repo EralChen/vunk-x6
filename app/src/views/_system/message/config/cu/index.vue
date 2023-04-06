@@ -8,10 +8,12 @@ import {
 } from '@skzz/platform'
 
 import { setData } from '@vunk/core'
+import { cuMessageConfig } from '@skzz-platform/api/system/message/config'
+import { MessageConfig } from '@skzz-platform/api/system/message/types'
 
 const firstFormData = reactive({
 
-})
+} as MessageConfig)
 
 const formItems: __SkAppForm.CoreFormItem[] = [
   {
@@ -55,6 +57,7 @@ const formItems: __SkAppForm.CoreFormItem[] = [
     ],
   },
   {
+    // 来自常量管理
     templateType: 'VkfInput',
     prop: 'type',
     label: '业务类型',
@@ -92,7 +95,7 @@ const formItems: __SkAppForm.CoreFormItem[] = [
 ] 
 
 const c = () => {
-  //
+  cuMessageConfig(firstFormData)
 }
 
 </script>

@@ -36,8 +36,12 @@
     "url": "http://192.168.110.232:30000/tpl-server"
   },
   {
-    "code": "wyy_dev",
+    "code": "wyy_dev_flow",
     "url": "http://192.168.110.244:30100/scene-server"
+  },
+  {
+    "code": "wyy_dev_message",
+    "url": "http://192.168.110.177:30011/demo-server"
   }
   
 ]

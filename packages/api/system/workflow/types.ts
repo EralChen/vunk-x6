@@ -16,6 +16,9 @@ export interface WorkflowNode {
   isJointly: 0|1;
   isCurrentNode: 0|1;
   label: string;
+  opers: {id: string, name: string}[];
+  nodeInstId: string;
+  assistOpers: {id: string, name: string, nodeId: string}[];
   [k: string]: any
 }
 
