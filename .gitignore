@@ -3,4 +3,5 @@ dist
 app/public/Esri
 app/src/styles/esri/_themes
 .pnpm-store
+*.tar
 
