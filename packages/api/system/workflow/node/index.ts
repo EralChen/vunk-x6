@@ -163,6 +163,7 @@ export const cWorkflowNodeByJson = async (flowId: string, flowData: GraphData | 
 
 
 /**
+ * 绑定操作人
  * https://www.apifox.cn/link/project/1903413/apis/api-71096680
  * @param nodeId 
  * @param operIds 
@@ -181,15 +182,47 @@ export const bindOpersToNode = (nodeId: string, operIds: string[]) => {
     },
 
   } as RestFetchExecOptions, {
-    msg: '绑定角色成功',
+    msg: '绑定成功',
+  })
+}
+
+
+
+/**
+ * 节点实例添加协办人
+ * https://www.apifox.cn/link/project/1903413/apis/api-72917748
+ * @param nodeInstId 
+ * @param assistOperIds 
+ */
+export const bindAssistOperToNode = (nodeInstId: string, assistOperIds: string[]) => {
+  return request({
+    method: 'POST',
+    url: '/core/busi/exec',
+    data: {
+      datasetId: '5',
+      condition: {
+        flow: {
+          op: 'assistOper',
+          nodeInstId,
+          assistOperIds,
+        },
+      },
+      ...MENU_DATA,
+    },
+
+  } as RestFetchExecOptions, {
+    msg: '绑定成功',
   })
 }
 
 /**
+ * 审批节点
  * https://www.apifox.cn/link/project/1903413/apis/api-69116505
  * @param itemId 
  * @param status 
+ * @param memo 
  * @param nodeInstId 
+ * @param backNodeId 
  * @returns 
  */
 export const doApproveNode = (itemId: string, status: WorkFlowNodeState, memo?: string, nodeInstId?: string, backNodeId?: string) => {

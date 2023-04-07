@@ -3,14 +3,13 @@
     <SkAppCard :header="'消息数据'" class="h-100%">
       <VkDuplexCalc class="gap-main-x">
         <template #one>
-          <SkAppQueryForm :fixes="2" :data="formData" @setData="setData(formData, $event)" :formItems="queryItems">
-            <!-- <template #options>
-              <ElButton type="primary">新增</ElButton>
-            </template> -->
-          </SkAppQueryForm>
+          <!-- <SkAppQueryForm :fixes="2" :data="formData" @setData="setData(formData, $event)" :formItems="queryItems">
+          </SkAppQueryForm> -->
         </template>
-        <SkAppTables class="h-100%" :data="data" :columns="colSource" :total="100">
-        </SkAppTables>
+        <SkAppTablesV1 :defaultExpandAll="true" flex-1 :rowKey="'menuId'" :columns="tableState.columns"
+          :data="tableState.data" :total="tableState.total" v-model:page-size="tableState.pagination.pageSize"
+          v-model:start="tableState.pagination.start">
+        </SkAppTablesV1>
       </VkDuplexCalc>
     </SkAppCard>
   </PageX>
@@ -20,14 +19,77 @@
 import PageX from '_c/PageX/index.vue'
 import {
   SkAppCard,
-  SkAppTables, __SkAppTables,
+  __SkAppTables,
   SkAppQueryForm, __SkAppQueryForm,
-  SkAppOperations,
 } from '@skzz/platform'
-import { NormalObject, setData, VkDuplexCalc } from '@vunk/core'
-import { ref } from 'vue'
-import { FixedDir } from 'element-plus/es/components/table-v2/src/constants'
+import { SkAppOperations, SkAppTablesV1, __SkAppTablesV1 } from '@skzz/platform'
+import { NormalObject, VkDuplexCalc } from '@vunk/core'
+import { reactive, ref, watch } from 'vue'
 import { MessageStatus } from './ctx'
+import { rMessageList } from '@skzz-platform/api/system/message/list'
+import { Row } from './types'
+type Col = __SkAppTablesV1.Column<Row>
+
+const tableState = reactive({
+  data: [] as Row[],
+  _columns: [
+    {
+      prop: 'tplId',
+      label: '模板ID',
+    },
+    {
+      prop: 'status',
+      label: '状态',
+      slots: ({row}) => {
+        const stateMap: Record<MessageStatus, string> = {
+          [MessageStatus.UnSend]: '未发送',
+          [MessageStatus.Send]: '已发送',
+          [MessageStatus.Read]: '已读',
+          [MessageStatus.Confirm]: '已确认',
+
+        }
+        return <span>{stateMap[row.status as MessageStatus]}</span>
+      },
+    },
+    {
+      prop: 'title',
+      label: '标题',
+    },
+    {
+      prop: 'content',
+      label: '消息内容',
+    },
+    {
+      prop: 'receiverName',
+      label: '接收人',
+    },
+    {
+      prop: 'founderName',
+      label: '创建人姓名',
+    },
+    {
+      prop: 'sendTime',
+      label: '发送时间',
+    },
+    // {
+    //   prop: undefined,
+    //   label: '操作',
+    //   width: '400em',
+    //   slots: ({ row }) => <SkAppOperations
+    //     modules={['r', 'u', 'run', 'nodes', 'd']}>
+    //   </SkAppOperations>,
+    //   align: 'center',
+    //   headerAlign: 'center',
+    // },
+  ] as Col[],
+  columns: [] as Col[],
+  query: {},
+  pagination: {
+    pageSize: 10,
+    start: 0,
+  },
+  total: 0,
+})
 
 const queryItems: __SkAppQueryForm.FormItem[] = [
   {
@@ -39,102 +101,29 @@ const queryItems: __SkAppQueryForm.FormItem[] = [
   },
 ]
 
-const colSource: __SkAppTables.Column[] = [
-  {
-    key: 'tplId',
-    dataKey: 'tplId',
-    width: 50,
-    title: '模板ID',
-    align: 'center',
-    flexGrow: 1,
-  },
-  {
-    key: 'status',
-    dataKey: 'status',
-    width: 50,
-    title: '状态',
-    align: 'center',
-    flexGrow: 1,
-    cellRenderer: ({rowData}) => {
-      const stateMap: Record<MessageStatus, string> = {
-        [MessageStatus.UnSend]: '未发送',
-        [MessageStatus.Send]: '已发送',
-        [MessageStatus.Read]: '已读',
-        [MessageStatus.Confirm]: '已确认',
-        
-      }
-      return <span>{stateMap[rowData.status as MessageStatus]}</span>
-    },
-  },
-  {
-    key: 'title',
-    dataKey: 'title',
-    width: 50,
-    title: '消息标题',
-    align: 'center',
-    flexGrow: 1,
-  },
-  {
-    key: 'content',
-    dataKey: 'content',
-    width: 50,
-    title: '消息内容',
-    align: 'center',
-    flexGrow: 1,
-  },
-  {
-    key: 'receiverName',
-    dataKey: 'receiverName',
-    width: 50,
-    title: '接收人',
-    align: 'center',
-    flexGrow: 1,
-  },
-  {
-    key: 'sendTime',
-    dataKey: 'sendTime',
-    width: 50,
-    title: '发送时间',
-    align: 'center',
-    flexGrow: 1,
-  },
-  {
-    key: 'founderName',
-    dataKey: 'founderName',
-    width: 50,
-    title: '创建人姓名',
-    align: 'center',
-    flexGrow: 1,
-  },
-  {
-    key: 'operations',
-    title: '操作',
-    width: 260,
-    flexGrow: 1,
-    align: 'center',
-    fixed: FixedDir.RIGHT,
-    cellRenderer: () => {
-      return <SkAppOperations
-        modules={['r', 'u', 'd']}
-
-      ></SkAppOperations>
-    },
-  },
-]
 
 
 const formData = ref({
   type: 'all',
 } as NormalObject)
 
-const data = [
-  ...Array.from({ length: 100 }).map((_, i) => {
-    return {
-      name: `cx${i}`,
-      id: i,
+
+watch(() => tableState.pagination, r, { deep: true, immediate: true })
+function r () {
+  return rMessageList(tableState.pagination).then(res => {
+    if (!res) {
+      return
     }
-  }),
-]
+    if (!tableState.columns.length) {
+      tableState.columns = [
+        // ...res.columns as Col[],
+        ...tableState._columns,
+      ]
+    }
+    tableState.data = res.rows
+    tableState.total = res.total
+  })
+}
 
 </script>
 
