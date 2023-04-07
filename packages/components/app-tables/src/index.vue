@@ -171,6 +171,7 @@ export default defineComponent({
       <ElAutoResizer>
         <template #default="{ height, width }">
           <VkCheckRecordLogicProvider 
+            :allowExtra="true"
             :modelValue="modelValue"
             @update:modelValue="$emit('update:modelValue', $event)"
             :oidField="oidField"
