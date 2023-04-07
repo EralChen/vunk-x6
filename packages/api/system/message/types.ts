@@ -23,24 +23,7 @@ export type Message = {
   status: number;
 }
 
-export type MessageConfig = {
-  modelId: string;
-  requireConfirm: number;
-  founder?: number;
-  requireRead: number;
-  founderName?: string;
-  updateTime?: string;
-  type: number;
-  updater?: number;
-  path: string;
-  foundTime?: string;
-  param: string;
-  updaterName?: string;
-  datasetId: string;
-  client: string;
-  id?: string;
-  tplId: number;
-}
+
 
 
 export type CommonAddition = {

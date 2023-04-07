@@ -1,21 +1,42 @@
 <script lang="ts" setup>
 import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
-import { onUpdated, reactive, ref } from 'vue'
+import { cuMessageConfig, rMessageConfigList } from '@skzz-platform/api/system/message/config'
+import { MessageConfig } from '@skzz-platform/api/system/message/config/types'
+import { Deferred } from '@vunk/core/shared/utils-promise'
+import { ElMessage, FormInstance } from 'element-plus'
+import { SkAppCard } from '@skzz/platform'
 import PageX from '_c/PageX/index.vue'
-import {
-  SkAppModule,
-  SkAppCard,
-} from '@skzz/platform'
-
 import { setData } from '@vunk/core'
-import { cuMessageConfig } from '@skzz-platform/api/system/message/config'
-import { MessageConfig } from '@skzz-platform/api/system/message/types'
+import { ref } from 'vue'
+import router from '@/router'
+import { Option } from '@skzz-platform/api/system/dictionary'
+import { rTemplateList } from '@skzz-platform/api/system/message/template'
+import { useDictionaryStore } from '@/stores/dictionary'
 
-const firstFormData = reactive({
-
+const props = defineProps({
+  id: {
+    type: String,
+  },
+  detail: Boolean,
+})
+const firstFormData = ref({
+  id: props.id,
 } as MessageConfig)
-
-const formItems: __SkAppForm.CoreFormItem[] = [
+const defer = new Deferred<FormInstance>()
+const dicStore = useDictionaryStore()
+const templOptions = ref<Option[]>([])
+rTemplateList().then((res) => {
+  templOptions.value = res.rows.map((item) => {
+    return {
+      label: item.title,
+      value: item.id,
+    }
+  })
+})
+const clientOpts = ref<Option[]>([])
+// 获取字典
+dicStore.getTemplateDic(clientOpts)
+const formItems = ref<__SkAppForm.CoreFormItem[]>([
   {
     templateType: 'VkfInput',
     prop: 'modelId',
@@ -37,24 +58,19 @@ const formItems: __SkAppForm.CoreFormItem[] = [
     label: '路由参数',
   },
   {
-    templateType: 'VkfInput',
+    templateType: 'VkfSelect',
     prop: 'client',
     label: '接收端',
+    allowCreate: true,
+    filterable: true,
+    options: clientOpts as any,
   },
   {
     templateType: 'VkfSelect',
     prop: 'tplId',
     label: '消息模板',
-    options: [
-      {
-        label: '模板1',
-        value: 1,
-      },
-      {
-        label: '模板2',
-        value: 2,
-      },
-    ],
+    filterable: true,
+    options: templOptions as any,
   },
   {
     // 来自常量管理
@@ -92,10 +108,95 @@ const formItems: __SkAppForm.CoreFormItem[] = [
       },
     ],
   },
-] 
+])
+const rules = ref({
+  modelId: [
+    {
+      required: true,
+      message: '请输入模型ID',
+      trigger: 'blur',
+    },
+  ],
+  datasetId: [
+    {
+      required: true,
+      message: '请输入数据集ID',
+      trigger: 'blur',
+    },
+  ],
+  path: [
+    {
+      required: true,
+      message: '请输入跳转路由',
+      trigger: 'blur',
+    },
+  ],
+  param: [
+    {
+      required: true,
+      message: '请输入路由参数',
+      trigger: 'blur',
+    },
+  ],
+  client: [
+    {
+      required: true,
+      message: '请输入接收端',
+      trigger: 'blur',
+    },
+  ],
+  tplId: [
+    {
+      required: true,
+      message: '请选择消息模板',
+      trigger: 'blur',
+    },
+  ],
+  type: [
+    {
+      required: true,
+      message: '请输入业务类型',
+      trigger: 'blur',
+    },
+  ],
+  requireRead: [
+    {
+      required: true,
+      message: '请选择要求已读回执',
+      trigger: 'blur',
+    },
+  ],
+  requireConfirm: [
+    {
+      required: true,
+      message: '请选择要求确认回执',
+      trigger: 'blur',
+    },
+  ],
+})
 
+const r = () => {
+  rMessageConfigList(undefined, { id: props.id })
+    .then(res => {
+      firstFormData.value = res.rows[0]
+    })
+}
+props.id && r()
 const c = () => {
-  cuMessageConfig(firstFormData)
+  defer.promise.then((form) => {
+    return form.validate()
+  })
+    .then((valid) => {
+      if (valid) {
+        return cuMessageConfig(firstFormData.value, !!props.id)
+      }
+    })
+    .catch(err => {
+      ElMessage.warning('请检查表单')
+    })
+    .then(() => {
+      router.push('/system/message/config')
+    })
 }
 
 </script>
@@ -103,14 +204,12 @@ const c = () => {
   <PageX>
     <SkAppCard class="h-100%" :header="'新增消息配置'">
       <template #header__options>
-        <ElButton type="primary"
-          @click="c"
-        >提交</ElButton>
+        <ElButton type="primary" @click="c">提交</ElButton>
       </template>
 
       <ElScrollbar>
-        <div class="gap-form-x"> 
-          <SkAppForm :labelPosition="'top'" :layout="true" :formItems="formItems" 
+        <div class="gap-form-x">
+          <SkAppForm :elRef="defer.resolve" :disabled="props.detail" :rules="rules" :labelPosition="'top'" :layout="true" :formItems="formItems"
             :data="firstFormData" @setData="setData(firstFormData, $event)">
           </SkAppForm>
         </div>
