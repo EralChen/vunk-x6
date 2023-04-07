@@ -25,7 +25,7 @@
   },
   {
     "code": "local",
-    "url": "http://localhost:30100/scene-server"
+    "url": "http://localhost:30000/tpl-server"
   },
   {
     "code": "cx_dev",

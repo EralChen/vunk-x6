@@ -68,5 +68,9 @@ export default function () {
     '/system/auth': {
       component: () => import('@/views/_system/auth/index.vue'),
     },
+
+    '/system/button': {
+      component: () => import('@/views/_system/button/index.vue'),
+    },
   } as Record<string, Partial<RouteRecordRaw>>
 }
