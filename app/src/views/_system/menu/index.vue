@@ -8,6 +8,7 @@ import { setData, unsetData, VkDuplexCalc, VkDuplex } from '@vunk/core'
 import CUForm from './cu-form/index.vue'
 import { Row } from './types'
 import SkAppIcon from '@skzz-platform/components/app-icon'
+import { ElButton } from 'element-plus'
 
 const checkTagsState = reactive({
   options: [  
@@ -25,7 +26,6 @@ const checkTagsState = reactive({
     },
   ] as __SkCheckTags.Option[],
   value: 'admin',
-
 })
 
 const treeState = reactive({
@@ -64,13 +64,23 @@ const tableState = reactive({
     {
       prop: undefined,
       label: '操作',
-      width: '200em',
+      width: '260em',
       slots: ({ row }) => <SkAppOperations
-        modules={['c', 'u', 'd']}
+        modules={['c', 'u', 'btns', 'd']}
         onC={ () => precI(row.menuId) }
         onD={ () => d([row.id])  }
         onU={ () => preuI(row) }
-        
+        v-slots={
+          {
+            btns: () => <ElButton 
+              type="primary" 
+              size="small"
+              onClick={() => bindBtns(row)}
+            >
+              权限
+            </ElButton>,
+          }
+        }
       >
         
       </SkAppOperations>,
@@ -89,6 +99,11 @@ const cuData = computed(() => {
     ...cuState.data,
     client: checkTagsState.value,
   }
+})
+
+const bindBtnsState = reactive({
+  data: [],
+  current: {} as Partial<Row>,
 })
 
 
@@ -153,6 +168,13 @@ function cuI () {
     cuState.data = {}
   })
 }
+
+function bindBtns (row: Row) {
+  bindBtnsState.current = row
+
+}
+
+
 </script>
 <template>
   <page-x>
@@ -214,12 +236,26 @@ function cuI () {
       @update:modelValue="cuState.type = ''"
       :title="cuState.type === 'u' ? '编辑' : '新增'"
     >
+
       <CUForm
         :type="cuState.type"
         :data="cuState.data"
         @setData="setData(cuState.data, $event)"
         @submit="cuI"
       ></CUForm>
+
+    </SkAppDialog>
+
+    <SkAppDialog
+      :modal="false"
+      :modelValue="!!bindBtnsState.current.menuId"
+      @update:modelValue="bindBtnsState.current = {}"
+      :title="'权限绑定'"
+    >
+      <BindBtnsForm
+        :data="bindBtnsState.current"
+        @setData="setData(bindBtnsState.current, $event)"
+      ></BindBtnsForm>
     </SkAppDialog>
   </page-x>
 </template>
