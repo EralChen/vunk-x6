@@ -22,7 +22,6 @@ RUN pnpm run app:init-arcgis
 # 构建
 RUN pnpm build
 
-
 # 使用nginx镜像
 FROM nginx:stable-alpine as prod
 
