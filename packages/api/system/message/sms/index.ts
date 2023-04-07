@@ -2,20 +2,20 @@ import { request } from '@skzz-platform/shared/fetch/platform'
 import { Pagination } from '@skzz-platform/shared'
 import { MESSAGE_DATA } from '../const'
 import { QueryRData } from '@vunk/skzz'
-import { CMessageConfig, MessageConfig } from './types'
+import { Sms, CSms } from './types'
 /**
- * https://www.apifox.cn/link/project/2475837/apis/api-73086703 查询
+ * https://www.apifox.cn/link/project/2475837/apis/api-73489189 查询
  * @param pagination 
  * @returns 
  */
-export const rMessageConfigList = (pagination?: Pagination, data?: Partial<CMessageConfig>) => {
-  return request<[QueryRData<MessageConfig>]>({
+export const rSmsList = (pagination?: Pagination, data?: Partial<CSms>) => {
+  return request<[QueryRData<Sms>]>({
     method: 'POST',
     url: '/core/busi/query',
     data: {
-      'datasetIds': ['1.1'],
+      'datasetIds': ['1.3'],
       'condition': {
-        '1.1': {
+        '1.3': {
           ...data,
           ...(pagination ? { pagination } : {}),
         },
@@ -29,18 +29,18 @@ export const rMessageConfigList = (pagination?: Pagination, data?: Partial<CMess
 }
 
 /**
- * https://www.apifox.cn/link/project/2475837/apis/api-73092524 新增
- * https://www.apifox.cn/link/project/2475837/apis/api-73092700 修改
+ * https://www.apifox.cn/link/project/2475837/apis/api-73095993 新增
+ * https://www.apifox.cn/link/project/2475837/apis/api-73096093 修改
  * @param data 
  * @param u
  */
-export const cuMessageConfig = (data: CMessageConfig, u = false) => {
+export const cuSms = (data: CSms, u = false) => {
   return request({
     method: 'POST',
     url: '/core/busi/save',
     data: {
       datas: [{
-        'datasetId': '1.1',
+        'datasetId': '1.3',
         rows: [{
           ...data,
           'op': u ? 8 : 4,
@@ -56,17 +56,17 @@ export const cuMessageConfig = (data: CMessageConfig, u = false) => {
 
 
 /**
- * https://www.apifox.cn/link/project/2475837/apis/api-73093307 删除
+ * https://www.apifox.cn/link/project/2475837/apis/api-73096106 删除
  * @param id 
  * @returns 
  */
-export const dMessageConfig = (id: string) => {
+export const dSms = (id: string) => {
   return request({
     method: 'POST',
     url: '/core/busi/save',
     data: {
       datas: [{
-        'datasetId': '1.1',
+        'datasetId': '1.3',
         'rows': [
           {
             id,
@@ -79,4 +79,5 @@ export const dMessageConfig = (id: string) => {
     },
   })
 }
+
 export * from './types'
