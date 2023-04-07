@@ -41,3 +41,13 @@ export type MessageConfig = {
   id?: string;
   tplId: number;
 }
+
+
+export type CommonAddition = {
+  founder: string // 创建人id
+  founderName: string // 创建人姓名
+  foundTime: string // 创建时间
+  updater: string // 更新人id
+  updaterName: string // 更新人姓名
+  updateTime: string // 更新时间
+}
