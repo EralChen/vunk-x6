@@ -2,20 +2,21 @@ import { request } from '@skzz-platform/shared/fetch/platform'
 import { Pagination } from '@skzz-platform/shared'
 import { MESSAGE_DATA } from '../const'
 import { QueryRData } from '@vunk/skzz'
-import { MessageConfig } from '../types'
+import { CMessageConfig, MessageConfig } from './types'
 /**
- * https://www.apifox.cn/link/project/2475837/apis/api-73086703
+ * https://www.apifox.cn/link/project/2475837/apis/api-73086703 查询
  * @param pagination 
  * @returns 
  */
-export const rMessageConfigList = (pagination?: Pagination) => {
+export const rMessageConfigList = (pagination?: Pagination, data?: Partial<CMessageConfig>) => {
   return request<[QueryRData<MessageConfig>]>({
     method: 'POST',
     url: '/core/busi/query',
     data: {
       'datasetIds': ['1.1'],
       'condition': {
-        '1': {
+        '1.1': {
+          ...data,
           ...(pagination ? { pagination } : {}),
         },
       },
@@ -28,23 +29,53 @@ export const rMessageConfigList = (pagination?: Pagination) => {
 }
 
 /**
- * https://www.apifox.cn/link/project/2475837/apis/api-73092524
+ * https://www.apifox.cn/link/project/2475837/apis/api-73092524 新增
+ * https://www.apifox.cn/link/project/2475837/apis/api-73092700 修改
  * @param data 
+ * @param u
  */
-export const cuMessageConfig = (data: MessageConfig) => {
+export const cuMessageConfig = (data: CMessageConfig, u = false) => {
   return request({
     method: 'POST',
     url: '/core/busi/save',
     data: {
-      'datasetId': '1.1',
-      rows: [{
-        ...data,
-        'op': 4,
+      datas: [{
+        'datasetId': '1.1',
+        rows: [{
+          ...data,
+          'op': u ? 8 : 4,
+        }],
       }],
       ...MESSAGE_DATA,
-      'buttonId': 'increase',
+      'buttonId': u ? 'modify' : 'increase',
     },
   }, {
-    msg: '新增成功！',
+    msg: u ? '修改成功！' : '新增成功！',
+  })
+}
+
+
+/**
+ * https://www.apifox.cn/link/project/2475837/apis/api-73093307 删除
+ * @param id 
+ * @returns 
+ */
+export const dMessageConfig = (id: string) => {
+  return request({
+    method: 'POST',
+    url: '/core/busi/save',
+    data: {
+      datas: [{
+        'datasetId': '1.1',
+        'rows': [
+          {
+            id,
+            'op': 2,
+          },
+        ],
+      }],
+      ...MESSAGE_DATA,
+      'buttonId': 'remove',
+    },
   })
 }

@@ -3,11 +3,9 @@
     <SkAppCard :header="'消息模板'" class="h-100%">
       <VkDuplexCalc class="gap-main-x">
         <template #one>
-          <SkAppQueryForm :fixes="2" :data="formData" @setData="setData(formData, $event)" :formItems="queryItems">
-            <template #options>
-              <ElButton type="primary" @click="$router.push('/system/message/template/add')">新增</ElButton>
-            </template>
-          </SkAppQueryForm>
+          <div sk-flex="row-end" class="mb">
+            <ElButton type="primary" @click="$router.push('/system/message/template/add')">新增</ElButton>
+          </div>
         </template>
         <SkAppTablesV1 :defaultExpandAll="true" flex-1 :rowKey="'menuId'" :columns="tableState.columns"
           :data="tableState.data" :total="tableState.total" v-model:page-size="tableState.pagination.pageSize"
@@ -20,15 +18,18 @@
 
 <script lang="tsx" setup>
 import PageX from '_c/PageX/index.vue'
-import { SkAppCard, __SkAppTables, SkAppQueryForm, __SkAppQueryForm } from '@skzz/platform'
+import { SkAppCard, __SkAppTables, __SkAppQueryForm } from '@skzz/platform'
 import { SkAppOperations, SkAppTablesV1, __SkAppTablesV1 } from '@skzz/platform'
-import { NormalObject, VkDuplexCalc, setData } from '@vunk/core'
+import { dTemplate, rTemplateList } from '@skzz-platform/api/system/message/template'
+import { VkDuplexCalc } from '@vunk/core'
 import { reactive, ref, watch } from 'vue'
 import { Row } from './types'
-import { dTemplate, rTemplateList } from '@skzz-platform/api/system/message/template'
 import router from '@/router'
+import { useDictionaryStore } from '@/stores/dictionary'
+import { Option } from '@skzz-platform/api/system/dictionary'
 type Col = __SkAppTablesV1.Column<Row>
 
+const dicStore = useDictionaryStore()
 const tableState = reactive({
   data: [] as Row[],
   _columns: [
@@ -47,6 +48,16 @@ const tableState = reactive({
     {
       prop: 'client',
       label: '接收端',
+      slots: ({row}) => {
+        const d = dicStore.getTemplateDic()
+        const client = ref<Option>()
+        d.then((dic) => {
+          dic.find(item => item.value === row.client)
+        })
+        return <span>
+          {client.value ? client.value.label : row.client}
+        </span>
+      },
     },
     {
       prop: undefined,
@@ -71,23 +82,6 @@ const tableState = reactive({
   },
   total: 0,
 })
-
-const queryItems: __SkAppQueryForm.FormItem[] = [
-  {
-    templateType: 'VkfInput',
-    prop: 'title',
-    label: '标题',
-    clearable: true,
-    class: 'w-240px',
-  },
-]
-
-
-
-const formData = ref({
-  type: 'all',
-} as NormalObject)
-
 
 watch(() => tableState.pagination, r, { deep: true, immediate: true })
 function r () {

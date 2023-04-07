@@ -86,6 +86,27 @@ export default [
             },
             component: () => import('_v/_system/message/config/cu/index.vue'),
           },
+          {
+            path: 'edit/:id',
+            meta: {
+              title: '消息配置修改',
+              hidden: true,
+            },
+            props: true,
+            component: () => import('_v/_system/message/config/cu/index.vue'),
+          },
+          {
+            path: 'detail/:id',
+            meta: {
+              title: '消息配置详情',
+              hidden: true,
+            },
+            props: (route) => ({
+              id: route.params.id,
+              detail: true,
+            }),
+            component: () => import('_v/_system/message/config/cu/index.vue'),
+          },
         ],
       },
     ],

@@ -10,6 +10,8 @@ import { Deferred } from '@vunk/core/shared/utils-promise'
 import { FormInstance } from 'element-plus/es/components/form'
 import { ElMessage } from 'element-plus'
 import router from '@/router'
+import { rDic, Option } from '@skzz-platform/api/system/dictionary'
+import { useDictionaryStore } from '@/stores/dictionary'
 
 const props = defineProps({
   id: {
@@ -21,7 +23,12 @@ const firstFormData = ref({
   id: props.id,
 } as CMessageTemplate)
 
-const formItems: __SkAppForm.CoreFormItem[] = [
+const dicStore = useDictionaryStore()
+const clientOpts = ref<Option[]>([])
+// 获取字典
+dicStore.getTemplateDic(clientOpts)
+
+const formItems = ref< __SkAppForm.CoreFormItem[]>([
   {
     templateType: 'VkfInput',
     prop: 'title',
@@ -36,16 +43,9 @@ const formItems: __SkAppForm.CoreFormItem[] = [
     templateType: 'VkfSelect',
     prop: 'client',
     label: '接收端',
-    options: [
-      {
-        label: 'pc',
-        value: 'pc',
-      },
-      {
-        label: 'mobile',
-        value: 'mobile',
-      },
-    ],
+    allowCreate: true,
+    filterable: true,
+    options: clientOpts as any,
   },
   {
     templateType: 'VkfInput',
@@ -53,7 +53,7 @@ const formItems: __SkAppForm.CoreFormItem[] = [
     label: '模板',
   },
   // templateIf: 'return data.client === 1',
-]
+])
 const rules = reactive({
   title: [
     {
