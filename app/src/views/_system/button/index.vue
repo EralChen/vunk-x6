@@ -86,12 +86,12 @@ function d (ids: string[]) {
 function precI () {
   cuIState.visible = true
   cuIState.formData = {}
-  cuIState.title = '新增应用'
+  cuIState.title = '新增'
 }
 function preuI (data: Row) {
   cuIState.visible = true
   cuIState.formData = {...data}
-  cuIState.title = '修改应用'
+  cuIState.title = '修改'
 }
 function cuI () {
   cuApi(cuIState.formData as Row).then(r).then(() => {
