@@ -2,32 +2,30 @@
 import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
 import { reactive, ref } from 'vue'
 import PageX from '_c/PageX/index.vue'
-import {
-  SkAppModule,
-  SkAppCard,
-} from '@skzz/platform'
-
+import { SkAppCard } from '@skzz/platform'
 import { setData } from '@vunk/core'
+import { CMessageTemplate } from '@skzz-platform/api/system/message/template/types'
+import { cuTemplate, rTemplateList } from '@skzz-platform/api/system/message/template'
+import { Deferred } from '@vunk/core/shared/utils-promise'
+import { FormInstance } from 'element-plus/es/components/form'
+import { ElMessage } from 'element-plus'
+import router from '@/router'
 
-const firstFormData = reactive<any>({
-
+const props = defineProps({
+  id: {
+    type: String,
+  },
+  detail: Boolean,
 })
+const firstFormData = ref({
+  id: props.id,
+} as CMessageTemplate)
 
 const formItems: __SkAppForm.CoreFormItem[] = [
   {
     templateType: 'VkfInput',
     prop: 'title',
-    label: '标题', 
-  },
-  {
-    templateType: 'VkfInput',
-    prop: 'path',
-    label: '跳转路由',
-  },
-  {
-    templateType: 'VkfInput',
-    prop: 'param',
-    label: '路由参数',
+    label: '标题',
   },
   {
     templateType: 'VkfInput',
@@ -40,12 +38,12 @@ const formItems: __SkAppForm.CoreFormItem[] = [
     label: '接收端',
     options: [
       {
-        label: '微信',
-        value: 1,
+        label: 'pc',
+        value: 'pc',
       },
       {
-        label: '短信',
-        value: 2,
+        label: 'mobile',
+        value: 'mobile',
       },
     ],
   },
@@ -53,27 +51,72 @@ const formItems: __SkAppForm.CoreFormItem[] = [
     templateType: 'VkfInput',
     prop: 'tpl',
     label: '模板',
-    templateIf: 'return data.client === 1',
   },
-] 
+  // templateIf: 'return data.client === 1',
+]
+const rules = reactive({
+  title: [
+    {
+      required: true,
+      message: '请输入标题',
+      trigger: 'blur',
+    },
+  ],
+  clientTemplateId: [
+    {
+      required: true,
+      message: '请输入三方模版id',
+      trigger: 'blur',
+    },
+  ],
+  client: [
+    {
+      required: true,
+      message: '请选择接收端',
+      trigger: 'blur',
+    },
+  ],
+  tpl: [
+    {
+      required: true,
+      message: '请输入模板',
+      trigger: 'blur',
+    },
+  ],
+})
+const defer = new Deferred<FormInstance>()
 
-const c = () => {
-  //
+const r = () => {
+  rTemplateList(undefined, { id: props.id }).then((res) => {
+    firstFormData.value = res.rows[0]
+  })
+}
+props.id && r()
+const c = async () => {
+  const form = await defer.promise
+  form.validate()
+    .then(() => {
+      return cuTemplate(firstFormData.value, !!props.id)
+    })
+    .then(() => {
+      router.replace('/system/message/template')
+    })
+    .catch(() => {
+      ElMessage.error('请检查输入')
+    })
 }
 </script>
 <template>
   <PageX>
     <SkAppCard class="h-100%" :header="'新增消息模板'">
       <template #header__options>
-        <ElButton type="primary"
-          @click="c"
-        >提交</ElButton>
+        <ElButton type="primary" @click="c" v-if="!props.detail">提交</ElButton>
       </template>
 
       <ElScrollbar>
-        <div class="gap-form-x"> 
-          <SkAppForm :labelPosition="'top'" :layout="true" :formItems="formItems" 
-            :data="firstFormData" @setData="setData(firstFormData, $event)">
+        <div class="gap-form-x">
+          <SkAppForm :disabled="props.detail" :labelPosition="'top'" :layout="true" :formItems="formItems" :data="firstFormData"
+            @setData="setData(firstFormData, $event)" :elRef="defer.resolve" :rules="rules">
           </SkAppForm>
         </div>
       </ElScrollbar>
