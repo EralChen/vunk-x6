@@ -37,6 +37,11 @@ watch(queryData, r, { deep: true  })
 /* query end */
 
 const tableState = reactive({
+  _columns: [
+    {
+      
+    },
+  ] as __SkAppTables.Column[],
   columns: [] as  __SkAppTables.Column[],
   data: [] as Row[],
   total: 0,
