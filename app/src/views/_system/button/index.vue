@@ -17,12 +17,13 @@ import { genColumn } from '@skzz-platform/shared/utils-data'
 import CuForm from './cu-form/index.vue'
 import { SkAppDialog } from '@skzz-platform/components/app-dialog'
 import { Row } from './types'
+import SkAppIcon from '@skzz-platform/components/app-icon'
 
 /* query */
 const queryItems: __SkAppQueryForm.FormItem[] = [
   {
     templateType: 'VkfInput',
-    prop: 'name',
+    prop: 'label',
     label: '名称',
   },
 ]
@@ -36,23 +37,6 @@ watch(pagination, r, { deep: true , immediate: true })
 watch(queryData, r, { deep: true  })
 /* query end */
 
-const tableState = reactive({
-  _columns: [
-    {
-      
-    },
-  ] as __SkAppTables.Column[],
-  columns: [] as  __SkAppTables.Column[],
-  data: [] as Row[],
-  total: 0,
-})
-
-const cuIState = reactive({
-  visible: false,
-  formData: {} as Partial<Row>,
-  title: '新增应用',
-})
-
 const operationsCol: __SkAppTables.Column = {
   title: '操作',
   key: 'operations',
@@ -65,21 +49,64 @@ const operationsCol: __SkAppTables.Column = {
     onU={ () => { preuI(rowData) } }
   ></SkAppOperations>,
 } 
+const tableState = reactive({
+  _columns: [] as __SkAppTables.Column[],
+  columns: [] as  __SkAppTables.Column[],
+  data: [] as Row[],
+  total: 0,
+})
+
+const cuIState = reactive({
+  visible: false,
+  formData: {} as Partial<Row>,
+  title: '新增应用',
+})
+
+const overwriteCols = {
+  icon: {
+    dataKey: 'icon',
+    key: 'icon',
+    width: 60,
+    align: 'center',
+    title: '图标',
+    cellRenderer: ({ cellData }) => <SkAppIcon
+      icon={cellData} 
+    ></SkAppIcon>,
+  },
+  label: {
+    dataKey: 'label',
+    width: 200,
+    align: 'center',
+    title: '名称',
+    key: 'label',
+    flexGrow: 1,
+  },
+  name: null,
+  isSys: null,
+  event: null,
+  
+} as Record<keyof Row, __SkAppTables.Column|null>
 function r () {
   rApi(queryData.value, pagination.value).then(res => {
     if (!tableState.columns.length) {
-      tableState.columns = res.columns.reduce((a, c) => {
-        if (c.type === 'selection') {
+
+      tableState.columns = [
+        ...tableState._columns,
+        ...res.columns.reduce((a, c) => {
+          if (Reflect.has(overwriteCols, c.prop)) {
+            const oCol = overwriteCols[c.prop as keyof Row]
+            oCol && a.push(oCol)
+          } else if (c.type === 'selection') {
 
   
-        } else if (c.type === 'button') {
-          a.push(operationsCol)
-        } else {
-          a.push(genColumn(c))
-        }
-  
-        return a
-      }, [] as __SkAppTables.Column[])
+          } else if (c.type === 'button') {
+            a.push(operationsCol)
+          } else {
+            a.push(genColumn(c))
+          }
+          return a
+        }, [] as __SkAppTables.Column[]),
+      ]
     }
     tableState.data = res.rows
     tableState.total = res.total

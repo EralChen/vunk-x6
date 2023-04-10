@@ -13,7 +13,7 @@ export default defineComponent({
 
     const moduleInfo = {
       c: {
-        label: '创建',
+        label: '新增',
         eventName: 'c',
       },
       r: {
