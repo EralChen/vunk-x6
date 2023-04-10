@@ -1,16 +1,18 @@
 <script lang="tsx">
 import { props, emits } from './ctx'
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { VkCheckboxTree, __VkCheckboxTree } from '@vunk/skzz/components/checkbox-tree'
 import { computed, reactive, watch } from 'vue'
 import { rMenus, rMenusWithButtons } from '@skzz-platform/api/system/menu'
 import { listToTree } from '@vunk/core/shared/utils-data'
 import { SkCheckTags, __SkCheckTags  } from '@skzz-platform/components/check-tags'
 import { SkAppTablesV1, __SkAppTablesV1 } from '@skzz-platform/components/app-tables-v1'
-import { setData, unsetData, VkDuplexCalc, VkDuplex } from '@vunk/core'
+import { setData, unsetData, VkDuplexCalc, VkDuplex, Media } from '@vunk/core'
 import { Row } from './types'
 import { SkAppQueryForm } from '@skzz-platform/components/app-query-form'
 import { __SkAppForm } from '@skzz-platform/shared'
+import { VkfCheckbox } from '@vunk/form/components/checkbox'
+import { rButtons } from '@skzz-platform/api/system/button'
 export default defineComponent({
   name: 'SkMenuSelect',
   emits,
@@ -22,6 +24,8 @@ export default defineComponent({
     VkDuplexCalc, VkDuplex, SkAppQueryForm,
   },
   setup (props, { emit }) {
+
+
     const checkTagsState = reactive({
       options: [  
         {
@@ -44,18 +48,41 @@ export default defineComponent({
       data: [] as __VkCheckboxTree.TreeNode[],
       // checked: [] as Row[],
     })
+
+    const buttonsOptions = ref<Media[]>([])
+    rButtons().then(res => {
+      buttonsOptions.value = res.rows.map(item => ({
+        label: item.label,
+        value: item.buttonId,
+      }))
+    })
     const tableState = reactive({
       data: [] as Row[],
       columns: [
-
         {
-          prop: 'label',
+          prop: 'name',
           label: '菜单名称',
+          
         },
         {
-          prop: 'path',
-          label: '菜单路径',
+          prop: 'menuId',
+          label: '菜单ID',
         },
+        {
+          prop: 'buttons',
+          label: '按钮',
+          slots: ({ row }) => <VkfCheckbox
+            class={'mb-0'}
+            options={
+              row.buttons.map(item => ({
+                label: item.label,
+                value: item.buttonId,
+              }))
+            }
+          >
+          </VkfCheckbox>,
+        },
+
       ] as any[],
       query: {},
     })
@@ -78,11 +105,6 @@ export default defineComponent({
         prop: 'name',
         templateType: 'VkfInput',
         label: '菜单名称',
-      },
-      {
-        prop: 'path',
-        templateType: 'VkfInput',
-        label: '菜单路径',
       },
     ]
 
@@ -118,6 +140,7 @@ export default defineComponent({
         tableState.data = listToTree(res)
       })
     }
+    
 
     return {
       setData,

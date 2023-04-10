@@ -1,4 +1,5 @@
 import { request } from '@skzz-platform/shared/fetch/platform'
+import { NormalObject } from '@vunk/core'
 import { RestFetchExecOptions, RestFetchSaveOptions } from '@vunk/skzz'
 import { RestFetchQueryOptions, QueryRData } from '@vunk/skzz'
 import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
@@ -47,9 +48,24 @@ export const rMenus = (query: {
 export const rMenusWithButtons = (
   query: {
     client?: string,
-    ids: string[],
+    ids?: string[],
+    menuIds?: string[]
   },
 ) => {
+  const condition = {
+    ...query,
+  } as NormalObject
+
+  if (query.ids) {
+    condition.ids = query.ids.join()
+    condition.op = 'getMenuButtonsByIds'
+  }
+  
+  if (query.menuIds) {
+    condition.menuIds = query.menuIds.join()
+    condition.op = 'getMenuButtonsByMenuIds'
+  }
+  
   return request<{
     '2.1': Menu[]
   }>({
@@ -58,11 +74,7 @@ export const rMenusWithButtons = (
     data: {
       // 'datasetIds': ['2'],
       datasetId: '2',
-      'condition': {
-        op: 'getMenuButtonsByIds',
-        ...query,
-        ids: query.ids.join(','),
-      },
+      condition,
       ...MENU_DATA,
     },
   } as RestFetchExecOptions).then(res => {
@@ -132,15 +144,14 @@ export const cMenuButtons = (
       'datas': [
         {
           'datasetId': '3.1',
-          'rows': [
-            buttonIds.map(buttonId => {
-              return  {
-                'op': RestFetchOp.c,
-                menuId,
-                buttonId,
-              }
-            }),
-          ],
+          'rows': buttonIds.map(buttonId => {
+            return  {
+              'op': RestFetchOp.c,
+              menuId,
+              buttonId,
+            }
+          }),
+          
         },
       ],
       ...MENU_DATA,
@@ -162,15 +173,14 @@ export const dMenuButtons = (
       'datas': [
         {
           'datasetId': '3.1',
-          'rows': [
-            buttonIds.map(buttonId => {
-              return  {
-                'op': RestFetchOp.d,
-                menuId,
-                buttonId,
-              }
-            }),
-          ],
+          'rows': buttonIds.map(buttonId => {
+            return  {
+              'op': RestFetchOp.d,
+              menuId,
+              buttonId,
+            }
+          }),
+          
         },
       ],
       ...MENU_DATA,
