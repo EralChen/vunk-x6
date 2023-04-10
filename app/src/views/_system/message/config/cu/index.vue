@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
-import { cuMessageConfig, rMessageConfigList } from '@skzz-platform/api/system/message/config'
+import { cuMessageConfig, rMessageConfigList } from '@skzz-platform/api/system/message'
 import { MessageConfig } from '@skzz-platform/api/system/message/config/types'
 import { Deferred } from '@vunk/core/shared/utils-promise'
 import { ElMessage, FormInstance } from 'element-plus'
@@ -10,7 +10,7 @@ import { setData } from '@vunk/core'
 import { ref } from 'vue'
 import router from '@/router'
 import { Option } from '@skzz-platform/api/system/dictionary'
-import { rTemplateList } from '@skzz-platform/api/system/message/template'
+import { rTemplateList } from '@skzz-platform/api/system/message'
 import { useDictionaryStore } from '@/stores/dictionary'
 
 const props = defineProps({

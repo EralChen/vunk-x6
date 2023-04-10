@@ -84,3 +84,5 @@ export const dTemplate = (id: string) => {
     },
   })
 }
+
+export * from './types'
