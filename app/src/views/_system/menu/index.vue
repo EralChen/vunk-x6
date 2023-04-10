@@ -9,6 +9,7 @@ import CUForm from './cu-form/index.vue'
 import { Row } from './types'
 import SkAppIcon from '@skzz-platform/components/app-icon'
 import { ElButton } from 'element-plus'
+import BindBtnsForm from './bind-btns-form/index.vue'
 
 const checkTagsState = reactive({
   options: [  
@@ -75,7 +76,7 @@ const tableState = reactive({
             btns: () => <ElButton 
               type="primary" 
               size="small"
-              onClick={() => bindBtns(row)}
+              onClick={() => preBindBtns(row)}
             >
               权限
             </ElButton>,
@@ -102,7 +103,6 @@ const cuData = computed(() => {
 })
 
 const bindBtnsState = reactive({
-  data: [],
   current: {} as Partial<Row>,
 })
 
@@ -169,9 +169,9 @@ function cuI () {
   })
 }
 
-function bindBtns (row: Row) {
+function preBindBtns (row: Row) {
+  
   bindBtnsState.current = row
-
 }
 
 
@@ -250,11 +250,10 @@ function bindBtns (row: Row) {
       :modal="false"
       :modelValue="!!bindBtnsState.current.menuId"
       @update:modelValue="bindBtnsState.current = {}"
-      :title="'权限绑定'"
+      :title="'按钮权限绑定'"
     >
       <BindBtnsForm
-        :data="bindBtnsState.current"
-        @setData="setData(bindBtnsState.current, $event)"
+        :id="bindBtnsState.current.id"
       ></BindBtnsForm>
     </SkAppDialog>
   </page-x>

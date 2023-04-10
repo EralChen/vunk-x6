@@ -37,6 +37,7 @@ export const rMenus = (query: {
       return {
         ...item,
         label: item.name,
+        id: item.id + '',
       }
     })
   })
