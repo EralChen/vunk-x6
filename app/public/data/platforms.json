@@ -7,10 +7,6 @@
     "code": "scene_dev",
     "url": "http://192.168.110.185:30100/scene-server"
   },
-  {
-    "code": "zzh_dev",
-    "url": "http://192.168.110.216:30100/scene-server"
-  },
   { 
     "code": "scene", 
     "url": "http://t1.zjsophon.com:10000/scene-server"
@@ -33,7 +29,7 @@
   },
   {
     "code": "tpl",
-    "url": "http://192.168.110.232:30000/tpl-server"
+    "url": "http://192.168.110.205:30000/tpl-server"
   },
   {
     "code": "wyy_dev_flow",

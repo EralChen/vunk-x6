@@ -68,7 +68,7 @@ export default defineComponent({
   >
 
     
-    <component :is="icon">
+    <component :is="icon.trim()">
     </component>
     
   </ElIcon>

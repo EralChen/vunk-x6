@@ -9,4 +9,6 @@ export interface IndexColumn extends _Column {
   type: 'index'
 }
 
-export type Column = _Column | SelectionColumn | IndexColumn
+export type Column = (_Column & {
+  key: string
+}) | SelectionColumn | IndexColumn
