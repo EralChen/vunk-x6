@@ -51,14 +51,14 @@ const tableState = reactive({
       prop: 'msgDataFormat',
       label: 'msgDataFormat',
     },
-    {
-      prop: 'applicationId',
-      label: 'applicationId',
-    },
-    {
-      prop: 'tenantId',
-      label: 'tenantId',
-    },
+    // {
+    //   prop: 'applicationId',
+    //   label: 'applicationId',
+    // },
+    // {
+    //   prop: 'tenantId',
+    //   label: 'tenantId',
+    // },
     {
       prop: undefined,
       label: '操作',
