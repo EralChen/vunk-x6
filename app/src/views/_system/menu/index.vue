@@ -253,6 +253,7 @@ function preBindBtns (row: Row) {
       :title="'按钮权限绑定'"
     >
       <BindBtnsForm
+        :menuId="bindBtnsState.current.menuId"
         :id="bindBtnsState.current.id"
       ></BindBtnsForm>
     </SkAppDialog>

@@ -117,5 +117,68 @@ export const cuMenu = (data: Partial<Menu>) => {
   })
 }
 
+/**
+ * https://www.apifox.cn/link/project/2475837/apis/api-73882963
+ */
+export const cMenuButtons = (
+  menuId: string,
+  buttonIds: string[],
+) => {
+  return request({
+    method: 'POST',
+    url: '/core/busi/save',
+    data: {
+      'buttonId': 'increase',
+      'datas': [
+        {
+          'datasetId': '3.1',
+          'rows': [
+            buttonIds.map(buttonId => {
+              return  {
+                'op': RestFetchOp.c,
+                menuId,
+                buttonId,
+              }
+            }),
+          ],
+        },
+      ],
+      ...MENU_DATA,
+    },
+  } as RestFetchSaveOptions)
+}
+
+/**
+ * https://www.apifox.cn/link/project/2475837/apis/api-73882963
+ */
+export const dMenuButtons = (
+  menuId: string,
+  buttonIds: string[],
+) => {
+  return request({
+    method: 'POST',
+    url: '/core/busi/save',
+    data: {
+      'datas': [
+        {
+          'datasetId': '3.1',
+          'rows': [
+            buttonIds.map(buttonId => {
+              return  {
+                'op': RestFetchOp.d,
+                menuId,
+                buttonId,
+              }
+            }),
+          ],
+        },
+      ],
+      ...MENU_DATA,
+    },
+  })
+}
+
+
+
 export * from './types'
 
