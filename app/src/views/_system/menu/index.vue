@@ -31,9 +31,12 @@ const checkTagsState = reactive({
 
 const treeState = reactive({
   data: [] as __VkCheckboxTree.TreeNode[],
-  checked: [] as Row[],
+  checked: [
+    { menuId: 'init' },
+  ] as Row[],
 })
 const treeCheckedMenuIds = computed(() => {
+  console.log(treeState.checked)
   return treeState.checked.map((item) => item.menuId)
 })
 
@@ -108,16 +111,15 @@ const bindBtnsState = reactive({
 
 
 watch(() => checkTagsState.value, () => {
-  // 切换标签时，清空选中的树节点
-  treeState.checked = []
-  rTree()
-  r()
+
+  rTree().then(() => {
+    // 切换标签时，清空选中的树节点
+    treeState.checked = [] // 将会触发 r
+  })
 }, { immediate: true })
-watch(() => treeCheckedMenuIds.value, () => {
-  r()
-})
+watch(() => treeCheckedMenuIds.value, r)
 function rTree () {
-  rMenus({
+  return rMenus({
     client: checkTagsState.value,
   }).then(res => {
     treeState.data = listToTree(res, {
@@ -209,6 +211,7 @@ function preBindBtns (row: Row) {
       <VkDuplex :gap="'var(--gap-page)'" :direction="'row'"  h-full >
         <template #one>
           <VkCheckboxTree 
+            :nodeKey="'menuId'"
             :modules="['filter', 'srcollbar']"
             :defaultExpandAll="true"
             :data="treeState.data" 
