@@ -49,7 +49,7 @@ export default defineComponent({
               width: 60,
               ...colProps, 
               headerCellRenderer: () => {
-
+                if (props.single) return <span>单选</span>
                 const getCurrentPageCheckInfo = () => {
                   const oidField = props.oidField
                   const allCheckedId = props.modelValue.map((d) => d[oidField])
@@ -128,7 +128,6 @@ export default defineComponent({
               width: 150,
               cellRenderer: () => <SkAppOperations></SkAppOperations>,
               ...colProps,
-
             })
           }
 

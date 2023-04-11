@@ -7,8 +7,10 @@ import CUForm from './cu-form/index.vue'
 import { Row } from './types'
 import { useRouterTo } from '@skzz-platform/composables'
 import { ElButton } from 'element-plus'
+import BindUserTable from './bind-form-table/index.vue'
+
 type Col = __SkAppTablesV1.Column<Row>
-const { routerNext }  = useRouterTo()
+const { routerNext } = useRouterTo()
 const tableState = reactive({
   data: [] as Row[],
   _columns: [
@@ -21,9 +23,13 @@ const tableState = reactive({
       label: '关联业务ID',
     },
     {
+      prop: 'formId',
+      label: '关联表单',
+    },
+    {
       prop: 'isStart',
       label: '是否启动',
-      slots: ({ row }) => <span>{ row.isStart ? '是' : '否' }</span>,
+      slots: ({ row }) => <span>{row.isStart ? '是' : '否'}</span>,
     },
 
     {
@@ -31,20 +37,30 @@ const tableState = reactive({
       label: '操作',
       width: '400em',
       slots: ({ row }) => <SkAppOperations
-        modules={[ 'r', 'u', 'run', 'nodes','d']}
-        onR={ () => rI(row.id) }
-        onD={ () => d([row.id]) }
-        onU={ () => preuI(row) }
+        modules={['nodes', 'run', 'bind', 'r', 'u', 'd']}
+        onR={() => rI(row.id)}
+        onD={() => d([row.id])}
+        onU={() => preuI(row)}
         v-slots={{
-          run: () => <ElButton type="primary" size="small"
+          run: () => <ElButton
+            type="primary"
+            size="small"
             disabled={!!row.isStart}
-            onClick={ () => runWorkflow(row.itemId).then(r) }
-          >运行</ElButton>,
-          nodes: () => <ElButton type="primary" size="small"
-            onClick={ () => routerNext({
-              path: 'nodes/' + row.flowId,
-            }) } 
-          >节点</ElButton>,
+            onClick={() => runWorkflow(row.itemId).then(r)
+            }>运行</ElButton>,
+          nodes: () => <ElButton
+            type="primary"
+            size="small"
+            onClick={() => routerNext({ path: 'nodes/' + row.flowId })
+            }>
+            节点
+          </ElButton>,
+          bind: () => <ElButton
+            type="primary"
+            size="small"
+            onClick={() => bindData.flowId = row.flowId}>
+            绑定表单
+          </ElButton>,
         }}
       >
       </SkAppOperations>,
@@ -68,6 +84,10 @@ const cuData = computed(() => {
   return {
     ...cuState.data,
   }
+})
+const bindData = reactive({
+  flowId: '',
+  data: {},
 })
 
 
@@ -95,7 +115,7 @@ function precI () {
 }
 function preuI (row: Row) {
   cuState.type = 'u'
-  cuState.data = {...row}
+  cuState.data = { ...row }
 }
 function cuI () {
   cuWorkflow(cuData.value).then(() => {
@@ -106,10 +126,13 @@ function cuI () {
 function rI (id: string) {
   routerNext({
     path: 'read/' + id,
-    
+
   })
 }
 
+function bindUser () {
+  //
+}
 
 </script>
 <template>
@@ -118,42 +141,31 @@ function rI (id: string) {
       <template #one>
         <div sk-flex="row-between-center">
           <span></span>
-          <ElButton type="primary" sk-flex="row_center"
-            @click="precI()"
-          >
+          <ElButton type="primary" sk-flex="row_center" @click="precI()">
             <span>新增</span>
           </ElButton>
         </div>
 
       </template>
 
-      <SkAppTablesV1 
-        :defaultExpandAll="true"
-        flex-1
-        :rowKey="'menuId'"
-        :columns="tableState.columns"
-        :data="tableState.data"
-        :total="tableState.total"
-        v-model:page-size="tableState.pagination.pageSize"
-        v-model:start="tableState.pagination.start"
-      >
+      <SkAppTablesV1 :defaultExpandAll="true" flex-1 :rowKey="'menuId'" :columns="tableState.columns"
+        :data="tableState.data" :total="tableState.total" v-model:page-size="tableState.pagination.pageSize"
+        v-model:start="tableState.pagination.start">
       </SkAppTablesV1>
 
 
     </VkDuplexCalc>
 
-    <SkAppDialog
-      :modelValue="!!cuState.type"
-      @update:modelValue="cuState.type = ''"
-      :title="cuState.type === 'u' ? '编辑' : '新增'"
-    >
-      <CUForm
-        :type="cuState.type"
-        :data="cuState.data"
-        @setData="setData(cuState.data, $event)"
-        @submit="cuI"
-      ></CUForm>
+    <SkAppDialog :modelValue="!!cuState.type" @update:modelValue="cuState.type = ''"
+      :title="cuState.type === 'u' ? '编辑' : '新增'">
+      <CUForm :type="cuState.type" :data="cuState.data" @setData="setData(cuState.data, $event)" @submit="cuI"></CUForm>
     </SkAppDialog>
 
+    <SkAppDialog :modelValue="!!bindData.flowId" @update:modelValue="bindData.flowId = ''" title="绑定表单">
+      <BindUserTable class="h-30em" v-model="bindData.data"></BindUserTable>
+      <template #footer>
+        <el-button size="large" type="primary" @click="bindUser">确定</el-button>
+      </template>
+    </SkAppDialog>
   </page-x>
 </template>
