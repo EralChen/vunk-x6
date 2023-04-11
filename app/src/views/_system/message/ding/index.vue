@@ -44,12 +44,8 @@ const tableState = reactive({
       label: 'domainName',
     },
     {
-      prop: 'senderId',
-      label: 'senderId',
-    },
-    {
-      prop: 'tenantId',
-      label: 'tenantId',
+      prop: 'dingDenantId',
+      label: 'dingTenantId',
     },
     {
       prop: undefined,
