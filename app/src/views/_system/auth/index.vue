@@ -2,12 +2,28 @@
 import { SkRoleTreesSelect } from '@skzz-platform/components/role-trees-select'
 import { SkMenuSelect } from '@skzz-platform/components/menu-select'
 import { VkDuplex } from '@vunk/core'
-import { reactive } from 'vue'
+import { reactive, watch } from 'vue'
+import { Role, rRolePermission } from '@skzz-platform/api/system/role'
+
 const roleState = reactive({
-  current: [],
+  current: [] as Role[],
 })
+
 const menuState = reactive({
   current: [],
+})
+
+/* 根据role获取选中的menu */
+watch(() => roleState.current[0]?.roleId, (v) => {
+  if (!v) return 
+  rRolePermission({
+    roleId: v,
+  }).then(res => {
+    console.log(res)
+  })
+
+}, {
+  immediate: true,
 })
 </script>
 <template>

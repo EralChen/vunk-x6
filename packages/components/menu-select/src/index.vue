@@ -13,6 +13,9 @@ import { SkAppQueryForm } from '@skzz-platform/components/app-query-form'
 import { __SkAppForm } from '@skzz-platform/shared'
 import { VkfCheckbox } from '@vunk/form/components/checkbox'
 import { rButtons } from '@skzz-platform/api/system/button'
+import { Deferred } from '@vunk/core/shared/utils-promise'
+import { ElTree } from 'element-plus'
+
 export default defineComponent({
   name: 'SkMenuSelect',
   emits,
@@ -47,6 +50,7 @@ export default defineComponent({
     const treeState = reactive({
       data: [] as __VkCheckboxTree.TreeNode[],
       // checked: [] as Row[],
+      def: new Deferred<InstanceType<typeof ElTree>>(),
     })
 
     const buttonsOptions = ref<Media[]>([])
@@ -93,8 +97,8 @@ export default defineComponent({
       ]
     })
 
-    const treeCheckedIds = computed(() => {
-      return props.modelValue.map((item) => item.id)
+    const treeCheckedMenuIds = computed(() => {
+      return props.modelValue.map((item) => item.menuId)
     })
     
     const queryState = reactive({
@@ -113,7 +117,7 @@ export default defineComponent({
       rTree()
       r()
     }, { immediate: true })
-    watch(() => treeCheckedIds.value, () => {
+    watch(() => treeCheckedMenuIds.value, () => {
       r()
     })
     watch(() => queryState.query, () => {
@@ -134,7 +138,7 @@ export default defineComponent({
 
       rMenusWithButtons({
         client: checkTagsState.value,
-        ids: treeCheckedIds.value,
+        menuIds: treeCheckedMenuIds.value,
         ...queryState.query,
       }).then(res => {
         tableState.data = listToTree(res)
@@ -181,7 +185,8 @@ export default defineComponent({
       <VkDuplex :gap="'var(--gap-page)'" :direction="'row'"  h-full >
         <template #one>
           <VkCheckboxTree 
-            :checkStrictly="true"
+            :elRef="treeState.def.resolve"
+            :nodeKey="'menuId'"
             :modules="['filter', 'srcollbar']"
             :defaultExpandAll="true"
             :data="treeState.data" 
