@@ -60,5 +60,5 @@ export default defineComponent({
 })
 </script>
 <template>
-  <div>checkedTree</div>
+  <div text-blue>checkedTree</div>
 </template>
