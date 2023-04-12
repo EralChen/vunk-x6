@@ -3,7 +3,7 @@
     <SkAppCard class="h-full" header="节点详情">
       <div class="editor-x" sk-flex="row">
         <div class="editor">
-          <ZzEditor :mode="'default'" :model-value="model" @nodeselectchange="nodeSelectChange"></ZzEditor>
+          <ZzG6Editor :mode="'default'" :model-value="model" @nodeselectchange="nodeSelectChange"></ZzG6Editor>
         </div>
         <div class="form">
           <ElScrollbar>
@@ -38,8 +38,7 @@
   </PageOver>
 </template>
 
-<script setup lang="ts">
-import { ZzEditor } from '@zzg6/flow'
+<script setup lang="tsx">
 import { bindOpersToNode, doApproveNode, rWorkflowNodesWithRaw, WorkflowNode, WorkFlowNodeState, runWorkflow, Workflow, bindAssistOperToNode } from '@skzz-platform/api/system/workflow'
 import { computed, reactive, ref, shallowRef, watch } from 'vue'
 import { SkAppCard } from '@skzz/platform'
@@ -47,6 +46,8 @@ import { User } from '@skzz-platform/api/system/user'
 import BindUser from './bind-user/index.vue'
 import { useUserStore } from '@skzz-platform/stores/user'
 import { ElMessage } from 'element-plus'
+import ZzG6Editor from '@/components/ZzG6Editor/index.vue'
+
 
 // type Row = Partial<WorkflowNode>
 

@@ -1,6 +1,6 @@
 <template>
   <PageOver>
-    <ZzEditor :model-value="editData" @update:data="e => backData = e" :id-gen-fn="snowFlake">
+    <ZzG6Editor :model-value="editData" @update:data="e => backData = e" :id-gen-fn="snowFlake" :form-id="formId">
       <template #toolbar>
         <li>
           <el-button type="primary" link size="small" @click="jsonLoad">
@@ -8,30 +8,19 @@
           </el-button>
         </li>
       </template>
-    </ZzEditor>
+    </ZzG6Editor>
   </PageOver>
 </template>
 
 <script setup lang="ts">
-import { rWorkflowNodes, WorkflowNode, cWorkflowNodeByJson, WorkflowData } from '@skzz-platform/api/system/workflow'
-import { MaterialNode, ZzEditor, expendForm, extendNodeFormMap } from '@zzg6/flow'
-import { shallowRef, watch } from 'vue'
+import { rWorkflowNodes, cWorkflowNodeByJson, WorkflowData } from '@skzz-platform/api/system/workflow'
+import ZzG6Editor from '@/components/ZzG6Editor/index.vue'
+import { ref, shallowRef, watch } from 'vue'
 import { GraphData, TreeGraphData } from '@antv/g6'
 import { snowFlake } from '@skzz-platform/api/basic'
 
-
-type Row = Partial<WorkflowNode>
-
-expendForm([{
-  component: () => '这是一个组件',
-  type: 'VkfRegisterTest',
-}])
-extendNodeFormMap(MaterialNode.zzRect, [{
-  templateType: 'VkfRegisterTest',
-  prop: 'peopleNode',
-  label: '操作人',
-}])
 let isEdit = true
+const formId = ref('')
 const props = defineProps({
   flowId: {
     type: String,
