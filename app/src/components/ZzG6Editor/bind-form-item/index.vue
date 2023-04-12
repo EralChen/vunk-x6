@@ -1,33 +1,35 @@
 <template>
   <ElFormItem :label="props.label">
     <div>
-      <ElButton type="primary" size="small" @click="doBind">绑定</ElButton>
-      <div> {{ props.modelValue }}
+      <ElButton type="primary" size="small" @click="doBind">{{ readonly ? '查看' : '绑定' }}</ElButton>
+      <div> 
+        <span>{{ props.modelValue.map(item => item.name).join('、') }}</span>
       </div>
     </div>
   </ElFormItem>
 
   <ElDialog v-model="showDialog" title="绑定表单">
-    <SkAppTables class="h-30em" :modelValue="modelValue" @update:modelValue="$emit('update:modelValue', $event)"
-      :columns="tableState.columns" :data="tableState.data" :total="tableState.total"
-      v-model:start="tableState.pagination.start" v-model:pageSize="tableState.pagination.pageSize"></SkAppTables>
+    <SkAppTables class="h-30em" :modelValue="modelValue" :columns="tableState.columns" :data="tableState.data"
+      :total="tableState.total" @update:modelValue="$emit('update:modelValue', $event)"
+      v-model:pageSize="tableState.pagination.pageSize" v-model:start="tableState.pagination.start"></SkAppTables>
   </ElDialog>
 </template>
 
-<script setup lang="ts">
-import { reactive, ref, useAttrs, watch } from 'vue'
-import { propsOp, emits } from './ctx'
-import { useFormDisabled } from 'element-plus'
+<script setup lang="tsx">
+import { reactive, ref, watch } from 'vue'
+import { propsOp } from './ctx'
 import { SkAppTables, __SkAppTables } from '@skzz-platform/components/app-tables'
 import { Pagination } from '@skzz/platform'
+import { useComputedReadonly } from '@vunk/form'
 
 const props = defineProps(propsOp)
-
 // el-form 表单向下注入的disabled的内容
-const formDisabled = useFormDisabled()
+
+const readonly = useComputedReadonly({
+  readonly: undefined,
+})
 const showDialog = ref(false)
 const doBind = () => {
-  console.log(props.modelValue)
   showDialog.value = true
 }
 
@@ -41,19 +43,24 @@ const tableState = reactive({
       key: 'selection',
     },
     {
-      title: '表单名称',
+      title: '字段名称',
       dataKey: 'code',
       key: 'code',
       width: 200,
     },
     {
-      title: '表单编号',
+      title: '状态',
       dataKey: 'name',
       key: 'name',
       width: 200,
       flexGrow: 1,
+      cellRenderer: ({rowData}) => {
+        return <ElSelect disabled={readonly.value} v-model={rowData.status}>
+          <ElOption label="可编辑" value="1"></ElOption>
+          <ElOption label="仅显示" value="0"></ElOption>
+        </ElSelect>
+      },
     },
-
   ] as __SkAppTables.Column[],
 
   pagination: {
@@ -75,16 +82,19 @@ function r () {
       id: '1',
       code: '111',
       name: '222',
+      status: '1',
     } as any,
     {
       id: '2',
       code: '111',
       name: '222',
+      status: '',
     } as any,
     {
       id: '3',
       code: '111',
       name: '222',
+      status: '0',
     } as any,
   ] as any
 }

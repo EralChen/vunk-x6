@@ -37,7 +37,7 @@ const tableState = reactive({
       label: '操作',
       width: '400em',
       slots: ({ row }) => <SkAppOperations
-        modules={['nodes', 'run', 'bind', 'r', 'u', 'd']}
+        modules={['nodes', 'bind', 'r', 'run','u', 'd']}
         onR={() => rI(row.id)}
         onD={() => d([row.id])}
         onU={() => preuI(row)}
