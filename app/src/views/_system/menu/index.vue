@@ -36,7 +36,6 @@ const treeState = reactive({
   ] as Row[],
 })
 const treeCheckedMenuIds = computed(() => {
-  console.log(treeState.checked)
   return treeState.checked.map((item) => item.menuId)
 })
 
