@@ -20,6 +20,10 @@ const tableV2Props = pickObject({
     type: Boolean,
     default: false,
   },
+  readonly: {
+    type: Boolean,
+    default: null,
+  },
 }, {
   excludes: ['style', 'class'],
 })

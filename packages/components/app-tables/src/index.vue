@@ -11,6 +11,8 @@ import { SkAppOperations } from '@skzz-platform/components/app-operations'
 import { pickObject } from '@vunk/core/shared/utils-object'
 import { VkCheckRecordLogicProvider, VkCheckRecordLogic } from '@vunk/core'
 import { vOn } from '@vunk/core/shared/utils-vue'
+import { useComputedReadonly } from '@vunk/form'
+
 
 export default defineComponent({
   name: 'SkAppTables',
@@ -27,7 +29,7 @@ export default defineComponent({
     const tableBindProps = createTableV2BindProps(props, ['columns'])
     const paginationBindProps = createPaginationBindProps(props)
     const paginationOnEmits = createPaginationOnEmits(emit)
-
+    const readonly = useComputedReadonly(props)
     const columns = computed(() => {
       return props.columns.reduce((a, c) => {
 
@@ -72,6 +74,7 @@ export default defineComponent({
                 const { checkedNodes, uncheckedNodes } = getCurrentPageCheckInfo()
 
                 return <ElCheckbox
+                  disabled={readonly.value}
                   indeterminate={ checkedNodes.length > 0 && checkedNodes.length < props.data.length }
                   modelValue={ checkedNodes.length === props.data.length }
                   {
@@ -106,7 +109,7 @@ export default defineComponent({
                   v-slots={
                     {
                       default: ({ isActive, toggle }) => {
-                        return <ElCheckbox modelValue={isActive}
+                        return <ElCheckbox disabled={readonly.value} modelValue={isActive}
                           {
                             ...vOn({
                               'update:modelValue': toggle,
@@ -160,6 +163,7 @@ export default defineComponent({
       columns,
       currentPage,
       updateStart,
+      readonly,
     }
   },
 })
