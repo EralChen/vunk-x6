@@ -33,6 +33,7 @@
 		"@antv/g6": "^4.8.7",
 		"@arcgis/core": "^4.25.5",
 		"@element-plus/utils": "workspace:*",
+		"@mapbox/mapbox-gl-draw": "^1.4.1",
 		"@skzz-platform/api": "workspace:*",
 		"@skzz-platform/components": "workspace:*",
 		"@skzz-platform/composables": "workspace:*",
@@ -42,12 +43,15 @@
 		"@skzz/platform": "workspace:*",
 		"@vuesri/core": "^0.0.6",
 		"@vueuse/core": "^9.12.0",
+		"@vumap/core": "0.0.0-alpha.23",
 		"@vunk/core": "0.0.0-alpha.74",
 		"@vunk/form": "0.0.1-alpha.45",
+		"@vunk/formaker": "0.0.0-alpha.23",
 		"@vunk/skzz": "0.0.0-alpha.78",
 		"@zzg6/flow": "0.0.0-alpha.2",
 		"chroma-js": "^2.4.2",
 		"element-plus": "npm:element-plus@latest",
+		"mapbox-gl": "^2.13.0",
 		"vue": "^3.2.38"
 	},
 	"scripts": {

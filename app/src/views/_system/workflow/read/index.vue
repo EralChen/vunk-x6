@@ -213,4 +213,7 @@ function doRunWorkflow () {
   border-left: 1px solid var(--el-border-color);
   padding: var(--gap-m);
 }
+.editor-x :deep(.el-form-item .el-form-item ){
+  margin-bottom: 18px;
+}
 </style>

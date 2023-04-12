@@ -13,24 +13,24 @@
 </template>
 
 <script setup lang="ts">
-import { ZzEditor } from '@zzg6/flow'
-import { defineComponent, shallowRef, watch } from 'vue'
 import { rWorkflowNodes, WorkflowNode, cWorkflowNodeByJson, WorkflowData } from '@skzz-platform/api/system/workflow'
+import { MaterialNode, ZzEditor, expendForm, extendNodeFormMap } from '@zzg6/flow'
+import { shallowRef, watch } from 'vue'
 import { GraphData, TreeGraphData } from '@antv/g6'
 import { snowFlake } from '@skzz-platform/api/basic'
 
 
 type Row = Partial<WorkflowNode>
 
-// expendForm([{
-//   component: registerTest,
-//   type: 'VkfRegisterTest',
-// }])
-// extendNodeFormMap(MaterialNode.zzRect, [{
-//   templateType: 'VkfRegisterTest',
-//   prop: 'peopleNode',
-//   label: '操作人',
-// }])
+expendForm([{
+  component: () => '这是一个组件',
+  type: 'VkfRegisterTest',
+}])
+extendNodeFormMap(MaterialNode.zzRect, [{
+  templateType: 'VkfRegisterTest',
+  prop: 'peopleNode',
+  label: '操作人',
+}])
 let isEdit = true
 const props = defineProps({
   flowId: {
