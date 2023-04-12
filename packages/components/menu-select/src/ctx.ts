@@ -10,6 +10,10 @@ export const props = {
     type: Array as PropType<__SkAppTablesV1.Column[]>,
     default: () => ([]),
   },
+  buttons: {
+    type: Object as PropType<Record<string, string[]>>,
+    default: () => ({}),
+  },
 }
 
 export const emits = {

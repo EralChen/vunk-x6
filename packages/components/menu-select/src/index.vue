@@ -83,6 +83,7 @@ export default defineComponent({
                 value: item.buttonId,
               }))
             }
+            modelValue={ props.buttons[row.menuId] }
           >
           </VkfCheckbox>,
         },
@@ -113,7 +114,6 @@ export default defineComponent({
     ]
 
     watch(() => checkTagsState.value, () => {
-      // 切换标签时，清空选中的树节点
       rTree()
       r()
     }, { immediate: true })
