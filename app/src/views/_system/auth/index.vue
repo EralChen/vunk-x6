@@ -8,7 +8,11 @@ import { Menu } from '@skzz-platform/api/system/menu'
 import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
 
 const roleState = reactive({
-  current: [] as Role[],
+  current: [
+    {
+      roleId: 'root',
+    },
+  ] as Role[],
 })
 
 const menuState = reactive({
