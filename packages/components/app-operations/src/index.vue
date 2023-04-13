@@ -47,7 +47,7 @@ export default defineComponent({
         event: 'search',
       },
 
-    } as Record<string/* buttonId */, Partial<Button>>
+    } as Record<string/* buttonId */, Partial<Button> | null>
 
     const eventEmits = {
       c: ['c'],
@@ -65,11 +65,14 @@ export default defineComponent({
 
     const moduleInfo = computed(() => {
       return {
+
         ...defaultModuleInfo,
         ...remoteModuleInfo.value,
-        ...(props.showSearch ? {} : {
-          search: undefined,
-        }),
+        ...props.excludes.reduce((a, c) => {
+          a[c] = null
+          return a
+        }, {} as typeof defaultModuleInfo),
+
       }
     })
 
@@ -120,7 +123,7 @@ export default defineComponent({
       >
         <template #reference>
           <el-button :size="'small'" :type="'danger'">
-            {{ moduleInfo[item].label }}
+            {{ moduleInfo[item]?.label }}
           </el-button>
         </template>
       </el-popconfirm>
@@ -131,7 +134,7 @@ export default defineComponent({
         :type="'primary'" 
         :size="'small'"
         @click="crud(item)"
-      >{{ moduleInfo[item].label }}
+      >{{ moduleInfo[item]?.label }}
       </el-button>
       
     </template>

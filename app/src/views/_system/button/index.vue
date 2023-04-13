@@ -55,26 +55,28 @@ const cuIState = reactive({
 const operationsCol: __SkAppTables.Column = {
   title: '操作',
   key: 'operations',
-  width: 250,
+  width: 100,
   flexGrow: 1,
   align: 'center',
   cellRenderer: ({ rowData }) => <SkAppOperations
     api={rButtonBtns}
+    excludes={['search',  'increase']}
     onD={ () => { d([rowData.id]) } }
     onU={ () => { preuI(rowData) } }
   ></SkAppOperations>,
 } 
 const overwriteCols = {
-  icon: {
-    dataKey: 'icon',
-    key: 'icon',
-    width: 60,
-    align: 'center',
-    title: '图标',
-    cellRenderer: ({ cellData }) => <SkAppIcon
-      icon={cellData} 
-    ></SkAppIcon>,
-  },
+  // icon: {
+  //   dataKey: 'icon',
+  //   key: 'icon',
+  //   width: 60,
+  //   align: 'center',
+  //   title: '图标',
+  //   cellRenderer: ({ cellData }) => <SkAppIcon
+  //     icon={cellData} 
+  //   ></SkAppIcon>,
+  // },
+  icon: null,
   label: {
     dataKey: 'label',
     width: 200,

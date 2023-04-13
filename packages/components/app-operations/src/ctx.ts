@@ -13,9 +13,9 @@ export const props = {
     default: NOOP,
   },
 
-  showSearch: {
-    type: Boolean,
-    default: false,
+  excludes: {
+    type: Array as PropType<string[]>,
+    default: () => ['search'],
   },
 }
 

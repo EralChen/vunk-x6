@@ -1,6 +1,6 @@
 <script lang="tsx" setup>
 import { computed, reactive, watch } from 'vue'
-import { cuUser, dUsers, rUsers } from '@skzz-platform/api/system/user'
+import { cuUser, dUsers, rUsers, rUserBtns } from '@skzz-platform/api/system/user'
 import { SkAppDialog, SkAppOperations, SkAppTablesV1, __SkAppTablesV1, SkAppQueryForm, __SkAppQueryForm } from '@skzz/platform'
 import { setData, VkDuplexCalc } from '@vunk/core'
 import CUForm from './cu-form/index.vue'
@@ -58,9 +58,9 @@ const tableState = reactive({
     {
       prop: undefined,
       label: '操作',
-      width: '400em',
       slots: ({ row }) => <SkAppOperations
-        modules={[ 'u', 'd']}
+        api={ rUserBtns }
+        excludes={['increase', 'search']}
         onU={ () => preuI(row) }
         onD={ () => d([row.id])  }
       >
@@ -126,23 +126,21 @@ function cuI () {
 </script>
 <template>
   <page-x>
-    <VkDuplexCalc :gap="'var(--gap-page)'" class="pa-page h-full">
+    <VkDuplexCalc class="pa-page h-full">
       <template #one>
         <SkAppQueryForm
           :formItems="queryItems"
           :data="queryState.data"
           @setData="setData(queryState.data, $event)"
-        ></SkAppQueryForm>
-
-        <div sk-flex="row-between-center">
-          <span></span>
+        >
+        <template #options>
           <ElButton type="primary" sk-flex="row_center"
             @click="precI()"
           >
             <span>新增</span>
           </ElButton>
-        </div>
-
+        </template>
+        </SkAppQueryForm>
       </template>
 
       <SkAppTablesV1 
