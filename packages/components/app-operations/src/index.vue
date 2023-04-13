@@ -99,6 +99,7 @@ export default defineComponent({
       moduleInfo,
       crud,
       modules,
+      eventEmits,
     }
   },
 })
@@ -109,8 +110,7 @@ export default defineComponent({
       <slot :name="item"></slot>
       
       <el-popconfirm 
-        v-if="moduleInfo[item]?.event === 'd'
-          || moduleInfo[item]?.event === 'remove'
+        v-if="eventEmits[moduleInfo[item]?.event + '']?.includes('d')
         "
         title="确认删除吗?"
         @confirm="crud(item)"
