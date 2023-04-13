@@ -1,7 +1,7 @@
 <script lang="tsx" setup>
 import { VkCheckboxTree, __VkCheckboxTree } from '@vunk/skzz/components/checkbox-tree'
 import { computed, reactive, watch } from 'vue'
-import { dMenus, rMenus, cuMenu } from '@skzz-platform/api/system/menu'
+import { dMenus, rMenus, cuMenu, rMenuBtns } from '@skzz-platform/api/system/menu'
 import { listToTree } from '@vunk/core/shared/utils-data'
 import { SkAppDialog, SkAppOperations, SkCheckTags, __SkCheckTags, SkAppTablesV1, __SkAppTablesV1 } from '@skzz/platform'
 import { setData, unsetData, VkDuplexCalc, VkDuplex } from '@vunk/core'
@@ -36,7 +36,6 @@ const treeState = reactive({
   ] as Row[],
 })
 const treeCheckedMenuIds = computed(() => {
-  console.log(treeState.checked)
   return treeState.checked.map((item) => item.menuId)
 })
 
@@ -70,13 +69,14 @@ const tableState = reactive({
       label: '操作',
       width: '300em',
       slots: ({ row }) => <SkAppOperations
-        modules={['c', 'u', 'btns', 'd']}
+
+        modules={['c', 'u',  'auth', 'd']}
         onC={ () => precI(row.menuId) }
         onD={ () => d([row.id])  }
         onU={ () => preuI(row) }
         v-slots={
           {
-            btns: () => <ElButton 
+            auth: () => <ElButton 
               type="primary" 
               size="small"
               onClick={() => preBindBtns(row)}

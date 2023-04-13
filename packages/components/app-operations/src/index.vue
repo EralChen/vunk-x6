@@ -1,7 +1,8 @@
 <script lang="ts">
 import { props, emits } from './ctx'
-import { defineComponent } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import { ElButton } from 'element-plus'
+import { Button } from '@skzz-platform/api/system/button'
 export default defineComponent({
   name: 'SkAppOperations',
   components: {
@@ -11,51 +12,100 @@ export default defineComponent({
   props,
   setup (props, { emit }) {
 
-    const moduleInfo = {
+    const defaultModuleInfo = {
       c: {
         label: '新增',
-        eventName: 'c',
+        event: 'c',
       },
       r: {
         label: '查看',
-        eventName: 'r',
+        event: 'r',
       },
       u: {
         label: '编辑',
-        eventName: 'u',
+        event: 'u',
       },
       d: {
         label: '删除',
-        eventName: 'd',
+        event: 'd',
       },
+
       increase: {
-        label: '创建',
-        eventName: 'c',
+        label: '新增',
+        event: 'increase',
       },
       modify: {
         label: '编辑',
-        eventName: 'u',
+        event: 'modify',
       },
       remove: {
         label: '删除',
-        eventName: 'd',
+        event: 'remove',
       },
-      detail: {
+      search: {
         label: '查看',
-        eventName: 'r',
+        event: 'search',
       },
-    } as Record<string, { label: string, eventName: string }>
+
+    } as Record<string/* buttonId */, Partial<Button> | null>
+
+    const eventEmits = {
+      c: ['c'],
+      r: ['r'],
+      u: ['u'],
+      d: ['d'],
+
+      increase: ['increase','c'],
+      modify: ['modify', 'u'],
+      remove: ['remove', 'd'],
+      detail: ['detail','r'],
+    } as Record<string/* event */,  string[]>
+
+    const remoteModuleInfo = ref<Record<string, Partial<Button>>>({})
+
+    const moduleInfo = computed(() => {
+      return {
+
+        ...defaultModuleInfo,
+        ...remoteModuleInfo.value,
+        ...props.excludes.reduce((a, c) => {
+          a[c] = null
+          return a
+        }, {} as typeof defaultModuleInfo),
+
+      }
+    })
+
+    const remoteModules = ref<string[]>([])
+
+    props.api()?.then(res => {
+      remoteModules.value = res.map(item => item.buttonId)
+      remoteModuleInfo.value = res.reduce((acc, cur) => {
+        acc[cur.buttonId] = cur
+        return acc
+      }, {} as Record<string, Partial<Button>>)
+    })
 
     const crud = (key: string) => {
-      const e = moduleInfo[key]?.eventName
+      const e = moduleInfo.value[key]?.event
       if (e) {
         emit('click', e)
-        emit(e as any)
+        if (eventEmits[e]) {
+          eventEmits[e].forEach(eventName => {
+            emit(eventName as any)
+          })
+        }
       }
     }
+
+    const modules = computed(() => {
+      return props.modules?.length ? props.modules : remoteModules.value
+    })
     return {
       moduleInfo,
       crud,
+      modules,
+      eventEmits,
     }
   },
 })
@@ -66,13 +116,14 @@ export default defineComponent({
       <slot :name="item"></slot>
       
       <el-popconfirm 
-        v-if="moduleInfo[item]?.eventName === 'd'"
+        v-if="eventEmits[moduleInfo[item]?.event + '']?.includes('d')
+        "
         title="确认删除吗?"
         @confirm="crud(item)"
       >
         <template #reference>
           <el-button :size="'small'" :type="'danger'">
-            {{ moduleInfo[item].label }}
+            {{ moduleInfo[item]?.label }}
           </el-button>
         </template>
       </el-popconfirm>
@@ -83,7 +134,7 @@ export default defineComponent({
         :type="'primary'" 
         :size="'small'"
         @click="crud(item)"
-      >{{ moduleInfo[item].label }}
+      >{{ moduleInfo[item]?.label }}
       </el-button>
       
     </template>

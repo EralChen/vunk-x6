@@ -2,6 +2,7 @@ import { Pagination } from '@skzz-platform/shared'
 import { request } from '@skzz-platform/shared/fetch/platform'
 import { QueryRData, RestFetchQueryOptions, RestFetchSaveOptions } from '@vunk/skzz'
 import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
+import { rBtns } from '@skzz-platform/api/basic'
 import { MENU_DATA } from './const'
 import { User } from './types'
 
@@ -24,6 +25,10 @@ export const rUsers = (query: Partial<User>, pagination: Pagination) => {
   } as RestFetchQueryOptions).then(res => {
     return res.datas[0]
   })
+}
+
+export const rUserBtns = () => {
+  return rBtns(MENU_DATA)
 }
 
 export const dUsers = (ids: string[]) => {

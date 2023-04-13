@@ -22,4 +22,5 @@ export interface Menu {
 
   pId?: string;
   buttons?: MenuButton[];
+  children?: Menu[];
 }

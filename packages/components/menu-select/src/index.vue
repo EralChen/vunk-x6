@@ -6,7 +6,7 @@ import { computed, reactive, watch } from 'vue'
 import { rMenus, rMenusWithButtons } from '@skzz-platform/api/system/menu'
 import { listToTree } from '@vunk/core/shared/utils-data'
 import { SkCheckTags, __SkCheckTags  } from '@skzz-platform/components/check-tags'
-import { SkAppTablesV1, __SkAppTablesV1 } from '@skzz-platform/components/app-tables-v1'
+import { SkAppTablesV1 } from '@skzz-platform/components/app-tables-v1'
 import { setData, unsetData, VkDuplexCalc, VkDuplex, Media } from '@vunk/core'
 import { Row } from './types'
 import { SkAppQueryForm } from '@skzz-platform/components/app-query-form'
@@ -76,14 +76,32 @@ export default defineComponent({
           prop: 'buttons',
           label: '按钮',
           slots: ({ row }) => <VkfCheckbox
-            class={'mb-0'}
+
+            class={'mb-0 menu-select-buttons-col'}
             options={
               row.buttons.map(item => ({
                 label: item.label,
                 value: item.buttonId,
+                disabled: item.buttonId === 'search',
+                onChange: (v:boolean) => {
+                  if (v) {
+                    emit('setData:buttons', {
+                      k: [row.menuId, 0],
+                      v: item.buttonId,
+                      insert: true,
+                    })
+                  } else {
+                    const index = props.buttons[row.menuId].findIndex(v => v === item.buttonId)
+                    emit('unsetData:buttons', {
+                      k: [row.menuId, index],
+                    })
+                  }
+                },
               }))
             }
             modelValue={ props.buttons[row.menuId] }
+   
+            
           >
           </VkfCheckbox>,
         },
@@ -135,7 +153,9 @@ export default defineComponent({
       })
     }
     function r () {
-
+      if (!treeCheckedMenuIds.value.length) {
+        return tableState.data = []
+      }
       rMenusWithButtons({
         client: checkTagsState.value,
         menuIds: treeCheckedMenuIds.value,
@@ -192,6 +212,7 @@ export default defineComponent({
             :data="treeState.data" 
             :modelValue="modelValue"
             @update:modelValue=" $emit('update:modelValue', $event)"
+            @check="(...args) => $emit('check', ...args)"
           ></VkCheckboxTree>
         </template>
 
@@ -220,3 +241,8 @@ export default defineComponent({
 
     </VkDuplexCalc>
 </template>
+<style>
+.menu-select-buttons-col .el-checkbox.is-disabled{
+  display: none;
+}
+</style>

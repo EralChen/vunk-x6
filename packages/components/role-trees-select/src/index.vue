@@ -36,7 +36,8 @@ export default defineComponent({
 </script>
 <template>
   <VkCheckboxTree
-    :nodeKey="'id'"
+    :modules="[]"
+    :nodeKey="'roleId'"
     :single="true"
     :data="treeState.data"
   >

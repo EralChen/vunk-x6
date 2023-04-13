@@ -88,8 +88,13 @@ export const cuRole = (data: {
   })
 }
 
-
-export const rRolePermission = (query: {
+/**
+ * https://www.apifox.cn/link/project/2475837/apis/api-72112876
+ * 角色可用菜单实际上是 角色-菜单-按钮(查询 search) 的这条记录
+ * @param query 
+ * @returns 
+ */
+export const rRolePermissions = (query: {
   roleId: string;
 }) => {
   return request<[
@@ -116,9 +121,9 @@ export const rRolePermission = (query: {
     const doc = res.datas[0].rows
     return doc.reduce((a, c) => {
       
-      const returnA = a.find(item => item.menuId === c.menuId)
-      if (returnA) {
-        returnA.buttonIds.push(c.buttonId)
+      const aItem = a.find(item => item.menuId === c.menuId)
+      if (aItem) {
+        aItem.buttonIds.push(c.buttonId)
       } else {
         a.push({
           menuId: c.menuId,
@@ -132,8 +137,59 @@ export const rRolePermission = (query: {
       'menuId': string;
       'id': string;
       'buttonIds': string[];
-    }[])
+    }[]).filter((res) => {
+      // 把不包含 search button的记录剔除
+      const flag = res.buttonIds.includes('search')
+      return flag
+    })
   })
+}
+
+
+export const cdRolePermissions = (datas: {
+  roleId: string,
+  buttonId: string;
+  menuId: string;
+}[], op = RestFetchOp.c) => {
+  return request({
+    method: 'POST',
+    url: '/core/busi/save',
+    data: {
+      menuId: 'role',
+      modelId: 'role',
+      dir: 'system',
+      datas: [
+        {
+          datasetId: '3',
+          rows: [
+            ...datas.map(data => {
+              return {
+                ...data,
+                op,
+              }
+            }),
+            
+          ],
+        },
+      ],
+    },
+  } as RestFetchSaveOptions)
+}
+
+
+export const cdRoleMenuPermissions = (
+  datas: {
+    roleId: string,
+    menuId: string;
+  }[],
+  op = RestFetchOp.c,
+) => {
+  return cdRolePermissions(datas.map(data => {
+    return {
+      ...data,
+      buttonId: 'search',
+    }
+  }), op)
 }
 
 

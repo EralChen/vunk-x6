@@ -2,6 +2,7 @@ import { Pagination } from '@skzz-platform/shared'
 import { request } from '@skzz-platform/shared/fetch/platform'
 import { RestFetchQueryOptions, QueryRData, RestFetchSaveOptions } from '@vunk/skzz'
 import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
+import { rBtns } from '@skzz-platform/api/basic'
 import { MENU_DATA } from './const'
 import { Button as Row } from './types'
 
@@ -27,6 +28,10 @@ export const rButtons = (
   } as RestFetchQueryOptions).then(res => {
     return res.datas[0]
   })
+}
+
+export const rButtonBtns = () => {
+  return rBtns(MENU_DATA)
 }
 
 export const dButtons = (ids: string[]) => {

@@ -12,6 +12,7 @@ import {
   cuButton as cuApi,
   dButtons as dApi,
   rButtons as rApi, 
+  rButtonBtns,
 } from '@skzz-platform/api/system/button'
 import { genColumn } from '@skzz-platform/shared/utils-data'
 import CuForm from './cu-form/index.vue'
@@ -37,18 +38,7 @@ watch(pagination, r, { deep: true , immediate: true })
 watch(queryData, r, { deep: true  })
 /* query end */
 
-const operationsCol: __SkAppTables.Column = {
-  title: '操作',
-  key: 'operations',
-  width: 150,
-  flexGrow: 1,
-  align: 'center',
-  cellRenderer: ({ rowData }) => <SkAppOperations
-    modules={['u','d']}
-    onD={ () => { d([rowData.id]) } }
-    onU={ () => { preuI(rowData) } }
-  ></SkAppOperations>,
-} 
+
 const tableState = reactive({
   _columns: [] as __SkAppTables.Column[],
   columns: [] as  __SkAppTables.Column[],
@@ -62,17 +52,31 @@ const cuIState = reactive({
   title: '新增应用',
 })
 
+const operationsCol: __SkAppTables.Column = {
+  title: '操作',
+  key: 'operations',
+  width: 100,
+  flexGrow: 1,
+  align: 'center',
+  cellRenderer: ({ rowData }) => <SkAppOperations
+    api={rButtonBtns}
+    excludes={['search',  'increase']}
+    onD={ () => { d([rowData.id]) } }
+    onU={ () => { preuI(rowData) } }
+  ></SkAppOperations>,
+} 
 const overwriteCols = {
-  icon: {
-    dataKey: 'icon',
-    key: 'icon',
-    width: 60,
-    align: 'center',
-    title: '图标',
-    cellRenderer: ({ cellData }) => <SkAppIcon
-      icon={cellData} 
-    ></SkAppIcon>,
-  },
+  // icon: {
+  //   dataKey: 'icon',
+  //   key: 'icon',
+  //   width: 60,
+  //   align: 'center',
+  //   title: '图标',
+  //   cellRenderer: ({ cellData }) => <SkAppIcon
+  //     icon={cellData} 
+  //   ></SkAppIcon>,
+  // },
+  icon: null,
   label: {
     dataKey: 'label',
     width: 200,
@@ -83,8 +87,7 @@ const overwriteCols = {
   },
   name: null,
   isSys: null,
-  event: null,
-  
+
 } as Record<keyof Row, __SkAppTables.Column|null>
 function r () {
   rApi(queryData.value, pagination.value).then(res => {

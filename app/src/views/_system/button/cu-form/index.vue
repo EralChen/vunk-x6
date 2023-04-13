@@ -28,6 +28,12 @@ export default defineComponent({
         prop: 'label',
         label: '名称',
       },
+      {
+        templateType: 'VkfInputNumber',
+        prop: 'idx',
+        label: '排序',
+
+      },
   
       {
         prop: 'icon',
