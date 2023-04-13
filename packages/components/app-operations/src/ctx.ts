@@ -12,6 +12,11 @@ export const props = {
     type: Function  as PropType<() => Promise<Button[]>>,
     default: NOOP,
   },
+
+  showSearch: {
+    type: Boolean,
+    default: false,
+  },
 }
 
 export const emits = {
@@ -22,6 +27,6 @@ export const emits = {
   increase: null,
   modify: null,
   remove: null,
-  detail: null,
+  search: null,
   click: (e: string) => e, 
 }

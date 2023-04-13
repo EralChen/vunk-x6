@@ -17,6 +17,9 @@ export const rBtns = (menuData: {
       datasetIds: ['btn'],
       ...menuData,
     },
+    cache: {
+      id: ['btn', menuData.dir, menuData.modelId, menuData.menuId].join(),
+    },
   } as RestFetchQueryOptions).then(res => {
     return res.datas[0].rows
   })

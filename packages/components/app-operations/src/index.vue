@@ -42,9 +42,9 @@ export default defineComponent({
         label: '删除',
         event: 'remove',
       },
-      detail: {
+      search: {
         label: '查看',
-        event: 'detail',
+        event: 'search',
       },
 
     } as Record<string/* buttonId */, Partial<Button>>
@@ -67,6 +67,9 @@ export default defineComponent({
       return {
         ...defaultModuleInfo,
         ...remoteModuleInfo.value,
+        ...(props.showSearch ? {} : {
+          search: undefined,
+        }),
       }
     })
 

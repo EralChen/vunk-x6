@@ -69,7 +69,8 @@ const tableState = reactive({
       label: '操作',
       width: '300em',
       slots: ({ row }) => <SkAppOperations
-        api={rMenuBtns}
+
+        modules={['c', 'u',  'auth', 'd']}
         onC={ () => precI(row.menuId) }
         onD={ () => d([row.id])  }
         onU={ () => preuI(row) }
