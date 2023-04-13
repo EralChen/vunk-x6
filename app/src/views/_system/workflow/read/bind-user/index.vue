@@ -1,13 +1,6 @@
 <template>
-  <div>
-    <div>
-      <div>已绑定用户：</div>
-      <div>{{ data.map(item => item?.name).join('、') }}</div>
-    </div>
-    <el-button type="primary" @click="preBind()">绑定</el-button>
-  </div>
-
-  <SkAppDialog v-model="showdialog" :title="props.title">
+  <SkTableSelectTags @click="preBind()" v-model="showDataVm" :prop="{ label: 'name' }"></SkTableSelectTags>
+  <SkAppDialog v-model="showdialog" :title="props.title" :before-close="beforeClose">
     <SkUserTablesSelect v-model="data" class="h-40em"></SkUserTablesSelect>
     <template #footer>
       <el-button type="primary" @click="doBindUser">确定</el-button>
@@ -20,6 +13,8 @@ import { User } from '@skzz-platform/api/system/user'
 import { SkAppDialog, SkUserTablesSelect } from '@skzz/platform'
 import { PropType } from 'vue'
 import { useVModel } from '@vueuse/core'
+import { SkTableSelectTags } from '@skzz/platform'
+
 
 const props = defineProps({
   title: {
@@ -30,20 +25,31 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  showData: {
+    type: Array as PropType<User[]>,
+    default: () => [],
+  },
   data: {
     type: Array as PropType<User[]>,
     default: () => [],
   },
 })
-const emit = defineEmits(['doBindUser', 'update:modelValue', 'update:data'])
+const emit = defineEmits(['doBindUser', 'update:modelValue', 'update:data', 'update:showData'])
 const showdialog = useVModel(props, 'modelValue', emit)
 const data = useVModel(props, 'data', emit)
+const showDataVm = useVModel(props, 'showData', emit)
 
+
+function beforeClose (done: () => void) {
+  data.value = []
+  done()
+}
 
 function doBindUser () {
   emit('doBindUser')
 }
 function preBind () {
+  data.value = showDataVm.value
   showdialog.value = true
 }
 </script>
