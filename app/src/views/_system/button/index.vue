@@ -83,8 +83,7 @@ const overwriteCols = {
   },
   name: null,
   isSys: null,
-  event: null,
-  
+
 } as Record<keyof Row, __SkAppTables.Column|null>
 function r () {
   rApi(queryData.value, pagination.value).then(res => {

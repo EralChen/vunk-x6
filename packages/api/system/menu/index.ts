@@ -3,6 +3,7 @@ import { NormalObject } from '@vunk/core'
 import { RestFetchExecOptions, RestFetchSaveOptions } from '@vunk/skzz'
 import { RestFetchQueryOptions, QueryRData } from '@vunk/skzz'
 import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
+import { rBtns } from '@skzz-platform/api/basic'
 import { Menu } from './types'
 const MENU_DATA = {
   'dir': 'system',
@@ -33,7 +34,6 @@ export const rMenus = (query: {
       'buttonId': 'search',
     },
   } as RestFetchQueryOptions).then(res => {
-
     return res.datas[0].rows.map(item => {
       return {
         ...item,
@@ -42,8 +42,13 @@ export const rMenus = (query: {
       }
     })
   })
-
 }
+
+export const rMenuBtns = () => {
+  return rBtns(MENU_DATA)
+} 
+
+
 
 export const rMenusWithButtons = (
   query: {
