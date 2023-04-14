@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import { NodeModel } from '@zzg6/flow/components/editor/src/types'
-import { PropType, computed, ref } from 'vue'
+import { PropType, computed, ref, watch } from 'vue'
 import { User } from '@skzz-platform/api/system/user'
 import { WorkFlowNodeState, doApproveNode } from '@skzz-platform/api/system/workflow'
 import { getCurrentNodeId } from '../utils'
@@ -45,17 +45,25 @@ const memo = ref('') // 审批意见
 const nodeModelCp = computed(() => props.nodeModel)
 const currentNodeInstIdsCp = computed(() => props.currentNodeInstIds)
 
-const hasApprovelAuth = computed(() => judgeAuth('opers'))
-const hasAssistAuth = computed(() => judgeAuth('assistOpers'))
+const hasApprovelAuth = ref(false)
+const hasAssistAuth = ref(false)
+
 /**
- * 是否有选中节点的操作权限
- * @param key 
+ * 是否有对选中节点的审批权限
+ * @param opers 
  */
-function judgeAuth (key: 'opers' | 'assistOpers') {
-  let opers = nodeModelCp.value[key]
+function judgeAuth (opers: User[]) {
   const ids = opers?.map(item => item.id + '')
-  return ids?.includes(userStore.getUserInfo().id + '')
+  return !!ids?.includes(userStore.getUserInfo().id + '')
 }
+
+// 为了和选人显示的内容做区分，要不然关闭选人窗口时会出现按钮不显示的问题
+watch(() => props.nodeModel, (v) => {
+  hasApprovelAuth.value = judgeAuth(v.opers || [])
+}, { immediate: true })
+watch(() => props.nodeModel, (v) => {
+  hasAssistAuth.value = judgeAuth(v.opers || [])
+}, { immediate: true })
 
 /**
  * 审批  

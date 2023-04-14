@@ -25,9 +25,13 @@ export const props = {
     type: Boolean,
     default: undefined,
   },
+  placeholder: {
+    type: String,
+    default: '点击选择',
+  },
 }
 
 export const emits = {
-  click: (e: MouseEvent) => void 0,
+  click: (e: MouseEvent) => e,
   'update:modelValue': (e: Tag[]) => e,
 }

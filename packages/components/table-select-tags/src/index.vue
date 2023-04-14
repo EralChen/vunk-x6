@@ -53,7 +53,8 @@ export default defineComponent({
 <template>
   <div :class="{'fack-input-x': true, 'is-disabled': unuse}" @click="doClick">
     <div class="fack-input w-100%">
-      <ElTag v-for="item in model" :key="item[tempProp.id]" :closable="closable" type="info"
+      <span v-if="!model.length" class="placeholder">{{ placeholder }}</span>
+      <ElTag v-else v-for="item in model" :key="item[tempProp.id]" :closable="closable" type="info"
         @close="closeTag(item[tempProp.id])">
         {{ item[tempProp.label] }}
       </ElTag>
@@ -86,4 +87,10 @@ export default defineComponent({
 
 .fack-input .el-tag {
   margin-right: 5px;
-}</style>
+}
+
+.fack-input .placeholder{
+  color: var(--el-text-color-placeholder);
+}
+
+</style>

@@ -35,32 +35,16 @@ const tableState = reactive({
     {
       prop: undefined,
       label: '操作',
-      width: '400em',
+      width: '450em',
       slots: ({ row }) => <SkAppOperations
-        modules={['nodes', 'bind', 'r', 'run','u', 'd']}
+        modules={['nodes', 'r', 'bind', 'run', 'u', 'd']}
         onR={() => rI(row.id)}
         onD={() => d([row.id])}
         onU={() => preuI(row)}
         v-slots={{
-          run: () => <ElButton
-            type="primary"
-            size="small"
-            disabled={!!row.isStart}
-            onClick={() => runWorkflow(row.itemId).then(r)
-            }>运行</ElButton>,
-          nodes: () => <ElButton
-            type="primary"
-            size="small"
-            onClick={() => routerNext({ path: 'nodes/' + row.flowId })
-            }>
-            节点
-          </ElButton>,
-          bind: () => <ElButton
-            type="primary"
-            size="small"
-            onClick={() => bindData.flowId = row.flowId}>
-            绑定表单
-          </ElButton>,
+          run: () => <ElButton type="primary" size="small" disabled={!!row.isStart} onClick={() => runWorkflow(row.itemId).then(r)}>运行</ElButton>,
+          nodes: () => <ElButton type="primary" size="small" onClick={() => routerNext({ path: 'nodes/' + row.flowId })}>配置节点</ElButton>,
+          bind: () => <ElButton type="primary" size="small" onClick={() => bindData.flowId = row.flowId}>绑定表单</ElButton>,
         }}
       >
       </SkAppOperations>,
