@@ -34,6 +34,11 @@ export default defineComponent({
         label: '排序',
 
       },
+      {
+        templateType: 'VkfInput',
+        prop: 'event',
+        label: '事件名称',
+      },
   
       {
         prop: 'icon',

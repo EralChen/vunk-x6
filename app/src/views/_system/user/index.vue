@@ -5,11 +5,11 @@ import { SkAppDialog, SkAppOperations, SkAppTablesV1, __SkAppTablesV1, SkAppQuer
 import { setData, VkDuplexCalc } from '@vunk/core'
 import CUForm from './cu-form/index.vue'
 import { Row } from './types'
-import { useRouterTo } from '@skzz-platform/composables'
 import { ElButton } from 'element-plus'
+import { SkRoleTablesSelect } from '@skzz-platform/components/role-tables-select'
  
 type Col = __SkAppTablesV1.Column<Row>
-const { routerNext }  = useRouterTo()
+
 
 const queryItems:__SkAppQueryForm.CoreFormItem[] = [
   {
@@ -63,6 +63,11 @@ const tableState = reactive({
         excludes={['increase', 'search']}
         onU={ () => preuI(row) }
         onD={ () => d([row.id])  }
+        onClick={ (e: string) => {
+          if (e === 'bind') {
+            preBind(row)
+          }
+        } }
       >
       </SkAppOperations>,
       align: 'center',
@@ -77,6 +82,7 @@ const tableState = reactive({
   },
   total: 0,
 })
+
 const cuState = reactive({
   type: '' as 'c' | 'u' | '',
   data: {} as Partial<Row>,
@@ -85,6 +91,11 @@ const cuData = computed(() => {
   return {
     ...cuState.data,
   }
+})
+
+const bindState = reactive({
+  current: {} as Partial<Row>,
+  data: [] as Row[],
 })
 
 
@@ -120,6 +131,9 @@ function cuI () {
     r()
     cuState.type = ''
   })
+}
+function preBind (row: Row) {
+  bindState.current = row
 }
 
 
@@ -169,6 +183,17 @@ function cuI () {
         @setData="setData(cuState.data, $event)"
         @submit="cuI"
       ></CUForm>
+    </SkAppDialog>
+
+    <SkAppDialog 
+      :modelValue="!!bindState.current.id"
+      @update:modelValue=" bindState.current = {}"
+    >
+      <SkRoleTablesSelect
+        class="h-50vh"
+        v-model="bindState.data"
+      >
+      </SkRoleTablesSelect>
     </SkAppDialog>
   </page-x>
 </template>
