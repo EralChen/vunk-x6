@@ -58,7 +58,7 @@ export default defineComponent({
       increase: ['increase','c'],
       modify: ['modify', 'u'],
       remove: ['remove', 'd'],
-      detail: ['detail','r'],
+      search: ['search','r'],
     } as Record<string/* event */,  string[]>
 
     const remoteModuleInfo = ref<Record<string, Partial<Button>>>({})

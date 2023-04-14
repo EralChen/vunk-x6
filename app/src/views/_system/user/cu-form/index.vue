@@ -21,7 +21,7 @@ const emit = defineEmits({
 })
 
 const isU = computed(() => props.type === 'u')
-const formItems = ref<__SkAppForm.FormItem<keyof Row>[]>([
+const formItems = computed<__SkAppForm.FormItem<keyof Row>[]>(() => [
   {
     prop: 'code',
     label: '账号',
@@ -40,6 +40,7 @@ const formItems = ref<__SkAppForm.FormItem<keyof Row>[]>([
     templateType: 'VkfInput',
     placeholder: '请输入密码',
     showPassword: true,
+    templateIf: !isU.value,
   },
   
   {

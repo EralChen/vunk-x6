@@ -23,7 +23,11 @@ export const rUsers = (query: Partial<User>, pagination: Pagination) => {
       ...MENU_DATA,
     },
   } as RestFetchQueryOptions).then(res => {
-    return res.datas[0]
+    const doc = res.datas[0]
+    doc.rows.forEach(item => {
+      item.password = ''
+    })
+    return doc
   })
 }
 
