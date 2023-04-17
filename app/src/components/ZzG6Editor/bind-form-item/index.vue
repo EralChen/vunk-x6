@@ -1,11 +1,6 @@
 <template>
   <ElFormItem :label="props.label">
-    <div>
-      <ElButton type="primary" size="small" @click="doBind">{{ readonly ? '查看' : '绑定' }}</ElButton>
-      <div> 
-        <span>{{ props.modelValue.map(item => item.name).join('、') }}</span>
-      </div>
-    </div>
+    <SkTableSelectTags :closable="true" @click="doBind()" v-model="model" :prop="{ label: 'name' }"></SkTableSelectTags>
   </ElFormItem>
 
   <ElDialog v-model="showDialog" title="绑定表单">
@@ -16,19 +11,28 @@
 </template>
 
 <script setup lang="tsx">
-import { reactive, ref, watch } from 'vue'
+import { computed, reactive, ref, watch } from 'vue'
 import { propsOp } from './ctx'
 import { SkAppTables, __SkAppTables } from '@skzz-platform/components/app-tables'
 import { Pagination } from '@skzz/platform'
 import { useComputedReadonly } from '@vunk/form'
+import { ElOption, ElSelect } from 'element-plus'
+import { SkTableSelectTags } from '@skzz/platform'
+
 
 const props = defineProps(propsOp)
 // el-form 表单向下注入的disabled的内容
-
+const emit = defineEmits(['update:modelValue'])
 const readonly = useComputedReadonly({
   readonly: undefined,
 })
 const showDialog = ref(false)
+const model = computed({
+  get: () => props.modelValue,
+  set: (val) => {
+    emit('update:modelValue', val)
+  },
+})
 const doBind = () => {
   showDialog.value = true
 }

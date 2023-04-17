@@ -162,8 +162,8 @@ importers:
   app:
     dependencies:
       '@zzg6/flow':
-        specifier: 0.0.0-alpha.19
-        version: 0.0.0-alpha.19
+        specifier: 0.0.0-alpha.21
+        version: 0.0.0-alpha.21
       deepdash-es:
         specifier: ^5.3.9
         version: 5.3.9
@@ -3811,8 +3811,12 @@ packages:
     resolution: {integrity: sha512-NbE8nlT1BVivYg4vvL1fdHIYCkEoXfydP9JJho9X6v7byueiCwGFm0cJJc7Lrovu8Q7VWGaWccWna1FXM9jJog==}
     dev: false
 
-  /@zzg6/flow@0.0.0-alpha.19:
-    resolution: {integrity: sha512-FfpmFB7PBd5mNZFGugA8iHSjmx/bMOkAMvSYZj8C77lqwDJsHE3VIyOkVFPqK0yDMwl00UZbNGi0O6PNshj33g==}
+  /@zzg6/flow@0.0.0-alpha.2:
+    resolution: {integrity: sha512-f+PN51a7FPVMt1E95II23fo/NDUb4IVD4HOZhJtP0atW5MjIFQnVSRQgOrEYfT6dSGBDkB/brbvfTSJ1XQi9EA==}
+    dev: false
+
+  /@zzg6/flow@0.0.0-alpha.21:
+    resolution: {integrity: sha512-lFIaBLdq+540UocoHKx4nSrSDVSC4Afpfr7Wcvq23ztGsB/5ERP1JRQfoo3fgxwnYNgeVXwrrOtLKjlw0WYyTQ==}
     dependencies:
       '@antv/g6': 4.8.8
       '@vunk/form': 0.0.1-alpha.45
@@ -3820,10 +3824,6 @@ packages:
       vue: 3.2.47
     transitivePeerDependencies:
       - '@vue/composition-api'
-    dev: false
-
-  /@zzg6/flow@0.0.0-alpha.2:
-    resolution: {integrity: sha512-f+PN51a7FPVMt1E95II23fo/NDUb4IVD4HOZhJtP0atW5MjIFQnVSRQgOrEYfT6dSGBDkB/brbvfTSJ1XQi9EA==}
     dev: false
 
   /acorn-jsx@5.3.2(acorn@8.8.2):

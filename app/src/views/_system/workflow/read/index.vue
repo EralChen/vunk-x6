@@ -3,19 +3,26 @@
     <SkAppCard class="h-full" header="节点详情">
       <div class="editor-x" sk-flex="row">
         <div class="editor">
-          <ZzG6Editor :selectNodeId="nodeModel.id" :mode="'default'" :model-value="model" @nodeselectchange="nodeSelectChange"></ZzG6Editor>
-        </div>
-        <div class="form">
-          <ElScrollbar>
-            <ElForm label-position="top">
-              <BindOpers :node-model="nodeModel" @bind-success="operBindSuccess"></BindOpers>
-              <ElFormItem label="开始流程" v-show="!isFlowStart">
-                <el-button type="primary" @click="doRunWorkflow">运行</el-button>
-              </ElFormItem>
-              <BindAssitsOpers :node-model="nodeModel" :currentNodeInstIds="bindState.currentNodeInstIds" @bind-success="operBindSuccess" :isFlowStart="isFlowStart"></BindAssitsOpers>
-              <Approval :flowId="id" :node-model="nodeModel" :currentNodeInstIds="bindState.currentNodeInstIds" :isFlowStart="isFlowStart" @approvalSuccess="approvalSuccess"></Approval>
-            </ElForm>
-          </ElScrollbar>
+          <ZzG6Editor :selectNodeId="nodeModel.id" :mode="'default'" :model-value="model"
+            @nodeselectchange="nodeSelectChange">
+            
+            <template #form>
+              <el-tab-pane label="扩展属性" name="expend">
+                <ElScrollbar>
+                  <ElForm label-position="top">
+                    <BindOpers :node-model="nodeModel" @bind-success="operBindSuccess"></BindOpers>
+                    <ElFormItem label="开始流程" v-show="!isFlowStart">
+                      <el-button type="primary" @click="doRunWorkflow">运行</el-button>
+                    </ElFormItem>
+                    <BindAssitsOpers :node-model="nodeModel" :currentNodeInstIds="bindState.currentNodeInstIds"
+                      @bind-success="operBindSuccess" :isFlowStart="isFlowStart"></BindAssitsOpers>
+                    <Approval :flowId="id" :node-model="nodeModel" :currentNodeInstIds="bindState.currentNodeInstIds"
+                      :isFlowStart="isFlowStart" @approvalSuccess="approvalSuccess"></Approval>
+                  </ElForm>
+                </ElScrollbar>
+              </el-tab-pane>
+            </template>
+          </ZzG6Editor>
         </div>
       </div>
     </SkAppCard>
@@ -106,15 +113,10 @@ function doRunWorkflow () {
 }
 
 .editor {
-  width: 80%;
+  width: 100%;
 }
 
-.form {
-  width: 20%;
-  border-left: 1px solid var(--el-border-color);
-  padding: var(--gap-m);
-}
-.editor-x :deep(.el-form-item .el-form-item ){
+.editor-x :deep(.el-form-item .el-form-item) {
   margin-bottom: 18px;
 }
 </style>

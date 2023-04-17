@@ -1,4 +1,3 @@
-import Renderer from 'esri/renderers/Renderer'
 import { PropType } from 'vue'
 
 
@@ -8,7 +7,7 @@ export const propsOp = {
     default: '',
   },
   modelValue: {
-    type: Array,
+    type: Array as PropType<any[]>,
     default: () => ([]),
   },
   formId: {
