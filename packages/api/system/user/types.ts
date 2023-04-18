@@ -21,3 +21,10 @@ export interface User {
   isSys?: any;
   status: number;
 }
+
+
+export interface BoundUser {
+  id: string
+  userId: string
+  roleId: string
+}
