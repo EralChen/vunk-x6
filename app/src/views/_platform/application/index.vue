@@ -118,6 +118,7 @@ function cuI () {
       </template>
 
       <SkAppTables 
+        
         class="h-100%" 
         v-bind="tableState"
         v-model:start="pagination.start"

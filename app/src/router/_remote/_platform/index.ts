@@ -8,7 +8,7 @@ export default function () {
       meta: {
         header: true,
       },
-      redirect: '/platform/tenant',
+      // redirect: '/platform/tenant',
     },
     '/platform/tenant': {
       component: () => import('@/views/_platform/tenant/index.vue'),

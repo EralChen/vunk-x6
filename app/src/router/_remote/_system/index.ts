@@ -72,5 +72,9 @@ export default function () {
     '/system/button': {
       component: () => import('@/views/_system/button/index.vue'),
     },
+
+    '/system/constant': {
+      component: () => import('@/views/_system/constant/index.vue'),
+    },
   } as Record<string, Partial<RouteRecordRaw>>
 }
