@@ -162,8 +162,8 @@ importers:
   app:
     dependencies:
       '@zzg6/flow':
-        specifier: 0.0.0-alpha.21
-        version: 0.0.0-alpha.21
+        specifier: 0.0.0-alpha.28
+        version: 0.0.0-alpha.28
       deepdash-es:
         specifier: ^5.3.9
         version: 5.3.9
@@ -3815,8 +3815,8 @@ packages:
     resolution: {integrity: sha512-f+PN51a7FPVMt1E95II23fo/NDUb4IVD4HOZhJtP0atW5MjIFQnVSRQgOrEYfT6dSGBDkB/brbvfTSJ1XQi9EA==}
     dev: false
 
-  /@zzg6/flow@0.0.0-alpha.21:
-    resolution: {integrity: sha512-lFIaBLdq+540UocoHKx4nSrSDVSC4Afpfr7Wcvq23ztGsB/5ERP1JRQfoo3fgxwnYNgeVXwrrOtLKjlw0WYyTQ==}
+  /@zzg6/flow@0.0.0-alpha.28:
+    resolution: {integrity: sha512-LvS5+Vv/xHazMOERB8GbT6jXj0uKh15BiYJUET1d2EX/w2f+q9r818yMbb5yZBZ2r1eIsnnVVSCHDI8otzXf0w==}
     dependencies:
       '@antv/g6': 4.8.8
       '@vunk/form': 0.0.1-alpha.45

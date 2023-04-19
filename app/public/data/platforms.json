@@ -37,7 +37,7 @@
   },
   {
     "code": "wyy_dev_message",
-    "url": "http://192.168.110.17:30011/demo-server"
+    "url": "http://192.168.110.175:30000/tpl-server"
   }
   
 ]

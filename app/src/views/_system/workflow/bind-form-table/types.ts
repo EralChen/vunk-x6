@@ -1,2 +1,2 @@
-import { User } from '@skzz-platform/api/system/user'
-export type Row = User
+import { FormList } from '@skzz-platform/api/system/form'
+export type Row = FormList

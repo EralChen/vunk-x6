@@ -18,6 +18,8 @@ import ZzG6Editor from '@/components/ZzG6Editor/index.vue'
 import { ref, shallowRef, watch } from 'vue'
 import { GraphData, TreeGraphData } from '@antv/g6'
 import { snowFlake } from '@skzz-platform/api/basic'
+import { onBeforeRouteLeave } from 'vue-router'
+import { ElMessageBox } from 'element-plus'
 
 let isEdit = true
 const formId = ref('')
@@ -27,8 +29,10 @@ const props = defineProps({
     required: true,
   },
 })
-
+// 为什么分开？内部emit是通过g6的事件监听实现的，如果回填和输出是同一个对象，内部监听外部数据变化会触发g6渲染方法，渲染方法会触发g6监听，导致死循环
+// 回填数据
 const editData = shallowRef({} as WorkflowData)
+// 编辑后返回的数据
 const backData = shallowRef({} as GraphData | TreeGraphData)
 
 watch(() => props.flowId, r, { immediate: true })
@@ -51,13 +55,19 @@ function jsonLoad () {
 }
 
 
-// onBeforeRouteLeave((to, from, next) => {
-//   console.log(to, from)
-// })
+onBeforeRouteLeave((to, from, next) => {
+  ElMessageBox.confirm('确定离开吗？未保存数据将消失！', '提示', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning',
+  }).then(() => {
+    next()
+  }).catch(() => {
+    next(false)
+  })
+})
 </script>
 
 <style lang="scss" scoped>
-:deep(.sk-g6-minimap){
-  right: unset;
-}
+
 </style>

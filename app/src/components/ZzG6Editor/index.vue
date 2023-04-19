@@ -1,5 +1,5 @@
 <template>
-  <ZzEditor>
+  <ZzEditor v-bind="editProps">
     <slot></slot>
     <template #toolbar>
       <slot name="toolbar"></slot>
@@ -10,31 +10,43 @@
   </ZzEditor>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
 import { MaterialNode, ZzEditor, expendForm, extendNodeFormMap } from '@zzg6/flow'
 import bindFormItem from './bind-form-item/index.vue'
-import { propsOp } from './ctx'
-import { computed } from 'vue'
+import { propsOp, bindProps } from './ctx'
+import { computed, defineComponent } from 'vue'
 
-
-const props = defineProps(propsOp)
-const formKey = 'VkfBindFormItem'
-
-expendForm([
-  {
-    component: bindFormItem,
-    type: formKey,
+export default defineComponent({
+  props: propsOp,
+  components: {
+    ZzEditor,
   },
-])
-extendNodeFormMap(
-  MaterialNode.zzRect,
-  [{
-    templateType: formKey,
-    prop: 'formItemKeys',
-    label: '绑定表单字段',
-    formId: computed(() => props.formId),
-  }],
-)
+  setup (props) {
+    const editProps = bindProps(props, ['formId'])
+
+    const formKey = 'VkfBindFormItem'
+
+    expendForm([
+      {
+        component: bindFormItem,
+        type: formKey,
+      },
+    ])
+    extendNodeFormMap(
+      MaterialNode.zzRect,
+      [{
+        templateType: formKey,
+        prop: 'formItemKeys',
+        label: '绑定表单字段',
+        formId: computed(() => props.formId),
+      }],
+    )
+    return {
+      editProps,
+    }
+  },
+})
+
 </script>
 
 <style lang="scss" scoped></style>

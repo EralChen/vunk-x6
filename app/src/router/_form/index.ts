@@ -27,6 +27,27 @@ export default [
         },
         component: () => import('_v/_system/form/cu/index.vue'),
       },
+      {
+        path: 'edit/:id',
+        props: true,
+        meta: {
+          title: '修改表单配置',
+          hidden: true,
+        },
+        component: () => import('_v/_system/form/cu/index.vue'),
+      },
+      {
+        path: 'detail/:id',
+        props: (route) => ({
+          id: route.params.id,
+          isDetail: true,
+        }),
+        meta: {
+          title: '表单配置查看',
+          hidden: true,
+        },
+        component: () => import('_v/_system/form/cu/index.vue'),
+      },
     ],
   },
 ] as RouteRecordRaw[]

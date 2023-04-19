@@ -4,20 +4,20 @@
       <div class="editor-x" sk-flex="row">
         <div class="editor">
           <ZzG6Editor :selectNodeId="nodeModel.id" :mode="'default'" :model-value="model"
-            @nodeselectchange="nodeSelectChange">
+            @nodeselectchange="nodeSelectChange" :active-tab-name="'expend'">
             
             <template #form>
               <el-tab-pane label="扩展属性" name="expend">
                 <ElScrollbar>
                   <ElForm label-position="top">
-                    <BindOpers :node-model="nodeModel" @bind-success="operBindSuccess"></BindOpers>
+                    <BindOpers :node-model="nodeModel" @bind-success="r"></BindOpers>
                     <ElFormItem label="开始流程" v-show="!isFlowStart">
                       <el-button type="primary" @click="doRunWorkflow">运行</el-button>
                     </ElFormItem>
                     <BindAssitsOpers :node-model="nodeModel" :currentNodeInstIds="bindState.currentNodeInstIds"
-                      @bind-success="operBindSuccess" :isFlowStart="isFlowStart"></BindAssitsOpers>
+                      @bind-success="r" :isFlowStart="isFlowStart"></BindAssitsOpers>
                     <Approval :flowId="id" :node-model="nodeModel" :currentNodeInstIds="bindState.currentNodeInstIds"
-                      :isFlowStart="isFlowStart" @approvalSuccess="approvalSuccess"></Approval>
+                      :isFlowStart="isFlowStart" @approvalSuccess="r"></Approval>
                   </ElForm>
                 </ElScrollbar>
               </el-tab-pane>
@@ -31,7 +31,7 @@
 
 <script setup lang="tsx">
 import { rWorkflowNodesWithRaw, runWorkflow, Workflow } from '@skzz-platform/api/system/workflow'
-import { computed, reactive, ref, shallowRef, watch } from 'vue'
+import { computed, nextTick, reactive, ref, shallowRef, watch } from 'vue'
 import { SkAppCard } from '@skzz/platform'
 import { User } from '@skzz-platform/api/system/user'
 import ZzG6Editor from '@/components/ZzG6Editor/index.vue'
@@ -72,24 +72,20 @@ function r () {
       const node = res.raws.nodes?.find(item => item.id === nodeModel.value.id)
       if (node)
         nodeModel.value = node as NodeModel<User>
+    } else {      
+      nextTick(() => {
+        nodeModel.value = res.raws.nodes![0] as NodeModel<User>
+      })
     }
   })
 }
-
-const operBindSuccess = () => {
-  r()
-}
-const approvalSuccess = () => {
-  r()
-}
-
 
 /**
  * 选中节点事件
  * @param e 
  */
 const nodeSelectChange = (e: any) => {
-  if (e.target) {
+  if (e.target && e.select) {
     const m = e.target.getModel()
     nodeModel.value = cloneDeep(m)
   } else {

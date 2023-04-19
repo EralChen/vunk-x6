@@ -7,8 +7,9 @@ type withDic<T extends string[]> = {
 }
 
 export const useDictionaryStore = defineStore('dictionary', () => {
-  const types = reactive<withDic<['消息接收端']>>({
+  const types = reactive<withDic<['消息接收端', '业务类型']>>({
     '消息接收端': [],
+    '业务类型': [],
   })
 
 
@@ -27,10 +28,13 @@ export const useDictionaryStore = defineStore('dictionary', () => {
     return getTypes('消息接收端', '消息接收端', ref)
   }
 
-
+  function getConfigDic (ref?: Ref<any>) {
+    return getTypes('业务类型', '业务类型', ref)
+  }
   return {
     getTemplateDic,
     types,
     getTypes,
+    getConfigDic,
   }
 })

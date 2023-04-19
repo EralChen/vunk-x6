@@ -23,9 +23,6 @@ export type Message = {
   status: number;
 }
 
-
-
-
 export type CommonAddition = {
   founder: string // 创建人id
   founderName: string // 创建人姓名

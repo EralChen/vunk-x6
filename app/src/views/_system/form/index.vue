@@ -3,9 +3,16 @@
     <SkAppCard :header="'表单配置'" class="h-100%">
       <VkDuplexCalc class="gap-main-x">
         <template #one>
-          <div sk-flex="row-end" class="mb">
-            <ElButton type="primary" @click="$router.push('/system/form/add')">新增</ElButton>
-          </div>
+          <SkAppQueryForm
+          :formItems="queryItems"
+          :data="queryState.data"
+          @setData="setData(queryState.data, $event)"
+        >
+        <template #options>
+          <ElButton type="primary" @click="$router.push('/system/form/add')">新增</ElButton>
+        </template>
+        </SkAppQueryForm>
+          
         </template>
         <SkAppTablesV1 :defaultExpandAll="true" flex-1 :rowKey="'menuId'" :columns="tableState.columns"
           :data="tableState.data" :total="tableState.total" v-model:page-size="tableState.pagination.pageSize"
@@ -18,30 +25,36 @@
 
 <script lang="tsx" setup>
 import PageX from '_c/PageX/index.vue'
-import { SkAppCard } from '@skzz/platform'
-import { SkAppOperations, SkAppTablesV1, __SkAppTablesV1 } from '@skzz/platform'
-import { VkDuplexCalc } from '@vunk/core'
+import { SkAppCard, __SkAppQueryForm } from '@skzz/platform'
+import { SkAppOperations, SkAppTablesV1, __SkAppTablesV1, SkAppQueryForm } from '@skzz/platform'
 import { reactive, watch } from 'vue'
-import { rWeixinList, dWeixin } from '@skzz-platform/api/system/message'
+import { dForm, rFormList } from '@skzz-platform/api/system/form'
+import { setData, VkDuplexCalc } from '@vunk/core'
 import { Row } from './types'
 import router from '@/router'
+import { debounce } from 'lodash'
 
 type Col = __SkAppTablesV1.Column<Row>
-  
+const queryItems: __SkAppQueryForm.CoreFormItem[]  = [
+  {
+    templateType: 'VkfInput',
+    label: '表单名称',
+    prop: 'formName',
+  },
+]
+const queryState = reactive({
+  data: {} as Partial<Row>,
+})
 const tableState = reactive({
   data: [] as Row[],
   _columns: [
     {
-      prop: 'appId',
+      prop: 'formName',
       label: '表单名称',
     },
     {
-      prop: '创建时间',
-      label: 'secret',
-    },
-    {
-      prop: 'chuang',
-      label: '创建人',
+      prop: 'versionTag',
+      label: '版本',
     },
     {
       prop: undefined,
@@ -52,7 +65,7 @@ const tableState = reactive({
       slots: ({ row }) => <SkAppOperations
         modules={['r', 'u', 'd']}
         onU={() => router.push(`/system/form/edit/${row.id}`)}
-        onD={() => dWeixin(row.id).then(r)}
+        onD={() => dForm(row.id).then(r)}
         onR={() => router.push(`/system/form/detail/${row.id}`)}
       >
       </SkAppOperations>,
@@ -67,26 +80,27 @@ const tableState = reactive({
   total: 0,
 })
 
-
+const deR = debounce(r, 300)
+watch(() => queryState.data, deR, { deep: true })
 watch(() => tableState.pagination, r, { deep: true, immediate: true })
 function r () {
   tableState.columns = [
     // ...res.columns as Col[],
     ...tableState._columns,
   ]
-  // return rWeixinList(tableState.pagination).then(res => {
-  //   if (!res) {
-  //     return
-  //   }
-  //   if (!tableState.columns.length) {
-  //     tableState.columns = [
-  //       // ...res.columns as Col[],
-  //       ...tableState._columns,
-  //     ]
-  //   }
-  //   tableState.data = res.rows
-  //   tableState.total = res.total
-  // })
+  return rFormList(tableState.pagination, queryState.data.formName).then(res => {
+    if (!res) {
+      return
+    }
+    if (!tableState.columns.length) {
+      tableState.columns = [
+        // ...res.columns as Col[],
+        ...tableState._columns,
+      ]
+    }
+    tableState.data = res.rows
+    tableState.total = res.total
+  })
 }
 
 </script>
