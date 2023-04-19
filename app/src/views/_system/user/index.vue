@@ -1,12 +1,13 @@
 <script lang="tsx" setup>
 import { computed, reactive, watch } from 'vue'
-import { cuUser, dUsers, rUsers, rUserBtns } from '@skzz-platform/api/system/user'
+import { cuUser, dUsers, rUsers, rUserBtns, rBoundUsers, cBoundUsers } from '@skzz-platform/api/system/user'
 import { SkAppDialog, SkAppOperations, SkAppTablesV1, __SkAppTablesV1, SkAppQueryForm, __SkAppQueryForm } from '@skzz/platform'
 import { setData, VkDuplexCalc } from '@vunk/core'
 import CUForm from './cu-form/index.vue'
 import { Row } from './types'
 import { ElButton } from 'element-plus'
 import { SkRoleTablesSelect } from '@skzz-platform/components/role-tables-select'
+import { Role } from '@skzz-platform/api/system/role'
  
 type Col = __SkAppTablesV1.Column<Row>
 
@@ -95,7 +96,7 @@ const cuData = computed(() => {
 
 const bindState = reactive({
   current: {} as Partial<Row>,
-  data: [] as Row[],
+  data: [] as Role[],
 })
 
 
@@ -132,9 +133,34 @@ function cuI () {
     cuState.type = ''
   })
 }
-function preBind (row: Row) {
+async function preBind (row: Row) {
   bindState.current = row
+  const res = await rBoundUsers({
+    userId: row.id,
+  })
+  bindState.data = res.rows.map(item => {
+    return {
+      roleId: item.roleId,
+    } as Role
+  })
+
+  
 }
+
+function bind () {
+  return cBoundUsers(
+    bindState.data.map(item => {
+      if (!bindState.current.id) {
+        throw TypeError('userId 是必须的')
+      }
+      return {
+        roleId: item.roleId,
+        userId: bindState.current.id,
+      }
+    },
+    ), true)
+}
+
 
 
 </script>
@@ -186,6 +212,7 @@ function preBind (row: Row) {
     </SkAppDialog>
 
     <SkAppDialog 
+      :title="'角色绑定'"
       :modelValue="!!bindState.current.id"
       @update:modelValue=" bindState.current = {}"
     >
@@ -193,7 +220,14 @@ function preBind (row: Row) {
         class="h-50vh"
         v-model="bindState.data"
       >
+
       </SkRoleTablesSelect>
+
+      <template #footer>
+        <ElButton :type="'primary'" :size="'large'"
+          @click="bind"
+        >提交</ElButton>
+      </template>
     </SkAppDialog>
   </page-x>
 </template>

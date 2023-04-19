@@ -96,6 +96,7 @@ export default defineComponent({
     </template>
 
     <SkAppTables 
+      :oidField="'roleId'"
       :modelValue="modelValue"
       @update:modelValue="$emit('update:modelValue', $event)"
       :columns="tableState.columns"

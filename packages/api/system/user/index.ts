@@ -5,6 +5,7 @@ import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
 import { rBtns } from '@skzz-platform/api/basic'
 import { MENU_DATA } from './const'
 import { BoundUser, User } from './types'
+import { NormalObject } from '@vunk/core'
 
 export const rUsers = (query: Partial<User>, pagination: Pagination) => {
   return request<[QueryRData<User>]>({
@@ -91,7 +92,19 @@ export const cuUser = (user: Partial<User>) => {
 export const cBoundUsers = (list: {
   'userId': string,
   'roleId': string,
-}[]) => {
+}[], reset?: boolean) => {
+  const rows:NormalObject[]  = list.map(item => {
+    return {
+      'op': RestFetchOp.c,
+      ...item,
+    }
+  })
+  if (reset) {
+    rows.unshift({
+      op: RestFetchOp.d,
+      userId: list[0].userId,
+    })
+  }
   return request({
     method: 'POST',
     url: '/core/busi/save',
@@ -100,17 +113,14 @@ export const cBoundUsers = (list: {
       'datas': [
         {
           'datasetId': '3',
-          'rows': list.map(item => {
-            return {
-              'op': RestFetchOp.c,
-              ...item,
-            }
-          }),
+          rows,
         },
       ],
       ...MENU_DATA,
     },
-  } as RestFetchSaveOptions)
+  } as RestFetchSaveOptions, {
+    msg: '绑定成功',
+  })
 }
 
 export const dBoundUsers = (list: Partial<BoundUser>[]) => {
@@ -139,10 +149,13 @@ export const rBoundUsers = (query: Partial<BoundUser>) => {
   return request<[QueryRData<BoundUser>]>({
     method: 'POST',
     url: '/core/busi/query',
+    DEV_NAME: 'rBoundUsers',
     data: {
       datasetIds: ['3'],
       condition: {
-        ...query,
+        3: {
+          ...query,
+        },
       },
       ...MENU_DATA,
     },
