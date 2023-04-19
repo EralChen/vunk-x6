@@ -1,6 +1,6 @@
 import { Pagination } from '@skzz-platform/shared'
 import { request } from '@skzz-platform/shared/fetch/platform'
-import { FirstParameter, NormalObject } from '@vunk/core'
+import { NormalObject } from '@vunk/core'
 import { RestFetchQueryOptions, QueryRData, RestFetchSaveOptions } from '@vunk/skzz'
 import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
 
@@ -216,6 +216,7 @@ export const cdRoleMenuPermissions = (
   return cdRolePermissions(datas.map(data => {
     return {
       ...data,
+      // 添加时候，buttonId 为 search， 删除时候解绑所有buttonId
       buttonId: op === RestFetchOp.c ? 'search' : undefined,
     }
   }), op)
