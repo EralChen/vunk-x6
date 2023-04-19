@@ -1,6 +1,6 @@
 import { Pagination } from '@skzz-platform/shared'
 import { request } from '@skzz-platform/shared/fetch/platform'
-import { NormalObject } from '@vunk/core'
+import { FirstParameter, NormalObject } from '@vunk/core'
 import { RestFetchQueryOptions, QueryRData, RestFetchSaveOptions } from '@vunk/skzz'
 import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
 
@@ -88,14 +88,13 @@ export const cuRole = (data: {
   })
 }
 
-/**
- * https://www.apifox.cn/link/project/2475837/apis/api-72112876
- * 角色可用菜单实际上是 角色-菜单-按钮(查询 search) 的这条记录
- * @param query 
- * @returns 
- */
-export const rRolePermissions = (query: {
-  roleId: string;
+
+
+
+
+const _rRolePermissions = (query: {
+  roleId?: string;
+  menuId?: string;
 }) => {
   return request<[
     QueryRData<{
@@ -118,7 +117,22 @@ export const rRolePermissions = (query: {
       },
     },
   } as RestFetchQueryOptions).then(res => {
-    const doc = res.datas[0].rows
+    return res.datas[0]
+  })
+}
+
+/**
+ * https://www.apifox.cn/link/project/2475837/apis/api-75383823
+ * 角色可用菜单实际上是 角色-菜单-按钮(查询 search) 的这条记录
+ * @param query 
+ * @returns 
+ */
+export const rRolePermissions = (query: {
+  roleId?: string;
+  menuId?: string;
+}) => {
+  return _rRolePermissions(query).then(res => {
+    const doc = res.rows
     return doc.reduce((a, c) => {
       
       const aItem = a.find(item => item.menuId === c.menuId)
@@ -147,9 +161,8 @@ export const rRolePermissions = (query: {
 
 
 export const cdRolePermissions = (datas: {
-  roleId: string,
-  buttonId: string;
-  menuId: string;
+  roleId?: string,
+  id?: string
 }[], op = RestFetchOp.c) => {
   return request({
     method: 'POST',
@@ -176,11 +189,24 @@ export const cdRolePermissions = (datas: {
   } as RestFetchSaveOptions)
 }
 
+export const dMenuAllRolePermissions = (menuId: string) => {
+  return _rRolePermissions({
+    menuId,
+  }).then(res => {
+   
+    return cdRolePermissions(
+      res.rows.map(item => ({ id: item.id })), 
+      RestFetchOp.d,
+    )
+  })
+}
+
 
 export const cdRoleMenuPermissions = (
   datas: {
-    roleId: string,
-    menuId: string;
+    roleId?: string,
+    menuId?: string;
+    id?: string
   }[],
   op = RestFetchOp.c,
 ) => {
@@ -191,6 +217,8 @@ export const cdRoleMenuPermissions = (
     }
   }), op)
 }
+
+
 
 
 export interface Role {

@@ -1,15 +1,16 @@
 <script lang="tsx" setup>
 import { VkCheckboxTree, __VkCheckboxTree } from '@vunk/skzz/components/checkbox-tree'
 import { computed, reactive, watch } from 'vue'
-import { dMenus, rMenus, cuMenu, rMenuBtns } from '@skzz-platform/api/system/menu'
+import { dMenus, rMenus, cuMenu } from '@skzz-platform/api/system/menu'
 import { listToTree } from '@vunk/core/shared/utils-data'
 import { SkAppDialog, SkAppOperations, SkCheckTags, __SkCheckTags, SkAppTablesV1, __SkAppTablesV1 } from '@skzz/platform'
 import { setData, unsetData, VkDuplexCalc, VkDuplex } from '@vunk/core'
 import CUForm from './cu-form/index.vue'
 import { Row } from './types'
 import SkAppIcon from '@skzz-platform/components/app-icon'
-import { ElButton } from 'element-plus'
+import { ElButton, ElMessageBox } from 'element-plus'
 import BindBtnsForm from './bind-btns-form/index.vue'
+import { dMenuAllRolePermissions } from '@skzz-platform/api/system/role'
 
 const checkTagsState = reactive({
   options: [  
@@ -72,7 +73,7 @@ const tableState = reactive({
 
         modules={['c', 'u',  'auth', 'd']}
         onC={ () => precI(row.menuId) }
-        onD={ () => d([row.id])  }
+        onD={ () => d([row])  }
         onU={ () => preuI(row) }
         v-slots={
           {
@@ -139,11 +140,28 @@ function r () {
     })
   })
 }
-function d (ids: string[]) {
-  dMenus(ids).then(() => {
-    rTree()
-    r()
-  })
+function d (rows: Row[]) {
+  dMenus(rows.map(item => item.id))
+    .catch((err) => {
+  
+      return ElMessageBox({
+        title: '删除失败',
+        message: `因 ${err.msg}, 是否尝试解绑菜单相关权限, 再次重试`,
+        showCancelButton: true,
+        type: 'warning',
+        closeOnClickModal: false,
+        
+      })
+    })
+    .then(() => {
+      return Promise.all(rows.map((item) => dMenuAllRolePermissions(item.menuId))) 
+    }).then(() => {
+      return dMenus(rows.map(item => item.id))
+    })
+    .then(() => {
+      rTree()
+      r()
+    })
 }
 function precI (parentMenuId?: string) {
   cuState.type = 'c'

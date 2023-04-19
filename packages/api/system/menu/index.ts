@@ -106,6 +106,8 @@ export const dMenus = (ids: string[]) => {
       ...MENU_DATA,
     },
   } as RestFetchSaveOptions, {
+    throwResErr: true,
+    err: false,
     msg: '删除菜单成功',
   })
 
