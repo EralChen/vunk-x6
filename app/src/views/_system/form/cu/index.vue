@@ -7,7 +7,7 @@
       <div class="h-full">
         <VkDuplex class="h-full">
           <template #one>
-            <SkAppForm :disabled="props.isDetail" :layout="true" :elRef="formDef.resolve" :data="formData" @setData="setData(formData, $event)" :formItems="formItems" class="mt-20px ml-20px mr-20px" ></SkAppForm>
+            <SkAppForm :disabled="!!props.id" :layout="true" :elRef="formDef.resolve" :data="formData" @setData="setData(formData, $event)" :formItems="formItems" class="mt-20px ml-20px mr-20px" ></SkAppForm>
           </template>
           <SkAppFormaker class="h-full" :data="data" @setData="setData(data, $event)" :formItems="formMakerItems"
             @setData:formItems="setData(formMakerItems, $event)" @unsetData:formItems="unsetData(formMakerItems, $event)"
@@ -62,15 +62,15 @@ const formItems = ref<__SkAppForm.FormItem<any>[]>([
     placeholder: '请输入表单名称',
     rules: {
       required: true,
-      validator: (rule: any, value: any, callback: any) => {
-        const regEn = /[`~!@#$%^&*()_+<>?:"{},.\/;'[\]]/im
+      validator: (rule: any, value: string, callback: any) => {
+        const regEn = /[`~!@#$%^&*()_+=<>?:"{},.\/;'[\]-]/im
         const regCn = /[·！#￥（——）：；“”‘、，|《。》？、【】[\]]/im
         if (value === '' || value === undefined) {
           callback(new Error('请输入表单名！'))
         } else if (/^\d/.test(value)) {
           callback(new Error('表单名不能以数字开头！'))
         } else if (regEn.test(value) || regCn.test(value)) {
-          callback(new Error('表单名不能以特殊字符开头！'))
+          callback(new Error('表单名不能出现特殊字符！'))
         } else {
           callback()
         }

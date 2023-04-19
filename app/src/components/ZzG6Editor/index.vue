@@ -36,7 +36,7 @@ export default defineComponent({
       MaterialNode.zzRect,
       [{
         templateType: formKey,
-        prop: 'formItemKeys',
+        prop: 'formItems',
         label: '绑定表单字段',
         formId: computed(() => props.formId),
       }],

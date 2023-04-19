@@ -115,7 +115,7 @@ function rI (id: string) {
 }
 
 function bindUser () {
-  //
+  console.log(bindData.data)
 }
 
 </script>

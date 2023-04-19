@@ -4,13 +4,18 @@
       <div class="editor-x" sk-flex="row">
         <div class="editor">
           <ZzG6Editor :selectNodeId="nodeModel.id" :mode="'default'" :model-value="model"
-            @nodeselectchange="nodeSelectChange" :active-tab-name="'expend'">
-            
+            @nodeselectchange="nodeSelectChange" :active-tab-name="'expend'" :form-id="'846101130386604032'">
             <template #form>
               <el-tab-pane label="扩展属性" name="expend">
                 <ElScrollbar>
                   <ElForm label-position="top">
                     <BindOpers :node-model="nodeModel" @bind-success="r"></BindOpers>
+                  </ElForm>
+                </ElScrollbar>
+              </el-tab-pane>
+              <el-tab-pane label="审批" name="approval">
+                <ElScrollbar>
+                  <ElForm label-position="top">
                     <ElFormItem label="开始流程" v-show="!isFlowStart">
                       <el-button type="primary" @click="doRunWorkflow">运行</el-button>
                     </ElFormItem>
@@ -57,7 +62,7 @@ const flowData = ref({} as Workflow) // 流程详情
 const bindState = reactive({
   currentNodeInstIds: [] as string[],
 })
-const isFlowStart = computed(() => !!bindState.currentNodeInstIds.length) // 节点是否开始
+const isFlowStart = computed(() => !!flowData.value.isStart) // 节点是否开始
 
 watch(() => props.id, r, { immediate: true })
 
