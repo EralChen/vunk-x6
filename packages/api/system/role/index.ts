@@ -162,6 +162,9 @@ export const rRolePermissions = (query: {
 
 export const cdRolePermissions = (datas: {
   roleId?: string,
+  buttonId?: string;
+  menuId?: string;
+
   id?: string
 }[], op = RestFetchOp.c) => {
   return request({
@@ -213,7 +216,7 @@ export const cdRoleMenuPermissions = (
   return cdRolePermissions(datas.map(data => {
     return {
       ...data,
-      buttonId: 'search',
+      buttonId: op === RestFetchOp.c ? 'search' : undefined,
     }
   }), op)
 }
