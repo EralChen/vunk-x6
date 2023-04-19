@@ -33,7 +33,7 @@
   },
   {
     "code": "wyy_dev_flow",
-    "url": "http://192.168.110.244:30100/scene-server"
+    "url": "http://192.168.110.244:30000/tpl-server"
   },
   {
     "code": "wyy_dev_message",

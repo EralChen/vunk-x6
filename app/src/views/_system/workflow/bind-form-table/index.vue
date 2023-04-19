@@ -41,13 +41,15 @@ export default defineComponent({
           title: '表单名称',
           dataKey: 'formName',
           key: 'formName',
-          width: 200,
+          width: 100,
+          flexGrow: 1,
+
         },
         {
           title: '版本',
           dataKey: 'versionTag',
           key: 'versionTag',
-          width: 200,
+          width: 100,
           flexGrow: 1,
         },
         

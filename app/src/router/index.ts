@@ -4,7 +4,7 @@ import _UI_CONFIG from './_ui-config'
 import _TEMPLATE_PAGE from './_template-page'
 import _PLAY from './_play'
 import _MESSAGE from './_message'
-import _FORM from './_form'
+
 import { getPlatform } from '@/utils'
 
 export const routes: Array<RouteRecordRaw> = [
@@ -57,7 +57,6 @@ export const routes: Array<RouteRecordRaw> = [
   ..._TEMPLATE_PAGE,
   ..._PLAY,
   ..._MESSAGE,
-  ..._FORM,
 ]
 
 const router = createRouter({

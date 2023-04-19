@@ -1,10 +1,10 @@
 <template>
   <ElFormItem :label="props.label">
-    <SkTableSelectTags :closable="true" @click="doBind()" v-model="model" :prop="{ label: 'name' }"></SkTableSelectTags>
+    <SkTableSelectTags :closable="true" @click="doBind()" v-model="model" :prop="{ id: idKey }"></SkTableSelectTags>
   </ElFormItem>
 
-  <ElDialog v-model="showDialog" title="绑定表单">
-    <SkAppTables class="h-30em" :modelValue="modelValue" :columns="tableState.columns" :data="tableState.data"
+  <ElDialog v-model="showDialog" :title="`绑定'${title}'表单`">
+    <SkAppTables :oidField="idKey" class="h-30em" :modelValue="modelValue" :columns="tableState.columns" :data="tableState.data"
       :total="tableState.total" @update:modelValue="$emit('update:modelValue', $event)"
       v-model:pageSize="tableState.pagination.pageSize" v-model:start="tableState.pagination.start"></SkAppTables>
   </ElDialog>
@@ -18,11 +18,14 @@ import { Pagination } from '@skzz/platform'
 import { useComputedReadonly } from '@vunk/form'
 import { ElOption, ElSelect } from 'element-plus'
 import { SkTableSelectTags } from '@skzz/platform'
+import { FIRS, rFormDetail } from '@skzz-platform/api/system/form'
 
 
+const idKey = 'prop'
 const props = defineProps(propsOp)
 // el-form 表单向下注入的disabled的内容
 const emit = defineEmits(['update:modelValue'])
+const title = ref('')
 const readonly = useComputedReadonly({
   readonly: undefined,
 })
@@ -33,12 +36,10 @@ const model = computed({
     emit('update:modelValue', val)
   },
 })
-const doBind = () => {
-  showDialog.value = true
-}
+
 
 const tableState = reactive({
-  data: [],
+  data: [] as any,
   columns: [
     {
       type: 'selection',
@@ -48,9 +49,17 @@ const tableState = reactive({
     },
     {
       title: '字段名称',
-      dataKey: 'code',
-      key: 'code',
+      dataKey: 'label',
+      key: 'label',
       width: 200,
+      flexGrow: 1,
+    },
+    {
+      title: '字段类型',
+      dataKey: 'templateType',
+      key: 'templateType',
+      width: 200,
+      flexGrow: 1,
     },
     {
       title: '状态',
@@ -68,39 +77,28 @@ const tableState = reactive({
   ] as __SkAppTables.Column[],
 
   pagination: {
-    pageSize: 8,
+    pageSize: 10,
     start: 0,
   } as Pagination,
 
   total: 0,
 })
-
-watch(() => tableState.pagination, r, { deep: true, immediate: true })
-function r () {
-  // rUsers(queryState.data, tableState.pagination).then(res => {
-  //   tableState.data = res.rows
-  //   tableState.total = res.total
-  // })
-  tableState.data = [
-    {
-      id: '1',
-      code: '111',
-      name: '222',
-      status: '1',
-    } as any,
-    {
-      id: '2',
-      code: '111',
-      name: '222',
-      status: '',
-    } as any,
-    {
-      id: '3',
-      code: '111',
-      name: '222',
-      status: '0',
-    } as any,
-  ] as any
+let tempData: FIRS<string>[] | null = null
+watch(() => tableState.pagination, r, { deep: true, immediate: true })  
+async function r () {
+  if (!tempData) {
+    const res = await rFormDetail(props.formId)
+    tempData = res.form
+    title.value = res.formName
+    tableState.total = tempData.length
+  }
+  tableState.data = getData()
+}
+const doBind = () => {
+  showDialog.value = true
+}
+function getData () {
+  return tempData?.slice(tableState.pagination.start, tableState.pagination.start + tableState.pagination.pageSize) || []
 }
 
 </script>

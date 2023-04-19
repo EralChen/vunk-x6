@@ -3,7 +3,7 @@
     <div mt-page mb-page w-100>
       <el-input type="textarea" v-model="memo"></el-input>
     </div>
-    <el-button type="primary" @click="doApprovel(WorkFlowNodeState.通过, 'pass')">通过</el-button>
+    <el-button v-if="!nodeModelCp.auditStatus" type="primary" @click="doApprovel(WorkFlowNodeState.通过, 'pass')">通过</el-button>
     <el-button v-show="nodeModelCp.id && nodeModelCp.auditStatus" type="success"
       @click="doApprovel(WorkFlowNodeState.驳回, 'th')">退回</el-button>
     <el-button type="warning" @click="doApprovel(WorkFlowNodeState.驳回, 'bh')">驳回</el-button>
