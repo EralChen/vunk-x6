@@ -34,7 +34,9 @@ rTemplateList().then((res) => {
   })
 })
 const clientOpts = ref<Option[]>([])
+const yewuOpts = ref<Option[]>([])
 // 获取字典
+dicStore.getConfigDic(yewuOpts)
 dicStore.getTemplateDic(clientOpts)
 const formItems = ref<__SkAppForm.CoreFormItem[]>([
   {
@@ -74,9 +76,11 @@ const formItems = ref<__SkAppForm.CoreFormItem[]>([
   },
   {
     // 来自常量管理
-    templateType: 'VkfInput',
+    templateType: 'VkfSelect',
     prop: 'type',
     label: '业务类型',
+    filterable: true,
+    options: yewuOpts as any,
   },
   {
     templateType: 'VkfRadio',

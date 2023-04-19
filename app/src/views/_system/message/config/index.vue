@@ -63,6 +63,16 @@ const tableState = reactive({
     {
       prop: 'type',
       label: '业务类型',
+      slots: ({row}) => {
+        const d = dicStore.getConfigDic()
+        const client = ref<Option>()
+        d.then((dic) => {
+          dic.find(item => item.value === row.client)
+        })
+        return <span>
+          {client.value ? client.value.label : row.client}
+        </span>
+      },
     },
     {
       prop: 'requireRead',

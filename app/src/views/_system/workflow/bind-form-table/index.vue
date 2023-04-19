@@ -7,6 +7,8 @@ import { SkAppQueryForm, __SkAppQueryForm } from '@skzz-platform/components/app-
 import { Row } from './types'
 import { Pagination } from '@skzz-platform/shared'
 import { VkDuplex, setData } from '@vunk/core'
+import { rFormList } from '@skzz-platform/api/system/form'
+
 export default defineComponent({
   emits,
   props,
@@ -18,16 +20,10 @@ export default defineComponent({
   setup () {
     const queryItems:__SkAppQueryForm.CoreFormItem<keyof Row>[] = [
       {
-        prop: 'code',
+        prop: 'formName',
         label: '表单名称',
         templateType: 'VkfInput',
       },
-      {
-        prop: 'name',
-        label: '表单id',
-        templateType: 'VkfInput',
-      },
-
     ]
     const queryState = reactive({
       data: {} as Partial<Row>,
@@ -43,14 +39,14 @@ export default defineComponent({
         },
         {
           title: '表单名称',
-          dataKey: 'code',
-          key: 'code',
+          dataKey: 'formName',
+          key: 'formName',
           width: 200,
         },
         {
-          title: '表单编号',
-          dataKey: 'name',
-          key: 'name',
+          title: '版本',
+          dataKey: 'versionTag',
+          key: 'versionTag',
           width: 200,
           flexGrow: 1,
         },
@@ -68,27 +64,10 @@ export default defineComponent({
     watch(() => tableState.pagination, r, { deep: true, immediate: true })
     watch(() => queryState.data, r, { deep: true })
     function r () {
-      // rUsers(queryState.data, tableState.pagination).then(res => {
-      //   tableState.data = res.rows
-      //   tableState.total = res.total
-      // })
-      tableState.data = [
-        {
-          id: '1',
-          code: '111',
-          name: '222',
-        } as any,
-        {
-          id: '2',
-          code: '111',
-          name: '222',
-        } as any,
-        {
-          id: '3',
-          code: '111',
-          name: '222',
-        } as any,
-      ]
+      rFormList(tableState.pagination, queryState.data.formName).then(res => {
+        tableState.data = res.rows
+        tableState.total = res.total
+      })
     }
     return {
       queryItems,

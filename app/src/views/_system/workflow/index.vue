@@ -145,6 +145,7 @@ function bindUser () {
       <CUForm :type="cuState.type" :data="cuState.data" @setData="setData(cuState.data, $event)" @submit="cuI"></CUForm>
     </SkAppDialog>
 
+    <!-- 绑定表单 -->
     <SkAppDialog :modelValue="!!bindData.flowId" @update:modelValue="bindData.flowId = ''" title="绑定表单">
       <BindUserTable class="h-30em" v-model="bindData.data"></BindUserTable>
       <template #footer>

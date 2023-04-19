@@ -1,4 +1,4 @@
-import { CommonAddition } from "../types";
+import { CommonAddition } from '../types'
 
 export type MessageConfig = Required<CMessageConfig> & CommonAddition
 
