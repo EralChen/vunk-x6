@@ -3,7 +3,6 @@ import Layout from '@/layouts/default/index.vue'
 import _UI_CONFIG from './_ui-config'
 import _TEMPLATE_PAGE from './_template-page'
 import _PLAY from './_play'
-import _MESSAGE from './_message'
 
 import { getPlatform } from '@/utils'
 
@@ -56,7 +55,6 @@ export const routes: Array<RouteRecordRaw> = [
   ..._UI_CONFIG,
   ..._TEMPLATE_PAGE,
   ..._PLAY,
-  ..._MESSAGE,
 ]
 
 const router = createRouter({
