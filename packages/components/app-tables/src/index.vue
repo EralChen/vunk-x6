@@ -184,8 +184,8 @@ export default defineComponent({
               v-bind="tableBindProps" 
               :class="tableClass" 
               :style="tableStyle"
-              :width="tableBindProps.width ?? width - 2" 
-              :height="tableBindProps.height ?? height - 2" 
+              :width="(tableBindProps.width ?? width) - 2" 
+              :height="(tableBindProps.height ?? height) - 2" 
               :columns="columns"
               
             >
