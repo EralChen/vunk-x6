@@ -1,7 +1,9 @@
 <template>
   <PageX>
-    <SkAppCard :header="'表单配置'" class="h-100%">
-      <VkDuplexCalc class="gap-main-x">
+    <!-- <SkAppCard :header="'表单配置'" class="h-100%">
+
+    </SkAppCard> -->
+    <VkDuplexCalc class="pa-page h-100%">
         <template #one>
           <SkAppQueryForm
           :formItems="queryItems"
@@ -19,7 +21,6 @@
           v-model:start="tableState.pagination.start">
         </SkAppTablesV1>
       </VkDuplexCalc>
-    </SkAppCard>
   </PageX>
 </template>
 

@@ -1,18 +1,16 @@
 <template>
   <PageX>
-    <SkAppCard :header="'消息模板'" class="h-100%">
-      <VkDuplexCalc class="gap-main-x">
-        <template #one>
-          <div sk-flex="row-end" class="mb">
-            <ElButton type="primary" @click="$router.push('/system/message/template/add')">新增</ElButton>
-          </div>
-        </template>
-        <SkAppTablesV1 :defaultExpandAll="true" flex-1 :rowKey="'menuId'" :columns="tableState.columns"
-          :data="tableState.data" :total="tableState.total" v-model:page-size="tableState.pagination.pageSize"
-          v-model:start="tableState.pagination.start">
-        </SkAppTablesV1>
-      </VkDuplexCalc>
-    </SkAppCard>
+    <VkDuplexCalc class="pa-page h-full">
+      <template #one>
+        <div sk-flex="row-end" class="mb">
+          <ElButton type="primary" @click="$router.push('/system/message/template/add')">新增</ElButton>
+        </div>
+      </template>
+      <SkAppTablesV1 :defaultExpandAll="true" flex-1 :rowKey="'menuId'" :columns="tableState.columns"
+        :data="tableState.data" :total="tableState.total" v-model:page-size="tableState.pagination.pageSize"
+        v-model:start="tableState.pagination.start">
+      </SkAppTablesV1>
+    </VkDuplexCalc>
   </PageX>
 </template>
 
@@ -48,7 +46,7 @@ const tableState = reactive({
     {
       prop: 'client',
       label: '接收端',
-      slots: ({row}) => {
+      slots: ({ row }) => {
         const d = dicStore.getTemplateDic()
         const client = ref<Option>()
         d.then((dic) => {
@@ -92,7 +90,7 @@ function r () {
       }
       if (!tableState.columns.length) {
         tableState.columns = [
-        // ...res.columns as Col[],
+          // ...res.columns as Col[],
           ...tableState._columns,
         ]
       }

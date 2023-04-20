@@ -1,33 +1,30 @@
 <template>
   <PageX>
-    <SkAppCard :header="'微信配置'" class="h-100%">
-      <VkDuplexCalc class="gap-main-x">
-        <template #one>
-          <div sk-flex="row-end" class="mb">
-            <ElButton type="primary" @click="$router.push('/system/message/weixin/add')">新增</ElButton>
-          </div>
-        </template>
-        <SkAppTablesV1 :defaultExpandAll="true" flex-1 :rowKey="'menuId'" :columns="tableState.columns"
-          :data="tableState.data" :total="tableState.total" v-model:page-size="tableState.pagination.pageSize"
-          v-model:start="tableState.pagination.start">
-        </SkAppTablesV1>
-      </VkDuplexCalc>
-    </SkAppCard>
+    <VkDuplexCalc class="pa-page h-full">
+      <template #one>
+        <div sk-flex="row-end" class="mb">
+          <ElButton type="primary" @click="$router.push('/system/message/weixin/add')">新增</ElButton>
+        </div>
+      </template>
+      <SkAppTablesV1 :defaultExpandAll="true" flex-1 :rowKey="'menuId'" :columns="tableState.columns"
+        :data="tableState.data" :total="tableState.total" v-model:page-size="tableState.pagination.pageSize"
+        v-model:start="tableState.pagination.start">
+      </SkAppTablesV1>
+    </VkDuplexCalc>
   </PageX>
 </template>
 
 <script lang="tsx" setup>
 import PageX from '_c/PageX/index.vue'
-import { SkAppCard, __SkAppTables, __SkAppQueryForm } from '@skzz/platform'
 import { SkAppOperations, SkAppTablesV1, __SkAppTablesV1 } from '@skzz/platform'
 import { VkDuplexCalc } from '@vunk/core'
-import { reactive, ref, watch } from 'vue'
+import { reactive, watch } from 'vue'
 import { rWeixinList, dWeixin } from '@skzz-platform/api/system/message'
 import { Row } from './types'
 import router from '@/router'
 
 type Col = __SkAppTablesV1.Column<Row>
-  
+
 const tableState = reactive({
   data: [] as Row[],
   _columns: [
