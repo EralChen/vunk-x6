@@ -1,7 +1,6 @@
 <template>
   <PageX>
-    <SkAppCard :header="'消息数据'" class="h-100%">
-      <VkDuplexCalc class="gap-main-x">
+    <VkDuplexCalc class="pa-page h-full">
         <template #one>
           <!-- <SkAppQueryForm :fixes="2" :data="formData" @setData="setData(formData, $event)" :formItems="queryItems">
           </SkAppQueryForm> -->
@@ -11,7 +10,6 @@
           v-model:start="tableState.pagination.start">
         </SkAppTablesV1>
       </VkDuplexCalc>
-    </SkAppCard>
   </PageX>
 </template>
 

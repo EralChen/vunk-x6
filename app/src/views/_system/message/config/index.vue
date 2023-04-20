@@ -1,24 +1,22 @@
 <template>
   <PageX>
-    <SkAppCard :header="'消息数据'" class="h-100%">
-      <VkDuplexCalc class="gap-main-x">
-        <template #one>
-          <div sk-flex="row-end" class="mb">
-            <ElButton type="primary" @click="$router.push('/system/message/config/add')">新增</ElButton>
-          </div>
-        </template>
-        <SkAppTablesV1 :defaultExpandAll="true" flex-1 :rowKey="'menuId'" :columns="tableState.columns"
-          :data="tableState.data" :total="tableState.total" v-model:page-size="tableState.pagination.pageSize"
-          v-model:start="tableState.pagination.start">
-        </SkAppTablesV1>
-      </VkDuplexCalc>
-    </SkAppCard>
+    <VkDuplexCalc class="pa-page h-full">
+      <template #one>
+        <div sk-flex="row-end" class="mb">
+          <ElButton type="primary" @click="$router.push('/system/message/config/add')">新增</ElButton>
+        </div>
+      </template>
+      <SkAppTablesV1 :defaultExpandAll="true" flex-1 :rowKey="'menuId'" :columns="tableState.columns"
+        :data="tableState.data" :total="tableState.total" v-model:page-size="tableState.pagination.pageSize"
+        v-model:start="tableState.pagination.start">
+      </SkAppTablesV1>
+    </VkDuplexCalc>
   </PageX>
 </template>
 
 <script lang="tsx" setup>
 import PageX from '_c/PageX/index.vue'
-import { SkAppCard, __SkAppTables, __SkAppQueryForm } from '@skzz/platform'
+import { __SkAppTables, __SkAppQueryForm } from '@skzz/platform'
 import { SkAppOperations, SkAppTablesV1, __SkAppTablesV1 } from '@skzz/platform'
 import { VkDuplexCalc } from '@vunk/core'
 import { reactive, ref, watch } from 'vue'
@@ -28,7 +26,7 @@ import { Row } from './types'
 import router from '@/router'
 import { useDictionaryStore } from '@/stores/dictionary'
 type Col = __SkAppTablesV1.Column<Row>
-  
+
 const dicStore = useDictionaryStore()
 
 const tableState = reactive({
@@ -45,7 +43,7 @@ const tableState = reactive({
     {
       prop: 'client',
       label: '接收端',
-      slots: ({row}) => {
+      slots: ({ row }) => {
         const d = dicStore.getTemplateDic()
         const client = ref<Option>()
         d.then((dic) => {
@@ -63,7 +61,7 @@ const tableState = reactive({
     {
       prop: 'type',
       label: '业务类型',
-      slots: ({row}) => {
+      slots: ({ row }) => {
         const d = dicStore.getConfigDic()
         const client = ref<Option>()
         d.then((dic) => {
