@@ -25,12 +25,16 @@ const tableV2Props = pickObject({
     default: null,
   },
   headerHeight: {
-    type: [Number],
+    type: Number,
     default: 40,
   },
   rowHeight: {
-    type: [Number],
+    type: Number,
     default: 40,
+  },
+  vScrollbarSize: {
+    type: Number,
+    default: 0,
   },
 
 }, {
