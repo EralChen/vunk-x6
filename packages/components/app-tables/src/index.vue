@@ -184,9 +184,10 @@ export default defineComponent({
               v-bind="tableBindProps" 
               :class="tableClass" 
               :style="tableStyle"
-              :width="tableBindProps.width ?? width" 
-              :height="tableBindProps.height ?? height" 
+              :width="tableBindProps.width ?? width - 2" 
+              :height="tableBindProps.height ?? height - 2" 
               :columns="columns"
+              
             >
               <slot></slot>
             </ElTableV2>
@@ -209,17 +210,19 @@ export default defineComponent({
   </VkDuplexCalc>
 </template>
 <style lang="scss">
-
-.sk-app-tables__table .el-table-v2__table {
-  border-right: var(--el-border);
+.sk-app-tables__table .el-table-v2__table{
+  border: var(--el-border);
 }
-.el-table-v2__header-cell{
-  border-top: var(--el-border);
-}
-.sk-app-tables__table .el-table-v2__header-cell{
+// .sk-app-tables__table .el-table-v2__table {
+//   border-right: var(--el-border);
+// }
+// .el-table-v2__header-cell{
+//   border-top: var(--el-border);
+// }
+.sk-app-tables__table .el-table-v2__header-cell:not(:first-child){
   border-left: var(--el-border);
 }
-.sk-app-tables__table .el-table-v2__row-cell{
+.sk-app-tables__table .el-table-v2__row-cell:not(:first-child){
   border-left: var(--el-border);
 }
 

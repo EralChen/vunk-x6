@@ -24,6 +24,15 @@ const tableV2Props = pickObject({
     type: Boolean,
     default: null,
   },
+  headerHeight: {
+    type: [Number],
+    default: 40,
+  },
+  rowHeight: {
+    type: [Number],
+    default: 40,
+  },
+
 }, {
   excludes: ['style', 'class'],
 })

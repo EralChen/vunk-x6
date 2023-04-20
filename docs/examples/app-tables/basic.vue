@@ -21,15 +21,6 @@ const colSource:__SkAppTables.Column[] = [
     width: 100,
     title: '姓名',
   },
-  {
-    type: 'button',
-    width: 250,
-    title: '操作',
-    
-    cellRenderer: () => {
-      return <SkAppOperations></SkAppOperations>
-    },
-  },
 
 
 ]
