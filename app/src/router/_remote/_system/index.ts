@@ -1,5 +1,7 @@
 import Layout from '@/layouts/default/index.vue'
 import { RouteRecordRaw } from 'vue-router'
+import FORM from './form'
+import MESSAGE from './message'
 
 export default function () {
   return  {
@@ -75,33 +77,10 @@ export default function () {
     '/system/button': {
       component: () => import('@/views/_system/button/index.vue'),
     },
-
     '/system/constant': {
       component: () => import('@/views/_system/constant/index.vue'),
     },
-    
-    '/system/form': {
-      redirect: '/system/form/list',
-    },
-    '/system/form/list': {
-      component: () => import('@/views/_system/form/index.vue'),
-      meta: {
-        breadcrumb: false,
-      },
-    },
-    '/system/form/add': {
-      component: () => import('@/views/_system/form/cu/index.vue'),
-    },
-    '/system/form/edit/:id': {
-      component: () => import('@/views/_system/form/cu/index.vue'),
-      props: true,
-    },
-    '/system/form/detail/:id': {
-      component: () => import('@/views/_system/form/cu/index.vue'),
-      props: (route) => ({
-        id: route.params.id,
-        isDetail: true,
-      }),
-    },
+    ...FORM(),
+    ...MESSAGE(),
   } as Record<string, Partial<RouteRecordRaw>>
 }
