@@ -15,15 +15,37 @@ export default defineComponent({
     const formItems: __SkAppForm.FormItem<keyof Row>[] = [
       {
         templateType: 'VkfInput',
-        prop: 'tenantId',
-        label: '租户ID',
+        prop: 'applicationId',
+        label: '应用ID',
         required: true,
       },
       {
         templateType: 'VkfInput',
         prop: 'name',
         label: '名称',
+        required: true,
       },
+
+      {
+        templateType: 'VkfSelect',
+        prop: 'client',
+        label: '所属客户端',
+      },
+      
+      // {
+      //   templateType: 'VkfInput',
+      //   prop: 'tenantId',
+      //   label: '租户ID',
+      // },
+
+      {
+        prop: 'memo',
+        label: '备注',
+        templateType: 'VkfInput',
+        type: 'textarea',
+        rows: 5,
+      },
+
 
       {
         templateType: 'VkfButton',
@@ -35,6 +57,7 @@ export default defineComponent({
           emit('submit', props.data)
         },
       },
+      
     ]
     return {
       formItems,
@@ -44,7 +67,7 @@ export default defineComponent({
 </script>
 <template>
   <SkAppForm 
-    :labelWidth="'5em'"
+    :labelWidth="'6em'"
     :data="data"
     :formItems="formItems"
   ></SkAppForm>

@@ -1,6 +1,6 @@
 import { Pagination } from '@skzz-platform/shared'
 import { request } from '@skzz-platform/shared/fetch/platform'
-import { RestFetchQueryOptions, QueryRData, RestFetchSaveOptions } from '@vunk/skzz'
+import { RestFetchQueryOptions, QueryRData, RestFetchSaveOptions, RestFetchExecOptions } from '@vunk/skzz'
 import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
 import { MENU_DATA } from './const'
 import { Tenant } from './types'
@@ -32,9 +32,14 @@ export const rTenants = (
 export const dTenants = (ids: string[]) => {
   return request({
     method: 'POST',
-    url: '/core/busi/save',
+    url: '/core/busi/exec',
     data: {
- 
+      datasetId: '3',
+      buttonId: 'remove',
+      condition: {
+        op: 'remove',
+      },
+
       datas: [
         {
           datasetId: '1',
@@ -50,32 +55,80 @@ export const dTenants = (ids: string[]) => {
       ],
       ...MENU_DATA,
     },
-  } as RestFetchSaveOptions, {
-    msg: '删除角色成功',
+  } as RestFetchExecOptions, {
+    msg: '删除成功',
   })
 }
 
-export const cuTenant = (data: Partial<Tenant>) => {
+const cTenant = (data: Partial<Tenant>) => {
   return request({
     method: 'POST',
-    url: '/core/busi/save',
+    url: '/core/busi/exec',
     data: {
+      datasetId: '3',
+      condition: {
+        op: 'increase',
+      },
+
       datas: [
         {
           datasetId: '1',
           rows: [
             {
               ...data,
-              op: data.id ? RestFetchOp.u : RestFetchOp.c,
+              op: RestFetchOp.c,
             },
           ],
         },
       ],
+
+      'buttonId': 'increase',
       ...MENU_DATA,
     },
-  } as RestFetchSaveOptions, {
-    msg: data.id ? '修改角色成功' : '新增角色成功',
+  } as RestFetchExecOptions, {
+    msg: '新增成功',
   })
+}
+
+const uTenant = (data: Partial<Tenant>) => {
+  return request({
+    method: 'POST',
+    url: '/core/busi/exec',
+    data: {
+      datasetId: '3',
+      condition: {
+        op: 'increase',
+      },
+
+      datas: [
+        {
+          datasetId: '1',
+          rows: [
+            {
+              ...data,
+              op: RestFetchOp.c,
+            },
+          ],
+        },
+      ],
+
+      'buttonId': 'increase',
+      ...MENU_DATA,
+    },
+  } as RestFetchExecOptions, {
+    msg: '新增成功',
+  })
+}
+
+export const cuTenant = (data: Partial<Tenant>) => {
+  const op = data.id ? RestFetchOp.u : RestFetchOp.c
+
+  if (op === RestFetchOp.c)  {
+    return cTenant(data)
+  } else {
+    return uTenant(data)
+  }
+
 }
 
 export * from './types'
