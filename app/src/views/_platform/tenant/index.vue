@@ -5,6 +5,7 @@ import {
   SkAppQueryForm, __SkAppQueryForm, 
   SkAppOperations,
   Pagination,
+  
 } from '@skzz/platform'
 import { NormalObject, setData, VkDuplexCalc } from '@vunk/core'
 import { reactive, ref, watch } from 'vue'
@@ -19,7 +20,7 @@ const queryItems: __SkAppQueryForm.FormItem[] = [
   {
     templateType: 'VkfInput',
     prop: 'name',
-    label: '名称',
+    label: '租户名称',
   },
 ]
 const queryData = ref({} as NormalObject)

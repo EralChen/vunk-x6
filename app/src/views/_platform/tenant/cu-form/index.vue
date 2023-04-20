@@ -22,7 +22,7 @@ export default defineComponent({
       {
         templateType: 'VkfInput',
         prop: 'name',
-        label: '姓名',
+        label: '租户名称',
       },
 
       {

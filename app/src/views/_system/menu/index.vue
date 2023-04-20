@@ -158,7 +158,7 @@ function d (rows: Row[]) {
     }).then(() => {
       return dMenus(rows.map(item => item.id))
     })
-    .then(() => {
+    .finally(() => {
       rTree()
       r()
     })
