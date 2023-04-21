@@ -3,8 +3,8 @@ import { request } from '@skzz-platform/shared/fetch/platform'
 import { RestFetchQueryOptions, QueryRData, RestFetchSaveOptions, RestFetchExecOptions } from '@vunk/skzz'
 import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
 import { MENU_DATA } from './const'
-import { Application as Row } from './types'
-
+import { Application as Row, BoundApplication } from './types'
+import { rBtns } from '@skzz-platform/api/basic'
 export const rApplications = (
   query: Partial<Row> = {}, 
   pagination?: Pagination,
@@ -28,6 +28,11 @@ export const rApplications = (
     return res.datas[0]
   })
 }
+
+export const rApplicationBtns = () => {
+  return rBtns(MENU_DATA)
+}
+
 
 export const dApplications = (ids: string[]) => {
   return request({
@@ -125,5 +130,70 @@ export const cuApplication = (data: Partial<Row>) => {
     return uApplication(data)
   }
 }
+
+
+export const rBoundApplications = (applicationId: string) => {
+  return request<{
+    '2.2': QueryRData<BoundApplication>
+  }>({
+    method: 'POST',
+    url: '/core/busi/query',
+    data: {
+      'datasetIds': [
+        '2.2',
+      ],
+      'condition': {
+        '2.2': {
+          'applicationId': applicationId,
+        },
+      },
+      'dir': 'platform',
+      'modelId': 'application',
+      'menuId': 'application',
+      'buttonId': 'search',
+    },
+  } as RestFetchQueryOptions).then(res => {
+    return res.datas['2.2']
+  })
+}
+
+export const cBoundApplications = (
+  data: Partial<BoundApplication>[],
+  // d = true,
+) => {
+  const rows = data.map(item => {
+    return {
+      ...item,
+      op: RestFetchOp.c,
+    }
+  })
+  // if (d) {
+  //   rows.unshift({
+  //     applicationId: data[0].applicationId,
+  //     op: RestFetchOp.d,
+  //   })
+  // }
+
+  return request({
+    method: 'POST',
+    url: '/core/busi/exec',
+    data: {
+      ...MENU_DATA,
+      'buttonId': 'increase',
+      'condition': {
+        'op': 'increase',
+      },
+
+      'datas': [{
+        'datasetId': '1',
+        rows,
+      }],
+      'datasetId': '5',
+        
+    },
+  })
+}
+
+
 
 export * from './types'
