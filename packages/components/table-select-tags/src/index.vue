@@ -54,7 +54,7 @@ export default defineComponent({
   <div :class="{'fack-input-x': true, 'is-disabled': unuse}" @click="doClick">
     <div class="fack-input w-100%">
       <span v-if="!model.length" class="placeholder">{{ placeholder }}</span>
-      <ElTag v-else v-for="item in model" :key="item[tempProp.id]" :closable="closable" type="info"
+      <ElTag v-else v-for="item in model" :key="item[tempProp.id]" :closable="closable && !unuse" type="info"
         @close="closeTag(item[tempProp.id])">
         {{ item[tempProp.label] }}
       </ElTag>

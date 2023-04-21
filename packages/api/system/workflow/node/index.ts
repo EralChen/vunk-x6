@@ -8,14 +8,15 @@ import { rWorkflow } from '@skzz-platform/api/system/workflow'
 import { GraphData, TreeGraphData } from '@antv/g6'
 
 /**
- * https://www.apifox.cn/link/project/1903413/apis/api-71032252
+ * https://www.apifox.cn/link/project/1903413/apis/api-71032252  
+ * 查询节点定义
  * @param query 
  * @returns 
  */
 export const rWorkflowNodes = (query: {
   flowId: string,
 }) => {
-  return request<{'8.1': WorkflowData}>({
+  return request<{ '8.1': WorkflowData }>({
     method: 'POST',
     url: '/core/busi/exec',
     DEV_NAME: 'rWorkflowNode',
@@ -34,7 +35,8 @@ export const rWorkflowNodes = (query: {
 }
 
 /**
- * https://www.apifox.cn/link/project/1903413/apis/api-69112632
+ * https://www.apifox.cn/link/project/1903413/apis/api-69112632  
+ * 查询节点实例
  * @param query 
  */
 export const rWorkflowNodeRaw = (query: {
@@ -62,7 +64,11 @@ export const rWorkflowNodeRaw = (query: {
   })
 }
 
-
+/**
+ * 先调用rWorkflow，再调用rWorkflowNodeRaw
+ * @param query 
+ * @returns 
+ */
 export const rWorkflowNodesWithRaw = (query: {
   flowId?: string,
   id?: string,
@@ -85,7 +91,7 @@ export const rWorkflowNodesWithRaw = (query: {
 }
 
 
-export const dWorkflowNodes  = (ids: string[]) => {
+export const dWorkflowNodes = (ids: string[]) => {
   return request({
     method: 'POST',
     url: '/core/busi/save',
@@ -112,7 +118,7 @@ export const cuWorkflowNode = async (data: Partial<WorkflowNode>) => {
   if (op === RestFetchOp.c) {
     data.id = await (snowFlake())
   }
-  
+
   return request({
     method: 'POST',
     url: '/core/busi/save',
@@ -130,7 +136,7 @@ export const cuWorkflowNode = async (data: Partial<WorkflowNode>) => {
       ],
       ...MENU_DATA,
     },
-      
+
   } as RestFetchSaveOptions, {
     msg: op === RestFetchOp.c ? '新增成功' : '修改成功',
   })
@@ -218,14 +224,16 @@ export const bindAssistOperToNode = (nodeInstId: string, assistOperIds: string[]
 /**
  * 审批节点
  * https://www.apifox.cn/link/project/1903413/apis/api-69116505
- * @param itemId 
- * @param status 
- * @param memo 
- * @param nodeInstId 
- * @param backNodeId 
+ * @param data
  * @returns 
  */
-export const doApproveNode = (itemId: string, status: WorkFlowNodeState, memo?: string, nodeInstId?: string, backNodeId?: string) => {
+export const doApproveNode = (data: {
+  itemId: string,
+  status: WorkFlowNodeState,
+  memo?: string,
+  nodeInstId?: string,
+  backNodeId?: string
+}) => {
   return request({
     method: 'POST',
     url: '/core/busi/exec',
@@ -234,14 +242,59 @@ export const doApproveNode = (itemId: string, status: WorkFlowNodeState, memo?: 
       'condition': {
         'flow': {
           'op': 'audit',
-          itemId,
-          status,
-          nodeInstId,
-          memo,
-          backNodeId,
+          ...(data ? data : {}),
         },
       },
       ...MENU_DATA,
+      'buttonId': 'modify',
+    },
+
+  } as RestFetchExecOptions, {
+    msg: '操作成功',
+  })
+}
+
+/**
+ * 
+ * @param data 审批需要的数据
+ * @param formData 节点表单数据
+ * @param id 节点实例id？
+ * @returns 
+ */
+export const doApproveNodeWithForm = (data: {
+  itemId: string,
+  status: WorkFlowNodeState,
+  memo?: string,
+  nodeInstId?: string,
+  backNodeId?: string
+}, formData: any, id: string, formTable: string) => {
+  return request({
+    method: 'POST',
+    url: '/core/busi/exec',
+    data: {
+      'datasetId': '2',
+      'condition': {
+        'flow': {
+          'op': 'audit',
+          ...(data ? data : {}),
+        },
+      },
+      'datas': [
+        {
+          'datasetId': '1',
+          'rows': [
+            {
+              ...(formData ? formData : {}),
+              'op': RestFetchOp.u,
+              'id': id,
+            },
+          ],
+        },
+      ],
+      'dir': formTable,
+      'modelId': formTable,
+      'menuId': formTable,
+      'buttonId': 'modify',
     },
 
   } as RestFetchExecOptions, {

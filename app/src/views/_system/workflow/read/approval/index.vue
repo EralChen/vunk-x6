@@ -1,9 +1,14 @@
 <template>
+  <ElDivider>表单</ElDivider>
+  <SkAppForm :formItems="nodeFormItem" :data="nodeFormData" @setData="setData(nodeFormData, $event)">
+  </SkAppForm>
+  <ElDivider>表单 - end</ElDivider>
   <ElFormItem label="审批" v-show="isFlowStart && (hasApprovelAuth || hasAssistAuth)">
     <div mt-page mb-page w-100>
       <el-input type="textarea" v-model="memo"></el-input>
     </div>
-    <el-button v-if="!nodeModelCp.auditStatus" type="primary" @click="doApprovel(WorkFlowNodeState.通过, 'pass')">通过</el-button>
+    <el-button v-if="!nodeModelCp.auditStatus" type="primary"
+      @click="doApprovel(WorkFlowNodeState.通过, 'pass')">通过</el-button>
     <el-button v-show="nodeModelCp.id && nodeModelCp.auditStatus" type="success"
       @click="doApprovel(WorkFlowNodeState.驳回, 'th')">退回</el-button>
     <el-button type="warning" @click="doApprovel(WorkFlowNodeState.驳回, 'bh')">驳回</el-button>
@@ -14,9 +19,12 @@
 import { NodeModel } from '@zzg6/flow/components/editor/src/types'
 import { PropType, computed, ref, watch } from 'vue'
 import { User } from '@skzz-platform/api/system/user'
-import { WorkFlowNodeState, doApproveNode } from '@skzz-platform/api/system/workflow'
+import { WorkFlowNodeState, doApproveNode, doApproveNodeWithForm } from '@skzz-platform/api/system/workflow'
 import { getCurrentNodeId } from '../utils'
 import { useUserStore } from '@skzz-platform/stores/user'
+import { cloneDeep } from 'lodash'
+import { SkAppForm } from '@skzz/platform'
+import { setData } from '@vunk/core'
 
 
 const props = defineProps({
@@ -29,12 +37,16 @@ const props = defineProps({
     default: false,
   },
   nodeModel: {
-    type: Object as PropType<NodeModel<User>>,
+    type: Object as PropType<NodeModel>,
     default: () => ({}),
   },
   currentNodeInstIds: {
     type: Array as PropType<string[]>,
     default: () => [],
+  },
+  formTable: {
+    type: String,
+    default: '',
   },
 })
 const emit = defineEmits(['approvalSuccess'])
@@ -48,6 +60,11 @@ const currentNodeInstIdsCp = computed(() => props.currentNodeInstIds)
 const hasApprovelAuth = ref(false)
 const hasAssistAuth = ref(false)
 
+const nodeFormData = ref({})
+const nodeFormItem = ref([])
+
+const formTableCp = computed(() => props.formTable)
+
 /**
  * 是否有对选中节点的审批权限
  * @param opers 
@@ -58,8 +75,14 @@ function judgeAuth (opers: User[]) {
 }
 
 // 为了和选人显示的内容做区分，要不然关闭选人窗口时会出现按钮不显示的问题
-watch(() => props.nodeModel, (v) => {
+watch(() => props.nodeModel, (v, ov) => {
   hasApprovelAuth.value = judgeAuth(v.opers || [])
+  if (v && v.formColumns && v.formColumns.show && v.id !== ov?.id) {
+    nodeFormItem.value = cloneDeep((v as any).formColumns.show)
+  } else {
+    nodeFormItem.value = []
+    nodeFormData.value = {}
+  }
 }, { immediate: true })
 watch(() => props.nodeModel, (v) => {
   hasAssistAuth.value = judgeAuth(v.opers || [])
@@ -84,12 +107,17 @@ function doApprovel (type: WorkFlowNodeState, e: string) {
   if (e === 'th') {
     currentBackId = nodeModelCp.value.id
   }
-  doApproveNode(
-    props.flowId,
-    type,
-    memo.value,
-    currentNodeId,
-    currentBackId,
+  doApproveNodeWithForm(
+    {
+      itemId: props.flowId,
+      status: type,
+      memo: memo.value,
+      nodeInstId: currentNodeId,
+      backNodeId: currentBackId,
+    },
+    nodeFormData.value,
+    nodeModelCp.value.id,
+    formTableCp.value,
   ).then(() => {
     emit('approvalSuccess')
   })
