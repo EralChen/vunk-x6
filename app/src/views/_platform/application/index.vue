@@ -7,12 +7,15 @@ import {
   Pagination,
 } from '@skzz/platform'
 import { NormalObject, setData, VkDuplexCalc } from '@vunk/core'
-import { reactive, ref, watch } from 'vue'
-import { cuApplication, dApplications, rApplications } from '@skzz-platform/api/platform/application'
+import { computed, reactive, ref, watch } from 'vue'
+import { cuApplication, rApplicationBtns, dApplications, rApplications, BoundApplication, cBoundApplications, rBoundApplications, dBoundApplications } from '@skzz-platform/api/platform/application'
 import { genColumn } from '@skzz-platform/shared/utils-data'
 import CuForm from './cu-form/index.vue'
 import { SkAppDialog } from '@skzz-platform/components/app-dialog'
 import { Row } from './types'
+import { SkTenantTablesSelect } from '@skzz-platform/components/tenant-tables-select'
+import { Tenant } from '@skzz-platform/api/platform/tenant'
+import { ElButton, ElPopconfirm } from 'element-plus'
 
 /* query */
 const queryItems: __SkAppQueryForm.FormItem[] = [
@@ -44,6 +47,56 @@ const cuIState = reactive({
   title: '新增应用',
 })
 
+const bindState = reactive({
+  current: {} as Partial<Row>,
+  title: '绑定租户',
+  data: [] as Partial<Tenant>[],
+})
+const bindCols = computed< __SkAppTables.Column[]>(() => [
+  {
+    key: 'operation',
+    title: '操作',
+    width: 100,
+    align: 'center',
+    cellRenderer: ({ rowData }) => {
+   
+      return bindState.data.some(item => {
+        return item.tenantId === rowData.tenantId
+      }) 
+        ? <ElPopconfirm
+          title="确定解绑吗？"
+          onConfirm={ () => { unbind({
+            tenantId: rowData.tenantId,
+            applicationId: bindState.current.applicationId,
+          }) } }
+          v-slots={
+            {
+              reference: () => <ElButton
+                type="danger"
+                size='small'
+              >
+              解绑
+              </ElButton>,
+            }
+          }
+        >
+        
+        </ElPopconfirm>
+
+        : <ElButton
+          type="primary"
+          size='small'
+          onClick={() => bind({
+            applicationId: bindState.current.applicationId,
+            tenantId: rowData.tenantId,
+          })}
+        >
+          绑定  
+        </ElButton>
+    },
+  },
+])  
+
 const operationsCol: __SkAppTables.Column = {
   title: '操作',
   key: 'operations',
@@ -51,9 +104,15 @@ const operationsCol: __SkAppTables.Column = {
   flexGrow: 1,
   align: 'center',
   cellRenderer: ({ rowData }) => <SkAppOperations
-    modules={['u','d']}
+    api={rApplicationBtns}
+    excludes={['increase', 'search']}
     onD={ () => { d([rowData.id]) } }
     onU={ () => { preuI(rowData) } }
+    onClick={ (e) => {
+      if (e === 'bind') {
+        prebind(rowData)
+      }
+    }}
   ></SkAppOperations>,
 } 
 function r () {
@@ -96,6 +155,27 @@ function cuI () {
   })
 }
 
+
+function prebind (row: Row) {
+  bindState.current = row
+  bindState.title = '绑定租户'
+  return rBinds()
+}
+function rBinds ()  {
+  if (!bindState.current.applicationId) return
+  rBoundApplications(bindState.current.applicationId).then(res => {
+    bindState.data = res.rows
+  })
+}
+function bind (ba: Partial<BoundApplication>) {
+  cBoundApplications([ba])
+    .then(rBinds)
+}
+function unbind (ba: Partial<BoundApplication>) {
+  dBoundApplications([ba])
+    .then(rBinds)
+}
+
 </script>
 <template>
   <PageX>
@@ -133,6 +213,21 @@ function cuI () {
         @setData="setData(cuIState.formData, $event)"
         @submit="cuI"
       ></CuForm>
+    </SkAppDialog>
+
+    <SkAppDialog 
+      :modelValue="!!bindState.current.applicationId"
+      @update:modelValue="bindState.current = {}"
+      :title="bindState.title"
+    >
+      <SkTenantTablesSelect
+        :columns="bindCols"
+        :readonly="true"
+        class="h-50vh"
+        v-model="bindState.data"
+      >
+      </SkTenantTablesSelect>
+
     </SkAppDialog>
 
   </PageX>

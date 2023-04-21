@@ -20,3 +20,9 @@ export interface Application {
   databaseId: string;
   isSys?: any;
 }
+
+
+export interface BoundApplication {
+  'applicationId': string, // 应用ID
+  'tenantId': string // 租户ID
+}
