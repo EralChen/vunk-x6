@@ -189,6 +189,8 @@ export const cBoundApplications = (
       'datasetId': '6',
         
     },
+  }, {
+    loading: true,
   })
 }
 
@@ -217,6 +219,8 @@ export const dBoundApplications = (data: Partial<BoundApplication>[]) => {
       'datasetId': '6',
         
     },
+  }, {
+    loading: true,
   })
 }
 
