@@ -133,9 +133,7 @@ export const cuApplication = (data: Partial<Row>) => {
 
 
 export const rBoundApplications = (applicationId: string) => {
-  return request<{
-    '2.2': QueryRData<BoundApplication>
-  }>({
+  return request<[QueryRData<BoundApplication>]>({
     method: 'POST',
     url: '/core/busi/query',
     data: {
@@ -153,7 +151,7 @@ export const rBoundApplications = (applicationId: string) => {
       'buttonId': 'search',
     },
   } as RestFetchQueryOptions).then(res => {
-    return res.datas['2.2']
+    return res.datas[0]
   })
 }
 
@@ -182,6 +180,34 @@ export const cBoundApplications = (
       'buttonId': 'increase',
       'condition': {
         'op': 'increase',
+      },
+
+      'datas': [{
+        'datasetId': '1',
+        rows,
+      }],
+      'datasetId': '5',
+        
+    },
+  })
+}
+
+export const dBoundApplications = (data: Partial<BoundApplication>[]) => {
+  const rows = data.map(item => {
+    return {
+      ...item,
+      op: RestFetchOp.d,
+    }
+  })
+  
+  return request({
+    method: 'POST',
+    url: '/core/busi/exec',
+    data: {
+      ...MENU_DATA,
+      'buttonId': 'remove',
+      'condition': {
+        'op': 'remove',
       },
 
       'datas': [{

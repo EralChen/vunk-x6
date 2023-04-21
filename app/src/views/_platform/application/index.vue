@@ -8,7 +8,7 @@ import {
 } from '@skzz/platform'
 import { NormalObject, setData, VkDuplexCalc } from '@vunk/core'
 import { computed, reactive, ref, watch } from 'vue'
-import { cuApplication, rApplicationBtns, dApplications, rApplications, BoundApplication, cBoundApplications, rBoundApplications } from '@skzz-platform/api/platform/application'
+import { cuApplication, rApplicationBtns, dApplications, rApplications, BoundApplication, cBoundApplications, rBoundApplications, dBoundApplications } from '@skzz-platform/api/platform/application'
 import { genColumn } from '@skzz-platform/shared/utils-data'
 import CuForm from './cu-form/index.vue'
 import { SkAppDialog } from '@skzz-platform/components/app-dialog'
@@ -58,39 +58,42 @@ const bindCols = computed< __SkAppTables.Column[]>(() => [
     title: '操作',
     width: 100,
     align: 'center',
-    cellRenderer: ({ rowData }) => bindState.data.some(item => {
-      item.tenantId === rowData.tenantId
-    }) 
-      ? <ElPopconfirm
-        title="确定解绑吗？"
-        onConfirm={ () => { bind({
-          tenantId: rowData.tenantId,
-          applicationId: bindState.current.applicationId,
-        }) } }
-        v-slots={
-          {
-            reference: () => <ElButton
-              type="danger"
-              size='small'
-            >
+    cellRenderer: ({ rowData }) => {
+   
+      return bindState.data.some(item => {
+        return item.tenantId === rowData.tenantId
+      }) 
+        ? <ElPopconfirm
+          title="确定解绑吗？"
+          onConfirm={ () => { unbind({
+            tenantId: rowData.tenantId,
+            applicationId: bindState.current.applicationId,
+          }) } }
+          v-slots={
+            {
+              reference: () => <ElButton
+                type="danger"
+                size='small'
+              >
               解绑
-            </ElButton>,
+              </ElButton>,
+            }
           }
-        }
-      >
+        >
         
-      </ElPopconfirm>
+        </ElPopconfirm>
 
-      : <ElButton
-        type="primary"
-        size='small'
-        onClick={() => unbind({
-          applicationId: bindState.current.applicationId,
-          tenantId: rowData.tenantId,
-        })}
-      >
+        : <ElButton
+          type="primary"
+          size='small'
+          onClick={() => bind({
+            applicationId: bindState.current.applicationId,
+            tenantId: rowData.tenantId,
+          })}
+        >
           绑定  
-      </ElButton>,
+        </ElButton>
+    },
   },
 ])  
 
@@ -169,7 +172,8 @@ function bind (ba: Partial<BoundApplication>) {
     .then(rBinds)
 }
 function unbind (ba: Partial<BoundApplication>) {
-  // [TODO] 
+  dBoundApplications([ba])
+    .then(rBinds)
 }
 
 </script>
