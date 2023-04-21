@@ -1,6 +1,6 @@
 import { Pagination } from '@skzz-platform/shared'
 import { request } from '@skzz-platform/shared/fetch/platform'
-import { RestFetchQueryOptions, QueryRData, RestFetchSaveOptions, RestFetchExecOptions } from '@vunk/skzz'
+import { RestFetchQueryOptions, QueryRData, RestFetchExecOptions } from '@vunk/skzz'
 import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
 import { MENU_DATA } from './const'
 import { Tenant } from './types'
@@ -97,7 +97,7 @@ const uTenant = (data: Partial<Tenant>) => {
     data: {
       datasetId: '3',
       condition: {
-        op: 'increase',
+        op: 'modify',
       },
 
       datas: [
@@ -106,17 +106,17 @@ const uTenant = (data: Partial<Tenant>) => {
           rows: [
             {
               ...data,
-              op: RestFetchOp.c,
+              op: RestFetchOp.u,
             },
           ],
         },
       ],
 
-      'buttonId': 'increase',
+      'buttonId': 'modify',
       ...MENU_DATA,
     },
   } as RestFetchExecOptions, {
-    msg: '新增成功',
+    msg: '修改成功',
   })
 }
 

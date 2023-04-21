@@ -1,6 +1,6 @@
 import { Pagination } from '@skzz-platform/shared'
 import { request } from '@skzz-platform/shared/fetch/platform'
-import { RestFetchQueryOptions, QueryRData, RestFetchSaveOptions } from '@vunk/skzz'
+import { RestFetchQueryOptions, QueryRData, RestFetchSaveOptions, RestFetchExecOptions } from '@vunk/skzz'
 import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
 import { MENU_DATA } from './const'
 import { Application as Row } from './types'
@@ -55,27 +55,75 @@ export const dApplications = (ids: string[]) => {
   })
 }
 
-export const cuApplication = (data: Partial<Row>) => {
+const cApplication = (data: Partial<Row>) => {
   return request({
     method: 'POST',
-    url: '/core/busi/save',
+    url: '/core/busi/exec',
     data: {
+      datasetId: '5',
+      condition: {
+        op: 'increase',
+      },
+
       datas: [
         {
           datasetId: '1',
           rows: [
             {
               ...data,
-              op: data.id ? RestFetchOp.u : RestFetchOp.c,
+              op: RestFetchOp.c,
             },
           ],
         },
       ],
+
+      'buttonId': 'increase',
       ...MENU_DATA,
     },
-  } as RestFetchSaveOptions, {
-    msg: data.id ? '修改角色成功' : '新增角色成功',
+  } as RestFetchExecOptions, {
+    msg: '新增成功',
   })
+}
+
+const uApplication = (data: Partial<Row>) => {
+  return request({
+    method: 'POST',
+    url: '/core/busi/exec',
+    data: {
+      datasetId: '5',
+      condition: {
+        op: 'modify',
+      },
+
+      datas: [
+        {
+          datasetId: '1',
+          rows: [
+            {
+              ...data,
+              op: RestFetchOp.u,
+            },
+          ],
+        },
+      ],
+
+      'buttonId': 'modify',
+      ...MENU_DATA,
+    },
+  } as RestFetchExecOptions, {
+    msg: '修改成功',
+  })
+}
+
+
+export const cuApplication = (data: Partial<Row>) => {
+  const op = data.id ? RestFetchOp.u : RestFetchOp.c
+
+  if (op === RestFetchOp.c) {
+    return cApplication(data)
+  } else {
+    return uApplication(data)
+  }
 }
 
 export * from './types'
