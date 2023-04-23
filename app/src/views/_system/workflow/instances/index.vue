@@ -1,12 +1,18 @@
 <script lang="tsx" setup>
 import { reactive, watch } from 'vue'
-import { rWorkflows} from '@skzz-platform/api/system/workflow'
+import { rInstanceList } from '@skzz-platform/api/system/workflow'
 import { SkAppOperations, SkAppTablesV1, __SkAppTablesV1 } from '@skzz/platform'
 import { VkDuplexCalc } from '@vunk/core'
 import { useRouterTo } from '@skzz-platform/composables'
 
 type Row = any
 type Col = __SkAppTablesV1.Column<Row>
+const props = defineProps({
+  flowId: {
+    type: String,
+    required: true,
+  },
+})
 const { routerNext } = useRouterTo()
 const tableState = reactive({
   data: [] as Row[],
@@ -67,7 +73,7 @@ function rI (id: string) {
 
 watch(() => tableState.pagination, r, { deep: true, immediate: true })
 function r () {
-  return rWorkflows({}, tableState.pagination).then(res => {
+  return rInstanceList(tableState.pagination, props.flowId).then(res => {
     if (!tableState.columns.length) {
       tableState.columns = [
         ...res.columns as Col[],

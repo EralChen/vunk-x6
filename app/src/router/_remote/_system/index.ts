@@ -53,6 +53,7 @@ export default function () {
       },
     },
     '/system/workflow/list/instances/:flowId': {
+      props: true,
       component: () => import('@/views/_system/workflow/instances/index.vue'),
     },
     '/system/workflow/list/instances/:flowId/read/:id': {
