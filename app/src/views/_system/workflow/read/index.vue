@@ -10,25 +10,10 @@
                 <ElScrollbar>
                   <ElForm label-position="top">
                     <BindOpers :node-model="nodeModel" @bind-success="r"></BindOpers>
-                  </ElForm>
-                </ElScrollbar>
-              </el-tab-pane>
-              <!-- <el-tab-pane label="表单" name="form">
-                <ElScrollbar>
-                  
-                </ElScrollbar>
-              </el-tab-pane> -->
-              <el-tab-pane label="审批" name="approval">
-                <ElScrollbar>
-                 
-                  <ElForm label-position="top">
-                    <ElFormItem label="开始流程" v-show="!isFlowStart">
+                    <!-- v-show="!isFlowStart" -->
+                    <ElFormItem label="开始流程">
                       <el-button type="primary" @click="doRunWorkflow">运行</el-button>
                     </ElFormItem>
-                    <BindAssitsOpers :node-model="nodeModel" :currentNodeInstIds="bindState.currentNodeInstIds"
-                      @bind-success="r" :isFlowStart="isFlowStart"></BindAssitsOpers>
-                    <Approval :flowId="id" :node-model="nodeModel" :currentNodeInstIds="bindState.currentNodeInstIds"
-                      :isFlowStart="isFlowStart" @approvalSuccess="r" :form-table="flowData.formTable"></Approval>
                   </ElForm>
                 </ElScrollbar>
               </el-tab-pane>
@@ -38,19 +23,23 @@
       </div>
     </SkAppCard>
   </PageOver>
+  <SkAppDialog v-model="startShow" title="运行流程">
+    <GenInstance :tableData="tableData" :flowData="flowData" :itemId="flowData.itemId" @success="startShow = false"></GenInstance>
+  </SkAppDialog>
 </template>
 
 <script setup lang="tsx">
 import { rWorkflowNodesWithRaw, runWorkflow, Workflow } from '@skzz-platform/api/system/workflow'
 import { computed, nextTick, reactive, ref, shallowRef, watch } from 'vue'
 import { SkAppCard } from '@skzz/platform'
-import { User } from '@skzz-platform/api/system/user'
 import ZzG6Editor from '@/components/ZzG6Editor/index.vue'
 import BindOpers from './bind-opers/index.vue'
-import BindAssitsOpers from './bind-assist-opers/index.vue'
-import Approval from './approval/index.vue'
 import { cloneDeep } from 'lodash'
 import { NodeModel } from '@zzg6/flow/components/editor/src/types'
+import { SkAppDialog } from '@skzz/platform'
+import GenInstance from './gen-instance/index.vue'
+import { NodeConfig } from '@antv/g6'
+
 
 
 // type Row = Partial<WorkflowNode>
@@ -61,8 +50,8 @@ const props = defineProps({
     required: true,
   },
 })
-
-
+const tableData = ref<NodeConfig[]>([])
+const startShow = ref(false)
 const nodeModel = ref({} as NodeModel)
 const model = shallowRef({}) // 流程节点数据
 const flowData = ref({} as Workflow) // 流程详情
@@ -77,6 +66,7 @@ function r () {
   rWorkflowNodesWithRaw({
     id: props.id,
   }).then(res => {
+    tableData.value = res.raws.nodes!
     model.value = res.raws
     bindState.currentNodeInstIds = res.raws.currentNodeInstIds
     flowData.value = res.info
@@ -110,9 +100,11 @@ const nodeSelectChange = (e: any) => {
  * 运行流程
  */
 function doRunWorkflow () {
-  if (flowData.value.itemId)
-    runWorkflow(flowData.value.itemId).then(r)
+  startShow.value = true
+  // if (flowData.value.itemId)
+  //   runWorkflow(flowData.value.itemId).then(r)
 }
+
 
 </script>
 

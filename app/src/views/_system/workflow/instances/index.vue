@@ -1,11 +1,11 @@
 <script lang="tsx" setup>
 import { reactive, watch } from 'vue'
-import { rInstanceList } from '@skzz-platform/api/system/workflow'
+import { FlowNodeInstance, rInstanceList } from '@skzz-platform/api/system/workflow'
 import { SkAppOperations, SkAppTablesV1, __SkAppTablesV1 } from '@skzz/platform'
 import { VkDuplexCalc } from '@vunk/core'
 import { useRouterTo } from '@skzz-platform/composables'
 
-type Row = any
+type Row = FlowNodeInstance
 type Col = __SkAppTablesV1.Column<Row>
 const props = defineProps({
   flowId: {
@@ -18,28 +18,6 @@ const tableState = reactive({
   data: [] as Row[],
   _columns: [
     {
-      prop: 'name',
-      label: '名称',
-    },
-    {
-      prop: 'itemId',
-      label: '关联业务ID',
-    },
-    {
-      prop: 'formName',
-      label: '关联表单名称',
-    },
-    {
-      prop: 'formVersion',
-      label: '关联表单版本',
-    },
-    {
-      prop: 'isStart',
-      label: '是否启动',
-      slots: ({ row }) => <span>{row.isStart ? '是' : '否'}</span>,
-    },
-
-    {
       prop: undefined,
       label: '操作',
       width: '450em',
@@ -48,7 +26,7 @@ const tableState = reactive({
 
         return <SkAppOperations
           modules={modules}
-          onR={() => rI(row.id)}
+          onR={() => rI(row.itemId)}
         >
         </SkAppOperations>
       },
@@ -65,9 +43,9 @@ const tableState = reactive({
   total: 0,
 })
 
-function rI (id: string) {
+function rI (itemId: string) {
   routerNext({
-    path: 'read/' + id,
+    path: 'read/' + itemId,
   })
 }
 

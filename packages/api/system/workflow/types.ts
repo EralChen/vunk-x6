@@ -50,3 +50,12 @@ export enum WorkFlowNodeState {
   '通过' = 10,
   '驳回' = -10,
 }
+
+
+export type FlowNodeInstance = {
+  itemId: string;
+  name: string;
+  id: string;
+  flowId: string;
+  status: number;
+}
