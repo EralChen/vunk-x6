@@ -42,7 +42,7 @@ const tableState = reactive({
       label: '操作',
       width: '450em',
       slots: ({ row }) => {
-        const modules = ['bind', 'u', 'd']
+        const modules = ['bind', 'u', 'd', 'instances']
         if (row.formName) {
           modules.unshift('nodes', 'r')
           if (row.isStart) modules.unshift('run')
@@ -73,6 +73,11 @@ const tableState = reactive({
                     }
                   }
                 }}>绑定表单</ElButton>,
+            instances: () => {
+              return <ElButton type="primary" size="small" onClick={
+                () => routerNext({ path: 'instances/' + row.flowId })
+              }>流程实例</ElButton>
+            },
           }}
         >
         </SkAppOperations>

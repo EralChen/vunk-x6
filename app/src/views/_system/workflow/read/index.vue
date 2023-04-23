@@ -4,7 +4,7 @@
       <div class="editor-x" sk-flex="row">
         <div class="editor">
           <ZzG6Editor :selectNodeId="nodeModel.id" :mode="'default'" :model-value="model"
-            @nodeselectchange="nodeSelectChange" :active-tab-name="'expend'" :form-id="'846101130386604032'">
+            @nodeselectchange="nodeSelectChange" :active-tab-name="'expend'" :form-id="flowData.formId">
             <template #form>
               <el-tab-pane label="扩展属性" name="expend">
                 <ElScrollbar>

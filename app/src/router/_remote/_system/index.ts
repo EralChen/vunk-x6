@@ -1,5 +1,5 @@
 import Layout from '@/layouts/default/index.vue'
-import { RouteRecordRaw } from 'vue-router'
+import { RouteRecordRaw, RouterView } from 'vue-router'
 import FORM from './form'
 import MESSAGE from './message'
 
@@ -52,7 +52,12 @@ export default function () {
         tagsView: false,
       },
     },
-
+    '/system/workflow/list/instances/:flowId': {
+      component: () => import('@/views/_system/workflow/instances/index.vue'),
+    },
+    '/system/workflow/list/instances/:flowId/read/:id': {
+      component: () => import('@/views/_system/workflow/instances/read/index.vue'),
+    },
     '/system/data-model': {
       component: () => import('@/views/_system/data-model/index.vue'),
     },
