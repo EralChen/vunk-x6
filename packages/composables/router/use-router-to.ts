@@ -13,31 +13,39 @@ export const useRouterTo = () => {
     path: string,
     mode?: Mode,
   } & RouteLocationPathRaw) => {
+
     const currentMatched = route.matched[route.matched.length - 1]
     const children = currentMatched.children ?? []
-    const fullPath = resolveFullPath(opts.path, currentMatched.path)
+    
+    // [TODO] 这里是不是简单的拼接就可以了？
+    const fullPath = resolveFullPath(opts.path, route.path)
     // 如果children中没有相同path，就不跳转。
     if (children) {
       const childrenMatched = createRouterMatcher([currentMatched], {})
       const childrenMatchedRoutes = childrenMatched.getRoutes()
-      if (!childrenMatchedRoutes.find(item => item.re.test(fullPath))) {
+      const childrenMatchedRoute = childrenMatchedRoutes.find(item => item.re.test(fullPath))
+      if (!childrenMatchedRoute) {
         // eslint-disable-next-line no-console
         console.warn(`[routerTo] ${opts.path} not found in children`, children)
         return
       }
+    
     }
+    
 
     const e = {
       mode: 'replace' as Mode,
       ...opts,
       path: fullPath,
     }
+
     router[e.mode]({
       
       ...pickObject(e, {
         excludes: ['mode'],
       }),
     })
+
   }
 
   const routerBack = (opts:{
