@@ -19,6 +19,21 @@ export default [
         },
         component: () => import('_v/_play/test1/index.vue'),
       },
+      {
+        path: 'test2',
+        meta: {
+          title: 'test2',
+        },
+        component: () => import('_v/_play/test2/index'),
+      },
+      {
+        path: 'test3',
+        meta: {
+          title: 'test3',
+        },
+        component: () => import('_v/_play/test3/index'),
+      },
+
 
       {
         path: 'vuesri',
