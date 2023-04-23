@@ -1,6 +1,6 @@
 <script lang="tsx" setup>
 import { computed, reactive, watch } from 'vue'
-import { rWorkflows, cuWorkflow, dWorkflows, runWorkflow } from '@skzz-platform/api/system/workflow'
+import { rWorkflows, cuWorkflow, dWorkflows, runWorkflow, bindForm2Flow } from '@skzz-platform/api/system/workflow'
 import { SkAppDialog, SkAppOperations, SkAppTablesV1, __SkAppTablesV1 } from '@skzz/platform'
 import { setData, VkDuplexCalc } from '@vunk/core'
 import CUForm from './cu-form/index.vue'
@@ -8,6 +8,7 @@ import { Row } from './types'
 import { useRouterTo } from '@skzz-platform/composables'
 import { ElButton } from 'element-plus'
 import BindUserTable from './bind-form-table/index.vue'
+import { CForm } from '@skzz-platform/api/system/form'
 
 type Col = __SkAppTablesV1.Column<Row>
 const { routerNext } = useRouterTo()
@@ -23,8 +24,12 @@ const tableState = reactive({
       label: '关联业务ID',
     },
     {
-      prop: 'formId',
-      label: '关联表单',
+      prop: 'formName',
+      label: '关联表单名称',
+    },
+    {
+      prop: 'formVersion',
+      label: '关联表单版本',
     },
     {
       prop: 'isStart',
@@ -36,18 +41,42 @@ const tableState = reactive({
       prop: undefined,
       label: '操作',
       width: '450em',
-      slots: ({ row }) => <SkAppOperations
-        modules={['nodes', 'r', 'bind', 'run', 'u', 'd']}
-        onR={() => rI(row.id)}
-        onD={() => d([row.id])}
-        onU={() => preuI(row)}
-        v-slots={{
-          run: () => <ElButton type="primary" size="small" disabled={!!row.isStart} onClick={() => runWorkflow(row.itemId).then(r)}>运行</ElButton>,
-          nodes: () => <ElButton type="primary" size="small" onClick={() => routerNext({ path: 'nodes/' + row.flowId })}>配置节点</ElButton>,
-          bind: () => <ElButton type="primary" size="small" onClick={() => bindData.flowId = row.flowId}>绑定表单</ElButton>,
-        }}
-      >
-      </SkAppOperations>,
+      slots: ({ row }) => {
+        const modules = ['bind', 'u', 'd']
+        if (row.formName) {
+          modules.unshift('nodes', 'r')
+          if (row.isStart) modules.unshift('run')
+        }
+
+        return <SkAppOperations
+          modules={modules}
+          onR={() => rI(row.id)}
+          onD={() => d([row.id])}
+          onU={() => preuI(row)}
+          v-slots={{
+            run: () =>
+              <ElButton type="primary" size="small" disabled={!!row.isStart} onClick={
+                () => runWorkflow(row.itemId).then(r)
+              }>运行</ElButton>,
+            nodes: () =>
+              <ElButton type="primary" size="small" onClick={
+                () => routerNext({ path: 'nodes/' + row.flowId })
+              }>配置节点</ElButton>,
+            bind: () =>
+              <ElButton type="primary" size="small" onClick={
+                () => {
+                  bindData.id = row.id
+                  if (row.formId && row.formName) {
+                    bindData.data = {
+                      id: row.formId,
+                      formName: row.formName,
+                    }
+                  }
+                }}>绑定表单</ElButton>,
+          }}
+        >
+        </SkAppOperations>
+      },
       align: 'center',
       headerAlign: 'center',
     },
@@ -70,9 +99,12 @@ const cuData = computed(() => {
   }
 })
 const bindData = reactive({
-  flowId: '',
+  id: '',
   data: {},
-})
+}) as {
+  id: string
+  data: CForm
+}
 
 
 watch(() => tableState.pagination, r, { deep: true, immediate: true })
@@ -115,7 +147,12 @@ function rI (id: string) {
 }
 
 function bindUser () {
-  console.log(bindData.data)
+  bindForm2Flow(bindData.id, bindData.data.id)
+    .then(() => {
+      bindData.id = ''
+      bindData.data = {} as CForm
+      r()
+    })
 }
 
 </script>
@@ -146,7 +183,7 @@ function bindUser () {
     </SkAppDialog>
 
     <!-- 绑定表单 -->
-    <SkAppDialog :modelValue="!!bindData.flowId" @update:modelValue="bindData.flowId = ''" title="绑定表单">
+    <SkAppDialog :modelValue="!!bindData.id" @update:modelValue="bindData.id = ''" title="绑定表单">
       <BindUserTable class="h-30em" v-model="bindData.data"></BindUserTable>
       <template #footer>
         <el-button size="large" type="primary" @click="bindUser">确定</el-button>

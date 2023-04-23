@@ -13,8 +13,14 @@
                   </ElForm>
                 </ElScrollbar>
               </el-tab-pane>
+              <!-- <el-tab-pane label="表单" name="form">
+                <ElScrollbar>
+                  
+                </ElScrollbar>
+              </el-tab-pane> -->
               <el-tab-pane label="审批" name="approval">
                 <ElScrollbar>
+                 
                   <ElForm label-position="top">
                     <ElFormItem label="开始流程" v-show="!isFlowStart">
                       <el-button type="primary" @click="doRunWorkflow">运行</el-button>
@@ -22,7 +28,7 @@
                     <BindAssitsOpers :node-model="nodeModel" :currentNodeInstIds="bindState.currentNodeInstIds"
                       @bind-success="r" :isFlowStart="isFlowStart"></BindAssitsOpers>
                     <Approval :flowId="id" :node-model="nodeModel" :currentNodeInstIds="bindState.currentNodeInstIds"
-                      :isFlowStart="isFlowStart" @approvalSuccess="r"></Approval>
+                      :isFlowStart="isFlowStart" @approvalSuccess="r" :form-table="flowData.formTable"></Approval>
                   </ElForm>
                 </ElScrollbar>
               </el-tab-pane>
@@ -56,7 +62,8 @@ const props = defineProps({
   },
 })
 
-const nodeModel = ref({} as NodeModel<User>)
+
+const nodeModel = ref({} as NodeModel)
 const model = shallowRef({}) // 流程节点数据
 const flowData = ref({} as Workflow) // 流程详情
 const bindState = reactive({
@@ -76,10 +83,10 @@ function r () {
     if (nodeModel.value.id) {
       const node = res.raws.nodes?.find(item => item.id === nodeModel.value.id)
       if (node)
-        nodeModel.value = node as NodeModel<User>
-    } else {      
+        nodeModel.value = node as NodeModel
+    } else {
       nextTick(() => {
-        nodeModel.value = res.raws.nodes![0] as NodeModel<User>
+        nodeModel.value = res.raws.nodes![0] as NodeModel
       })
     }
   })
@@ -95,6 +102,7 @@ const nodeSelectChange = (e: any) => {
     nodeModel.value = cloneDeep(m)
   } else {
     nodeModel.value = {} as any
+
   }
 }
 

@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { rWorkflowNodes, cWorkflowNodeByJson, WorkflowData } from '@skzz-platform/api/system/workflow'
+import { rWorkflowNodes, cWorkflowNodeByJson, WorkflowData, rWorkflow } from '@skzz-platform/api/system/workflow'
 import ZzG6Editor from '@/components/ZzG6Editor/index.vue'
 import { ref, shallowRef, watch } from 'vue'
 import { GraphData, TreeGraphData } from '@antv/g6'
@@ -22,14 +22,15 @@ import { onBeforeRouteLeave } from 'vue-router'
 import { ElMessageBox } from 'element-plus'
 
 let isEdit = true
-const formId = ref('846101130386604032')
+const formId = ref('')
 const props = defineProps({
   flowId: {
     type: String,
     required: true,
   },
 })
-// 为什么分开？内部emit是通过g6的事件监听实现的，如果回填和输出是同一个对象，内部监听外部数据变化会触发g6渲染方法，渲染方法会触发g6监听，导致死循环
+// 为什么分开数据传输，不用v-model？
+// 内部emit是通过g6的事件监听实现的，如果回填和输出是同一个对象，内部监听外部数据变化会触发g6渲染方法，渲染方法会触发g6监听，导致死循环
 // 回填数据
 const editData = shallowRef({} as WorkflowData)
 // 编辑后返回的数据
@@ -37,13 +38,20 @@ const backData = shallowRef({} as GraphData | TreeGraphData)
 
 watch(() => props.flowId, r, { immediate: true })
 function r () {
-  rWorkflowNodes({
-    flowId: props.flowId,
-  }).then((res) => {
-    if (!res.nodes.length) {
+  Promise.all([
+    rWorkflow({
+      flowId: props.flowId,
+    }),
+    rWorkflowNodes({
+      flowId: props.flowId,
+    }),
+  ]).then(([info, res]) => {
+    if (!res.nodes?.length) {
       isEdit = false
     }
     editData.value = res
+    if (info.formId)
+      formId.value = info.formId
   })
 }
 

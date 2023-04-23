@@ -7,8 +7,8 @@ export const propsOp = {
     default: '',
   },
   modelValue: {
-    type: Array as PropType<any[]>,
-    default: () => ([]),
+    type: Object as PropType<{show: any[]; ref: any[]} | undefined>,
+    default: () => ({}),
   },
   formId: {
     type: String,
@@ -17,6 +17,10 @@ export const propsOp = {
   prop: {},
   Renderer: {},
   raw: {},
+  modelKey: {
+    type: String as PropType<'show' | 'ref'>,
+    default: 'show',
+  },
 }
 
 export const emits = {

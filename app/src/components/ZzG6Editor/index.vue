@@ -25,21 +25,36 @@ export default defineComponent({
     const editProps = bindProps(props, ['formId'])
 
     const formKey = 'VkfBindFormItem'
+    const formRefKey = 'VkfBindFormItemRef'
 
     expendForm([
       {
         component: bindFormItem,
         type: formKey,
       },
+      {
+        component: bindFormItem,
+        type: formRefKey,
+      },
     ])
     extendNodeFormMap(
       MaterialNode.zzRect,
-      [{
-        templateType: formKey,
-        prop: 'formItems',
-        label: '绑定表单字段',
-        formId: computed(() => props.formId),
-      }],
+      [
+        {
+          templateType: formKey,
+          prop: 'formColumns',
+          label: '绑定表单字段',
+          formId: computed(() => props.formId),
+          modelKey: 'show',
+        },
+        {
+          templateType: formRefKey,
+          prop: 'formColumns',
+          label: '绑定引用字段',
+          formId: computed(() => props.formId),
+          modelKey: 'ref',
+        },
+      ],
     )
     return {
       editProps,

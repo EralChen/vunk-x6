@@ -34,6 +34,11 @@ export const rWorkflows = (query, pagination?: Pagination) => {
   })
 }
 
+/**
+ * 查询流程详情
+ * @param query 
+ * @returns 
+ */
 export const rWorkflow = (query: {
   id?: string,
   flowId?: string,
@@ -98,8 +103,10 @@ export const cuWorkflow = async (data: Partial<Workflow>) => {
 /**
  * https://www.apifox.cn/link/project/1903413/apis/api-69105530
  * @param itemId 绑定的业务id
+ * @param skipNodes 需要被跳过的节点的定义id
+ * @param formData 业务中新增流程实例时需要初始化的表单数据
  */
-export const runWorkflow = (itemId: string) => {
+export const runWorkflow = (itemId: string, skipNodes: string[] = [], formData: any = {}) => {
   return request({
     method: 'POST',
     DEV_NAME: 'runWorkflow',
@@ -109,9 +116,21 @@ export const runWorkflow = (itemId: string) => {
       condition: {
         flow: {
           itemId,
+          skipNodes,
           op: 'startAndSubmit',
         },
       },
+      'datas': [
+        {
+          'datasetId': '1',
+          'rows': [
+            {
+              ...formData,
+              'op': RestFetchOp.c,
+            },
+          ],
+        },
+      ],
       ...MENU_DATA,
     },
 
@@ -124,3 +143,4 @@ export const runWorkflow = (itemId: string) => {
 export * from './node'
 export * from './oper'
 export * from './types'
+export * from './form'

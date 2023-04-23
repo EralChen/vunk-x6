@@ -4,9 +4,9 @@
   </ElFormItem>
 
   <ElDialog v-model="showDialog" :title="`绑定'${title}'表单`">
-    <SkAppTables :oidField="idKey" class="h-30em" :modelValue="modelValue" :columns="tableState.columns" :data="tableState.data"
-      :total="tableState.total" @update:modelValue="$emit('update:modelValue', $event)"
-      v-model:pageSize="tableState.pagination.pageSize" v-model:start="tableState.pagination.start"></SkAppTables>
+    <SkAppTables :oidField="idKey" class="h-30em" v-model="model" :columns="tableState.columns" :data="tableState.data"
+      :total="tableState.total" v-model:pageSize="tableState.pagination.pageSize"
+      v-model:start="tableState.pagination.start"></SkAppTables>
   </ElDialog>
 </template>
 
@@ -30,10 +30,48 @@ const readonly = useComputedReadonly({
   readonly: undefined,
 })
 const showDialog = ref(false)
+/**
+ * 数据结构就是
+ * "formColumns":{
+      "show":[
+        {
+          "templateType":"VkfInput",
+          "prop":"vkf1d48fd5e",
+          "label":"标签"
+        }
+      ],
+      "ref":[
+        {
+          "templateType":"VkfSelect",
+          "prop":"vkf40f8d672",
+          "label":"标签"
+        }
+      ]
+    }
+    外部只有一个字段，所以需要在这里修改字段格式，其实可以在外面定义俩字段来做这个事情，可以降低复杂度
+    是为了同一个组件可以绑定两种表单类型，一种引用字段，一种填写字段
+ */
 const model = computed({
-  get: () => props.modelValue,
+  get: () => {
+    if (!props.modelValue) {
+      emit('update:modelValue', {
+        show: [],
+        ref: [],
+      })
+    }
+    if (props.modelValue && !props.modelValue[props.modelKey]) {
+      emit('update:modelValue', {
+        ...props.modelValue,
+        [props.modelKey]: [],
+      })
+    }
+    return props.modelValue![props.modelKey]
+  },
   set: (val) => {
-    emit('update:modelValue', val)
+    emit('update:modelValue', {
+      ...props.modelValue,
+      [props.modelKey]: val,
+    })
   },
 })
 
@@ -67,10 +105,10 @@ const tableState = reactive({
       key: 'name',
       width: 200,
       flexGrow: 1,
-      cellRenderer: ({rowData}) => {
+      cellRenderer: ({ rowData }) => {
         return <ElSelect disabled={readonly.value} v-model={rowData.status}>
-          <ElOption label="可编辑" value="1"></ElOption>
-          <ElOption label="仅显示" value="0"></ElOption>
+          <ElOption label="可编辑" value={1}></ElOption>
+          <ElOption label="仅显示" value={0}></ElOption>
         </ElSelect>
       },
     },
@@ -84,11 +122,11 @@ const tableState = reactive({
   total: 0,
 })
 let tempData: FIRS<string>[] | null = null
-watch(() => tableState.pagination, r, { deep: true, immediate: true })  
+watch(() => tableState.pagination, r, { deep: true, immediate: true })
 async function r () {
   if (!tempData) {
     const res = await rFormDetail(props.formId)
-    tempData = res.form
+    tempData = res.form.map(item => ({...item, status: props.modelKey === 'show' ? 1 : 0}))
     title.value = res.formName
     tableState.total = tempData.length
   }
