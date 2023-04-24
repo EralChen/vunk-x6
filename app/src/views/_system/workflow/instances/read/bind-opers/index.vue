@@ -1,5 +1,5 @@
 <template>
-  <ElFormItem v-show="nodeModelCp.id" :label="`节点定义绑定人员`">
+  <ElFormItem v-show="nodeModelCp.id" :label="`绑定人员`">
     <BindUser :show-data="showData" v-model="showdialog" v-model:data="nodeModelCp.opers" @doBindUser="bindOpers">
     </BindUser>
   </ElFormItem>
@@ -9,13 +9,13 @@
 import { bindOpersToNode } from '@skzz-platform/api/system/workflow'
 import { PropType, computed, ref, watch } from 'vue'
 import { User } from '@skzz-platform/api/system/user'
-import BindUser from '../../bind-user/index.vue'
+import BindUser from '../bind-user/index.vue'
 import { NodeModel } from '@zzg6/flow/components/editor/src/types'
 
 
 const props = defineProps({
   nodeModel: {
-    type: Object as PropType<NodeModel>,
+    type: Object as PropType<NodeModel<User>>,
     default: () => ({}),
   },
 })

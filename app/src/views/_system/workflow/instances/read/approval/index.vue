@@ -1,0 +1,128 @@
+<template>
+  <ElDivider>表单</ElDivider>
+  <SkAppForm :formItems="nodeFormItem" :data="nodeFormData" @setData="setData(nodeFormData, $event)">
+  </SkAppForm>
+  <ElDivider>表单 - end</ElDivider>
+  <ElFormItem label="审批" v-show="isFlowStart && (hasApprovelAuth || hasAssistAuth)">
+    <div mt-page mb-page w-100>
+      <el-input type="textarea" v-model="memo"></el-input>
+    </div>
+    <el-button v-if="!nodeModelCp.auditStatus" type="primary"
+      @click="doApprovel(WorkFlowNodeState.通过, 'pass')">通过</el-button>
+    <el-button v-show="nodeModelCp.id && nodeModelCp.auditStatus" type="success"
+      @click="doApprovel(WorkFlowNodeState.驳回, 'th')">退回</el-button>
+    <el-button type="warning" @click="doApprovel(WorkFlowNodeState.驳回, 'bh')">驳回</el-button>
+  </ElFormItem>
+</template>
+
+<script setup lang="ts">
+import { NodeModel } from '@zzg6/flow/components/editor/src/types'
+import { PropType, computed, ref, watch } from 'vue'
+import { User } from '@skzz-platform/api/system/user'
+import { WorkFlowNodeState, doApproveNode, doApproveNodeWithForm } from '@skzz-platform/api/system/workflow'
+import { getCurrentNodeId } from '../utils'
+import { useUserStore } from '@skzz-platform/stores/user'
+import { cloneDeep } from 'lodash'
+import { SkAppForm } from '@skzz/platform'
+import { setData } from '@vunk/core'
+
+
+const props = defineProps({
+  flowId: {
+    type: String,
+    required: true,
+  },
+  isFlowStart: {
+    type: Boolean,
+    default: false,
+  },
+  nodeModel: {
+    type: Object as PropType<NodeModel>,
+    default: () => ({}),
+  },
+  currentNodeInstIds: {
+    type: Array as PropType<string[]>,
+    default: () => [],
+  },
+  formTable: {
+    type: String,
+    default: '',
+  },
+})
+const emit = defineEmits(['approvalSuccess'])
+
+const userStore = useUserStore()
+const memo = ref('') // 审批意见
+
+const nodeModelCp = computed(() => props.nodeModel)
+const currentNodeInstIdsCp = computed(() => props.currentNodeInstIds)
+
+const hasApprovelAuth = ref(false)
+const hasAssistAuth = ref(false)
+
+const nodeFormData = ref({})
+const nodeFormItem = ref([])
+
+const formTableCp = computed(() => props.formTable)
+
+/**
+ * 是否有对选中节点的审批权限
+ * @param opers 
+ */
+function judgeAuth (opers: User[]) {
+  const ids = opers?.map(item => item.id + '')
+  return !!ids?.includes(userStore.getUserInfo().id + '')
+}
+
+// 为了和选人显示的内容做区分，要不然关闭选人窗口时会出现按钮不显示的问题
+watch(() => props.nodeModel, (v, ov) => {
+  hasApprovelAuth.value = judgeAuth(v.opers || [])
+  if (v && v.formColumns && v.formColumns.show && v.id !== ov?.id) {
+    nodeFormItem.value = cloneDeep((v as any).formColumns.show)
+  } else {
+    nodeFormItem.value = []
+    nodeFormData.value = {}
+  }
+}, { immediate: true })
+watch(() => props.nodeModel, (v) => {
+  hasAssistAuth.value = judgeAuth(v.opers || [])
+}, { immediate: true })
+
+/**
+ * 审批  
+ * 1. 驳回逻辑为直接将整个流程中已审批的流程全部退回，传的为实例id,字段为 nodeInstId  
+ * 2. 退回逻辑，指定某个节点，退回到该节点，传的是定义的id,字段为 backNodeId  
+ * 3. auditStatus 用来判断是否审批过，用来控制退回按钮是否出现
+ */
+function doApprovel (type: WorkFlowNodeState, e: string) {
+  let currentBackId
+  let currentNodeId
+  if (e === 'bh') {
+    currentNodeId = currentNodeInstIdsCp.value[0]
+  } else {
+    currentNodeId = getCurrentNodeId(currentNodeInstIdsCp.value, nodeModelCp.value)
+    if (!currentNodeId) return
+  }
+
+  if (e === 'th') {
+    currentBackId = nodeModelCp.value.id
+  }
+  doApproveNodeWithForm(
+    {
+      itemId: props.flowId,
+      status: type,
+      memo: memo.value,
+      nodeInstId: currentNodeId,
+      backNodeId: currentBackId,
+    },
+    nodeFormData.value,
+    nodeModelCp.value.id,
+    formTableCp.value,
+  ).then(() => {
+    emit('approvalSuccess')
+  })
+}
+
+</script>
+
+<style lang="scss" scoped></style>

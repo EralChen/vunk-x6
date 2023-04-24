@@ -126,7 +126,7 @@ watch(() => tableState.pagination, r, { deep: true, immediate: true })
 async function r () {
   if (!tempData) {
     const res = await rFormDetail(props.formId)
-    tempData = res.form.map(item => ({...item, status: props.modelKey === 'show' ? 1 : 0}))
+    tempData = res.form?.map(item => ({...item, status: props.modelKey === 'show' ? 1 : 0})) || []
     title.value = res.formName
     tableState.total = tempData.length
   }

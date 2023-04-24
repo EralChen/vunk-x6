@@ -36,7 +36,6 @@ const tableState = reactive({
       label: '是否启动',
       slots: ({ row }) => <span>{row.isStart ? '是' : '否'}</span>,
     },
-
     {
       prop: undefined,
       label: '操作',
