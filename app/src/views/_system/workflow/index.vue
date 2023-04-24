@@ -41,22 +41,34 @@ const tableState = reactive({
       label: '操作',
       width: '450em',
       slots: ({ row }) => {
-        const modules = ['bind', 'u', 'd', 'instances']
+        const modules = ['u', 'd']
+        // 流程没启动前可以绑定表单
+        if (!row.isStart) {
+          modules.unshift('bind')
+        } 
+        if (row.isStart) {
+          modules.push('instances')
+        }
         if (row.formName) {
-          modules.unshift('nodes', 'r')
-          if (row.isStart) modules.unshift('run')
+          modules.unshift('r')
+          if (!row.isStart) {
+            modules.unshift('nodes')
+          }
         }
 
+        /**
+ *             run: () =>
+              <ElButton type="primary" size="small" disabled={!!row.isStart} onClick={
+                () => runWorkflow(row.itemId).then(r)
+              }>运行</ElButton>,
+ */
         return <SkAppOperations
           modules={modules}
           onR={() => rI(row.id)}
           onD={() => d([row.id])}
           onU={() => preuI(row)}
           v-slots={{
-            run: () =>
-              <ElButton type="primary" size="small" disabled={!!row.isStart} onClick={
-                () => runWorkflow(row.itemId).then(r)
-              }>运行</ElButton>,
+
             nodes: () =>
               <ElButton type="primary" size="small" onClick={
                 () => routerNext({ path: 'nodes/' + row.flowId })

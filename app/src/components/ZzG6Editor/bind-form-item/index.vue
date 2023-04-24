@@ -124,7 +124,7 @@ const tableState = reactive({
 let tempData: FIRS<string>[] | null = null
 watch(() => tableState.pagination, r, { deep: true, immediate: true })
 async function r () {
-  if (!tempData) {
+  if (!tempData && props.formId) {
     const res = await rFormDetail(props.formId)
     tempData = res.form?.map(item => ({...item, status: props.modelKey === 'show' ? 1 : 0})) || []
     title.value = res.formName
