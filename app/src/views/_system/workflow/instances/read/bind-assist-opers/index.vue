@@ -46,7 +46,7 @@ watch(() => props.nodeModel, (v) => {
  * 2. 只有当前登录用户与待审核节点的审批人一致,才能添加协办人  
  * 3. 必须当前用户和协办用户全部审批完成,节点才会走向下一节点  
  * 4. 协办用户不支持回退,比如现在有ABC三个节点,B节点添加了协办人,全部审批通过后到了C节点,C节点操作回退到了B节点,B节点只会生成节点定义时指定的那些审批人实例  
- * 节点A设置a,b,c三个操作人,a添加了协办人d,那么a,d都会被标记成协办人,后台把操作人剔除了所以看不见
+ * 5. 节点A设置a,b,c三个操作人,a添加了协办人d,那么a,d都会被标记成协办人,后台把操作人剔除了所以看不见
  */
 function bindAssOpers () {
   let currentNodeId = getCurrentNodeId(currentNodeInstIdsCp.value, nodeModelCp.value)

@@ -5,13 +5,14 @@
         <div class="editor">
           <ZzG6Editor :selectNodeId="nodeModel.id" :mode="'default'" :model-value="model"
             @nodeselectchange="nodeSelectChange" :active-tab-name="'expend'" :form-id="flowData.formId">
+            
             <el-button class="absolute top-14px right-14px z-100" type="primary" @click="doRunWorkflow">生成实例</el-button>
+
             <template #form>
               <el-tab-pane label="扩展属性" name="expend">
                 <ElScrollbar>
                   <ElForm label-position="top">
                     <BindOpers :node-model="nodeModel" @bind-success="r"></BindOpers>
-                    <!-- v-show="!isFlowStart" -->
                   </ElForm>
                 </ElScrollbar>
               </el-tab-pane>
@@ -22,25 +23,22 @@
     </SkAppCard>
   </PageOver>
   <SkAppDialog v-model="startShow" title="运行流程">
-    <GenInstance :tableData="tableData" :flowData="flowData" :itemId="flowData.itemId" @success="startShow = false"></GenInstance>
+    <GenInstance :tableData="tableData" :flowData="flowData" :itemId="flowData.itemId" @success="genSuccess"></GenInstance>
   </SkAppDialog>
 </template>
 
 <script setup lang="tsx">
-import { rWorkflowNodesWithRaw, runWorkflow, Workflow } from '@skzz-platform/api/system/workflow'
-import { computed, nextTick, reactive, ref, shallowRef, watch } from 'vue'
+import { rWorkflowNodesWithRaw, Workflow } from '@skzz-platform/api/system/workflow'
+import { nextTick, reactive, ref, shallowRef, watch } from 'vue'
 import { SkAppCard } from '@skzz/platform'
 import ZzG6Editor from '@/components/ZzG6Editor/index.vue'
-import BindOpers from './bind-opers/index.vue'
+import BindOpers from '../bind-opers/index.vue'
 import { cloneDeep } from 'lodash'
 import { NodeModel } from '@zzg6/flow/components/editor/src/types'
 import { SkAppDialog } from '@skzz/platform'
 import GenInstance from './gen-instance/index.vue'
 import { NodeConfig } from '@antv/g6'
-
-
-
-// type Row = Partial<WorkflowNode>
+import { usePostQueryU } from '@skzz-platform/composables'
 
 const props = defineProps({
   id: {
@@ -51,11 +49,15 @@ const props = defineProps({
 const tableData = ref<NodeConfig[]>([])
 const startShow = ref(false)
 const nodeModel = ref({} as NodeModel)
-const model = shallowRef({}) // 流程节点数据
-const flowData = ref({} as Workflow) // 流程详情
+// 流程节点数据
+const model = shallowRef({})
+// 流程详情数据
+const flowData = ref({} as Workflow)
 const bindState = reactive({
   currentNodeInstIds: [] as string[],
 })
+
+const { postQueryU } = usePostQueryU()
 
 watch(() => props.id, r, { immediate: true })
 
@@ -63,7 +65,7 @@ function r () {
   rWorkflowNodesWithRaw({
     id: props.id,
   }).then(res => {
-    tableData.value = res.raws.nodes!
+    tableData.value = res.raws.nodes || []
     model.value = res.raws
     bindState.currentNodeInstIds = res.raws.currentNodeInstIds
     flowData.value = res.info
@@ -73,7 +75,8 @@ function r () {
         nodeModel.value = node as NodeModel
     } else {
       nextTick(() => {
-        nodeModel.value = res.raws.nodes![0] as NodeModel
+        if (res.raws.nodes)
+          nodeModel.value = res.raws.nodes[0] as NodeModel
       })
     }
   })
@@ -98,8 +101,14 @@ const nodeSelectChange = (e: any) => {
  */
 function doRunWorkflow () {
   startShow.value = true
-  // if (flowData.value.itemId)
-  //   runWorkflow(flowData.value.itemId).then(r)
+}
+
+/**
+ * 流程运行成功
+ */
+const genSuccess = () => {
+  startShow.value = false
+  postQueryU()
 }
 
 

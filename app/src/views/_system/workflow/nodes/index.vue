@@ -19,6 +19,7 @@ import { ref, shallowRef, watch } from 'vue'
 import { GraphData, TreeGraphData } from '@antv/g6'
 import { snowFlake } from '@skzz-platform/api/basic'
 
+// 用来判断当前操作是编辑还是新增，调用接口的时候做判断
 let isEdit = true
 const formId = ref('')
 const props = defineProps({
@@ -27,8 +28,10 @@ const props = defineProps({
     required: true,
   },
 })
-// 为什么分开数据传输，不用v-model？
-// 内部emit是通过g6的事件监听实现的，如果回填和输出是同一个对象，内部监听外部数据变化会触发g6渲染方法，渲染方法会触发g6监听，导致死循环
+/**
+ * 为什么分开数据传输，不用v-model？
+ * 内部emit是通过g6的事件监听实现的，如果回填和输出是同一个对象，内部监听外部数据变化会触发g6渲染方法，渲染方法会触发g6监听，导致死循环
+ */
 // 回填数据
 const editData = shallowRef({} as WorkflowData)
 // 编辑后返回的数据

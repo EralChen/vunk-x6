@@ -9,13 +9,13 @@
               <el-tab-pane label="审批" name="approval">
                 <ElScrollbar>
                   <ElForm label-position="top" :disabled="true">
-                    <BindOpers></BindOpers>
+                    <BindOpers :node-model="nodeModel" :disabled="true"></BindOpers>
                   </ElForm>
                   <ElForm label-position="top">
                     <BindAssitsOpers :node-model="nodeModel" :currentNodeInstIds="bindState.currentNodeInstIds"
                       @bind-success="r" :isFlowStart="isFlowStart"></BindAssitsOpers>
                     <Approval :itemId="flowData.itemId" :flowId="flowId" :node-model="nodeModel" :currentNodeInstIds="bindState.currentNodeInstIds"
-                      :isFlowStart="isFlowStart" @approvalSuccess="r" :form-table="flowData.formTable"></Approval>
+                      :isFlowStart="isFlowStart" @approvalSuccess="approvalSuccess" :form-table="flowData.formTable"></Approval>
                   </ElForm>
                 </ElScrollbar>
               </el-tab-pane>
@@ -28,7 +28,7 @@
 </template>
 
 <script setup lang="tsx">
-import { Workflow, rWorkflowNodeRaw, rWorkflow, rInstanceList, FlowNodeInstance } from '@skzz-platform/api/system/workflow'
+import { rWorkflowNodeRaw, rInstanceList, FlowNodeInstance } from '@skzz-platform/api/system/workflow'
 import { computed, nextTick, reactive, ref, shallowRef, watch } from 'vue'
 import { SkAppCard } from '@skzz/platform'
 import ZzG6Editor from '@/components/ZzG6Editor/index.vue'
@@ -36,10 +36,9 @@ import BindAssitsOpers from './bind-assist-opers/index.vue'
 import Approval from './approval/index.vue'
 import { cloneDeep } from 'lodash'
 import { NodeModel } from '@zzg6/flow/components/editor/src/types'
-import BindOpers from './bind-opers/index.vue'
+import BindOpers from '../../bind-opers/index.vue'
+import { usePostQueryU } from '@skzz-platform/composables'
 
-
-// type Row = Partial<WorkflowNode>
 
 const props = defineProps({
   id: {
@@ -54,12 +53,16 @@ const props = defineProps({
 
 
 const nodeModel = ref({} as NodeModel)
-const model = shallowRef({}) // 流程节点数据
-const flowData = ref({} as FlowNodeInstance) // 流程详情
+// 流程节点数据
+const model = shallowRef({})
+// 流程详情
+const flowData = ref({} as FlowNodeInstance) 
 const bindState = reactive({
   currentNodeInstIds: [] as string[],
 })
-const isFlowStart = computed(() => flowData.value.status !== 10) // 节点是否开始
+// 节点是否开始
+const isFlowStart = computed(() => flowData.value.status !== 10)
+const { postQueryU } = usePostQueryU()
 
 watch(() => props.id, r, { immediate: true })
 
@@ -72,35 +75,24 @@ async function r () {
   bindState.currentNodeInstIds = raws.currentNodeInstIds
   flowData.value = rows
   if (nodeModel.value.id) {
-    const node = raws.nodes?.find((item: any) => item.id === nodeModel.value.id)
+    const node = raws.nodes?.find(item => item.id === nodeModel.value.id)
     if (node)
       nodeModel.value = node as NodeModel
   } else {
     nextTick(() => {
-      nodeModel.value = raws.nodes![0] as NodeModel
+      if (raws.nodes)
+        nodeModel.value = raws.nodes[0] as NodeModel
     })
   }
+}
 
-  // rWorkflowNodesWithRaw({
-  //   itemId: props.itemId,
-  // }).then(res => {
-  //   model.value = res.raws
-  //   bindState.currentNodeInstIds = res.raws.currentNodeInstIds
-  //   flowData.value = res.info
-  //   if (nodeModel.value.id) {
-  //     const node = res.raws.nodes?.find(item => item.id === nodeModel.value.id)
-  //     if (node)
-  //       nodeModel.value = node as NodeModel
-  //   } else {
-  //     nextTick(() => {
-  //       nodeModel.value = res.raws.nodes![0] as NodeModel
-  //     })
-  //   }
-  // })
+function approvalSuccess () {
+  r()
+  postQueryU()
 }
 
 /**
- * 选中节点事件
+ * 选中节点事件(点击触发，或者设置selectNodeId触发)
  * @param e 
  */
 const nodeSelectChange = (e: any) => {

@@ -1,8 +1,11 @@
 <template>
-  <ElDivider>表单</ElDivider>
-  <SkAppForm :rules="rules" :el-ref="def.resolve" :formItems="nodeFormItem" :data="nodeFormData" @setData="setData(nodeFormData, $event)">
-  </SkAppForm>
-  <ElDivider>表单 - end</ElDivider>
+  <template v-if="nodeFormItem.length">
+    <ElDivider>表单</ElDivider>
+    <SkAppForm :rules="rules" :el-ref="def.resolve" :formItems="nodeFormItem" :data="nodeFormData"
+      @setData="setData(nodeFormData, $event)">
+    </SkAppForm>
+    <ElDivider>表单 - end</ElDivider>
+  </template>
   <ElFormItem label="审批" v-show="isFlowStart && (hasApprovelAuth || hasAssistAuth)">
     <div mt-page mb-page w-100>
       <el-input type="textarea" v-model="memo"></el-input>
@@ -28,7 +31,6 @@ import { setData } from '@vunk/core'
 import { Deferred } from '@vunk/core/shared/utils-promise'
 import { ElMessage, FormInstance, FormRules } from 'element-plus'
 import { CoreFormItem } from '@skzz-platform/components/app-form/src/types'
-
 
 
 const props = defineProps({
@@ -60,7 +62,8 @@ const props = defineProps({
 const emit = defineEmits(['approvalSuccess'])
 
 const userStore = useUserStore()
-const memo = ref('') // 审批意见
+// 审批意见
+const memo = ref('')
 
 const nodeModelCp = computed(() => props.nodeModel)
 const currentNodeInstIdsCp = computed(() => props.currentNodeInstIds)
@@ -69,7 +72,8 @@ const hasApprovelAuth = ref(false)
 const hasAssistAuth = ref(false)
 
 const nodeFormData = ref({})
-const nodeFormItem = ref([])
+// CoreFormItem[] 按理将应该是这个类型，但是会有实例过深且有无限可能的问题
+const nodeFormItem = ref<any>([])
 const rules = ref<FormRules>({})
 
 const formTableCp = computed(() => props.formTable)
@@ -77,6 +81,7 @@ const formTableCp = computed(() => props.formTable)
 const def = new Deferred<FormInstance>()
 /**
  * 是否有对选中节点的审批权限
+ * 节点的操作人中是否有当前登录用户
  * @param opers 
  */
 function judgeAuth (opers: User[]) {
@@ -87,14 +92,12 @@ function judgeAuth (opers: User[]) {
 function genRules (formItems: CoreFormItem[]) {
   formItems.forEach(item => {
     (item as any).key = item.prop
-    rules.value[item.prop] = [{ required: true, message: `${item.label}不能为空！`}]
+    rules.value[item.prop] = [{ required: true, message: `${item.label}不能为空！` }]
   })
 
 }
-
+// 点击节点时，获取填写的表单数据
 async function getFormInfn (flowInstId?: string) {
-  console.log(flowInstId)
-
   if (flowInstId) {
     const res = await rFormInfo(flowInstId)
     nodeFormData.value = res
@@ -102,11 +105,11 @@ async function getFormInfn (flowInstId?: string) {
 }
 
 // 为了和选人显示的内容做区分，要不然关闭选人窗口时会出现按钮不显示的问题
-watch(() => props.nodeModel, (v, ov) => {
+watch(() => props.nodeModel, (v) => {
   hasApprovelAuth.value = judgeAuth(v.opers || [])
   // && v.id !== ov?.id
   if (v && v.formColumns && v.formColumns.show) {
-    nodeFormItem.value = cloneDeep((v as any).formColumns.show)
+    nodeFormItem.value = cloneDeep(v.formColumns.show) as any
     genRules(nodeFormItem.value)
     getFormInfn(v.nodeInstId)
   } else {
@@ -134,7 +137,7 @@ async function doApprovel (type: WorkFlowNodeState, e: string) {
     }
   } catch (e) {
     ElMessage.warning('请按规则填写表单！')
-    return 
+    return
   }
   let currentBackId
   let currentNodeId
@@ -144,7 +147,6 @@ async function doApprovel (type: WorkFlowNodeState, e: string) {
     currentNodeId = getCurrentNodeId(currentNodeInstIdsCp.value, nodeModelCp.value)
     if (!currentNodeId) {
       ElMessage.warning('nodeInstId为空！')
-
       return
     }
   }

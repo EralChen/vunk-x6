@@ -9,7 +9,7 @@
 import { bindOpersToNode } from '@skzz-platform/api/system/workflow'
 import { PropType, computed, ref, watch } from 'vue'
 import { User } from '@skzz-platform/api/system/user'
-import BindUser from '../../bind-user/index.vue'
+import BindUser from '../bind-user/index.vue'
 import { NodeModel } from '@zzg6/flow/components/editor/src/types'
 
 
@@ -20,8 +20,10 @@ const props = defineProps({
   },
 })
 const emit = defineEmits(['bindSuccess'])
-const showdialog = ref(false) // 绑定操作人弹窗显影状态
-const showData = ref<User[]>([])// 绑定用户的时候用来展示已绑定的人字段
+// 绑定操作人弹窗显影状态
+const showdialog = ref(false)
+// 绑定用户的时候用来展示已绑定的人字段
+const showData = ref<User[]>([])
 const nodeModelCp = computed(() => props.nodeModel)
 
 watch(() => props.nodeModel, (v) => {
@@ -30,7 +32,7 @@ watch(() => props.nodeModel, (v) => {
 
 
 /**
- * 绑定操作人,使用节点id
+ * 使用节点id绑定操作人，给节点实例绑人
  */
 function bindOpers () {
   const ids = nodeModelCp.value.opers?.map((item: any) => item.id) || []
@@ -39,7 +41,6 @@ function bindOpers () {
     ids,
   ).then(() => {
     showdialog.value = false
-    // showData.value = nodeModelCp.value.opers!
     emit('bindSuccess')
   })
 }

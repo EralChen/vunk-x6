@@ -3,7 +3,7 @@ import { reactive, watch } from 'vue'
 import { FlowNodeInstance, rInstanceList } from '@skzz-platform/api/system/workflow'
 import { SkAppOperations, SkAppTablesV1, __SkAppTablesV1 } from '@skzz/platform'
 import { VkDuplexCalc } from '@vunk/core'
-import { useRouterTo } from '@skzz-platform/composables'
+import { useResolveQueryU, useRouterTo } from '@skzz-platform/composables'
 
 type Row = FlowNodeInstance
 type Col = __SkAppTablesV1.Column<Row>
@@ -54,6 +54,10 @@ const tableState = reactive({
     start: 0,
   },
   total: 0,
+})
+
+useResolveQueryU(() => {
+  r()
 })
 
 function rI (id: string) {

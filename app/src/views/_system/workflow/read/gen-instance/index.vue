@@ -7,12 +7,13 @@ import { VkDuplex, setData } from '@vunk/core'
 import { ElCheckbox, ElMessage } from 'element-plus'
 import BindUser from '../../bind-user/index.vue'
 import { NodeConfig } from '@antv/g6'
-import { Workflow, genInstance } from '@skzz-platform/api/system/workflow'
-import {cloneDeep} from 'lodash-es'
+import { InstanceBindOpers, Workflow, genInstance } from '@skzz-platform/api/system/workflow'
+import { cloneDeep } from 'lodash-es'
 import { User } from '@skzz-platform/api/system/user'
+
 type Row = NodeConfig
 export default defineComponent({
-  name: 'SkUserTablesSelect',
+  name: 'GenInstance',
   emits: {
     'success': () => true,
     'update:modelValue': (v: Partial<Row>[]) => v,
@@ -40,7 +41,7 @@ export default defineComponent({
     VkDuplex,
     SkAppForm,
   },
-  setup (props, {emit}) {
+  setup (props, { emit }) {
     const queryItems: __SkAppForm.CoreFormItem<any>[] = [
       {
         prop: 'any',
@@ -68,7 +69,7 @@ export default defineComponent({
           key: 'isChecked',
           width: 200,
           flexGrow: 1,
-          cellRenderer: ({rowData}) => {
+          cellRenderer: ({ rowData }) => {
             return <>
               <ElCheckbox
                 v-model={rowData.isChecked}
@@ -99,24 +100,17 @@ export default defineComponent({
       total: 0,
     })
 
-    // watch(() => tableState.pagination, r, { deep: true, immediate: true })
     watch(() => props.tableData, v => {
       if (v) {
         tempTata = v.map(item => ({
           ...item,
-          // TODO 需要初始化加上，如果是后面加的会不响应
+          // 需要初始化加上，如果是后面加的会不响应
           isChecked: false,
         }))
         tableState.data = cloneDeep(tempTata)
       }
-        
+
     }, { deep: true, immediate: true })
-    // function r () {
-    //   rUsers(queryState.data, tableState.pagination).then(res => {
-    //     tableState.data = res.rows
-    //     tableState.total = res.total
-    //   })
-    // }
 
 
     function filterOpers () {
@@ -136,22 +130,30 @@ export default defineComponent({
         } else
           return undefined
       })
-      return {isOk, skipNodes, nodeOpers: nodeOpers.filter(item => item !== undefined)}
+      return {
+        isOk,
+        skipNodes,
+        nodeOpers: nodeOpers.filter(item => item !== undefined) as InstanceBindOpers[],
+      }
     }
 
-    
+
     function doGen () {
-      const {skipNodes, nodeOpers, isOk} =  filterOpers()
+      const { skipNodes, nodeOpers, isOk } = filterOpers()
       if (!isOk) {
         ElMessage.warning('请选择操作人！')
+        return
+      }
+      if (!props.flowData.formTable) {
+        ElMessage.warning('需要被操作的表单位置！')
         return
       }
       genInstance({
         itemId: props.itemId,
         skipNodes,
-        nodeOpers: nodeOpers as any,
+        nodeOpers,
         formData: queryState.data,
-        formTable: props.flowData.formTable!,
+        formTable: props.flowData.formTable,
       }).then(() => {
         tableState.data = cloneDeep(tempTata)
         queryState.data = {}
@@ -176,9 +178,10 @@ export default defineComponent({
     </template>
 
     <SkAppTables class="h-30em" :columns="tableState.columns" :data="tableState.data" :total="tableState.total"
-      v-model:start="tableState.pagination.start" v-model:pageSize="tableState.pagination.pageSize" :layout="''"></SkAppTables>
-      <div sk-flex="row-end">
-        <el-button size="large" type="primary" @click="doGen">确定</el-button>
-      </div>
+      v-model:start="tableState.pagination.start" v-model:pageSize="tableState.pagination.pageSize" :layout="''">
+    </SkAppTables>
+    <div sk-flex="row-end">
+      <el-button size="large" type="primary" @click="doGen">确定</el-button>
+    </div>
   </VkDuplex>
 </template>

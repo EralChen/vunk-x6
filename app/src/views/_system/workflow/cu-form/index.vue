@@ -1,9 +1,8 @@
 <script lang="tsx" setup>
 import { SkAppForm, __SkAppForm } from '@skzz/platform'
 import { Row } from '../types'
-import { ElButton, ElLink } from 'element-plus'
-import { computed, PropType, ref  } from 'vue'
-import { SkAppIcon } from '@skzz-platform/components/app-icon'
+import { ElButton } from 'element-plus'
+import { PropType, ref  } from 'vue'
 import { SetDataEvent } from '@vunk/core'
 import { snowFlake } from '@skzz-platform/api/basic'
 
@@ -22,7 +21,7 @@ const emit = defineEmits({
   'setData': (e: SetDataEvent) => e,
 })
 
-const isU = computed(() => props.type === 'u')
+// const isU = computed(() => props.type === 'u')
 const formItems = ref<__SkAppForm.FormItem<keyof Row>[]>([
   {
     templateType: 'VkfInput',
