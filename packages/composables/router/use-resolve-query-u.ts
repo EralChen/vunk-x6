@@ -19,3 +19,4 @@ export function useResolveQueryU (fn: FirstParameter<typeof onBeforeRouteUpdate>
 
   })
 }
+
