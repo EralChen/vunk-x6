@@ -8,6 +8,9 @@
             <template #form>
               <el-tab-pane label="审批" name="approval">
                 <ElScrollbar>
+                  <ElForm label-position="top" :disabled="true">
+                    <BindOpers></BindOpers>
+                  </ElForm>
                   <ElForm label-position="top">
                     <BindAssitsOpers :node-model="nodeModel" :currentNodeInstIds="bindState.currentNodeInstIds"
                       @bind-success="r" :isFlowStart="isFlowStart"></BindAssitsOpers>
@@ -33,6 +36,7 @@ import BindAssitsOpers from './bind-assist-opers/index.vue'
 import Approval from './approval/index.vue'
 import { cloneDeep } from 'lodash'
 import { NodeModel } from '@zzg6/flow/components/editor/src/types'
+import BindOpers from './bind-opers/index.vue'
 
 
 // type Row = Partial<WorkflowNode>

@@ -1,6 +1,6 @@
 <script lang="tsx" setup>
 import { computed, reactive, watch } from 'vue'
-import { rWorkflows, cuWorkflow, dWorkflows, runWorkflow, bindForm2Flow } from '@skzz-platform/api/system/workflow'
+import { rWorkflows, cuWorkflow, dWorkflows, bindForm2Flow } from '@skzz-platform/api/system/workflow'
 import { SkAppDialog, SkAppOperations, SkAppTablesV1, __SkAppTablesV1 } from '@skzz/platform'
 import { setData, VkDuplexCalc } from '@vunk/core'
 import CUForm from './cu-form/index.vue'
