@@ -56,7 +56,7 @@ export default function () {
       props: true,
       component: () => import('@/views/_system/workflow/instances/index.vue'),
     },
-    '/system/workflow/list/instances/:flowId/read/:itemId': {
+    '/system/workflow/list/instances/:flowId/read/:id': {
       props: true,
 
       component: () => import('@/views/_system/workflow/instances/read/index.vue'),

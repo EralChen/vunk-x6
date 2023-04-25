@@ -1,6 +1,6 @@
 <template>
   <ElDivider>表单</ElDivider>
-  <SkAppForm :formItems="nodeFormItem" :data="nodeFormData" @setData="setData(nodeFormData, $event)">
+  <SkAppForm :rules="rules" :el-ref="def.resolve" :formItems="nodeFormItem" :data="nodeFormData" @setData="setData(nodeFormData, $event)">
   </SkAppForm>
   <ElDivider>表单 - end</ElDivider>
   <ElFormItem label="审批" v-show="isFlowStart && (hasApprovelAuth || hasAssistAuth)">
@@ -19,12 +19,16 @@
 import { NodeModel } from '@zzg6/flow/components/editor/src/types'
 import { PropType, computed, ref, watch } from 'vue'
 import { User } from '@skzz-platform/api/system/user'
-import { WorkFlowNodeState, doApproveNode, doApproveNodeWithForm } from '@skzz-platform/api/system/workflow'
+import { WorkFlowNodeState, doApproveNodeWithForm, rFormInfo } from '@skzz-platform/api/system/workflow'
 import { getCurrentNodeId } from '../utils'
 import { useUserStore } from '@skzz-platform/stores/user'
 import { cloneDeep } from 'lodash'
 import { SkAppForm } from '@skzz/platform'
 import { setData } from '@vunk/core'
+import { Deferred } from '@vunk/core/shared/utils-promise'
+import { ElMessage, FormInstance, FormRules } from 'element-plus'
+import { CoreFormItem } from '@skzz-platform/components/app-form/src/types'
+
 
 
 const props = defineProps({
@@ -48,6 +52,10 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  itemId: {
+    type: String,
+    default: '',
+  },
 })
 const emit = defineEmits(['approvalSuccess'])
 
@@ -62,9 +70,11 @@ const hasAssistAuth = ref(false)
 
 const nodeFormData = ref({})
 const nodeFormItem = ref([])
+const rules = ref<FormRules>({})
 
 const formTableCp = computed(() => props.formTable)
 
+const def = new Deferred<FormInstance>()
 /**
  * 是否有对选中节点的审批权限
  * @param opers 
@@ -74,11 +84,31 @@ function judgeAuth (opers: User[]) {
   return !!ids?.includes(userStore.getUserInfo().id + '')
 }
 
+function genRules (formItems: CoreFormItem[]) {
+  formItems.forEach(item => {
+    (item as any).key = item.prop
+    rules.value[item.prop] = [{ required: true, message: `${item.label}不能为空！`}]
+  })
+
+}
+
+async function getFormInfn (flowInstId?: string) {
+  console.log(flowInstId)
+
+  if (flowInstId) {
+    const res = await rFormInfo(flowInstId)
+    nodeFormData.value = res
+  }
+}
+
 // 为了和选人显示的内容做区分，要不然关闭选人窗口时会出现按钮不显示的问题
 watch(() => props.nodeModel, (v, ov) => {
   hasApprovelAuth.value = judgeAuth(v.opers || [])
-  if (v && v.formColumns && v.formColumns.show && v.id !== ov?.id) {
+  // && v.id !== ov?.id
+  if (v && v.formColumns && v.formColumns.show) {
     nodeFormItem.value = cloneDeep((v as any).formColumns.show)
+    genRules(nodeFormItem.value)
+    getFormInfn(v.nodeInstId)
   } else {
     nodeFormItem.value = []
     nodeFormData.value = {}
@@ -94,14 +124,29 @@ watch(() => props.nodeModel, (v) => {
  * 2. 退回逻辑，指定某个节点，退回到该节点，传的是定义的id,字段为 backNodeId  
  * 3. auditStatus 用来判断是否审批过，用来控制退回按钮是否出现
  */
-function doApprovel (type: WorkFlowNodeState, e: string) {
+async function doApprovel (type: WorkFlowNodeState, e: string) {
+  const formIns = await def.promise
+  try {
+    const valid = await formIns.validate()
+    if (!valid) {
+      ElMessage.warning('请按规则填写表单！')
+      return
+    }
+  } catch (e) {
+    ElMessage.warning('请按规则填写表单！')
+    return 
+  }
   let currentBackId
   let currentNodeId
   if (e === 'bh') {
     currentNodeId = currentNodeInstIdsCp.value[0]
   } else {
     currentNodeId = getCurrentNodeId(currentNodeInstIdsCp.value, nodeModelCp.value)
-    if (!currentNodeId) return
+    if (!currentNodeId) {
+      ElMessage.warning('nodeInstId为空！')
+
+      return
+    }
   }
 
   if (e === 'th') {
@@ -116,7 +161,7 @@ function doApprovel (type: WorkFlowNodeState, e: string) {
       backNodeId: currentBackId,
     },
     nodeFormData.value,
-    nodeModelCp.value.id,
+    props.itemId,
     formTableCp.value,
   ).then(() => {
     emit('approvalSuccess')

@@ -41,6 +41,7 @@ export const rWorkflowNodes = (query: {
  */
 export const rWorkflowNodeRaw = (query: {
   itemId: string,
+  flowInstId?: string
 }) => {
   return request<{
     '5.1': GraphData & {
@@ -255,7 +256,7 @@ export const doApproveNode = (data: {
 }
 
 /**
- * 
+ * https://www.apifox.cn/link/project/1903413/apis/api-77292352
  * @param data 审批需要的数据
  * @param formData 节点表单数据
  * @param id 节点实例id？

@@ -9,13 +9,13 @@
 import { bindOpersToNode } from '@skzz-platform/api/system/workflow'
 import { PropType, computed, ref, watch } from 'vue'
 import { User } from '@skzz-platform/api/system/user'
-import BindUser from '../bind-user/index.vue'
+import BindUser from '../../bind-user/index.vue'
 import { NodeModel } from '@zzg6/flow/components/editor/src/types'
 
 
 const props = defineProps({
   nodeModel: {
-    type: Object as PropType<NodeModel<User>>,
+    type: Object as PropType<NodeModel>,
     default: () => ({}),
   },
 })

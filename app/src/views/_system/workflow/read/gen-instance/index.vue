@@ -4,7 +4,7 @@ import { SkAppTables, __SkAppTables } from '@skzz-platform/components/app-tables
 import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
 import { Pagination } from '@skzz-platform/shared'
 import { VkDuplex, setData } from '@vunk/core'
-import { ElButton, ElCheckbox, ElMessage } from 'element-plus'
+import { ElCheckbox, ElMessage } from 'element-plus'
 import BindUser from '../../bind-user/index.vue'
 import { NodeConfig } from '@antv/g6'
 import { Workflow, genInstance } from '@skzz-platform/api/system/workflow'
@@ -118,8 +118,8 @@ export default defineComponent({
     //   })
     // }
 
-    
-    function doGen () {
+
+    function filterOpers () {
       const skipNodes = tableState.data.filter(item => item.isChecked).map(item => item.id)
       let isOk = false
       const nodeOpers = tableState.data.map(item => {
@@ -128,11 +128,20 @@ export default defineComponent({
           operName: inner.name,
         })) || []
         if (ops.length) isOk = true
-        return {
-          nodeId: item.id,
-          opers: ops,
-        }
+        if (ops.length) {
+          return {
+            nodeId: item.id,
+            opers: ops,
+          }
+        } else
+          return undefined
       })
+      return {isOk, skipNodes, nodeOpers: nodeOpers.filter(item => item !== undefined)}
+    }
+
+    
+    function doGen () {
+      const {skipNodes, nodeOpers, isOk} =  filterOpers()
       if (!isOk) {
         ElMessage.warning('请选择操作人！')
         return
@@ -140,15 +149,12 @@ export default defineComponent({
       genInstance({
         itemId: props.itemId,
         skipNodes,
-        nodeOpers,
+        nodeOpers: nodeOpers as any,
         formData: queryState.data,
         formTable: props.flowData.formTable!,
       }).then(() => {
-        console.log(tableState.data)
         tableState.data = cloneDeep(tempTata)
         queryState.data = {}
-        console.log(tableState.data)
-
         emit('success')
       })
     }

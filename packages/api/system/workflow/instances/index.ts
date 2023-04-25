@@ -3,8 +3,13 @@ import { request } from '@skzz-platform/shared/fetch/platform'
 import { Pagination } from '@skzz-platform/shared'
 import { QueryRData } from '@vunk/skzz'
 import { FlowNodeInstance } from '../types'
-
-export const rInstanceList = (pagination: Pagination, flowId: string) => {
+/**
+ * https://www.apifox.cn/link/project/1903413/apis/api-77333403
+ * @param pagination 
+ * @param flowId 
+ * @returns 
+ */
+export const rInstanceList = (pagination?: Pagination, flowId?: string, id?: string) => {
   return request<[QueryRData<FlowNodeInstance>]>({
     method: 'POST',
     url: '/core/busi/query',
@@ -15,6 +20,7 @@ export const rInstanceList = (pagination: Pagination, flowId: string) => {
       'condition': {
         '10': {
           'flowId': flowId,
+          id,
           ...(pagination ? { pagination } : {}),
         },
       },
@@ -32,7 +38,7 @@ export type InstanceBindOpers = {
   opers: { operId: string, operName: string }[]
 }
 /**
- * 
+ * https://www.apifox.cn/link/project/1903413/apis/api-77292033
  * @param data 
  * @returns 
  */
@@ -76,4 +82,52 @@ export const genInstance = (
   }, {
     msg: '启动成功!',
   })
+}
+
+
+/**
+ * https://www.apifox.cn/link/project/1903413/apis/api-77333648
+ * 查询表单配置
+ * @param flowInstId 节点的实例id
+ * @returns 
+ */
+export const rFormConfigInfo = (flowInstId: string) => {
+  return request({
+    method: 'POST',
+    url: '/core/busi/exec',
+    data: {
+      'datasetId': '5',
+      'condition': {
+        'flow': {
+          'flowInstId': flowInstId,
+          'op': 'formInfo',
+        },
+      },
+      ...MENU_DATA,
+    },
+  })
+}
+
+/**
+ * https://www.apifox.cn/link/project/1903413/apis/api-77645506
+ * @param nodeInstId 节点的实例id
+ * @returns 
+ */
+export const rFormInfo = (nodeInstId: string) => {
+  return request<{
+    '5.1': Record<string, any>
+  }>({
+    method: 'POST',
+    url: '/core/busi/exec',
+    data: {
+      'datasetId': '5',
+      'condition': {
+        'flow': {
+          'nodeInstId': nodeInstId,
+          'op': 'formData',
+        },
+      },
+      ...MENU_DATA,
+    },
+  }).then(res => res.datas[5.1])
 }

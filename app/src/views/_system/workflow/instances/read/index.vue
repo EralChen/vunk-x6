@@ -1,28 +1,17 @@
 <template>
   <PageOver>
-    <SkAppCard class="h-full" header="节点详情">
+    <SkAppCard class="h-full" header="实例详情">
       <div class="editor-x" sk-flex="row">
         <div class="editor">
           <ZzG6Editor :selectNodeId="nodeModel.id" :mode="'default'" :model-value="model"
-            @nodeselectchange="nodeSelectChange" :active-tab-name="'expend'" :form-id="flowData.formId">
+            @nodeselectchange="nodeSelectChange" :active-tab-name="'approval'" >
             <template #form>
-              <el-tab-pane label="扩展属性" name="expend">
-                <ElScrollbar>
-                  <ElForm label-position="top">
-                    <BindOpers :node-model="nodeModel" @bind-success="r"></BindOpers>
-                  </ElForm>
-                </ElScrollbar>
-              </el-tab-pane>
               <el-tab-pane label="审批" name="approval">
                 <ElScrollbar>
-                 
                   <ElForm label-position="top">
-                    <ElFormItem label="开始流程" v-show="!isFlowStart">
-                      <el-button type="primary" @click="doRunWorkflow">运行</el-button>
-                    </ElFormItem>
                     <BindAssitsOpers :node-model="nodeModel" :currentNodeInstIds="bindState.currentNodeInstIds"
                       @bind-success="r" :isFlowStart="isFlowStart"></BindAssitsOpers>
-                    <Approval :flowId="flowId" :node-model="nodeModel" :currentNodeInstIds="bindState.currentNodeInstIds"
+                    <Approval :itemId="flowData.itemId" :flowId="flowId" :node-model="nodeModel" :currentNodeInstIds="bindState.currentNodeInstIds"
                       :isFlowStart="isFlowStart" @approvalSuccess="r" :form-table="flowData.formTable"></Approval>
                   </ElForm>
                 </ElScrollbar>
@@ -36,11 +25,10 @@
 </template>
 
 <script setup lang="tsx">
-import { rWorkflowNodesWithRaw, runWorkflow, Workflow, rWorkflowNodeRaw, rWorkflow } from '@skzz-platform/api/system/workflow'
+import { Workflow, rWorkflowNodeRaw, rWorkflow, rInstanceList, FlowNodeInstance } from '@skzz-platform/api/system/workflow'
 import { computed, nextTick, reactive, ref, shallowRef, watch } from 'vue'
 import { SkAppCard } from '@skzz/platform'
 import ZzG6Editor from '@/components/ZzG6Editor/index.vue'
-import BindOpers from './bind-opers/index.vue'
 import BindAssitsOpers from './bind-assist-opers/index.vue'
 import Approval from './approval/index.vue'
 import { cloneDeep } from 'lodash'
@@ -50,7 +38,7 @@ import { NodeModel } from '@zzg6/flow/components/editor/src/types'
 // type Row = Partial<WorkflowNode>
 
 const props = defineProps({
-  itemId: {
+  id: {
     type: String,
     required: true,
   },
@@ -63,35 +51,32 @@ const props = defineProps({
 
 const nodeModel = ref({} as NodeModel)
 const model = shallowRef({}) // 流程节点数据
-const flowData = ref({} as Workflow) // 流程详情
+const flowData = ref({} as FlowNodeInstance) // 流程详情
 const bindState = reactive({
   currentNodeInstIds: [] as string[],
 })
-const isFlowStart = computed(() => !!flowData.value.isStart) // 节点是否开始
+const isFlowStart = computed(() => flowData.value.status !== 10) // 节点是否开始
 
-watch(() => props.itemId, r, { immediate: true })
+watch(() => props.id, r, { immediate: true })
 
-function r () {
-  Promise.all([rWorkflow({flowId: props.flowId}), rWorkflowNodeRaw({itemId: props.itemId!})])
-    .then(([e, e1]) => {
-      const res = {
-        raws: e1,
-        info: e,
-      } as any
-      console.log(res)
-      model.value = res.raws
-      bindState.currentNodeInstIds = res.raws.currentNodeInstIds
-      flowData.value = res.info
-      if (nodeModel.value.id) {
-        const node = res.raws.nodes?.find((item: any) => item.id === nodeModel.value.id)
-        if (node)
-          nodeModel.value = node as NodeModel
-      } else {
-        nextTick(() => {
-          nodeModel.value = res.raws.nodes![0] as NodeModel
-        })
-      }
+async function r () {
+  const r = await rInstanceList(undefined, undefined, props.id)
+  const rows = r.rows[0]
+  const raws = await rWorkflowNodeRaw({itemId: rows.itemId, flowInstId: props.id})
+
+  model.value = raws
+  bindState.currentNodeInstIds = raws.currentNodeInstIds
+  flowData.value = rows
+  if (nodeModel.value.id) {
+    const node = raws.nodes?.find((item: any) => item.id === nodeModel.value.id)
+    if (node)
+      nodeModel.value = node as NodeModel
+  } else {
+    nextTick(() => {
+      nodeModel.value = raws.nodes![0] as NodeModel
     })
+  }
+
   // rWorkflowNodesWithRaw({
   //   itemId: props.itemId,
   // }).then(res => {
@@ -123,15 +108,6 @@ const nodeSelectChange = (e: any) => {
 
   }
 }
-
-/**
- * 运行流程
- */
-function doRunWorkflow () {
-  if (flowData.value.itemId)
-    runWorkflow(flowData.value.itemId).then(r)
-}
-
 </script>
 
 <style lang="scss" scoped>

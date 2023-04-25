@@ -18,15 +18,28 @@ const tableState = reactive({
   data: [] as Row[],
   _columns: [
     {
+      prop: 'status',
+      label: '流程实例状态',
+      formatter: (row) => {
+        const map: Record<string, string> = {
+          '-10': '驳回',
+          10: '通过',
+          0: '审核中',
+        }
+        return map[row.status]
+      },
+      width: 0,
+    },
+    {
       prop: undefined,
       label: '操作',
-      width: '450em',
+      width: '250em',
       slots: ({ row }) => {
         const modules = ['r']
 
         return <SkAppOperations
           modules={modules}
-          onR={() => rI(row.itemId)}
+          onR={() => rI(row.id)}
         >
         </SkAppOperations>
       },
@@ -43,9 +56,9 @@ const tableState = reactive({
   total: 0,
 })
 
-function rI (itemId: string) {
+function rI (id: string) {
   routerNext({
-    path: 'read/' + itemId,
+    path: 'read/' + id,
   })
 }
 
@@ -54,7 +67,7 @@ function r () {
   return rInstanceList(tableState.pagination, props.flowId).then(res => {
     if (!tableState.columns.length) {
       tableState.columns = [
-        ...res.columns as Col[],
+        ...res.columns.filter(item => item.prop !== 'status') as Col[],
         ...tableState._columns,
       ]
     }
@@ -79,7 +92,8 @@ function r () {
       </SkAppTablesV1>
 
     </VkDuplexCalc>
+    <RouterView></RouterView>
+
   </PageOver>
-  <RouterView></RouterView>
 
 </template>

@@ -58,4 +58,5 @@ export type FlowNodeInstance = {
   id: string;
   flowId: string;
   status: number;
+  formTable: string
 }
