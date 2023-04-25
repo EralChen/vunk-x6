@@ -15,8 +15,9 @@ type Res = ApiReturnType<typeof rRoles>
 const { routerNext } = useRouterTo()
 // when router back 
 useResolveQueryU(() => {
-  r()
+  r() 
 })
+
 
 /* query */
 const queryItems: __SkAppQueryForm.FormItem[] = [
