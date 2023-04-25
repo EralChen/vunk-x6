@@ -9,10 +9,13 @@ import { useRouterTo } from '@skzz-platform/composables'
 import { ElButton } from 'element-plus'
 import BindUserTable from './bind-form-table/index.vue'
 import { CForm } from '@skzz-platform/api/system/form'
-import { useResolveQueryU } from '@skzz-platform/composables'
+import { useWorkflowResolveQueryU } from './utils'
 
 type Col = __SkAppTablesV1.Column<Row>
 const { routerNext } = useRouterTo()
+const { addListener } = useWorkflowResolveQueryU()
+addListener(() => r())
+
 const tableState = reactive({
   data: [] as Row[],
   _columns: [
@@ -123,9 +126,6 @@ const bindData = reactive({
   data: CForm
 }
 
-useResolveQueryU(() => {
-  r()
-})
 
 
 watch(() => tableState.pagination, r, { deep: true, immediate: true })
