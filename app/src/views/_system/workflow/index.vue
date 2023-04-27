@@ -10,9 +10,16 @@ import { ElButton } from 'element-plus'
 import BindUserTable from './bind-form-table/index.vue'
 import { CForm } from '@skzz-platform/api/system/form'
 import { useResolveQueryU } from '@skzz-platform/composables'
+import BindCallback from './bind-callback/index.vue'
 
 type Col = __SkAppTablesV1.Column<Row>
 const { routerNext } = useRouterTo()
+
+const bindVallback = reactive({
+  id: '',
+  formId: '',
+})
+
 const tableState = reactive({
   data: [] as Row[],
   _columns: [
@@ -42,11 +49,11 @@ const tableState = reactive({
       label: '操作',
       width: '450em',
       slots: ({ row }) => {
-        const modules = ['u', 'd']
+        const modules = ['u', 'd', 'callback']
         // 流程没启动前可以绑定表单
         if (!row.isStart) {
           modules.unshift('bind')
-        } 
+        }
         if (row.isStart) {
           modules.push('instances')
         }
@@ -69,7 +76,12 @@ const tableState = reactive({
           onD={() => d([row.id])}
           onU={() => preuI(row)}
           v-slots={{
-
+            callback: () => <ElButton type="primary" size="small" onClick={
+              () => { 
+                bindVallback.id = row.id
+                bindVallback.formId = row.formId!
+              }
+            }>绑定回调</ElButton>,
             nodes: () =>
               <ElButton type="primary" size="small" onClick={
                 () => routerNext({ path: 'nodes/' + row.flowId })
@@ -122,6 +134,8 @@ const bindData = reactive({
   id: string
   data: CForm
 }
+
+
 
 useResolveQueryU(() => {
   r()
@@ -209,6 +223,10 @@ function bindUser () {
       <template #footer>
         <el-button size="large" type="primary" @click="bindUser">确定</el-button>
       </template>
+    </SkAppDialog>
+    <!-- 绑定 回调 -->
+    <SkAppDialog :modelValue="!!bindVallback.id" @update:modelValue="bindVallback.id = ''" title="绑定流程回调">
+      <BindCallback :form-id="bindVallback.formId"></BindCallback>
     </SkAppDialog>
   </page-x>
 </template>
