@@ -11,6 +11,7 @@ import BindUserTable from './bind-form-table/index.vue'
 import { CForm } from '@skzz-platform/api/system/form'
 import { useResolveQueryU } from '@skzz-platform/composables'
 import BindCallback from './bind-callback/index.vue'
+import { useWorkflowResolveQueryU } from './utils'
 
 type Col = __SkAppTablesV1.Column<Row>
 const { routerNext } = useRouterTo()
@@ -19,6 +20,10 @@ const bindVallback = reactive({
   id: '',
   formId: '',
 })
+
+
+const { addListener } = useWorkflowResolveQueryU()
+addListener(() => r())
 
 const tableState = reactive({
   data: [] as Row[],
@@ -136,10 +141,10 @@ const bindData = reactive({
 }
 
 
-
-useResolveQueryU(() => {
-  r()
-})
+// TODO 这里改版没重写
+// useResolveQueryU(() => {
+//   r()
+// })
 
 
 watch(() => tableState.pagination, r, { deep: true, immediate: true })
