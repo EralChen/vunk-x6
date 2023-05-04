@@ -17,10 +17,10 @@ export default series([
     await run(`docker build -t zz-platform-config:${mriData.v} .`, workRoot)
   }),
   taskWithName('docker tag', async () => {
-    await run(`docker tag zz-platform-config:${mriData.v} t1.zjsophon.com:58088/zz-platform-config:${mriData.v}`, workRoot)
+    await run(`docker tag zz-platform-config:${mriData.v} t1.zjsophon.com:58088/snapshot/zz-platform-config:${mriData.v}`, workRoot)
   }),
   taskWithName('docker push', async () => {
-    await run(`docker push t1.zjsophon.com:58088/zz-platform-config:${mriData.v}`, workRoot)
+    await run(`docker push t1.zjsophon.com:58088/snapshot/zz-platform-config:${mriData.v}`, workRoot)
   }),
  
 ])
