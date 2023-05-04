@@ -231,7 +231,7 @@ function bindUser () {
     </SkAppDialog>
     <!-- 绑定 回调 -->
     <SkAppDialog :modelValue="!!bindVallback.id" @update:modelValue="bindVallback.id = ''" title="绑定流程回调">
-      <BindCallback :form-id="bindVallback.formId"></BindCallback>
+      <BindCallback :form-id="bindVallback.formId" :id="bindVallback.id" @success="bindVallback.id = ''"></BindCallback>
     </SkAppDialog>
   </page-x>
 </template>

@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="tsx">
-import { reactive, watch } from 'vue'
+import { Ref, reactive, watch } from 'vue'
 import { propsOp } from './ctx'
 import { SkAppTables, __SkAppTables } from '@skzz-platform/components/app-tables'
 import { Pagination } from '@skzz/platform'
@@ -31,7 +31,7 @@ const props = defineProps(propsOp)
 
 const emit = defineEmits(['update:modelValue', 'update:show', 'add'])
 const showDialog = useVModel(props, 'show', emit)
-const model = useVModel(props, 'modelValue', emit) as any
+const model = useVModel(props, 'modelValue', emit) as Ref<FIRS>
 
 const tableState = reactive({
   data: [] as any,
