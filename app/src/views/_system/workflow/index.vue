@@ -3,15 +3,14 @@ import { computed, reactive, watch } from 'vue'
 import { rWorkflows, cuWorkflow, dWorkflows, bindForm2Flow } from '@skzz-platform/api/system/workflow'
 import { SkAppDialog, SkAppOperations, SkAppTablesV1, __SkAppTablesV1 } from '@skzz/platform'
 import { setData, VkDuplexCalc } from '@vunk/core'
-import CUForm from './cu-form/index.vue'
 import { Row } from './types'
 import { useRouterTo } from '@skzz-platform/composables'
 import { ElButton } from 'element-plus'
 import BindUserTable from './bind-form-table/index.vue'
 import { CForm } from '@skzz-platform/api/system/form'
-import { useResolveQueryU } from '@skzz-platform/composables'
 import BindCallback from './bind-callback/index.vue'
 import { useWorkflowResolveQueryU } from './utils'
+import CUForm from './cu-form/index.vue'
 
 type Col = __SkAppTablesV1.Column<Row>
 const { routerNext } = useRouterTo()
@@ -139,13 +138,6 @@ const bindData = reactive({
   id: string
   data: CForm
 }
-
-
-// TODO 这里改版没重写
-// useResolveQueryU(() => {
-//   r()
-// })
-
 
 watch(() => tableState.pagination, r, { deep: true, immediate: true })
 function r () {
