@@ -63,6 +63,7 @@
 		"docs:dev": "pnpm run -C docs dev",
 		"docs:build": "pnpm run -C docs build",
 		"publish": "gulp -f scripts/publish.ts",
+		"docker:publish": "gulp -f scripts/docker/publish.ts",
 		"cc": "gulp -f scripts/create/component/index.ts",
 		"ccd": "gulp -f scripts/create/component-docs/index.ts",
 		"app:preview": "gulp -f scripts/app/preview.ts",
