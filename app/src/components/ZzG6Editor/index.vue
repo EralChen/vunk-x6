@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts">
-import { MaterialNode, ZzEditor, expendForm, extendNodeFormMap } from '@zzg6/flow'
+import { MaterialGeometryEnum, ZzEditor, expendForm, extendNodeFormMap } from '@zzg6/flow'
 import bindFormItem from './bind-form-item/index.vue'
 import { propsOp, bindProps } from './ctx'
 import { computed, defineComponent } from 'vue'
@@ -38,7 +38,7 @@ export default defineComponent({
       },
     ])
     extendNodeFormMap(
-      MaterialNode.zzRect,
+      MaterialGeometryEnum.zzRect,
       [
         {
           templateType: formKey,
