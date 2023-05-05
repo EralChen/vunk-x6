@@ -23,9 +23,12 @@ declare module 'vue-router' {
     hidden?: boolean
 
     /**
-     * 缓存
+     * 是否缓存
+     * 0: 不缓存
+     * 1: 缓存
+     * 2: 自定义缓存策略
      */
-    // noCache?: boolean
+    noCache?: 0|1|2
     
     /**
      * 控制当前路由是否出现在面包屑 

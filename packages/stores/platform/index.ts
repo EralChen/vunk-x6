@@ -12,8 +12,6 @@ export const usePlatformStore = defineStore('platform', () => {
     setPlatform(res.code)
   }
 
-
-
   const setPlatformInfoByCode = async (code?: string) => { 
     
     if (!code) {

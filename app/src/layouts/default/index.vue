@@ -3,6 +3,7 @@ import { VkDuplexCalc } from '@vunk/core'
 import { defineAsyncComponent, Ref, ref } from 'vue'
 import { ElScrollbar } from 'element-plus'
 import { onBeforeRouteUpdate } from 'vue-router'
+import { useKeepAliverStore } from '@skzz-platform/stores/keep-aliver'
 const LayoutHeader = defineAsyncComponent(() => import('_c/LayoutTop/index.vue'))
 const TagsView = defineAsyncComponent(() => import('_c/TagsView/index.vue'))
 const LayoutAside = defineAsyncComponent(() => import('_c/LayoutAside/index.vue'))
@@ -11,12 +12,16 @@ const BreadcrumbVue = defineAsyncComponent(() => import('_c/Breadcrumb/index.vue
 const headerReady = ref(false)
 const asideReady = ref(false)
 const scrollbarNode = ref() as Ref<InstanceType<typeof ElScrollbar>>
+const keepAliverStore = useKeepAliverStore()
 
 onBeforeRouteUpdate(() => {
   setTimeout(() => {
     scrollbarNode.value?.update()
   }, 400)
 })
+keepAliverStore.collectingInclude()
+
+
 </script>
 <template>
   <VkDuplexCalc class="layout-default">
@@ -26,33 +31,35 @@ onBeforeRouteUpdate(() => {
       ></LayoutHeader>
     </template>
 
-
-
-
-      <div sk-flex class="h-100%">
-        <div class="layout-default-aside-x">
-          <LayoutAside v-if="headerReady"
-            @load="asideReady = true"
-          ></LayoutAside>
-        </div>
-
-        <VkDuplexCalc 
-          class="flex-1 overflow-hidden" 
-          :heightProperty="'--zz-page-height'"
-          v-if="asideReady"
-        >
-          <template #one>
-            <TagsView></TagsView>
-            <BreadcrumbVue></BreadcrumbVue>
-          </template>
-
-          <ElScrollbar ref="scrollbarNode">
-            <RouterView></RouterView>
-          </ElScrollbar>
-        </VkDuplexCalc>
-
+    <div sk-flex class="h-100%">
+      <div class="layout-default-aside-x">
+        <LayoutAside v-if="headerReady"
+          @load="asideReady = true"
+        ></LayoutAside>
       </div>
 
+      <VkDuplexCalc 
+        class="flex-1 overflow-hidden" 
+        :heightProperty="'--zz-page-height'"
+        v-if="asideReady"
+      >
+        <template #one>
+          <TagsView></TagsView>
+          <BreadcrumbVue></BreadcrumbVue>
+        </template>
+
+        <ElScrollbar ref="scrollbarNode">
+          {{  keepAliverStore.include  }}
+          <RouterView  v-slot="{ Component }">
+            <KeepAlive :include="keepAliverStore.include">
+              <component :is="Component"></component>
+            </KeepAlive>
+          </RouterView>
+          
+        </ElScrollbar>
+      </VkDuplexCalc>
+
+    </div>
 
   </VkDuplexCalc>
 </template>

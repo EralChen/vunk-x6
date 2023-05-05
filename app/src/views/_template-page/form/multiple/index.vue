@@ -1,5 +1,10 @@
+<script lang="ts">
+export default {
+  name: 'FormMultiple',
+}
+</script>
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
+import { getCurrentInstance, reactive, ref } from 'vue'
 import PageX from '_c/PageX/index.vue'
 import {
   SkAppCard,
@@ -8,6 +13,7 @@ import {
 
 import FirstVue from './first.vue'
 import { setData } from '@vunk/core'
+
 
 const currentPage = ref('first')
 const firstFormData = reactive({
