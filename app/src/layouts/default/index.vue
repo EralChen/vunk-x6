@@ -49,7 +49,7 @@ keepAliverStore.collectingInclude()
         </template>
 
         <ElScrollbar ref="scrollbarNode">
-          {{  keepAliverStore.include  }}
+  
           <RouterView  v-slot="{ Component }">
             <KeepAlive :include="keepAliverStore.include">
               <component :is="Component"></component>
