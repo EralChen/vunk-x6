@@ -12,7 +12,7 @@ import PageOver from '_c/PageOver/index.vue'
 import '@/api'
 
 import 'virtual:svg-icons-register'
-import './permission'
+// import './permission'
 import './styles'
 import 'uno.css'
 

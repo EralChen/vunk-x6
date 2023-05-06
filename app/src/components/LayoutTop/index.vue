@@ -4,7 +4,6 @@ import { defineAsyncComponent } from 'vue'
 import { useThemeStore } from '@/stores/theme'
 import { ElAvatar } from 'element-plus'
 import { logout } from '@skzz/platform/api/login'
-import ApplicationCascader from '_c/ApplicationCascader/index.vue'
 import SizeCtrl from '_c/SizeCtrl/index.vue'
 defineEmits({
   'load': null,
@@ -35,9 +34,6 @@ const { layoutTopClassName } = useThemeStore()
                 
         <SizeCtrl></SizeCtrl>
 
-        <ApplicationCascader
-          :size="32"
-        ></ApplicationCascader>
 
         <ElDropdown>
           <ElAvatar
