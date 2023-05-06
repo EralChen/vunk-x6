@@ -4,7 +4,10 @@ import { RestFetch } from '@vunk/skzz/shared/utils-fetch'
 export const restFetch  = new RestFetch({
   baseURL: '',
   DEV: true,
-
+  customOk (res) {
+    // 自定义后台成功的返回码
+    return res.code === 0
+  },
   errHandler () {
     /**
      * 在 request 出现异常时调用 默认如下
