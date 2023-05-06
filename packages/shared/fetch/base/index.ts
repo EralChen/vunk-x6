@@ -5,8 +5,7 @@ export const restFetch  = new RestFetch({
   baseURL: '',
   DEV: true,
 
-  errHandler (err) {
-    
+  errHandler () {
     /**
      * 在 request 出现异常时调用 默认如下
      *   throttle((res) => {
@@ -19,8 +18,6 @@ export const restFetch  = new RestFetch({
      *       trailing: false,
      *   })
      * */ 
-    console.log('errHandler', err)
-    
   },
 })
 
@@ -31,6 +28,9 @@ interface R<T> { // 一个自定义的泛型接口
 }
 
 export const request = <T>(...args: Parameters<RestFetchRequest>) => {
-  return restFetch.request(...args) as unknown as Promise<R<T>>
+  const p = restFetch
+    .request(...args) as unknown as Promise<R<T>>
+
+  return p
 }
 

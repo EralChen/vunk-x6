@@ -1,11 +1,18 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
+import { rTestData } from '@/api/test'
 export default defineComponent({
   setup () {
-    return {}
+    const testName = ref('')
+    rTestData().then(res => {
+      testName.value = res.name
+    })
+    return {
+      testName,
+    }
   },
 })
 </script>
 <template>
-  <div>home</div>
+  <div>{{  testName  }}</div>
 </template>
