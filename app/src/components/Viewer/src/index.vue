@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { VaMapView, VaTdtBasemap, VaBasemapToggle, VaBasemapToggleNextBasemap } from '@vuesri/core'
-import { useSharedDark } from '@skzz-platform/composables'
+import { useSharedDark } from '@skzz/platform/composables'
 import { VaZoom } from '@vuesri/core/components/zoom'
 import { props as dProps } from './ctx'
 import { Deferred } from '@vunk/core/shared/utils-promise'
