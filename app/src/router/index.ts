@@ -41,7 +41,7 @@ export const routes: Array<RouteRecordRaw> = [
     meta: {
       display: 0,
     },
-    redirect: '/login' + '/' + getPlatform(),
+    component: () => import('_v/_login/index.vue'),
   },
 
   {

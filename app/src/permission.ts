@@ -7,22 +7,27 @@ import { usePermissionStore } from '@/stores/permission'
 
 const whiteList: (RegExp|string)[] = [/^\/login/, /^\/_play/] // no redirect whitelist
 
+const loginPath = '/login'
 
 router.beforeEach(async (to, from, next) => {
-  const platformStore = usePlatformStore()
+  /**
+   * 当在登录页面时
+   * 通过 publicFetch 获取平台信息
+   * 这将重写 platformFetch 的 baseURL
+   * 这个功能仅在 平台管理系统 中使用
+   */
+  // const platformStore = usePlatformStore()
+  // if (to.path.includes('/login')) {
+  //   const platform = to.params.platform as string
+  //   await platformStore.setPlatformInfoByCode(platform)
+  // }
+  // const platformInfo  = await platformStore.getPlatformInfo()
+  // loginPath = '/login/' +  platformInfo.code
+  /* ------------------------------------------------ */
+
   const userStore = useUserStore()
   const permissionStore = usePermissionStore()
 
-  // 获取当前所处平台
-  if (to.path.includes('/login')) {
-    const platform = to.params.platform as string
-    await platformStore.setPlatformInfoByCode(platform)
-  }
-
-  // 当前平台 登录地址
-  const platformInfo  = await platformStore.getPlatformInfo()
-  const loginPath = '/login/' +  platformInfo.code
-  
   // determine whether the user has logged in
   const token = getToken()
 
