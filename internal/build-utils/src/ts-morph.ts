@@ -12,6 +12,7 @@ import { JsxEmit } from 'typescript'
 export async function genTypes (opts = {} as {
   filesRoot: string
   source?: string
+  outDir?: string
 }) { // 生成一个 .d.ts
   const _opts = {
     source: '**/*',
@@ -28,7 +29,7 @@ export async function genTypes (opts = {} as {
       jsx: JsxEmit.Preserve,
       disableSizeLimit: true,
       esModuleInterop: true,
-      outDir: distTypesDir,
+      outDir: opts.outDir || distTypesDir,
       baseUrl: workRoot,
       preserveSymlinks: true,
       target: ScriptTarget.ESNext,
@@ -116,8 +117,10 @@ export async function genTypes (opts = {} as {
     // 生成实体文件
     const tasks = emitFiles.map(async (outputFile) => {
       const filepath = outputFile.getFilePath()
+
       /* [TODO]有没有方法能够固定输入的文件路径 */
-      // yellow(`写入文件的路径: ${bold(filepath)}`)
+      consola.log(`写入文件的路径: ${bold(filepath)}`)
+
       await fs.mkdir(path.dirname(filepath), {
         recursive: true,
       })
