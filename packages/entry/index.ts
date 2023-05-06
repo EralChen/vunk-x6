@@ -18,5 +18,5 @@ export * from '@skzz-platform/components/multipage-renderer'
 export * from '@skzz-platform/components/multipage-template'
 export * from '@skzz-platform/components/app-dialog'
 export * from '@skzz-platform/components/user-tables-select'
-export * from '@skzz-platform/components/app-formaker'
 export * from '@skzz-platform/components/table-select-tags'
+

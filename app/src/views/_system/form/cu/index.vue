@@ -20,7 +20,8 @@
 
 <script setup lang="ts">
 import PageX from '_c/PageX/index.vue'
-import { SkAppCard, SkAppFormaker } from '@skzz/platform'
+import { SkAppCard } from '@skzz/platform'
+import { SkAppFormaker } from '@skzz-platform/components/app-formaker'
 import { NormalObject, setData, unsetData, VkDuplex } from '@vunk/core'
 import { Ref, reactive, ref } from 'vue'
 import { SkAppForm, __SkAppForm } from '@skzz/platform'
