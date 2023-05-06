@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { SkAppForm, __SkAppForm } from '@skzz/platform/components/app-form'
 import { cuMessageConfig, rMessageConfigList } from '@skzz/platform/api/system/message'
-import { MessageConfig } from '@skzz/platform/api/system/message/config/types'
+import type { MessageConfig } from '@skzz/platform/api/system/message/config/types'
 import { Deferred } from '@vunk/core/shared/utils-promise'
 import { ElMessage, FormInstance } from 'element-plus'
 import { SkAppCard } from '@skzz/platform'
@@ -9,7 +9,7 @@ import PageX from '_c/PageX/index.vue'
 import { setData } from '@vunk/core'
 import { ref } from 'vue'
 import router from '@/router'
-import { Option } from '@skzz/platform/api/system/dictionary'
+import type { Option } from '@skzz/platform/api/system/dictionary'
 import { rTemplateList } from '@skzz/platform/api/system/message'
 import { useDictionaryStore } from '@/stores/dictionary'
 

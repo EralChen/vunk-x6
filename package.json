@@ -40,7 +40,7 @@
 		"@skzz-template/shared": "workspace:*",
 		"@skzz-template/stores": "workspace:*",
 		"@skzz-template/theme": "workspace:*",
-		"@skzz/platform": "0.0.0-alpha.2",
+		"@skzz/platform": "0.0.0-alpha.4",
 		"@skzz/template": "workspace:*",
 		"@vuesri/core": "^0.0.6",
 		"@vueuse/core": "^9.12.0",

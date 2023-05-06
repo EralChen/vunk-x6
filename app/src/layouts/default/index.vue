@@ -3,7 +3,8 @@ import { VkDuplexCalc } from '@vunk/core'
 import { defineAsyncComponent, Ref, ref } from 'vue'
 import { ElScrollbar } from 'element-plus'
 import { onBeforeRouteUpdate } from 'vue-router'
-import { useKeepAliverStore } from '@skzz/platform/stores/keep-aliver'
+
+const AppMain = defineAsyncComponent(() => import('./app-main.vue'))
 const LayoutHeader = defineAsyncComponent(() => import('_c/LayoutTop/index.vue'))
 const TagsView = defineAsyncComponent(() => import('_c/TagsView/index.vue'))
 const LayoutAside = defineAsyncComponent(() => import('_c/LayoutAside/index.vue'))
@@ -12,14 +13,13 @@ const BreadcrumbVue = defineAsyncComponent(() => import('_c/Breadcrumb/index.vue
 const headerReady = ref(false)
 const asideReady = ref(false)
 const scrollbarNode = ref() as Ref<InstanceType<typeof ElScrollbar>>
-const keepAliverStore = useKeepAliverStore()
 
 onBeforeRouteUpdate(() => {
   setTimeout(() => {
     scrollbarNode.value?.update()
   }, 400)
 })
-keepAliverStore.collectingInclude()
+
 
 
 </script>
@@ -49,14 +49,9 @@ keepAliverStore.collectingInclude()
         </template>
 
         <ElScrollbar ref="scrollbarNode">
-  
-          <RouterView  v-slot="{ Component }">
-            <KeepAlive :include="keepAliverStore.include">
-              <component :is="Component"></component>
-            </KeepAlive>
-          </RouterView>
-          
+          <AppMain></AppMain>
         </ElScrollbar>
+
       </VkDuplexCalc>
 
     </div>

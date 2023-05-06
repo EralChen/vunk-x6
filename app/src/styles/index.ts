@@ -6,6 +6,7 @@ import '@vunk/form/index.css'
 import './form'
 import './layout/index.css'
 import '@zzg6/flow/index.css'
+import '@skzz/platform/index.css'
 
 // for formaker
 import 'mapbox-gl/dist/mapbox-gl.css'

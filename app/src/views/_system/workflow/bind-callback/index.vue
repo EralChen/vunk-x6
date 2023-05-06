@@ -23,7 +23,7 @@
 import { SkMultipageRenderer, SkMultipageTemplate } from '@skzz/platform'
 import { ref, watch } from 'vue'
 import Cu from './cu/index.vue'
-import { FlowCallback, FlowCallbackItem } from '@skzz/platform/api/system/workflow/callback/types'
+import type { FlowCallback, FlowCallbackItem } from '@skzz/platform/api/system/workflow/callback/types'
 import { cFlowCallback, rFlowCallbacks } from '@skzz/platform/api/system/workflow'
 
 const props = defineProps({
