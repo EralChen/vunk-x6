@@ -1,4 +1,4 @@
-import { baseGap, namedGap, baseFontSize, namedFontSize, unoShortcuts, unoThemeColors } from '@skzz-template/theme'
+import { baseGap, namedGap, baseFontSize, namedFontSize, unoShortcuts, unoThemeColors } from '@skzz/platform/theme'
 import { NormalObject } from '@vunk/core/shared/types'
 
 
