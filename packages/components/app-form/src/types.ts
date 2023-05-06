@@ -16,6 +16,7 @@ type CoreSourcePlugin<P extends string = string> =
 
 type ExtendsProperties = {
   span?: number
+  label?: string
 }
 
 
