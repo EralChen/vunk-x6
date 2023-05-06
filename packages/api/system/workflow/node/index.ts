@@ -1,10 +1,10 @@
 import { MENU_DATA } from '../const'
-import { request } from '@skzz-platform/shared/fetch/platform'
+import { request } from '@skzz-template/shared/fetch/platform'
 import { QueryRData, RestFetchExecOptions, RestFetchQueryOptions, RestFetchSaveOptions } from '@vunk/skzz'
 import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
 import { WorkflowNode, WorkflowData, WorkflowNodeRaw, WorkFlowNodeState } from '../types'
-import { snowFlake } from '@skzz-platform/api/basic'
-import { rWorkflow } from '@skzz-platform/api/system/workflow'
+import { snowFlake } from '@skzz-template/api/basic'
+import { rWorkflow } from '@skzz-template/api/system/workflow'
 import { GraphData, TreeGraphData } from '@antv/g6'
 
 /**

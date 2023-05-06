@@ -1,7 +1,7 @@
 
 
-import { Pagination } from '@skzz-platform/shared'
-import { request } from '@skzz-platform/shared/fetch/platform'
+import { Pagination } from '@skzz-template/shared'
+import { request } from '@skzz-template/shared/fetch/platform'
 import { NormalObject } from '@vunk/core'
 import { QueryRData, RestFetchExecOptions, RestFetchQueryOptions } from '@vunk/skzz'
 import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'

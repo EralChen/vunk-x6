@@ -1,5 +1,5 @@
 {
-  "name": "@skzz-platform/components",
+  "name": "@skzz-template/components",
   "scripts": {
     "build": "gulp -f gulpfile.ts"
   },

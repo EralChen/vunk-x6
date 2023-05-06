@@ -24,7 +24,7 @@ import { SkAppOperations, SkAppTablesV1, __SkAppTablesV1 } from '@skzz/platform'
 import { NormalObject, VkDuplexCalc } from '@vunk/core'
 import { reactive, ref, watch } from 'vue'
 import { MessageStatus } from './ctx'
-import { rMessageList } from '@skzz-platform/api/system/message'
+import { rMessageList } from '@skzz/platform/api/system/message'
 import { Row } from './types'
 type Col = __SkAppTablesV1.Column<Row>
 

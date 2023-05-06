@@ -1,5 +1,5 @@
-import { request } from '@skzz-platform/shared/fetch/platform'
-import { Pagination } from '@skzz-platform/shared'
+import { request } from '@skzz-template/shared/fetch/platform'
+import { Pagination } from '@skzz-template/shared'
 import { QueryRData } from '@vunk/skzz'
 import { CForm, FIRS } from './types'
 import { FROM_DATA } from './const'

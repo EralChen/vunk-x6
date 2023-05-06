@@ -12,7 +12,7 @@
     "skipLibCheck": true,
     "lib": ["WebWorker"],
     "paths": {
-      "@skzz/platform": ["../packages/entry"],
+      "@skzz/template": ["../packages/entry"],
       "~/*": ["./.vitepress/vitepress/*"]
     },
 

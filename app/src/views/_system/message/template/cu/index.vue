@@ -1,15 +1,15 @@
 <script lang="ts" setup>
-import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
+import { SkAppForm, __SkAppForm } from '@skzz/platform/components/app-form'
 import { reactive, ref } from 'vue'
 import PageX from '_c/PageX/index.vue'
 import { SkAppCard } from '@skzz/platform'
 import { setData } from '@vunk/core'
-import { cuTemplate, rTemplateList, CMessageTemplate } from '@skzz-platform/api/system/message'
+import { cuTemplate, rTemplateList, CMessageTemplate } from '@skzz/platform/api/system/message'
 import { Deferred } from '@vunk/core/shared/utils-promise'
 import { FormInstance } from 'element-plus'
 import { ElMessage } from 'element-plus'
 import router from '@/router'
-import { Option } from '@skzz-platform/api/system/dictionary'
+import { Option } from '@skzz/platform/api/system/dictionary'
 import { useDictionaryStore } from '@/stores/dictionary'
 
 const props = defineProps({

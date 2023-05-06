@@ -8,13 +8,13 @@ import {
 } from '@skzz/platform'
 import { NormalObject, setData, VkDuplexCalc } from '@vunk/core'
 import { computed, reactive, ref, watch } from 'vue'
-import { cuApplication, rApplicationBtns, dApplications, rApplications, BoundApplication, cBoundApplications, rBoundApplications, dBoundApplications } from '@skzz-platform/api/platform/application'
-import { genColumn } from '@skzz-platform/shared/utils-data'
+import { cuApplication, rApplicationBtns, dApplications, rApplications, BoundApplication, cBoundApplications, rBoundApplications, dBoundApplications } from '@skzz/platform/api/platform/application'
+import { genColumn } from '@skzz/platform/shared/utils-data'
 import CuForm from './cu-form/index.vue'
-import { SkAppDialog } from '@skzz-platform/components/app-dialog'
+import { SkAppDialog } from '@skzz/platform/components/app-dialog'
 import { Row } from './types'
-import { SkTenantTablesSelect } from '@skzz-platform/components/tenant-tables-select'
-import { Tenant } from '@skzz-platform/api/platform/tenant'
+import { SkTenantTablesSelect } from '@skzz/platform/components/tenant-tables-select'
+import { Tenant } from '@skzz/platform/api/platform/tenant'
 import { ElButton, ElPopconfirm } from 'element-plus'
 
 /* query */

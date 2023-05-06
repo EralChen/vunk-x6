@@ -1,5 +1,5 @@
-import { request } from '@skzz-platform/shared/fetch/platform'
-import { Pagination } from '@skzz-platform/shared'
+import { request } from '@skzz-template/shared/fetch/platform'
+import { Pagination } from '@skzz-template/shared'
 import { MESSAGE_DATA } from '../const'
 import { QueryRData } from '@vunk/skzz'
 import { Weixin, CWeixin } from './types'

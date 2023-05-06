@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ElTransfer, TransferDataItem, TransferDirection, TransferKey } from 'element-plus'
-import { rButtons } from '@skzz-platform/api/system/button'
-import { rMenusWithButtons, cMenuButtons, dMenuButtons } from '@skzz-platform/api/system/menu'
+import { rButtons } from '@skzz/platform/api/system/button'
+import { rMenusWithButtons, cMenuButtons, dMenuButtons } from '@skzz/platform/api/system/menu'
 import { ref, watch } from 'vue'
 
 const props = defineProps({

@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { PlatformInfo } from '@skzz-platform/shared/types'
-import { setPlatform, getPlatform } from '@skzz-platform/shared/auth'
-import { rDefaultPlatfrom, rPlatfromByCode } from '@skzz-platform/api/platform'
+import { PlatformInfo } from '@skzz-template/shared/types'
+import { setPlatform, getPlatform } from '@skzz-template/shared/auth'
+import { rDefaultPlatfrom, rPlatfromByCode } from '@skzz-template/api/platform'
 
 export const usePlatformStore = defineStore('platform', () => {
   const platformInfo = ref({} as PlatformInfo)

@@ -6,8 +6,8 @@ export default {
 <script lang="tsx" setup>
 import { useThemeStore } from '@/stores/theme'
 import { setData } from '@vunk/core'
-import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
-import { namedFontSize, baseFontSizeOptions } from '@skzz-platform/theme'
+import { SkAppForm, __SkAppForm } from '@skzz/platform/components/app-form'
+import { namedFontSize, baseFontSizeOptions } from '@skzz/platform/theme'
 const themeStore = useThemeStore()
 
 

@@ -1,11 +1,11 @@
 <script lang="ts">
 import { props, emits } from './ctx'
 import { defineComponent, reactive, watch } from 'vue'
-import { rUsers } from '@skzz-platform/api/system/user'
-import { SkAppTables, __SkAppTables } from '@skzz-platform/components/app-tables'
-import { SkAppQueryForm, __SkAppQueryForm } from '@skzz-platform/components/app-query-form'
+import { rUsers } from '@skzz-template/api/system/user'
+import { SkAppTables, __SkAppTables } from '@skzz-template/components/app-tables'
+import { SkAppQueryForm, __SkAppQueryForm } from '@skzz-template/components/app-query-form'
 import { Row } from './types'
-import { Pagination } from '@skzz-platform/shared'
+import { Pagination } from '@skzz-template/shared'
 import { VkDuplex, setData } from '@vunk/core'
 export default defineComponent({
   name: 'SkUserTablesSelect',

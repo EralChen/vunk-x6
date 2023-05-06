@@ -1,4 +1,4 @@
-import { Application } from '@skzz-platform/api/platform/application'
+import { Application } from '@skzz/platform/api/platform/application'
 
 export type Row = Application
 

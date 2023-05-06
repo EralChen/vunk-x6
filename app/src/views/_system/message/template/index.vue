@@ -18,13 +18,13 @@
 import PageX from '_c/PageX/index.vue'
 import { SkAppCard, __SkAppTables, __SkAppQueryForm } from '@skzz/platform'
 import { SkAppOperations, SkAppTablesV1, __SkAppTablesV1 } from '@skzz/platform'
-import { dTemplate, rTemplateList } from '@skzz-platform/api/system/message'
+import { dTemplate, rTemplateList } from '@skzz/platform/api/system/message'
 import { VkDuplexCalc } from '@vunk/core'
 import { reactive, ref, watch } from 'vue'
 import { Row } from './types'
 import router from '@/router'
 import { useDictionaryStore } from '@/stores/dictionary'
-import { Option } from '@skzz-platform/api/system/dictionary'
+import { Option } from '@skzz/platform/api/system/dictionary'
 type Col = __SkAppTablesV1.Column<Row>
 
 const dicStore = useDictionaryStore()

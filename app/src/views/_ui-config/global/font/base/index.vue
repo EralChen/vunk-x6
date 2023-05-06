@@ -7,8 +7,8 @@ export default {
 import { useThemeStore } from '@/stores/theme'
 import { computed } from 'vue'
 import { NormalObject, setData, SetDataEvent } from '@vunk/core'
-import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
-import { baseFontSize } from '@skzz-platform/theme'
+import { SkAppForm, __SkAppForm } from '@skzz/platform/components/app-form'
+import { baseFontSize } from '@skzz/platform/theme'
 const themeStore = useThemeStore()
 
 const formData = computed(() => {

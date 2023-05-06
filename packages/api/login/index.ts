@@ -1,4 +1,4 @@
-import { withPlatform } from '@skzz-platform/shared/fetch/platform'
+import { withPlatform } from '@skzz-template/shared/fetch/platform'
 import * as baseLogin from './base'
 
 

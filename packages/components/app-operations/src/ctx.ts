@@ -1,5 +1,5 @@
 import { NOOP } from '@vunk/core/shared/utils-function'
-import { Button } from '@skzz-platform/api/system/button'
+import { Button } from '@skzz-template/api/system/button'
 import { PropType } from 'vue'
 
 

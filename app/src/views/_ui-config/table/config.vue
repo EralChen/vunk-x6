@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { SkAppForm, __SkAppForm } from '@skzz/platform'
-import { elTableV2Theme } from '@skzz-platform/theme'
+import { elTableV2Theme } from '@skzz/platform/theme'
 
 const formItems: __SkAppForm.CoreFormItem<keyof typeof elTableV2Theme>[] = [
   {

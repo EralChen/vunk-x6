@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { SkCheckTags, __SkCheckTags } from '@skzz-platform/components/check-tags'
+import { SkCheckTags, __SkCheckTags } from '@skzz-template/components/check-tags'
 import { ref } from 'vue'
 const options: __SkCheckTags.Option[] = [
   {

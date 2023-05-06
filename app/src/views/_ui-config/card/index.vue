@@ -2,7 +2,7 @@
 import PageX from '_c/PageX/index.vue'
 import { SkAppCard, SkAppForm, __SkAppForm } from '@skzz/platform'
 import { useThemeStore } from '@/stores/theme'
-import { baseGapOptions, elCardTheme } from '@skzz-platform/theme'
+import { baseGapOptions, elCardTheme } from '@skzz/platform/theme'
 import { setData } from '@vunk/core'
 const themeStore = useThemeStore()
 const formItems: __SkAppForm.CoreFormItem<keyof typeof elCardTheme>[] = [

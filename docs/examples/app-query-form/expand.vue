@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { SkAppQueryForm, __SkAppQueryForm } from '@skzz-platform/components/app-query-form'
+import { SkAppQueryForm, __SkAppQueryForm } from '@skzz-template/components/app-query-form'
 import { setData } from '@vunk/core'
 import { ElForm, ElMessage } from 'element-plus'
 import { reactive, ref } from 'vue'

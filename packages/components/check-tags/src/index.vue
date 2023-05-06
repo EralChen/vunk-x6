@@ -2,7 +2,7 @@
 import { props, emits } from './ctx'
 import { defineComponent, reactive } from 'vue'
 import { VkCheckLogicProvider, VkCheckLogic } from '@vunk/core'
-import { SkCheckTag } from '@skzz-platform/components/check-tag'
+import { SkCheckTag } from '@skzz-template/components/check-tag'
 import { Option } from './types'
 export default defineComponent({
   name: 'SkCheckTags',

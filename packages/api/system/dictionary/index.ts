@@ -1,4 +1,4 @@
-import { request } from '@skzz-platform/shared/fetch/platform'
+import { request } from '@skzz-template/shared/fetch/platform'
 import { Dictionary } from './types'
 
 

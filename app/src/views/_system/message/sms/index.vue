@@ -19,7 +19,7 @@ import PageX from '_c/PageX/index.vue'
 import { SkAppOperations, SkAppTablesV1, __SkAppTablesV1 } from '@skzz/platform'
 import { VkDuplexCalc } from '@vunk/core'
 import { reactive, watch } from 'vue'
-import { rSmsList, dSms } from '@skzz-platform/api/system/message'
+import { rSmsList, dSms } from '@skzz/platform/api/system/message'
 import { Row } from './types'
 import router from '@/router'
 

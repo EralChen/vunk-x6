@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { baseGapOptions, layoutTopTheme } from '@skzz-platform/theme'
-import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
+import { baseGapOptions, layoutTopTheme } from '@skzz/platform/theme'
+import { SkAppForm, __SkAppForm } from '@skzz/platform/components/app-form'
 
 const formItems: __SkAppForm.CoreFormItem<keyof typeof layoutTopTheme>[] = [
   {

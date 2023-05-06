@@ -1,4 +1,4 @@
-import { Menu } from '@skzz-platform/api/system/menu'
+import { Menu } from '@skzz-template/api/system/menu'
 
 
 export type Row = Menu

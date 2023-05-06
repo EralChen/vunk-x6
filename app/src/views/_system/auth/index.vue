@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import { SkRoleTreesSelect } from '@skzz-platform/components/role-trees-select'
-import { SkMenuSelect } from '@skzz-platform/components/menu-select'
+import { SkRoleTreesSelect } from '@skzz/platform/components/role-trees-select'
+import { SkMenuSelect } from '@skzz/platform/components/menu-select'
 import { getValue, SetDataEvent, UnsetDataEvent, VkDuplex } from '@vunk/core'
 import { computed, reactive, watch } from 'vue'
-import { Role, rRolePermissions, cdRoleMenuPermissions, cdRolePermissions } from '@skzz-platform/api/system/role'
-import { Menu } from '@skzz-platform/api/system/menu'
+import { Role, rRolePermissions, cdRoleMenuPermissions, cdRolePermissions } from '@skzz/platform/api/system/role'
+import { Menu } from '@skzz/platform/api/system/menu'
 import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
 
 const roleState = reactive({

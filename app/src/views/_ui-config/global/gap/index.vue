@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { SkMultipage } from '@skzz-platform/components/multipage'
+import { SkMultipage } from '@skzz/platform/components/multipage'
 import { ref } from 'vue'
 import BaseVue from './base/index.vue'
 import NameVue from './name/index.vue'

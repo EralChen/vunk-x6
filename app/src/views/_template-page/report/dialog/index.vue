@@ -8,10 +8,10 @@ import {
 } from '@skzz/platform'
 import { NormalObject, setData, VkDuplexCalc } from '@vunk/core'
 import { reactive, ref, watch } from 'vue'
-import { rRoles, dRoles, cuRole } from '@skzz-platform/api/system/role'
-import { genColumn } from '@skzz-platform/shared/utils-data'
+import { rRoles, dRoles, cuRole } from '@skzz/platform/api/system/role'
+import { genColumn } from '@skzz/platform/shared/utils-data'
 import CuForm from './cu-form/index.vue'
-import { SkAppDialog } from '@skzz-platform/components/app-dialog'
+import { SkAppDialog } from '@skzz/platform/components/app-dialog'
 import { Row } from './types'
 
 /* query */

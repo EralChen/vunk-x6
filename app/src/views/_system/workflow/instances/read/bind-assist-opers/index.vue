@@ -6,9 +6,9 @@
 </template>
 
 <script setup lang="ts">
-import { bindAssistOperToNode } from '@skzz-platform/api/system/workflow'
+import { bindAssistOperToNode } from '@skzz/platform/api/system/workflow'
 import { PropType, computed, ref, watch } from 'vue'
-import { User } from '@skzz-platform/api/system/user'
+import { User } from '@skzz/platform/api/system/user'
 import BindUser from '../../../bind-user/index.vue'
 import { NodeModel } from '@zzg6/flow/components/editor/src/types'
 import { getCurrentNodeId } from '../utils'

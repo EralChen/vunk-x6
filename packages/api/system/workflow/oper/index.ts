@@ -1,10 +1,10 @@
 import { MENU_DATA } from '../const'
-import { request } from '@skzz-platform/shared/fetch/platform'
+import { request } from '@skzz-template/shared/fetch/platform'
 import { QueryRData, RestFetchExecOptions, RestFetchQueryOptions, RestFetchSaveOptions } from '@vunk/skzz'
 import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
 import { WorkflowOper } from '../types'
-import { snowFlake } from '@skzz-platform/api/basic'
-import { Pagination } from '@skzz-platform/shared'
+import { snowFlake } from '@skzz-template/api/basic'
+import { Pagination } from '@skzz-template/shared'
 
 
 export const rWorkflowOpers = (query: Partial<WorkflowOper>, pagination: Pagination) => {

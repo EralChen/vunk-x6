@@ -9,7 +9,7 @@ import { filterDeep } from 'deepdash-es/standalone'
 import { RouteRecordRaw, useRoute } from 'vue-router'
 import { useViewsStore } from '@/stores/views'
 import { useSharedMenuClick } from '@/composables'
-import { SkAppIcon } from '@skzz-platform/components/app-icon'
+import { SkAppIcon } from '@skzz/platform/components/app-icon'
 
 const emit = defineEmits({
   'load': null,

@@ -1,9 +1,9 @@
-import { Pagination } from '@skzz-platform/shared'
-import { request } from '@skzz-platform/shared/fetch/platform'
+import { Pagination } from '@skzz-template/shared'
+import { request } from '@skzz-template/shared/fetch/platform'
 import { QueryRData, RestFetchExecOptions, RestFetchQueryOptions } from '@vunk/skzz'
 import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
 import { Workflow } from './types'
-import { snowFlake } from '@skzz-platform/api/basic'
+import { snowFlake } from '@skzz-template/api/basic'
 import { MENU_DATA } from './const'
 
 /**

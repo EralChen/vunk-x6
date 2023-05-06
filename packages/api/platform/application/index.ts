@@ -1,10 +1,10 @@
-import { Pagination } from '@skzz-platform/shared'
-import { request } from '@skzz-platform/shared/fetch/platform'
+import { Pagination } from '@skzz-template/shared'
+import { request } from '@skzz-template/shared/fetch/platform'
 import { RestFetchQueryOptions, QueryRData, RestFetchSaveOptions, RestFetchExecOptions } from '@vunk/skzz'
 import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
 import { MENU_DATA } from './const'
 import { Application as Row, BoundApplication } from './types'
-import { rBtns } from '@skzz-platform/api/basic'
+import { rBtns } from '@skzz-template/api/basic'
 export const rApplications = (
   query: Partial<Row> = {}, 
   pagination?: Pagination,

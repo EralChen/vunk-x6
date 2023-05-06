@@ -1,7 +1,7 @@
 export * from './types'
 
-export * from '@skzz-platform/components/app-card'
-export * from '@skzz-platform/components/app-form'
-export * from '@skzz-platform/components/app-module'
-export * from '@skzz-platform/components/app-tables'
+export * from '@skzz-template/components/app-card'
+export * from '@skzz-template/components/app-form'
+export * from '@skzz-template/components/app-module'
+export * from '@skzz-template/components/app-tables'
 

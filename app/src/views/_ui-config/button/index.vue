@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { SkAppCard } from '@skzz/platform'
-import { SkMultipageRenderer } from '@skzz-platform/components/multipage-renderer'
-import { SkMultipageTemplate } from '@skzz-platform/components/multipage-template'
+import { SkMultipageRenderer } from '@skzz/platform/components/multipage-renderer'
+import { SkMultipageTemplate } from '@skzz/platform/components/multipage-template'
 import { ref } from 'vue'
 import PrimaryVue from './primary.vue'
 import { useThemeStore } from '@/stores/theme'

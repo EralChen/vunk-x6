@@ -1,5 +1,5 @@
 {
-  "name": "@skzz-platform/api",
+  "name": "@skzz-template/api",
   "private": true,
   "module": "index.ts",
   "type": "module",

@@ -1,6 +1,6 @@
 import { PropType } from 'vue'
 import { Row } from './types'
-import { __SkAppTablesV1 } from '@skzz-platform/components/app-tables-v1'
+import { __SkAppTablesV1 } from '@skzz-template/components/app-tables-v1'
 import { SetDataEvent, UnsetDataEvent } from '@vunk/core'
 export const props = {
   modelValue: {

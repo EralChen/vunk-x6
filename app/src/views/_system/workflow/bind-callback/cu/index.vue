@@ -21,8 +21,8 @@ import BindUser from '../../bind-user/index.vue'
 import { SkAppTablesV1, __SkAppTablesV1 } from '@skzz/platform'
 import { ElButton, ElInput } from 'element-plus'
 import BindFormItem from '../bind-form-item/index.vue'
-import { FlowCallbackItem } from '@skzz-platform/api/system/workflow/callback/types'
-import { User } from '@skzz-platform/api/system/user'
+import { FlowCallbackItem } from '@skzz/platform/api/system/workflow/callback/types'
+import { User } from '@skzz/platform/api/system/user'
 
 type Row = FlowCallbackItem['updateFormData']
 type Col = __SkAppTablesV1.Column<Row[0]>

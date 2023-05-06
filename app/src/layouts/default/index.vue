@@ -3,7 +3,7 @@ import { VkDuplexCalc } from '@vunk/core'
 import { defineAsyncComponent, Ref, ref } from 'vue'
 import { ElScrollbar } from 'element-plus'
 import { onBeforeRouteUpdate } from 'vue-router'
-import { useKeepAliverStore } from '@skzz-platform/stores/keep-aliver'
+import { useKeepAliverStore } from '@skzz/platform/stores/keep-aliver'
 const LayoutHeader = defineAsyncComponent(() => import('_c/LayoutTop/index.vue'))
 const TagsView = defineAsyncComponent(() => import('_c/TagsView/index.vue'))
 const LayoutAside = defineAsyncComponent(() => import('_c/LayoutAside/index.vue'))

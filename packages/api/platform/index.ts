@@ -1,7 +1,7 @@
-import { PlatformInfo } from '@skzz-platform/shared/types'
-import { usePlatformStore } from '@skzz-platform/stores/platform'
-import { request } from '@skzz-platform/shared/fetch/public'
-import { restFetch as platformRestFetch } from '@skzz-platform/shared/fetch/platform'
+import { PlatformInfo } from '@skzz-template/shared/types'
+import { usePlatformStore } from '@skzz-template/stores/platform'
+import { request } from '@skzz-template/shared/fetch/public'
+import { restFetch as platformRestFetch } from '@skzz-template/shared/fetch/platform'
 
 export const rPlatfroms = async () => { 
   return request<PlatformInfo[]>({

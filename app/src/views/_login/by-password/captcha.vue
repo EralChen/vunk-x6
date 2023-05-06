@@ -1,7 +1,7 @@
 <script lang="tsx" setup>
 import { PropType, ref } from 'vue'
 import { VkfInput } from '@vunk/form/components/input'
-import { rCaptcha } from '@skzz-platform/api/login'
+import { rCaptcha } from '@skzz/platform/api/login'
 import { ApiReturnType, SetDataEvent } from '@vunk/core'
 import { LoginFormData } from '../types'
 defineProps({

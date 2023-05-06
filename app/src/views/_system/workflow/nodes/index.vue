@@ -13,11 +13,11 @@
 </template>
 
 <script setup lang="ts">
-import { rWorkflowNodes, cWorkflowNodeByJson, WorkflowData, rWorkflow } from '@skzz-platform/api/system/workflow'
+import { rWorkflowNodes, cWorkflowNodeByJson, WorkflowData, rWorkflow } from '@skzz/platform/api/system/workflow'
 import ZzG6Editor from '@/components/ZzG6Editor/index.vue'
 import { ref, shallowRef, watch } from 'vue'
 import { GraphData, TreeGraphData } from '@antv/g6'
-import { snowFlake } from '@skzz-platform/api/basic'
+import { snowFlake } from '@skzz/platform/api/basic'
 
 // 用来判断当前操作是编辑还是新增，调用接口的时候做判断
 let isEdit = true

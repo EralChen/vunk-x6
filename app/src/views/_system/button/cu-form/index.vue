@@ -1,9 +1,9 @@
 <script lang="tsx">
 import { defineComponent } from 'vue'
-import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
+import { SkAppForm, __SkAppForm } from '@skzz/platform/components/app-form'
 import { Row } from '../types'
 import { ElLink } from 'element-plus'
-import SkAppIcon from '@skzz-platform/components/app-icon'
+import SkAppIcon from '@skzz/platform/components/app-icon'
 
 export default defineComponent({
   components: {

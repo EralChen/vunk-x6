@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { SkAppCard } from '@skzz-platform/components/app-card'
+import { SkAppCard } from '@skzz-template/components/app-card'
 </script>
 <template>
   <div :style="'height: 500px'">

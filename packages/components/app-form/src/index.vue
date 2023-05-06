@@ -3,7 +3,7 @@ import { props, emits } from './ctx'
 import { computed, defineComponent } from 'vue'
 import { VkfForm, _VkfFormCtx, VkfFormItemRendererTemplate, ElRowSource, ElColSource } from '@vunk/form'
 import { VkfFormItemRendererTemplateLayout } from '@vunk/form/components/form-item-renderer-template-layout'
-import { SkCssColorPicker } from '@skzz-platform/components/css-color-picker'
+import { SkCssColorPicker } from '@skzz-template/components/css-color-picker'
 import { CoreFormItem, FormItem } from './types'
 import { pickObject } from '@vunk/core/shared/utils-object'
 export default defineComponent({

@@ -21,16 +21,16 @@
 <script setup lang="ts">
 import { NodeModel } from '@zzg6/flow/components/editor/src/types'
 import { PropType, computed, ref, watch } from 'vue'
-import { User } from '@skzz-platform/api/system/user'
-import { WorkFlowNodeState, doApproveNodeWithForm, rFormInfo } from '@skzz-platform/api/system/workflow'
+import { User } from '@skzz/platform/api/system/user'
+import { WorkFlowNodeState, doApproveNodeWithForm, rFormInfo } from '@skzz/platform/api/system/workflow'
 import { getCurrentNodeId } from '../utils'
-import { useUserStore } from '@skzz-platform/stores/user'
+import { useUserStore } from '@skzz/platform/stores/user'
 import { cloneDeep } from 'lodash'
 import { SkAppForm } from '@skzz/platform'
 import { setData } from '@vunk/core'
 import { Deferred } from '@vunk/core/shared/utils-promise'
 import { ElMessage, FormInstance, FormRules } from 'element-plus'
-import { CoreFormItem } from '@skzz-platform/components/app-form/src/types'
+import { CoreFormItem } from '@skzz/platform/components/app-form/src/types'
 
 
 const props = defineProps({

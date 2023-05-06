@@ -7,7 +7,7 @@ import {
 import { defineComponent, computed, watch } from 'vue'
 import { ElTableV2, ElAutoResizer, ElPagination, Column, ElCheckbox } from 'element-plus'
 import { VkDuplexCalc } from '@vunk/core'
-import { SkAppOperations } from '@skzz-platform/components/app-operations'
+import { SkAppOperations } from '@skzz-template/components/app-operations'
 import { pickObject } from '@vunk/core/shared/utils-object'
 import { VkCheckRecordLogicProvider, VkCheckRecordLogic } from '@vunk/core'
 import { vOn } from '@vunk/core/shared/utils-vue'

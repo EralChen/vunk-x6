@@ -3,7 +3,7 @@ import { SkAppForm, __SkAppForm } from '@skzz/platform'
 import { Row } from '../types'
 import { ElLink } from 'element-plus'
 import { computed, PropType, ref  } from 'vue'
-import { SkAppIcon } from '@skzz-platform/components/app-icon'
+import { SkAppIcon } from '@skzz/platform/components/app-icon'
 
 const props = defineProps({
   data: {

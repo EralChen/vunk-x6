@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { SkMultipage } from '@skzz-platform/components/multipage'
+import { SkMultipage } from '@skzz-template/components/multipage'
 import { ref } from 'vue'
 const currentPage = ref('tab1')
 const modules = ref([

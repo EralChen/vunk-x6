@@ -1,4 +1,4 @@
-import { rTAInfo, rUserInfo } from '@skzz-platform/api/login'
+import { rTAInfo, rUserInfo } from '@skzz-template/api/login'
 import { UserPuppet } from '@vunk/skzz'
 import { useUserStore as useVkUserStore } from '@vunk/skzz/stores'
 import { defineStore } from 'pinia'

@@ -1,5 +1,5 @@
 {
-  "name": "@skzz-platform/shared",
+  "name": "@skzz-template/shared",
   "private": true,
   "module": "index.ts",
   "scripts": {

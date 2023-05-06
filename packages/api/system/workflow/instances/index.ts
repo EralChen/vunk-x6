@@ -1,6 +1,6 @@
 import { MENU_DATA } from '../const'
-import { request } from '@skzz-platform/shared/fetch/platform'
-import { Pagination } from '@skzz-platform/shared'
+import { request } from '@skzz-template/shared/fetch/platform'
+import { Pagination } from '@skzz-template/shared'
 import { QueryRData } from '@vunk/skzz'
 import { FlowNodeInstance } from '../types'
 /**

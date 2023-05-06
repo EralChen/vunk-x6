@@ -1,4 +1,4 @@
-import { useSharedDark } from '@skzz-platform/composables/use-shared-dark'
+import { useSharedDark } from '@skzz-template/composables/use-shared-dark'
 import { ToggleHandler } from '@vunk/core/shared/utils-class'
 import { computed, watch } from 'vue'
 export const useArcgisTheme = (basePath: '/Esri') => {

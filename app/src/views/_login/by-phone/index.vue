@@ -1,5 +1,5 @@
 <script lang="tsx" setup>
-import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
+import { SkAppForm, __SkAppForm } from '@skzz/platform/components/app-form'
 import { setData } from '@vunk/core'
 import { ElButton } from 'element-plus'
 import { computed, ref } from 'vue'

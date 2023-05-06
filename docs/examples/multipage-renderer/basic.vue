@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { SkMultipageRenderer } from '@skzz-platform/components/multipage-renderer'
-import { SkMultipageTemplate } from '@skzz-platform/components/multipage-template'
+import { SkMultipageRenderer } from '@skzz-template/components/multipage-renderer'
+import { SkMultipageTemplate } from '@skzz-template/components/multipage-template'
 import { ref } from 'vue'
 const currentPage = ref('tab1')
 const name = ref('tab1')

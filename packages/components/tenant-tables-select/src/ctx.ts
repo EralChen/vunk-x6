@@ -1,4 +1,4 @@
-import { __SkAppTables } from '@skzz-platform/shared'
+import { __SkAppTables } from '@skzz-template/shared'
 import { PropType } from 'vue'
 import { Row } from './types'
 

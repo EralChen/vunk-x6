@@ -1,6 +1,6 @@
-import { restFetch, withPlatform, request } from '@skzz-platform/shared/fetch/platform'
+import { restFetch, withPlatform, request } from '@skzz-template/shared/fetch/platform'
 import { QueryRData, RestFetchQueryOptions } from '@vunk/skzz'
-import { Button } from '@skzz-platform/api/system/button'
+import { Button } from '@skzz-template/api/system/button'
 
 export const snowFlake = withPlatform((...args) => restFetch.snowFlake(...args))
 

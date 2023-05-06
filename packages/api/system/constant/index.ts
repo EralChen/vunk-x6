@@ -1,8 +1,8 @@
-import { Pagination } from '@skzz-platform/shared'
-import { request } from '@skzz-platform/shared/fetch/platform'
+import { Pagination } from '@skzz-template/shared'
+import { request } from '@skzz-template/shared/fetch/platform'
 import { QueryRData, RestFetchQueryOptions, RestFetchSaveOptions } from '@vunk/skzz'
 import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
-import { rBtns } from '@skzz-platform/api/basic'
+import { rBtns } from '@skzz-template/api/basic'
 import { MENU_DATA } from './const'
 import { Constant } from './types'
 

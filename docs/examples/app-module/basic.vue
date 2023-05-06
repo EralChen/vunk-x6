@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { SkAppModule } from '@skzz-platform/components/app-module'
+import { SkAppModule } from '@skzz-template/components/app-module'
 </script>
 <template>
   <SkAppModule :title="'基础颜色'">

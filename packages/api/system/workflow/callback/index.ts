@@ -1,5 +1,5 @@
 import { MENU_DATA } from '../const'
-import { request } from '@skzz-platform/shared/fetch/platform'
+import { request } from '@skzz-template/shared/fetch/platform'
 import { FlowCallback } from './types'
 
 /**

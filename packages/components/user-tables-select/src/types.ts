@@ -1,2 +1,2 @@
-import { User } from '@skzz-platform/api/system/user'
+import { User } from '@skzz-template/api/system/user'
 export type Row = User

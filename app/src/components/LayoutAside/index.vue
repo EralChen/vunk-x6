@@ -12,7 +12,7 @@ import { routes as constRoutes } from '@/router'
 import { AnyFunc } from '@vunk/core'
 import { useRoute } from 'vue-router'
 import { useSharedMenuClick } from '@/composables'
-import { SkAppIcon } from '@skzz-platform/components/app-icon'
+import { SkAppIcon } from '@skzz/platform/components/app-icon'
 
 const emit = defineEmits({
   'load': null,

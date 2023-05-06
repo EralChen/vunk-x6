@@ -1,16 +1,16 @@
 <script lang="tsx" setup>
 import { VkCheckboxTree, __VkCheckboxTree } from '@vunk/skzz/components/checkbox-tree'
 import { computed, reactive, watch } from 'vue'
-import { dMenus, rMenus, cuMenu } from '@skzz-platform/api/system/menu'
+import { dMenus, rMenus, cuMenu } from '@skzz/platform/api/system/menu'
 import { listToTree } from '@vunk/core/shared/utils-data'
 import { SkAppDialog, SkAppOperations, SkCheckTags, __SkCheckTags, SkAppTablesV1, __SkAppTablesV1 } from '@skzz/platform'
 import { setData, unsetData, VkDuplexCalc, VkDuplex } from '@vunk/core'
 import CUForm from './cu-form/index.vue'
 import { Row } from './types'
-import SkAppIcon from '@skzz-platform/components/app-icon'
+import SkAppIcon from '@skzz/platform/components/app-icon'
 import { ElButton, ElMessageBox } from 'element-plus'
 import BindBtnsForm from './bind-btns-form/index.vue'
-import { dMenuAllRolePermissions } from '@skzz-platform/api/system/role'
+import { dMenuAllRolePermissions } from '@skzz/platform/api/system/role'
 
 const checkTagsState = reactive({
   options: [  

@@ -1,13 +1,13 @@
 <script lang="ts">
 import { props, emits } from './ctx'
 import { defineComponent, reactive, watch } from 'vue'
-import { rUsers } from '@skzz-platform/api/system/user'
-import { SkAppTables, __SkAppTables } from '@skzz-platform/components/app-tables'
-import { SkAppQueryForm, __SkAppQueryForm } from '@skzz-platform/components/app-query-form'
+import { rUsers } from '@skzz/platform/api/system/user'
+import { SkAppTables, __SkAppTables } from '@skzz/platform/components/app-tables'
+import { SkAppQueryForm, __SkAppQueryForm } from '@skzz/platform/components/app-query-form'
 import { Row } from './types'
-import { Pagination } from '@skzz-platform/shared'
+import { Pagination } from '@skzz/platform/shared'
 import { VkDuplex, setData } from '@vunk/core'
-import { rFormList } from '@skzz-platform/api/system/form'
+import { rFormList } from '@skzz/platform/api/system/form'
 
 export default defineComponent({
   emits,

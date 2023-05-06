@@ -34,7 +34,7 @@ const currentLink = computed(() => {
     <div class="header-container">
       <div class="logo-container">
         <a :href="currentLink">
-          @skzz/platform
+          @skzz/template
           <!-- <img
             class="logo"
             src="/images/element-plus-logo.svg"

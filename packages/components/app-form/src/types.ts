@@ -2,7 +2,7 @@ import { VueComponentPropsType } from '@vunk/core'
 import { ComponentSource, ElColSource, ElRowSource, 
   FormItemRendererSource,
   VkfButtonSource, VkfFlexSource, BasicSource } from '@vunk/form'
-import type { SkCssColorPicker } from '@skzz-platform/components/css-color-picker'
+import type { SkCssColorPicker } from '@skzz-template/components/css-color-picker'
 
 interface SkCssColorPickerSource<P extends string = string>
 extends VueComponentPropsType<typeof SkCssColorPicker>, BasicSource { 

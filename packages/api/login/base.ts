@@ -1,4 +1,4 @@
-import { restFetch } from '@skzz-platform/shared/fetch/platform'
+import { restFetch } from '@skzz-template/shared/fetch/platform'
 import { setToken, removeToken, removeTenant, getApplication } from '@vunk/skzz/shared/utils-auth'
 import { FirstParameter } from '@vunk/core'
 // import { sleep } from '@vunk/core/shared/utils-promise'

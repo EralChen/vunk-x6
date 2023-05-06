@@ -2,9 +2,9 @@
 import { CascaderValue, ElAvatar, ElCascaderPanel } from 'element-plus'
 import { PropType, ref } from 'vue'
 import { useModelComputed } from '@vunk/core/composables'
-import { rTAInfo } from '@skzz-platform/api/login'
+import { rTAInfo } from '@skzz/platform/api/login'
 import { ApiReturnType } from '@vunk/core'
-import { useUserStore } from '@skzz-platform/stores/user'
+import { useUserStore } from '@skzz/platform/stores/user'
 const props = defineProps({
   size: null,
   modelValue: {

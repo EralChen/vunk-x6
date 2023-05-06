@@ -13,12 +13,12 @@
 <script setup lang="tsx">
 import { computed, reactive, ref, watch } from 'vue'
 import { propsOp } from './ctx'
-import { SkAppTables, __SkAppTables } from '@skzz-platform/components/app-tables'
+import { SkAppTables, __SkAppTables } from '@skzz/platform/components/app-tables'
 import { Pagination } from '@skzz/platform'
 import { useComputedReadonly } from '@vunk/form'
 import { ElOption, ElSelect } from 'element-plus'
 import { SkTableSelectTags } from '@skzz/platform'
-import { FIRS, rFormDetail } from '@skzz-platform/api/system/form'
+import { FIRS, rFormDetail } from '@skzz/platform/api/system/form'
 
 
 const idKey = 'prop'

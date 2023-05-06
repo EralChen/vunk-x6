@@ -1,9 +1,9 @@
 <script lang="tsx" setup>
 import { reactive, watch } from 'vue'
-import { FlowNodeInstance, rInstanceList } from '@skzz-platform/api/system/workflow'
+import { FlowNodeInstance, rInstanceList } from '@skzz/platform/api/system/workflow'
 import { SkAppOperations, SkAppTablesV1, __SkAppTablesV1 } from '@skzz/platform'
 import { VkDuplexCalc } from '@vunk/core'
-import { useRouterTo } from '@skzz-platform/composables'
+import { useRouterTo } from '@skzz/platform/composables'
 import { useWorkflowResolveQueryU } from '../utils'
 
 type Row = FlowNodeInstance

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useThemeStore } from '@/stores/theme'
-import { SkAppCard } from '@skzz-platform/components/app-card'
+import { SkAppCard } from '@skzz/platform/components/app-card'
 import { setData } from '@vunk/core'
 import ElMenuConfigForm from '_c/ElMenuConfigForm/index.vue'
 const themeStore = useThemeStore()

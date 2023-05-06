@@ -1,5 +1,5 @@
 import ElementPlus from 'element-plus'
-import Entry from '@skzz/platform'
+import Entry from '@skzz/template'
 import VPApp, { NotFound, globals } from '../vitepress'
 import { define } from '../utils/types'
 import 'uno.css'

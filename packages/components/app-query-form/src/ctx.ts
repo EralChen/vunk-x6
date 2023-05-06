@@ -1,4 +1,4 @@
-import { _SkAppFormCtx } from '@skzz-platform/components/app-form'
+import { _SkAppFormCtx } from '@skzz-template/components/app-form'
 import { Form } from './types'
 export const props = {
   ..._SkAppFormCtx.props,

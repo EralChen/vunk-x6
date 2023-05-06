@@ -1,7 +1,7 @@
 <script lang="tsx" setup>
-import { loginByPassword } from '@skzz-platform/api/login'
+import { loginByPassword } from '@skzz/platform/api/login'
 import { setData, SetDataEvent } from '@vunk/core'
-import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
+import { SkAppForm, __SkAppForm } from '@skzz/platform/components/app-form'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { LoginFormData } from '../types'

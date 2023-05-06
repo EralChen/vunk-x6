@@ -5,7 +5,7 @@ import {
   cuConstant as cuApi,
   dConstants as dApi,
   rConstantBtns as rBtnsApi,
-} from '@skzz-platform/api/system/constant'
+} from '@skzz/platform/api/system/constant'
 import { SkAppDialog, SkAppOperations, SkAppTablesV1, __SkAppTablesV1, SkAppQueryForm, __SkAppQueryForm } from '@skzz/platform'
 import { setData, VkDuplexCalc } from '@vunk/core'
 import CUForm from './cu-form/index.vue'

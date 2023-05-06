@@ -6,8 +6,8 @@ export default {
 <script lang="tsx" setup>
 import { useThemeStore } from '@/stores/theme'
 import { setData } from '@vunk/core'
-import { namedGap, baseGapOptions } from '@skzz-platform/theme'
-import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
+import { namedGap, baseGapOptions } from '@skzz/platform/theme'
+import { SkAppForm, __SkAppForm } from '@skzz/platform/components/app-form'
 const themeStore = useThemeStore()
 
 const formItems: __SkAppForm.FormItem<keyof typeof namedGap>[] = [

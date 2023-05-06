@@ -1,6 +1,6 @@
 <script lang="tsx" setup>
-import { SkAppTables, __SkAppTables } from '@skzz-platform/components/app-tables'
-import { SkAppOperations } from '@skzz-platform/components/app-operations'
+import { SkAppTables, __SkAppTables } from '@skzz-template/components/app-tables'
+import { SkAppOperations } from '@skzz-template/components/app-operations'
 const data = [
   ...Array.from({ length: 100 }).map((_, i) => {
     return {

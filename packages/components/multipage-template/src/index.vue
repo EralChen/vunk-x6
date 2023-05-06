@@ -1,7 +1,7 @@
 <script lang="ts">
 import { props, emits } from './ctx'
 import { defineComponent, inject, onMounted, onUnmounted, watch } from 'vue'
-import { __SkMultipageRenderer } from '@skzz-platform/components/multipage-renderer'
+import { __SkMultipageRenderer } from '@skzz-template/components/multipage-renderer'
 export default defineComponent({
   name: 'SkMultipageTemplate',
   emits,

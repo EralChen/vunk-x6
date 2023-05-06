@@ -8,10 +8,10 @@ import {
 } from '@skzz/platform'
 import { ApiReturnType, NormalObject, setData, VkDuplexCalc } from '@vunk/core'
 import { reactive, ref, watch } from 'vue'
-import { rRoles, dRoles } from '@skzz-platform/api/system/role'
-import { genColumn } from '@skzz-platform/shared/utils-data'
-import { useRouterTo } from '@skzz-platform/composables'
-import { SkAppTablesV1, __SkAppTablesV1 } from '@skzz-platform/components/app-tables-v1'
+import { rRoles, dRoles } from '@skzz/platform/api/system/role'
+import { genColumn } from '@skzz/platform/shared/utils-data'
+import { useRouterTo } from '@skzz/platform/composables'
+import { SkAppTablesV1, __SkAppTablesV1 } from '@skzz/platform/components/app-tables-v1'
 type Res = ApiReturnType<typeof rRoles>
 const { routerNext } = useRouterTo()
 /* query */

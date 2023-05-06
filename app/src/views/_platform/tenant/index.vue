@@ -9,10 +9,10 @@ import {
 } from '@skzz/platform'
 import { NormalObject, setData, VkDuplexCalc } from '@vunk/core'
 import { reactive, ref, watch } from 'vue'
-import { cuTenant, dTenants, rTenants } from '@skzz-platform/api/platform/tenant'
-import { genColumn } from '@skzz-platform/shared/utils-data'
+import { cuTenant, dTenants, rTenants } from '@skzz/platform/api/platform/tenant'
+import { genColumn } from '@skzz/platform/shared/utils-data'
 import CuForm from './cu-form/index.vue'
-import { SkAppDialog } from '@skzz-platform/components/app-dialog'
+import { SkAppDialog } from '@skzz/platform/components/app-dialog'
 import { Row } from './types'
 
 /* query */

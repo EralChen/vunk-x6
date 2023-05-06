@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { User } from '@skzz-platform/api/system/user'
+import { User } from '@skzz/platform/api/system/user'
 import { SkAppDialog, SkUserTablesSelect } from '@skzz/platform'
 import { PropType } from 'vue'
 import { useVModel } from '@vueuse/core'

@@ -1,6 +1,6 @@
 import { ElMessage } from 'element-plus'
 import { NodeModel } from '@zzg6/flow/components/editor/src/types'
-import { User } from '@skzz-platform/api/system/user'
+import { User } from '@skzz/platform/api/system/user'
 
 
 export function getCurrentNodeId (currentNodeInstIds: string[], currentNodeData: NodeModel<User>) {

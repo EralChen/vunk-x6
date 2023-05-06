@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { rDic, Dictionary } from '@skzz-platform/api/system/dictionary'
+import { rDic, Dictionary } from '@skzz/platform/api/system/dictionary'
 import { Ref, reactive } from 'vue'
 
 type withDic<T extends string[]> = {

@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
-import { cuRole } from '@skzz-platform/api/system/role'
+import { SkAppForm, __SkAppForm } from '@skzz/platform/components/app-form'
+import { cuRole } from '@skzz/platform/api/system/role'
 import { FirstParameter } from '@vunk/core'
 export type Data = FirstParameter<typeof cuRole>
   

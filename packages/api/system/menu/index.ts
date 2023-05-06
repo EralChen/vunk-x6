@@ -1,9 +1,9 @@
-import { request } from '@skzz-platform/shared/fetch/platform'
+import { request } from '@skzz-template/shared/fetch/platform'
 import { NormalObject } from '@vunk/core'
 import { RestFetchExecOptions, RestFetchSaveOptions } from '@vunk/skzz'
 import { RestFetchQueryOptions, QueryRData } from '@vunk/skzz'
 import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
-import { rBtns } from '@skzz-platform/api/basic'
+import { rBtns } from '@skzz-template/api/basic'
 import { Menu } from './types'
 const MENU_DATA = {
   'dir': 'system',

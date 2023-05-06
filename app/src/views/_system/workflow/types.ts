@@ -1,4 +1,4 @@
-import { rWorkflows, WorkflowOper, WorkflowNode } from '@skzz-platform/api/system/workflow'
+import { rWorkflows, WorkflowOper, WorkflowNode } from '@skzz/platform/api/system/workflow'
 import { ApiReturnType } from '@vunk/core'
 
 

@@ -1,7 +1,7 @@
 import { usePermissionStore as useVkPermissionStore } from '@vunk/skzz/stores/permission'
 import { defineStore } from 'pinia'
 import { computed } from 'vue'
-import { rMenus  } from '@skzz-platform/api/login'
+import { rMenus  } from '@skzz/platform/api/login'
 import { createRemoteRoutes } from '@/router/_remote'
 import { RouteRecordRaw } from 'vue-router'
 

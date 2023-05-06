@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
+import { SkAppForm, __SkAppForm } from '@skzz-template/components/app-form'
 const formItems: __SkAppForm.CoreFormItem[] = [
   {
     templateType: 'SkCssColorPicker',

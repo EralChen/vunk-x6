@@ -26,7 +26,7 @@ import { Ref, reactive, ref } from 'vue'
 import { SkAppForm, __SkAppForm } from '@skzz/platform'
 import { Deferred } from '@vunk/core/shared/utils-promise'
 import { ElMessage, FormInstance } from 'element-plus'
-import { FIRS, cuForm, rFormDetail } from '@skzz-platform/api/system/form'
+import { FIRS, cuForm, rFormDetail } from '@skzz/platform/api/system/form'
 import router from '@/router'
 
 const props = defineProps({

@@ -2,7 +2,7 @@
 import { props, emits } from './ctx'
 import { computed, defineComponent, ref } from 'vue'
 import { ElButton } from 'element-plus'
-import { Button } from '@skzz-platform/api/system/button'
+import { Button } from '@skzz-template/api/system/button'
 export default defineComponent({
   name: 'SkAppOperations',
   components: {

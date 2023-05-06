@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="tsx">
-import { rWorkflowNodeRaw, rInstanceList, FlowNodeInstance } from '@skzz-platform/api/system/workflow'
+import { rWorkflowNodeRaw, rInstanceList, FlowNodeInstance } from '@skzz/platform/api/system/workflow'
 import { computed, nextTick, reactive, ref, shallowRef, watch } from 'vue'
 import { SkAppCard } from '@skzz/platform'
 import ZzG6Editor from '@/components/ZzG6Editor/index.vue'
@@ -39,7 +39,7 @@ import Approval from './approval/index.vue'
 import { cloneDeep } from 'lodash'
 import { NodeModel } from '@zzg6/flow/components/editor/src/types'
 import BindOpers from '../../bind-opers/index.vue'
-import { usePostQueryU } from '@skzz-platform/composables'
+import { usePostQueryU } from '@skzz/platform/composables'
 
 
 const props = defineProps({

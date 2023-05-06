@@ -5,8 +5,8 @@ export default {
 </script>
 <script lang="tsx" setup>
 import { computed } from 'vue'
-import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
-import { elColorWithMode } from '@skzz-platform/theme'
+import { SkAppForm, __SkAppForm } from '@skzz/platform/components/app-form'
+import { elColorWithMode } from '@skzz/platform/theme'
 const props = defineProps({
   formItemBasis: {
     type: String,

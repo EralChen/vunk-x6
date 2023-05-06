@@ -1,15 +1,15 @@
 <script lang="tsx">
 import { PropType, defineComponent, reactive, watch } from 'vue'
-import { SkAppTables, __SkAppTables } from '@skzz-platform/components/app-tables'
-import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
-import { Pagination } from '@skzz-platform/shared'
+import { SkAppTables, __SkAppTables } from '@skzz/platform/components/app-tables'
+import { SkAppForm, __SkAppForm } from '@skzz/platform/components/app-form'
+import { Pagination } from '@skzz/platform/shared'
 import { VkDuplex, setData } from '@vunk/core'
 import { ElCheckbox, ElMessage } from 'element-plus'
 import BindUser from '../../bind-user/index.vue'
 import { NodeConfig } from '@antv/g6'
-import { InstanceBindOpers, Workflow, genInstance } from '@skzz-platform/api/system/workflow'
+import { InstanceBindOpers, Workflow, genInstance } from '@skzz/platform/api/system/workflow'
 import { cloneDeep } from 'lodash-es'
-import { User } from '@skzz-platform/api/system/user'
+import { User } from '@skzz/platform/api/system/user'
 
 type Row = NodeConfig
 export default defineComponent({

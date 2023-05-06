@@ -1,12 +1,12 @@
 <script lang="tsx" setup>
 import { VkCheckboxTree, __VkCheckboxTree } from '@vunk/skzz/components/checkbox-tree'
 import { computed, reactive, watch } from 'vue'
-import { rDataModels, dDataModels } from '@skzz-platform/api/system/data-model'
+import { rDataModels, dDataModels } from '@skzz/platform/api/system/data-model'
 import { SkAppDialog, SkAppOperations, SkCheckTags, __SkCheckTags, SkAppTablesV1, __SkAppTablesV1 } from '@skzz/platform'
 import { setData, unsetData, VkDuplexCalc, VkDuplex } from '@vunk/core'
 import CUForm from './cu-form/index.vue'
 import { Row } from './types'
-import SkAppIcon from '@skzz-platform/components/app-icon'
+import SkAppIcon from '@skzz/platform/components/app-icon'
 type Col = __SkAppTablesV1.Column<Row>
 
 const tableState = reactive({

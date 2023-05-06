@@ -1,6 +1,6 @@
 import { RestFetch } from '@vunk/skzz/shared/utils-fetch'
 import type { R } from '@vunk/skzz/shared'
-import { usePlatformStore } from '@skzz-platform/stores/platform'
+import { usePlatformStore } from '@skzz-template/stores/platform'
 import { AnyFunc } from '@vunk/core'
 
 

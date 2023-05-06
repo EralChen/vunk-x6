@@ -1,6 +1,6 @@
 import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
 import { MENU_DATA } from '../const'
-import { request } from '@skzz-platform/shared/fetch/platform'
+import { request } from '@skzz-template/shared/fetch/platform'
 
 /**
  * 流程绑定表单

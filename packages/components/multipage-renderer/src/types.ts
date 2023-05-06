@@ -1,4 +1,4 @@
-import { __SkMultipage } from '@skzz-platform/components/multipage'
+import { __SkMultipage } from '@skzz-template/components/multipage'
 import { AnyFunc } from '@vunk/core'
 export type VM = {
   data: {

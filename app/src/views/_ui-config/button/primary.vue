@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { SkAppForm, __SkAppForm } from '@skzz/platform'
 import { useThemeStore } from '@/stores/theme'
-import { elButtonPrimaryTheme } from '@skzz-platform/theme'
+import { elButtonPrimaryTheme } from '@skzz/platform/theme'
 import { setData } from '@vunk/core'
 const themeStore = useThemeStore()
 /* 

@@ -8,8 +8,8 @@ import {
 } from '@skzz/platform'
 import { ApiReturnType, NormalObject, setData, VkDuplexCalc } from '@vunk/core'
 import { reactive, ref, watch } from 'vue'
-import { rRoles, dRoles, cuRole } from '@skzz-platform/api/system/role'
-import { genColumn } from '@skzz-platform/shared/utils-data'
+import { rRoles, dRoles, cuRole } from '@skzz/platform/api/system/role'
+import { genColumn } from '@skzz/platform/shared/utils-data'
 import FormVue, { Data as FormVueData } from './form.vue'
 type Res = ApiReturnType<typeof rRoles>
 

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { FormItemRendererSource, VkfForm } from '@vunk/form'
-import { elMenuTheme } from '@skzz-platform/theme'
+import { elMenuTheme } from '@skzz/platform/theme'
 
 const formItems: FormItemRendererSource<`--el-menu-${keyof typeof elMenuTheme['default']}`>[] = [
   {

@@ -8,9 +8,9 @@ import {
 } from '@skzz/platform'
 import { ApiReturnType, NormalObject, setData, VkDuplexCalc } from '@vunk/core'
 import { reactive, ref, watch } from 'vue'
-import { rRoles, dRoles } from '@skzz-platform/api/system/role'
-import { genColumn } from '@skzz-platform/shared/utils-data'
-import { useRouterTo, useResolveQueryU } from '@skzz-platform/composables'
+import { rRoles, dRoles } from '@skzz/platform/api/system/role'
+import { genColumn } from '@skzz/platform/shared/utils-data'
+import { useRouterTo, useResolveQueryU } from '@skzz/platform/composables'
 type Res = ApiReturnType<typeof rRoles>
 const { routerNext } = useRouterTo()
 // when router back 

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
-import { cuSms, rSmsList, CSms } from '@skzz-platform/api/system/message'
+import { SkAppForm, __SkAppForm } from '@skzz/platform/components/app-form'
+import { cuSms, rSmsList, CSms } from '@skzz/platform/api/system/message'
 import { Deferred } from '@vunk/core/shared/utils-promise'
 import { ElMessage, FormInstance } from 'element-plus'
 import { SkAppCard } from '@skzz/platform'

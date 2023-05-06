@@ -1,7 +1,7 @@
 <script lang="ts">
 import { props, emits } from './ctx'
 import { defineComponent, getCurrentInstance, provide } from 'vue'
-import { SkMultipage, _SkMultipageCtx } from '@skzz-platform/components/multipage'
+import { SkMultipage, _SkMultipageCtx } from '@skzz-template/components/multipage'
 import { VM } from './types'
 import { AnyFunc } from '@vunk/core'
 

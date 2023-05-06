@@ -2,7 +2,7 @@
 import { emits } from './ctx'
 import { defineComponent, reactive } from 'vue'
 import { VkCheckboxTree, __VkCheckboxTree } from '@vunk/skzz/components/checkbox-tree'
-import { rRoles } from '@skzz-platform/api/system/role'
+import { rRoles } from '@skzz-template/api/system/role'
 export default defineComponent({
   name: 'SkRoleTreesSelect',
   emits,

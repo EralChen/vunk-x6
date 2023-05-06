@@ -4,7 +4,7 @@ import { Row } from '../types'
 import { ElButton } from 'element-plus'
 import { PropType, ref  } from 'vue'
 import { SetDataEvent } from '@vunk/core'
-import { snowFlake } from '@skzz-platform/api/basic'
+import { snowFlake } from '@skzz/platform/api/basic'
 
 const props = defineProps({
   data: {

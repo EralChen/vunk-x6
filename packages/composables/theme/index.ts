@@ -2,7 +2,7 @@ import { NormalObject } from '@vunk/core'
 import { ToggleHandler } from '@vunk/core/shared/utils-class'
 import { loadStyleString } from '@vunk/core/shared/utils-dom'
 import { computed, ref, watch } from 'vue'
-import { useSharedDark } from '@skzz-platform/composables/use-shared-dark'
+import { useSharedDark } from '@skzz-template/composables/use-shared-dark'
 
 class ToggleRootStyles extends ToggleHandler {
   key: string

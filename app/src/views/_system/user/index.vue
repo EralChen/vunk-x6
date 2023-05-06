@@ -1,13 +1,13 @@
 <script lang="tsx" setup>
 import { computed, reactive, watch } from 'vue'
-import { cuUser, dUsers, rUsers, rUserBtns, rBoundUsers, cBoundUsers } from '@skzz-platform/api/system/user'
+import { cuUser, dUsers, rUsers, rUserBtns, rBoundUsers, cBoundUsers } from '@skzz/platform/api/system/user'
 import { SkAppDialog, SkAppOperations, SkAppTablesV1, __SkAppTablesV1, SkAppQueryForm, __SkAppQueryForm } from '@skzz/platform'
 import { setData, VkDuplexCalc } from '@vunk/core'
 import CUForm from './cu-form/index.vue'
 import { Row } from './types'
 import { ElButton } from 'element-plus'
-import { SkRoleTablesSelect } from '@skzz-platform/components/role-tables-select'
-import { Role } from '@skzz-platform/api/system/role'
+import { SkRoleTablesSelect } from '@skzz/platform/components/role-tables-select'
+import { Role } from '@skzz/platform/api/system/role'
  
 type Col = __SkAppTablesV1.Column<Row>
 

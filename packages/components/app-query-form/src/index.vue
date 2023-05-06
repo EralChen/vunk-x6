@@ -1,11 +1,11 @@
 <script lang="ts">
 import { props, emits } from './ctx'
 import { computed, defineComponent } from 'vue'
-import { SkAppForm, _SkAppFormCtx } from '@skzz-platform/components/app-form'
+import { SkAppForm, _SkAppFormCtx } from '@skzz-template/components/app-form'
 import { ArrowDown } from '@element-plus/icons-vue'
 import { ElForm, ElIcon } from 'element-plus'
 import { Deferred } from '@vunk/core/shared/utils-promise'
-import { useReady } from '@skzz-platform/composables'
+import { useReady } from '@skzz-template/composables'
 import { useModelComputed } from '@vunk/core/composables'
 export default defineComponent({
   name: 'SkAppQueryForm',

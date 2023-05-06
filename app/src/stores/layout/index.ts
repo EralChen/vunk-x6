@@ -1,7 +1,7 @@
 import { loadStyleString } from '@vunk/core/shared/utils-dom'
 import { defineStore } from 'pinia'
 import { reactive, ref, watch } from 'vue'
-import { baseFontSize } from '@skzz-platform/theme'
+import { baseFontSize } from '@skzz/platform/theme'
 import { ToggleHandler } from '@vunk/core/shared/utils-class'
 
 export const useLayoutStore = defineStore('layout', () => {

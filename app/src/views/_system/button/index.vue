@@ -13,12 +13,12 @@ import {
   dButtons as dApi,
   rButtons as rApi, 
   rButtonBtns,
-} from '@skzz-platform/api/system/button'
-import { genColumn } from '@skzz-platform/shared/utils-data'
+} from '@skzz/platform/api/system/button'
+import { genColumn } from '@skzz/platform/shared/utils-data'
 import CuForm from './cu-form/index.vue'
-import { SkAppDialog } from '@skzz-platform/components/app-dialog'
+import { SkAppDialog } from '@skzz/platform/components/app-dialog'
 import { Row } from './types'
-import SkAppIcon from '@skzz-platform/components/app-icon'
+import SkAppIcon from '@skzz/platform/components/app-icon'
 
 /* query */
 const queryItems: __SkAppQueryForm.FormItem[] = [

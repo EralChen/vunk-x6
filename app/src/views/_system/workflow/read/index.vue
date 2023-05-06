@@ -28,7 +28,7 @@
 </template>
 
 <script setup lang="tsx">
-import { rWorkflowNodesWithRaw, Workflow } from '@skzz-platform/api/system/workflow'
+import { rWorkflowNodesWithRaw, Workflow } from '@skzz/platform/api/system/workflow'
 import { nextTick, reactive, ref, shallowRef, watch } from 'vue'
 import { SkAppCard } from '@skzz/platform'
 import ZzG6Editor from '@/components/ZzG6Editor/index.vue'
@@ -38,7 +38,7 @@ import { NodeModel } from '@zzg6/flow/components/editor/src/types'
 import { SkAppDialog } from '@skzz/platform'
 import GenInstance from './gen-instance/index.vue'
 import { NodeConfig } from '@antv/g6'
-import { usePostQueryU } from '@skzz-platform/composables'
+import { usePostQueryU } from '@skzz/platform/composables'
 
 const props = defineProps({
   id: {

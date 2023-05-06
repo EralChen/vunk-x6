@@ -1,5 +1,5 @@
 {
-  "name": "@skzz-platform/app",
+  "name": "@skzz/platform/app",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",

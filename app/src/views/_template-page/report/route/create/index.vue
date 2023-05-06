@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import PageOver from '_c/PageOver/index.vue'
-import { SkAppCard } from '@skzz-platform/components/app-card'
-import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
-import { cuRole } from '@skzz-platform/api/system/role'
+import { SkAppCard } from '@skzz/platform/components/app-card'
+import { SkAppForm, __SkAppForm } from '@skzz/platform/components/app-form'
+import { cuRole } from '@skzz/platform/api/system/role'
 import { ref } from 'vue'
 import { FirstParameter, setData } from '@vunk/core'
-import { useRouterTo } from '@skzz-platform/composables'
+import { useRouterTo } from '@skzz/platform/composables'
 defineProps({
   uid: {
     type: String,

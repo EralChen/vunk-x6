@@ -1,5 +1,5 @@
-import { Pagination } from '@skzz-platform/shared'
-import { request } from '@skzz-platform/shared/fetch/platform'
+import { Pagination } from '@skzz-template/shared'
+import { request } from '@skzz-template/shared/fetch/platform'
 import { RestFetchQueryOptions, QueryRData, RestFetchExecOptions } from '@vunk/skzz'
 import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
 import { MENU_DATA } from './const'
