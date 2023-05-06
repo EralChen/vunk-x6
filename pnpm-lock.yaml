@@ -20,7 +20,7 @@ importers:
       '@skzz-template/shared': workspace:*
       '@skzz-template/stores': workspace:*
       '@skzz-template/theme': workspace:*
-      '@skzz/platform': 0.0.0-alpha.3
+      '@skzz/platform': 0.0.0-alpha.4
       '@skzz/template': workspace:*
       '@types/arcgis-js-api': ^4.25.0
       '@types/chroma-js': ^2.1.4
@@ -67,7 +67,7 @@ importers:
       '@skzz-template/shared': link:packages/shared
       '@skzz-template/stores': link:packages/stores
       '@skzz-template/theme': link:packages/theme
-      '@skzz/platform': 0.0.0-alpha.3
+      '@skzz/platform': 0.0.0-alpha.4
       '@skzz/template': link:packages/entry
       '@vuesri/core': 0.0.6
       '@vueuse/core': 9.13.0_vue@3.2.47
@@ -2868,8 +2868,8 @@ packages:
       picomatch: 2.3.1
     dev: true
 
-  /@skzz/platform/0.0.0-alpha.3:
-    resolution: {integrity: sha512-ugn9IZLmkBFGt7Hg5GoI+AS+fdhxI+934ajAHBakBNWhUlXIv4+Og7M/d5c9u19Gc+cL7le59T690TuEVLx2pQ==}
+  /@skzz/platform/0.0.0-alpha.4:
+    resolution: {integrity: sha512-r7hJYEaQ2CxoNwYh0du2AYq1a+wosLN0fRK03wkGhHGoIAs3/dXITB3ma19PuEXr8/GF24fl/Ha+cXPXUggXyQ==}
     dev: false
 
   /@stencil/core/2.20.0:
