@@ -1,9 +1,21 @@
 import { onScopeDispose } from 'vue'
 import { createSharedComposable } from '@vueuse/core'
+import { ToggleHandler } from '@vunk/core/shared/utils-class'
 const useMenuClick = () => {
-  document.addEventListener('click', upLinkClickToItem)
+  class ListenerToggle extends ToggleHandler {
+    add () {
+      document.addEventListener('click', upLinkClickToItem)
+      this.removeHandler = () => {
+        document.removeEventListener('click', upLinkClickToItem)
+      }
+    }
+  }
+  const listenerToggle = new ListenerToggle()
+ 
+  listenerToggle.add()
+
   onScopeDispose(() => {
-    document.removeEventListener('click', upLinkClickToItem)
+    listenerToggle.remove()
   })
 
   function upLinkClickToItem (e: MouseEvent) {
@@ -13,10 +25,14 @@ const useMenuClick = () => {
     }) as HTMLElement
 
     if (elMenuItem) {
+
       elMenuItem.getElementsByTagName('a')[0]?.click()                 
     }
   }
 
+  return {
+    listenerToggle,
+  }
 }
 
 export const useSharedMenuClick = createSharedComposable(useMenuClick)
