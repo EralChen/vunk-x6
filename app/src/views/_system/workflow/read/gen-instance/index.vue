@@ -4,14 +4,16 @@ import { SkAppTables, __SkAppTables } from '@skzz-platform/components/app-tables
 import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
 import { Pagination } from '@skzz-platform/shared'
 import { VkDuplex, setData } from '@vunk/core'
-import { ElCheckbox, ElMessage } from 'element-plus'
+import { ElCheckbox, ElInput, ElMessage } from 'element-plus'
 import BindUser from '../../bind-user/index.vue'
 import { NodeConfig } from '@antv/g6'
-import { InstanceBindOpers, Workflow, genInstance } from '@skzz-platform/api/system/workflow'
+import { InstanceBindOpers, NodesDeadLine, Workflow, genInstance } from '@skzz-platform/api/system/workflow'
 import { cloneDeep } from 'lodash-es'
 import { User } from '@skzz-platform/api/system/user'
 
-type Row = NodeConfig
+type Row = NodeConfig & {
+  deadLine?: string
+}
 export default defineComponent({
   name: 'GenInstance',
   emits: {
@@ -78,7 +80,7 @@ export default defineComponent({
           },
         },
         {
-          title: '操作人',
+          title: '操作人(必填)',
           dataKey: 'operShow',
           key: 'operShow',
           width: 200,
@@ -87,6 +89,16 @@ export default defineComponent({
             return <>
               <BindUser showData={rowData.insOpers} v-model={rowData.operShow} v-model:data={rowData.insOpers} onDoBindUser={() => rowData.operShow = false}></BindUser>
             </>
+          },
+        },
+        {
+          title: '办理时长',
+          dataKey: 'deadLine',
+          key: 'deadLine',
+          width: 200,
+          flexGrow: 1,
+          cellRenderer: ({ rowData }) => {
+            return <ElInput type='number' v-model={rowData.deadLine}></ElInput>
           },
         },
 
@@ -116,30 +128,39 @@ export default defineComponent({
     function filterOpers () {
       const skipNodes = tableState.data.filter(item => item.isChecked).map(item => item.id)
       let isOk = false
-      const nodeOpers = tableState.data.map(item => {
+      const nodeOpers = []
+      const nodesDeadLine = [] as NodesDeadLine[]
+      for (const item of tableState.data) {
         const ops = (item.insOpers as User[])?.map(inner => ({
           operId: inner.id,
           operName: inner.name,
         })) || []
         if (ops.length) isOk = true
+        else isOk = false
         if (ops.length) {
-          return {
+          nodeOpers.push({
             nodeId: item.id,
             opers: ops,
-          }
-        } else
-          return undefined
-      })
+          }) 
+        }
+        if (item.deadLine)
+          nodesDeadLine.push({
+            nodeId: item.id,
+            deadLine: parseInt(item.deadLine),
+          })
+      }
+
       return {
         isOk,
         skipNodes,
-        nodeOpers: nodeOpers.filter(item => item !== undefined) as InstanceBindOpers[],
+        nodeOpers: nodeOpers as InstanceBindOpers[],
+        nodesDeadLine,
       }
     }
 
 
     function doGen () {
-      const { skipNodes, nodeOpers, isOk } = filterOpers()
+      const { skipNodes, nodeOpers, isOk, nodesDeadLine } = filterOpers()
       if (!isOk) {
         ElMessage.warning('请选择操作人！')
         return
@@ -154,6 +175,7 @@ export default defineComponent({
         nodeOpers,
         formData: queryState.data,
         formTable: props.flowData.formTable,
+        nodesDeadLine: nodesDeadLine,
       }).then(() => {
         tableState.data = cloneDeep(tempTata)
         queryState.data = {}

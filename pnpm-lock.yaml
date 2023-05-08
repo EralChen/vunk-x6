@@ -162,8 +162,8 @@ importers:
   app:
     dependencies:
       '@zzg6/flow':
-        specifier: 0.0.0-alpha.33
-        version: 0.0.0-alpha.33
+        specifier: 0.0.0-alpha.42
+        version: 0.0.0-alpha.42
       deepdash-es:
         specifier: ^5.3.9
         version: 5.3.9
@@ -3797,14 +3797,14 @@ packages:
     resolution: {integrity: sha512-jMHy63bUN94At6aPyxlMuu4GbFqKvnvwxPd5MSb0y5gbKBqk2EFLbeYApKYLHgSig3k+fDjHOZ+E8iNULJzzgg==}
     dev: false
 
-  /@vunk/core@0.0.0-alpha.75:
-    resolution: {integrity: sha512-C/mG6+/a1bU8WFxLnk5vVt0hruW3N7GesSywv6izOx3n7IiTZSXAASyTQT5cDzEoKtvrA76BOSnh+dkSvrh8Ow==}
+  /@vunk/core@0.0.0-alpha.76:
+    resolution: {integrity: sha512-QCEhx8CJrK41aYZd4W6T6dfVA63sk56eB3dwd7uniGRvEJa6CwRtJF2CJitg9so8gpKp/xRzPSNJ4OWGiJvnog==}
     dev: false
 
   /@vunk/form@0.0.1-alpha.45:
     resolution: {integrity: sha512-uFXuHYEYkoGCRFzqml2GeK3jwnYG57e/bxacNgikT72+ZX+9f49O5y0XX/2lf/NFnQPJ6Npch0akKVGJSMrpdw==}
     dependencies:
-      '@vunk/core': 0.0.0-alpha.75
+      '@vunk/core': 0.0.0-alpha.76
     dev: false
 
   /@vunk/formaker@0.0.0-alpha.23:
@@ -3819,8 +3819,8 @@ packages:
     resolution: {integrity: sha512-f+PN51a7FPVMt1E95II23fo/NDUb4IVD4HOZhJtP0atW5MjIFQnVSRQgOrEYfT6dSGBDkB/brbvfTSJ1XQi9EA==}
     dev: false
 
-  /@zzg6/flow@0.0.0-alpha.33:
-    resolution: {integrity: sha512-tcNjyQ6TMxprDkrWroD+oIcnGFXbGncW32tZm3KPI1fSolo0ianW0mnAunmzgrjRw061JxTO/3iPPPv43WMEyQ==}
+  /@zzg6/flow@0.0.0-alpha.42:
+    resolution: {integrity: sha512-P8Bbmw/rym2HKYCkIVMHMoZyX2+uG2hwAoTVTN/6Saypx9Sgr0w+yVJtC7kh6XPwfmNU4rUxIgtRTcMve5hS4A==}
     dependencies:
       '@antv/g6': 4.8.8
       '@vunk/form': 0.0.1-alpha.45

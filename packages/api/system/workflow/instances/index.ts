@@ -37,6 +37,11 @@ export type InstanceBindOpers = {
   nodeId: string,
   opers: { operId: string, operName: string }[]
 }
+
+export type NodesDeadLine = {
+  deadLine: number
+  nodeId: string
+}
 /**
  * https://www.apifox.cn/link/project/1903413/apis/api-77292033
  * @param data 
@@ -44,11 +49,13 @@ export type InstanceBindOpers = {
  */
 export const genInstance = (
   data: {
-    itemId: string,
-    skipNodes: string[],
-    nodeOpers: InstanceBindOpers[],
-    formData: any,
+    itemId: string
+    skipNodes: string[]
+    nodeOpers: InstanceBindOpers[]
+    nodesDeadLine: NodesDeadLine[]
+    formData: any
     formTable: string
+    
   }) => {
   return request({
     method: 'POST',
@@ -62,6 +69,7 @@ export const genInstance = (
           'itemId': data.itemId,
           'skipNodes': data.skipNodes,
           'nodeOpers': data.nodeOpers,
+          nodesDeadLine: data.nodesDeadLine,
         },
       },
       'datas': [

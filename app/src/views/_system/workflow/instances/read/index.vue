@@ -1,6 +1,5 @@
 <template>
   <PageOver>
-    <ElButton @click="approvalSuccess">test</ElButton>
     <SkAppCard class="h-full" header="实例详情">
       <div class="editor-x" sk-flex="row">
         <div class="editor">
