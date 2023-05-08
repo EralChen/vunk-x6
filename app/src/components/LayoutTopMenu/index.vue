@@ -19,7 +19,6 @@ const permissionStore = usePermissionStore()
 const viewsStore = useViewsStore()
 useSharedMenuClick()
 
-
 const navRoutes = computed(() => {
   return filterDeep([...permissionStore.routes, ...constRoutes], (v) => {
     if (v.meta?.header) {

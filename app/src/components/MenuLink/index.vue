@@ -24,6 +24,7 @@ export default defineComponent({
   },
   setup (props) {
     const doNav = (navigate: AnyFunc) => {
+      console.log('doNav', props.to)
       if (!props.isMenu) {
         navigate()
       }
@@ -49,7 +50,8 @@ export default defineComponent({
         'is-exact-active': isExactActive,
       }"></VkSpreadTo>
 
-      <a @click.prevent="doNav(navigate)" class="layout-default-aside-link" :href="href" :class="{
+      <a 
+      @click="doNav(navigate)" class="layout-default-aside-link" :href="href" :class="{
         'is-active': isActive,
         'is-exact-active': isExactActive,
       }">
