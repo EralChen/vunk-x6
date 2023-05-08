@@ -4,6 +4,9 @@
     <template #toolbar>
       <slot name="toolbar"></slot>
     </template>
+    <template #base-form>
+      <slot name="base-form"></slot>
+    </template>
     <template #form>
       <slot name="form"></slot>
     </template>
