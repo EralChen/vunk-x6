@@ -1,7 +1,7 @@
 import {series} from 'gulp'
 import path from 'path'
 import glob from 'fast-glob'
-import { distDir } from '@lib-env/path'
+import { distDir, distTypesDir } from '@lib-env/path'
 import { taskWithName } from '@lib-env/shared'
 import { filePathIgnore } from '@lib-env/build-constants'
 import { genTypes, rollupFile } from '@lib-env/build-utils'
@@ -41,6 +41,8 @@ export default series(
     genTypes({
       filesRoot: path.resolve(__dirname),
       source: buildFile,
+      
+      outDir: path.resolve(distTypesDir, './theme'),
     })
   }),
 

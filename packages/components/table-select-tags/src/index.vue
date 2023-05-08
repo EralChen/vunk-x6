@@ -62,7 +62,7 @@ export default defineComponent({
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style>
 .fack-input-x {
   --el-input-inner-height: calc(var(--el-input-height, 32px) - 2px);
   display: inline-flex;
@@ -74,15 +74,16 @@ export default defineComponent({
   transform: translateZ(0);
   cursor: pointer;
   min-height: var(--el-input-inner-height);
+}
 
-  &:hover:not(.is-disabled) {
-    box-shadow: 0 0 0 1px var(--el-text-color-secondary) inset;
-  }
-  &.is-disabled {
-    background-color: var(--el-disabled-bg-color);
-    box-shadow: 0 0 0 1px var(--el-disabled-border-color) inset;
-    cursor: not-allowed;
-  }
+.fack-input-x:hover:not(.is-disabled) {
+  box-shadow: 0 0 0 1px var(--el-text-color-secondary) inset;
+}
+
+.fack-input-x.is-disabled {
+  background-color: var(--el-disabled-bg-color);
+  box-shadow: 0 0 0 1px var(--el-disabled-border-color) inset;
+  cursor: not-allowed;
 }
 
 .fack-input .el-tag {

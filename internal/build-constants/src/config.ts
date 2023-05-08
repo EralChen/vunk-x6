@@ -6,6 +6,8 @@ export const libExternal = [
   /^@vunk\/skzz/,
   /^@vunk\/form/,
   /^element-plus/,
+  'pinia',
+  'vue-router',
   new RegExp(`^${LIB_NAME}`),
   new RegExp(`^${LIB_ALIAS}`),
 ]

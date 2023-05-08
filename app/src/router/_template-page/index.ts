@@ -72,6 +72,7 @@ export default [
           
             meta: {
               title: '多列表单',
+              noCache: 1,
             },
             path: 'multiple',
             component: () => import('@/views/_template-page/form/multiple/index.vue'),

@@ -209,16 +209,16 @@ export default defineComponent({
 
   </VkDuplexCalc>
 </template>
-<style lang="scss">
+<style>
 .sk-app-tables__table .el-table-v2__table{
   border: var(--el-border);
 }
-// .sk-app-tables__table .el-table-v2__table {
-//   border-right: var(--el-border);
-// }
-// .el-table-v2__header-cell{
-//   border-top: var(--el-border);
-// }
+/* .sk-app-tables__table .el-table-v2__table {
+   border-right: var(--el-border);
+ }
+ .el-table-v2__header-cell{
+  border-top: var(--el-border);
+} */
 .sk-app-tables__table .el-table-v2__header-cell:not(:first-child){
   border-left: var(--el-border);
 }

@@ -4,8 +4,6 @@ import _UI_CONFIG from './_ui-config'
 import _TEMPLATE_PAGE from './_template-page'
 import _PLAY from './_play'
 
-import { getPlatform } from '@/utils'
-
 export const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
@@ -41,7 +39,7 @@ export const routes: Array<RouteRecordRaw> = [
     meta: {
       display: 0,
     },
-    redirect: '/login' + '/' + getPlatform(),
+    component: () => import('_v/_login/index.vue'),
   },
 
   {
