@@ -28,17 +28,17 @@ export default defineComponent({
     const editProps = bindProps(props, ['formId'])
 
     const formKey = 'VkfBindFormItem'
-    const formRefKey = 'VkfBindFormItemRef'
+    // const formRefKey = 'VkfBindFormItemRef'
 
     expendForm([
       {
         component: bindFormItem,
         type: formKey,
       },
-      {
-        component: bindFormItem,
-        type: formRefKey,
-      },
+      // {
+      //   component: bindFormItem,
+      //   type: formRefKey,
+      // },
     ])
     extendNodeFormMap(
       MaterialGeometryEnum.zzRect,
@@ -50,13 +50,13 @@ export default defineComponent({
           formId: computed(() => props.formId),
           modelKey: 'show',
         },
-        {
-          templateType: formRefKey,
-          prop: 'formColumns',
-          label: '绑定引用字段',
-          formId: computed(() => props.formId),
-          modelKey: 'ref',
-        },
+        // {
+        //   templateType: formRefKey,
+        //   prop: 'formColumns',
+        //   label: '绑定引用字段',
+        //   formId: computed(() => props.formId),
+        //   modelKey: 'ref',
+        // },
       ],
     )
     return {
