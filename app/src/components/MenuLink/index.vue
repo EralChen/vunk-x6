@@ -51,7 +51,7 @@ export default defineComponent({
       }"></VkSpreadTo>
 
       <a 
-      @click="doNav(navigate)" class="layout-default-aside-link" :href="href" :class="{
+      @click.prevent="doNav(navigate)" class="layout-default-aside-link" :href="href" :class="{
         'is-active': isActive,
         'is-exact-active': isExactActive,
       }">
