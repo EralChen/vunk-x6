@@ -79,7 +79,10 @@ export default defineConfig(({ mode }) => {
       viteExternalsPlugin(),
       createSvgIconsPlugin({
         // Specify the icon folder to be cached
-        iconDirs: [path.resolve(packagesDir,'./icons/svg')],
+        iconDirs: [
+          path.resolve(packagesDir,'./icons/svg'),
+          path.resolve(appRoot, './src/icons/svg'),
+        ],
         // Specify symbolId format
         symbolId: 'icon-[dir]-[name]',
       }),
