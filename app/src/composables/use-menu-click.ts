@@ -19,7 +19,6 @@ const useMenuClick = () => {
   })
 
   function upLinkClickToItem (e: MouseEvent) {
-    console.log(e)
     const path = e.composedPath()
     const elMenuItem = path.find((item) => {
       return item instanceof Element && item.classList.contains('el-menu-item')
@@ -27,7 +26,7 @@ const useMenuClick = () => {
 
     if (elMenuItem) {
 
-      //  elMenuItem.getElementsByTagName('a')[0]?.click()                 
+      elMenuItem.getElementsByTagName('a')[0]?.click()                 
     }
   }
 
