@@ -120,7 +120,7 @@ export const libExternal = [
 
 ### docs component 页面重定向
 
-全局替换 `/component/app-card` => `/component/[第一个组件的link]`
+全局替换 `/component/hello-world` => `/component/[第一个组件的link]`
 
 
 
