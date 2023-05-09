@@ -56,6 +56,7 @@
 	"scripts": {
 		"dev": "pnpm run -C app dev",
 		"build": "pnpm run -C app build",
+		"build:skzz": "pnpm run -C app build:skzz",
 		"lib:build": "gulp -f scripts/build/index.ts",
 		"stub": "pnpm run -r --parallel stub",
 		"postinstall": "pnpm stub",
