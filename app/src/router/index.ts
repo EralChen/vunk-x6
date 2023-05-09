@@ -20,7 +20,10 @@ export const routes: Array<RouteRecordRaw> = [
     component: Layout,
 
     meta: {
-      display: 0,
+      display: 1,
+      header: true,
+      title: '首页',
+      icon: 'House',
     },
     children: [
       {
@@ -28,6 +31,7 @@ export const routes: Array<RouteRecordRaw> = [
         name: 'home',
         meta: {
           title: '首页',
+          display: 1,
         },
         component: () => import('_v/home/index.vue'),
       },
