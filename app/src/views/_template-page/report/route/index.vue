@@ -1,3 +1,8 @@
+<script lang="tsx">
+export default {
+  name: 'ReportCreate',
+}
+</script>
 <script lang="tsx" setup>
 import PageX from '_c/PageX/index.vue'
 import { 
@@ -14,9 +19,8 @@ import { useRouterTo, useResolveQueryU } from '@skzz-platform/composables'
 type Res = ApiReturnType<typeof rRoles>
 const { routerNext } = useRouterTo()
 // when router back 
-useResolveQueryU(() => {
-  r() 
-})
+const { addListener } = useResolveQueryU()
+addListener(() => r())
 
 
 /* query */
