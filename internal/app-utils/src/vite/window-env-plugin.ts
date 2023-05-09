@@ -1,7 +1,7 @@
 import { PluginOption } from 'vite'
 import { getEnv } from '../env'
 
-export function windowEnvPlugin (): PluginOption {
+export function windowEnvPlugin (appRoot: string): PluginOption {
   let mode = ''
   
   return {
@@ -20,7 +20,7 @@ export function windowEnvPlugin (): PluginOption {
       return code
     },
     transformIndexHtml (html) {
-      const obj = getEnv(mode)
+      const obj = getEnv(appRoot, mode)
       Reflect.deleteProperty(obj, 'NODE_ENV')
       // Reflect.deleteProperty(obj, 'VITE_BASE_URL')
       

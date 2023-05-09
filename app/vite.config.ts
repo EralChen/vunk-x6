@@ -4,20 +4,18 @@ import vueJSX from '@vitejs/plugin-vue-jsx'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { windowEnvPlugin, vunkPresetsTheme, vunkPresetsShortcuts, unoThemeColors, getEnv } from '@lib-env/app-utils'
 import path from 'path'
-import { appRoot, packagesDir } from '@lib-env/path'
+import { packagesDir } from '@lib-env/path'
 // import legacy from '@vitejs/plugin-legacy'
 import { viteExternalsPlugin } from 'vite-plugin-externals'
 import unocss from 'unocss/vite'
 import { presetAttributify, presetWind } from 'unocss'
 import { presetFlex, presetFont, presetGap } from 'unocss-preset-vunk'
+import { appRoot, srcRoot } from './path.config'
 
-
-
-const srcRoot = path.resolve(appRoot, './src')
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  const env = getEnv(mode)
+  const env = getEnv(appRoot, mode)
   return {
     base: env.VITE_BASE_URL + '/',
     build: {
@@ -39,7 +37,7 @@ export default defineConfig(({ mode }) => {
       vue(),
       vueJSX(),
   
-      windowEnvPlugin(),
+      windowEnvPlugin(appRoot),
       unocss({
         presets: [
           presetAttributify(),
