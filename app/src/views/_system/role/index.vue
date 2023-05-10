@@ -5,6 +5,7 @@ import {
   SkAppQueryForm, __SkAppQueryForm, 
   SkAppOperations,
   Pagination,
+  SkAppDialog,
 } from '@skzz/platform'
 import { ApiReturnType, NormalObject, setData, VkDuplexCalc } from '@vunk/core'
 import { reactive, ref, watch } from 'vue'
@@ -40,7 +41,7 @@ const tableState = reactive({
 })
 
 const cuIState = reactive({
-  visible: false,
+  type: '' as 'c' | 'u' | '',
   formData: {} as Partial<FormVueData>,
 })
 
@@ -104,16 +105,16 @@ function d (ids: string[]) {
   dRoles(ids).then(r)
 }
 function precI () {
-  cuIState.visible = true
+  cuIState.type = 'c'
   cuIState.formData = {}
 }
 function preuI (data: FormVueData) {
-  cuIState.visible = true
+  cuIState.type = 'u'
   cuIState.formData = {...data}
 }
 function cuI () {
   cuRole(cuIState.formData).then(r).then(() => {
-    cuIState.visible = false
+    cuIState.type = ''
   })
 }
 
@@ -147,13 +148,17 @@ function cuI () {
       </SkAppTables>
     </VkDuplexCalc>
 
-    <ElDialog v-model="cuIState.visible">
+    <SkAppDialog 
+      :modelValue="!!cuIState.type"
+      @update:modelValue="cuIState.type = ''"
+      :title="cuIState.type === 'u' ? '编辑' : '新增'"
+    >
       <FormVue
         :data="cuIState.formData"
         @setData="setData(cuIState.formData, $event)"
         @submit="cuI"
       ></FormVue>
-    </ElDialog>
+    </SkAppDialog>
 
   </PageX>
 </template>
