@@ -110,8 +110,8 @@ const tableState = reactive({
         >
         </SkAppOperations>
       },
-      align: 'center',
-      headerAlign: 'center',
+      align: 'left',
+      headerAlign: 'left',
     },
   ] as Col[],
   columns: [] as Col[],
