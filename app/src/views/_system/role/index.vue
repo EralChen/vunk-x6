@@ -18,7 +18,7 @@ const queryItems: __SkAppQueryForm.FormItem[] = [
   {
     templateType: 'VkfInput',
     prop: 'name',
-    label: '姓名',
+    label: '角色名称',
   },
 ]
 const queryData = ref({} as NormalObject)
@@ -28,7 +28,7 @@ const pagination = ref<Pagination>({
   start: 0,
 })
 watch(pagination, r, { deep: true , immediate: true })
-// watch(queryData, r, { deep: true , immediate: true })
+watch(queryData, r, { deep: true  })
 /* query end */
 
 const tableState = reactive({
@@ -103,10 +103,10 @@ function cuI () {
           @enter="r"
         >
           <template #options>
-            <ElButton type="primary" @click="r">查询</ElButton>
+            <!-- <ElButton type="primary" @click="r">查询</ElButton> -->
             <ElButton type="primary" 
               @click="precI"
-            >新增</ElButton>
+            >新增</ElButton>  
             
           </template>
         </SkAppQueryForm>
@@ -131,3 +131,5 @@ function cuI () {
 
   </PageX>
 </template>
+
+

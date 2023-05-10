@@ -22,6 +22,7 @@ export default defineComponent({
         rules: {
           required: true,
         },
+        
       },  
       {
         templateType: 'VkfInput',
