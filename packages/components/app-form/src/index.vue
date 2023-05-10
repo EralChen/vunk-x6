@@ -53,10 +53,27 @@ export default defineComponent({
     }
 
     const formItems = computed(() => {
+      
+      const processFormItems = props.formItems.map((item)  => {
+        const message = `${item.label || '该字段'}不能为空`
+        if (item.rules) {
+          if (item.rules.required && !item.rules.message) {
+            item.rules.message = message
+          }
+        }
+        if (item.required &&  !item.rules) {
+          item.rules = {
+            required: true,
+            message,
+          }
+        }
+        return item
+      })
+
       if (!props.layout) {
-        return props.formItems
+        return processFormItems
       } else {
-        return props.formItems.reduce((a, c) => {
+        return processFormItems.reduce((a, c) => {
           // 先看最后一行是否有空位
           const lastRow = a[a.length - 1] as ElRowSource<ElColSource<FormItem>>
           const colItem = genColItem(c)
@@ -94,7 +111,7 @@ export default defineComponent({
     }"
     @keydown.enter.prevent="$emit('enter', $event)"
     :style="{
-      '--gap-form-label': `calc(${labelWidth} + 16px)`,
+      '--gap-form-label': `${labelWidth}`,
     }"
   >
     <template #rendererTemplate>
@@ -114,8 +131,3 @@ export default defineComponent({
     </template>
   </VkfForm>
 </template>
-<style>
-.sk-app-form.is-layout{
-  overflow-x: hidden;
-}
-</style>

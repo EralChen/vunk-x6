@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { SkRoleTreesSelect } from '@skzz-platform/components/role-trees-select'
-import { SkMenuSelect } from '@skzz-platform/components/menu-select'
+import { SkMenuSelect, __SkMenuSelect } from '@skzz-platform/components/menu-select'
 import { getValue, SetDataEvent, UnsetDataEvent, VkDuplex } from '@vunk/core'
 import { computed, reactive, watch } from 'vue'
 import { Role, rRolePermissions, cdRoleMenuPermissions, cdRolePermissions } from '@skzz-platform/api/system/role'
@@ -24,15 +24,10 @@ const currentRoleId = computed(() => roleState.current[0]?.roleId)
 /**
  * @description: 菜单树选择
  */
-const menuCheck = (
-  data: Menu, 
-  checked: {
-    checkedNodes: Menu[],
-    checkedKeys: string[],
-    halfCheckedNodes: Menu[],
-    halfCheckedKeys: string[],
-  },
+const menuCheck:__SkMenuSelect.OnCheck = (
+  data, checked, record,
 ) => {
+  
   // 判断是否选中
   const checkedKeys = checked.checkedKeys
   const checkedKeysSet = new Set(checkedKeys)
@@ -40,32 +35,60 @@ const menuCheck = (
   const currentCheckedKeys: string[] = []
   const currentUnCheckedKeys: string[] = []
 
-  // 如果选中该节点
+  // // 如果选中该节点
   if (isCheck) {
     // 选中该节点
     currentCheckedKeys.push(data.menuId)
-    // 选中子节点
-    const children = data.children || []
-    children.forEach(item => {
-      currentCheckedKeys.push(item.menuId)
-    })
-    // 如果父节点在 全选节点里，则添加到 currentCheckedKeys
-    if (checkedKeysSet.has(data.parentMenuId)) {
-      currentCheckedKeys.push(data.parentMenuId)
+    // 递归选中叶子节点
+    function addChildren (data: Menu) {
+      const children = data.children || []
+      children.forEach(item => {
+        currentCheckedKeys.push(item.menuId)
+        addChildren(item)
+      })
     }
+    addChildren(data)
+
+    // 如果父节点在 全选节点里，则添加到 currentCheckedKeys
+    function addParent (data:Menu) {
+      if (checkedKeysSet.has(data.parentMenuId)) {
+        currentCheckedKeys.push(data.parentMenuId)
+        const parentMenu = record[data.parentMenuId]
+        if (parentMenu) {
+          addParent(parentMenu)
+        }
+      }
+    }
+    addParent(data)
+
   } else {
     // 取消选中该节点
     currentUnCheckedKeys.push(data.menuId)
     // 取消选中子节点
-    const children = data.children || []
-    children.forEach(item => {
-      currentUnCheckedKeys.push(item.menuId)
-    })
+    function addChildren (data: Menu) {
+      const children = data.children || []
+      children.forEach(item => {
+        currentUnCheckedKeys.push(item.menuId)
+        addChildren(item)
+      })
+    }
+    addChildren(data)
 
     // 取消选中该节点
-    if (data.parentMenuId) {
-      currentUnCheckedKeys.push(data.parentMenuId)
+    function addParent (data:Menu) {
+
+      if (data.parentMenuId) {
+        currentUnCheckedKeys.push(data.parentMenuId)
+
+        const parentMenu = record[data.parentMenuId]
+
+        if (parentMenu) {
+          addParent(parentMenu)
+        }
+      }
     }
+    addParent(data)
+
   }
 
   if (currentCheckedKeys.length) {
