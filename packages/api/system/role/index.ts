@@ -59,11 +59,7 @@ export const dRoles = (ids: string[]) => {
   })
 }
 
-export const cuRole = (data: {
-  id?: string;
-  name: string;
-  roleId: string;
-}) => {
+export const cuRole = (data: Partial<Role>) => {
   return request({
     method: 'POST',
     url: '/core/busi/save',
@@ -238,6 +234,6 @@ export interface Role {
   name: string;
   updaterName: string;
   id: string;
-  isSys?: unknown;
+  isSys?: 0|1;
   seq: number;
 }

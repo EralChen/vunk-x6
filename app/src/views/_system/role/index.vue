@@ -5,6 +5,7 @@ import {
   SkAppQueryForm, __SkAppQueryForm, 
   SkAppOperations,
   Pagination,
+  SkAppDialog,
 } from '@skzz/platform'
 import { ApiReturnType, NormalObject, setData, VkDuplexCalc } from '@vunk/core'
 import { reactive, ref, watch } from 'vue'
@@ -32,13 +33,15 @@ watch(queryData, r, { deep: true  })
 /* query end */
 
 const tableState = reactive({
+  _columns: [
+  ] as  __SkAppTables.Column[],
   columns: [] as  __SkAppTables.Column[],
   data: [] as Res['rows'],
   total: 0,
 })
 
 const cuIState = reactive({
-  visible: false,
+  type: '' as 'c' | 'u' | '',
   formData: {} as Partial<FormVueData>,
 })
 
@@ -54,10 +57,32 @@ const operationsCol: __SkAppTables.Column = {
     onU={ () => { preuI(rowData) } }
   ></SkAppOperations>,
 } 
+
+const colsMap = {
+  isSys: {
+
+    key: 'isSys',
+    dataKey: 'isSys',
+    title: '系统保留',
+    cellRenderer: ({cellData}) => {
+      return <span>{cellData === 1 ? '是' : '否'}</span> 
+    },
+
+  },
+
+} as Record<string, Partial<__SkAppTables.Column>>
 function r () {
   rRoles(queryData.value, pagination.value).then(res => {
     if (!tableState.columns.length) {
-      tableState.columns = res.columns.reduce((a, c) => {
+      const remoteCols = res.columns.reduce((a, c) => {
+        if (colsMap[c.prop]) {
+          a.push({
+            ...genColumn(c),
+            ...colsMap[c.prop],
+          })
+          return a
+        }
+
         if (c.type === 'selection') {
 
   
@@ -69,6 +94,8 @@ function r () {
   
         return a
       }, [] as __SkAppTables.Column[])
+      tableState.columns = [...tableState._columns, ...remoteCols]
+  
     }
     tableState.data = res.rows
     tableState.total = res.total
@@ -78,16 +105,16 @@ function d (ids: string[]) {
   dRoles(ids).then(r)
 }
 function precI () {
-  cuIState.visible = true
+  cuIState.type = 'c'
   cuIState.formData = {}
 }
 function preuI (data: FormVueData) {
-  cuIState.visible = true
+  cuIState.type = 'u'
   cuIState.formData = {...data}
 }
 function cuI () {
-  cuRole(cuIState.formData as FormVueData).then(r).then(() => {
-    cuIState.visible = false
+  cuRole(cuIState.formData).then(r).then(() => {
+    cuIState.type = ''
   })
 }
 
@@ -121,13 +148,17 @@ function cuI () {
       </SkAppTables>
     </VkDuplexCalc>
 
-    <ElDialog v-model="cuIState.visible">
+    <SkAppDialog 
+      :modelValue="!!cuIState.type"
+      @update:modelValue="cuIState.type = ''"
+      :title="cuIState.type === 'u' ? '编辑' : '新增'"
+    >
       <FormVue
         :data="cuIState.formData"
         @setData="setData(cuIState.formData, $event)"
         @submit="cuI"
       ></FormVue>
-    </ElDialog>
+    </SkAppDialog>
 
   </PageX>
 </template>
