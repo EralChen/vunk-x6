@@ -3,7 +3,7 @@ import { props, emits } from './ctx'
 import { defineComponent, ref } from 'vue'
 import { VkCheckboxTree, __VkCheckboxTree } from '@vunk/skzz/components/checkbox-tree'
 import { computed, reactive, watch } from 'vue'
-import { rMenus, rMenusWithButtons } from '@skzz-platform/api/system/menu'
+import { Menu, rMenus, rMenusWithButtons } from '@skzz-platform/api/system/menu'
 import { listToTree } from '@vunk/core/shared/utils-data'
 import { SkCheckTags, __SkCheckTags  } from '@skzz-platform/components/check-tags'
 import { SkAppTablesV1 } from '@skzz-platform/components/app-tables-v1'
@@ -15,7 +15,9 @@ import { VkfCheckbox } from '@vunk/form/components/checkbox'
 import { rButtons } from '@skzz-platform/api/system/button'
 import { Deferred } from '@vunk/core/shared/utils-promise'
 import { ElTree } from 'element-plus'
+import { TreeCheckEvents } from './types'
 
+const nodeKey = 'menuId'
 export default defineComponent({
   name: 'SkMenuSelect',
   emits,
@@ -27,7 +29,7 @@ export default defineComponent({
     VkDuplexCalc, VkDuplex, SkAppQueryForm,
   },
   setup (props, { emit }) {
-
+    
 
     const checkTagsState = reactive({
       options: [  
@@ -49,6 +51,7 @@ export default defineComponent({
     })
     const treeState = reactive({
       data: [] as __VkCheckboxTree.TreeNode[],
+      record: {} as Record<string, Menu>,
       // checked: [] as Row[],
       def: new Deferred<InstanceType<typeof ElTree>>(),
     })
@@ -142,23 +145,34 @@ export default defineComponent({
       r()
     }, { deep: true })
 
+    const treeCheck = (...args:TreeCheckEvents) => {
+      emit('check', ...args, treeState.record)
+    }
+
     function rTree () {
       rMenus({
         client: checkTagsState.value,
       }).then(res => {
+        treeState.record = res.reduce((a, c) => {
+          a[c.menuId] = c
+          return a
+        }, {} as Record<string, Menu>)
+
         treeState.data = listToTree(res, {
           id: 'menuId',
           pId: 'parentMenuId',
         })
       })
     }
-    function r () {
+    async function r () {
       if (!treeCheckedMenuIds.value.length) {
         return tableState.data = []
       }
-      rMenusWithButtons({
+      const treeNode = await treeState.def.promise
+      const halfCheckedKeys = treeNode.getHalfCheckedKeys() as string[]
+      return rMenusWithButtons({
         client: checkTagsState.value,
-        menuIds: treeCheckedMenuIds.value,
+        menuIds: [...treeCheckedMenuIds.value, ...halfCheckedKeys],
         ...queryState.query,
       }).then(res => {
         tableState.data = listToTree(res)
@@ -167,6 +181,7 @@ export default defineComponent({
     
 
     return {
+      nodeKey,
       setData,
       unsetData,
       checkTagsState,
@@ -175,6 +190,7 @@ export default defineComponent({
       tableColumns,
       queryFormItems,
       queryState,
+      treeCheck,
     }
   },
 })
@@ -206,13 +222,14 @@ export default defineComponent({
         <template #one>
           <VkCheckboxTree 
             :elRef="treeState.def.resolve"
-            :nodeKey="'menuId'"
+            :nodeKey="nodeKey"
             :modules="['filter', 'srcollbar']"
             :defaultExpandAll="true"
             :data="treeState.data" 
             :modelValue="modelValue"
             @update:modelValue=" $emit('update:modelValue', $event)"
-            @check="(...args) => $emit('check', ...args)"
+
+            @check="treeCheck"
           ></VkCheckboxTree>
         </template>
 
