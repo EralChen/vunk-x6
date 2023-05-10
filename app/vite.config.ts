@@ -22,16 +22,6 @@ export default defineConfig(({ mode }) => {
     base: env.VITE_BASE_URL + '/',
     build: {
       outDir: path.resolve(appRoot,'./dist' + env.VITE_BASE_URL),
-      rollupOptions: {
-        output: {
-          manualChunks: (id) => {
-            // 将 node_modules 中的包拆分成 vender，依赖不变的情况下，文件名hash值不变，会被强缓存
-            if (id.includes('node_modules')) {
-              return 'vender'
-            }
-          },
-        },
-      },
     },
     server: {
       host: '0.0.0.0',
