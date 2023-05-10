@@ -1,4 +1,3 @@
-import { PropType } from 'vue'
 
 export const props = {
   icon: {
