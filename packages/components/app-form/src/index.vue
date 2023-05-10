@@ -94,7 +94,7 @@ export default defineComponent({
     }"
     @keydown.enter.prevent="$emit('enter', $event)"
     :style="{
-      '--gap-form-label': `calc(${labelWidth} + 16px)`,
+      '--gap-form-label': `${labelWidth}`,
     }"
   >
     <template #rendererTemplate>
