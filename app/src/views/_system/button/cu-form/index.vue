@@ -21,6 +21,7 @@ export default defineComponent({
         label: '编号',
         rules: {
           required: true,
+          message: '编号不能为空',
         },
         
       },  
