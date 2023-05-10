@@ -82,7 +82,7 @@ export default defineComponent({
   </span>
 
   <ElIcon 
-    v-else-if="/^[\u4E00-\u9FA5A-Za-z0-9]{2,20}$/.test(icon)"
+    v-else-if="/^[\u4E00-\u9FA5A-Za-z0-9\s]{2,20}$/.test(icon)"
     :color="color" 
     :size="size"
     v-bind="$attrs"
