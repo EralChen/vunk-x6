@@ -73,9 +73,9 @@ const formItems = ref<__SkAppForm.FormItem<keyof Row>[]>([
       class="sub-ml-widget-space ml-form-label mb-18px"
     >
    
-      <ElLink target="_blank" href='https://element-plus.org/zh-CN/component/icon.html#%E5%9B%BE%E6%A0%87%E9%9B%86%E5%90%88'>
+      <ElLink target="_blank" type="primary" href='https://element-plus.org/zh-CN/component/icon.html#%E5%9B%BE%E6%A0%87%E9%9B%86%E5%90%88'>
 
-        <span>图标集合</span>
+        <span>图标站点</span>
       </ElLink>
       
     

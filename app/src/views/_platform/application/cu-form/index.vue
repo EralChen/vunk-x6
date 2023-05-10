@@ -17,13 +17,19 @@ export default defineComponent({
         templateType: 'VkfInput',
         prop: 'applicationId',
         label: '应用ID',
-        required: true,
+        rules: {
+          required: true,
+          message: '应用ID不能为空',
+        },
       },
       {
         templateType: 'VkfInput',
         prop: 'name',
         label: '名称',
-        required: true,
+        rules: {
+          required: true,
+          message: '名称不能为空',
+        },
       },
 
       {

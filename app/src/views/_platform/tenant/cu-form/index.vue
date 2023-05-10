@@ -17,7 +17,10 @@ export default defineComponent({
         templateType: 'VkfInput',
         prop: 'tenantId',
         label: '租户ID',
-        required: true,
+        rules: {
+          required: true,
+          message: '租户ID不能为空',
+        },
       },
       {
         templateType: 'VkfInput',

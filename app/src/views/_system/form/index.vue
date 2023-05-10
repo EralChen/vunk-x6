@@ -1,8 +1,5 @@
 <template>
   <PageX>
-    <!-- <SkAppCard :header="'表单配置'" class="h-100%">
-
-    </SkAppCard> -->
     <VkDuplexCalc class="pa-page h-100%">
         <template #one>
           <SkAppQueryForm
