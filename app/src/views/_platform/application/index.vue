@@ -7,9 +7,9 @@ import {
   Pagination,
 } from '@skzz/platform'
 import { NormalObject, setData, VkDuplexCalc } from '@vunk/core'
-import { computed, reactive, ref, watch } from 'vue'
+import { computed, h, reactive, ref, watch } from 'vue'
 import { cuApplication, rApplicationBtns, dApplications, rApplications, BoundApplication, cBoundApplications, rBoundApplications, dBoundApplications } from '@skzz-platform/api/platform/application'
-import { genColumn } from '@skzz-platform/shared/utils-data'
+import { genColumns } from '@skzz-platform/shared/utils-data'
 import CuForm from './cu-form/index.vue'
 import { SkAppDialog } from '@skzz-platform/components/app-dialog'
 import { Row } from './types'
@@ -115,21 +115,30 @@ const operationsCol: __SkAppTables.Column = {
     }}
   ></SkAppOperations>,
 } 
+
+const propToCol = {
+  client: null,
+  foundTime: {
+    cellRenderer ({ cellData }) {
+      const data = cellData as string
+      return <span>{data.split('.')[0]}</span>
+    },
+  },
+} as Record<keyof Row, Partial<__SkAppTables.Column> | null>
+
+const typeToCol: Record<string, __SkAppTables.Column> = {
+  button: operationsCol,
+}
+
 function r () {
   rApplications(queryData.value, pagination.value).then(res => {
     if (!tableState.columns.length) {
-      tableState.columns = res.columns.reduce((a, c) => {
-        if (c.type === 'selection') {
+      tableState.columns = genColumns(
+        res.columns, 
+        propToCol,
+        typeToCol,
+      )
 
-  
-        } else if (c.type === 'button') {
-          a.push(operationsCol)
-        } else {
-          a.push(genColumn(c))
-        }
-  
-        return a
-      }, [] as __SkAppTables.Column[])
       tableState.columns.push(operationsCol)
     }
     tableState.data = res.rows

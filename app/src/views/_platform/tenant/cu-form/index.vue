@@ -17,6 +17,8 @@ export default defineComponent({
         templateType: 'VkfInput',
         prop: 'tenantId',
         label: '租户ID',
+        maxlength: 20,
+        showWordLimit: true,
         rules: {
           required: true,
           message: '租户ID不能为空',
@@ -26,6 +28,8 @@ export default defineComponent({
         templateType: 'VkfInput',
         prop: 'name',
         label: '租户名称',
+        maxlength: 20,
+        showWordLimit: true,
       },
 
       {

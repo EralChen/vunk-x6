@@ -1,4 +1,5 @@
 import { Pagination } from '@skzz-platform/shared'
+import { ButtonId } from '@skzz-platform/shared/enum'
 import { request } from '@skzz-platform/shared/fetch/platform'
 import { NormalObject } from '@vunk/core'
 import { RestFetchQueryOptions, QueryRData, RestFetchSaveOptions } from '@vunk/skzz'
@@ -149,7 +150,7 @@ export const rRolePermissions = (query: {
       'buttonIds': string[];
     }[]).filter((res) => {
       // 把不包含 search button的记录剔除
-      const flag = res.buttonIds.includes('search')
+      const flag = res.buttonIds.includes(ButtonId.search)
       return flag
     })
   })
