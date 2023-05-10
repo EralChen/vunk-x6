@@ -18,22 +18,25 @@ export default defineComponent({
       {
         templateType: 'VkfInput',
         prop: 'name',
-        label: '姓名',
+        label: '角色名称',
       },
       {
         templateType: 'VkfInput',
         prop: 'roleId',
-        label: '编码',
+        label: '角色编号',
       },
-
       {
         templateType: 'VkfButton',
         buttonLabel: '提交',
         type: 'primary',
+        size: 'large',
+        class: 'is-btn-group',
         onClick: () => {
           emit('submit', props.data)
         },
+        
       },
+
     ]
     return {
       formItems,
@@ -43,6 +46,7 @@ export default defineComponent({
 </script>
 <template>
   <SkAppForm 
+    :labelWidth="'5em'"
     :data="data"
     :formItems="formItems"
   ></SkAppForm>

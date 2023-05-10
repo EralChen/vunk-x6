@@ -22,6 +22,9 @@ export function withPlatform <T extends AnyFunc> (fn: T) {
 
 const baseRequest = async <T>(...args: Parameters<typeof restFetch.request>) => {
   const data = await restFetch.request<R<T>>(...args)
+  if (data.code === 401) {
+    window.location.reload()
+  }
   return data 
 }
 
