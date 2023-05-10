@@ -56,7 +56,7 @@ export const dApplications = (ids: string[]) => {
       ...MENU_DATA,
     },
   } as RestFetchSaveOptions, {
-    msg: '删除角色成功',
+    msg: '删除成功',
   })
 }
 

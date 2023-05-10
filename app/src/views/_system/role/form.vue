@@ -26,6 +26,13 @@ export default defineComponent({
         label: '角色编号',
       },
       {
+        templateType: 'VkfInput',
+        type: 'textarea',
+        rows: 5,
+        prop: 'memo',
+        label: '角色简介',
+      },
+      {
         templateType: 'VkfButton',
         buttonLabel: '提交',
         type: 'primary',
