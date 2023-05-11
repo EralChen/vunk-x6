@@ -3,6 +3,7 @@ import { ElTransfer, TransferDataItem, TransferDirection, TransferKey } from 'el
 import { rButtons } from '@skzz-platform/api/system/button'
 import { rMenusWithButtons, cMenuButtons, dMenuButtons } from '@skzz-platform/api/system/menu'
 import { ref, watch } from 'vue'
+import { ButtonId } from '@skzz-platform/shared/enum'
 
 const props = defineProps({
   menuId: {
@@ -36,10 +37,8 @@ const valueChange = async (
       movedKeys,
     ).finally(r)
   }
-  
 }
 
-rData()
 watch(() => props.id, r, { immediate: true })
 function r () {
   if (!props.id) return
@@ -55,12 +54,13 @@ function r () {
       }) 
     }
    
-  })
+  }).then(rData)
 }
 function rData () {
   rButtons().then(res => {
     data.value = res.rows.map((item) => {
       return {
+        disabled: value.value.includes(item.buttonId) && item.buttonId === ButtonId.search,
         key: item.buttonId,
         label: item.label,
       }
@@ -73,6 +73,7 @@ function rData () {
 
     sk-flex="row-center2"
     v-model="value"
+    
     :data="data"
     :titles="['未绑列表', '已绑列表']"
     @change="valueChange"

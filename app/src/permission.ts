@@ -47,8 +47,13 @@ router.beforeEach(async (to, from, next) => {
           // get user info
           // note: roles must be a object array! such as: ['admin'] or ,['developer','editor']
           // const { roles } = await store.dispatch('user/getInfo')
-          await userStore.setPuppet()
+
+          // 1.用token换用户信息
           await userStore.setUserInfoByToken()
+
+          // 2. 设置当前用户操作的应用
+          await userStore.setPuppet()
+
           
  
 

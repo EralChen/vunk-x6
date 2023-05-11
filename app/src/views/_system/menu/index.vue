@@ -32,6 +32,7 @@ const checkTagsState = reactive({
 
 const treeState = reactive({
   data: [] as __VkCheckboxTree.TreeNode[],
+  filterText: '',
   checked: [
     { menuId: 'init' },
   ] as Row[],
@@ -89,8 +90,6 @@ const tableState = reactive({
       >
         
       </SkAppOperations>,
-      align: 'center',
-      headerAlign: 'start',
     },
   ] as __SkAppTablesV1.Column<Row>[],
   query: {},
@@ -115,6 +114,7 @@ watch(() => checkTagsState.value, () => {
 
   rTree().then(() => {
     // 切换标签时，清空选中的树节点
+    treeState.filterText = ''
     treeState.checked = [] // 将会触发 r
   })
 }, { immediate: true })
@@ -229,6 +229,7 @@ function preBindBtns (row: Row) {
       <VkDuplex :gap="'var(--gap-page)'" :direction="'row'"  h-full >
         <template #one>
           <VkCheckboxTree 
+            v-model:filterText="treeState.filterText"
             :nodeKey="'menuId'"
             :modules="['filter', 'srcollbar']"
             :defaultExpandAll="true"
@@ -252,7 +253,6 @@ function preBindBtns (row: Row) {
     </VkDuplexCalc>
 
     <SkAppDialog
-      :modal="false"
       :modelValue="!!cuState.type"
       @update:modelValue="cuState.type = ''"
       :title="cuState.type === 'u' ? '编辑' : '新增'"
@@ -268,7 +268,6 @@ function preBindBtns (row: Row) {
     </SkAppDialog>
 
     <SkAppDialog
-      :modal="false"
       :modelValue="!!bindBtnsState.current.menuId"
       @update:modelValue="bindBtnsState.current = {}"
       :title="'按钮权限绑定'"

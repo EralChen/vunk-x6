@@ -53,7 +53,11 @@ export default defineComponent({
       <ElTable 
       :style="tableStyle"
        :className="'sk-app-tables-v1-table ' + tableClass" v-bind="tableProps" v-on="tableOnEmits">
-        <VkTableColumns v-bind="columnsProps" :source="columns"></VkTableColumns>
+        <VkTableColumns 
+ 
+          v-bind="columnsProps" 
+          :source="columns"
+        ></VkTableColumns>
       </ElTable>
     </template>
 

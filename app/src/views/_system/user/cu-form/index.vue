@@ -30,7 +30,6 @@ const formItems = computed<__SkAppForm.FormItem<keyof Row>[]>(() => [
     disabled: isU.value,
     rules: {
       required: true,
-      message: '请输入账号',
       trigger: 'blur',
     },
   },
@@ -40,6 +39,7 @@ const formItems = computed<__SkAppForm.FormItem<keyof Row>[]>(() => [
     templateType: 'VkfInput',
     placeholder: '请输入密码',
     showPassword: true,
+    required: true,
     templateIf: !isU.value,
   },
   

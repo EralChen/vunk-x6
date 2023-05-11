@@ -81,7 +81,9 @@ export default defineComponent({
           v-if="modules.includes('creatable')"
         >
           <ElInput
-           :size="'small'"
+            :size="'small'"
+            :maxlength="editMaxlength"
+            :showWordLimit="true"
             v-if="cOptionState.inputting"
             v-model="cOptionState.value"
             @keydown.enter="setDataOptions"

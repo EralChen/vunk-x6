@@ -15,3 +15,27 @@ export const genColumn = (item: RDataCol) => {
   } as __SkAppTables.Column
 
 }
+
+export const genColumns = (
+  columns:RDataCol[],
+  propToCol: Record<string, Partial<__SkAppTables.Column> | null>,
+  typeToCol: Record<string, __SkAppTables.Column>,
+) => columns.reduce((a, c) => {
+  const propCol = propToCol[c.prop]
+  if (propCol === null) {
+    return a
+  }
+
+  if (typeToCol[c.type]) {
+    a.push(typeToCol[c.type])
+  } else if (propCol) {
+    a.push({
+      ...genColumn(c),
+      ...propCol,
+    })
+  } else {
+    a.push(genColumn(c))
+  }
+
+  return a
+}, [] as __SkAppTables.Column[])

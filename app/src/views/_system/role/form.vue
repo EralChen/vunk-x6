@@ -19,11 +19,20 @@ export default defineComponent({
         templateType: 'VkfInput',
         prop: 'name',
         label: '角色名称',
+        required: true,
       },
       {
         templateType: 'VkfInput',
         prop: 'roleId',
         label: '角色编号',
+        required: true,
+      },
+      {
+        templateType: 'VkfInput',
+        type: 'textarea',
+        rows: 5,
+        prop: 'memo',
+        label: '角色简介',
       },
       {
         templateType: 'VkfButton',
@@ -46,7 +55,7 @@ export default defineComponent({
 </script>
 <template>
   <SkAppForm 
-    :labelWidth="'5em'"
+    :labelWidth="'6em'"
     :data="data"
     :formItems="formItems"
   ></SkAppForm>

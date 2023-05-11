@@ -16,7 +16,7 @@ import { rButtons } from '@skzz-platform/api/system/button'
 import { Deferred } from '@vunk/core/shared/utils-promise'
 import { ElTree } from 'element-plus'
 import { TreeCheckEvents } from './types'
-
+import { ButtonId } from '@skzz-platform/shared/enum'
 const nodeKey = 'menuId'
 export default defineComponent({
   name: 'SkMenuSelect',
@@ -53,6 +53,7 @@ export default defineComponent({
       data: [] as __VkCheckboxTree.TreeNode[],
       record: {} as Record<string, Menu>,
       // checked: [] as Row[],
+      filterText: '',
       def: new Deferred<InstanceType<typeof ElTree>>(),
     })
 
@@ -85,7 +86,7 @@ export default defineComponent({
               row.buttons.map(item => ({
                 label: item.label,
                 value: item.buttonId,
-                disabled: item.buttonId === 'search',
+                disabled: item.buttonId === ButtonId.search,
                 onChange: (v:boolean) => {
                   if (v) {
                     emit('setData:buttons', {
@@ -135,6 +136,7 @@ export default defineComponent({
     ]
 
     watch(() => checkTagsState.value, () => {
+      treeState.filterText = ''
       rTree()
       r()
     }, { immediate: true })
@@ -221,6 +223,7 @@ export default defineComponent({
       <VkDuplex :gap="'var(--gap-page)'" :direction="'row'"  h-full >
         <template #one>
           <VkCheckboxTree 
+            v-model:filterText="treeState.filterText"
             :elRef="treeState.def.resolve"
             :nodeKey="nodeKey"
             :modules="['filter', 'srcollbar']"

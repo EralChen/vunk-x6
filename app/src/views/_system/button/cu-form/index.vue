@@ -21,14 +21,16 @@ export default defineComponent({
         label: '编号',
         rules: {
           required: true,
-          message: '编号不能为空',
         },
-        
+        maxlength: 10,
+        showWordLimit: true,
       },  
       {
         templateType: 'VkfInput',
         prop: 'label',
         label: '名称',
+        maxlength: 10,
+        showWordLimit: true,
       },
       {
         templateType: 'VkfInputNumber',
@@ -40,6 +42,8 @@ export default defineComponent({
         templateType: 'VkfInput',
         prop: 'event',
         label: '事件名称',
+        maxlength: 10,
+        showWordLimit: true,
       },
   
       {

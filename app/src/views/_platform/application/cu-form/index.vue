@@ -17,6 +17,8 @@ export default defineComponent({
         templateType: 'VkfInput',
         prop: 'applicationId',
         label: '应用ID',
+        maxlength: 20,
+        showWordLimit: true,
         rules: {
           required: true,
           message: '应用ID不能为空',
@@ -26,17 +28,19 @@ export default defineComponent({
         templateType: 'VkfInput',
         prop: 'name',
         label: '名称',
+        maxlength: 20,
+        showWordLimit: true,
         rules: {
           required: true,
           message: '名称不能为空',
         },
       },
 
-      {
-        templateType: 'VkfSelect',
-        prop: 'client',
-        label: '所属客户端',
-      },
+      // {
+      //   templateType: 'VkfSelect',
+      //   prop: 'client',
+      //   label: '所属客户端',
+      // },
       
       // {
       //   templateType: 'VkfInput',

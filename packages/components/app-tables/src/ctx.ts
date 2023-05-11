@@ -34,8 +34,9 @@ const tableV2Props = pickObject({
   },
   vScrollbarSize: {
     type: Number,
-    default: 0,
+    default: 1,
   },
+  
 
 }, {
   excludes: ['style', 'class'],

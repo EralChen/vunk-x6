@@ -71,6 +71,18 @@ export const props = {
     type: Array as PropType<('pagination')[]>,
     default: () => ['pagination'],
   },
+  /*   
+  :align="'center'"
+  :headerAlign="'center'"
+  */
+  align: {
+    type: String,
+    default: 'center',
+  },
+  headerAlign: {
+    type: String,
+    default: 'center',
+  },
   
 
 }

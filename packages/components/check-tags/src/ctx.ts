@@ -16,6 +16,10 @@ export const props = {
     type: Array as PropType<('creatable')[]>,
     default: () => [],
   },
+  editMaxlength: {
+    type: Number,
+    default: 10,
+  },
 }
 
 export const emits = {
