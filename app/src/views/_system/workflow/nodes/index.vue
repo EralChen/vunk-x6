@@ -18,6 +18,9 @@ import ZzG6Editor from '@/components/ZzG6Editor/index.vue'
 import { ref, shallowRef, watch } from 'vue'
 import { GraphData, TreeGraphData } from '@antv/g6'
 import { snowFlake } from '@skzz-platform/api/basic'
+import { defaultValidate } from '@zzg6/flow'
+import { onBeforeRouteLeave } from 'vue-router'
+import { ElMessageBox } from 'element-plus'
 
 // 用来判断当前操作是编辑还是新增，调用接口的时候做判断
 let isEdit = true
@@ -56,25 +59,27 @@ function r () {
   })
 }
 
-function jsonLoad () {
-  cWorkflowNodeByJson(props.flowId, backData.value, isEdit)
+async function jsonLoad () {
+  const validate = await defaultValidate(backData.value)
+
+  validate && cWorkflowNodeByJson(props.flowId, backData.value, isEdit)
     .then(() => {
       isEdit = true
     })
 }
 
 
-// onBeforeRouteLeave((to, from, next) => {
-//   ElMessageBox.confirm('确定离开吗？未保存数据将消失！', '提示', {
-//     confirmButtonText: '确定',
-//     cancelButtonText: '取消',
-//     type: 'warning',
-//   }).then(() => {
-//     next()
-//   }).catch(() => {
-//     next(false)
-//   })
-// })
+onBeforeRouteLeave((to, from, next) => {
+  ElMessageBox.confirm('确定离开吗？未保存数据将消失！', '提示', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning',
+  }).then(() => {
+    next()
+  }).catch(() => {
+    next(false)
+  })
+})
 </script>
 
 <style lang="scss" scoped>

@@ -9,7 +9,7 @@
           <template #one>
             <SkAppForm :disabled="!!props.id" :layout="true" :elRef="formDef.resolve" :data="formData" @setData="setData(formData, $event)" :formItems="formItems" class="mt-20px ml-20px mr-20px" ></SkAppForm>
           </template>
-          <SkAppFormaker class="h-full" :data="data" @setData="setData(data, $event)" :formItems="formMakerItems"
+          <SkAppFormaker class="h-full" :data="data" @setData="setData(data, $event)" v-model:formItems="formMakerItems"
             @setData:formItems="setData(formMakerItems, $event)" @unsetData:formItems="unsetData(formMakerItems, $event)"
             :canU="canU"></SkAppFormaker>
         </VkDuplex>
