@@ -191,6 +191,7 @@ export const cBoundApplications = (
     },
   }, {
     loading: true,
+    msg: '绑定成功',
   })
 }
 
@@ -221,6 +222,7 @@ export const dBoundApplications = (data: Partial<BoundApplication>[]) => {
     },
   }, {
     loading: true,
+    msg: '解绑成功',
   })
 }
 
