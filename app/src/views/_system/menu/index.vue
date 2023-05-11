@@ -255,7 +255,6 @@ function preBindBtns (row: Row) {
     </VkDuplexCalc>
 
     <SkAppDialog
-      :modal="false"
       :modelValue="!!cuState.type"
       @update:modelValue="cuState.type = ''"
       :title="cuState.type === 'u' ? '编辑' : '新增'"
@@ -271,7 +270,6 @@ function preBindBtns (row: Row) {
     </SkAppDialog>
 
     <SkAppDialog
-      :modal="false"
       :modelValue="!!bindBtnsState.current.menuId"
       @update:modelValue="bindBtnsState.current = {}"
       :title="'按钮权限绑定'"

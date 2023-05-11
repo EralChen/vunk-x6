@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ElMenu, ElIcon } from 'element-plus'
+import { ElMenu } from 'element-plus'
 import { usePermissionStore } from '@/stores/permission'
 import { VkRoutesMenuContent } from '@vunk/skzz/components/routes-menu-content'
 import LinkVue from '_c/MenuLink/index.vue'

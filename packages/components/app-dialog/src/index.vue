@@ -24,6 +24,7 @@ export default defineComponent({
 <template>
   <ElDialog
     class="app-dialog"
+    
     v-bind="coreProps"
     v-on="coreEmits"
   >

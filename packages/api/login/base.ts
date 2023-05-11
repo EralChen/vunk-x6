@@ -1,5 +1,5 @@
 import { restFetch } from '@skzz-platform/shared/fetch/platform'
-import { setToken, removeToken, removeTenant, getApplication } from '@vunk/skzz/shared/utils-auth'
+import { setToken, removeToken } from '@vunk/skzz/shared/utils-auth'
 import { FirstParameter } from '@vunk/core'
 // import { sleep } from '@vunk/core/shared/utils-promise'
 export const rCaptcha = () => {
