@@ -28,7 +28,7 @@ export default defineComponent({
     const defResolve = formDef.resolve as AnyFunc
     formDef.promise.then(props.elRef)
     
-    watch(() => dialogProps.modelValue, (v) => {
+    watch(() => dialogProps.modelValue, () => {
       nextTick()
         .then(() => formDef.promise)
         .then(el => {
