@@ -83,7 +83,7 @@ const tableState = reactive({
             callback: () => <ElButton type="primary" size="small" onClick={
               () => { 
                 bindVallback.id = row.id
-                bindVallback.formId = row.formId!
+                bindVallback.formId = row.formId as string
               }
             }>绑定回调</ElButton>,
             nodes: () =>
@@ -110,8 +110,7 @@ const tableState = reactive({
         >
         </SkAppOperations>
       },
-      align: 'left',
-      headerAlign: 'left',
+
     },
   ] as Col[],
   columns: [] as Col[],

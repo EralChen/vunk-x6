@@ -90,8 +90,6 @@ const tableState = reactive({
       >
         
       </SkAppOperations>,
-      align: 'center',
-      headerAlign: 'start',
     },
   ] as __SkAppTablesV1.Column<Row>[],
   query: {},
