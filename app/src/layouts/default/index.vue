@@ -17,7 +17,7 @@ const keepAliverStore = useKeepAliverStore()
 onBeforeRouteUpdate(() => {
   setTimeout(() => {
     scrollbarNode.value?.update()
-  }, 400)
+  }, 500)
 })
 keepAliverStore.collectingInclude()
 
