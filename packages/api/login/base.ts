@@ -58,13 +58,15 @@ export const rMenus = async (client?: string) => {
       })
     })
     .then(res => {
-  
-      return res.map(item => ({
+      const doc = res.map(item => ({
         ...item,
       
         title: item.name,
         name: item.menuId,
       }))
+      // 添加 404 数据
+      doc.push({ path: '/:pathMatch(.*)*', display: 0 } as typeof doc[0])
+      return doc
 
     })
 }

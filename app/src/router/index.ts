@@ -33,6 +33,22 @@ export const routes: Array<RouteRecordRaw> = [
       },
     ],
   },
+
+  {
+    path: '/404',
+    component: () => import('_v/_error/404.vue'),
+    meta: {
+      hidden: true,
+    },
+   
+  },
+  {
+    path: '/401',
+    component: () => import('_v/_error/401.vue'),
+    meta: {
+      hidden: true,
+    },
+  },
   
   {
     path: '/login',
