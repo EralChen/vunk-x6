@@ -1,6 +1,6 @@
 <script lang="ts">
 import { props, emits, createBindProps, createOnEmits } from './ctx'
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, provide } from 'vue'
 import { ElDialog } from 'element-plus'
 export default defineComponent({
   name: 'SkAppDialog',
@@ -13,6 +13,8 @@ export default defineComponent({
     const coreProps = createBindProps(props)
     const coreEmits = createOnEmits(emit)
     const hasFooter = computed(() => !!slots.footer)  
+    provide('skAppDialogProps', props)
+   
     return {
       coreProps,
       coreEmits,

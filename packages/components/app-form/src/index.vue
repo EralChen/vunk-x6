@@ -1,11 +1,15 @@
 <script lang="ts">
 import { props, emits } from './ctx'
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, nextTick, watch } from 'vue'
 import { VkfForm, _VkfFormCtx, VkfFormItemRendererTemplate, ElRowSource, ElColSource } from '@vunk/form'
 import { VkfFormItemRendererTemplateLayout } from '@vunk/form/components/form-item-renderer-template-layout'
 import { SkCssColorPicker } from '@skzz-platform/components/css-color-picker'
 import { CoreFormItem, FormItem } from './types'
 import { pickObject } from '@vunk/core/shared/utils-object'
+import { _SkAppDialogUse } from '@skzz-platform/components/app-dialog'
+import { Deferred } from '@vunk/core/shared/utils-promise'
+import type { ElForm } from 'element-plus'
+import { AnyFunc } from '@vunk/core/shared/types'
 export default defineComponent({
   name: 'SkAppForm',
   components: {
@@ -16,8 +20,22 @@ export default defineComponent({
   emits,
   props,
   setup (props, { emit }) {
-    const coreProps = _VkfFormCtx.createBindProps(props, ['formItems'])
+    const coreProps = _VkfFormCtx.createBindProps(props, ['formItems', 'elRef'])
     const coreEmits = _VkfFormCtx.createOnEmits(emit)
+
+    const dialogProps = _SkAppDialogUse.useProps()
+    const formDef = new Deferred<InstanceType<typeof ElForm>>()
+    const defResolve = formDef.resolve as AnyFunc
+    formDef.promise.then(props.elRef)
+    
+    watch(() => dialogProps.modelValue, (v) => {
+      nextTick()
+        .then(() => formDef.promise)
+        .then(el => {
+          el.clearValidate()
+        })
+    })
+
     const createRow = (defaultItem?: ElColSource<FormItem>) => {
       return {
         templateType: 'ElRow',
@@ -96,6 +114,8 @@ export default defineComponent({
       coreProps,
       coreEmits,
       formItems,
+      formDef,
+      defResolve,
     }
   },
 })
@@ -105,6 +125,7 @@ export default defineComponent({
     v-bind="coreProps" 
     v-on="coreEmits"
     :formItems="formItems"
+    :elRef="defResolve"
     :class="{
       'sk-app-form': true,
       'is-layout': layout,
