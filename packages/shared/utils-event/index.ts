@@ -25,6 +25,7 @@ export function createCustomEventComposable (type: string) {
 
     const addListener = (listener: AnyFunc) => {
       const listenerToggle = new ListenerToggle(type, listener)
+      listenerToggle.add()
       onScopeDispose(() => {
         listenerToggle.remove()
       })
