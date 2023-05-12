@@ -70,7 +70,7 @@ export default defineComponent({
         {
           prop: 'name',
           label: '菜单名称',
-          
+          align: 'start',
         },
         {
           prop: 'menuId',
@@ -79,6 +79,7 @@ export default defineComponent({
         {
           prop: 'buttons',
           label: '按钮',
+          align: 'start',
           slots: ({ row }) => <VkfCheckbox
 
             class={'mb-0 menu-select-buttons-col'}
