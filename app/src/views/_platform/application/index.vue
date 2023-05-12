@@ -176,13 +176,21 @@ function rBinds ()  {
     bindState.data = res.rows
   })
 }
+
+const event = new Event('update:application')
 function bind (ba: Partial<BoundApplication>) {
   cBoundApplications([ba])
     .then(rBinds)
+    .then(() => {
+      document.dispatchEvent(event)
+    })
 }
 function unbind (ba: Partial<BoundApplication>) {
   dBoundApplications([ba])
     .then(rBinds)
+    .then(() => {
+      document.dispatchEvent(event)
+    })
 }
 
 </script>
