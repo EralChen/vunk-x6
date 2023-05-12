@@ -5,7 +5,7 @@ export const manualChunks: ManualChunksOption  = (id, { getModuleInfo }) => {
   }
   const commonRegs = [ 
     /(.*)\/src\/components\/(.*)/,
-    /@skzz-(.*)/,
+    /(.*)@skzz-(.*)/,
   ]
   for (const reg of commonRegs) {
     if (reg.test(id)) {
