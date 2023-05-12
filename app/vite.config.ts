@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJSX from '@vitejs/plugin-vue-jsx'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
-import { windowEnvPlugin, vunkPresetsTheme, vunkPresetsShortcuts, unoThemeColors, getEnv } from '@lib-env/app-utils'
+import { windowEnvPlugin, vunkPresetsTheme, vunkPresetsShortcuts, unoThemeColors, getEnv, manualChunks } from '@lib-env/app-utils'
 import path from 'path'
 import { appRoot, packagesDir } from '@lib-env/path'
 // import legacy from '@vitejs/plugin-legacy'
@@ -22,6 +22,11 @@ export default defineConfig(({ mode }) => {
     base: env.VITE_BASE_URL + '/',
     build: {
       outDir: path.resolve(appRoot,'./dist' + env.VITE_BASE_URL),
+      rollupOptions: {
+        output: {
+          manualChunks,
+        },
+      },
     },
     server: {
       host: '0.0.0.0',
