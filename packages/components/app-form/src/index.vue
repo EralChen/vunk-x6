@@ -10,7 +10,7 @@ import { _SkAppDialogUse } from '@skzz-platform/components/app-dialog'
 import { Deferred } from '@vunk/core/shared/utils-promise'
 import type { ElForm } from 'element-plus'
 import { AnyFunc, NormalObject } from '@vunk/core/shared/types'
-
+import { PATTERN } from '@skzz-platform/shared/utils-form'
 export default defineComponent({
   name: 'SkAppForm',
   components: {
@@ -79,8 +79,8 @@ export default defineComponent({
           if (rule.required && !rule.message) {
             rule.message = message
           } 
-          if (rule.pattern  && !rule.message) {
-            rule.message = `输入 ${item.label || '该字段'} 格式不符`
+          if (rule.pattern === PATTERN.normal  && !rule.message) {
+            rule.message = `输入 ${item.label || '该字段'} 不能包含特殊字符或空格`
           }
         }
 
@@ -99,6 +99,10 @@ export default defineComponent({
             message,
           }
         }
+        if (item.maxlength) {
+          item.showWordLimit = true
+        }
+
         return item
       })
 
