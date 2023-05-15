@@ -56,6 +56,11 @@ export const useViewsStore = defineStore('views', () => {
     )
   }
 
+  const setVisitedViews = (routes: RouteLocationNormalizedLoaded[]) => {
+    visitedViews.value = routes
+  }
+
+
   const delVisitedViewByFullpath = (fullPath: string) => {
     const index = visitedViews.value.findIndex((v) => {
       return v.fullPath === fullPath
@@ -84,6 +89,7 @@ export const useViewsStore = defineStore('views', () => {
     findBaseViewByFullPath,
 
     visitedViews,
+    setVisitedViews,
     addVisitedView,
     delVisitedViewByFullpath,
 

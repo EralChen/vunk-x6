@@ -5,6 +5,7 @@ import { useModelComputed } from '@vunk/core/composables'
 import { rTAInfo } from '@skzz-platform/api/login'
 import { ApiReturnType } from '@vunk/core'
 import { useUserStore } from '@skzz-platform/stores/user'
+import {  useViewsStore } from '@/stores/views'
 import { useUpdateApplictionEvent } from '@/composables'
 const props = defineProps({
   size: null,
@@ -15,6 +16,7 @@ const props = defineProps({
 })
 const emit = defineEmits(['update:modelValue'])
 const userStore = useUserStore()
+const viewsStore = useViewsStore()
 const { addListener } = useUpdateApplictionEvent()
 const cascaderValue = useModelComputed({
   default: [] as string[],
@@ -30,6 +32,7 @@ const appChange = async ([tenantId, applicationId]: string[]) => {
     applicationId,
     tenantId,
   })
+  viewsStore.setVisitedViews([])
   window.location.reload()
 }
 
