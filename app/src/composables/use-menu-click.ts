@@ -1,16 +1,9 @@
 import { onScopeDispose } from 'vue'
 import { createSharedComposable } from '@vueuse/core'
-import { ToggleHandler } from '@vunk/core/shared/utils-class'
+import { ListenerToggle } from '@skzz-platform/shared/utils-event'
 const useMenuClick = () => {
-  class ListenerToggle extends ToggleHandler {
-    add () {
-      document.addEventListener('click', upLinkClickToItem)
-      this.removeHandler = () => {
-        document.removeEventListener('click', upLinkClickToItem)
-      }
-    }
-  }
-  const listenerToggle = new ListenerToggle()
+
+  const listenerToggle = new ListenerToggle('click', upLinkClickToItem)
  
   listenerToggle.add()
 

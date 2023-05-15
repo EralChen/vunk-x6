@@ -16,7 +16,8 @@ import { Row } from './types'
 import { SkTenantTablesSelect } from '@skzz-platform/components/tenant-tables-select'
 import { Tenant } from '@skzz-platform/api/platform/tenant'
 import { ElButton, ElPopconfirm } from 'element-plus'
-
+import { useUpdateApplictionEvent } from '@/composables'
+const  { dispath } = useUpdateApplictionEvent()
 /* query */
 const queryItems: __SkAppQueryForm.FormItem[] = [
   {
@@ -176,13 +177,17 @@ function rBinds ()  {
     bindState.data = res.rows
   })
 }
+
+
 function bind (ba: Partial<BoundApplication>) {
   cBoundApplications([ba])
     .then(rBinds)
+    .then(dispath)
 }
 function unbind (ba: Partial<BoundApplication>) {
   dBoundApplications([ba])
     .then(rBinds)
+    .then(dispath)
 }
 
 </script>

@@ -3,6 +3,9 @@ import GEN_SYSTEM from './_system'
 import GEN_PLATFORM from './_platform'
 export const createRemoteRoutes = () => { 
   return {
+    '/:pathMatch(.*)*': {
+      redirect: '/404',
+    },
     '': {
       redirect: '/home',
     },

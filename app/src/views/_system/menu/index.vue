@@ -45,13 +45,15 @@ const tableState = reactive({
   data: [] as Row[],
   columns: [
     {
+      prop: 'label',
+      label: '菜单名称',
+      align: 'start',
+    },
+    {
       prop: 'menuId',
       label: '菜单ID',
     },
-    {
-      prop: 'label',
-      label: '菜单名称',
-    },
+
     {
       prop: 'path',
       label: '路径',
@@ -63,8 +65,7 @@ const tableState = reactive({
         ? <SkAppIcon icon={row.icon} /> 
         : '',
       width: '100em',
-      align: 'center',
-      headerAlign: 'start',
+
     },
     {
       prop: undefined,

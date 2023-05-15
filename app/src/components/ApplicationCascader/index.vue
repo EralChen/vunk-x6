@@ -5,6 +5,7 @@ import { useModelComputed } from '@vunk/core/composables'
 import { rTAInfo } from '@skzz-platform/api/login'
 import { ApiReturnType } from '@vunk/core'
 import { useUserStore } from '@skzz-platform/stores/user'
+import { useUpdateApplictionEvent } from '@/composables'
 const props = defineProps({
   size: null,
   modelValue: {
@@ -14,6 +15,7 @@ const props = defineProps({
 })
 const emit = defineEmits(['update:modelValue'])
 const userStore = useUserStore()
+const { addListener } = useUpdateApplictionEvent()
 const cascaderValue = useModelComputed({
   default: [] as string[],
   key: 'modelValue',
@@ -21,14 +23,7 @@ const cascaderValue = useModelComputed({
 
 const { tenantId, applicationId } = userStore.getPuppet()
 const options = ref<ApiReturnType<typeof rTAInfo>['tenants']>([])
-rTAInfo().then(res => {
-  if (res) {
-    options.value = res.tenants.filter(t => t.applications.length > 0)
-  }
-  cascaderValue.value = [
-    tenantId, applicationId, 
-  ]
-})
+
 
 const appChange = async ([tenantId, applicationId]: string[]) => {
   await userStore.setPuppet({
@@ -36,6 +31,19 @@ const appChange = async ([tenantId, applicationId]: string[]) => {
     tenantId,
   })
   window.location.reload()
+}
+
+r()
+addListener(r)
+function r () {
+  rTAInfo().then(res => {
+    if (res) {
+      options.value = res.tenants.filter(t => t.applications.length > 0)
+    }
+    cascaderValue.value = [
+      tenantId, applicationId, 
+    ]
+  })
 }
 
 </script>

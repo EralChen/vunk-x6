@@ -328,6 +328,7 @@ export {}
 ![image-20230301161242639](README.assets/image-20230301161242639.png)
 
 + 使用 `pl pr plr pt pb ptb pa` `ml mr mlr mt mb mtb ma ` 可以快速使用 间距 设置`padding` `margin`
++ 如 `pl-page` 设置 `padding-left: var(--gap-page);`
 
 ##### --gap-page
 
