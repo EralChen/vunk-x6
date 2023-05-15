@@ -4,6 +4,7 @@ import { Row } from '../types'
 import { ElLink } from 'element-plus'
 import { computed, PropType, ref  } from 'vue'
 import { SkAppIcon } from '@skzz-platform/components/app-icon'
+import { PATTERN } from '@skzz-platform/shared/utils-form'
 
 const props = defineProps({
   data: {
@@ -29,10 +30,15 @@ const formItems = ref<__SkAppForm.FormItem<keyof Row>[]>([
     templateType: 'VkfInput',
     label: '菜单ID',
     placeholder: '请输入菜单ID',
-    rules: {
-      required: true,
-      message: '菜单ID不能为空',
-    },
+    rules: [
+      {
+        required: true,
+     
+      },
+      {
+        pattern: PATTERN.code,  
+      },
+    ],
     disabled: menuIdDisabled as unknown as boolean,
   },
   {
@@ -40,10 +46,15 @@ const formItems = ref<__SkAppForm.FormItem<keyof Row>[]>([
     templateType: 'VkfInput',
     label: '菜单名称',
     placeholder: '请输入菜单名称',
-    rules: {
-      required: true,
-      message: '菜单名称不能为空',
-    },
+    rules: [
+      {
+        required: true,
+     
+      },
+      {
+        pattern: PATTERN.normal,  
+      },
+    ],
   },
   {
     prop: 'path',

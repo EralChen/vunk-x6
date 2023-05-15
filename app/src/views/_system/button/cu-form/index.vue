@@ -29,7 +29,6 @@ export default defineComponent({
           },
         ],
         maxlength: 10,
-        showWordLimit: true,
         
       },  
       {
@@ -37,7 +36,12 @@ export default defineComponent({
         prop: 'label',
         label: '名称',
         maxlength: 10,
-        showWordLimit: true,
+      },
+      {
+        templateType: 'VkfInput',
+        prop: 'event',
+        label: '事件',
+        maxlength: 10,
       },
       {
         templateType: 'VkfInputNumber',
@@ -45,13 +49,7 @@ export default defineComponent({
         label: '排序',
 
       },
-      {
-        templateType: 'VkfInput',
-        prop: 'event',
-        label: '事件名称',
-        maxlength: 10,
-        showWordLimit: true,
-      },
+
   
       {
         prop: 'icon',

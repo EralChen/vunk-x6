@@ -87,6 +87,14 @@ export default defineComponent({
           if (rule.pattern === PATTERN.code) {
             rule.message = `输入 ${item.label || '该字段'} 只能由数字或字母组成, 且不能以数字开头`
           }
+
+          if (rule.pattern === PATTERN.password) {
+            rule.message = `输入 ${item.label || '该字段'} 只能由字母、数字或特殊字符组成，且长度在8到16之间`
+          }
+
+          if (rule.pattern === PATTERN.phone) {
+            rule.message = `输入 ${item.label || '该字段'} 不是正确的手机号码`
+          }
         }
 
         if (item.rules) {
