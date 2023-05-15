@@ -76,11 +76,16 @@ export default defineComponent({
       const processFormItems = props.formItems.map((item)  => {
         const message = `${item.label || '该字段'}不能为空`
         const setMsg = (rule: NormalObject) => {
-          if (rule.required && !rule.message) {
+          if (rule.message) return
+          if (rule.required) {
             rule.message = message
           } 
-          if (rule.pattern === PATTERN.normal  && !rule.message) {
+      
+          if (rule.pattern === PATTERN.normal) {
             rule.message = `输入 ${item.label || '该字段'} 不能包含特殊字符或空格`
+          }
+          if (rule.pattern === PATTERN.code) {
+            rule.message = `输入 ${item.label || '该字段'} 只能由数字或字母组成, 且不能以数字开头`
           }
         }
 
