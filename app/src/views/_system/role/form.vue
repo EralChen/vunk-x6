@@ -19,13 +19,22 @@ export default defineComponent({
         templateType: 'VkfInput',
         prop: 'name',
         label: '角色名称',
-        required: true,
+        rules: [
+          {
+            required: true,
+            message: '请输入名称',
+          },
+          {
+            pattern: /^[a-zA-Z0-9\u4e00-\u9fa5]+$/,
+          },
+        ],
+
       },
       {
         templateType: 'VkfInput',
         prop: 'roleId',
         label: '角色编号',
-        required: true,
+  
       },
       {
         templateType: 'VkfInput',

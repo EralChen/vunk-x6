@@ -9,7 +9,8 @@ import { pickObject } from '@vunk/core/shared/utils-object'
 import { _SkAppDialogUse } from '@skzz-platform/components/app-dialog'
 import { Deferred } from '@vunk/core/shared/utils-promise'
 import type { ElForm } from 'element-plus'
-import { AnyFunc } from '@vunk/core/shared/types'
+import { AnyFunc, NormalObject } from '@vunk/core/shared/types'
+
 export default defineComponent({
   name: 'SkAppForm',
   components: {
@@ -74,12 +75,25 @@ export default defineComponent({
       
       const processFormItems = props.formItems.map((item)  => {
         const message = `${item.label || '该字段'}不能为空`
-        if (item.rules) {
-          if (item.rules.required && !item.rules.message) {
-            item.rules.message = message
+        const setMsg = (rule: NormalObject) => {
+          if (rule.required && !rule.message) {
+            rule.message = message
+          } 
+          if (rule.pattern  && !rule.message) {
+            rule.message = `输入 ${item.label || '该字段'} 格式不符`
           }
         }
-        if (item.required &&  !item.rules) {
+
+        if (item.rules) {
+
+          if (Array.isArray(item.rules)) {
+            item.rules.forEach(setMsg)
+          } else {
+            setMsg(item.rules)
+          }
+
+        } else if (item.required) {
+
           item.rules = {
             required: true,
             message,
