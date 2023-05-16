@@ -11,9 +11,9 @@ export class ListenerToggle extends ToggleHandler {
     this.listener = listener
   }
   add () {
-    document.addEventListener('click', this.listener)
+    document.addEventListener(this.type, this.listener)
     this.removeHandler = () => {
-      document.removeEventListener('click', this.listener)
+      document.removeEventListener(this.type, this.listener)
     }
   }
 

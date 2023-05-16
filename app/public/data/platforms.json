@@ -21,7 +21,7 @@
   },
   {
     "code": "local",
-    "url": "http://localhost:30000/tpl-server"
+    "url": "http://localhost:30200/zz-server"
   },
   {
     "code": "cx_dev",
