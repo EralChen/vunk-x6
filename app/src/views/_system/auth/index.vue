@@ -167,6 +167,7 @@ function cdBindMenus (menuIds: string[], op?: RestFetchOp) {
       <template #one>
         <!-- 左侧放角色列表 -->
         <SkRoleTreesSelect
+          :filter="(v) => !(v.isSys && v.lv <= 1)"
           class="w-12em"
           v-model="roleState.current"
         ></SkRoleTreesSelect>
