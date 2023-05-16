@@ -22,11 +22,14 @@ export function withPlatform <T extends AnyFunc> (fn: T) {
 }
 
 const baseRequest = async <T>(...args: Parameters<typeof restFetch.request>) => {
-  const [ options  ] = args
+  const [ options ] = args
   if (options.url === '/core/busi/query') {
     const data = options.data as RestFetchQueryOptionsData
-    data.buttonId = ButtonId.search
+    if (!data.buttonId) { 
+      data.buttonId = ButtonId.search
+    }
   }
+
   const data = await restFetch.request<R<T>>(...args)
   if (data.code === 401) {
     window.location.reload()
