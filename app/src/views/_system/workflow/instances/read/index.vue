@@ -12,8 +12,8 @@
                     <BindOpers :node-model="nodeModel" :disabled="true"></BindOpers>
                   </ElForm>
                   <ElForm label-position="top">
-                    <BindAssitsOpers :node-model="nodeModel" :currentNodeInstIds="bindState.currentNodeInstIds"
-                      @bind-success="r" :isFlowStart="isFlowStart"></BindAssitsOpers>
+                    <!-- <BindAssitsOpers :node-model="nodeModel" :currentNodeInstIds="bindState.currentNodeInstIds"
+                      @bind-success="r" :isFlowStart="isFlowStart"></BindAssitsOpers> -->
                     <Approval :itemId="flowData.itemId" :flowId="flowId" :node-model="nodeModel" :currentNodeInstIds="bindState.currentNodeInstIds"
                       :isFlowStart="isFlowStart" @approvalSuccess="approvalSuccess" :form-table="flowData.formTable"></Approval>
                   </ElForm>
@@ -88,7 +88,7 @@ async function r () {
 }
 
 function approvalSuccess () {
-  // r()
+  r()
   postQueryU()
 }
 

@@ -1,11 +1,9 @@
 <template>
-  <template v-if="nodeFormItem.length">
-    <ElDivider>表单</ElDivider>
-    <SkAppForm :rules="rules" :el-ref="def.resolve" :formItems="nodeFormItem" :data="nodeFormData"
-      @setData="setData(nodeFormData, $event)">
-    </SkAppForm>
-    <ElDivider>表单 - end</ElDivider>
-  </template>
+  <ElDivider>表单</ElDivider>
+  <SkAppForm :rules="rules" :el-ref="def.resolve" :formItems="nodeFormItem" :data="nodeFormData"
+    @setData="setData(nodeFormData, $event)">
+  </SkAppForm>
+  <ElDivider>表单 - end</ElDivider>
   <ElFormItem label="审批" v-show="isFlowStart && (hasApprovelAuth || hasAssistAuth)">
     <div mt-page mb-page w-100>
       <el-input type="textarea" v-model="memo"></el-input>

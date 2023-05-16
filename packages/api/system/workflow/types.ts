@@ -60,11 +60,4 @@ export type FlowNodeInstance = {
   status: number
   formTable: string
 
-  nodeInstStartTime: string // 开始时间
-  nodeInstEndTime: string // 结束时间
-  nodeInstFounder: string // 创建人id
-  nodeInstFounderName: string  //创建人名称
-  nodeInstDeadLine: string // 截止天数
-  assistOpers: string // 指派人
-  mainOpers: string  // 主办人
 }
