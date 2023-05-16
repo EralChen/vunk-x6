@@ -1,5 +1,6 @@
 import Layout from '@/layouts/default/index.vue'
 import { RouteRecordRaw } from 'vue-router'
+import { redirectToFirstChildName } from '@skzz-platform/shared/utils-router'
 
 export default function () {
   return  {
@@ -8,7 +9,7 @@ export default function () {
       meta: {
         header: true,
       },
-      // redirect: '/platform/tenant',
+      redirect: redirectToFirstChildName,
     },
     '/platform/tenant': {
       component: () => import('@/views/_platform/tenant/index.vue'),
