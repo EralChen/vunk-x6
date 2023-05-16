@@ -9,6 +9,7 @@ export default [
       alwaysShow: true,
       icon: 'VideoPlay',
       header: true,
+      hidden: true,
     },
     redirect: '/_play/test1',
     children: [
