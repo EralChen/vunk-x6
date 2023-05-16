@@ -139,3 +139,27 @@ export const rFormInfo = (nodeInstId: string) => {
     },
   }).then(res => res.datas[5.1])
 }
+
+/**
+ * https://app.apifox.com/project/1903413/apis/api-81820770
+ * @param nodeInstId 
+ * @returns 
+ */
+export const rFlowInstanceDetail = (nodeInstId: string) => {
+  return request<{
+    '5.1': InstanceDetail
+  }>({
+    method: 'POST',
+    url: '/core/busi/exec',
+    data: {
+      'datasetId': 5,
+      'condition': {
+        'flow': {
+          'op': 'nodeInstInfo',
+          'nodeInstId': nodeInstId,
+        },
+      },
+      ...MENU_DATA,
+    },
+  })
+}

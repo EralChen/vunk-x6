@@ -29,16 +29,17 @@
 </template>
 
 <script setup lang="tsx">
-import { rWorkflowNodeRaw, rInstanceList, FlowNodeInstance } from '@skzz-platform/api/system/workflow'
+import { rWorkflowNodeRaw, rInstanceList, FlowNodeInstance, rFlowInstanceDetail } from '@skzz-platform/api/system/workflow'
 import { computed, nextTick, reactive, ref, shallowRef, watch } from 'vue'
 import { SkAppCard } from '@skzz/platform'
 import ZzG6Editor from '@/components/ZzG6Editor/index.vue'
-import BindAssitsOpers from './bind-assist-opers/index.vue'
+// import BindAssitsOpers from './bind-assist-opers/index.vue'
 import Approval from './approval/index.vue'
 import { cloneDeep } from 'lodash'
-import { NodeModel } from '@zzg6/flow/components/editor/src/types'
+// import { NodeModel } from '@zzg6/flow/components/editor/src/types'
 import BindOpers from '../../bind-opers/index.vue'
 import { usePostQueryU } from '@skzz-platform/composables'
+import { TotalFlow } from '@skzz-platform/api/system/workflow/node/types'
 
 
 const props = defineProps({
@@ -53,7 +54,7 @@ const props = defineProps({
 })
 
 
-const nodeModel = ref({} as NodeModel)
+const nodeModel = ref({} as TotalFlow['nodes'][0])
 // 流程节点数据
 const model = shallowRef({})
 // 流程详情
@@ -74,15 +75,23 @@ async function r () {
 
   model.value = raws
   bindState.currentNodeInstIds = raws.currentNodeInstIds
+
+  if (raws.currentNodeInstIds[0])
+  // 测试 获取 实例详情 暂时无用
+    rFlowInstanceDetail(raws.currentNodeInstIds[0])
+      .then(() => {
+      // console.log(res)
+      })
+
   flowData.value = rows
   if (nodeModel.value.id) {
     const node = raws.nodes?.find(item => item.id === nodeModel.value.id)
     if (node)
-      nodeModel.value = node as NodeModel
+      nodeModel.value = node as TotalFlow['nodes'][0]
   } else {
     nextTick(() => {
       if (raws.nodes)
-        nodeModel.value = raws.nodes[0] as NodeModel
+        nodeModel.value = raws.nodes[0] as TotalFlow['nodes'][0]
     })
   }
 }
@@ -102,7 +111,6 @@ const nodeSelectChange = (e: any) => {
     nodeModel.value = cloneDeep(m)
   } else {
     nodeModel.value = {} as any
-
   }
 }
 </script>

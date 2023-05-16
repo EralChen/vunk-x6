@@ -6,6 +6,7 @@ import { WorkflowNode, WorkflowData, WorkflowNodeRaw, WorkFlowNodeState } from '
 import { snowFlake } from '@skzz-platform/api/basic'
 import { rWorkflow } from '@skzz-platform/api/system/workflow'
 import { GraphData, TreeGraphData } from '@antv/g6'
+import { TotalFlow } from './types'
 
 /**
  * https://www.apifox.cn/link/project/1903413/apis/api-71032252  
@@ -44,9 +45,7 @@ export const rWorkflowNodeRaw = (query: {
   flowInstId?: string
 }) => {
   return request<{
-    '5.1': GraphData & {
-      currentNodeInstIds: string[],
-    }
+    '5.1': TotalFlow
   }>({
     method: 'POST',
     url: '/core/busi/exec',
