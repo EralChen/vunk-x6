@@ -1,12 +1,12 @@
 <script lang="ts">
-import { emits } from './ctx'
+import { emits,  props } from './ctx'
 import { defineComponent, reactive } from 'vue'
 import { VkCheckboxTree, __VkCheckboxTree } from '@vunk/skzz/components/checkbox-tree'
 import { rRoles } from '@skzz-platform/api/system/role'
 export default defineComponent({
   name: 'SkRoleTreesSelect',
   emits,
-  // props,
+  props,
   components: {
     VkCheckboxTree,
   },
@@ -23,7 +23,7 @@ export default defineComponent({
             label: item.name,
             ...item,
           }
-        })  
+        }).filter(props.filter)
       
       })
     }
