@@ -61,6 +61,9 @@ export const dButtons = (ids: string[]) => {
 }
 
 export const cuButton = (data: Partial<Row>) => {
+  if (!data.name) {
+    data.name = data.buttonId
+  }
   return request({
     method: 'POST',
     url: '/core/busi/save',
