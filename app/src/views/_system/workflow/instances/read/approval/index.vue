@@ -4,7 +4,7 @@
     @setData="setData(nodeFormData, $event)">
   </SkAppForm>
   <ElDivider>表单 - end</ElDivider>
-  <ElFormItem label="审批" v-show="isFlowStart && (hasApprovelAuth || hasAssistAuth)">
+  <ElFormItem label="审批" v-show="isFlowStart && hasApprovelAuth">
     <div mt-page mb-page w-100>
       <el-input type="textarea" v-model="memo"></el-input>
     </div>
@@ -17,9 +17,9 @@
 </template>
 
 <script setup lang="ts">
-import { NodeModel } from '@zzg6/flow/components/editor/src/types'
+
 import { PropType, computed, ref, watch } from 'vue'
-import { User } from '@skzz-platform/api/system/user'
+// import { User } from '@skzz-platform/api/system/user'
 import { WorkFlowNodeState, doApproveNodeWithForm, rFormInfo } from '@skzz-platform/api/system/workflow'
 import { getCurrentNodeId } from '../utils'
 import { useUserStore } from '@skzz-platform/stores/user'
@@ -29,6 +29,7 @@ import { setData } from '@vunk/core'
 import { Deferred } from '@vunk/core/shared/utils-promise'
 import { ElMessage, FormInstance, FormRules } from 'element-plus'
 import { CoreFormItem } from '@skzz-platform/components/app-form/src/types'
+import { TotalFlow } from '@skzz-platform/api/system/workflow/node/types'
 
 
 const props = defineProps({
@@ -41,7 +42,7 @@ const props = defineProps({
     default: false,
   },
   nodeModel: {
-    type: Object as PropType<NodeModel>,
+    type: Object as PropType<Required<TotalFlow['nodes']>[0]>,
     default: () => ({}),
   },
   currentNodeInstIds: {
@@ -67,7 +68,7 @@ const nodeModelCp = computed(() => props.nodeModel)
 const currentNodeInstIdsCp = computed(() => props.currentNodeInstIds)
 
 const hasApprovelAuth = ref(false)
-const hasAssistAuth = ref(false)
+// const hasAssistAuth = ref(false)
 
 const nodeFormData = ref({})
 // CoreFormItem[] 按理将应该是这个类型，但是会有实例过深且有无限可能的问题
@@ -82,8 +83,8 @@ const def = new Deferred<FormInstance>()
  * 节点的操作人中是否有当前登录用户
  * @param opers 
  */
-function judgeAuth (opers: User[]) {
-  const ids = opers?.map(item => item.id + '')
+function judgeAuth (opers: TotalFlow['nodes'][0]['nodeInstOpers']) {
+  const ids = opers?.map(item => item.operId + '')
   return !!ids?.includes(userStore.getUserInfo().id + '')
 }
 
@@ -104,7 +105,7 @@ async function getFormInfn (flowInstId?: string) {
 
 // 为了和选人显示的内容做区分，要不然关闭选人窗口时会出现按钮不显示的问题
 watch(() => props.nodeModel, (v) => {
-  hasApprovelAuth.value = judgeAuth(v.opers || [])
+  hasApprovelAuth.value = judgeAuth(v.nodeInstOpers || [])
   // && v.id !== ov?.id
   if (v && v.formColumns && v.formColumns.show) {
     nodeFormItem.value = cloneDeep(v.formColumns.show) as any
@@ -115,9 +116,10 @@ watch(() => props.nodeModel, (v) => {
     nodeFormData.value = {}
   }
 }, { immediate: true })
-watch(() => props.nodeModel, (v) => {
-  hasAssistAuth.value = judgeAuth(v.opers || [])
-}, { immediate: true })
+
+// watch(() => props.nodeModel, (v) => {
+//   hasAssistAuth.value = judgeAuth(v.opers || [])
+// }, { immediate: true })
 
 /**
  * 审批  
