@@ -25,7 +25,7 @@ export default defineComponent({
             required: true,
           },
           {
-            pattern: PATTERN.normal,
+            pattern: PATTERN.code,
           },
         ],
         maxlength: 10,
@@ -36,6 +36,14 @@ export default defineComponent({
         prop: 'label',
         label: '名称',
         maxlength: 10,
+        rules: [
+          {
+            required: true,
+          },
+          {
+            pattern: PATTERN.normal,
+          },
+        ],
       },
       {
         templateType: 'VkfInput',
