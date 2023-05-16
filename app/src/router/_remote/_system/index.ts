@@ -2,6 +2,7 @@ import Layout from '@/layouts/default/index.vue'
 import { RouteRecordRaw, RouterView } from 'vue-router'
 import FORM from './form'
 import MESSAGE from './message'
+import { redirectToFirstChildName } from '@skzz-platform/shared/utils-router'
 
 export default function () {
   return  {
@@ -10,11 +11,7 @@ export default function () {
       meta: {
         header: true,
       },
-      redirect: '/system/role',
-    },
-    '/system$': {
-      component: null,
-      redirect: '/system/role',
+      redirect: redirectToFirstChildName,
     },
     '/system/role': {
       component: () => import('@/views/_system/role/index.vue'),

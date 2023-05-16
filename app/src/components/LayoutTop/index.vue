@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import DarkSwitch from '_c/DarkSwitch/index.vue'
-import { defineAsyncComponent } from 'vue'
+import { computed, defineAsyncComponent } from 'vue'
 import { useThemeStore } from '@/stores/theme'
+import { useUserStore } from '@skzz-platform/stores/user'
 import { ElAvatar } from 'element-plus'
 import { logout } from '@skzz-platform/api/login'
 import ApplicationCascader from '_c/ApplicationCascader/index.vue'
@@ -12,7 +13,9 @@ defineEmits({
 })
 const LayoutTopMenu = defineAsyncComponent(() => import('_c/LayoutTopMenu/index.vue'))
 const { layoutTopClassName } = useThemeStore()
-
+const userStore = useUserStore()
+const userInfo = computed(() => userStore.getUserInfo())
+const powerfulRoleId = computed(() => userStore.getPowerfulRoleId()) 
 </script>
 <template>
   <VkDuplex :direction="'row'" sk-flex="row-between-center" :withFlex="'one'" class="layout-top text-white"
@@ -70,6 +73,10 @@ const { layoutTopClassName } = useThemeStore()
   
       </ElDropdown>
 
+      <div>
+        <p>{{  userInfo.name || userInfo.code  }}</p> 
+        <p>{{  powerfulRoleId  }}</p> 
+      </div>
     
       <!-- <ElButton @click="logout">退出</ElButton> -->
 

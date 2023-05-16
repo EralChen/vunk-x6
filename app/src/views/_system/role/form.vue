@@ -3,6 +3,7 @@ import { defineComponent } from 'vue'
 import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
 import { cuRole } from '@skzz-platform/api/system/role'
 import { FirstParameter } from '@vunk/core'
+import { PATTERN } from '@skzz-platform/shared/utils-form'
 export type Data = FirstParameter<typeof cuRole>
   
 export default defineComponent({
@@ -19,13 +20,30 @@ export default defineComponent({
         templateType: 'VkfInput',
         prop: 'name',
         label: '角色名称',
-        required: true,
+        maxlength: 10,
+        rules: [
+          {
+            required: true,
+          },
+          {
+            pattern: PATTERN.normal,
+          },
+        ],
+
       },
       {
         templateType: 'VkfInput',
         prop: 'roleId',
+        maxlength: 10,
         label: '角色编号',
-        required: true,
+        rules: [
+          {
+            required: true,
+          },
+          {
+            pattern: PATTERN.normal,
+          },
+        ],
       },
       {
         templateType: 'VkfInput',
@@ -33,6 +51,7 @@ export default defineComponent({
         rows: 5,
         prop: 'memo',
         label: '角色简介',
+        maxlength: 100,
       },
       {
         templateType: 'VkfButton',

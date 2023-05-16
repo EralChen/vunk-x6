@@ -4,6 +4,7 @@ import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
 import { Row } from '../types'
 import { ElLink } from 'element-plus'
 import SkAppIcon from '@skzz-platform/components/app-icon'
+import { PATTERN } from '@skzz-platform/shared/utils-form'
 
 export default defineComponent({
   components: {
@@ -19,18 +20,36 @@ export default defineComponent({
         templateType: 'VkfInput',
         prop: 'buttonId',
         label: '编号',
-        rules: {
-          required: true,
-        },
+        rules: [
+          {
+            required: true,
+          },
+          {
+            pattern: PATTERN.code,
+          },
+        ],
         maxlength: 10,
-        showWordLimit: true,
+        
       },  
       {
         templateType: 'VkfInput',
         prop: 'label',
         label: '名称',
         maxlength: 10,
-        showWordLimit: true,
+        rules: [
+          {
+            required: true,
+          },
+          {
+            pattern: PATTERN.normal,
+          },
+        ],
+      },
+      {
+        templateType: 'VkfInput',
+        prop: 'event',
+        label: '事件',
+        maxlength: 10,
       },
       {
         templateType: 'VkfInputNumber',
@@ -38,13 +57,7 @@ export default defineComponent({
         label: '排序',
 
       },
-      {
-        templateType: 'VkfInput',
-        prop: 'event',
-        label: '事件名称',
-        maxlength: 10,
-        showWordLimit: true,
-      },
+
   
       {
         prop: 'icon',

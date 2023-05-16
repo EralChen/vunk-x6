@@ -2,7 +2,8 @@
 import { SkAppForm, __SkAppForm } from '@skzz/platform'
 import { Row } from '../types'
 import { computed, PropType, ref  } from 'vue'
-import { SetDataEvent } from '@vunk/core'
+import { NormalObject, SetDataEvent } from '@vunk/core'
+import { PATTERN } from '@skzz-platform/shared/utils-form'
 
 
 const props = defineProps({
@@ -33,6 +34,16 @@ const formItems = computed<__SkAppForm.FormItem<keyof Row>[]>(() => [
       trigger: 'blur',
     },
   },
+
+  {
+    templateType: 'VkfSwitch',
+    prop: '_uPassword' as any,
+    label: '修改密码',
+    templateIf: isU.value,
+    defaultModelValue: false,
+  },
+
+
   {
     prop: 'password',
     label: '密码',
@@ -40,7 +51,16 @@ const formItems = computed<__SkAppForm.FormItem<keyof Row>[]>(() => [
     placeholder: '请输入密码',
     showPassword: true,
     required: true,
-    templateIf: !isU.value,
+    templateIf: (data) => !isU.value || data?._uPassword,
+    rules: [
+      {
+        required: true,
+      },
+      {
+        pattern: PATTERN.password,
+        trigger: 'blur',
+      },
+    ],
   },
   
   {
@@ -53,6 +73,13 @@ const formItems = computed<__SkAppForm.FormItem<keyof Row>[]>(() => [
     prop: 'mobile',
     label: '手机号',
     templateType: 'VkfInput',
+    rules: [
+
+      {
+        pattern: PATTERN.phone,
+        trigger: 'blur',
+      },
+    ],
 
   },
   {

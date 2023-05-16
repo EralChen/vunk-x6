@@ -2,6 +2,7 @@
 import { defineComponent } from 'vue'
 import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
 import { Row } from '../types'
+import { PATTERN } from '@skzz-platform/shared/utils-form'
 
 export default defineComponent({
   components: {
@@ -17,19 +18,26 @@ export default defineComponent({
         templateType: 'VkfInput',
         prop: 'tenantId',
         label: '租户ID',
-        maxlength: 20,
-        showWordLimit: true,
-        rules: {
-          required: true,
-          message: '租户ID不能为空',
-        },
+        maxlength: 10,
+        rules: [
+          {
+            required: true,
+          },
+          {
+            pattern: PATTERN.code,
+          },
+        ],
       },
       {
         templateType: 'VkfInput',
         prop: 'name',
         label: '租户名称',
-        maxlength: 20,
-        showWordLimit: true,
+        maxlength: 10,
+        rules: [
+          {
+            pattern: PATTERN.normal,
+          },
+        ],
       },
 
       {
