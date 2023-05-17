@@ -15,7 +15,7 @@ export const props = {
 
   excludes: {
     type: Array as PropType<('search'|'increase'|'remove'|'modify')[]>,
-    default: () => ['search'],
+    default: () => ['search', 'increase'],
   },
 }
 

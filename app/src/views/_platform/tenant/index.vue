@@ -9,11 +9,12 @@ import {
 } from '@skzz/platform'
 import { NormalObject, setData, VkDuplexCalc } from '@vunk/core'
 import { reactive, ref, watch } from 'vue'
-import { cuTenant, dTenants, rTenants } from '@skzz-platform/api/platform/tenant'
+import { cuTenant, dTenants, rTenants, rTenantBtns } from '@skzz-platform/api/platform/tenant'
 import { genColumns } from '@skzz-platform/shared/utils-data'
 import CuForm from './cu-form/index.vue'
 import { SkAppDialog } from '@skzz-platform/components/app-dialog'
 import { Row } from './types'
+import { vButton } from '@skzz-platform/shared/directives'
 
 /* query */
 const queryItems: __SkAppQueryForm.FormItem[] = [
@@ -53,7 +54,7 @@ const operationsCol: __SkAppTables.Column = {
   flexGrow: 1,
   align: 'center',
   cellRenderer: ({ rowData }) => <SkAppOperations
-    modules={['u','d']}
+    api={rTenantBtns}
     onD={ () => { d([rowData.id]) } }
     onU={ () => { preuI(rowData) } }
   ></SkAppOperations>,
@@ -120,7 +121,9 @@ function cuI () {
         >
           <template #options>
             <!-- <ElButton type="primary" @click="r">查询</ElButton> -->
-            <ElButton type="primary" 
+            <ElButton 
+              v-button:increase="rTenantBtns()"
+              type="primary" 
               @click="precI"
             >新增</ElButton>
             

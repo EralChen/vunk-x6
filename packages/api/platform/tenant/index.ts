@@ -4,6 +4,7 @@ import { RestFetchQueryOptions, QueryRData, RestFetchExecOptions } from '@vunk/s
 import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
 import { MENU_DATA } from './const'
 import { Tenant } from './types'
+import { rBtns } from '@skzz-platform/api/basic'
 
 export const rTenants = (
   query: Partial<Tenant> = {}, 
@@ -27,6 +28,10 @@ export const rTenants = (
   } as RestFetchQueryOptions).then(res => {
     return res.datas[0]
   })
+}
+
+export const rTenantBtns = () => {
+  return rBtns(MENU_DATA)
 }
 
 export const dTenants = (ids: string[]) => {
