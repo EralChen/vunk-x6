@@ -4,18 +4,26 @@ import { computed, defineAsyncComponent } from 'vue'
 import { useThemeStore } from '@/stores/theme'
 import { useUserStore } from '@skzz-platform/stores/user'
 import { ElAvatar } from 'element-plus'
-import { logout } from '@skzz-platform/api/login'
+import { logout as logoutApi } from '@skzz-platform/api/login'
 import ApplicationCascader from '_c/ApplicationCascader/index.vue'
 import SizeCtrl from '_c/SizeCtrl/index.vue'
 import { VkDuplex } from '@vunk/core'
+import { useViewsStore } from '@/stores/views'
+
 defineEmits({
   'load': null,
 })
 const LayoutTopMenu = defineAsyncComponent(() => import('_c/LayoutTopMenu/index.vue'))
 const { layoutTopClassName } = useThemeStore()
 const userStore = useUserStore()
+const viewsStore = useViewsStore()
 const userInfo = computed(() => userStore.getUserInfo())
 const powerfulRoleId = computed(() => userStore.getPowerfulRoleId()) 
+function logout () {
+  logoutApi().then(() => {
+    viewsStore.setVisitedViews([])
+  })
+}
 </script>
 <template>
   <VkDuplex :direction="'row'" sk-flex="row-between-center" :withFlex="'one'" class="layout-top text-white"
