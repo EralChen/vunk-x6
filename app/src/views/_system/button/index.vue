@@ -18,6 +18,7 @@ import { genColumn } from '@skzz-platform/shared/utils-data'
 import CuForm from './cu-form/index.vue'
 import { SkAppDialog } from '@skzz-platform/components/app-dialog'
 import { Row } from './types'
+import { vButton } from '@skzz-platform/shared/directives'
 // import SkAppIcon from '@skzz-platform/components/app-icon'
 
 /* query */
@@ -146,8 +147,10 @@ function cuI () {
           @enter="r"
         >
           <template #options>
-            <!-- <ElButton type="primary" @click="r">查询</ElButton> -->
-            <ElButton type="primary" 
+
+            <ElButton 
+              v-button:increase="rButtonBtns()"
+              type="primary" 
               @click="precI"
             >新增</ElButton>
             

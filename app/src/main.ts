@@ -24,6 +24,7 @@ app.use(store)
   .component('PageX', PageX)
   .component('PageOver', PageOver)
   .mount('#app')
+  
 
 
 for (const [key, component] of Object.entries(ElIconsVue)) {
