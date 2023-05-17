@@ -8,4 +8,8 @@ export interface Tenant {
   updateTime: string;
   id: number;
   updater: number;
+
+  /* 租户可能具有绑定的管理员 */
+  username?: string;
+  password?: string;
 }
