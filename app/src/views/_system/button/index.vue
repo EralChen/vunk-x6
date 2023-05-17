@@ -18,8 +18,7 @@ import { genColumn } from '@skzz-platform/shared/utils-data'
 import CuForm from './cu-form/index.vue'
 import { SkAppDialog } from '@skzz-platform/components/app-dialog'
 import { Row } from './types'
-import { vButton } from '@skzz-platform/shared/directives'
-// import SkAppIcon from '@skzz-platform/components/app-icon'
+import { SkIncreaseButton } from '@skzz-platform/components/increase-button'
 
 /* query */
 const queryItems: __SkAppQueryForm.FormItem[] = [
@@ -61,7 +60,6 @@ const operationsCol: __SkAppTables.Column = {
   align: 'center',
   cellRenderer: ({ rowData }) => <SkAppOperations
     api={rButtonBtns}
-    excludes={['search',  'increase']}
     onD={ () => { d([rowData.id]) } }
     onU={ () => { preuI(rowData) } }
   ></SkAppOperations>,
@@ -148,11 +146,10 @@ function cuI () {
         >
           <template #options>
 
-            <ElButton 
+            <SkIncreaseButton 
               v-button:increase="rButtonBtns()"
-              type="primary" 
               @click="precI"
-            >新增</ElButton>
+            >新增</SkIncreaseButton>
             
           </template>
         </SkAppQueryForm>
