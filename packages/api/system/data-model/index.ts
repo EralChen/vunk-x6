@@ -1,6 +1,7 @@
 
 
 import { Pagination } from '@skzz-platform/shared'
+import { ButtonId } from '@skzz-platform/shared/enum'
 import { request } from '@skzz-platform/shared/fetch/platform'
 import { NormalObject } from '@vunk/core'
 import { QueryRData, RestFetchExecOptions, RestFetchQueryOptions } from '@vunk/skzz'
@@ -32,6 +33,7 @@ export const rDataModels = (
         ...query,
         op: 'query',
       },
+      buttonId: ButtonId.search,
       ...MENU_DATA,
     },
   

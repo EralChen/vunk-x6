@@ -40,6 +40,7 @@ const tableState = reactive({
 })
 
 const cuIState = reactive({
+  type: '' as 'u' | 'c' | '',
   visible: false,
   formData: {} as Partial<Row>,
   title: '新增角色',
@@ -89,11 +90,13 @@ function d (ids: string[]) {
   dTenants(ids).then(r)
 }
 function precI () {
+  cuIState.type = 'c'
   cuIState.visible = true
   cuIState.formData = {}
   cuIState.title = '新增租户'
 }
 function preuI (data: Row) {
+  cuIState.type = 'u'
   cuIState.visible = true
   cuIState.formData = {...data}
   cuIState.title = '修改租户'
@@ -134,8 +137,13 @@ function cuI () {
       </SkAppTables>
     </VkDuplexCalc>
 
-    <SkAppDialog :title="cuIState.title" v-model="cuIState.visible">
+    <SkAppDialog 
+      :title="cuIState.title" 
+      v-model="cuIState.visible"
+      @close="cuIState.type = ''"
+    >
       <CuForm
+        :type="cuIState.type"
         :data="cuIState.formData"
         @setData="setData(cuIState.formData, $event)"
         @submit="cuI"

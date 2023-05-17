@@ -1,7 +1,8 @@
 import { RestFetch } from '@vunk/skzz/shared/utils-fetch'
-import type { R } from '@vunk/skzz/shared'
+import type { R, RestFetchQueryOptionsData } from '@vunk/skzz/shared'
 import { usePlatformStore } from '@skzz-platform/stores/platform'
 import { AnyFunc } from '@vunk/core'
+import { ButtonId } from '@skzz-platform/shared/enum'
 
 
 export const restFetch = new RestFetch({
@@ -21,6 +22,14 @@ export function withPlatform <T extends AnyFunc> (fn: T) {
 }
 
 const baseRequest = async <T>(...args: Parameters<typeof restFetch.request>) => {
+  const [ options ] = args
+  if (options.url === '/core/busi/query') {
+    const data = options.data as RestFetchQueryOptionsData
+    if (!data.buttonId) { 
+      data.buttonId = ButtonId.search
+    }
+  }
+
   const data = await restFetch.request<R<T>>(...args)
   if (data.code === 401) {
     window.location.reload()

@@ -3,8 +3,13 @@ import ByPassword from './by-password/index.vue'
 import ByPhone from './by-phone/index.vue'
 import ByDing from './by-ding/index.vue'
 import { ref } from 'vue'
+import { useViewsStore } from '@/stores/views'
 const currentPage = ref('1')
+const viewsStore = useViewsStore()
 
+function clear () {
+  viewsStore.setVisitedViews([])
+}
 </script>
 <template>
   <div sk-flex="col-center2" class="h-100% bg-bg-page">
@@ -26,7 +31,9 @@ const currentPage = ref('1')
 
           <ElTabs  v-model="currentPage" class="login-tabs">
             <ElTabPane label="账号密码登录" name="1">
-              <ByPassword></ByPassword>
+              <ByPassword
+                @login="clear"
+              ></ByPassword>
             </ElTabPane>
 
             <ElTabPane label="手机验证码登录" name="2">

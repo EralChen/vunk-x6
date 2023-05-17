@@ -87,6 +87,7 @@ const cTenant = (data: Partial<Tenant>) => {
     },
   } as RestFetchExecOptions, {
     msg: '新增成功',
+    throwResErr: true,
   })
 }
 
@@ -117,6 +118,7 @@ const uTenant = (data: Partial<Tenant>) => {
     },
   } as RestFetchExecOptions, {
     msg: '修改成功',
+    throwResErr: true,
   })
 }
 

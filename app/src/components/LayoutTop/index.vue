@@ -8,6 +8,7 @@ import { logout } from '@skzz-platform/api/login'
 import ApplicationCascader from '_c/ApplicationCascader/index.vue'
 import SizeCtrl from '_c/SizeCtrl/index.vue'
 import { VkDuplex } from '@vunk/core'
+
 defineEmits({
   'load': null,
 })
