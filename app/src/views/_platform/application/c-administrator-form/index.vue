@@ -1,78 +1,48 @@
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { defineComponent } from 'vue'
 import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
-import { Row } from '../types'
 import { PATTERN } from '@skzz-platform/shared/utils-form'
-import { SetDataEvent } from '@vunk/core'
+import { BoundApplication } from '@skzz-platform/api/platform/application'
 
 export default defineComponent({
   components: {
     SkAppForm,
   },
-  props: ['data', 'type'],
+  props: ['data'],
   emits: {
-    submit: (data: Row) => data,
-    setData: (e: SetDataEvent) => e,
+    submit: (data: BoundApplication) => data,
   },
   setup (props, { emit }) {
-    const isU = computed(() => props.type === 'u')
-
-    const formItems = computed(() => [
+    const formItems: __SkAppForm.FormItem<keyof BoundApplication>[] = [
       {
         templateType: 'VkfInput',
+        prop: 'applicationId',
+        label: '应用ID',
+        maxlength: 10,
+        disabled: true,
+        rules: [
+          {
+            required: true,
+          },
+          {
+            pattern: PATTERN.code,
+          },
+        ],
+      },
+
+      {
         prop: 'tenantId',
         label: '租户ID',
-        maxlength: 10,
-        rules: [
-          {
-            required: true,
-          },
-          {
-            pattern: PATTERN.code,
-          },
-        ],
-      },
-      {
         templateType: 'VkfInput',
-        prop: 'name',
-        label: '租户名称',
-        maxlength: 10,
-        rules: [
-          {
-            required: true,
-          },
-          {
-            pattern: PATTERN.normal,
-          },
-        ],
+        disabled: true,
+        required: true,
       },
 
       {
-        templateType: 'VkfSwitch',
-        prop: '$admin',
-        label: '新建管理员',
-        templateIf: !isU.value,
-        onChange (v) {
-          if (!v) {
-            // 清空管理员账号密码
-            emit('setData', {
-              k: 'username',
-              v: undefined,
-            })
-            emit('setData', {
-              k: 'password',
-              v: undefined,
-            })
-          }
-        },
-
-      },
-
-      {
-        templateType: 'VkfInput',
         prop: 'adminUser',
         label: '账号',
-        templateIf: (data) => data?.$admin,
+        templateType: 'VkfInput',
+        maxlength: 10,
         rules: [
           {
             required: true,
@@ -84,10 +54,10 @@ export default defineComponent({
       },
 
       {
-        templateType: 'VkfInput',
         prop: 'adminPassword',
         label: '密码',
-        templateIf: (data) => data?.$admin,
+        templateType: 'VkfInput',
+        showPassword: true,
         rules: [
           {
             required: true,
@@ -99,6 +69,8 @@ export default defineComponent({
 
       },
 
+
+
       {
         templateType: 'VkfButton',
         buttonLabel: '提交',
@@ -109,9 +81,8 @@ export default defineComponent({
           emit('submit', props.data)
         },
       },
-    ] as __SkAppForm.CoreFormItem<
-     keyof Row | '_user'
-    >[]) 
+      
+    ]
     return {
       formItems,
     }
@@ -123,6 +94,5 @@ export default defineComponent({
     :labelWidth="'6em'"
     :data="data"
     :formItems="formItems"
-    @setData="$emit('setData', $event)"
   ></SkAppForm>
 </template>

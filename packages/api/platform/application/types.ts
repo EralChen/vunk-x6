@@ -25,4 +25,8 @@ export interface Application {
 export interface BoundApplication {
   'applicationId': string, // 应用ID
   'tenantId': string // 租户ID
+
+  /* 应用可能具有绑定的管理员 */
+  adminUser?: string;
+  adminPassword?: string;
 }

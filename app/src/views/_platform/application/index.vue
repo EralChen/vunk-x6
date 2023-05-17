@@ -18,6 +18,8 @@ import { Tenant } from '@skzz-platform/api/platform/tenant'
 import { ElButton, ElPopconfirm } from 'element-plus'
 import { useUpdateApplictionEvent } from '@/composables'
 import { SkIncreaseButton } from '@skzz-platform/components/increase-button'
+import CAdministratorForm from './c-administrator-form/index.vue'
+
 const  { dispath } = useUpdateApplictionEvent()
 
 /* query */
@@ -50,11 +52,24 @@ const cuIState = reactive({
   title: '新增应用',
 })
 
+/**
+ * 绑定第一步, 选择租户
+ */
 const bindState = reactive({
   current: {} as Partial<Row>,
   title: '绑定租户',
   data: [] as Partial<Tenant>[],
 })
+/**
+ * 绑定第二步, 分配应用管理员
+ */
+const bind2State = reactive({
+  title: '分配应用管理员',
+  visible: false,
+  current: {} as Partial<Tenant>,
+  postData: {} as Partial<BoundApplication>,
+})
+
 const bindCols = computed< __SkAppTables.Column[]>(() => [
   {
     key: 'operation',
@@ -89,10 +104,7 @@ const bindCols = computed< __SkAppTables.Column[]>(() => [
         : <ElButton
           type="primary"
           size='small'
-          onClick={() => bind({
-            applicationId: bindState.current.applicationId,
-            tenantId: rowData.tenantId,
-          })}
+          onClick={() => prebind2(rowData)}
         >
           绑定  
         </ElButton>
@@ -166,24 +178,31 @@ function cuI () {
   })
 }
 
-
-function prebind (row: Row) {
-  bindState.current = row
-  bindState.title = '绑定租户'
-  return rBinds()
-}
 function rBinds ()  {
   if (!bindState.current.applicationId) return
   rBoundApplications(bindState.current.applicationId).then(res => {
     bindState.data = res.rows
   })
 }
-
+function prebind (row: Row) {
+  bindState.current = row
+  bindState.title = '绑定租户'
+  bind2State.postData.applicationId = row.applicationId
+  return rBinds()
+}
+function prebind2 (row: Tenant) {
+  bind2State.visible = true
+  bind2State.current = row
+  bind2State.postData.tenantId = row.tenantId
+}
 
 function bind (ba: Partial<BoundApplication>) {
   cBoundApplications([ba])
     .then(rBinds)
     .then(dispath)
+    .then(() => {
+      bind2State.visible = false
+    })
 }
 function unbind (ba: Partial<BoundApplication>) {
   dBoundApplications([ba])
@@ -245,6 +264,18 @@ function unbind (ba: Partial<BoundApplication>) {
       >
       </SkTenantTablesSelect>
 
+    </SkAppDialog>
+
+    <SkAppDialog
+      v-model="bind2State.visible"
+      :title="bind2State.title"
+      :modal="false"
+    >
+     <CAdministratorForm
+        :data="bind2State.postData"
+        @setData="setData(bind2State.postData, $event)"
+        @submit="bind(bind2State.postData)"
+     ></CAdministratorForm>
     </SkAppDialog>
 
   </PageX>

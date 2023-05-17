@@ -10,6 +10,6 @@ export interface Tenant {
   updater: number;
 
   /* 租户可能具有绑定的管理员 */
-  username?: string;
-  password?: string;
+  adminUser?: string;
+  adminPassword?: string;
 }
