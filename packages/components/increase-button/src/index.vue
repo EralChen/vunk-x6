@@ -22,7 +22,7 @@ export default defineComponent({
 })
 </script>
 <template>
-   <ElButton 
+  <ElButton 
     v-button:increase="btns"
     v-bind="coreProps"
     v-on="coreEmits"
