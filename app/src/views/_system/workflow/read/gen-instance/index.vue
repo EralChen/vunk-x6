@@ -10,6 +10,7 @@ import { NodeConfig } from '@antv/g6'
 import { InstanceBindOpers, NodesDeadLine, Workflow, genInstance } from '@skzz-platform/api/system/workflow'
 import { cloneDeep } from 'lodash-es'
 import { User } from '@skzz-platform/api/system/user'
+import { MaterialGeometryEnum } from '@zzg6/flow' 
 
 type Row = NodeConfig & {
   deadLine?: string
@@ -50,7 +51,6 @@ export default defineComponent({
         label: '假表单',
         templateType: 'VkfInput',
       },
-
     ]
     const queryState = reactive({
       data: {} as Partial<any>,
@@ -114,11 +114,12 @@ export default defineComponent({
 
     watch(() => props.tableData, v => {
       if (v) {
-        tempTata = v.map(item => ({
-          ...item,
-          // 需要初始化加上，如果是后面加的会不响应
-          isChecked: false,
-        }))
+        tempTata = v.filter(item => {
+          if (item.type !== MaterialGeometryEnum.zzStart && item.type !== MaterialGeometryEnum.zzEnd) {
+            item.isChecked = false
+            return true
+          }
+        })
         tableState.data = cloneDeep(tempTata)
       }
 
