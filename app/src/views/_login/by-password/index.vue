@@ -24,9 +24,10 @@ const formData = ref({
 } as LoginFormData)
 
 const login = () => {
-  loginByPassword(formData.value).then(() => {
-    router.push({ path: '/home' })
-  })
+  return loginByPassword(formData.value)
+    .then(() => {
+      router.push({ path: '/home' })
+    })
 }
 
 const defaultFormItemProps = {
@@ -75,8 +76,10 @@ const formItems: __SkAppForm.FormItem<keyof LoginFormData>[] = [
     
     validate: true,
     onClick: () => {
-      login()
-      emit('login', formData.value)
+      login().then(() => {
+        emit('login', formData.value)
+      })
+      
     },
   },
 ]
