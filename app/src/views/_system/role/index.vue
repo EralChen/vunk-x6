@@ -9,9 +9,10 @@ import {
 } from '@skzz/platform'
 import { ApiReturnType, NormalObject, setData, VkDuplexCalc } from '@vunk/core'
 import { reactive, ref, watch } from 'vue'
-import { rRoles, dRoles, cuRole } from '@skzz-platform/api/system/role'
+import { rRoles, dRoles, cuRole, rRoleBtns } from '@skzz-platform/api/system/role'
 import { genColumn } from '@skzz-platform/shared/utils-data'
 import FormVue, { Data as FormVueData } from './form.vue'
+import { SkIncreaseButton } from '@skzz-platform/components/increase-button'
 type Res = ApiReturnType<typeof rRoles>
 
 /* query */
@@ -52,7 +53,7 @@ const operationsCol: __SkAppTables.Column = {
   flexGrow: 1,
   align: 'center',
   cellRenderer: ({ rowData }) => <SkAppOperations
-    modules={['u','d']}
+    api={rRoleBtns}
     onD={ () => { d([rowData.id]) } }
     onU={ () => { preuI(rowData) } }
   ></SkAppOperations>,
@@ -71,6 +72,7 @@ const colsMap = {
   },
 
 } as Record<string, Partial<__SkAppTables.Column>>
+
 function r () {
   rRoles(queryData.value, pagination.value).then(res => {
     if (!tableState.columns.length) {
@@ -130,10 +132,11 @@ function cuI () {
           @enter="r"
         >
           <template #options>
-            <!-- <ElButton type="primary" @click="r">查询</ElButton> -->
-            <ElButton type="primary" 
+ 
+            <SkIncreaseButton 
+              :btns="rRoleBtns()"
               @click="precI"
-            >新增</ElButton>  
+            >新增</SkIncreaseButton>  
             
           </template>
         </SkAppQueryForm>

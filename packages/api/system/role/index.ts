@@ -4,6 +4,7 @@ import { request } from '@skzz-platform/shared/fetch/platform'
 import { NormalObject } from '@vunk/core'
 import { RestFetchQueryOptions, QueryRData, RestFetchSaveOptions } from '@vunk/skzz'
 import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
+import { rBtns } from '@skzz-platform/api/basic'
 
 
 export const rRoles = (
@@ -29,6 +30,14 @@ export const rRoles = (
     },
   } as RestFetchQueryOptions).then(res => {
     return res.datas[0]
+  })
+}
+
+export const rRoleBtns = () => {
+  return rBtns({
+    dir: 'system',
+    menuId: 'role',
+    modelId: 'role',
   })
 }
 
