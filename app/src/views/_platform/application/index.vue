@@ -17,7 +17,9 @@ import { SkTenantTablesSelect } from '@skzz-platform/components/tenant-tables-se
 import { Tenant } from '@skzz-platform/api/platform/tenant'
 import { ElButton, ElPopconfirm } from 'element-plus'
 import { useUpdateApplictionEvent } from '@/composables'
+import { SkIncreaseButton } from '@skzz-platform/components/increase-button'
 const  { dispath } = useUpdateApplictionEvent()
+
 /* query */
 const queryItems: __SkAppQueryForm.FormItem[] = [
   {
@@ -106,7 +108,6 @@ const operationsCol: __SkAppTables.Column = {
   align: 'center',
   cellRenderer: ({ rowData }) => <SkAppOperations
     api={rApplicationBtns}
-    excludes={['increase', 'search']}
     onD={ () => { d([rowData.id]) } }
     onU={ () => { preuI(rowData) } }
     onClick={ (e) => {
@@ -203,9 +204,11 @@ function unbind (ba: Partial<BoundApplication>) {
         >
           <template #options>
             <!-- <ElButton type="primary" @click="r">查询</ElButton> -->
-            <ElButton type="primary" 
+
+            <SkIncreaseButton 
+              :btns="rApplicationBtns()"
               @click="precI"
-            >新增</ElButton>
+            >新增</SkIncreaseButton>
             
           </template>
         </SkAppQueryForm>

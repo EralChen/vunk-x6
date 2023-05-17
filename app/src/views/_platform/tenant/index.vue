@@ -14,7 +14,9 @@ import { genColumns } from '@skzz-platform/shared/utils-data'
 import CuForm from './cu-form/index.vue'
 import { SkAppDialog } from '@skzz-platform/components/app-dialog'
 import { Row } from './types'
-import { vButton } from '@skzz-platform/shared/directives'
+import { SkIncreaseButton } from '@skzz-platform/components/increase-button'
+
+
 
 /* query */
 const queryItems: __SkAppQueryForm.FormItem[] = [
@@ -120,12 +122,11 @@ function cuI () {
           @enter="r"
         >
           <template #options>
-            <!-- <ElButton type="primary" @click="r">查询</ElButton> -->
-            <ElButton 
-              v-button:increase="rTenantBtns()"
-              type="primary" 
+   
+            <SkIncreaseButton 
+              :btns="rTenantBtns()"
               @click="precI"
-            >新增</ElButton>
+            >新增</SkIncreaseButton>
             
           </template>
         </SkAppQueryForm>
