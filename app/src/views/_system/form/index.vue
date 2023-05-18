@@ -8,7 +8,11 @@
           @setData="setData(queryState.data, $event)"
         >
         <template #options>
-          <ElButton type="primary" @click="$router.push('/system/form/add')">新增</ElButton>
+          <SkIncreaseButton 
+            :btns="rFormBtns"
+            @click="$router.push('/system/form/add')"
+          >
+          </SkIncreaseButton>
         </template>
         </SkAppQueryForm>
           
@@ -26,11 +30,12 @@ import PageX from '_c/PageX/index.vue'
 import { SkAppCard, __SkAppQueryForm } from '@skzz/platform'
 import { SkAppOperations, SkAppTablesV1, __SkAppTablesV1, SkAppQueryForm } from '@skzz/platform'
 import { reactive, watch } from 'vue'
-import { dForm, rFormList } from '@skzz-platform/api/system/form'
+import { dForm, rFormList, rFormBtns } from '@skzz-platform/api/system/form'
 import { setData, VkDuplexCalc } from '@vunk/core'
 import { Row } from './types'
 import router from '@/router'
 import { debounce } from 'lodash'
+import { SkIncreaseButton } from '@skzz-platform/components/increase-button'
 
 type Col = __SkAppTablesV1.Column<Row>
 const queryItems: __SkAppQueryForm.CoreFormItem[]  = [
@@ -61,7 +66,8 @@ const tableState = reactive({
       align: 'center',
       headerAlign: 'center',
       slots: ({ row }) => <SkAppOperations
-        modules={['r', 'u', 'd']}
+        api={rFormBtns}
+        excludes={['increase']}
         onU={() => router.push(`/system/form/edit/${row.id}`)}
         onD={() => dForm(row.id).then(r)}
         onR={() => router.push(`/system/form/detail/${row.id}`)}

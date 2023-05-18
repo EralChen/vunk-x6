@@ -4,7 +4,7 @@ import { QueryRData } from '@vunk/skzz'
 import { CForm, FIRS } from './types'
 import { FROM_DATA } from './const'
 import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
-
+import { rBtns } from '@skzz-platform/api/basic'
 /**
  * https://www.apifox.cn/link/project/2475837/apis/api-75968085  查询列表
  * @param pagination 
@@ -29,6 +29,10 @@ export const rFormList = (pagination?: Pagination, formName?: Partial<CForm>['fo
   }).then(res => {
     return res.datas[0]
   })
+}
+
+export const rFormBtns = () => {
+  return rBtns(FROM_DATA)
 }
 
 /**
