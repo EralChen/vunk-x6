@@ -30,6 +30,7 @@ const formItems = ref<__SkAppForm.FormItem<keyof Row>[]>([
     templateType: 'VkfInput',
     label: '菜单ID',
     placeholder: '请输入菜单ID',
+    maxlength: 10,
     rules: [
       {
         required: true,
@@ -46,6 +47,7 @@ const formItems = ref<__SkAppForm.FormItem<keyof Row>[]>([
     templateType: 'VkfInput',
     label: '菜单名称',
     placeholder: '请输入菜单名称',
+    maxlength: 10,
     rules: [
       {
         required: true,
