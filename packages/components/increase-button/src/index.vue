@@ -1,6 +1,6 @@
 <script lang="ts">
 import { props, emits, createElBindProps, createElOnEmits } from './ctx'
-import { defineComponent } from 'vue'
+import { defineComponent, computed } from 'vue'
 import { vButton } from '@skzz-platform/shared/directives'
 
 export default defineComponent({
@@ -13,10 +13,18 @@ export default defineComponent({
   setup (props, { emit }) {
     const coreProps = createElBindProps(props)
     const coreEmits = createElOnEmits(emit)
-
+    const btns = computed(() => {
+      // 判断 props.btns 是不是 function
+      if (typeof props.btns === 'function') {
+        return props.btns()
+      } else {
+        return props.btns
+      }
+    })
     return {
       coreProps,
       coreEmits,
+      btns,
     }
   },
 })

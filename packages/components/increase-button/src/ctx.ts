@@ -12,7 +12,7 @@ export const props = {
     default: 'primary',
   },
   btns: {
-    type: [Promise, Array],
+    type: [Promise, Array, Function] as PropType<any>,
     default: () => [],
   },
 }

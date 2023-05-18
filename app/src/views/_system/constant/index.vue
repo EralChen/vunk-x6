@@ -11,6 +11,7 @@ import { setData, VkDuplexCalc } from '@vunk/core'
 import CUForm from './cu-form/index.vue'
 import { Row } from './types'
 import { ElButton } from 'element-plus'
+import { SkIncreaseButton } from '@skzz-platform/components/increase-button'
 
 type Col = __SkAppTablesV1.Column<Row>
 
@@ -129,11 +130,11 @@ function cuI () {
           @setData="setData(queryState.data, $event)"
         >
         <template #options>
-          <ElButton type="primary" sk-flex="row_center"
-            @click="precI()"
+          <SkIncreaseButton
+            :btns="rBtnsApi"
+            @click="precI"
           >
-            <span>新增</span>
-          </ElButton>
+          </SkIncreaseButton>
         </template>
         </SkAppQueryForm>
       </template>
