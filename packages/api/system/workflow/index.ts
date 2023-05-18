@@ -3,7 +3,7 @@ import { request } from '@skzz-platform/shared/fetch/platform'
 import { QueryRData, RestFetchExecOptions, RestFetchQueryOptions } from '@vunk/skzz'
 import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
 import { Workflow } from './types'
-import { snowFlake } from '@skzz-platform/api/basic'
+import { rBtns, snowFlake } from '@skzz-platform/api/basic'
 import { MENU_DATA } from './const'
 
 /**
@@ -32,6 +32,10 @@ export const rWorkflows = (query, pagination?: Pagination) => {
   } as RestFetchQueryOptions).then(res => {
     return res.datas[0]
   })
+}
+
+export const rWorkflowBtns = () => {
+  return rBtns(MENU_DATA)
 }
 
 /**

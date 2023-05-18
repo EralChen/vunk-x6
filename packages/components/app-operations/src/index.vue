@@ -122,7 +122,11 @@ export default defineComponent({
         @confirm="crud(item)"
       >
         <template #reference>
-          <el-button :size="'small'" :type="'danger'">
+          <el-button 
+            :size="'small'" 
+            :type="'danger'"
+            v-bind="buttonPropsRecord[item]"
+          >
             {{ moduleInfo[item]?.label }}
           </el-button>
         </template>
@@ -133,6 +137,7 @@ export default defineComponent({
         v-else-if="moduleInfo[item]" 
         :type="'primary'" 
         :size="'small'"
+        v-bind="buttonPropsRecord[item]"
         @click="crud(item)"
       >{{ moduleInfo[item]?.label }}
       </el-button>

@@ -8,7 +8,7 @@ import { Row } from './types'
 import { ElButton } from 'element-plus'
 import { SkRoleTablesSelect } from '@skzz-platform/components/role-tables-select'
 import { Role } from '@skzz-platform/api/system/role'
- 
+import { SkIncreaseButton } from '@skzz-platform/components/increase-button'
 type Col = __SkAppTablesV1.Column<Row>
 
 
@@ -61,7 +61,6 @@ const tableState = reactive({
       label: '操作',
       slots: ({ row }) => <SkAppOperations
         api={ rUserBtns }
-        excludes={['increase', 'search']}
         onU={ () => preuI(row) }
         onD={ () => d([row.id])  }
         onClick={ (e: string) => {
@@ -174,11 +173,11 @@ function bind () {
           @setData="setData(queryState.data, $event)"
         >
         <template #options>
-          <ElButton type="primary" sk-flex="row_center"
+          <SkIncreaseButton 
+            :btns="rUserBtns()"
             @click="precI()"
           >
-            <span>新增</span>
-          </ElButton>
+          </SkIncreaseButton>
         </template>
         </SkAppQueryForm>
       </template>

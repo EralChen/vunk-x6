@@ -1,6 +1,6 @@
 <script lang="tsx" setup>
-import { computed, reactive, watch } from 'vue'
-import { rWorkflows, cuWorkflow, dWorkflows, bindForm2Flow } from '@skzz-platform/api/system/workflow'
+import { computed, reactive, ref, watch } from 'vue'
+import { rWorkflows, cuWorkflow, dWorkflows, bindForm2Flow, rWorkflowBtns } from '@skzz-platform/api/system/workflow'
 import { SkAppDialog, SkAppOperations, SkAppTablesV1, __SkAppTablesV1 } from '@skzz/platform'
 import { setData, VkDuplexCalc } from '@vunk/core'
 import { Row } from './types'
@@ -11,6 +11,10 @@ import { CForm } from '@skzz-platform/api/system/form'
 import BindCallback from './bind-callback/index.vue'
 import { useWorkflowResolveQueryU } from './utils'
 import CUForm from './cu-form/index.vue'
+import { ButtonId } from '@skzz-platform/shared/enum'
+import { SkIncreaseButton } from '@skzz-platform/components/increase-button'
+
+
 
 type Col = __SkAppTablesV1.Column<Row>
 const { routerNext } = useRouterTo()
@@ -23,6 +27,11 @@ const bindVallback = reactive({
 
 const { addListener } = useWorkflowResolveQueryU()
 addListener(() => r())
+
+const operationsModules = ref<string[]>([])
+rWorkflowBtns().then(res => {
+  operationsModules.value = res.map(item => item.buttonId)
+})
 
 const tableState = reactive({
   data: [] as Row[],
@@ -53,29 +62,32 @@ const tableState = reactive({
       label: '操作',
       width: '450em',
       slots: ({ row }) => {
-        const modules = ['u', 'd', 'callback']
+        const modules = [...operationsModules.value]
+        const uAfterIndex = modules.indexOf(ButtonId.modify) + 1
+
         // 流程没启动前可以绑定表单
         if (!row.isStart) {
-          modules.unshift('bind')
+          modules.splice(uAfterIndex, 0, 'bind')
         }
         if (row.isStart) {
-          modules.push('instances')
+          modules.splice(modules.length - 1, 0, 'instances')
         }
         if (row.formName) {
-          modules.unshift('r')
           if (!row.isStart) {
-            modules.unshift('nodes')
+            modules.splice(uAfterIndex, 0, 'nodes')
           }
         }
 
-        /**
- *             run: () =>
-              <ElButton type="primary" size="small" disabled={!!row.isStart} onClick={
-                () => runWorkflow(row.itemId).then(r)
-              }>运行</ElButton>,
- */
         return <SkAppOperations
           modules={modules}
+          excludes={['increase']}
+          buttonPropsRecord={
+            {
+              search: {
+                disabled: !row.formName,
+              },
+            }
+          }
           onR={() => rI(row.id)}
           onD={() => d([row.id])}
           onU={() => preuI(row)}
@@ -193,9 +205,11 @@ function bindUser () {
       <template #one>
         <div sk-flex="row-between-center">
           <span></span>
-          <ElButton type="primary" sk-flex="row_center" @click="precI()">
-            <span>新增</span>
-          </ElButton>
+          <SkIncreaseButton 
+            :btns="rWorkflowBtns()"
+            @click="precI"
+          >
+          </SkIncreaseButton>
         </div>
 
       </template>
