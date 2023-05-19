@@ -42,44 +42,47 @@ function rLayers () {
 
 
 /* layer click */
-function layerClick () {
+function layerClick (e) {
   console.log('layerClick')
 }
 
 </script>
 <template>
-<VaSceneView>
-  <template #before>
-    <VkfForm 
-      :formItems="formItems"
-      :data="capabilitiesState"
-      @setData="setData(capabilitiesState, $event)"
-    ></VkfForm>
-  </template>
+<PageX>
+  <VaSceneView>
+    <template #before>
+      <VkfForm 
+        :formItems="formItems"
+        :data="capabilitiesState"
+        @setData="setData(capabilitiesState, $event)"
+      ></VkfForm>
+    </template>
 
-  <VaTdtBasemap 
-    :type="'vec_c'"
-    :anno="false" 
-    :spatial-reference="{
-      wkid: 4490
-    }"
-  ></VaTdtBasemap>
+    <VaTdtBasemap 
+      :type="'vec_c'"
+      :anno="false" 
+      :spatial-reference="{
+        wkid: 4490
+      }"
+    ></VaTdtBasemap>
 
-  <VaWmsLayer
-    :url="geoserver + '/ows'"
-    @load="layerLoad"
-    :sublayers="[
-      {
-        name: capabilitiesState.name,
-        queryable: true,
-      }
-    ]"
-  >
-      <VaWmsLayerOnClick
-        @click="layerClick"
-      >
-      </VaWmsLayerOnClick>
-  </VaWmsLayer>
+    <VaWmsLayer
+      :url="geoserver + '/ows'"
+      @load="layerLoad"
+      :sublayers="[
+        {
+          name: capabilitiesState.name,
+          queryable: true,
+          popupEnabled: true
+        }
+      ]"
+    >
+        <VaWmsLayerOnClick
+          @click="layerClick"
+        >
+        </VaWmsLayerOnClick>
+    </VaWmsLayer>
 
-</VaSceneView>
+  </VaSceneView>
+</PageX>
 </template>

@@ -49,6 +49,13 @@ export default [
             },
             component: () => import('_v/_play/vuesri/basemap/index.vue'),
           },
+          {
+            path: 'wms-layer',
+            meta: {
+              title: 'wms-layer',
+            },
+            component: () => import('_v/_play/vuesri/wms-layer/index.vue'),
+          },
         ],
       },
 
