@@ -1,6 +1,8 @@
 import { RestFetchRequestOptions } from '@vunk/core'
 import { RestFetch } from '@vunk/core/shared/utils-fetch'
-export const geoserver = 'http://192.168.110.250:8080/geoserver'
+// export const geoserver = 'http://192.168.110.250:8080/geoserver'
+
+export const geoserver = 'http://t1.zjsophon.com:10000/zz/geoserver'
 
 const restFetch = new RestFetch({
   baseURL: geoserver,
