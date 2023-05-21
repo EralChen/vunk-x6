@@ -31,7 +31,7 @@ importers:
       '@vunk/core': 0.0.0-alpha.76
       '@vunk/form': 0.0.1-alpha.51
       '@vunk/formaker': 0.0.0-alpha.23
-      '@vunk/skzz': 0.0.0-alpha.85
+      '@vunk/skzz': 0.0.0-alpha.86
       chroma-js: ^2.4.2
       consola: ^2.15.3
       element-plus: npm:element-plus@latest
@@ -72,9 +72,9 @@ importers:
       '@vunk/core': 0.0.0-alpha.76
       '@vunk/form': 0.0.1-alpha.51
       '@vunk/formaker': 0.0.0-alpha.23
-      '@vunk/skzz': 0.0.0-alpha.85
+      '@vunk/skzz': 0.0.0-alpha.86
       chroma-js: 2.4.2
-      element-plus: 2.3.4_vue@3.2.47
+      element-plus: 2.3.5_vue@3.2.47
       mapbox-gl: 2.14.1
       vue: 3.2.47
     devDependencies:
@@ -3793,8 +3793,8 @@ packages:
     resolution: {integrity: sha512-JjfYNgQLEQXVyq2j2PQhrKYbbgnCFYQ/twHcssjdSAfN5pKccNEgQVVj7eZBL1NDC1ni6M5+fzVnPhWaCLeyMA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/@vunk/formaker/-/formaker-0.0.0-alpha.23.tgz}
     dev: false
 
-  /@vunk/skzz/0.0.0-alpha.85:
-    resolution: {integrity: sha512-V+lOck/Fdiom5PRZYF1RoIYt6IlT4ynohm5lB9tTqNst3YEYhT3zjluO7tyCsV5YuWeJCQww7Nl1VBuRvWygbw==}
+  /@vunk/skzz/0.0.0-alpha.86:
+    resolution: {integrity: sha512-URn1fCkAMh23dx3E6mrm/hRdHWDUi+4ThglZLDfHKlfnZyLHwOv1m3Q74Ds5EjkBXz0ETaD76LagHPt5d+3KYg==}
     dev: false
 
   /@zzg6/flow/0.0.0-alpha.49:
@@ -5032,6 +5032,31 @@ packages:
 
   /element-plus/2.3.4_vue@3.2.47:
     resolution: {integrity: sha512-SQr0J9z7N4z48WYk/l9NE2tizl8Q7j2OhqlpTc42k4pGncry3+rVX6dsmcsglFynn6vt3NzYxWJqmLFyDKQq+g==}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      '@ctrl/tinycolor': 3.6.0
+      '@element-plus/icons-vue': 2.1.0_vue@3.2.47
+      '@floating-ui/dom': 1.2.7
+      '@popperjs/core': /@sxzz/popperjs-es/2.11.7
+      '@types/lodash': 4.14.194
+      '@types/lodash-es': 4.17.7
+      '@vueuse/core': 9.13.0_vue@3.2.47
+      async-validator: 4.2.5
+      dayjs: 1.11.7
+      escape-html: 1.0.3
+      lodash: 4.17.21
+      lodash-es: 4.17.21
+      lodash-unified: 1.0.3_tknf7errc3xdqocd3ryzzla7vq
+      memoize-one: 6.0.0
+      normalize-wheel-es: 1.2.0
+      vue: 3.2.47
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+    dev: false
+
+  /element-plus/2.3.5_vue@3.2.47:
+    resolution: {integrity: sha512-g27DHm2C5/tPwte9H6Juu+JOdzT9z1ALHTIvia6MwnBdCrI4kd77o6KcYdodU15/tYiPBoCEmobhl/7GUDb+1Q==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:

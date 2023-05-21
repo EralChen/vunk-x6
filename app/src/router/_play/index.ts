@@ -5,11 +5,11 @@ export default [
     path: '/_play',
     component: Layout,
     meta: {
-      title: '游乐',
+      title: '实验室',
       alwaysShow: true,
       icon: 'VideoPlay',
       header: true,
-      hidden: true,
+      // hidden: true,
     },
     redirect: '/_play/test1',
     children: [
@@ -17,6 +17,7 @@ export default [
         path: 'test1',
         meta: {
           title: 'test1',
+          hidden: true,
         },
         component: () => import('_v/_play/test1/index.vue'),
       },
@@ -24,6 +25,7 @@ export default [
         path: 'test2',
         meta: {
           title: 'test2',
+          hidden: true,
         },
         component: () => import('_v/_play/test2/index'),
       },
@@ -31,6 +33,7 @@ export default [
         path: 'test3',
         meta: {
           title: 'test3',
+          hidden: true,
         },
         component: () => import('_v/_play/test3/index'),
       },
@@ -39,20 +42,21 @@ export default [
       {
         path: 'vuesri',
         meta: {
-          title: 'vuesri',
+          title: '地图组件',
         },
         children: [
           {
             path: 'basemap',
             meta: {
               title: 'basemap',
+              hidden: true,
             },
             component: () => import('_v/_play/vuesri/basemap/index.vue'),
           },
           {
             path: 'wms-layer',
             meta: {
-              title: 'wms-layer',
+              title: '大气图层',
             },
             component: () => import('_v/_play/vuesri/wms-layer/index.vue'),
           },
@@ -63,6 +67,7 @@ export default [
         path: 'table',
         meta: {
           title: 'table',
+          hidden: true,
         },
         children: [
           {
