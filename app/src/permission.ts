@@ -4,7 +4,7 @@ import router from './router'
 import { usePlatformStore } from '@skzz-platform/stores/platform'
 import { usePermissionStore } from '@/stores/permission'
 
-const whiteList: (RegExp|string)[] = [/^\/login/, /^\/_play/] // no redirect whitelist
+const whiteList: (RegExp|string)[] = [/^\/login/] // no redirect whitelist
 
 
 router.beforeEach(async (to, from, next) => {
