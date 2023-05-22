@@ -1,14 +1,9 @@
 <script lang="ts" setup>
-import { VaSceneView } from '@vuesri/core/components/scene-view'
-import { VaTdtBasemap } from '@vuesri/core/components/tdt-basemap'
-import { VaWmsLayer, __VaWmsLayer } from '@vuesri/core/components/wms-layer'
-import { Media, setData } from '@vunk/core'
-import { __VkfForm, VkfForm } from '@vunk/form'
-import { onMounted, ref, shallowReactive } from 'vue'
+import {  ref } from 'vue'
 import { rLayers as rLayersApi, geoserver } from './request'
-import { VaWmsLayerOnClick } from '@vuesri/core/components/wms-layer-on-click'
-import { VaTreeLayerGroup, VaTreeLayerItem, VaViewUi, __VaTreeLayerGroup } from '@vuesri/core'
 import { VkCheckboxTree } from '@vunk/skzz/components/checkbox-tree'
+import { VaPopupTemplate, VaSceneView, VaTdtBasemap, VaWmsLayer, __VaWmsLayer, VaTreeLayerGroup, VaTreeLayerItem, VaViewUi, __VaTreeLayerGroup } from '@vuesri/core'
+import { VaWmsLayerPopupTemplate } from '@vuesri/core/components/wms-layer-popup-template'
 
 
 interface WmsLayerNode extends __VaTreeLayerGroup.TreeNode {
@@ -31,10 +26,7 @@ const layersData = ref<WmsLayerNode[]>([])
 const layerChecked = ref<WmsLayerNode[]>([])
 const filterText = ref<string>()
 
-
-rLayers().then(() => {
-  filterText.value = 'o'
-})
+rLayers()
 function rLayers () {
   return rLayersApi().then(res => {
     layersData.value = res.map((v) => {
@@ -56,12 +48,10 @@ function rLayers () {
 /* layer click */
 
 const checkChange = (data: WmsLayerNode, checked: boolean) => {
-  console.log(data, checked)
   if (data.layer) {
     data.layer.if = true
     data.layer.visible = checked
   }
-  
 }
 
 const layerLoad: __VaWmsLayer.OnLoad = async (e) => {
@@ -110,25 +100,29 @@ const layerLoad: __VaWmsLayer.OnLoad = async (e) => {
             ]"
             @load="layerLoad"
           >
-            <VaWmsLayerOnClick></VaWmsLayerOnClick>
+
+            <VaPopupTemplate :orphan="true">
+              <template #plugins>
+                <VaWmsLayerPopupTemplate></VaWmsLayerPopupTemplate>
+              </template>
+              
+              <template #default="{attributes}">
+
+              <el-descriptions :border="true">
+                <el-descriptions-item v-for="(v, k) of attributes"
+                  :label="k + ''"
+                  :key="k"
+                >
+                  {{ v }}
+                </el-descriptions-item>
+              </el-descriptions>
+              </template>
+            </VaPopupTemplate>
+
           </VaWmsLayer>
         </template>
       </VaTreeLayerItem>
     </VaTreeLayerGroup>
-
-
-
-    <!-- <VaWmsLayer
-      :url="geoserver + '/ows'"
-      @load="layerLoad"
-      :sublayers="[
-        {
-          name: 'pub:O3_predict_20220301',
-          queryable: true,
-        }
-      ]"
-    >
-    </VaWmsLayer> -->
 
   </VaSceneView>
 </PageX>

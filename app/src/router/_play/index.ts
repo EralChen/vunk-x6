@@ -11,7 +11,7 @@ export default [
       header: true,
       // hidden: true,
     },
-    redirect: '/_play/test1',
+    redirect: '/_play/vuesri',
     children: [
       {
         path: 'test1',
@@ -44,6 +44,7 @@ export default [
         meta: {
           title: '地图组件',
         },
+        redirect: '/_play/vuesri/wms-layer',
         children: [
           {
             path: 'basemap',
