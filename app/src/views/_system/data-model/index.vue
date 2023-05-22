@@ -1,76 +1,79 @@
 <script lang="tsx" setup>
-import { VkCheckboxTree, __VkCheckboxTree } from '@vunk/skzz/components/checkbox-tree'
-import { computed, reactive, watch } from 'vue'
-import { rDataModels, dDataModels } from '@skzz-platform/api/system/data-model'
-import { SkAppDialog, SkAppOperations, SkCheckTags, __SkCheckTags, SkAppTablesV1, __SkAppTablesV1 } from '@skzz/platform'
-import { setData, unsetData, VkDuplexCalc, VkDuplex } from '@vunk/core'
+import { reactive, ref } from 'vue'
+import { rDataModels, dDataModels, cuDataModel } from '@skzz-platform/api/system/data-model'
+import { SkAppDialog, SkAppOperations, SkAppTablesV1, __SkAppTablesV1, Pagination } from '@skzz/platform'
+import { FirstParameter, setData, VkDuplexCalc } from '@vunk/core'
 import CUForm from './cu-form/index.vue'
 import { Row } from './types'
-import SkAppIcon from '@skzz-platform/components/app-icon'
+import { genColumnsV1 } from '@skzz-platform/shared/utils-data'
 type Col = __SkAppTablesV1.Column<Row>
+
 
 const tableState = reactive({
   data: [] as Row[],
-  _columns: [
-    {
-      prop: undefined,
-      label: '操作',
-      width: '200em',
-      slots: ({ row }) => <SkAppOperations
-        modules={[ 'u', 'd']}
-        onD={ () => d([row.modelId])  }
-        onU={ () => preuI(row) }
-      >
-      </SkAppOperations>,
-      align: 'center',
-      headerAlign: 'center',
-    },
-  ] as Col[],
+  _columns: [ ] as Col[],
   columns: [] as Col[],
   query: {},
-  pagination: {
-    pageSize: 10,
-    start: 0,
-  },
+  total: 0,
 })
-const cuState = reactive({
+const pagination = ref<Pagination>({
+  pageSize: 10,
+  start: 0,
+})
+const cuIState = reactive({
   type: '' as 'c' | 'u' | '',
-  data: {} as Partial<Row>,
-})
-const cuData = computed(() => {
-  return {
-    ...cuState.data,
-  }
+  data: {} as FirstParameter<typeof cuDataModel>,
 })
 
+
+const operationsCol: Col =  {
+  prop: undefined,
+  label: '操作',
+  width: '200em',
+  slots: ({ row }) => <SkAppOperations
+    modules={[  'd']}
+    onD={ () => d([row])  }
+  >
+  </SkAppOperations>,
+  align: 'center',
+  headerAlign: 'center',
+}
+const propToCol = {
+  
+} as Record<keyof Row, Partial<Col> | null>
+const typeToCol: Record<string, Col> = {
+  button: operationsCol,
+}
 r()
 function r () {
-  return rDataModels({}, tableState.pagination).then(res => {
+  return rDataModels({}, pagination.value).then(res => {
     if (!tableState.columns.length) {
-      tableState.columns = [
-        ...res.columns as Col[],
-        ...tableState._columns,
-      ]
+      tableState.columns = genColumnsV1<Col>(
+        res.columns, 
+        propToCol, 
+        typeToCol,
+      )
+
+      tableState.columns.push(operationsCol)
     }
+    tableState.total = res.total
     tableState.data = res.rows
   })
 }
-function d (ids: string[]) {
+function d (ids: Row[]) {
   dDataModels(ids).then(() => {
     r()
   })
 }
 function precI () {
-  cuState.type = 'c'
-  cuState.data = {}
+  cuIState.type = 'c'
+  cuIState.data = {}
 }
 function preuI (row: Row) {
-  cuState.type = 'u'
-  
-  cuState.data = {...row}
+  // 暂无修改逻辑
 }
 function cuI () {
-  //
+  cuDataModel(cuIState.data)
 }
 </script>
 <template>
@@ -89,13 +92,14 @@ function cuI () {
       </template>
 
       <SkAppTablesV1 
-        :defaultExpandAll="true"
+        :modules="[]"
         flex-1
         :rowKey="'menuId'"
         :columns="tableState.columns"
         :data="tableState.data"
-        v-model:page-size="tableState.pagination.pageSize"
-        v-model:start="tableState.pagination.start"
+        :total="tableState.total"
+        v-model:page-size="pagination.pageSize"
+        v-model:start="pagination.start"
       >
       </SkAppTablesV1>
 
@@ -103,14 +107,14 @@ function cuI () {
     </VkDuplexCalc>
 
     <SkAppDialog
-      :modelValue="!!cuState.type"
-      @update:modelValue="cuState.type = ''"
-      :title="cuState.type === 'u' ? '编辑' : '新增'"
+      :modelValue="!!cuIState.type"
+      @update:modelValue="cuIState.type = ''"
+      :title="cuIState.type === 'u' ? '编辑' : '新增'"
     >
       <CUForm
-        :type="cuState.type"
-        :data="cuState.data"
-        @setData="setData(cuState.data, $event)"
+        :type="cuIState.type"
+        :data="cuIState.data"
+        @setData="setData(cuIState.data, $event)"
         @submit="cuI"
       ></CUForm>
     </SkAppDialog>

@@ -3,9 +3,10 @@
 import { Pagination } from '@skzz-platform/shared'
 import { ButtonId } from '@skzz-platform/shared/enum'
 import { request } from '@skzz-platform/shared/fetch/platform'
-import { NormalObject } from '@vunk/core'
-import { QueryRData, RestFetchExecOptions, RestFetchQueryOptions } from '@vunk/skzz'
+import { Merge, NormalObject } from '@vunk/core'
+import { QueryRData, RestFetchExecOptions } from '@vunk/skzz'
 import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
+import { DataModel } from './types'
 
 const MENU_DATA = {
   'dir': 'system',
@@ -18,11 +19,7 @@ export const rDataModels = (
   pagination?: Pagination,
 ) => {
   return request<{
-    '1.2': QueryRData<{
-      path: string;
-      modelId: string;
-      // id: string;
-    }>
+    '1.1': QueryRData<DataModel>
   }>({
     method: 'POST',
     url: '/core/busi/exec',
@@ -38,55 +35,49 @@ export const rDataModels = (
     },
   
   } as RestFetchExecOptions).then(res => {
-    return res.datas['1.2']
+    return res.datas['1.1']
   })
 }
 
-export const dDataModels = (modelIds: string[]) => {
+export const dDataModels = (rows: DataModel[]) => {
   return request({
     method: 'POST',
-    url: '/core/busi/save',
+    url: '/core/busi/exec',
     data: {
-      datas: [
-        {
-          datasetId: '1',
-          rows: modelIds.map(modelId => {
-            return {
-              modelId,
-              op: RestFetchOp.d,
-            }
-          },
-          ),
-        },
-      ],
       ...MENU_DATA,
-      'buttonId': 'save',
+      'buttonId': 'remove',
+      'datasetId': '1',
+      'condition': {
+        'op': 'remove',
+        rows,
+      },
     },
-  }, {
+  } as RestFetchExecOptions, {
     msg: '删除成功',
   })
 }
 
-export const cuDataModel = (data) => {
+export const cuDataModel = (data: Partial<DataModel>) => {
+  const isU = !!data.id
   return request({
     method: 'POST',
-    url: '/core/busi/save',
+    url: '/core/busi/exec',
     data: {
-      datas: [
-        {
-          datasetId: '1',
-          rows: [
-            {
-              ...data,
-              op: data.id ? RestFetchOp.u : RestFetchOp.c,
-            },
-          ],
-        },
-      ],
       ...MENU_DATA,
-      'buttonId': 'save',
+
+      'buttonId': isU ? ButtonId.modify : ButtonId.increase,
+      'datasetId': '1',
+      'condition': {
+        'op': 'save',
+
+        ...data,
+        keys: (data.keys as string[]).join(','),
+      },
     },
-  }, {
+  } as RestFetchExecOptions, {
     msg: data.id ? '修改成功' : '新增成功',
   })
 }
+
+
+export * from './types'

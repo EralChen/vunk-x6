@@ -1,9 +1,8 @@
 <script lang="tsx" setup>
 import { SkAppForm, __SkAppForm } from '@skzz/platform'
-import { Row } from '../types'
-import { ElLink } from 'element-plus'
 import { computed, PropType, ref  } from 'vue'
-import { SkAppIcon } from '@skzz-platform/components/app-icon'
+import { DataModel as Row } from '@skzz-platform/api/system/data-model'
+import { PATTERN } from '@skzz-platform/shared/utils-form'
 
 const props = defineProps({
   data: {
@@ -24,23 +23,61 @@ const formItems = ref<__SkAppForm.FormItem<keyof Row>[]>([
   {
     prop: 'modelId',
     templateType: 'VkfInput',
-    rules: {
-      required: true,
-      message: '模型ID不能为空',
-    },
+    rules: [ 
+      {
+        required: true,
+      },
+      {
+        pattern: PATTERN.code,
+      },
+    ],
     placeholder: '请输入模型ID',
     label: '模型ID',
     disabled: isU as unknown as boolean,
   },
+
   {
-    prop: 'path',
+    prop: 'table',
+    label: '表名',
     templateType: 'VkfInput',
-    rules: {
-      required: true,
-      message: '路径不能为空',
-    },
-    placeholder: '请输入路径',
-    label: 'URL路径',
+    rules: [
+      {
+        required: true,
+      },
+      {
+        pattern: PATTERN.code,
+      },
+    ],
+  },
+
+  {
+    prop: 'keys',
+    label: '主键',
+    templateType: 'VkfSelect',
+    allowCreate: true,
+    filterable: true,
+    multiple: true,
+    options: [
+      {
+        label: 'id',
+        value: 'id',
+      },
+    ],
+    required: true,
+  },
+
+  {
+    prop: 'dir',
+    label: '目录',
+    templateType: 'VkfInput',
+    rules: [
+      {
+        required: true,
+      },
+      {
+        pattern: PATTERN.code,
+      },
+    ],
   },
 
   {
