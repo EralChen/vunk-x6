@@ -3,9 +3,8 @@
 import { Pagination } from '@skzz-platform/shared'
 import { ButtonId } from '@skzz-platform/shared/enum'
 import { request } from '@skzz-platform/shared/fetch/platform'
-import { Merge, NormalObject } from '@vunk/core'
+import { NormalObject } from '@vunk/core'
 import { QueryRData, RestFetchExecOptions } from '@vunk/skzz'
-import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
 import { DataModel } from './types'
 
 const MENU_DATA = {

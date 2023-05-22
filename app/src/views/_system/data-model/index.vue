@@ -69,9 +69,7 @@ function precI () {
   cuIState.type = 'c'
   cuIState.data = {}
 }
-function preuI (row: Row) {
-  // 暂无修改逻辑
-}
+
 function cuI () {
   cuDataModel(cuIState.data)
 }
