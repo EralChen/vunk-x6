@@ -187,7 +187,7 @@ export default defineComponent({
               :width="(tableBindProps.width ?? width) - 2" 
               :height="(tableBindProps.height ?? height) - 2" 
               :columns="columns"
-              
+              :ref="elRef"
             >
               <slot></slot>
             </ElTableV2>

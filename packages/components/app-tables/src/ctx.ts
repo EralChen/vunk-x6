@@ -5,6 +5,8 @@ import {
   paginationProps as _paginationProps,
   paginationEmits as _paginationEmits,
 } from 'element-plus'
+import { PropType } from 'vue'
+import { AnyFunc } from '@vunk/core'
 
 const tableV2Props = pickObject({
   ..._tableV2Props,
@@ -91,6 +93,11 @@ export const props = {
   modules: {
     type: Array<'pagination'>,
     default: () => ['pagination'],
+  },
+
+  elRef: {
+    type: Function as PropType<AnyFunc>,
+    default: undefined,
   },
 
 }

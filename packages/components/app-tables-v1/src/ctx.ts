@@ -9,6 +9,7 @@ import { PropType } from 'vue'
 import { Column } from './types'
 import { _VkTableColumnsElCtx } from '@vunk/skzz/components/table-columns'
 import { tableProps as _tableProps, tableEmits } from './el-ctx'
+import { AnyFunc } from '@vunk/core'
 const paginationProps = pickObject(
   _paginationProps,
   {
@@ -84,6 +85,10 @@ export const props = {
     default: 'center',
   },
   
+  elRef: {
+    type: Function as PropType<AnyFunc>,
+    default: undefined,
+  },
 
 }
 
