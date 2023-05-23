@@ -3,6 +3,7 @@ import { request } from '@skzz-platform/shared/fetch/platform'
 import { Pagination } from '@skzz-platform/shared'
 import { QueryRData } from '@vunk/skzz'
 import { FlowNodeInstance } from '../types'
+import { InstanceDetail } from './types'
 /**
  * https://www.apifox.cn/link/project/1903413/apis/api-77333403
  * @param pagination 

@@ -1,4 +1,4 @@
-interface InstanceDetail {
+export interface InstanceDetail {
   flowInstId: string;
   nodeInstFounder: number;
   nodeInstDeadLine: number;
@@ -10,7 +10,7 @@ interface InstanceDetail {
   nodeId: string;
   nodeInstEndTime: string;
 }
-interface NodeInstOper {
+export interface NodeInstOper {
   operName: string;
   operId: number;
 }
