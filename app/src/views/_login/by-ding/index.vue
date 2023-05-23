@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue'
-
 /* maybe from env */
 const VITE_DING_BASE = 'https://login.dg-work.cn/oauth2/auth.htm'
 const VITE_DING_REDIRECT_URI = 'http://183.249.87.107:10000'

@@ -11,6 +11,7 @@ module.exports = defineConfig({
   },
   plugins: [
     '@typescript-eslint',
+    'import',
   ],
   extends: [
     'plugin:vue/vue3-essential',
@@ -44,6 +45,9 @@ module.exports = defineConfig({
     // for vue
     'vue/multi-word-component-names': 'off',
     'vue/prefer-import-from-vue': 'off',
+    
+    // for import
+    'import/no-duplicates': 'error', // 禁止重复 import 同一模块
    
   },
 })
