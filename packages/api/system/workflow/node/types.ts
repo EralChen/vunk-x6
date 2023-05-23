@@ -1,4 +1,5 @@
-import { ComboConfig, EdgeConfig, NodeConfig } from '@antv/g6'
+import type { ComboConfig, EdgeConfig, NodeConfig } from '@antv/g6'
+import type { NodeInstOper } from '@skzz-platform/api/system/workflow/instances/types'
 
 export type TotalFlow = {
   nodes: (
