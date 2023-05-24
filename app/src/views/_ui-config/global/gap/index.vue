@@ -10,14 +10,18 @@ const modules = ref([
 ])
 </script>
 <template>
-  <div plr-page pb-page class="h-page">
+  <div
+    plr-page
+    pb-page
+    class="h-page"
+  >
     <SkMultipage 
       v-model="currentPage" 
       :modules="modules"
       bg-bg-overlay
       class="h-100%"
-      tabXClass="pl-form-pl"
-      bodyClass="h-100%"
+      tab-x-class="pl-form-pl"
+      body-class="h-100%"
     >
       <template #base>
         <ElScrollbar class="ptb-form-pt plr-form-pl">
@@ -29,7 +33,6 @@ const modules = ref([
           <NameVue></NameVue>
         </ElScrollbar>
       </template>
-
     </SkMultipage>
   </div>
 </template>

@@ -33,12 +33,14 @@ const formItems: __SkAppForm.CoreFormItem<keyof typeof elCardTheme>[] = [
 </script>
 <template>
   <PageX>
-    <SkAppCard class="h-100%" :header="'卡片配置'">
-
+    <SkAppCard
+      class="h-100%"
+      :header="'卡片配置'"
+    >
       <SkAppForm 
-        :labelWidth="100"
+        :label-width="100"
         class="plr-form-pl ptb-form-pt"
-        :formItems="formItems"
+        :form-items="formItems"
         :data="themeStore.cardStyles"
         @setData="setData(themeStore.cardStyles, $event)"
       ></SkAppForm>

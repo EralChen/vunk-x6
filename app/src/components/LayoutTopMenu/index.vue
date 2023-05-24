@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ElMenu, ElIcon } from 'element-plus'
+import { ElMenu } from 'element-plus'
 import { usePermissionStore } from '@/stores/permission'
 import { VkRoutesMenuContent } from '@vunk/skzz/components/routes-menu-content'
 import LinkVue from '_c/MenuLink/index.vue'
@@ -65,19 +65,23 @@ onMounted(() => {
   <ElMenu 
     mode="horizontal"
     class="layout-top-menu"
-    :defaultActive="defaultHref"
-    :backgroundColor="'transparent'"
+    :default-active="defaultHref"
+    :background-color="'transparent'"
   >
     <VkRoutesMenuContent :data="navRoutes">
       <template #item="{ data, href }">
-        <LinkVue :isMenu="false" :data="data" :to="href">
+        <LinkVue
+          :is-menu="false"
+          :data="data"
+          :to="href"
+        >
           <SkAppIcon 
-            class="mb-.2"
-            v-if="data.meta?.icon" 
+            v-if="data.meta?.icon"
+            class="mb-.2" 
             :icon="data.meta.icon"
           ></SkAppIcon>
     
-          {{  viewsStore.addBaseViewToRecord(href, data)  }}
+          {{ viewsStore.addBaseViewToRecord(href, data) }}
         </LinkVue>
       </template>
 
@@ -86,21 +90,23 @@ onMounted(() => {
       </template>
 
       <template #menuTitle="{ data, href }">
-        <LinkVue :isMenu="true" :data="data" :to="href">
+        <LinkVue
+          :is-menu="true"
+          :data="data"
+          :to="href"
+        >
           <SkAppIcon 
-            class="mb-.2"
-            v-if="data.meta?.icon" 
+            v-if="data.meta?.icon"
+            class="mb-.2" 
             :icon="data.meta.icon"
           ></SkAppIcon>
         </LinkVue>
 
         <span> 
           {{ data.meta?.title || data.meta?.name }} 
-          {{  viewsStore.addBaseViewToRecord(href, data)  }}
-        </span> 
-
+          {{ viewsStore.addBaseViewToRecord(href, data) }}
+        </span>
       </template>
-      
     </VkRoutesMenuContent>
   </ElMenu>
 </template>

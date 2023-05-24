@@ -23,21 +23,26 @@ export default defineComponent({
 })
 </script>
 <template>
-  <div :class="{
-    [skFlex]: true,
-  }">
-    <div :class="normalizeClass({
-      'g-primary': isFirstMain,
-      'g-second': !isFirstMain,
-    }) + ' ' + normalizeClass(itemClass)">
-
+  <div
+    :class="{
+      [skFlex]: true,
+    }"
+  >
+    <div
+      :class="normalizeClass({
+        'g-primary': isFirstMain,
+        'g-second': !isFirstMain,
+      }) + ' ' + normalizeClass(itemClass)"
+    >
       <slot name="one"></slot>
     </div>
 
-    <div :class="normalizeClass({
-      'g-second': isFirstMain,
-      'g-primary': !isFirstMain,
-    }) + ' ' + normalizeClass(itemClass)">
+    <div
+      :class="normalizeClass({
+        'g-second': isFirstMain,
+        'g-primary': !isFirstMain,
+      }) + ' ' + normalizeClass(itemClass)"
+    >
       <slot name="two"></slot>
       <slot></slot>
     </div>

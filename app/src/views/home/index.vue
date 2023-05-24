@@ -14,5 +14,5 @@ export default defineComponent({
 })
 </script>
 <template>
-  <div>{{  testName  }}</div>
+  <div>{{ testName }}</div>
 </template>

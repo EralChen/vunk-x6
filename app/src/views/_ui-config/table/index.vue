@@ -10,7 +10,10 @@ const themeStore = useThemeStore()
 </script>
 <template>
   <page-x>
-    <SkAppCard class="h-100%" :header="'表格配置'">
+    <SkAppCard
+      class="h-100%"
+      :header="'表格配置'"
+    >
       <ElScrollbar>
         <SkAppModule :title="'配置表单'">
           <ConfigVue
@@ -22,8 +25,6 @@ const themeStore = useThemeStore()
           <BasicVue></BasicVue>
         </SkAppModule>
       </ElScrollbar>
-   
     </SkAppCard>
-    
   </page-x>
 </template>

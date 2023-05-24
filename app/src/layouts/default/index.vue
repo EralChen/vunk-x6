@@ -31,17 +31,21 @@ onBeforeRouteUpdate(() => {
       ></LayoutHeader>
     </template>
 
-    <div sk-flex class="h-100%">
+    <div
+      sk-flex
+      class="h-100%"
+    >
       <div class="layout-default-aside-x">
-        <LayoutAside v-if="headerReady"
+        <LayoutAside
+          v-if="headerReady"
           @load="asideReady = true"
         ></LayoutAside>
       </div>
 
       <VkDuplexCalc 
-        class="flex-1 overflow-hidden" 
-        :heightProperty="'--zz-page-height'"
-        v-if="asideReady"
+        v-if="asideReady" 
+        class="flex-1 overflow-hidden"
+        :height-property="'--zz-page-height'"
       >
         <template #one>
           <TagsView></TagsView>
@@ -51,11 +55,8 @@ onBeforeRouteUpdate(() => {
         <ElScrollbar ref="scrollbarNode">
           <AppMain></AppMain>
         </ElScrollbar>
-
       </VkDuplexCalc>
-
     </div>
-
   </VkDuplexCalc>
 </template>
 

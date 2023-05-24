@@ -42,18 +42,33 @@ export default defineComponent({
 })
 </script>
 <template>
-  <RouterLink :to="to" custom>
+  <RouterLink
+    :to="to"
+    custom
+  >
     <template #default="{ navigate, isActive, isExactActive, href }">
-      <VkSpreadTo :target="getSpreadTarget" :type="'class'" :data="{
-        'is-active': isActive,
-        'is-exact-active': isExactActive,
-      }"></VkSpreadTo>
+      <VkSpreadTo
+        :target="getSpreadTarget"
+        :type="'class'"
+        :data="{
+          'is-active': isActive,
+          'is-exact-active': isExactActive,
+        }"
+      ></VkSpreadTo>
 
-      <a @click.prevent="doNav(navigate)" class="layout-default-aside-link" :href="href" :class="{
-        'is-active': isActive,
-        'is-exact-active': isExactActive,
-      }">
-        <slot :isActive="isActive" :isExactActive="isExactActive">
+      <a
+        class="layout-default-aside-link"
+        :href="href"
+        :class="{
+          'is-active': isActive,
+          'is-exact-active': isExactActive,
+        }"
+        @click.prevent="doNav(navigate)"
+      >
+        <slot
+          :is-active="isActive"
+          :is-exact-active="isExactActive"
+        >
           <!-- {{ data.meta?.name }} -->
           <span></span>
         </slot>

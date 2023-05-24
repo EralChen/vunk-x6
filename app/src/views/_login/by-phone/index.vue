@@ -76,7 +76,7 @@ const formItems = computed<__SkAppForm.FormItem[]>(() => {
       type: 'primary',
       size: 'large',
       onClick: () => {
-        console.log('login')
+        // console.log('login')
       },
     },
   ]
@@ -88,7 +88,7 @@ function rCode () {
 <template>
   <SkAppForm
     :data="formData"
-    :formItems="formItems"
+    :form-items="formItems"
     @setData="setData(formData, $event)"
   >
   </SkAppForm>

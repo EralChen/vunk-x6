@@ -63,10 +63,9 @@ const formItems: __SkAppForm.CoreFormItem<keyof typeof elTableV2Theme>[] = [
 </script>
 <template>
   <SkAppForm
-    :labelPosition="'top'"
+    :label-position="'top'"
     :layout="true"
-    :formItems="formItems"
+    :form-items="formItems"
   >
-
   </SkAppForm>
 </template>

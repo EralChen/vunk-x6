@@ -16,6 +16,7 @@ onMounted(() => {
   window.addEventListener('message', (event) => {
     //授权码
     let code = event.data.code
+    // eslint-disable-next-line no-console
     console.log(code)
   })
 
@@ -24,7 +25,11 @@ onMounted(() => {
 </script>
 <template>
   <div sk-flex="row-center">
-    <iframe :src="url" frameborder="0" height="350px" width="350px"></iframe>
+    <iframe
+      :src="url"
+      frameborder="0"
+      height="350px"
+      width="350px"
+    />
   </div>
-
 </template>

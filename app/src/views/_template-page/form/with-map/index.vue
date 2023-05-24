@@ -26,11 +26,17 @@ const formVueProps = computed(() => {
 </script>
 <template>
   <PageX>
-    <SkAppCard class="h-100%" :header="'地图+表单'">
+    <SkAppCard
+      class="h-100%"
+      :header="'地图+表单'"
+    >
       <template #header__options>
         <ThemeClipboardButton :target="'colorStyles'"></ThemeClipboardButton>
       </template>
-      <GoldMapX :viewerIndex="2" class="h-100%">
+      <GoldMapX
+        :viewer-index="2"
+        class="h-100%"
+      >
         <ElScrollbar>
           <SkAppModule :title="'基础颜色'">
             <BaseVue v-bind="formVueProps" />
@@ -38,16 +44,12 @@ const formVueProps = computed(() => {
           <SkAppModule :title="'背景颜色'">
             <BgVue v-bind="formVueProps"></BgVue>
           </SkAppModule>
-
         </ElScrollbar>
 
         <template #map>
           <VaSketch></VaSketch>
         </template>
-
       </GoldMapX>
-  
     </SkAppCard>
   </PageX>
-
 </template>

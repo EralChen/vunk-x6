@@ -6,17 +6,24 @@ const layoutStore = useLayoutStore()
 </script>
 <template>
   <ElDropdown :trigger="'click'">
-    <SvgIcon :iconClass="'size'" class="cursor-pointer text-white"></SvgIcon>
+    <SvgIcon
+      :icon-class="'size'"
+      class="cursor-pointer text-white"
+    ></SvgIcon>
     <template #dropdown>
-      <div w-200px pa-page>
-        <ElSlider :size="'small'" 
-        v-model="layoutStore.fontSize" 
-        :min="12" :max="18"></ElSlider>
+      <div
+        w-200px
+        pa-page
+      >
+        <ElSlider
+          v-model="layoutStore.fontSize" 
+          :size="'small'" 
+          :min="12"
+          :max="18"
+        ></ElSlider>
       </div>
-   
     </template>
   </ElDropdown>
-  
 </template>
 <style>
 

@@ -105,14 +105,14 @@ const formItemWithLayout = computed(() => {
 })
 </script>
 <template>
-    <SkAppForm 
-      :labelWidth="'6em'"
-      :formItems="formItemWithLayout" 
-      :data="formData"
-      @setData="setFormData"
-      v-bind="$attrs"
-    >
-    </SkAppForm>
+  <SkAppForm 
+    :label-width="'6em'"
+    :form-items="formItemWithLayout" 
+    :data="formData"
+    v-bind="$attrs"
+    @setData="setFormData"
+  >
+  </SkAppForm>
 </template>
 <style>
 

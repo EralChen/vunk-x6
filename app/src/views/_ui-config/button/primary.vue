@@ -95,15 +95,13 @@ const formItems: __SkAppForm.CoreFormItem<keyof typeof elButtonPrimaryTheme>[] =
 ] 
 </script>
 <template>
-
-    <SkAppForm 
-      :labelPosition="'top'"
-      :layout="true"
-      :labelWidth="150"
-      class="plr-form-pl ptb-form-pt"
-      :formItems="formItems"
-      :data="themeStore.cardStyles"
-      @setData="setData(themeStore.cardStyles, $event)"
-    ></SkAppForm>
-
+  <SkAppForm 
+    :label-position="'top'"
+    :layout="true"
+    :label-width="150"
+    class="plr-form-pl ptb-form-pt"
+    :form-items="formItems"
+    :data="themeStore.cardStyles"
+    @setData="setData(themeStore.cardStyles, $event)"
+  ></SkAppForm>
 </template>

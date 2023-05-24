@@ -27,7 +27,10 @@ const formVueProps = computed(() => {
 </script>
 <template>
   <PageX>
-    <SkAppCard class="h-100%" :header="'ElementPlus 颜色'">
+    <SkAppCard
+      class="h-100%"
+      :header="'ElementPlus 颜色'"
+    >
       <template #header__options>
         <ThemeClipboardButton :target="'colorStyles'"></ThemeClipboardButton>
       </template>
@@ -40,8 +43,7 @@ const formVueProps = computed(() => {
           <BgVue v-bind="formVueProps"></BgVue>
         </SkAppModule>
         <SkAppModule :title="'文本颜色'">
-          <TextVue v-bind="formVueProps"
-          ></TextVue>
+          <TextVue v-bind="formVueProps"></TextVue>
         </SkAppModule>
         <SkAppModule :title="'填充颜色'">
           <FillVue v-bind="formVueProps"></FillVue>
@@ -52,5 +54,4 @@ const formVueProps = computed(() => {
       </ElScrollbar>
     </SkAppCard>
   </PageX>
-
 </template>

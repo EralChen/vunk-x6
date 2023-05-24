@@ -5,7 +5,7 @@ keepAliverStore.collectingInclude()
 
 </script>
 <template>
-  <RouterView  v-slot="{ Component }">
+  <RouterView v-slot="{ Component }">
     <KeepAlive :include="keepAliverStore.include">
       <component :is="Component"></component>
     </KeepAlive>

@@ -1,7 +1,6 @@
 <script lang="tsx" setup>
 import PageX from '_c/PageX/index.vue'
 import { 
-  SkAppTables, __SkAppTables, 
   SkAppQueryForm, __SkAppQueryForm, 
   SkAppOperations,
   Pagination,
@@ -9,7 +8,6 @@ import {
 import { ApiReturnType, NormalObject, setData, VkDuplexCalc } from '@vunk/core'
 import { reactive, ref, watch } from 'vue'
 import { rRoles, dRoles } from '@skzz/platform/api/system/role'
-import { genColumn } from '@skzz/platform/shared/utils-data'
 import { useRouterTo } from '@skzz/platform/composables'
 import { SkAppTablesV1, __SkAppTablesV1 } from '@skzz/platform/components/app-tables-v1'
 type Res = ApiReturnType<typeof rRoles>
@@ -97,28 +95,34 @@ function precI () {
       <template #one>
         <SkAppQueryForm 
           :data="queryData" 
-          @setData="setData(queryData, $event)" 
-          :formItems="queryItems"
+          :form-items="queryItems" 
+          @setData="setData(queryData, $event)"
           @enter="r"
         >
           <template #options>
-            <ElButton type="primary" @click="r">查询</ElButton>
-            <ElButton type="primary" 
+            <ElButton
+              type="primary"
+              @click="r"
+            >
+              查询
+            </ElButton>
+            <ElButton
+              type="primary" 
               @click="precI"
-            >新增</ElButton>
-            
+            >
+              新增
+            </ElButton>
           </template>
         </SkAppQueryForm>
       </template>
 
       <SkAppTablesV1 
-        class="h-100%" 
-        v-bind="tableState"
+        v-bind="tableState" 
         v-model:start="pagination.start"
         v-model:pageSize="pagination.pageSize"
+        class="h-100%"
       >
       </SkAppTablesV1>
-      
     </VkDuplexCalc>
   </PageX>
 </template>

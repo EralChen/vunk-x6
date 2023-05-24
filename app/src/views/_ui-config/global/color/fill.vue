@@ -90,7 +90,10 @@ const formItemsWithDemo = computed(() => {
 })
 </script>
 <template>
-  <SkAppForm  :formItems="formItemsWithDemo" v-bind="$attrs"></SkAppForm>
+  <SkAppForm
+    :form-items="formItemsWithDemo"
+    v-bind="$attrs"
+  ></SkAppForm>
 </template>
 <style>
 
