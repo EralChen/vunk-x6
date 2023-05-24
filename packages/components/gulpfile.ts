@@ -3,8 +3,7 @@ import glob, { sync } from 'fast-glob'
 import path from 'path'
 
 import { distDir } from '@lib-env/path'
-import { rollupComponents, rollupFile  } from '@lib-env/build-utils'
-import { genTypes } from '@lib-env/build-utils'
+import { rollupComponents, rollupFile, genTypes } from '@lib-env/build-utils'
 import { filePathIgnore, libExternal } from '@lib-env/build-constants'
 import { taskWithName } from '@lib-env/shared'
 
