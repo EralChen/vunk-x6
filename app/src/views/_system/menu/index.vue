@@ -195,10 +195,14 @@ function preBindBtns (row: Row) {
 </script>
 <template>
   <page-x>
-    <VkDuplexCalc :gap="'var(--gap-page)'" class="pa-page h-full">
+    <VkDuplexCalc
+      :gap="'var(--gap-page)'"
+      class="pa-page h-full"
+    >
       <template #one>
         <div sk-flex="row-between-center">
           <SkCheckTags 
+            v-model="checkTagsState.value"
             :modules="['creatable']"
             :options="checkTagsState.options"
             @setData:options="setData(
@@ -209,69 +213,64 @@ function preBindBtns (row: Row) {
               checkTagsState.options,
               $event,
             )"
-            v-model="checkTagsState.value"
-          >
-          </SkCheckTags>
+          />
           <SkIncreaseButton
             :btns="rMenuBtns()"
             @click="precI()"
-          >
-          </SkIncreaseButton>
+          />
         </div>
-
       </template>
  
   
-      <VkDuplex :gap="'var(--gap-page)'" :direction="'row'"  h-full >
+      <VkDuplex
+        :gap="'var(--gap-page)'"
+        :direction="'row'"
+        h-full
+      >
         <template #one>
           <VkCheckboxTree 
             v-model:filterText="treeState.filterText"
-            :nodeKey="'menuId'"
-            :modules="['filter', 'srcollbar']"
-            :defaultExpandAll="true"
-            :data="treeState.data" 
             v-model="treeState.checked"
-          ></VkCheckboxTree>
+            :node-key="'menuId'"
+            :modules="['filter', 'srcollbar']"
+            :default-expand-all="true" 
+            :data="treeState.data"
+          />
         </template>
 
         <SkAppTablesV1 
-          :defaultExpandAll="true"
+          :default-expand-all="true"
           flex-1
           :modules="[]"
-          :rowKey="'menuId'"
+          :row-key="'menuId'"
           :columns="tableState.columns"
           :data="tableState.data"
-        >
-        </SkAppTablesV1>
-
+        />
       </VkDuplex>
-
     </VkDuplexCalc>
 
     <SkAppDialog
-      :modelValue="!!cuState.type"
-      @update:modelValue="cuState.type = ''"
+      :model-value="!!cuState.type"
       :title="cuState.type === 'u' ? '编辑' : '新增'"
+      @update:modelValue="cuState.type = ''"
     >
-
       <CUForm
         :type="cuState.type"
         :data="cuState.data"
         @setData="setData(cuState.data, $event)"
         @submit="cuI"
-      ></CUForm>
-
+      />
     </SkAppDialog>
 
     <SkAppDialog
-      :modelValue="!!bindBtnsState.current.menuId"
-      @update:modelValue="bindBtnsState.current = {}"
+      :model-value="!!bindBtnsState.current.menuId"
       :title="'按钮权限绑定'"
+      @update:modelValue="bindBtnsState.current = {}"
     >
       <BindBtnsForm
-        :menuId="bindBtnsState.current.menuId"
         :id="bindBtnsState.current.id"
-      ></BindBtnsForm>
+        :menu-id="bindBtnsState.current.menuId"
+      />
     </SkAppDialog>
   </page-x>
 </template>

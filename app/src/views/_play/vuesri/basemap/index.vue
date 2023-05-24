@@ -12,10 +12,10 @@ import { VaSceneView, VaTdtBasemap } from '@vuesri/core'
     <VaSceneView>
       <VaTdtBasemap
         :type="'vec_w'"
-        :spatialReference="{
+        :spatial-reference="{
           wkid: 3857
         }"
-      ></VaTdtBasemap>
+      />
     </VaSceneView>
   </page-x>
 </template>

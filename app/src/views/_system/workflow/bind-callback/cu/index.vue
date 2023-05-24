@@ -1,17 +1,36 @@
 <template>
   <ElFormItem label="通知人">
-    <BindUser v-model="showBind" :closable="true" :has-bind="false" v-model:data="bindData" @update:data="doEmit" v-model:show-data="bindData" @update:show-data="doEmit" />
+    <BindUser
+      v-model="showBind"
+      v-model:data="bindData"
+      v-model:show-data="bindData"
+      :closable="true"
+      :has-bind="false"
+      @update:data="doEmit"
+      @update:show-data="doEmit"
+    />
   </ElFormItem>
   <ElFormItem label="表单字段">
     <div class="w-100%">
-      <BindFormItem v-model:show="showBindForm" :form-id="formId" v-model="bindFormData" @add="addTableData" />
+      <BindFormItem
+        v-model:show="showBindForm"
+        v-model="bindFormData"
+        :form-id="formId"
+        @add="addTableData"
+      />
       
-      <SkAppTablesV1 class="h-20vh" layout="" :defaultExpandAll="true" flex-1 :rowKey="'menuId'"
-        :columns="tableState.columns" :data="tableState.data" v-model:page-size="tableState.pagination.pageSize"
-        v-model:start="tableState.pagination.start">
-      </SkAppTablesV1>
+      <SkAppTablesV1
+        v-model:page-size="tableState.pagination.pageSize"
+        v-model:start="tableState.pagination.start"
+        class="h-20vh"
+        layout=""
+        :default-expand-all="true"
+        flex-1
+        :row-key="'menuId'"
+        :columns="tableState.columns"
+        :data="tableState.data"
+      />
     </div>
-
   </ElFormItem>
 </template>
 

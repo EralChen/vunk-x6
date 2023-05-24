@@ -1,8 +1,8 @@
 <script lang="tsx" setup>
 import { SkAppForm, __SkAppForm } from '@skzz/platform'
 import { Row } from '../types'
-import { computed, PropType, ref  } from 'vue'
-import { NormalObject, SetDataEvent } from '@vunk/core'
+import { computed, PropType  } from 'vue'
+import { SetDataEvent } from '@vunk/core'
 import { PATTERN } from '@skzz-platform/shared/utils-form'
 
 
@@ -123,9 +123,8 @@ const formItems = computed<__SkAppForm.FormItem<keyof Row>[]>(() => [
 <template>
   <SkAppForm
     :data="data"
-    :labelWidth="'8em'"
-    :formItems="formItems"
+    :label-width="'8em'"
+    :form-items="formItems"
     @setData="$emit('setData', $event)"
-  >
-  </SkAppForm>
+  />
 </template>

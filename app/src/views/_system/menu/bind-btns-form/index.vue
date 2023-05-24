@@ -8,9 +8,11 @@ import { ButtonId } from '@skzz-platform/shared/enum'
 const props = defineProps({
   menuId: {
     type: String,
+    default: '',
   },
   id: {
     type: String,
+    default: '',
   },
 })
 
@@ -71,12 +73,11 @@ function rData () {
 <template>
   <ElTransfer 
 
-    sk-flex="row-center2"
     v-model="value"
+    sk-flex="row-center2"
     
     :data="data"
     :titles="['未绑列表', '已绑列表']"
     @change="valueChange"
-  >
-  </ElTransfer>
+  />
 </template>

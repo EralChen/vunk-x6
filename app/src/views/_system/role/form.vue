@@ -1,21 +1,26 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { PropType, defineComponent } from 'vue'
 import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
 import { cuRole } from '@skzz-platform/api/system/role'
 import { FirstParameter } from '@vunk/core'
 import { PATTERN } from '@skzz-platform/shared/utils-form'
-export type Data = FirstParameter<typeof cuRole>
+export type Row = FirstParameter<typeof cuRole>
   
 export default defineComponent({
   components: {
     SkAppForm,
   },
-  props: ['data'],
+  props: {
+    data: {
+      type: Object as PropType<Partial<Row>>,
+      required: true,
+    },
+  },
   emits: {
-    submit: (data: Data) => data,
+    submit: (data: Row) => data,
   },
   setup (props, { emit }) {
-    const formItems: __SkAppForm.FormItem<keyof Data>[] = [
+    const formItems: __SkAppForm.FormItem<keyof Row>[] = [
       {
         templateType: 'VkfInput',
         prop: 'name',
@@ -60,7 +65,7 @@ export default defineComponent({
         size: 'large',
         class: 'is-btn-group',
         onClick: () => {
-          emit('submit', props.data)
+          emit('submit', props.data as Row)
         },
         
       },
@@ -74,8 +79,8 @@ export default defineComponent({
 </script>
 <template>
   <SkAppForm 
-    :labelWidth="'6em'"
+    :label-width="'6em'"
     :data="data"
-    :formItems="formItems"
-  ></SkAppForm>
+    :form-items="formItems"
+  />
 </template>

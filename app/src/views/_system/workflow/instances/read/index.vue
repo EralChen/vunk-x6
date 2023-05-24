@@ -1,21 +1,48 @@
 <template>
   <PageOver>
-    <SkAppCard class="h-full" header="实例详情">
-      <div class="editor-x" sk-flex="row">
+    <SkAppCard
+      class="h-full"
+      header="实例详情"
+    >
+      <div
+        class="editor-x"
+        sk-flex="row"
+      >
         <div class="editor">
-          <ZzG6Editor :selectNodeId="nodeModel.id" :mode="'default'" :model-value="model"
-            @nodeselectchange="nodeSelectChange" :active-tab-name="'approval'" >
+          <ZzG6Editor
+            :select-node-id="nodeModel.id"
+            :mode="'default'"
+            :model-value="model"
+            :active-tab-name="'approval'"
+            @nodeselectchange="nodeSelectChange"
+          >
             <template #form>
-              <el-tab-pane label="审批" name="approval">
+              <el-tab-pane
+                label="审批"
+                name="approval"
+              >
                 <ElScrollbar>
-                  <ElForm label-position="top" :disabled="true">
-                    <BindOpers :node-model="nodeModel" :disabled="true"></BindOpers>
+                  <ElForm
+                    label-position="top"
+                    :disabled="true"
+                  >
+                    <BindOpers
+                      :node-model="nodeModel"
+                      :disabled="true"
+                    />
                   </ElForm>
                   <ElForm label-position="top">
                     <!-- <BindAssitsOpers :node-model="nodeModel" :currentNodeInstIds="bindState.currentNodeInstIds"
                       @bind-success="r" :isFlowStart="isFlowStart"></BindAssitsOpers> -->
-                    <Approval :itemId="flowData.itemId" :flowId="flowId" :node-model="nodeModel" :currentNodeInstIds="bindState.currentNodeInstIds"
-                      :isFlowStart="isFlowStart" @approvalSuccess="approvalSuccess" :form-table="flowData.formTable"></Approval>
+                    <Approval
+                      :item-id="flowData.itemId"
+                      :flow-id="flowId"
+                      :node-model="nodeModel"
+                      :current-node-inst-ids="bindState.currentNodeInstIds"
+                      :is-flow-start="isFlowStart"
+                      :form-table="flowData.formTable"
+                      @approvalSuccess="approvalSuccess"
+                    />
                   </ElForm>
                 </ElScrollbar>
               </el-tab-pane>
@@ -23,7 +50,6 @@
           </ZzG6Editor>
         </div>
       </div>
-     
     </SkAppCard>
   </PageOver>
 </template>

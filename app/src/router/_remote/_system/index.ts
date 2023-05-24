@@ -1,5 +1,5 @@
 import Layout from '@/layouts/default/index.vue'
-import { RouteRecordRaw, RouterView } from 'vue-router'
+import { RouteRecordRaw } from 'vue-router'
 import FORM from './form'
 import MESSAGE from './message'
 import { redirectToFirstChildName } from '@skzz-platform/shared/utils-router'

@@ -7,7 +7,7 @@ import {
   Pagination,
 } from '@skzz/platform'
 import { NormalObject, setData, VkDuplexCalc } from '@vunk/core'
-import { computed, h, reactive, ref, watch } from 'vue'
+import { computed, reactive, ref, watch } from 'vue'
 import { cuApplication, rApplicationBtns, dApplications, rApplications, BoundApplication, cBoundApplications, rBoundApplications, dBoundApplications } from '@skzz-platform/api/platform/application'
 import { genColumns } from '@skzz-platform/shared/utils-data'
 import CuForm from './cu-form/index.vue'
@@ -217,8 +217,8 @@ function unbind (ba: Partial<BoundApplication>) {
       <template #one>
         <SkAppQueryForm 
           :data="queryData" 
-          @setData="setData(queryData, $event)" 
-          :formItems="queryItems"
+          :form-items="queryItems" 
+          @setData="setData(queryData, $event)"
           @enter="r"
         >
           <template #options>
@@ -227,43 +227,44 @@ function unbind (ba: Partial<BoundApplication>) {
             <SkIncreaseButton 
               :btns="rApplicationBtns()"
               @click="precI"
-            >新增</SkIncreaseButton>
-            
+            >
+              新增
+            </SkIncreaseButton>
           </template>
         </SkAppQueryForm>
       </template>
 
       <SkAppTables 
         
-        class="h-100%" 
-        v-bind="tableState"
+        v-bind="tableState" 
         v-model:start="pagination.start"
         v-model:pageSize="pagination.pageSize"
-      >
-      </SkAppTables>
+        class="h-100%"
+      />
     </VkDuplexCalc>
 
-    <SkAppDialog :title="cuIState.title" v-model="cuIState.visible">
+    <SkAppDialog
+      v-model="cuIState.visible"
+      :title="cuIState.title"
+    >
       <CuForm
         :data="cuIState.formData"
         @setData="setData(cuIState.formData, $event)"
         @submit="cuI"
-      ></CuForm>
+      />
     </SkAppDialog>
 
     <SkAppDialog 
-      :modelValue="!!bindState.current.applicationId"
-      @update:modelValue="bindState.current = {}"
+      :model-value="!!bindState.current.applicationId"
       :title="bindState.title"
+      @update:modelValue="bindState.current = {}"
     >
       <SkTenantTablesSelect
+        v-model="bindState.data"
         :columns="bindCols"
         :readonly="true"
         class="h-50vh"
-        v-model="bindState.data"
-      >
-      </SkTenantTablesSelect>
-
+      />
     </SkAppDialog>
 
     <SkAppDialog
@@ -271,12 +272,11 @@ function unbind (ba: Partial<BoundApplication>) {
       :title="bind2State.title"
       :modal="false"
     >
-     <CAdministratorForm
+      <CAdministratorForm
         :data="bind2State.postData"
         @setData="setData(bind2State.postData, $event)"
         @submit="bind(bind2State.postData)"
-     ></CAdministratorForm>
+      />
     </SkAppDialog>
-
   </PageX>
 </template>

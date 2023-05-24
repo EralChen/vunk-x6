@@ -17,19 +17,23 @@ export default defineComponent({
 })
 </script>
 <template>
-  <ElCard class="sk-app-card" :class="{
-    'has-not-body-padding': !bodyPadding,
-    'is-flex': flex,
-  }" v-bind="cardProps">
+  <ElCard
+    class="sk-app-card"
+    :class="{
+      'has-not-body-padding': !bodyPadding,
+      'is-flex': flex,
+    }"
+    v-bind="cardProps"
+  >
     <template #header>
       <slot name="header">
-        <span>{{  header  }}</span>
+        <span>{{ header }}</span>
         <slot name="header__options">
-          <span></span>
+          <span />
         </slot>
       </slot>
     </template>
-    <slot></slot>
+    <slot />
   </ElCard>
 </template>
 <style>

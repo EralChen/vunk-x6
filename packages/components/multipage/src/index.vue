@@ -8,8 +8,8 @@ export default defineComponent({
   components: {
     VkCheckLogic, VkCheckLogicProvider, VkDuplex,
   },
-  emits,
   props,
+  emits,
   setup (props) {
     const visitedTabs =  ref(new Set<string|number>())
     const visitedModules = computed(() => {
@@ -28,11 +28,18 @@ export default defineComponent({
 <template>
   <VkDuplex>
     <template #one>
-      <VkCheckLogicProvider :modelValue="modelValue"
+      <VkCheckLogicProvider
+        :model-value="modelValue"
         @update:modelValue="$emit('update:modelValue', $event)"
       >
-        <div class="sk-multipage-header" :class="headerClass">
-          <div class="sk-multipage-tab-x" :class="tabXClass">
+        <div
+          class="sk-multipage-header"
+          :class="headerClass"
+        >
+          <div
+            class="sk-multipage-tab-x"
+            :class="tabXClass"
+          >
             <VkCheckLogic 
               v-for="item of modules" 
               :key="item.value"
@@ -46,27 +53,31 @@ export default defineComponent({
           </div>
 
           <div 
-            class="sk-multipage-options-x" 
             v-for="item of visitedModules" 
+            v-show="modelValue === item.value" 
             :key="item.value"
-            v-show="modelValue === item.value"
+            class="sk-multipage-options-x"
           >
-            <slot v-bind="item" :name="item.value + '__options'"></slot>
+            <slot
+              v-bind="item"
+              :name="item.value + '__options'"
+            />
           </div>
-       
-
         </div>
       </VkCheckLogicProvider>
     </template>
     
     <div 
       v-for="item of visitedModules" 
-      :key="item.value"
       v-show="modelValue === item.value"
+      :key="item.value"
       class="sk-multipage-body"
       :class="bodyClass"
     >
-      <slot v-bind="item" :name="item.value"></slot>
+      <slot
+        v-bind="item"
+        :name="item.value"
+      />
     </div>
   </VkDuplex>
 </template>

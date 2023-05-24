@@ -1,7 +1,6 @@
 import { bindPropsFactory } from '@vunk/core/shared/utils-vue'
 import { propsOp as bPropsop} from './bind-form-item/ctx'
 import { props } from '@zzg6/flow/components/editor/src/ctx'
-import { PropType } from 'vue'
 
 export const propsOp = {
   ...props,

@@ -10,7 +10,7 @@ export const isScroll = (el: HTMLElement, isVertical?: boolean): boolean => {
       true: 'overflow-y',
       false: 'overflow-x',
     } as const
-  )[String(isVertical)]!
+  )[String(isVertical)] as 'overflow' | 'overflow-y' | 'overflow-x'
   const overflow = getStyle(el, key)
   return ['scroll', 'auto', 'overlay'].some((s) => overflow.includes(s))
 }

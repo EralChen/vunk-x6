@@ -11,8 +11,8 @@ export default defineComponent({
     ElRadioGroup, ElRadio,
     ElColorPicker,
   },
-  emits,
   props,
+  emits,
   setup (props) {
     const formItemBindProps = _VkfFormItemCtx.createBindProps(props)
 
@@ -29,27 +29,32 @@ export default defineComponent({
 </script>
 <template>
   <VkfFormItem v-bind="formItemBindProps">
-
-      <ElRadioGroup v-model="currentType">
-        <el-radio label="1">取色器</el-radio>
-        <el-radio label="2">自定义</el-radio>
-      </ElRadioGroup>
-
+    <ElRadioGroup v-model="currentType">
+      <el-radio label="1">
+        取色器
+      </el-radio>
+      <el-radio label="2">
+        自定义
+      </el-radio>
+    </ElRadioGroup>
   </VkfFormItem>
 
-  <VkfFormItem v-bind="formItemBindProps" class="is-sub-form-item">
-    <ElColorPicker v-if="currentType === '1'" 
-      :showAlpha="true"
-      :modelValue="modelValue"
+  <VkfFormItem
+    v-bind="formItemBindProps"
+    class="is-sub-form-item"
+  >
+    <ElColorPicker
+      v-if="currentType === '1'" 
+      :show-alpha="true"
+      :model-value="modelValue"
       @update:modelValue="$emit('update:modelValue', $event)"
     />
     <ElInput 
-      :modelValue="modelValue"
-      @update:modelValue="$emit('update:modelValue', $event)"
-      v-else  
+      v-else
+      :model-value="modelValue"
+      @update:modelValue="$emit('update:modelValue', $event)"  
     />
   </VkfFormItem>
-
 </template>
 <style>
 .el-form-item.is-sub-form-item{

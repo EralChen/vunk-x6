@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
-import { cuMessageConfig, rMessageConfigList } from '@skzz-platform/api/system/message'
+import { cuMessageConfig, rMessageConfigList , rTemplateList } from '@skzz-platform/api/system/message'
 import { MessageConfig } from '@skzz-platform/api/system/message/config/types'
 import { Deferred } from '@vunk/core/shared/utils-promise'
 import { ElMessage, FormInstance } from 'element-plus'
@@ -10,12 +10,12 @@ import { setData } from '@vunk/core'
 import { ref } from 'vue'
 import router from '@/router'
 import { Option } from '@skzz-platform/api/system/dictionary'
-import { rTemplateList } from '@skzz-platform/api/system/message'
 import { useDictionaryStore } from '@/stores/dictionary'
 
 const props = defineProps({
   id: {
     type: String,
+    default: '',
   },
   detail: Boolean,
 })
@@ -195,7 +195,7 @@ const c = () => {
         return cuMessageConfig(firstFormData.value, !!props.id)
       }
     })
-    .catch(err => {
+    .catch(() => {
       ElMessage.warning('请检查表单')
     })
     .then(() => {
@@ -206,16 +206,31 @@ const c = () => {
 </script>
 <template>
   <PageX>
-    <SkAppCard class="h-100%" :header="'新增消息配置'">
+    <SkAppCard
+      class="h-100%"
+      :header="'新增消息配置'"
+    >
       <template #header__options>
-        <ElButton type="primary" @click="c">提交</ElButton>
+        <ElButton
+          type="primary"
+          @click="c"
+        >
+          提交
+        </ElButton>
       </template>
 
       <ElScrollbar>
         <div class="gap-form-x">
-          <SkAppForm :elRef="defer.resolve" :disabled="props.detail" :rules="rules" :labelPosition="'top'" :layout="true" :formItems="formItems"
-            :data="firstFormData" @setData="setData(firstFormData, $event)">
-          </SkAppForm>
+          <SkAppForm
+            :el-ref="defer.resolve"
+            :disabled="props.detail"
+            :rules="rules"
+            :label-position="'top'"
+            :layout="true"
+            :form-items="formItems"
+            :data="firstFormData"
+            @setData="setData(firstFormData, $event)"
+          />
         </div>
       </ElScrollbar>
     </SkAppCard>

@@ -1,18 +1,41 @@
 <template>
   <PageOver>
-    <SkAppCard class="h-full" header="节点详情">
-      <div class="editor-x" sk-flex="row">
+    <SkAppCard
+      class="h-full"
+      header="节点详情"
+    >
+      <div
+        class="editor-x"
+        sk-flex="row"
+      >
         <div class="editor">
-          <ZzG6Editor :selectNodeId="nodeModel.id" :mode="'default'" :model-value="model"
-            @nodeselectchange="nodeSelectChange" :active-tab-name="'expend'" :form-id="flowData.formId">
-            
-            <el-button class="absolute top-14px right-14px z-100" type="primary" @click="doRunWorkflow">生成实例</el-button>
+          <ZzG6Editor
+            :select-node-id="nodeModel.id"
+            :mode="'default'"
+            :model-value="model"
+            :active-tab-name="'expend'"
+            :form-id="flowData.formId"
+            @nodeselectchange="nodeSelectChange"
+          >
+            <el-button
+              class="absolute top-14px right-14px z-100"
+              type="primary"
+              @click="doRunWorkflow"
+            >
+              生成实例
+            </el-button>
 
             <template #form>
-              <el-tab-pane label="扩展属性" name="expend">
+              <el-tab-pane
+                label="扩展属性"
+                name="expend"
+              >
                 <ElScrollbar>
                   <ElForm label-position="top">
-                    <BindOpers :node-model="nodeModel" @bind-success="r"></BindOpers>
+                    <BindOpers
+                      :node-model="nodeModel"
+                      @bind-success="r"
+                    />
                   </ElForm>
                 </ElScrollbar>
               </el-tab-pane>
@@ -22,20 +45,27 @@
       </div>
     </SkAppCard>
   </PageOver>
-  <SkAppDialog v-model="startShow" title="运行流程">
-    <GenInstance :tableData="tableData" :flowData="flowData" :itemId="flowData.itemId" @success="genSuccess"></GenInstance>
+  <SkAppDialog
+    v-model="startShow"
+    title="运行流程"
+  >
+    <GenInstance
+      :table-data="tableData"
+      :flow-data="flowData"
+      :item-id="flowData.itemId"
+      @success="genSuccess"
+    />
   </SkAppDialog>
 </template>
 
 <script setup lang="tsx">
 import { rWorkflowNodesWithRaw, Workflow } from '@skzz-platform/api/system/workflow'
 import { nextTick, reactive, ref, shallowRef, watch } from 'vue'
-import { SkAppCard } from '@skzz/platform'
+import { SkAppCard , SkAppDialog } from '@skzz/platform'
 import ZzG6Editor from '@/components/ZzG6Editor/index.vue'
 import BindOpers from '../bind-opers/index.vue'
 import { cloneDeep } from 'lodash'
 import { NodeModel } from '@zzg6/flow/components/editor/src/types'
-import { SkAppDialog } from '@skzz/platform'
 import GenInstance from './gen-instance/index.vue'
 import { NodeConfig } from '@antv/g6'
 import { usePostQueryU } from '@skzz-platform/composables'

@@ -7,16 +7,24 @@ const themeStore = useThemeStore()
 
 </script>
 <template>
-  <div plr-page pb-page class="h-page">
-    <SkAppCard class="h-100%" :header="'菜单配置'">
-      <div plr-form-pl ptb-form-pt>
+  <div
+    plr-page
+    pb-page
+    class="h-page"
+  >
+    <SkAppCard
+      class="h-100%"
+      :header="'菜单配置'"
+    >
+      <div
+        plr-form-pl
+        ptb-form-pt
+      >
         <ElMenuConfigForm
           :data="themeStore.menuStyles"
           @setData="setData(themeStore.menuStyles, $event)"
-        ></ElMenuConfigForm>
+        />
       </div>
-   
     </SkAppCard>
   </div>
-
 </template>

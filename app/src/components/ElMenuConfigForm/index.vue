@@ -97,5 +97,9 @@ const formItems: FormItemRendererSource<`--el-menu-${keyof typeof elMenuTheme['d
 
 </script>
 <template>
-  <VkfForm class="bg-bg-overlay" :labelWidth="'14em'" :formItems="formItems"></VkfForm>
+  <VkfForm
+    class="bg-bg-overlay"
+    :label-width="'14em'"
+    :form-items="formItems"
+  />
 </template>

@@ -24,7 +24,6 @@ export default defineComponent({
   },
   setup (props) {
     const doNav = (navigate: AnyFunc) => {
-      console.log('doNav', props.to)
       if (!props.isMenu) {
         navigate()
       }
@@ -43,21 +42,35 @@ export default defineComponent({
 })
 </script>
 <template>
-  <RouterLink :to="to" custom>
+  <RouterLink
+    :to="to"
+    custom
+  >
     <template #default="{ navigate, isActive, isExactActive, href }">
-      <VkSpreadTo :target="getSpreadTarget" :type="'class'" :data="{
-        'is-active': isActive,
-        'is-exact-active': isExactActive,
-      }"></VkSpreadTo>
+      <VkSpreadTo
+        :target="getSpreadTarget"
+        :type="'class'"
+        :data="{
+          'is-active': isActive,
+          'is-exact-active': isExactActive,
+        }"
+      />
 
       <a 
-      @click.prevent="doNav(navigate)" class="layout-default-aside-link" :href="href" :class="{
-        'is-active': isActive,
-        'is-exact-active': isExactActive,
-      }">
-        <slot :isActive="isActive" :isExactActive="isExactActive">
+        class="layout-default-aside-link"
+        :href="href"
+        :class="{
+          'is-active': isActive,
+          'is-exact-active': isExactActive,
+        }"
+        @click.prevent="doNav(navigate)"
+      >
+        <slot
+          :is-active="isActive"
+          :is-exact-active="isExactActive"
+        >
           <!-- {{ data.meta?.name }} -->
-          <span></span>
+          <span />
         </slot>
       </a>
     </template>

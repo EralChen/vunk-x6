@@ -168,64 +168,62 @@ function bind () {
     <VkDuplexCalc class="pa-page h-full">
       <template #one>
         <SkAppQueryForm
-          :formItems="queryItems"
+          :form-items="queryItems"
           :data="queryState.data"
           @setData="setData(queryState.data, $event)"
         >
-        <template #options>
-          <SkIncreaseButton 
-            :btns="rUserBtns()"
-            @click="precI()"
-          >
-          </SkIncreaseButton>
-        </template>
+          <template #options>
+            <SkIncreaseButton 
+              :btns="rUserBtns()"
+              @click="precI()"
+            />
+          </template>
         </SkAppQueryForm>
       </template>
 
       <SkAppTablesV1 
-        :defaultExpandAll="true"
+        v-model:page-size="tableState.pagination.pageSize"
+        v-model:start="tableState.pagination.start"
+        :default-expand-all="true"
         flex-1
-        :rowKey="'menuId'"
+        :row-key="'menuId'"
         :columns="tableState.columns"
         :data="tableState.data"
         :total="tableState.total"
-        v-model:page-size="tableState.pagination.pageSize"
-        v-model:start="tableState.pagination.start"
-      >
-      </SkAppTablesV1>
-
-
+      />
     </VkDuplexCalc>
 
     <SkAppDialog
-      :modelValue="!!cuState.type"
-      @update:modelValue="cuState.type = ''"
+      :model-value="!!cuState.type"
       :title="cuState.type === 'u' ? '编辑' : '新增'"
+      @update:modelValue="cuState.type = ''"
     >
       <CUForm
         :type="cuState.type"
         :data="cuState.data"
         @setData="setData(cuState.data, $event)"
         @submit="cuI"
-      ></CUForm>
+      />
     </SkAppDialog>
 
     <SkAppDialog 
       :title="'角色绑定'"
-      :modelValue="!!bindState.current.id"
+      :model-value="!!bindState.current.id"
       @update:modelValue=" bindState.current = {}"
     >
       <SkRoleTablesSelect
-        class="h-50vh"
         v-model="bindState.data"
-      >
-
-      </SkRoleTablesSelect>
+        class="h-50vh"
+      />
 
       <template #footer>
-        <ElButton :type="'primary'" :size="'large'"
+        <ElButton
+          :type="'primary'"
+          :size="'large'"
           @click="bind"
-        >提交</ElButton>
+        >
+          提交
+        </ElButton>
       </template>
     </SkAppDialog>
   </page-x>

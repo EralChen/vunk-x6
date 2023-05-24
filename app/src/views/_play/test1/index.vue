@@ -52,13 +52,15 @@ export default defineComponent({
       }
     }
 
-    console.log(childrenNameToNode, 'childrenNameToNode')
-    console.log(checkedNameToNodeWithoutTop, 'checkedNameToNode')
-    console.log(checkedTree, 'checkedTree')
+    // console.log(childrenNameToNode, 'childrenNameToNode')
+    // console.log(checkedNameToNodeWithoutTop, 'checkedNameToNode')
+    // console.log(checkedTree, 'checkedTree')
     return {}
   },
 })
 </script>
 <template>
-  <div text-blue>checkedTree</div>
+  <div text-blue>
+    checkedTree
+  </div>
 </template>

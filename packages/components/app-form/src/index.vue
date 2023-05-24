@@ -18,8 +18,8 @@ export default defineComponent({
     VkfFormItemRendererTemplate,
     SkCssColorPicker,
   },
-  emits,
   props,
+  emits,
   setup (props, { emit }) {
     const coreProps = _VkfFormCtx.createBindProps(props, ['formItems', 'elRef'])
     const coreEmits = _VkfFormCtx.createOnEmits(emit)
@@ -154,30 +154,30 @@ export default defineComponent({
 <template>
   <VkfForm 
     v-bind="coreProps" 
-    v-on="coreEmits"
-    :formItems="formItems"
-    :elRef="defResolve"
+    :form-items="formItems"
+    :el-ref="defResolve"
     :class="{
       'sk-app-form': true,
       'is-layout': layout,
     }"
-    @keydown.enter.prevent="$emit('enter', $event)"
     :style="{
       '--gap-form-label': `${labelWidth}`,
     }"
+    v-on="coreEmits"
+    @keydown.enter.prevent="$emit('enter', $event)"
   >
     <template #rendererTemplate>
-      <VkfFormItemRendererTemplateLayout></VkfFormItemRendererTemplateLayout>
+      <VkfFormItemRendererTemplateLayout />
       <VkfFormItemRendererTemplate :type="'SkCssColorPicker'">
         <template #default="{ data: bindProps }">
           <SkCssColorPicker
             v-bind="bindProps"
-            :modelValue="data[bindProps.prop]"
+            :model-value="data[bindProps.prop]"
             @update:modelValue="$emit('setData', {
               k: bindProps.prop,
               v: $event,
             })"
-          ></SkCssColorPicker>
+          />
         </template>
       </VkfFormItemRendererTemplate>
     </template>

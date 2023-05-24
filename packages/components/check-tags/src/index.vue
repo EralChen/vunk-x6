@@ -11,8 +11,8 @@ export default defineComponent({
     VkCheckLogic,
     SkCheckTag,
   },
-  emits,
   props,
+  emits,
   setup (props, { emit }) {
     const cOptionState =  reactive({
       inputting: false,
@@ -53,68 +53,70 @@ export default defineComponent({
 })
 </script>
 <template>
-
-    <VkCheckLogicProvider
-      :modelValue="modelValue"
-      @update:modelValue="$emit('update:modelValue', $event)"
-    >
-      <div class="sk-check-tags">
-        <VkCheckLogic class="sk-check-tag" v-for="(item, index) of options" :key="item.value"
-          :name="item.value"
-          :clearable="item.clearable ?? clearable" 
-        
-        >
-          <template #default="{ isActive, toggle }">
-            <SkCheckTag :checked="isActive" 
-              :closeable="item.closeable"
-              @close="unsetDataOptions(index, {
-                isActive,
-                toggle,
-              })"
-            >
-              {{  item.label  }}
-            </SkCheckTag>
-          </template>
-        </VkCheckLogic>
-
-        <div class="sk-check-tag" sk-flex="row-center2"
-          v-if="modules.includes('creatable')"
-        >
-          <ElInput
-            :size="'small'"
-            :maxlength="editMaxlength"
-            :showWordLimit="true"
-            v-if="cOptionState.inputting"
-            v-model="cOptionState.value"
-            @keydown.enter="setDataOptions"
-          >
-            <template #append>
-              <ElButton :size="'small'"
-                @click="setDataOptions"
-              >
-                <el-icon><CircleCheck /></el-icon>
-              </ElButton>
-              <ElButton :size="'small'"
-                @click="cOptionState.inputting = false"
-              >
-                <el-icon><CircleClose /></el-icon>
-              </ElButton>
-
-            </template>
-          </ElInput>
-
+  <VkCheckLogicProvider
+    :model-value="modelValue"
+    @update:modelValue="$emit('update:modelValue', $event)"
+  >
+    <div class="sk-check-tags">
+      <VkCheckLogic
+        v-for="(item, index) of options"
+        :key="item.value"
+        class="sk-check-tag"
+        :name="item.value"
+        :clearable="item.clearable ?? clearable"
+      >
+        <template #default="{ isActive, toggle }">
           <SkCheckTag
-            v-else
-            @click="cOptionState.inputting = true"
-          
-          >+</SkCheckTag>
-         
-        </div>
-      
+            :checked="isActive" 
+            :closeable="item.closeable"
+            @close="unsetDataOptions(index, {
+              isActive,
+              toggle,
+            })"
+          >
+            {{ item.label }}
+          </SkCheckTag>
+        </template>
+      </VkCheckLogic>
+
+      <div
+        v-if="modules.includes('creatable')"
+        class="sk-check-tag"
+        sk-flex="row-center2"
+      >
+        <ElInput
+          v-if="cOptionState.inputting"
+          v-model="cOptionState.value"
+          :size="'small'"
+          :maxlength="editMaxlength"
+          :show-word-limit="true"
+          @keydown.enter="setDataOptions"
+        >
+          <template #append>
+            <ElButton
+              :size="'small'"
+              @click="setDataOptions"
+            >
+              <el-icon><CircleCheck /></el-icon>
+            </ElButton>
+            <ElButton
+              :size="'small'"
+              @click="cOptionState.inputting = false"
+            >
+              <el-icon><CircleClose /></el-icon>
+            </ElButton>
+          </template>
+        </ElInput>
+
+        <SkCheckTag
+          v-else
+          @click="cOptionState.inputting = true"
+        >
+          +
+        </SkCheckTag>
       </div>
-    </VkCheckLogicProvider>
-
-
+    </div>
+  </VkCheckLogicProvider>
 </template>
 <style>
 .sk-check-tags{

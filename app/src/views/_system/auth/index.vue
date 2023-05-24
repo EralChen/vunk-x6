@@ -162,27 +162,33 @@ function cdBindMenus (menuIds: string[], op?: RestFetchOp) {
 </script>
 <template>
   <page-x>
-    <VkDuplex h-full :direction="'row'" :gap="'var(--gap-page)'"  gap-main-x>
-
+    <VkDuplex
+      h-full
+      :direction="'row'"
+      :gap="'var(--gap-page)'"
+      gap-main-x
+    >
       <template #one>
         <!-- 左侧放角色列表 -->
         <SkRoleTreesSelect
+          v-model="roleState.current"
           :filter="(v) => !(v.isSys && v.lv <= 1)"
           class="w-12em"
-          v-model="roleState.current"
-        ></SkRoleTreesSelect>
+        />
       </template>
       <!-- 右侧放菜单table -->
-      <ElEmpty h-full v-if="!roleState.current.length"></ElEmpty>
-      <SkMenuSelect v-else
+      <ElEmpty
+        v-if="!roleState.current.length"
+        h-full
+      />
+      <SkMenuSelect
+        v-else
         v-model="menuState.current"
         :buttons="menuState.buttons"
         @check="menuCheck"
         @setData:buttons="setMenuButtons"
         @unsetData:buttons="unsetMenuButtons"
-      ></SkMenuSelect>
+      />
     </VkDuplex>
-
   </page-x>
-
 </template>

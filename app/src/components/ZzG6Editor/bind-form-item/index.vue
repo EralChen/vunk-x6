@@ -1,12 +1,27 @@
 <template>
   <ElFormItem :label="props.label">
-    <SkTableSelectTags :closable="true" @click="doBind()" v-model="model" :prop="{ id: idKey }"></SkTableSelectTags>
+    <SkTableSelectTags
+      v-model="model"
+      :closable="true"
+      :prop="{ id: idKey }"
+      @click="doBind()"
+    />
   </ElFormItem>
 
-  <ElDialog v-model="showDialog" :title="`绑定'${title}'表单`">
-    <SkAppTables :oidField="idKey" class="h-30em" v-model="model" :columns="tableState.columns" :data="tableState.data"
-      :total="tableState.total" v-model:pageSize="tableState.pagination.pageSize"
-      v-model:start="tableState.pagination.start"></SkAppTables>
+  <ElDialog
+    v-model="showDialog"
+    :title="`绑定'${title}'表单`"
+  >
+    <SkAppTables
+      v-model="model"
+      v-model:pageSize="tableState.pagination.pageSize"
+      v-model:start="tableState.pagination.start"
+      :oid-field="idKey"
+      class="h-30em"
+      :columns="tableState.columns"
+      :data="tableState.data"
+      :total="tableState.total"
+    />
   </ElDialog>
 </template>
 
@@ -14,10 +29,9 @@
 import { computed, reactive, ref, watch } from 'vue'
 import { propsOp } from './ctx'
 import { SkAppTables, __SkAppTables } from '@skzz-platform/components/app-tables'
-import { Pagination } from '@skzz/platform'
+import { Pagination , SkTableSelectTags } from '@skzz/platform'
 import { useComputedReadonly } from '@vunk/form'
 import { ElOption, ElSelect } from 'element-plus'
-import { SkTableSelectTags } from '@skzz/platform'
 import { FIRS, rFormDetail } from '@skzz-platform/api/system/form'
 
 
@@ -65,7 +79,7 @@ const model = computed({
         [props.modelKey]: [],
       })
     }
-    return props.modelValue![props.modelKey]
+    return props.modelValue?.[props.modelKey]
   },
   set: (val) => {
     emit('update:modelValue', {

@@ -8,8 +8,8 @@ export default defineComponent({
   components: {
     ElButton,
   },
-  emits,
   props,
+  emits,
   setup (props, { emit }) {
 
     const defaultModuleInfo = {
@@ -112,8 +112,11 @@ export default defineComponent({
 </script>
 <template>
   <div class="sk-app-operations">
-    <template v-for="(item) of modules" :key="item">
-      <slot :name="item"></slot>
+    <template
+      v-for="(item) of modules"
+      :key="item"
+    >
+      <slot :name="item" />
       
       <el-popconfirm 
         v-if="eventEmits[moduleInfo[item]?.event + '']?.includes('d')
@@ -139,9 +142,9 @@ export default defineComponent({
         :size="'small'"
         v-bind="buttonPropsRecord[item]"
         @click="crud(item)"
-      >{{ moduleInfo[item]?.label }}
+      >
+        {{ moduleInfo[item]?.label }}
       </el-button>
-      
     </template>
   </div>
 </template>

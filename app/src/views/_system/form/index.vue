@@ -1,34 +1,37 @@
 <template>
   <PageX>
     <VkDuplexCalc class="pa-page h-100%">
-        <template #one>
-          <SkAppQueryForm
-          :formItems="queryItems"
+      <template #one>
+        <SkAppQueryForm
+          :form-items="queryItems"
           :data="queryState.data"
           @setData="setData(queryState.data, $event)"
         >
-        <template #options>
-          <SkIncreaseButton 
-            :btns="rFormBtns"
-            @click="$router.push('/system/form/add')"
-          >
-          </SkIncreaseButton>
-        </template>
+          <template #options>
+            <SkIncreaseButton 
+              :btns="rFormBtns"
+              @click="$router.push('/system/form/add')"
+            />
+          </template>
         </SkAppQueryForm>
-          
-        </template>
-        <SkAppTablesV1 :defaultExpandAll="true" flex-1 :rowKey="'menuId'" :columns="tableState.columns"
-          :data="tableState.data" :total="tableState.total" v-model:page-size="tableState.pagination.pageSize"
-          v-model:start="tableState.pagination.start">
-        </SkAppTablesV1>
-      </VkDuplexCalc>
+      </template>
+      <SkAppTablesV1
+        v-model:page-size="tableState.pagination.pageSize"
+        v-model:start="tableState.pagination.start"
+        :default-expand-all="true"
+        flex-1
+        :row-key="'menuId'"
+        :columns="tableState.columns"
+        :data="tableState.data"
+        :total="tableState.total"
+      />
+    </VkDuplexCalc>
   </PageX>
 </template>
 
 <script lang="tsx" setup>
 import PageX from '_c/PageX/index.vue'
-import { SkAppCard, __SkAppQueryForm } from '@skzz/platform'
-import { SkAppOperations, SkAppTablesV1, __SkAppTablesV1, SkAppQueryForm } from '@skzz/platform'
+import { __SkAppQueryForm , SkAppOperations, SkAppTablesV1, __SkAppTablesV1, SkAppQueryForm } from '@skzz/platform'
 import { reactive, watch } from 'vue'
 import { dForm, rFormList, rFormBtns } from '@skzz-platform/api/system/form'
 import { setData, VkDuplexCalc } from '@vunk/core'

@@ -1,21 +1,46 @@
 <template>
-  <ElForm :label-position="'top'" :label-suffix="':'">
-    <SkMultipageRenderer v-model="currentPage" :tabXClass="'plr-form-pl'" :bodyClass="'h-100% '" :class="'h-100%'">
-      <SkMultipageTemplate :label="'成功回调'" :value="'success'">
+  <ElForm
+    :label-position="'top'"
+    :label-suffix="':'"
+  >
+    <SkMultipageRenderer
+      v-model="currentPage"
+      :tab-x-class="'plr-form-pl'"
+      :body-class="'h-100% '"
+      :class="'h-100%'"
+    >
+      <SkMultipageTemplate
+        :label="'成功回调'"
+        :value="'success'"
+      >
         <div class="plr-form-pl">
-          <Cu :formId="props.formId" v-model="passData"></Cu>
+          <Cu
+            v-model="passData"
+            :form-id="props.formId"
+          />
         </div>
       </SkMultipageTemplate>
 
-      <SkMultipageTemplate :label="'失败回调'" :value="'fail'">
-        <div  class="plr-form-pl">
-          <Cu :formId="props.formId" v-model="rejectData"></Cu>
+      <SkMultipageTemplate
+        :label="'失败回调'"
+        :value="'fail'"
+      >
+        <div class="plr-form-pl">
+          <Cu
+            v-model="rejectData"
+            :form-id="props.formId"
+          />
         </div>
       </SkMultipageTemplate>
     </SkMultipageRenderer>
   </ElForm>
   <div sk-flex="row-end">
-    <ElButton type="primary" @click="doBindCallback">确定</ElButton>
+    <ElButton
+      type="primary"
+      @click="doBindCallback"
+    >
+      确定
+    </ElButton>
   </div>
 </template>
 
@@ -81,7 +106,7 @@ const doBindCallback = () => {
   cFlowCallback(props.id, {
     pass: passData.value,
     reject: rejectData.value,
-  }).then(res => {
+  }).then(() => {
     clear()
     emit('success')
   })

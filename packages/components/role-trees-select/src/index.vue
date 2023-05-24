@@ -5,12 +5,12 @@ import { VkCheckboxTree, __VkCheckboxTree } from '@vunk/skzz/components/checkbox
 import { rRoles } from '@skzz-platform/api/system/role'
 export default defineComponent({
   name: 'SkRoleTreesSelect',
-  emits,
-  props,
   components: {
     VkCheckboxTree,
   },
-  setup (props, { emit }) {
+  props,
+  emits,
+  setup (props) {
     const treeState = reactive({
       data: [] as __VkCheckboxTree.Data,
     })
@@ -37,9 +37,8 @@ export default defineComponent({
 <template>
   <VkCheckboxTree
     :modules="[]"
-    :nodeKey="'roleId'"
+    :node-key="'roleId'"
     :single="true"
     :data="treeState.data"
-  >
-  </VkCheckboxTree>
+  />
 </template>

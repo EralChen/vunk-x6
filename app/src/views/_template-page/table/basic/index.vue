@@ -124,17 +124,30 @@ const data = [
 </script>
 <template>
   <PageX>
-    <SkAppCard :header="'表格'" class="h-100%">
-
+    <SkAppCard
+      :header="'表格'"
+      class="h-100%"
+    >
       <VkDuplexCalc class="gap-main-x">
         <template #one>
-          <SkAppQueryForm :fixes="2" :data="formData" @setData="setData(formData, $event)" :formItems="queryItems">
-          </SkAppQueryForm>
-          <div sk-flex="row-between-center" ptb-page>
-            <SkCheckTags v-model="formData.type" :options="typeOptions"></SkCheckTags>
-            <ElButton type="primary">新增</ElButton>
+          <SkAppQueryForm
+            :fixes="2"
+            :data="formData"
+            :form-items="queryItems"
+            @setData="setData(formData, $event)"
+          />
+          <div
+            sk-flex="row-between-center"
+            ptb-page
+          >
+            <SkCheckTags
+              v-model="formData.type"
+              :options="typeOptions"
+            />
+            <ElButton type="primary">
+              新增
+            </ElButton>
           </div>
-
         </template>
 
         <SkAppTables 
@@ -143,12 +156,8 @@ const data = [
           :data="data"
           :columns="colSource"
           :total="100"
-        >
-        </SkAppTables>
+        />
       </VkDuplexCalc>
-
     </SkAppCard>
-
-   
   </PageX>
 </template>

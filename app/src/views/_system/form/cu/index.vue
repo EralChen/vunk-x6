@@ -1,17 +1,40 @@
 <template>
   <PageX>
-    <SkAppCard class="h-100%" :header="`${props.isDetail ?  '查看' : props.id ? '修改' : '新增' }表单配置`">
+    <SkAppCard
+      class="h-100%"
+      :header="`${props.isDetail ? '查看' : props.id ? '修改' : '新增' }表单配置`"
+    >
       <template #header__options>
-        <ElButton v-if="!props.isDetail" type="primary" @click="cu">提交</ElButton>
+        <ElButton
+          v-if="!props.isDetail"
+          type="primary"
+          @click="cu"
+        >
+          提交
+        </ElButton>
       </template>
       <div class="h-full">
         <VkDuplex class="h-full">
           <template #one>
-            <SkAppForm :disabled="!!props.id" :layout="true" :elRef="formDef.resolve" :data="formData" @setData="setData(formData, $event)" :formItems="formItems" class="mt-20px ml-20px mr-20px" ></SkAppForm>
+            <SkAppForm
+              :disabled="!!props.id"
+              :layout="true"
+              :el-ref="formDef.resolve"
+              :data="formData"
+              :form-items="formItems"
+              class="mt-20px ml-20px mr-20px"
+              @setData="setData(formData, $event)"
+            />
           </template>
-          <SkAppFormaker class="h-full" :data="data" @setData="setData(data, $event)" v-model:formItems="formMakerItems"
-            @setData:formItems="setData(formMakerItems, $event)" @unsetData:formItems="unsetData(formMakerItems, $event)"
-            :canU="canU"></SkAppFormaker>
+          <SkAppFormaker
+            v-model:formItems="formMakerItems"
+            class="h-full"
+            :data="data"
+            :can-u="canU"
+            @setData="setData(data, $event)"
+            @setData:formItems="setData(formMakerItems, $event)"
+            @unsetData:formItems="unsetData(formMakerItems, $event)"
+          />
         </VkDuplex>
       </div>
     </SkAppCard>
@@ -20,11 +43,10 @@
 
 <script setup lang="ts">
 import PageX from '_c/PageX/index.vue'
-import { SkAppCard } from '@skzz/platform'
+import { SkAppCard , SkAppForm, __SkAppForm } from '@skzz/platform'
 import { SkAppFormaker } from '@skzz-platform/components/app-formaker'
 import { NormalObject, setData, unsetData, VkDuplex } from '@vunk/core'
 import { Ref, reactive, ref } from 'vue'
-import { SkAppForm, __SkAppForm } from '@skzz/platform'
 import { Deferred } from '@vunk/core/shared/utils-promise'
 import { ElMessage, FormInstance } from 'element-plus'
 import { FIRS, cuForm, rFormDetail } from '@skzz-platform/api/system/form'
@@ -33,6 +55,7 @@ import router from '@/router'
 const props = defineProps({
   id: {
     type: String,
+    default: '',
   },
   isDetail: {
     type: Boolean,
@@ -94,6 +117,7 @@ async function cu () {
     }
     
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error(error)
   }
 }

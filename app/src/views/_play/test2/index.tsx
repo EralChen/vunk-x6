@@ -5,7 +5,6 @@ export default defineComponent({
     const a = ref('hello')
     const uA = () => {
       a.value = 'world'
-      console.log(a.value) // world
     }
       
     return () => (

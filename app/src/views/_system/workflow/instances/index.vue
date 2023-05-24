@@ -83,21 +83,27 @@ function r () {
 </script>
 <template>
   <PageOver>
-    <VkDuplexCalc :gap="'var(--gap-page)'" class="pa-page h-full">
+    <VkDuplexCalc
+      :gap="'var(--gap-page)'"
+      class="pa-page h-full"
+    >
       <template #one>
         <div sk-flex="row-between-center">
-          <span></span>
+          <span />
         </div>
       </template>
 
-      <SkAppTablesV1 :defaultExpandAll="true" flex-1 :rowKey="'menuId'" :columns="tableState.columns"
-        :data="tableState.data" :total="tableState.total" v-model:page-size="tableState.pagination.pageSize"
-        v-model:start="tableState.pagination.start">
-      </SkAppTablesV1>
-
+      <SkAppTablesV1
+        v-model:page-size="tableState.pagination.pageSize"
+        v-model:start="tableState.pagination.start"
+        :default-expand-all="true"
+        flex-1
+        :row-key="'menuId'"
+        :columns="tableState.columns"
+        :data="tableState.data"
+        :total="tableState.total"
+      />
     </VkDuplexCalc>
-    <RouterView></RouterView>
-
+    <RouterView />
   </PageOver>
-
 </template>

@@ -1,33 +1,31 @@
 <script lang="tsx">
 import { props, emits } from './ctx'
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref , computed, reactive, watch } from 'vue'
 import { VkCheckboxTree, __VkCheckboxTree } from '@vunk/skzz/components/checkbox-tree'
-import { computed, reactive, watch } from 'vue'
 import { Menu, rMenus, rMenusWithButtons } from '@skzz-platform/api/system/menu'
 import { listToTree } from '@vunk/core/shared/utils-data'
 import { SkCheckTags, __SkCheckTags  } from '@skzz-platform/components/check-tags'
 import { SkAppTablesV1 } from '@skzz-platform/components/app-tables-v1'
 import { setData, unsetData, VkDuplexCalc, VkDuplex, Media } from '@vunk/core'
-import { Row } from './types'
+import { Row , TreeCheckEvents } from './types'
 import { SkAppQueryForm } from '@skzz-platform/components/app-query-form'
 import { __SkAppForm } from '@skzz-platform/shared'
 import { VkfCheckbox } from '@vunk/form/components/checkbox'
 import { rButtons } from '@skzz-platform/api/system/button'
 import { Deferred } from '@vunk/core/shared/utils-promise'
 import { ElTree } from 'element-plus'
-import { TreeCheckEvents } from './types'
 import { ButtonId } from '@skzz-platform/shared/enum'
 const nodeKey = 'menuId'
 export default defineComponent({
   name: 'SkMenuSelect',
-  emits,
-  props,
   components: {
     SkCheckTags,
     VkCheckboxTree,
     SkAppTablesV1,
     VkDuplexCalc, VkDuplex, SkAppQueryForm,
   },
+  props,
+  emits,
   setup (props, { emit }) {
     
 
@@ -199,68 +197,66 @@ export default defineComponent({
 })
 </script>
 <template>
-    <VkDuplexCalc :gap="'var(--gap-page)'">
-      <template #one>
-        <div sk-flex="row-between-center">
-          <SkCheckTags 
-            :modules="['creatable']"
-            :options="checkTagsState.options"
-            @setData:options="setData(
-              checkTagsState.options,
-              $event,
-            )"
-            @unsetData:options="unsetData(
-              checkTagsState.options,
-              $event,
-            )"
-            v-model="checkTagsState.value"
-          >
-          </SkCheckTags>
-        </div>
-
-      </template>
+  <VkDuplexCalc :gap="'var(--gap-page)'">
+    <template #one>
+      <div sk-flex="row-between-center">
+        <SkCheckTags 
+          v-model="checkTagsState.value"
+          :modules="['creatable']"
+          :options="checkTagsState.options"
+          @setData:options="setData(
+            checkTagsState.options,
+            $event,
+          )"
+          @unsetData:options="unsetData(
+            checkTagsState.options,
+            $event,
+          )"
+        />
+      </div>
+    </template>
  
   
-      <VkDuplex :gap="'var(--gap-page)'" :direction="'row'"  h-full >
-        <template #one>
-          <VkCheckboxTree 
-            v-model:filterText="treeState.filterText"
-            :elRef="treeState.def.resolve"
-            :nodeKey="nodeKey"
-            :modules="['filter', 'srcollbar']"
-            :defaultExpandAll="true"
-            :data="treeState.data" 
-            :modelValue="modelValue"
-            @update:modelValue=" $emit('update:modelValue', $event)"
+    <VkDuplex
+      :gap="'var(--gap-page)'"
+      :direction="'row'"
+      h-full
+    >
+      <template #one>
+        <VkCheckboxTree 
+          v-model:filterText="treeState.filterText"
+          :el-ref="treeState.def.resolve"
+          :node-key="nodeKey"
+          :modules="['filter', 'srcollbar']"
+          :default-expand-all="true"
+          :data="treeState.data" 
+          :model-value="modelValue"
+          @update:modelValue=" $emit('update:modelValue', $event)"
 
-            @check="treeCheck"
-          ></VkCheckboxTree>
+          @check="treeCheck"
+        />
+      </template>
+
+      <VkDuplexCalc>
+        <template #one>
+          <SkAppQueryForm
+            :form-items="queryFormItems"
+            :data="queryState.query"
+            @setData="setData(queryState.query, $event)"
+          />
         </template>
 
-        <VkDuplexCalc>
-          <template #one>
-            <SkAppQueryForm
-              :formItems="queryFormItems"
-              :data="queryState.query"
-              @setData="setData(queryState.query, $event)"
-            ></SkAppQueryForm>
-          </template>
-
-          <SkAppTablesV1 
-            :defaultExpandAll="true"
-            flex-1
-            :modules="[]"
-            :rowKey="'menuId'"
-            :columns="tableColumns"
-            :data="tableState.data"
-          >
-          </SkAppTablesV1>
-
-        </VkDuplexCalc>
-
-      </VkDuplex>
-
-    </VkDuplexCalc>
+        <SkAppTablesV1 
+          :default-expand-all="true"
+          flex-1
+          :modules="[]"
+          :row-key="'menuId'"
+          :columns="tableColumns"
+          :data="tableState.data"
+        />
+      </VkDuplexCalc>
+    </VkDuplex>
+  </VkDuplexCalc>
 </template>
 <style>
 .menu-select-buttons-col .el-checkbox.is-disabled{

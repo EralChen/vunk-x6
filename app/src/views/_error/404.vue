@@ -2,19 +2,49 @@
   <div class="wscn-http404-container">
     <div class="wscn-http404">
       <div class="pic-404">
-        <img class="pic-404__parent" :src="img404" alt="404">
-        <img class="pic-404__child left" :src="img404Cloud" alt="404">
-        <img class="pic-404__child mid" :src="img404Cloud" alt="404">
-        <img class="pic-404__child right" :src="img404Cloud" alt="404">
+        <img
+          class="pic-404__parent"
+          :src="img404"
+          alt="404"
+        >
+        <img
+          class="pic-404__child left"
+          :src="img404Cloud"
+          alt="404"
+        >
+        <img
+          class="pic-404__child mid"
+          :src="img404Cloud"
+          alt="404"
+        >
+        <img
+          class="pic-404__child right"
+          :src="img404Cloud"
+          alt="404"
+        >
       </div>
       <div class="bullshit">
-        <div class="bullshit__oops">哎呀！糟糕！</div>
-        <div class="bullshit__info">版权所有
-          <a style="color:#20a0ff" href="http://www.zjsophon.com" target="_blank">@时空智子大数据</a>
+        <div class="bullshit__oops">
+          哎呀！糟糕！
         </div>
-        <div class="bullshit__headline">{{ message }}</div>
-        <div class="bullshit__info">请检查您访问的URL是否有效，或点击下面的按钮返回主页。</div>
-        <a href="" class="bullshit__return-home">回到首页</a>
+        <div class="bullshit__info">
+          版权所有
+          <a
+            style="color:#20a0ff"
+            href="http://www.zjsophon.com"
+            target="_blank"
+          >@时空智子大数据</a>
+        </div>
+        <div class="bullshit__headline">
+          {{ message }}
+        </div>
+        <div class="bullshit__info">
+          请检查您访问的URL是否有效，或点击下面的按钮返回主页。
+        </div>
+        <a
+          href=""
+          class="bullshit__return-home"
+        >回到首页</a>
       </div>
     </div>
   </div>
@@ -25,16 +55,16 @@ import img404 from '@/assets/404_images/404.png'
 import img404Cloud from '@/assets/404_images/404_cloud.png'
 export default {
   name: 'Page404',
-  computed: {
-    message () {
-      return '网站管理员说您不能进入此页面... 请检查输入地址及访问权限！'
-    },
-  },
   setup () {
     return {
       img404Cloud,
       img404,
     }
+  },
+  computed: {
+    message () {
+      return '网站管理员说您不能进入此页面... 请检查输入地址及访问权限！'
+    },
   },
 }
 </script>

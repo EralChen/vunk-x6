@@ -1,5 +1,5 @@
 <script lang="tsx">
-import { defineComponent } from 'vue'
+import { PropType, defineComponent } from 'vue'
 import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
 import { Row } from '../types'
 import { ElLink } from 'element-plus'
@@ -10,7 +10,12 @@ export default defineComponent({
   components: {
     SkAppForm,
   },
-  props: ['data'],
+  props: {
+    data: {
+      type: Object as PropType<Partial<Row>>,
+      required: true,
+    },
+  },
   emits: {
     submit: (data: Row) => data,
   },
@@ -92,7 +97,7 @@ export default defineComponent({
         size: 'large',
         class: 'is-btn-group',
         onClick: () => {
-          emit('submit', props.data)
+          emit('submit', props.data as Row)
         },
       },
     ]
@@ -104,8 +109,8 @@ export default defineComponent({
 </script>
 <template>
   <SkAppForm 
-    :labelWidth="'5em'"
+    :label-width="'5em'"
     :data="data"
-    :formItems="formItems"
-  ></SkAppForm>
+    :form-items="formItems"
+  />
 </template>

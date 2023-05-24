@@ -4,8 +4,8 @@ import { defineComponent, inject, onMounted, onUnmounted, watch } from 'vue'
 import { __SkMultipageRenderer } from '@skzz-platform/components/multipage-renderer'
 export default defineComponent({
   name: 'SkMultipageTemplate',
-  emits,
   props,
+  emits,
   setup (props, { slots }) {
     const pvm = inject<__SkMultipageRenderer.VM>('skMultipageRenderer')
     if (!pvm) {

@@ -10,7 +10,6 @@ import { SkAppDialog, SkAppOperations, SkAppTablesV1, __SkAppTablesV1, SkAppQuer
 import { setData, VkDuplexCalc } from '@vunk/core'
 import CUForm from './cu-form/index.vue'
 import { Row } from './types'
-import { ElButton } from 'element-plus'
 import { SkIncreaseButton } from '@skzz-platform/components/increase-button'
 
 type Col = __SkAppTablesV1.Column<Row>
@@ -125,47 +124,42 @@ function cuI () {
     <VkDuplexCalc class="pa-page h-full">
       <template #one>
         <SkAppQueryForm
-          :formItems="queryItems"
+          :form-items="queryItems"
           :data="queryState.data"
           @setData="setData(queryState.data, $event)"
         >
-        <template #options>
-          <SkIncreaseButton
-            :btns="rBtnsApi"
-            @click="precI"
-          >
-          </SkIncreaseButton>
-        </template>
+          <template #options>
+            <SkIncreaseButton
+              :btns="rBtnsApi"
+              @click="precI"
+            />
+          </template>
         </SkAppQueryForm>
       </template>
 
       <SkAppTablesV1 
-        :defaultExpandAll="true"
+        v-model:page-size="tableState.pagination.pageSize"
+        v-model:start="tableState.pagination.start"
+        :default-expand-all="true"
         flex-1
-        :rowKey="'menuId'"
+        :row-key="'menuId'"
         :columns="tableState.columns"
         :data="tableState.data"
         :total="tableState.total"
-        v-model:page-size="tableState.pagination.pageSize"
-        v-model:start="tableState.pagination.start"
-      >
-      </SkAppTablesV1>
-
-
+      />
     </VkDuplexCalc>
 
     <SkAppDialog
-      :modelValue="!!cuState.type"
-      @update:modelValue="cuState.type = ''"
+      :model-value="!!cuState.type"
       :title="cuState.type === 'u' ? '编辑' : '新增'"
+      @update:modelValue="cuState.type = ''"
     >
       <CUForm
         :type="cuState.type"
         :data="cuState.data"
         @setData="setData(cuState.data, $event)"
         @submit="cuI"
-      ></CUForm>
+      />
     </SkAppDialog>
-
   </page-x>
 </template>

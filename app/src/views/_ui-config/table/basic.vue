@@ -62,6 +62,5 @@ const colSource: __SkAppTables.Column[] = [
     :data="data"
     :columns="colSource"
     :total="100"
-  >
-  </SkAppTables>
+  />
 </template>

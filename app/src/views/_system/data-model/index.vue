@@ -76,45 +76,46 @@ function cuI () {
 </script>
 <template>
   <page-x>
-    <VkDuplexCalc :gap="'var(--gap-page)'" class="pa-page h-full">
+    <VkDuplexCalc
+      :gap="'var(--gap-page)'"
+      class="pa-page h-full"
+    >
       <template #one>
         <div sk-flex="row-between-center">
-          <span></span>
-          <ElButton type="primary" sk-flex="row_center"
+          <span />
+          <ElButton
+            type="primary"
+            sk-flex="row_center"
             @click="precI()"
           >
             <span>新增</span>
           </ElButton>
         </div>
-
       </template>
 
       <SkAppTablesV1 
+        v-model:page-size="pagination.pageSize"
+        v-model:start="pagination.start"
         :modules="[]"
         flex-1
-        :rowKey="'menuId'"
+        :row-key="'menuId'"
         :columns="tableState.columns"
         :data="tableState.data"
         :total="tableState.total"
-        v-model:page-size="pagination.pageSize"
-        v-model:start="pagination.start"
-      >
-      </SkAppTablesV1>
-
-
+      />
     </VkDuplexCalc>
 
     <SkAppDialog
-      :modelValue="!!cuIState.type"
-      @update:modelValue="cuIState.type = ''"
+      :model-value="!!cuIState.type"
       :title="cuIState.type === 'u' ? '编辑' : '新增'"
+      @update:modelValue="cuIState.type = ''"
     >
       <CUForm
         :type="cuIState.type"
         :data="cuIState.data"
         @setData="setData(cuIState.data, $event)"
         @submit="cuI"
-      ></CUForm>
+      />
     </SkAppDialog>
   </page-x>
 </template>

@@ -6,8 +6,8 @@ import { useFormDisabled } from 'element-plus'
 import { useComputedReadonly } from '@vunk/form'
 export default defineComponent({
   name: 'SkTableSelectTags',
-  emits,
   props,
+  emits,
   setup (props, { emit }) {
     const tempProp = {
       id: 'id',
@@ -51,11 +51,23 @@ export default defineComponent({
 })
 </script>
 <template>
-  <div :class="{'fack-input-x': true, 'is-disabled': unuse}" @click="doClick">
+  <div
+    :class="{'fack-input-x': true, 'is-disabled': unuse}"
+    @click="doClick"
+  >
     <div class="fack-input w-100%">
-      <span v-if="!model.length" class="placeholder">{{ placeholder }}</span>
-      <ElTag v-else v-for="item in model" :key="item[tempProp.id]" :closable="closable && !unuse" type="info"
-        @close="closeTag(item[tempProp.id])">
+      <span
+        v-if="!model.length"
+        class="placeholder"
+      >{{ placeholder }}</span>
+      <ElTag
+        v-for="item in model"
+        v-else
+        :key="item[tempProp.id]"
+        :closable="closable && !unuse"
+        type="info"
+        @close="closeTag(item[tempProp.id])"
+      >
         {{ item[tempProp.label] }}
       </ElTag>
     </div>

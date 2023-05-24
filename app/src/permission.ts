@@ -76,6 +76,7 @@ router.beforeEach(async (to, from, next) => {
           // next()
 
         } catch (error) {
+          // eslint-disable-next-line no-console
           console.error(error)
           // remove token and go to login page to re-login
           // await store.dispatch('user/resetToken')

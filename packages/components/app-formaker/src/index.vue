@@ -8,14 +8,14 @@ import { ElCollapseItem } from 'element-plus'
 import { VkfDragWrapper } from '@vunk/formaker/components/drag-wrapper'
 export default defineComponent({
   name: 'SkAppFormaker',
-  emits,
-  props,
   components: {
     VkfDesigner,
     ElCollapseItem,
     VkRendererTemplateGis,
     VkfDragWrapper,
   },
+  props,
+  emits,
   setup (props, { emit }) {
     const designerBindProps = _VkfDesignerCtx.createBindProps(props, ['activeWidget0Item', 'configSource'])
     const designerOnEmits = _VkfDesignerCtx.createOnEmits(emit, ['update:activeWidget0Item'])
@@ -34,11 +34,10 @@ export default defineComponent({
 </script>
 <template>
   <VkfDesigner
-    :class="'is-t1'"
-    :configSource="configSource"
     v-model:activeWidget0Item="activeWidget0Item"
+    :class="'is-t1'"
+    :config-source="configSource"
     v-bind="designerBindProps"
-    v-on="designerOnEmits"
     :drag-default-options="{
       'VkfSwitch': {
         label: '开关',
@@ -54,6 +53,7 @@ export default defineComponent({
         valueFormat: 'YYYY-MM-DD HH:mm:ss',
       }
     }"
+    v-on="designerOnEmits"
   >
     <template #widgetTab0>
       <ElCollapseItem
@@ -72,7 +72,6 @@ export default defineComponent({
           >
             <li>地理输入框</li>
           </VkfDragWrapper>
-
         </ul>
       </ElCollapseItem>
     </template>
@@ -94,10 +93,8 @@ export default defineComponent({
       <VkRendererTemplateGis
         :data="data"
         @setData="$emit('setData', $event)"
-      >
-      </VkRendererTemplateGis>
+      />
     </template>
-
   </VkfDesigner>
 </template>
 <style>

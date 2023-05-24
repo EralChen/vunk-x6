@@ -113,13 +113,12 @@ const formItemsWithDemo = computed(() => {
 </script>
 <template>
   <SkAppForm 
-    :labelWidth="100"
-    :formItems="formItemsWithDemo" 
+    :label-width="100"
+    :form-items="formItemsWithDemo" 
     :data="formData"
-    @setData="setFormData"
     v-bind="$attrs"
-  >
-  </SkAppForm>
+    @setData="setFormData"
+  />
 </template>
 <style>
 

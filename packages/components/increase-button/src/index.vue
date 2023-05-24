@@ -8,8 +8,8 @@ export default defineComponent({
   directives: {
     button: vButton,
   },
-  emits,
   props,
+  emits,
   setup (props, { emit }) {
     const coreProps = createElBindProps(props)
     const coreEmits = createElOnEmits(emit)
@@ -34,5 +34,7 @@ export default defineComponent({
     v-button:increase="btns"
     v-bind="coreProps"
     v-on="coreEmits"
-  >新增</ElButton>
+  >
+    新增
+  </ElButton>
 </template>

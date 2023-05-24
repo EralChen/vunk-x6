@@ -4,7 +4,7 @@ export default {
 }
 </script>
 <script lang="ts" setup>
-import { getCurrentInstance, reactive, ref } from 'vue'
+import { reactive, ref } from 'vue'
 import PageX from '_c/PageX/index.vue'
 import {
   SkAppCard,
@@ -24,27 +24,38 @@ const firstFormData = reactive({
 </script>
 <template>
   <PageX>
-    <SkAppCard :header="'多列表单'"  :class="'h-100%'">
+    <SkAppCard
+      :header="'多列表单'"
+      :class="'h-100%'"
+    >
       <template #header__options>
-        <ElButton type="primary">提交</ElButton>
+        <ElButton type="primary">
+          提交
+        </ElButton>
       </template>
       <SkMultipageRenderer
         v-model="currentPage"
-        :tabXClass="'plr-form-pl'"
-        :bodyClass="'h-100% '"
+        :tab-x-class="'plr-form-pl'"
+        :body-class="'h-100% '"
         :class="'h-100%'"
-       >
-        <SkMultipageTemplate :label="'选项1'" :value="'first'">
-          <ElScrollbar >
+      >
+        <SkMultipageTemplate
+          :label="'选项1'"
+          :value="'first'"
+        >
+          <ElScrollbar>
             <FirstVue
               class="ptb-form-pt plr-form-pl"
               :data="firstFormData"
               @setData="setData(firstFormData, $event)"
-            ></FirstVue>
+            />
           </ElScrollbar>
         </SkMultipageTemplate>
 
-        <SkMultipageTemplate :label="'选项2'" :value="'second'">
+        <SkMultipageTemplate
+          :label="'选项2'"
+          :value="'second'"
+        >
           <div>form</div>
         </SkMultipageTemplate>
       </SkMultipageRenderer>

@@ -1,7 +1,14 @@
 <template>
-  <ElFormItem v-show="nodeModelCp.id && isFlowStart && nodeModelCp.isCurrentNode" :label="`绑定协办人`">
-    <BindUser v-model:show-data="showData" v-model="showdialog" v-model:data="nodeModelCp.assistOpers"
-      @doBindUser="bindAssOpers"></BindUser>
+  <ElFormItem
+    v-show="nodeModelCp.id && isFlowStart && nodeModelCp.isCurrentNode"
+    :label="`绑定协办人`"
+  >
+    <BindUser
+      v-model:show-data="showData"
+      v-model="showdialog"
+      v-model:data="nodeModelCp.assistOpers"
+      @doBindUser="bindAssOpers"
+    />
   </ElFormItem>
 </template>
 

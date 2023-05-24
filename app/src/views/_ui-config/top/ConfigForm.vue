@@ -51,5 +51,5 @@ const formItems: __SkAppForm.CoreFormItem<keyof typeof layoutTopTheme>[] = [
 
 </script>
 <template>
-  <SkAppForm  :formItems="formItems"></SkAppForm>
+  <SkAppForm :form-items="formItems" />
 </template>

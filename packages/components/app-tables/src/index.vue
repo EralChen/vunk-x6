@@ -6,10 +6,9 @@ import {
 } from './ctx'
 import { defineComponent, computed, watch } from 'vue'
 import { ElTableV2, ElAutoResizer, ElPagination, Column, ElCheckbox } from 'element-plus'
-import { VkDuplexCalc } from '@vunk/core'
+import { VkDuplexCalc , VkCheckRecordLogicProvider, VkCheckRecordLogic } from '@vunk/core'
 import { SkAppOperations } from '@skzz-platform/components/app-operations'
 import { pickObject } from '@vunk/core/shared/utils-object'
-import { VkCheckRecordLogicProvider, VkCheckRecordLogic } from '@vunk/core'
 import { vOn } from '@vunk/core/shared/utils-vue'
 import { useComputedReadonly } from '@vunk/form'
 
@@ -23,8 +22,8 @@ export default defineComponent({
     ElPagination,
     VkCheckRecordLogicProvider,
   },
-  emits,
   props,
+  emits,
   setup (props, { emit }) {
     const tableBindProps = createTableV2BindProps(props, ['columns'])
     const paginationBindProps = createPaginationBindProps(props)
@@ -169,44 +168,46 @@ export default defineComponent({
 })
 </script>
 <template>
-  <VkDuplexCalc :withResize="'one'" :gap="'var(--gap-page, 14px)'">
+  <VkDuplexCalc
+    :with-resize="'one'"
+    :gap="'var(--gap-page, 14px)'"
+  >
     <template #one>
       <ElAutoResizer>
         <template #default="{ height, width }">
           <VkCheckRecordLogicProvider 
-            :allowExtra="true"
-            :modelValue="modelValue"
+            :allow-extra="true"
+            :model-value="modelValue"
+            :oid-field="oidField"
             @update:modelValue="$emit('update:modelValue', $event)"
-            :oidField="oidField"
           >
             <ElTableV2   
-              class="sk-app-tables__table"
-              v-bind="tableBindProps" 
-              :class="tableClass" 
-              :style="tableStyle"
+              v-bind="tableBindProps"
+              :ref="elRef" 
+              class="sk-app-tables__table" 
+              :class="tableClass"
+              :style="tableStyle" 
               :width="(tableBindProps.width ?? width) - 2" 
-              :height="(tableBindProps.height ?? height) - 2" 
+              :height="(tableBindProps.height ?? height) - 2"
               :columns="columns"
-              :ref="elRef"
             >
-              <slot></slot>
+              <slot />
             </ElTableV2>
           </VkCheckRecordLogicProvider>
         </template>
       </ElAutoResizer>
-
     </template>
-    <div class="sk-app-tables-pagination-x"
+    <div
       v-if="modules.includes('pagination')"
+      class="sk-app-tables-pagination-x"
     >
       <ElPagination 
         v-bind="paginationBindProps" 
+        :current-page="currentPage"
         v-on="paginationOnEmits"
-        :currentPage="currentPage"
         @update:current-page="updateStart"
-      ></ElPagination>
+      />
     </div>
-
   </VkDuplexCalc>
 </template>
 <style>

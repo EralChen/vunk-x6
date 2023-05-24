@@ -49,37 +49,45 @@ const linkClick = (e: MouseEvent, navigate: AnyFunc) => {
 }
 </script>
 <template>
-  <ElScrollbar class="bg-bg-overlay tags-view" >
-    <div sk-flex >
-
+  <ElScrollbar class="bg-bg-overlay tags-view">
+    <div sk-flex>
       <RouterLink 
-      v-for="item of viewsStore.visitedViews"
-      :key="item.fullPath" :to="item.fullPath"
-       :custom="true"
-       >
+        v-for="item of viewsStore.visitedViews"
+        :key="item.fullPath"
+        :to="item.fullPath"
+        :custom="true"
+      >
         <template #default="{ navigate, href, isActive, isExactActive }">
-          <a draggable="false" :href="href" @click="linkClick($event, navigate)" class="decoration-none text-text-secondary ptb-s plr-m 
-           tags-view-item" sk-flex="row-around-center" :class="{
-             'router-link-active': isActive,
-             'router-link-exact-active': isExactActive
-           }" sub:ml-xxs>
+          <a
+            draggable="false"
+            :href="href"
+            class="decoration-none text-text-secondary ptb-s plr-m 
+           tags-view-item"
+            sk-flex="row-around-center"
+            :class="{
+              'router-link-active': isActive,
+              'router-link-exact-active': isExactActive
+            }"
+            sub:ml-xxs
+            @click="linkClick($event, navigate)"
+          >
             <span>{{ item.meta.title || '未命名' }}</span>
 
-            <span sk-flex="row_center" @click="linkClose($event, item.fullPath)">
-              <ElIcon class="tags-view-icon-close" hover="bg-fill-darker">
+            <span
+              sk-flex="row_center"
+              @click="linkClose($event, item.fullPath)"
+            >
+              <ElIcon
+                class="tags-view-icon-close"
+                hover="bg-fill-darker"
+              >
                 <Close />
               </ElIcon>
             </span>
 
           </a>
-
         </template>
-
       </RouterLink>
-
-
-
-
     </div>
   </ElScrollbar>
 </template>

@@ -5,13 +5,13 @@ import { ElIcon } from 'element-plus'
 import { VkSvgIcon } from '@vunk/core'
 export default defineComponent({
   name: 'SkAppIcon',
-  inheritAttrs: false,
   components: {
     ElIcon,
     VkSvgIcon,
   },
-  emits,
+  inheritAttrs: false,
   props,
+  emits,
   setup (props) {
     const elIconName = computed(() => {
       // 正则匹配 <el-icon><SwitchButton /></el-icon> 获取到名称
@@ -35,64 +35,60 @@ export default defineComponent({
 })
 </script>
 <template>
-
-<template v-if="icon">
-  <VkSvgIcon
-    v-if="icon.startsWith(customPrefix)"
-    :iconClass="icon.replace(customPrefix, '')"
-    :style="{
-      color: color,
-      'font-size': size
-    }"
-    v-bind="$attrs"
-  >
-  </VkSvgIcon>
-  <!-- 正则判断是否是url  -->
-  <VkSvgIcon
-    v-else-if="/^https?:\/\//.test(icon) || /^data:image/.test(icon) ||icon.startsWith('/')"
-    :url="icon"
+  <template v-if="icon">
+    <VkSvgIcon
+      v-if="icon.startsWith(customPrefix)"
+      :icon-class="icon.replace(customPrefix, '')"
+      :style="{
+        color: color,
+        'font-size': size
+      }"
+      v-bind="$attrs"
+    />
+    <!-- 正则判断是否是url  -->
+    <VkSvgIcon
+      v-else-if="/^https?:\/\//.test(icon) || /^data:image/.test(icon) ||icon.startsWith('/')"
+      :url="icon"
     
-    :style="{
-      color: color,
-      'font-size': size
-    }"
-    v-bind="$attrs"
-  >
-  </VkSvgIcon>
+      :style="{
+        color: color,
+        'font-size': size
+      }"
+      v-bind="$attrs"
+    />
 
-  <ElIcon v-else-if="elIconName">
-    <component :is="elIconName.trim()">
-    </component>
-  </ElIcon>
+    <ElIcon v-else-if="elIconName">
+      <component :is="elIconName.trim()" />
+    </ElIcon>
 
-  <ElIcon 
-    v-else-if="icon.startsWith('<svg')"
-    :color="color" 
-    :size="size"
-    v-bind="$attrs"
-  >
-    <span v-html="icon" class="sk-app-icon-svg__inner"></span>
-  </ElIcon>
+    <ElIcon 
+      v-else-if="icon.startsWith('<svg')"
+      :color="color" 
+      :size="size"
+      v-bind="$attrs"
+    >
+      <span
+        class="sk-app-icon-svg__inner"
+        v-html="icon"
+      />
+    </ElIcon>
 
-  <span 
-    v-else-if="/^\d/.test(icon)"
-    v-bind="$attrs"
-  >
-    {{ icon }}
-  </span>
+    <span 
+      v-else-if="/^\d/.test(icon)"
+      v-bind="$attrs"
+    >
+      {{ icon }}
+    </span>
 
-  <ElIcon 
-    v-else-if="/^[\u4E00-\u9FA5A-Za-z0-9\s]{2,20}$/.test(icon)"
-    :color="color" 
-    :size="size"
-    v-bind="$attrs"
-  >
-    <component :is="icon.trim()">
-    </component>
-  </ElIcon>
-
-</template>
-
+    <ElIcon 
+      v-else-if="/^[\u4E00-\u9FA5A-Za-z0-9\s]{2,20}$/.test(icon)"
+      :color="color" 
+      :size="size"
+      v-bind="$attrs"
+    >
+      <component :is="icon.trim()" />
+    </ElIcon>
+  </template>
 </template>
 <style>
 .sk-app-icon-svg__inner{

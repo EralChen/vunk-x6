@@ -20,7 +20,7 @@ const emit = defineEmits({
   'setData': (e: SetDataEvent) => e,
 })
 
-const isU = computed(() => props.type === 'u')
+// const isU = computed(() => props.type === 'u')
 const formItems = computed<__SkAppForm.FormItem<keyof Row>[]>(() => [
   {
     prop: 'label',
@@ -62,9 +62,8 @@ const formItems = computed<__SkAppForm.FormItem<keyof Row>[]>(() => [
 <template>
   <SkAppForm
     :data="data"
-    :labelWidth="'8em'"
-    :formItems="formItems"
+    :label-width="'8em'"
+    :form-items="formItems"
     @setData="$emit('setData', $event)"
-  >
-  </SkAppForm>
+  />
 </template>
