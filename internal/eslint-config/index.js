@@ -48,6 +48,9 @@ module.exports = defineConfig({
     'vue/prefer-import-from-vue': 'off',
     'vue/html-self-closing': 'off',
     'vue/no-v-model-argument': 'off',
+    'vue/no-v-for-template-key': 'off',
+    'vue/no-multiple-template-root': 'off',
+
     // for import
     'import/no-duplicates': 'error', // 禁止重复 import 同一模块
    
