@@ -4,9 +4,9 @@ import { defineComponent, ref , computed, reactive, watch } from 'vue'
 import { VkCheckboxTree, __VkCheckboxTree } from '@vunk/skzz/components/checkbox-tree'
 import { Menu, rMenus, rMenusWithButtons } from '@skzz-platform/api/system/menu'
 import { listToTree } from '@vunk/core/shared/utils-data'
-import { SkCheckTags, __SkCheckTags  } from '@skzz-platform/components/check-tags'
+import { SkCheckTags } from '@skzz-platform/components/check-tags'
 import { SkAppTablesV1 } from '@skzz-platform/components/app-tables-v1'
-import { setData, unsetData, VkDuplexCalc, VkDuplex, Media } from '@vunk/core'
+import { setData, unsetData, VkDuplexCalc, VkDuplex, Media, UnsetDataEvent, SetDataEvent } from '@vunk/core'
 import { Row , TreeCheckEvents } from './types'
 import { SkAppQueryForm } from '@skzz-platform/components/app-query-form'
 import { __SkAppForm } from '@skzz-platform/shared'
@@ -15,7 +15,9 @@ import { rButtons } from '@skzz-platform/api/system/button'
 import { Deferred } from '@vunk/core/shared/utils-promise'
 import { ElTree } from 'element-plus'
 import { ButtonId } from '@skzz-platform/shared/enum'
+import { useModelComputed } from '@vunk/core/composables'
 const nodeKey = 'menuId'
+
 export default defineComponent({
   name: 'SkMenuSelect',
   components: {
@@ -27,10 +29,8 @@ export default defineComponent({
   props,
   emits,
   setup (props, { emit }) {
-    
-
-    const checkTagsState = reactive({
-      options: [  
+    const clientOptions = useModelComputed({
+      default: [
         {
           label: '桌面端',
           value: 'pc',
@@ -43,10 +43,26 @@ export default defineComponent({
           label: '管理端',
           value: 'admin',
         },
-      ] as __SkCheckTags.Option[],
-      value: 'admin',
+      ],
+      key: 'clientOptions',
+    }, props, emit)
+    console.log(clientOptions.value)
+    
 
+    const checkTagsState = reactive({
+      value: 'admin',
     })
+    const setDataClientOptions = (e: SetDataEvent) => {
+      const data = [...clientOptions.value]
+      setData(data, e)
+      clientOptions.value = data
+    }
+    const unsetDataClientOptions = (e: UnsetDataEvent) => {
+      const data = [...clientOptions.value]
+      unsetData(data, e)
+      clientOptions.value = data
+    }
+
     const treeState = reactive({
       data: [] as __VkCheckboxTree.TreeNode[],
       record: {} as Record<string, Menu>,
@@ -179,7 +195,7 @@ export default defineComponent({
         tableState.data = listToTree(res)
       })
     }
-    
+
 
     return {
       nodeKey,
@@ -192,6 +208,9 @@ export default defineComponent({
       queryFormItems,
       queryState,
       treeCheck,
+      clientOptions,
+      setDataClientOptions,
+      unsetDataClientOptions,
     }
   },
 })
@@ -203,15 +222,9 @@ export default defineComponent({
         <SkCheckTags 
           v-model="checkTagsState.value"
           :modules="['creatable']"
-          :options="checkTagsState.options"
-          @setData:options="setData(
-            checkTagsState.options,
-            $event,
-          )"
-          @unsetData:options="unsetData(
-            checkTagsState.options,
-            $event,
-          )"
+          :options="clientOptions"
+          @setData:options="setDataClientOptions"
+          @unsetData:options="unsetDataClientOptions"
         />
       </div>
     </template>
