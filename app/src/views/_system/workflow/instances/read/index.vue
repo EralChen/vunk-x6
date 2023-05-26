@@ -4,7 +4,7 @@
       <div class="editor-x" sk-flex="row">
         <div class="editor">
           <ZzG6Editor :selectNodeId="nodeModel.id" :mode="'default'" :model-value="model"
-            @nodeselectchange="nodeSelectChange" :active-tab-name="'approval'" >
+            @nodeselectchange="nodeSelectChange" :active-tab-name="'approval'">
             <template #form>
               <el-tab-pane label="审批" name="approval">
                 <ElScrollbar>
@@ -14,8 +14,9 @@
                   <ElForm label-position="top">
                     <!-- <BindAssitsOpers :node-model="nodeModel" :currentNodeInstIds="bindState.currentNodeInstIds"
                       @bind-success="r" :isFlowStart="isFlowStart"></BindAssitsOpers> -->
-                    <Approval :itemId="flowData.itemId" :flowId="flowId" :node-model="nodeModel" :currentNodeInstIds="bindState.currentNodeInstIds"
-                      :isFlowStart="isFlowStart" @approvalSuccess="approvalSuccess" :form-table="flowData.formTable"></Approval>
+                    <Approval :itemId="flowData.itemId" :flowId="flowId" :node-model="nodeModel"
+                      :currentNodeInstIds="bindState.currentNodeInstIds" :isFlowStart="isFlowStart"
+                      @approvalSuccess="approvalSuccess" :form-table="flowData.formTable"></Approval>
                   </ElForm>
                 </ElScrollbar>
               </el-tab-pane>
@@ -23,7 +24,7 @@
           </ZzG6Editor>
         </div>
       </div>
-     
+
     </SkAppCard>
   </PageOver>
 </template>
@@ -58,7 +59,7 @@ const nodeModel = ref({} as TotalFlow['nodes'][0])
 // 流程节点数据
 const model = shallowRef({})
 // 流程详情
-const flowData = ref({} as FlowNodeInstance) 
+const flowData = ref({} as FlowNodeInstance)
 const bindState = reactive({
   currentNodeInstIds: [] as string[],
 })
@@ -71,16 +72,16 @@ watch(() => props.id, r, { immediate: true })
 async function r () {
   const r = await rInstanceList(undefined, undefined, props.id)
   const rows = r.rows[0]
-  const raws = await rWorkflowNodeRaw({itemId: rows.itemId, flowInstId: props.id})
+  const raws = await rWorkflowNodeRaw({ itemId: rows.itemId, flowInstId: props.id })
 
   model.value = raws
   bindState.currentNodeInstIds = raws.currentNodeInstIds
 
   if (raws.currentNodeInstIds[0])
-  // 测试 获取 实例详情 暂时无用
+    // 测试 获取 实例详情 暂时无用
     rFlowInstanceDetail(raws.currentNodeInstIds[0])
       .then(() => {
-      // console.log(res)
+        // console.log(res)
       })
 
   flowData.value = rows

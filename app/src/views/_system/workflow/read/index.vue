@@ -1,13 +1,14 @@
 <template>
   <PageOver>
     <SkAppCard class="h-full" header="节点详情">
+      <template #header>
+        <span>节点详情</span>
+        <el-button type="primary" @click="doRunWorkflow">生成实例</el-button>
+      </template>
       <div class="editor-x" sk-flex="row">
         <div class="editor">
           <ZzG6Editor :selectNodeId="nodeModel.id" :mode="'default'" :model-value="model"
             @nodeselectchange="nodeSelectChange" :active-tab-name="'expend'" :form-id="flowData.formId">
-            
-            <el-button class="absolute top-14px right-14px z-100" type="primary" @click="doRunWorkflow">生成实例</el-button>
-
             <template #form>
               <el-tab-pane label="扩展属性" name="expend">
                 <ElScrollbar>
