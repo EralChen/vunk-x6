@@ -4,3 +4,7 @@
 .el-button+.el-button{
   margin-left: var(--gap-widget-space);
 }
+
+.el-pagination .el-select .el-input .el-input__wrapper{
+  width: 100%;
+}
