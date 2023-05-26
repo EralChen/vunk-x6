@@ -140,37 +140,38 @@ function cuI () {
       <template #one>
         <SkAppQueryForm 
           :data="queryData" 
-          @setData="setData(queryData, $event)" 
-          :formItems="queryItems"
+          :form-items="queryItems" 
+          @setData="setData(queryData, $event)"
           @enter="r"
         >
           <template #options>
-
             <SkIncreaseButton 
               v-button:increase="rButtonBtns()"
               @click="precI"
-            >新增</SkIncreaseButton>
-            
+            >
+              新增
+            </SkIncreaseButton>
           </template>
         </SkAppQueryForm>
       </template>
 
       <SkAppTables 
-        class="h-100%" 
-        v-bind="tableState"
+        v-bind="tableState" 
         v-model:start="pagination.start"
         v-model:pageSize="pagination.pageSize"
-      >
-      </SkAppTables>
+        class="h-100%"
+      />
     </VkDuplexCalc>
 
-    <SkAppDialog :title="cuIState.title" v-model="cuIState.visible">
+    <SkAppDialog
+      v-model="cuIState.visible"
+      :title="cuIState.title"
+    >
       <CuForm
         :data="cuIState.formData"
         @setData="setData(cuIState.formData, $event)"
         @submit="cuI"
-      ></CuForm>
+      />
     </SkAppDialog>
-
   </PageX>
 </template>

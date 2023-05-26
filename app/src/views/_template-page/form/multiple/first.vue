@@ -78,10 +78,8 @@ const formItems: __SkAppForm.CoreFormItem[] = [
 </script>
 <template>
   <SkAppForm
-    :labelPosition="'top'"
+    :label-position="'top'"
     :layout="true"
-    :formItems="formItems"
-  >
-
-  </SkAppForm>
+    :form-items="formItems"
+  />
 </template>

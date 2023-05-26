@@ -71,9 +71,8 @@ const formItems = ref<__SkAppForm.FormItem<keyof Row>[]>([
 <template>
   <SkAppForm
     :data="data"
-    :labelWidth="'8em'"
-    :formItems="formItems"
+    :label-width="'8em'"
+    :form-items="formItems"
     @setData="$emit('setData', $event)"
-  >
-  </SkAppForm>
+  />
 </template>

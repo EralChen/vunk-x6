@@ -12,43 +12,66 @@ function clear () {
 }
 </script>
 <template>
-  <div sk-flex="col-center2" class="h-100% bg-bg-page">
-    <div class="w-1200px h-680px bg-bg-overlay rd-16px overflow-hidden" sk-flex>
-      <div class="flex-1  overflow-hidden bg-login-bg" >
-        <div class="pa-42px text-white  h-full" sk-flex="col-between">
-          <div class="fw-bold f-l ">智子开发平台</div>
+  <div
+    sk-flex="col-center2"
+    class="h-100% bg-bg-page"
+  >
+    <div
+      class="w-1200px h-680px bg-bg-overlay rd-16px overflow-hidden"
+      sk-flex
+    >
+      <div class="flex-1  overflow-hidden bg-login-bg">
+        <div
+          class="pa-42px text-white  h-full"
+          sk-flex="col-between"
+        >
+          <div class="fw-bold f-l ">
+            智子开发平台
+          </div>
           <div>
             浙江时空智子大数据
           </div>
         </div>
-   
       </div>
-      <div class="flex-1 overflow-hidden " > 
+      <div class="flex-1 overflow-hidden "> 
         <div class="pl-80px pr-80px ">
-          <div class="c-primary fw-bold text-28px pt-90px
+          <div
+            class="c-primary fw-bold text-28px pt-90px
             pb-56px text-center
-          ">智子开发平台</div>
+          "
+          >
+            智子开发平台
+          </div>
 
-          <ElTabs  v-model="currentPage" class="login-tabs">
-            <ElTabPane label="账号密码登录" name="1">
+          <ElTabs
+            v-model="currentPage"
+            class="login-tabs"
+          >
+            <ElTabPane
+              label="账号密码登录"
+              name="1"
+            >
               <ByPassword
                 @login="clear"
-              ></ByPassword>
+              />
             </ElTabPane>
 
-            <ElTabPane label="手机验证码登录" name="2">
-              <ByPhone></ByPhone>
+            <ElTabPane
+              label="手机验证码登录"
+              name="2"
+            >
+              <ByPhone />
             </ElTabPane>
 
-            <ElTabPane label="扫码登录" name="3">
-              <ByDing></ByDing>
+            <ElTabPane
+              label="扫码登录"
+              name="3"
+            >
+              <ByDing />
             </ElTabPane>
           </ElTabs>
-     
         </div>
-
       </div>
-
     </div>
   </div>
 </template>

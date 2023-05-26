@@ -13,6 +13,7 @@ import router from '@/router'
 const props = defineProps({
   id: {
     type: String,
+    default: '',
   },
   detail: Boolean,
 })
@@ -140,16 +141,31 @@ const c = () => {
 </script>
 <template>
   <PageX>
-    <SkAppCard class="h-100%" :header="`微信${header}`">
+    <SkAppCard
+      class="h-100%"
+      :header="`微信${header}`"
+    >
       <template #header__options>
-        <ElButton type="primary" @click="c">提交</ElButton>
+        <ElButton
+          type="primary"
+          @click="c"
+        >
+          提交
+        </ElButton>
       </template>
 
       <ElScrollbar>
         <div class="gap-form-x">
-          <SkAppForm :elRef="defer.resolve" :disabled="props.detail" :rules="rules" :labelPosition="'top'" :layout="true" :formItems="formItems"
-            :data="firstFormData" @setData="setData(firstFormData, $event)">
-          </SkAppForm>
+          <SkAppForm
+            :el-ref="defer.resolve"
+            :disabled="props.detail"
+            :rules="rules"
+            :label-position="'top'"
+            :layout="true"
+            :form-items="formItems"
+            :data="firstFormData"
+            @setData="setData(firstFormData, $event)"
+          />
         </div>
       </ElScrollbar>
     </SkAppCard>

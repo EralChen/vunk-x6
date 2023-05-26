@@ -100,28 +100,33 @@ function precI () {
       <template #one>
         <SkAppQueryForm 
           :data="queryData" 
-          @setData="setData(queryData, $event)" 
-          :formItems="queryItems"
+          :form-items="queryItems" 
+          @setData="setData(queryData, $event)"
           @enter="r"
         >
           <template #options>
-            <ElButton type="primary" @click="r">查询</ElButton>
-            <ElButton type="primary" 
+            <ElButton
+              type="primary"
+              @click="r"
+            >
+              查询
+            </ElButton>
+            <ElButton
+              type="primary" 
               @click="precI"
-            >新增</ElButton>
-            
+            >
+              新增
+            </ElButton>
           </template>
         </SkAppQueryForm>
       </template>
 
       <SkAppTables 
-        class="h-100%" 
-        v-bind="tableState"
+        v-bind="tableState" 
         v-model:start="pagination.start"
         v-model:pageSize="pagination.pageSize"
-      >
-      </SkAppTables>
-      
+        class="h-100%"
+      />
     </VkDuplexCalc>
   </PageX>
 </template>

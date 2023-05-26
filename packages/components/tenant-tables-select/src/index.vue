@@ -9,13 +9,13 @@ import { Pagination } from '@skzz-platform/shared'
 import { VkDuplex, setData } from '@vunk/core'
 export default defineComponent({
   name: 'SkTenantTablesSelect',
-  emits,
-  props,
   components: {
     SkAppTables,
     VkDuplex,
     SkAppQueryForm,
   },
+  props,
+  emits,
   setup (props) {
     const queryItems:__SkAppQueryForm.CoreFormItem<keyof Row>[] = [
       {
@@ -96,24 +96,23 @@ export default defineComponent({
   <VkDuplex>
     <template #one>
       <SkAppQueryForm
-        :formItems="queryItems"
+        :form-items="queryItems"
         :data="queryState.data"
         @setData="setData(queryState.data, $event)"
-        
-      ></SkAppQueryForm>
+      />
     </template>
 
     <SkAppTables 
       
+      v-model:start="tableState.pagination.start"
+      v-model:pageSize="tableState.pagination.pageSize"
       :readonly="readonly"
-      :oidField="'tenantId'"
-      :modelValue="modelValue"
-      @update:modelValue="$emit('update:modelValue', $event)"
+      :oid-field="'tenantId'"
+      :model-value="modelValue"
       :columns="tableCols"
       :data="tableState.data"
       :total="tableState.total"
-      v-model:start="tableState.pagination.start"
-      v-model:pageSize="tableState.pagination.pageSize"
-    ></SkAppTables>
+      @update:modelValue="$emit('update:modelValue', $event)"
+    />
   </VkDuplex>
 </template>

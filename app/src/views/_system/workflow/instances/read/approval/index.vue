@@ -1,18 +1,47 @@
 <template>
   <ElDivider>表单</ElDivider>
-  <SkAppForm :rules="rules" :el-ref="def.resolve" :formItems="nodeFormItem" :data="nodeFormData"
-    @setData="setData(nodeFormData, $event)">
-  </SkAppForm>
+  <SkAppForm
+    :rules="rules"
+    :el-ref="def.resolve"
+    :form-items="nodeFormItem"
+    :data="nodeFormData"
+    @setData="setData(nodeFormData, $event)"
+  />
   <ElDivider>表单 - end</ElDivider>
-  <ElFormItem label="审批" v-show="isFlowStart && hasApprovelAuth">
-    <div mt-page mb-page w-100>
-      <el-input type="textarea" v-model="memo"></el-input>
+  <ElFormItem
+    v-show="isFlowStart && hasApprovelAuth"
+    label="审批"
+  >
+    <div
+      mt-page
+      mb-page
+      w-100
+    >
+      <el-input
+        v-model="memo"
+        type="textarea"
+      />
     </div>
-    <el-button v-if="!nodeModelCp.auditStatus" type="primary"
-      @click="doApprovel(WorkFlowNodeState.通过, 'pass')">通过</el-button>
-    <el-button v-show="nodeModelCp.id && nodeModelCp.auditStatus" type="success"
-      @click="doApprovel(WorkFlowNodeState.驳回, 'th')">退回</el-button>
-    <el-button type="warning" @click="doApprovel(WorkFlowNodeState.驳回, 'bh')">驳回</el-button>
+    <el-button
+      v-if="!nodeModelCp.auditStatus"
+      type="primary"
+      @click="doApprovel(WorkFlowNodeState.通过, 'pass')"
+    >
+      通过
+    </el-button>
+    <el-button
+      v-show="nodeModelCp.id && nodeModelCp.auditStatus"
+      type="success"
+      @click="doApprovel(WorkFlowNodeState.驳回, 'th')"
+    >
+      退回
+    </el-button>
+    <el-button
+      type="warning"
+      @click="doApprovel(WorkFlowNodeState.驳回, 'bh')"
+    >
+      驳回
+    </el-button>
   </ElFormItem>
 </template>
 

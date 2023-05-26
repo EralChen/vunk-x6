@@ -1,6 +1,6 @@
 import { MENU_DATA } from '../const'
 import { request } from '@skzz-platform/shared/fetch/platform'
-import { QueryRData, RestFetchExecOptions, RestFetchQueryOptions, RestFetchSaveOptions } from '@vunk/skzz'
+import { QueryRData, RestFetchQueryOptions, RestFetchSaveOptions } from '@vunk/skzz'
 import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
 import { WorkflowOper } from '../types'
 import { snowFlake } from '@skzz-platform/api/basic'

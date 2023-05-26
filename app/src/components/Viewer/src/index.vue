@@ -29,20 +29,26 @@ function toggle () {
 }
 </script>
 <template>
-  <VaMapView :defaultOptions="defaultOptions">
-    <VaTdtBasemap :type="'vec_c'" @load="vecDef.resolve($event.basemap)"  />
-    <VaZoom :position="'bottom-trailing'"></VaZoom>
+  <VaMapView :default-options="defaultOptions">
+    <VaTdtBasemap
+      :type="'vec_c'"
+      @load="vecDef.resolve($event.basemap)"
+    />
+    <VaZoom :position="'bottom-trailing'" />
 
-    <VaBasemapToggle :position="'bottom-leading'"
+    <VaBasemapToggle
+      :position="'bottom-leading'"
       @load="toggleDef.resolve($event.basemapToggle)"
     >
-      <VaTdtBasemap :orphan="true" :type="'img_c'" 
+      <VaTdtBasemap
+        :orphan="true"
+        :type="'img_c'" 
     
         @load="imgDef.resolve($event.basemap)"
       >
-        <VaBasemapToggleNextBasemap></VaBasemapToggleNextBasemap>
+        <VaBasemapToggleNextBasemap />
       </VaTdtBasemap>
     </VaBasemapToggle>
-    <slot></slot>
+    <slot />
   </VaMapView>
 </template>

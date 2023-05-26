@@ -7,8 +7,8 @@ export default defineComponent({
   components: {
     ElDialog,
   },
-  emits,
   props,
+  emits,
   setup (props, { emit, slots }) {
     const coreProps = createBindProps(props)
     const coreEmits = createOnEmits(emit)
@@ -31,13 +31,16 @@ export default defineComponent({
     v-on="coreEmits"
   >
     <template #header>
-      <slot name="header"></slot>
+      <slot name="header" />
     </template>
     
-    <slot></slot>
+    <slot />
     
-    <template #footer v-if="hasFooter">
-      <slot name="footer"></slot>
+    <template
+      v-if="hasFooter"
+      #footer
+    >
+      <slot name="footer" />
     </template>
   </ElDialog>
 </template>

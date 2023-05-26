@@ -14,8 +14,8 @@ export default defineComponent({
     ArrowDown,
     ElIcon,
   },
-  emits,
   props,
+  emits,
   setup (props, { emit }) {
     const formProps = _SkAppFormCtx.createBindProps(props, ['formItems'])
     const formEmits = _SkAppFormCtx.createOnEmits(emit, ['enter'])
@@ -59,7 +59,8 @@ export default defineComponent({
 })
 </script>
 <template>
-  <div class="sk-app-query-form"
+  <div
+    class="sk-app-query-form"
     :class="{
       'has-more': moreFormItems.length,
     }"
@@ -67,45 +68,54 @@ export default defineComponent({
     <div class="sk-app-query-form__fixed">
       <SkAppForm 
         v-bind="formProps" 
-        v-on="formEmits" 
-        :formItems="fixedFormItems" 
-        :elRef="fixedFormDef.resolve"
+        :form-items="fixedFormItems" 
+        :el-ref="fixedFormDef.resolve" 
+        v-on="formEmits"
         @enter="formEnter"
-      >
-      </SkAppForm>
+      />
       <div>
-        <slot name="options" v-if="ready" :forms="forms">
+        <slot
+          v-if="ready"
+          name="options"
+          :forms="forms"
+        >
           <!-- <ElButton type="primary">查询</ElButton> -->
         </slot>
       </div>
-
     </div>
     <template v-if="moreFormItems.length">
-      <div class="sk-app-query-form__more" @click="expand = !expand">
+      <div
+        class="sk-app-query-form__more"
+        @click="expand = !expand"
+      >
         <span>
           {{ expand? '收起': '更多' }}
         </span>
         <ElIcon>
-          <ArrowDown class="sk-app-query-form__arrow" :class="{
-            'is-reverse': expand,
-          }"></ArrowDown>
+          <ArrowDown
+            class="sk-app-query-form__arrow"
+            :class="{
+              'is-reverse': expand,
+            }"
+          />
         </ElIcon>
       </div>
 
       <ElCollapseTransition>
-        <SkAppForm v-show="expand" v-bind="formProps" v-on="formEmits" :formItems="moreFormItems"
-          :elRef="moreFormDef.resolve"
+        <SkAppForm
+          v-show="expand"
+          v-bind="formProps"
+          :form-items="moreFormItems"
+          :el-ref="moreFormDef.resolve"
+          v-on="formEmits"
           @enter="formEnter"
-          >
-        </SkAppForm>
+        />
       </ElCollapseTransition>
-
     </template>
 
     <template v-else>
-      {{  moreFormDef.resolve(null)  }}
+      {{ moreFormDef.resolve(null) }}
     </template>
-
   </div>
 </template>
 <style>

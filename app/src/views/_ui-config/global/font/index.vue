@@ -13,27 +13,33 @@ const modules = ref([
 
 </script>
 <template>
-<div plr-page pb-page class="h-page">
-  <SkMultipage class="bg-bg-overlay h-100%" :headerClass="'plr-form-pl'" v-model="currentPage" :modules="modules">
-    
-    <template #base>
-      <div class="plr-form-pl ptb-form-pt">
-        <BaseVue />
-      </div>
-    </template>
+  <div
+    plr-page
+    pb-page
+    class="h-page"
+  >
+    <SkMultipage
+      v-model="currentPage"
+      class="bg-bg-overlay h-100%"
+      :header-class="'plr-form-pl'"
+      :modules="modules"
+    >
+      <template #base>
+        <div class="plr-form-pl ptb-form-pt">
+          <BaseVue />
+        </div>
+      </template>
 
-    <template #base__options>
-      <ThemeClipboardButton :target="'fontSizeStyles'">
-      </ThemeClipboardButton>
-    </template>
+      <template #base__options>
+        <ThemeClipboardButton :target="'fontSizeStyles'" />
+      </template>
 
-    <template #name>
-      <div class="plr-form-pl ptb-form-pt">
-        <NameVue></NameVue>
-      </div>
-    </template>
-
-  </SkMultipage>
-</div>
+      <template #name>
+        <div class="plr-form-pl ptb-form-pt">
+          <NameVue />
+        </div>
+      </template>
+    </SkMultipage>
+  </div>
 </template>
 

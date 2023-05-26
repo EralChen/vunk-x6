@@ -1,28 +1,30 @@
 <template>
   <PageX>
     <VkDuplexCalc class="pa-page h-full">
-        <template #one>
-          <!-- <SkAppQueryForm :fixes="2" :data="formData" @setData="setData(formData, $event)" :formItems="queryItems">
+      <template #one>
+        <!-- <SkAppQueryForm :fixes="2" :data="formData" @setData="setData(formData, $event)" :formItems="queryItems">
           </SkAppQueryForm> -->
-        </template>
-        <SkAppTablesV1 :defaultExpandAll="true" flex-1 :rowKey="'menuId'" :columns="tableState.columns"
-          :data="tableState.data" :total="tableState.total" v-model:page-size="tableState.pagination.pageSize"
-          v-model:start="tableState.pagination.start">
-        </SkAppTablesV1>
-      </VkDuplexCalc>
+      </template>
+      <SkAppTablesV1
+        v-model:page-size="tableState.pagination.pageSize"
+        v-model:start="tableState.pagination.start"
+        :default-expand-all="true"
+        flex-1
+        :row-key="'menuId'"
+        :columns="tableState.columns"
+        :data="tableState.data"
+        :total="tableState.total"
+      />
+    </VkDuplexCalc>
   </PageX>
 </template>
 
 <script lang="tsx" setup>
 import PageX from '_c/PageX/index.vue'
 import {
-  SkAppCard,
-  __SkAppTables,
-  SkAppQueryForm, __SkAppQueryForm,
-} from '@skzz/platform'
-import { SkAppOperations, SkAppTablesV1, __SkAppTablesV1 } from '@skzz/platform'
-import { NormalObject, VkDuplexCalc } from '@vunk/core'
-import { reactive, ref, watch } from 'vue'
+  SkAppTablesV1, __SkAppTablesV1 } from '@skzz/platform'
+import { VkDuplexCalc } from '@vunk/core'
+import { reactive, watch } from 'vue'
 import { MessageStatus } from './ctx'
 import { rMessageList } from '@skzz-platform/api/system/message'
 import { Row } from './types'
@@ -89,21 +91,19 @@ const tableState = reactive({
   total: 0,
 })
 
-const queryItems: __SkAppQueryForm.FormItem[] = [
-  {
-    templateType: 'VkfInput',
-    prop: 'name',
-    label: '接收人',
-    clearable: true,
-    class: 'w-200px',
-  },
-]
+// const queryItems: __SkAppQueryForm.FormItem[] = [
+//   {
+//     templateType: 'VkfInput',
+//     prop: 'name',
+//     label: '接收人',
+//     clearable: true,
+//     class: 'w-200px',
+//   },
+// ]
 
-
-
-const formData = ref({
-  type: 'all',
-} as NormalObject)
+// const formData = ref({
+//   type: 'all',
+// } as NormalObject)
 
 
 watch(() => tableState.pagination, r, { deep: true, immediate: true })

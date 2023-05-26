@@ -3,17 +3,23 @@ import { props, emits } from './ctx'
 import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'SkAppModule',
-  emits,
   props,
+  emits,
 })
 </script>
 <template>
   <div class="sk-app-module"> 
-    <div class="sk-app-module__header" :class="`is-${type}`">
-      {{  title  }}
+    <div
+      class="sk-app-module__header"
+      :class="`is-${type}`"
+    >
+      {{ title }}
     </div>
-    <div class="sk-app-module__body" :class="`is-${type}`">
-      <slot></slot>
+    <div
+      class="sk-app-module__body"
+      :class="`is-${type}`"
+    >
+      <slot />
     </div>
   </div>
 </template>

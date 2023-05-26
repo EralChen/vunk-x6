@@ -1,15 +1,30 @@
 <template>
   <PageOver>
-    <SkAppCard class="h-full" header="实例详情">
-      <div class="editor-x" sk-flex="row">
+    <SkAppCard
+      class="h-full"
+      header="实例详情"
+    >
+      <div
+        class="editor-x"
+        sk-flex="row"
+      >
         <div class="editor">
           <ZzG6Editor :selectNodeId="nodeModel.id" :mode="'default'" :model-value="model"
             @nodeselectchange="nodeSelectChange" :active-tab-name="'approval'">
             <template #form>
-              <el-tab-pane label="审批" name="approval">
+              <el-tab-pane
+                label="审批"
+                name="approval"
+              >
                 <ElScrollbar>
-                  <ElForm label-position="top" :disabled="true">
-                    <BindOpers :node-model="nodeModel" :disabled="true"></BindOpers>
+                  <ElForm
+                    label-position="top"
+                    :disabled="true"
+                  >
+                    <BindOpers
+                      :node-model="nodeModel"
+                      :disabled="true"
+                    />
                   </ElForm>
                   <ElForm label-position="top">
                     <!-- <BindAssitsOpers :node-model="nodeModel" :currentNodeInstIds="bindState.currentNodeInstIds"
@@ -24,7 +39,6 @@
           </ZzG6Editor>
         </div>
       </div>
-
     </SkAppCard>
   </PageOver>
 </template>

@@ -1,7 +1,14 @@
 <template>
-  <ElFormItem v-show="nodeModelCp.id" :label="`节点定义绑定人员`">
-    <BindUser :show-data="showData" v-model="showdialog" v-model:data="nodeModelCp.opers" @doBindUser="bindOpers">
-    </BindUser>
+  <ElFormItem
+    v-show="nodeModelCp.id"
+    :label="`节点定义绑定人员`"
+  >
+    <BindUser
+      v-model="showdialog"
+      v-model:data="nodeModelCp.opers"
+      :show-data="showData"
+      @doBindUser="bindOpers"
+    />
   </ElFormItem>
 </template>
 

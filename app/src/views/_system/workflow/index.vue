@@ -201,42 +201,76 @@ function bindUser () {
 </script>
 <template>
   <page-x>
-    <VkDuplexCalc :gap="'var(--gap-page)'" class="pa-page h-full">
+    <VkDuplexCalc
+      :gap="'var(--gap-page)'"
+      class="pa-page h-full"
+    >
       <template #one>
         <div sk-flex="row-between-center">
-          <span></span>
+          <span />
           <SkIncreaseButton 
             :btns="rWorkflowBtns()"
             @click="precI"
-          >
-          </SkIncreaseButton>
+          />
         </div>
-
       </template>
 
-      <SkAppTablesV1 :defaultExpandAll="true" flex-1 :rowKey="'menuId'" :columns="tableState.columns"
-        :data="tableState.data" :total="tableState.total" v-model:page-size="tableState.pagination.pageSize"
-        v-model:start="tableState.pagination.start">
-      </SkAppTablesV1>
-
-
+      <SkAppTablesV1
+        v-model:page-size="tableState.pagination.pageSize"
+        v-model:start="tableState.pagination.start"
+        :default-expand-all="true"
+        flex-1
+        :row-key="'menuId'"
+        :columns="tableState.columns"
+        :data="tableState.data"
+        :total="tableState.total"
+      />
     </VkDuplexCalc>
 
-    <SkAppDialog :modelValue="!!cuState.type" @update:modelValue="cuState.type = ''"
-      :title="cuState.type === 'u' ? '编辑' : '新增'">
-      <CUForm :type="cuState.type" :data="cuState.data" @setData="setData(cuState.data, $event)" @submit="cuI"></CUForm>
+    <SkAppDialog
+      :model-value="!!cuState.type"
+      :title="cuState.type === 'u' ? '编辑' : '新增'"
+      @update:modelValue="cuState.type = ''"
+    >
+      <CUForm
+        :type="cuState.type"
+        :data="cuState.data"
+        @setData="setData(cuState.data, $event)"
+        @submit="cuI"
+      />
     </SkAppDialog>
 
     <!-- 绑定表单 -->
-    <SkAppDialog :modelValue="!!bindData.id" @update:modelValue="bindData.id = ''" title="绑定表单">
-      <BindUserTable class="h-30em" v-model="bindData.data"></BindUserTable>
+    <SkAppDialog
+      :model-value="!!bindData.id"
+      title="绑定表单"
+      @update:modelValue="bindData.id = ''"
+    >
+      <BindUserTable
+        v-model="bindData.data"
+        class="h-30em"
+      />
       <template #footer>
-        <el-button size="large" type="primary" @click="bindUser">确定</el-button>
+        <el-button
+          size="large"
+          type="primary"
+          @click="bindUser"
+        >
+          确定
+        </el-button>
       </template>
     </SkAppDialog>
     <!-- 绑定 回调 -->
-    <SkAppDialog :modelValue="!!bindVallback.id" @update:modelValue="bindVallback.id = ''" title="绑定流程回调">
-      <BindCallback :form-id="bindVallback.formId" :id="bindVallback.id" @success="bindVallback.id = ''"></BindCallback>
+    <SkAppDialog
+      :model-value="!!bindVallback.id"
+      title="绑定流程回调"
+      @update:modelValue="bindVallback.id = ''"
+    >
+      <BindCallback
+        :id="bindVallback.id"
+        :form-id="bindVallback.formId"
+        @success="bindVallback.id = ''"
+      />
     </SkAppDialog>
   </page-x>
 </template>

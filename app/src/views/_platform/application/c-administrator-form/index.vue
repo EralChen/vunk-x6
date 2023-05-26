@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { PropType, defineComponent } from 'vue'
 import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
 import { PATTERN } from '@skzz-platform/shared/utils-form'
 import { BoundApplication } from '@skzz-platform/api/platform/application'
@@ -8,7 +8,12 @@ export default defineComponent({
   components: {
     SkAppForm,
   },
-  props: ['data'],
+  props: {
+    data: {
+      type: Object as PropType<Partial<BoundApplication>>,
+      required: true,
+    },
+  },
   emits: {
     submit: (data: BoundApplication) => data,
   },
@@ -69,8 +74,6 @@ export default defineComponent({
 
       },
 
-
-
       {
         templateType: 'VkfButton',
         buttonLabel: '提交',
@@ -78,7 +81,7 @@ export default defineComponent({
         size: 'large',
         class: 'is-btn-group',
         onClick: () => {
-          emit('submit', props.data)
+          emit('submit', props.data as BoundApplication)
         },
       },
       
@@ -91,8 +94,8 @@ export default defineComponent({
 </script>
 <template>
   <SkAppForm 
-    :labelWidth="'6em'"
+    :label-width="'6em'"
     :data="data"
-    :formItems="formItems"
-  ></SkAppForm>
+    :form-items="formItems"
+  />
 </template>

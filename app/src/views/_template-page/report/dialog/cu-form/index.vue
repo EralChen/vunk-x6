@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { PropType, defineComponent } from 'vue'
 import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
 import { Row } from '../types'
 
@@ -7,7 +7,12 @@ export default defineComponent({
   components: {
     SkAppForm,
   },
-  props: ['data'],
+  props: {
+    data: {
+      type: Object as PropType<Row>,
+      required: true,
+    },
+  },
   emits: {
     submit: (data: Row) => data,
   },
@@ -44,6 +49,6 @@ export default defineComponent({
 <template>
   <SkAppForm 
     :data="data"
-    :formItems="formItems"
-  ></SkAppForm>
+    :form-items="formItems"
+  />
 </template>

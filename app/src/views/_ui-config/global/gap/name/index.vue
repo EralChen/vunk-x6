@@ -132,14 +132,13 @@ const formItems: __SkAppForm.FormItem<keyof typeof namedGap>[] = [
 </script>
 <template>
   <SkAppForm 
-    :labelWidth="200"
+    :label-width="200"
    
-    :formItems="formItems" 
+    :form-items="formItems" 
     :data="themeStore.gapNamedStyles"
-    @setData="setData(themeStore.gapNamedStyles, $event)"
     v-bind="$attrs"
-  >
-  </SkAppForm>
+    @setData="setData(themeStore.gapNamedStyles, $event)"
+  />
 </template>
 <style>
 

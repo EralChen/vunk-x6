@@ -5,6 +5,9 @@ import { defineComponent, PropType, provide, ref } from 'vue'
 import { GoldX, _GoldXCtx } from '_c/GoldX'
 import { Viewer } from '_c/Viewer'
 export default defineComponent({
+  components: {
+    GoldX,
+  },
   props: {
     ..._GoldXCtx.props,
     viewer: {
@@ -15,9 +18,6 @@ export default defineComponent({
       type: Number as PropType<1 | 2>,
       default: 1,
     },
-  },
-  components: {
-    GoldX,
   },
   setup (props) {
     const goldProps = _GoldXCtx.createBindProps(props)
@@ -45,32 +45,36 @@ export default defineComponent({
 <template>
   <GoldX v-bind="goldProps">
     <template #one>
-      <div class="h-100% ptb-page pl-page" v-if="viewerIndex === 1">
-        <component :is="viewer" 
-        @load="viewLoad"
+      <div
+        v-if="viewerIndex === 1"
+        class="h-100% ptb-page pl-page"
+      >
+        <component
+          :is="viewer" 
+          @load="viewLoad"
         >
-          <slot name="map"></slot>
+          <slot name="map" />
         </component>
       </div>
 
 
-      <slot v-else-if="ready"></slot>
-
-
+      <slot v-else-if="ready" />
     </template>
 
     <template #two>
-      <div class="h-100% ptb-page pr-page"  v-if="viewerIndex === 2">
-      <component :is="viewer"
-        @load="viewLoad"
+      <div
+        v-if="viewerIndex === 2"
+        class="h-100% ptb-page pr-page"
       >
-        <slot name="map"></slot>
-      </component>
+        <component
+          :is="viewer"
+          @load="viewLoad"
+        >
+          <slot name="map" />
+        </component>
       </div>
 
-      <slot v-else-if="ready"></slot>
-
-
+      <slot v-else-if="ready" />
     </template>
   </GoldX>
 </template>

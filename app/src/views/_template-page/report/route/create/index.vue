@@ -42,20 +42,26 @@ function c () {
 </script>
 <template>
   <PageOver>
-    <SkAppCard :header="'新增角色'" class="h-full">
+    <SkAppCard
+      :header="'新增角色'"
+      class="h-full"
+    >
       <template #header__options>
-        <ElButton type="primary"
+        <ElButton
+          type="primary"
           @click="c"
-        >提交</ElButton>
+        >
+          提交
+        </ElButton>
       </template>
       <div class="gap-form-x"> 
         <SkAppForm
           :layout="true"
-          :labelPosition="'top'"
-          :formItems="formItems"
+          :label-position="'top'"
+          :form-items="formItems"
           :data="formData"
           @setData="setData(formData, $event)"
-        ></SkAppForm>
+        />
       </div>
     </SkAppCard>
   </PageOver>

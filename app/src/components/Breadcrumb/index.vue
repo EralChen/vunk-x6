@@ -38,13 +38,16 @@ const handleLink = (item:RouteLocationMatched) => {
     :separator="'>'"
   >
     <!-- <TransitionGroup name="breadcrumb"> -->
-      <el-breadcrumb-item v-for="(item) in levelList" :key="item.path">
-        <a 
-          @click.prevent="handleLink(item)"
-        >
-          {{ item.meta.title }}
-        </a>
-      </el-breadcrumb-item>
+    <el-breadcrumb-item
+      v-for="(item) in levelList"
+      :key="item.path"
+    >
+      <a 
+        @click.prevent="handleLink(item)"
+      >
+        {{ item.meta.title }}
+      </a>
+    </el-breadcrumb-item>
     <!-- </TransitionGroup> -->
   </ElBreadcrumb>
 </template>

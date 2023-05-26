@@ -2,8 +2,7 @@
 import { props, emits, createPaginationBindProps, createPaginationOnEmits, createTableBindProps } from './ctx'
 import { computed, defineComponent, watch } from 'vue'
 import { VkDuplexCalc } from '@vunk/core'
-import { ElPagination } from 'element-plus'
-import { ElTable } from 'element-plus'
+import { ElPagination , ElTable } from 'element-plus'
 import { VkTableColumns, _VkTableColumnsElCtx } from '@vunk/skzz/components/table-columns'
 import { createElTableOnEmits } from './el-ctx'
 export default defineComponent({
@@ -14,8 +13,8 @@ export default defineComponent({
     ElTable,
     VkTableColumns,
   },
-  emits,
   props,
+  emits,
   setup (props, { emit }) {
     const paginationBindProps = createPaginationBindProps(props)
     const paginationOnEmits = createPaginationOnEmits(emit)
@@ -47,29 +46,37 @@ export default defineComponent({
 })
 </script>
 <template>
-  <VkDuplexCalc :withResize="'one'" :gap="'var(--gap-page, 14px)'">
+  <VkDuplexCalc
+    :with-resize="'one'"
+    :gap="'var(--gap-page, 14px)'"
+  >
     <template #one>
-
       <ElTable 
-        :style="tableStyle"
-        :className="'sk-app-tables-v1-table ' + tableClass" v-bind="tableProps" v-on="tableOnEmits"
+        v-bind="tableProps"
         :ref="elRef"
-       >
+        :style="tableStyle"
+        :class-name="'sk-app-tables-v1-table ' + tableClass"
+        v-on="tableOnEmits"
+      >
         <VkTableColumns 
           
           v-bind="columnsProps" 
           :source="columns"
-        ></VkTableColumns>
+        />
       </ElTable>
     </template>
 
-    <div class="sk-app-tables-v1-pagination-x"
+    <div
       v-if="modules.includes('pagination')"
+      class="sk-app-tables-v1-pagination-x"
     >
-      <ElPagination v-bind="paginationBindProps" v-on="paginationOnEmits" :currentPage="currentPage"
-        @update:current-page="updateStart"></ElPagination>
+      <ElPagination
+        v-bind="paginationBindProps"
+        :current-page="currentPage"
+        v-on="paginationOnEmits"
+        @update:current-page="updateStart"
+      />
     </div>
-
   </VkDuplexCalc>
 </template>
 <style>

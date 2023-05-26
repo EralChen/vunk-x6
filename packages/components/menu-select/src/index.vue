@@ -1,38 +1,36 @@
 <script lang="tsx">
 import { props, emits } from './ctx'
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref , computed, reactive, watch } from 'vue'
 import { VkCheckboxTree, __VkCheckboxTree } from '@vunk/skzz/components/checkbox-tree'
-import { computed, reactive, watch } from 'vue'
 import { Menu, rMenus, rMenusWithButtons } from '@skzz-platform/api/system/menu'
 import { listToTree } from '@vunk/core/shared/utils-data'
-import { SkCheckTags, __SkCheckTags  } from '@skzz-platform/components/check-tags'
+import { SkCheckTags } from '@skzz-platform/components/check-tags'
 import { SkAppTablesV1 } from '@skzz-platform/components/app-tables-v1'
-import { setData, unsetData, VkDuplexCalc, VkDuplex, Media } from '@vunk/core'
-import { Row } from './types'
+import { setData, unsetData, VkDuplexCalc, VkDuplex, Media, UnsetDataEvent, SetDataEvent } from '@vunk/core'
+import { Row , TreeCheckEvents } from './types'
 import { SkAppQueryForm } from '@skzz-platform/components/app-query-form'
 import { __SkAppForm } from '@skzz-platform/shared'
 import { VkfCheckbox } from '@vunk/form/components/checkbox'
 import { rButtons } from '@skzz-platform/api/system/button'
 import { Deferred } from '@vunk/core/shared/utils-promise'
 import { ElTree } from 'element-plus'
-import { TreeCheckEvents } from './types'
 import { ButtonId } from '@skzz-platform/shared/enum'
+import { useModelComputed } from '@vunk/core/composables'
 const nodeKey = 'menuId'
+
 export default defineComponent({
   name: 'SkMenuSelect',
-  emits,
-  props,
   components: {
     SkCheckTags,
     VkCheckboxTree,
     SkAppTablesV1,
     VkDuplexCalc, VkDuplex, SkAppQueryForm,
   },
+  props,
+  emits,
   setup (props, { emit }) {
-    
-
-    const checkTagsState = reactive({
-      options: [  
+    const clientOptions = useModelComputed({
+      default: [
         {
           label: '桌面端',
           value: 'pc',
@@ -45,10 +43,26 @@ export default defineComponent({
           label: '管理端',
           value: 'admin',
         },
-      ] as __SkCheckTags.Option[],
-      value: 'admin',
+      ],
+      key: 'clientOptions',
+    }, props, emit)
+    console.log(clientOptions.value)
+    
 
+    const checkTagsState = reactive({
+      value: 'admin',
     })
+    const setDataClientOptions = (e: SetDataEvent) => {
+      const data = [...clientOptions.value]
+      setData(data, e)
+      clientOptions.value = data
+    }
+    const unsetDataClientOptions = (e: UnsetDataEvent) => {
+      const data = [...clientOptions.value]
+      unsetData(data, e)
+      clientOptions.value = data
+    }
+
     const treeState = reactive({
       data: [] as __VkCheckboxTree.TreeNode[],
       record: {} as Record<string, Menu>,
@@ -181,7 +195,7 @@ export default defineComponent({
         tableState.data = listToTree(res)
       })
     }
-    
+
 
     return {
       nodeKey,
@@ -194,73 +208,68 @@ export default defineComponent({
       queryFormItems,
       queryState,
       treeCheck,
+      clientOptions,
+      setDataClientOptions,
+      unsetDataClientOptions,
     }
   },
 })
 </script>
 <template>
-    <VkDuplexCalc :gap="'var(--gap-page)'">
-      <template #one>
-        <div sk-flex="row-between-center">
-          <SkCheckTags 
-            :modules="['creatable']"
-            :options="checkTagsState.options"
-            @setData:options="setData(
-              checkTagsState.options,
-              $event,
-            )"
-            @unsetData:options="unsetData(
-              checkTagsState.options,
-              $event,
-            )"
-            v-model="checkTagsState.value"
-          >
-          </SkCheckTags>
-        </div>
-
-      </template>
+  <VkDuplexCalc :gap="'var(--gap-page)'">
+    <template #one>
+      <div sk-flex="row-between-center">
+        <SkCheckTags 
+          v-model="checkTagsState.value"
+          :modules="['creatable']"
+          :options="clientOptions"
+          @setData:options="setDataClientOptions"
+          @unsetData:options="unsetDataClientOptions"
+        />
+      </div>
+    </template>
  
   
-      <VkDuplex :gap="'var(--gap-page)'" :direction="'row'"  h-full >
-        <template #one>
-          <VkCheckboxTree 
-            v-model:filterText="treeState.filterText"
-            :elRef="treeState.def.resolve"
-            :nodeKey="nodeKey"
-            :modules="['filter', 'srcollbar']"
-            :defaultExpandAll="true"
-            :data="treeState.data" 
-            :modelValue="modelValue"
-            @update:modelValue=" $emit('update:modelValue', $event)"
+    <VkDuplex
+      :gap="'var(--gap-page)'"
+      :direction="'row'"
+      h-full
+    >
+      <template #one>
+        <VkCheckboxTree 
+          v-model:filterText="treeState.filterText"
+          :el-ref="treeState.def.resolve"
+          :node-key="nodeKey"
+          :modules="['filter', 'srcollbar']"
+          :default-expand-all="true"
+          :data="treeState.data" 
+          :model-value="modelValue"
+          @update:modelValue=" $emit('update:modelValue', $event)"
 
-            @check="treeCheck"
-          ></VkCheckboxTree>
+          @check="treeCheck"
+        />
+      </template>
+
+      <VkDuplexCalc>
+        <template #one>
+          <SkAppQueryForm
+            :form-items="queryFormItems"
+            :data="queryState.query"
+            @setData="setData(queryState.query, $event)"
+          />
         </template>
 
-        <VkDuplexCalc>
-          <template #one>
-            <SkAppQueryForm
-              :formItems="queryFormItems"
-              :data="queryState.query"
-              @setData="setData(queryState.query, $event)"
-            ></SkAppQueryForm>
-          </template>
-
-          <SkAppTablesV1 
-            :defaultExpandAll="true"
-            flex-1
-            :modules="[]"
-            :rowKey="'menuId'"
-            :columns="tableColumns"
-            :data="tableState.data"
-          >
-          </SkAppTablesV1>
-
-        </VkDuplexCalc>
-
-      </VkDuplex>
-
-    </VkDuplexCalc>
+        <SkAppTablesV1 
+          :default-expand-all="true"
+          flex-1
+          :modules="[]"
+          :row-key="'menuId'"
+          :columns="tableColumns"
+          :data="tableState.data"
+        />
+      </VkDuplexCalc>
+    </VkDuplex>
+  </VkDuplexCalc>
 </template>
 <style>
 .menu-select-buttons-col .el-checkbox.is-disabled{

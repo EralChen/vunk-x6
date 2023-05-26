@@ -11,8 +11,8 @@ export default defineComponent({
     Close,
     ElIcon,
   },
-  emits,
   props,
+  emits,
 
   setup (props, { emit }) {
     const coreProps = createCheckTagBindProps(props)
@@ -25,13 +25,18 @@ export default defineComponent({
 })
 </script>
 <template>
-  <ElCheckTag class="sk-check-tag"
+  <ElCheckTag
+    class="sk-check-tag"
     v-bind="coreProps"
     v-on="coreEmits"
   >
-    <slot></slot>
-    <ElIcon v-if="closeable" class="sk-check-tag__close" @click.stop="$emit('close')">
-      <Close></Close>
+    <slot />
+    <ElIcon
+      v-if="closeable"
+      class="sk-check-tag__close"
+      @click.stop="$emit('close')"
+    >
+      <Close />
     </ElIcon>
   </ElCheckTag>
 </template>

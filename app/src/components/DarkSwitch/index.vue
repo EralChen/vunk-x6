@@ -6,12 +6,11 @@ const isDark = useSharedDark()
 </script>
 <template>
   <ElSwitch 
-    :inlinePrompt="true"
-    v-model="isDark" 
-    :activeIcon="Sunny"
-    :inactiveIcon="Moon"
-    :inactiveColor="'#000'"
-    :activeColor="'var(--el-color-info)'"
-    
-  ></ElSwitch>
+    v-model="isDark"
+    :inline-prompt="true" 
+    :active-icon="Sunny"
+    :inactive-icon="Moon"
+    :inactive-color="'#000'"
+    :active-color="'var(--el-color-info)'"
+  />
 </template>

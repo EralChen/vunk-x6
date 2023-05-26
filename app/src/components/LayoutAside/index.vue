@@ -1,9 +1,8 @@
 <script lang="ts" setup>
-import { ElMenu, ElIcon } from 'element-plus'
+import { ElMenu } from 'element-plus'
 import { VkRoutesMenuContent } from '@vunk/skzz/components/routes-menu-content'
 import LinkVue from '_c/MenuLink/index.vue'
 import { useLayoutStore } from '@/stores/layout'
-import { Document } from '@element-plus/icons-vue'
 import { nextTick, onMounted, Ref, ref, watch } from 'vue'
 import CollapseVue from './Collapse.vue'
 import { useViewsStore } from '@/stores/views'
@@ -51,56 +50,57 @@ onMounted(async () => {
 })
 </script>
 <template>
-<div class="layout-default-aside h-100%" >
-  <ElScrollbar>
-    <ElMenu 
-      class="layout-default-aside-menu"
-      :collapse="layoutStore.asideInfo.menuCollapse"
-      ref="menuNode"
-    >
-      <VkRoutesMenuContent 
-        :data="viewsStore.currentBaseView?.children || [...permissionStore.routes, ...constRoutes]" 
-        :basePath="viewsStore.currentBaseView?.fullPath || ''"
-        :popperClass="'layout-default-aside-popper'"
+  <div class="layout-default-aside h-100%">
+    <ElScrollbar>
+      <ElMenu 
+        ref="menuNode"
+        class="layout-default-aside-menu"
+        :collapse="layoutStore.asideInfo.menuCollapse"
       >
-        <template #item="{ data, href }">
-          <LinkVue :isMenu="false" :data="data" :to="href">
-            <SkAppIcon 
-              class="layout-default-aside-item-icon"
-              v-if="data.meta?.icon" 
-              :icon="data.meta.icon"
-            ></SkAppIcon>
+        <VkRoutesMenuContent 
+          :data="viewsStore.currentBaseView?.children || [...permissionStore.routes, ...constRoutes]" 
+          :base-path="viewsStore.currentBaseView?.fullPath || ''"
+          :popper-class="'layout-default-aside-popper'"
+        >
+          <template #item="{ data, href }">
+            <LinkVue
+              :is-menu="false"
+              :data="data"
+              :to="href"
+            >
+              <SkAppIcon 
+                v-if="data.meta?.icon"
+                class="layout-default-aside-item-icon" 
+                :icon="data.meta.icon"
+              />
+            </LinkVue>
+          </template>
 
-          
-          </LinkVue>
-        </template>
+          <template #itemTitle="{ data }">
+            <span>{{ data.meta?.title || data.meta?.name }}</span> 
+          </template>
 
-        <template #itemTitle="{ data }">
-          <span >{{ data.meta?.title || data.meta?.name }}</span> 
-        </template>
+          <template #menuTitle="{ data, href }">
+            <LinkVue
+              :is-menu="true"
+              :data="data"
+              :to="href"
+            >
+              <SkAppIcon 
+                v-if="data.meta?.icon"
+                class="layout-default-aside-item-icon" 
+                :icon="data.meta.icon"
+              />
+            </LinkVue>
 
-        <template #menuTitle="{ data, href }">
- 
-          <LinkVue :isMenu="true" :data="data" :to="href">
-            <SkAppIcon 
-              class="layout-default-aside-item-icon"
-              v-if="data.meta?.icon" 
-              :icon="data.meta.icon"
-            ></SkAppIcon>
+            <span class="layout-default-aside-item-span"> {{ data.meta?.title || data.meta?.name }}</span>
+          </template>
+        </VkRoutesMenuContent>
+      </ElMenu>
+    </ElScrollbar>
 
-          </LinkVue>
-
-          <span class="layout-default-aside-item-span"> {{ data.meta?.title || data.meta?.name }}</span> 
-
-
-        </template>
-      </VkRoutesMenuContent>
-    </ElMenu>
-  
-  </ElScrollbar>
-
-  <CollapseVue class="layout-default-aside-collapse"></CollapseVue>
-</div>
+    <CollapseVue class="layout-default-aside-collapse" />
+  </div>
 </template>
 
 <slyle lang="scss">

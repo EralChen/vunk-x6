@@ -41,19 +41,18 @@ const append = () => {
 </script>
 
 <template>
-    <VkfInput
-      v-bind="$attrs"
-      class="captcha-input"
-      :modelValue="data[prop]"
-      @update:modelValue="$emit('setData', {
-        k: 'captcha',
-        v: $event
-      })"
-      :inputSlots="{
-        append
-      }"
-    ></VkfInput>
-
+  <VkfInput
+    v-bind="$attrs"
+    class="captcha-input"
+    :model-value="data[prop]"
+    :input-slots="{
+      append
+    }"
+    @update:modelValue="$emit('setData', {
+      k: 'captcha',
+      v: $event
+    })"
+  />
 </template>
 <style lang="scss">
 .captcha-input {

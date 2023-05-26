@@ -1,18 +1,44 @@
 <template>
   <!-- <ElFormItem :label="props.label"> -->
-    <!-- <SkTableSelectTags :closable="true" @click="doBind()" v-model="showData" :prop="{ id: idKey }"></SkTableSelectTags> -->
+  <!-- <SkTableSelectTags :closable="true" @click="doBind()" v-model="showData" :prop="{ id: idKey }"></SkTableSelectTags> -->
   <!-- </ElFormItem> -->
-  <div sk-flex="row-end" class="mb">
-    <ElButton type="primary" size="small" @click="doShow">新增</ElButton>
+  <div
+    sk-flex="row-end"
+    class="mb"
+  >
+    <ElButton
+      type="primary"
+      size="small"
+      @click="doShow"
+    >
+      新增
+    </ElButton>
   </div>
 
-  <ElDialog v-model="showDialog" :title="`选择字段`" :appendToBody="true">
-    <SkAppTables :oidField="idKey" class="h-30em" v-model="model" :columns="tableState.columns" :data="tableState.data" :single="true"
-      :total="tableState.total" v-model:pageSize="tableState.pagination.pageSize"
-      v-model:start="tableState.pagination.start"></SkAppTables>
-      <template #footer>
-        <ElButton @click="add" type="primary">确定</ElButton>
-      </template>
+  <ElDialog
+    v-model="showDialog"
+    :title="`选择字段`"
+    :append-to-body="true"
+  >
+    <SkAppTables
+      v-model="model"
+      v-model:pageSize="tableState.pagination.pageSize"
+      v-model:start="tableState.pagination.start"
+      :oid-field="idKey"
+      class="h-30em"
+      :columns="tableState.columns"
+      :data="tableState.data"
+      :single="true"
+      :total="tableState.total"
+    />
+    <template #footer>
+      <ElButton
+        type="primary"
+        @click="add"
+      >
+        确定
+      </ElButton>
+    </template>
   </ElDialog>
 </template>
 

@@ -1,14 +1,14 @@
 <template>
   <ZzEditor v-bind="editProps">
-    <slot></slot>
+    <slot />
     <template #toolbar>
-      <slot name="toolbar"></slot>
+      <slot name="toolbar" />
     </template>
     <template #base-form>
-      <slot name="base-form"></slot>
+      <slot name="base-form" />
     </template>
     <template #form>
-      <slot name="form"></slot>
+      <slot name="form" />
     </template>
   </ZzEditor>
 </template>
@@ -20,10 +20,10 @@ import { propsOp, bindProps } from './ctx'
 import { computed, defineComponent } from 'vue'
 
 export default defineComponent({
-  props: propsOp,
   components: {
     ZzEditor,
   },
+  props: propsOp,
   setup (props) {
     const editProps = bindProps(props, ['formId'])
 

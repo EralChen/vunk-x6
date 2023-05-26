@@ -2,21 +2,34 @@
   <PageX>
     <VkDuplexCalc class="pa-page h-full">
       <template #one>
-        <div sk-flex="row-end" class="mb">
-          <ElButton type="primary" @click="$router.push('/system/message/template/add')">新增</ElButton>
+        <div
+          sk-flex="row-end"
+          class="mb"
+        >
+          <ElButton
+            type="primary"
+            @click="$router.push('/system/message/template/add')"
+          >
+            新增
+          </ElButton>
         </div>
       </template>
-      <SkAppTablesV1 :defaultExpandAll="true" flex-1 :rowKey="'menuId'" :columns="tableState.columns"
-        :data="tableState.data" :total="tableState.total" v-model:page-size="tableState.pagination.pageSize"
-        v-model:start="tableState.pagination.start">
-      </SkAppTablesV1>
+      <SkAppTablesV1
+        v-model:page-size="tableState.pagination.pageSize"
+        v-model:start="tableState.pagination.start"
+        :default-expand-all="true"
+        flex-1
+        :row-key="'menuId'"
+        :columns="tableState.columns"
+        :data="tableState.data"
+        :total="tableState.total"
+      />
     </VkDuplexCalc>
   </PageX>
 </template>
 
 <script lang="tsx" setup>
 import PageX from '_c/PageX/index.vue'
-import { SkAppCard, __SkAppTables, __SkAppQueryForm } from '@skzz/platform'
 import { SkAppOperations, SkAppTablesV1, __SkAppTablesV1 } from '@skzz/platform'
 import { dTemplate, rTemplateList } from '@skzz-platform/api/system/message'
 import { VkDuplexCalc } from '@vunk/core'

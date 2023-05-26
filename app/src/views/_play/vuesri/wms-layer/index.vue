@@ -62,68 +62,65 @@ const layerLoad: __VaWmsLayer.OnLoad = async (e) => {
 
 </script>
 <template>
-<PageX>
-  <VaSceneView>
-    <VaTdtBasemap 
-      :type="'vec_c'"
-      :anno="false" 
-      :spatial-reference="{
-        wkid: 4490
-      }"
-    ></VaTdtBasemap>
+  <PageX>
+    <VaSceneView>
+      <VaTdtBasemap 
+        :type="'vec_c'"
+        :anno="false" 
+        :spatial-reference="{
+          wkid: 4490
+        }"
+      />
 
-    <VaViewUi class="h-100% bg-bg-overlay">
-      <VkCheckboxTree 
-        class="pa-m"
-        :modules="['srcollbar', 'filter']"
-        v-model:filterText="filterText"
-        v-model="layerChecked"
-        :data="layersData" 
-       @check-change="checkChange" 
-       :render-after-expand="false"
-      ></VkCheckboxTree>
-    </VaViewUi>
+      <VaViewUi class="h-100% bg-bg-overlay">
+        <VkCheckboxTree 
+          v-model:filterText="filterText"
+          v-model="layerChecked"
+          class="pa-m"
+          :modules="['srcollbar', 'filter']"
+          :data="layersData" 
+          :render-after-expand="false" 
+          @check-change="checkChange"
+        />
+      </VaViewUi>
 
-    <VaTreeLayerGroup :data="layersData">
-      <VaTreeLayerItem type="VaWmsLayer">
-        <template #default="{ layer }">
-          <VaWmsLayer 
-            v-if="layer.if"
-            :url="layer.url" 
-            :visible="layer.visible"
-            :sublayers="[
-              {
-                name: layer.name,
-                queryable: true,
-                popupEnabled: true,
-              }
-            ]"
-            @load="layerLoad"
-          >
-
-            <VaPopupTemplate :orphan="true">
-              <template #plugins>
-                <VaWmsLayerPopupTemplate></VaWmsLayerPopupTemplate>
-              </template>
+      <VaTreeLayerGroup :data="layersData">
+        <VaTreeLayerItem type="VaWmsLayer">
+          <template #default="{ layer }">
+            <VaWmsLayer 
+              v-if="layer.if"
+              :url="layer.url" 
+              :visible="layer.visible"
+              :sublayers="[
+                {
+                  name: layer.name,
+                  queryable: true,
+                  popupEnabled: true,
+                }
+              ]"
+              @load="layerLoad"
+            >
+              <VaPopupTemplate :orphan="true">
+                <template #plugins>
+                  <VaWmsLayerPopupTemplate />
+                </template>
               
-              <template #default="{attributes}">
-
-              <el-descriptions :border="true">
-                <el-descriptions-item v-for="(v, k) of attributes"
-                  :label="k + ''"
-                  :key="k"
-                >
-                  {{ v }}
-                </el-descriptions-item>
-              </el-descriptions>
-              </template>
-            </VaPopupTemplate>
-
-          </VaWmsLayer>
-        </template>
-      </VaTreeLayerItem>
-    </VaTreeLayerGroup>
-
-  </VaSceneView>
-</PageX>
+                <template #default="{attributes}">
+                  <el-descriptions :border="true">
+                    <el-descriptions-item
+                      v-for="(v, k) of attributes"
+                      :key="k"
+                      :label="k + ''"
+                    >
+                      {{ v }}
+                    </el-descriptions-item>
+                  </el-descriptions>
+                </template>
+              </VaPopupTemplate>
+            </VaWmsLayer>
+          </template>
+        </VaTreeLayerItem>
+      </VaTreeLayerGroup>
+    </VaSceneView>
+  </PageX>
 </template>

@@ -7,12 +7,23 @@ import { AnyFunc } from '@vunk/core'
 
 export default defineComponent({
   name: 'SkMultipageRenderer',
-  inheritAttrs: false,
   components: {
     SkMultipage,
   },
-  emits,
+  inheritAttrs: false,
   props,
+  emits,
+  setup (props, { emit }) {
+    const vm = getCurrentInstance()
+    const coreProps = _SkMultipageCtx.createBindProps(props)
+    const coreEmits = _SkMultipageCtx.createOnEmits(emit)
+    provide('skMultipageRenderer', vm)
+
+    return {
+      coreProps,
+      coreEmits,
+    }
+  },
   data () {
     return {
       items: new Map(),
@@ -38,17 +49,6 @@ export default defineComponent({
       }, [] as { name: string, render: AnyFunc }[])
     },
   },
-  setup (props, { emit }) {
-    const vm = getCurrentInstance()
-    const coreProps = _SkMultipageCtx.createBindProps(props)
-    const coreEmits = _SkMultipageCtx.createOnEmits(emit)
-    provide('skMultipageRenderer', vm)
-
-    return {
-      coreProps,
-      coreEmits,
-    }
-  },
 })
 </script>
 <template>
@@ -57,18 +57,20 @@ export default defineComponent({
       ...coreProps,
       ...$attrs,
     }"
-    v-on="coreEmits"
     :modules="modules"
-
+    v-on="coreEmits"
   >
     <template 
       v-for="item of slots"
       :key="item.name"
-      v-slot:[item.name]="slotProps"
+      #[item.name]="slotProps"
     >
-      <component :is="item.render" v-bind="slotProps" />
+      <component
+        :is="item.render"
+        v-bind="slotProps"
+      />
     </template>
   </SkMultipage>
 
-  <slot></slot>
+  <slot />
 </template>

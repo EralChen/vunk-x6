@@ -11,28 +11,32 @@ const currentPage = ref('primary')
 </script>
 <template>
   <page-x>
-    <SkAppCard class="h-100%" :header="'按钮配置'">
-      <SkMultipageRenderer v-model="currentPage"
-        :headerClass="'plr-form-pl'"
-        :bodyClass="'h-100%'"
+    <SkAppCard
+      class="h-100%"
+      :header="'按钮配置'"
+    >
+      <SkMultipageRenderer
+        v-model="currentPage"
+        :header-class="'plr-form-pl'"
+        :body-class="'h-100%'"
         class="h-100%"
       >
         <SkMultipageTemplate 
           :label="'主要按钮'"
           :value="'primary'"
         >
-        <ElScrollbar>
-          <PrimaryVue
-            :data="themeStore.buttonPrimaryStyles"
-            @setData="setData(themeStore.buttonPrimaryStyles, $event)"
-          ></PrimaryVue>
-          
-        </ElScrollbar>
+          <ElScrollbar>
+            <PrimaryVue
+              :data="themeStore.buttonPrimaryStyles"
+              @setData="setData(themeStore.buttonPrimaryStyles, $event)"
+            />
+          </ElScrollbar>
 
-        <template #options>
-          <ElButton type="primary">TEST</ElButton>
-        </template>
-
+          <template #options>
+            <ElButton type="primary">
+              TEST
+            </ElButton>
+          </template>
         </SkMultipageTemplate>
       </SkMultipageRenderer>
     </SkAppCard>

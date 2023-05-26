@@ -1,19 +1,39 @@
 <template>
-  <SkTableSelectTags :closable="closable" @click="preBind()" v-model="showDataVm" :prop="{ label: 'name' }"></SkTableSelectTags>
-  <SkAppDialog v-model="showdialog" :title="props.title" :before-close="beforeClose" :append-to-body="true">
-    <SkUserTablesSelect v-model="data" class="h-40em"></SkUserTablesSelect>
-    <template #footer v-if="hasBind">
-      <el-button type="primary" @click="doBindUser">确定</el-button>
+  <SkTableSelectTags
+    v-model="showDataVm"
+    :closable="closable"
+    :prop="{ label: 'name' }"
+    @click="preBind()"
+  />
+  <SkAppDialog
+    v-model="showdialog"
+    :title="props.title"
+    :before-close="beforeClose"
+    :append-to-body="true"
+  >
+    <SkUserTablesSelect
+      v-model="data"
+      class="h-40em"
+    />
+    <template
+      v-if="hasBind"
+      #footer
+    >
+      <el-button
+        type="primary"
+        @click="doBindUser"
+      >
+        确定
+      </el-button>
     </template>
   </SkAppDialog>
 </template>
 
 <script setup lang="ts">
 import { User } from '@skzz-platform/api/system/user'
-import { SkAppDialog, SkUserTablesSelect } from '@skzz/platform'
+import { SkAppDialog, SkUserTablesSelect , SkTableSelectTags } from '@skzz/platform'
 import { PropType } from 'vue'
 import { useVModel } from '@vueuse/core'
-import { SkTableSelectTags } from '@skzz/platform'
 
 
 const props = defineProps({

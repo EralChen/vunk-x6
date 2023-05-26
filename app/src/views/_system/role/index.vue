@@ -127,42 +127,40 @@ function cuI () {
       <template #one>
         <SkAppQueryForm 
           :data="queryData" 
-          @setData="setData(queryData, $event)" 
-          :formItems="queryItems"
+          :form-items="queryItems" 
+          @setData="setData(queryData, $event)"
           @enter="r"
         >
           <template #options>
- 
             <SkIncreaseButton 
               :btns="rRoleBtns()"
               @click="precI"
-            >新增</SkIncreaseButton>  
-            
+            >
+              新增
+            </SkIncreaseButton>
           </template>
         </SkAppQueryForm>
       </template>
 
       <SkAppTables 
-        class="h-100%" 
-        v-bind="tableState"
+        v-bind="tableState" 
         v-model:start="pagination.start"
         v-model:pageSize="pagination.pageSize"
-      >
-      </SkAppTables>
+        class="h-100%"
+      />
     </VkDuplexCalc>
 
     <SkAppDialog 
-      :modelValue="!!cuIState.type"
-      @update:modelValue="cuIState.type = ''"
+      :model-value="!!cuIState.type"
       :title="cuIState.type === 'u' ? '编辑' : '新增'"
+      @update:modelValue="cuIState.type = ''"
     >
       <FormVue
         :data="cuIState.formData"
         @setData="setData(cuIState.formData, $event)"
         @submit="cuI"
-      ></FormVue>
+      />
     </SkAppDialog>
-
   </PageX>
 </template>
 

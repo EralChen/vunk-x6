@@ -17,9 +17,10 @@ type Row = NodeConfig & {
 }
 export default defineComponent({
   name: 'GenInstance',
-  emits: {
-    'success': () => true,
-    'update:modelValue': (v: Partial<Row>[]) => v,
+  components: {
+    SkAppTables,
+    VkDuplex,
+    SkAppForm,
   },
   props: {
     modelValue: {
@@ -39,10 +40,9 @@ export default defineComponent({
       default: '',
     },
   },
-  components: {
-    SkAppTables,
-    VkDuplex,
-    SkAppForm,
+  emits: {
+    'success': () => true,
+    'update:modelValue': (v: Partial<Row>[]) => v,
   },
   setup (props, { emit }) {
     const queryItems: __SkAppForm.CoreFormItem<any>[] = [
@@ -196,15 +196,30 @@ export default defineComponent({
 <template>
   <VkDuplex>
     <template #one>
-      <SkAppForm :formItems="queryItems" :data="queryState.data" @setData="setData(queryState.data, $event)">
-      </SkAppForm>
+      <SkAppForm
+        :form-items="queryItems"
+        :data="queryState.data"
+        @setData="setData(queryState.data, $event)"
+      />
     </template>
 
-    <SkAppTables class="h-30em" :columns="tableState.columns" :data="tableState.data" :total="tableState.total"
-      v-model:start="tableState.pagination.start" v-model:pageSize="tableState.pagination.pageSize" :layout="''">
-    </SkAppTables>
+    <SkAppTables
+      v-model:start="tableState.pagination.start"
+      v-model:pageSize="tableState.pagination.pageSize"
+      class="h-30em"
+      :columns="tableState.columns"
+      :data="tableState.data"
+      :total="tableState.total"
+      :layout="''"
+    />
     <div sk-flex="row-end">
-      <el-button size="large" type="primary" @click="doGen">确定</el-button>
+      <el-button
+        size="large"
+        type="primary"
+        @click="doGen"
+      >
+        确定
+      </el-button>
     </div>
   </VkDuplex>
 </template>

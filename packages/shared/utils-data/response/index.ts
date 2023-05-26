@@ -1,6 +1,5 @@
 import { RDataCol } from '@vunk/skzz'
 import { __SkAppTables } from '@skzz-platform/components/app-tables'
-import { __SkAppTablesV1 } from '@skzz-platform/components/app-tables-v1'
 export const genColumn = (item: RDataCol) => {
   return {
     key: item.prop,

@@ -80,9 +80,8 @@ const formItemsWithDemo = computed(() => {
 </script>
 <template>
   <SkAppForm 
-    :labelWidth="80" 
-    :formItems="formItemsWithDemo" 
+    :label-width="80" 
+    :form-items="formItemsWithDemo" 
     v-bind="$attrs"
-  >
-  </SkAppForm>
+  />
 </template> 

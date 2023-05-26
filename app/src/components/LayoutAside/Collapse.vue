@@ -1,5 +1,8 @@
 <template>
-  <div class="layout-default-aside-collapse"   @click="layoutStore.asideInfo.menuCollapse = !layoutStore.asideInfo.menuCollapse">
+  <div
+    class="layout-default-aside-collapse"
+    @click="layoutStore.asideInfo.menuCollapse = !layoutStore.asideInfo.menuCollapse"
+  >
     <el-icon 
       :size="'1.2em'"
     >

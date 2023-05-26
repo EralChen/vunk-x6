@@ -1,5 +1,5 @@
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { PropType, computed, defineComponent } from 'vue'
 import { SkAppForm, __SkAppForm } from '@skzz-platform/components/app-form'
 import { Row } from '../types'
 import { PATTERN } from '@skzz-platform/shared/utils-form'
@@ -9,7 +9,16 @@ export default defineComponent({
   components: {
     SkAppForm,
   },
-  props: ['data', 'type'],
+  props: {
+    data: {
+      type: Object as PropType<Partial<Row>>,
+      required: true,
+    },
+    type: {
+      type: String,
+      required: true,
+    },
+  },
   emits: {
     submit: (data: Row) => data,
     setData: (e: SetDataEvent) => e,
@@ -106,7 +115,7 @@ export default defineComponent({
         size: 'large',
         class: 'is-btn-group',
         onClick: () => {
-          emit('submit', props.data)
+          emit('submit', props.data as Row)
         },
       },
     ] as __SkAppForm.CoreFormItem<
@@ -120,9 +129,9 @@ export default defineComponent({
 </script>
 <template>
   <SkAppForm 
-    :labelWidth="'6em'"
+    :label-width="'6em'"
     :data="data"
-    :formItems="formItems"
+    :form-items="formItems"
     @setData="$emit('setData', $event)"
-  ></SkAppForm>
+  />
 </template>

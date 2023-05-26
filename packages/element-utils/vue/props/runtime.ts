@@ -49,9 +49,9 @@ export const buildProp = <
   Default extends EpPropMergeType<Type, Value, Validator> = never,
   Required extends boolean = false
 >(
-  prop: EpPropInput<Type, Value, Validator, Default, Required>,
-  key?: string
-): EpPropFinalized<Type, Value, Validator, Default, Required> => {
+    prop: EpPropInput<Type, Value, Validator, Default, Required>,
+    key?: string,
+  ): EpPropFinalized<Type, Value, Validator, Default, Required> => {
   // filter native prop type and nested prop, e.g `null`, `undefined` (from `buildProps`)
   if (!isObject(prop) || isEpProp(prop)) return prop as any
 
@@ -60,32 +60,32 @@ export const buildProp = <
   const _validator =
     values || validator
       ? (val: unknown) => {
-          let valid = false
-          let allowedValues: unknown[] = []
+        let valid = false
+        let allowedValues: unknown[] = []
 
-          if (values) {
-            allowedValues = Array.from(values)
-            if (hasOwn(prop, 'default')) {
-              allowedValues.push(defaultValue)
-            }
-            valid ||= allowedValues.includes(val)
+        if (values) {
+          allowedValues = Array.from(values)
+          if (hasOwn(prop, 'default')) {
+            allowedValues.push(defaultValue)
           }
-          if (validator) valid ||= validator(val)
-
-          if (!valid && allowedValues.length > 0) {
-            const allowValuesText = [...new Set(allowedValues)]
-              .map((value) => JSON.stringify(value))
-              .join(', ')
-            warn(
-              `Invalid prop: validation failed${
-                key ? ` for prop "${key}"` : ''
-              }. Expected one of [${allowValuesText}], got value ${JSON.stringify(
-                val
-              )}.`
-            )
-          }
-          return valid
+          valid ||= allowedValues.includes(val)
         }
+        if (validator) valid ||= validator(val)
+
+        if (!valid && allowedValues.length > 0) {
+          const allowValuesText = [...new Set(allowedValues)]
+            .map((value) => JSON.stringify(value))
+            .join(', ')
+          warn(
+            `Invalid prop: validation failed${
+              key ? ` for prop "${key}"` : ''
+            }. Expected one of [${allowValuesText}], got value ${JSON.stringify(
+              val,
+            )}.`,
+          )
+        }
+        return valid
+      }
       : undefined
 
   const epProp: any = {
@@ -106,8 +106,8 @@ export const buildProps = <
     | EpPropInput<any, any, any, any, any>
   >
 >(
-  props: Props
-): {
+    props: Props,
+  ): {
   [K in keyof Props]: IfEpProp<
     Props[K],
     Props[K],
@@ -118,5 +118,5 @@ export const buildProps = <
     Object.entries(props).map(([key, option]) => [
       key,
       buildProp(option as any, key),
-    ])
+    ]),
   ) as any

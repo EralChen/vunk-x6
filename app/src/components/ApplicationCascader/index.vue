@@ -3,12 +3,17 @@ import { CascaderValue, ElAvatar, ElCascaderPanel } from 'element-plus'
 import { PropType, ref } from 'vue'
 import { useModelComputed } from '@vunk/core/composables'
 import { rTAInfo } from '@skzz-platform/api/login'
-import { ApiReturnType } from '@vunk/core'
+import { ApiReturnType, VueComponentPropsType } from '@vunk/core'
 import { useUserStore } from '@skzz-platform/stores/user'
-import {  useViewsStore } from '@/stores/views'
+import { useViewsStore } from '@/stores/views'
 import { useUpdateApplictionEvent } from '@/composables'
 const props = defineProps({
-  size: null,
+  size: {
+    type: [String, Number] as PropType<
+      VueComponentPropsType<typeof ElAvatar>['size']
+    >,
+    default: undefined,
+  },
   modelValue: {
     type: Array as PropType<CascaderValue>,
     default: undefined,
@@ -51,24 +56,27 @@ function r () {
 
 </script>
 <template>
-  <ElDropdown  :trigger="'click'"  :placement="'bottom-end'"
+  <ElDropdown
     v-if="options.length"
+    :trigger="'click'"
+    :placement="'bottom-end'"
   >
-   
-    <ElAvatar :size="size"  class="cursor-pointer">
+    <ElAvatar
+      :size="size"
+      class="cursor-pointer"
+    >
       <span class="f-xxs">App</span>
-
     </ElAvatar>
     <template #dropdown>
       <div class="w-500px application-cascader-panel-x">
         <ElCascaderPanel 
           v-model="cascaderValue"
-          @change="appChange"
           :border="false"
           :options="options"
           :props="{
             expandTrigger: 'hover',
-          }" 
+          }"
+          @change="appChange" 
         />
       </div>
     </template>

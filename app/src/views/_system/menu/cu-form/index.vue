@@ -114,8 +114,7 @@ const formItems = ref<__SkAppForm.FormItem<keyof Row>[]>([
 <template>
   <SkAppForm
     :data="data"
-    :labelWidth="'8em'"
-    :formItems="formItems"
-  >
-  </SkAppForm>
+    :label-width="'8em'"
+    :form-items="formItems"
+  />
 </template>

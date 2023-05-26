@@ -1,9 +1,19 @@
 <template>
   <PageOver>
-    <ZzG6Editor :model-value="editData" @update:data="e => backData = e" :id-gen-fn="snowFlake" :form-id="formId">
+    <ZzG6Editor
+      :model-value="editData"
+      :id-gen-fn="snowFlake"
+      :form-id="formId"
+      @update:data="e => backData = e"
+    >
       <template #toolbar>
         <li>
-          <el-button type="primary" link size="small" @click="jsonLoad">
+          <el-button
+            type="primary"
+            link
+            size="small"
+            @click="jsonLoad"
+          >
             保存
           </el-button>
         </li>

@@ -6,8 +6,7 @@ import { SkAppCard } from '@skzz/platform'
 import { setData } from '@vunk/core'
 import { cuTemplate, rTemplateList, CMessageTemplate } from '@skzz-platform/api/system/message'
 import { Deferred } from '@vunk/core/shared/utils-promise'
-import { FormInstance } from 'element-plus'
-import { ElMessage } from 'element-plus'
+import { FormInstance , ElMessage } from 'element-plus'
 import router from '@/router'
 import { Option } from '@skzz-platform/api/system/dictionary'
 import { useDictionaryStore } from '@/stores/dictionary'
@@ -15,6 +14,7 @@ import { useDictionaryStore } from '@/stores/dictionary'
 const props = defineProps({
   id: {
     type: String,
+    default: '',
   },
   detail: Boolean,
 })
@@ -107,16 +107,32 @@ const c = async () => {
 </script>
 <template>
   <PageX>
-    <SkAppCard class="h-100%" :header="'新增消息模板'">
+    <SkAppCard
+      class="h-100%"
+      :header="'新增消息模板'"
+    >
       <template #header__options>
-        <ElButton type="primary" @click="c" v-if="!props.detail">提交</ElButton>
+        <ElButton
+          v-if="!props.detail"
+          type="primary"
+          @click="c"
+        >
+          提交
+        </ElButton>
       </template>
 
       <ElScrollbar>
         <div class="gap-form-x">
-          <SkAppForm :disabled="props.detail" :labelPosition="'top'" :layout="true" :formItems="formItems" :data="firstFormData"
-            @setData="setData(firstFormData, $event)" :elRef="defer.resolve" :rules="rules">
-          </SkAppForm>
+          <SkAppForm
+            :disabled="props.detail"
+            :label-position="'top'"
+            :layout="true"
+            :form-items="formItems"
+            :data="firstFormData"
+            :el-ref="defer.resolve"
+            :rules="rules"
+            @setData="setData(firstFormData, $event)"
+          />
         </div>
       </ElScrollbar>
     </SkAppCard>

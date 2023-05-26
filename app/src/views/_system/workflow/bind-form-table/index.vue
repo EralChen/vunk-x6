@@ -1,7 +1,6 @@
 <script lang="ts">
 import { props, emits } from './ctx'
 import { defineComponent, reactive, watch } from 'vue'
-import { rUsers } from '@skzz-platform/api/system/user'
 import { SkAppTables, __SkAppTables } from '@skzz-platform/components/app-tables'
 import { SkAppQueryForm, __SkAppQueryForm } from '@skzz-platform/components/app-query-form'
 import { Row } from './types'
@@ -10,13 +9,13 @@ import { VkDuplex, setData } from '@vunk/core'
 import { rFormList } from '@skzz-platform/api/system/form'
 
 export default defineComponent({
-  emits,
-  props,
   components: {
     SkAppTables,
     VkDuplex,
     SkAppQueryForm,
   },
+  props,
+  emits,
   setup () {
     const queryItems:__SkAppQueryForm.CoreFormItem<keyof Row>[] = [
       {
@@ -85,21 +84,20 @@ export default defineComponent({
   <VkDuplex>
     <template #one>
       <SkAppQueryForm
-        :formItems="queryItems"
+        :form-items="queryItems"
         :data="queryState.data"
         @setData="setData(queryState.data, $event)"
-        
-      ></SkAppQueryForm>
+      />
     </template>
     <SkAppTables 
-      :modelValue="modelValue"
-      @update:modelValue="$emit('update:modelValue', $event)"
+      v-model:start="tableState.pagination.start"
+      v-model:pageSize="tableState.pagination.pageSize"
+      :model-value="modelValue"
       :columns="tableState.columns"
       :data="tableState.data"
       :total="tableState.total"
       :single="true"
-      v-model:start="tableState.pagination.start"
-      v-model:pageSize="tableState.pagination.pageSize"
-    ></SkAppTables>
+      @update:modelValue="$emit('update:modelValue', $event)"
+    />
   </VkDuplex>
 </template>

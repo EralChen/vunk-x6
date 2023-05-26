@@ -49,15 +49,13 @@ const formItems: __SkAppForm.FormItem<keyof typeof namedFontSize>[] = [
 
 </script>
 <template>
-
   <SkAppForm 
-    :labelWidth="110"
-    :formItems="formItems" 
+    :label-width="110"
+    :form-items="formItems" 
     :data="themeStore.fontSizeNamedStyles"
-    @setData="setData(themeStore.fontSizeNamedStyles, $event)"
     v-bind="$attrs"
-  >
-  </SkAppForm>
+    @setData="setData(themeStore.fontSizeNamedStyles, $event)"
+  />
 </template>
 <style>
 
