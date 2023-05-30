@@ -23,14 +23,14 @@
       />
     </div>
     <el-button
-      v-if="!nodeModelCp.auditStatus"
+      v-if="nodeModelCp.isCurrentNode"
       type="primary"
       @click="doApprovel(WorkFlowNodeState.通过, 'pass')"
     >
       通过
     </el-button>
     <el-button
-      v-show="nodeModelCp.id && nodeModelCp.auditStatus"
+      v-show="nodeModelCp.id && nodeModelCp.auditStatus && !nodeModelCp.isCurrentNode"
       type="success"
       @click="doApprovel(WorkFlowNodeState.驳回, 'th')"
     >
@@ -158,16 +158,19 @@ watch(() => props.nodeModel, (v) => {
  */
 async function doApprovel (type: WorkFlowNodeState, e: string) {
   const formIns = await def.promise
-  try {
-    const valid = await formIns.validate()
-    if (!valid) {
+  if (e !== 'bh') {
+    try {
+      const valid = await formIns.validate()
+      if (!valid) {
+        ElMessage.warning('请按规则填写表单！')
+        return
+      }
+    } catch (e) {
       ElMessage.warning('请按规则填写表单！')
       return
     }
-  } catch (e) {
-    ElMessage.warning('请按规则填写表单！')
-    return
   }
+
   let currentBackId
   let currentNodeId
   if (e === 'bh') {
@@ -191,13 +194,17 @@ async function doApprovel (type: WorkFlowNodeState, e: string) {
       nodeInstId: currentNodeId,
       backNodeId: currentBackId,
     },
-    nodeFormData.value,
+    e == 'bh' ? undefined : nodeFormData.value,
     props.itemId,
     formTableCp.value,
   ).then(() => {
     emit('approvalSuccess')
   })
 }
+
+defineExpose({
+  doApprovel,
+})
 
 </script>
 

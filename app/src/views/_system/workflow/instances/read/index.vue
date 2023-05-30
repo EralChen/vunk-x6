@@ -9,8 +9,13 @@
         sk-flex="row"
       >
         <div class="editor">
-          <ZzG6Editor :selectNodeId="nodeModel.id" :mode="'default'" :model-value="model"
-            @nodeselectchange="nodeSelectChange" :active-tab-name="'approval'">
+          <ZzG6Editor
+            :select-node-id="nodeModel.id"
+            :mode="'default'"
+            :model-value="model"
+            :active-tab-name="'approval'"
+            @nodeselectchange="nodeSelectChange"
+          >
             <template #form>
               <el-tab-pane
                 label="审批"
@@ -29,9 +34,16 @@
                   <ElForm label-position="top">
                     <!-- <BindAssitsOpers :node-model="nodeModel" :currentNodeInstIds="bindState.currentNodeInstIds"
                       @bind-success="r" :isFlowStart="isFlowStart"></BindAssitsOpers> -->
-                    <Approval :itemId="flowData.itemId" :flowId="flowId" :node-model="nodeModel"
-                      :currentNodeInstIds="bindState.currentNodeInstIds" :isFlowStart="isFlowStart"
-                      @approvalSuccess="approvalSuccess" :form-table="flowData.formTable"></Approval>
+                    <Approval
+                      ref="approvalInstance"
+                      :item-id="flowData.itemId"
+                      :flow-id="flowId"
+                      :node-model="nodeModel"
+                      :current-node-inst-ids="bindState.currentNodeInstIds"
+                      :is-flow-start="isFlowStart"
+                      :form-table="flowData.formTable"
+                      @approvalSuccess="approvalSuccess"
+                    ></Approval>
                   </ElForm>
                 </ElScrollbar>
               </el-tab-pane>
@@ -44,7 +56,12 @@
 </template>
 
 <script setup lang="tsx">
-import { rWorkflowNodeRaw, rInstanceList, FlowNodeInstance, rFlowInstanceDetail } from '@skzz-platform/api/system/workflow'
+import {
+  rWorkflowNodeRaw,
+  rInstanceList,
+  FlowNodeInstance,
+  rFlowInstanceDetail,
+  WorkFlowNodeState } from '@skzz-platform/api/system/workflow'
 import { computed, nextTick, reactive, ref, shallowRef, watch } from 'vue'
 import { SkAppCard } from '@skzz/platform'
 import ZzG6Editor from '@/components/ZzG6Editor/index.vue'
@@ -55,8 +72,6 @@ import { cloneDeep } from 'lodash'
 import BindOpers from '../../bind-opers/index.vue'
 import { usePostQueryU } from '@skzz-platform/composables'
 import { TotalFlow } from '@skzz-platform/api/system/workflow/node/types'
-
-
 const props = defineProps({
   id: {
     type: String,
@@ -68,7 +83,7 @@ const props = defineProps({
   },
 })
 
-
+const approvalInstance = ref<InstanceType<typeof Approval> | null>()
 const nodeModel = ref({} as TotalFlow['nodes'][0])
 // 流程节点数据
 const model = shallowRef({})
@@ -86,27 +101,27 @@ watch(() => props.id, r, { immediate: true })
 async function r () {
   const r = await rInstanceList(undefined, undefined, props.id)
   const rows = r.rows[0]
-  const raws = await rWorkflowNodeRaw({ itemId: rows.itemId, flowInstId: props.id })
+  const raws = await rWorkflowNodeRaw({
+    itemId: rows.itemId,
+    flowInstId: props.id,
+  })
 
   model.value = raws
   bindState.currentNodeInstIds = raws.currentNodeInstIds
 
   if (raws.currentNodeInstIds[0])
     // 测试 获取 实例详情 暂时无用
-    rFlowInstanceDetail(raws.currentNodeInstIds[0])
-      .then(() => {
-        // console.log(res)
-      })
+    rFlowInstanceDetail(raws.currentNodeInstIds[0]).then(() => {
+      // console.log(res)
+    })
 
   flowData.value = rows
   if (nodeModel.value.id) {
-    const node = raws.nodes?.find(item => item.id === nodeModel.value.id)
-    if (node)
-      nodeModel.value = node as TotalFlow['nodes'][0]
+    const node = raws.nodes?.find((item) => item.id === nodeModel.value.id)
+    if (node) nodeModel.value = node as TotalFlow['nodes'][0]
   } else {
     nextTick(() => {
-      if (raws.nodes)
-        nodeModel.value = raws.nodes[0] as TotalFlow['nodes'][0]
+      if (raws.nodes) nodeModel.value = raws.nodes[0] as TotalFlow['nodes'][0]
     })
   }
 }
@@ -118,7 +133,7 @@ function approvalSuccess () {
 
 /**
  * 选中节点事件(点击触发，或者设置selectNodeId触发)
- * @param e 
+ * @param e
  */
 const nodeSelectChange = (e: any) => {
   if (e.target && e.select) {

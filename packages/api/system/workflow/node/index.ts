@@ -279,7 +279,7 @@ export const doApproveNodeWithForm = (data: {
           ...(data ? data : {}),
         },
       },
-      'datas': [
+      'datas': formData ?  [
         {
           'datasetId': '1',
           'rows': [
@@ -290,7 +290,7 @@ export const doApproveNodeWithForm = (data: {
             },
           ],
         },
-      ],
+      ] : undefined,
       'dir': formTable,
       'modelId': formTable,
       'menuId': formTable,
