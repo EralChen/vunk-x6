@@ -72,6 +72,12 @@ const powerfulRoleId = computed(() => userStore.getPowerfulRoleId())
           </ElAvatar>
           <template #dropdown>
             <el-dropdown-menu>
+              <el-dropdown-item>
+                <ElLink :type="'primary'">
+                  修改密码
+                </ElLink>
+              </el-dropdown-item>
+
               <el-dropdown-item @click="logout">
                 <ElLink :type="'danger'">
                   退出登录

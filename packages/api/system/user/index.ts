@@ -101,7 +101,7 @@ export const cuUser = (user: Partial<User>) => {
         condition: {
           uid: user.id,
           newPassword: user.password,
-          op: 'changePass',
+          op: 'resetPass',
         },
       },
     } as RestFetchExecOptions))

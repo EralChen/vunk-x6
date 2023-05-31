@@ -35,22 +35,22 @@ const formItems = computed<__SkAppForm.FormItem<keyof Row>[]>(() => [
     },
   },
 
-  // {
-  //   templateType: 'VkfSwitch',
-  //   prop: '$password' as any,
-  //   label: '修改密码',
-  //   templateIf: isU.value,
-  //   defaultModelValue: false,
-  //   onChange (v) {
-  //     if (!v) {
-  //       // 清空密码
-  //       emit('setData', {
-  //         k: 'password',
-  //         v: undefined,
-  //       })
-  //     }
-  //   },
-  // },
+  {
+    templateType: 'VkfSwitch',
+    prop: '$password' as any,
+    label: '修改密码',
+    templateIf: isU.value,
+    defaultModelValue: false,
+    onChange (v) {
+      if (!v) {
+        // 清空密码
+        emit('setData', {
+          k: 'password',
+          v: undefined,
+        })
+      }
+    },
+  },
 
 
   {
