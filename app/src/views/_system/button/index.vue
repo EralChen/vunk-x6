@@ -19,6 +19,7 @@ import CuForm from './cu-form/index.vue'
 import { SkAppDialog } from '@skzz-platform/components/app-dialog'
 import { Row } from './types'
 import { SkIncreaseButton } from '@skzz-platform/components/increase-button'
+import { vButton } from '@skzz-platform/shared/directives'
 
 /* query */
 const queryItems: __SkAppQueryForm.FormItem[] = [
