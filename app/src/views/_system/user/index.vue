@@ -1,5 +1,5 @@
 <script lang="tsx" setup>
-import { computed, reactive, watch } from 'vue'
+import { computed, reactive, watch , nextTick } from 'vue'
 import { cuUser, dUsers, rUsers, rUserBtns, rBoundUsers, cBoundUsers } from '@skzz-platform/api/system/user'
 import { SkAppDialog, SkAppOperations, SkAppTablesV1, __SkAppTablesV1, SkAppQueryForm, __SkAppQueryForm } from '@skzz/platform'
 import { setData, VkDuplexCalc } from '@vunk/core'
@@ -9,6 +9,7 @@ import { ElButton } from 'element-plus'
 import { SkRoleTablesSelect } from '@skzz-platform/components/role-tables-select'
 import { Role } from '@skzz-platform/api/system/role'
 import { SkIncreaseButton } from '@skzz-platform/components/increase-button'
+
 type Col = __SkAppTablesV1.Column<Row>
 
 
@@ -123,8 +124,14 @@ function precI () {
   cuState.data = {}
 }
 function preuI (row: Row) {
-  cuState.type = 'u'
-  cuState.data = {...row}
+  cuState.data = {
+    ...row,
+  }
+  nextTick(() => {
+    cuState.type = 'u'
+  })
+  // console.log(row)
+
 }
 function cuI () {
   cuUser(cuData.value).then(() => {

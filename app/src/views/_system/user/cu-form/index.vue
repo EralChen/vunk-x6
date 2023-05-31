@@ -37,7 +37,7 @@ const formItems = computed<__SkAppForm.FormItem<keyof Row>[]>(() => [
 
   {
     templateType: 'VkfSwitch',
-    prop: '_uPassword' as any,
+    prop: '$password' as any,
     label: '修改密码',
     templateIf: isU.value,
     defaultModelValue: false,
@@ -60,7 +60,7 @@ const formItems = computed<__SkAppForm.FormItem<keyof Row>[]>(() => [
     placeholder: '请输入密码',
     showPassword: true,
     required: true,
-    templateIf: (data) => !isU.value || data?._uPassword,
+    templateIf: (data) => !isU.value || data?.$password,
     rules: [
       {
         required: true,

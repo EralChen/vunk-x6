@@ -51,7 +51,7 @@
 		"chroma-js": "^2.4.2",
 		"element-plus": "npm:element-plus@latest",
 		"mapbox-gl": "^2.13.0",
-		"vue": "^3.2.38"
+		"vue": "^3.3.4"
 	},
 	"scripts": {
 		"dev": "pnpm run -C app dev",

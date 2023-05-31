@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import DarkSwitch from '_c/DarkSwitch/index.vue'
-import { computed, defineAsyncComponent } from 'vue'
+import { computed, defineAsyncComponent, reactive } from 'vue'
 import { useThemeStore } from '@/stores/theme'
 import { useUserStore } from '@skzz-platform/stores/user'
 import { ElAvatar } from 'element-plus'
@@ -8,6 +8,8 @@ import { logout } from '@skzz-platform/api/login'
 import ApplicationCascader from '_c/ApplicationCascader/index.vue'
 import SizeCtrl from '_c/SizeCtrl/index.vue'
 import { VkDuplex } from '@vunk/core'
+import { SkAppDialog } from '@skzz-platform/components/app-dialog'
+import UPasswordForm from './u-password-form/index.vue'
 
 defineEmits({
   'load': null,
@@ -17,6 +19,11 @@ const { layoutTopClassName } = useThemeStore()
 const userStore = useUserStore()
 const userInfo = computed(() => userStore.getUserInfo())
 const powerfulRoleId = computed(() => userStore.getPowerfulRoleId()) 
+
+
+const uPasswordState = reactive({
+  visible: false,
+})
 </script>
 <template>
   <VkDuplex
@@ -72,6 +79,15 @@ const powerfulRoleId = computed(() => userStore.getPowerfulRoleId())
           </ElAvatar>
           <template #dropdown>
             <el-dropdown-menu>
+              <el-dropdown-item>
+                <ElLink
+                  :type="'primary'"
+                  @click="uPasswordState.visible = true"
+                >
+                  修改密码
+                </ElLink>
+              </el-dropdown-item>
+
               <el-dropdown-item @click="logout">
                 <ElLink :type="'danger'">
                   退出登录
@@ -88,6 +104,16 @@ const powerfulRoleId = computed(() => userStore.getPowerfulRoleId())
     
       <!-- <ElButton @click="logout">退出</ElButton> -->
       </div>
+
+      <SkAppDialog
+        v-model="uPasswordState.visible"
+        :title="'修改密码'"
+      >
+        <UPasswordForm
+          @submitted="uPasswordState.visible = false"
+        >
+        </UPasswordForm>
+      </SkAppDialog>
     </template>
   </VkDuplex>
 </template>
