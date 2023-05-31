@@ -164,3 +164,28 @@ export const rFlowInstanceDetail = (nodeInstId: string) => {
     },
   })
 }
+
+/**
+ * https://app.apifox.com/project/1903413/apis/api-85425312  
+ * 流程撤回(发起人才能撤回)  
+ * @param flowInstId 
+ * @returns 
+ */
+export const withdrawApproval = (flowInstId: string) => {
+  return request({
+    method: 'POST',
+    url: '/core/busi/exec',
+    data: {
+      'datasetId': '5',
+      'condition': {
+        'flow': {
+          'op': 'callback',
+          'flowInstId': flowInstId,
+        },
+      },
+      ...MENU_DATA,
+    },
+  }, {
+    msg: '撤回成功!',
+  })
+}

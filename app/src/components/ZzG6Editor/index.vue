@@ -1,5 +1,8 @@
 <template>
-  <ZzEditor v-bind="editProps">
+  <ZzEditor
+    v-bind="editProps"
+    v-on="onEmits"
+  >
     <slot />
     <template #toolbar>
       <slot name="toolbar" />
@@ -16,7 +19,7 @@
 <script lang="ts">
 import { MaterialGeometryEnum, ZzEditor, expendForm, extendNodeFormMap } from '@zzg6/flow'
 import bindFormItem from './bind-form-item/index.vue'
-import { propsOp, bindProps } from './ctx'
+import { propsOp, bindProps, createOnEmits, emits } from './ctx'
 import { computed, defineComponent } from 'vue'
 
 export default defineComponent({
@@ -24,9 +27,10 @@ export default defineComponent({
     ZzEditor,
   },
   props: propsOp,
-  setup (props) {
+  emits,
+  setup (props, {emit}) {
     const editProps = bindProps(props, ['formId'])
-
+    const onEmits = createOnEmits(emit)
     const formKey = 'VkfBindFormItem'
     // const formRefKey = 'VkfBindFormItemRef'
 
@@ -61,6 +65,7 @@ export default defineComponent({
     )
     return {
       editProps,
+      onEmits,
     }
   },
 })

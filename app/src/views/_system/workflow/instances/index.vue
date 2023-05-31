@@ -1,10 +1,11 @@
 <script lang="tsx" setup>
 import { reactive, watch } from 'vue'
-import { FlowNodeInstance, rInstanceList } from '@skzz-platform/api/system/workflow'
+import { FlowNodeInstance, rInstanceList, withdrawApproval } from '@skzz-platform/api/system/workflow'
 import { SkAppOperations, SkAppTablesV1, __SkAppTablesV1 } from '@skzz/platform'
 import { VkDuplexCalc } from '@vunk/core'
 import { useRouterTo } from '@skzz-platform/composables'
 import { useWorkflowResolveQueryU } from '../utils'
+import { ElMessageBox } from 'element-plus'
 
 type Row = FlowNodeInstance
 type Col = __SkAppTablesV1.Column<Row>
@@ -36,12 +37,17 @@ const tableState = reactive({
       label: '操作',
       width: '250em',
       slots: ({ row }) => {
-        const modules = ['r']
+        const modules = ['r', 'withdraw']
 
         return <SkAppOperations
           modules={modules}
           onR={() => rI(row.id)}
         >
+          {{
+            withdraw: () => {
+              return <el-button type='warning' onClick={() => doWithDraw(row.id)} size='small'>撤回</el-button>
+            },
+          }}
         </SkAppOperations>
       },
       align: 'center',
@@ -77,6 +83,19 @@ function r () {
     }
     tableState.data = res.rows
     tableState.total = res.total
+  })
+}
+
+function doWithDraw (flowInstId: string) {
+  ElMessageBox.confirm('确定撤回吗？', '提示', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning',
+  }).then(() => {
+    withdrawApproval(flowInstId)
+      .then(r)
+  }).catch(() => {
+    //
   })
 }
 

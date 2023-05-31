@@ -23,32 +23,56 @@
       />
     </div>
     <el-button
-      v-if="nodeModelCp.isCurrentNode"
+      v-if="nodeModelCp.isCurrentNode && hasApprovelAuth"
       type="primary"
+      size="small"
       @click="doApprovel(WorkFlowNodeState.通过, 'pass')"
     >
       通过
     </el-button>
-    <el-button
-      v-show="nodeModelCp.id && nodeModelCp.auditStatus && !nodeModelCp.isCurrentNode"
-      type="success"
-      @click="doApprovel(WorkFlowNodeState.驳回, 'th')"
+    <!-- <el-button
+      v-if="hasApprovelAuth && nodeModelCp.auditStatus"
+      type="warning"
+      size="small"
+      @click="doApprovel(WorkFlowNodeState.驳回, 'withdraw')"
     >
+      撤回
+    </el-button> -->
+    <el-button
+      v-if="nodeModelCp.isCurrentNode"
+      type="warning"
+      size="small"
+      @click="doApprovel(WorkFlowNodeState.驳回, 'returnUpperLevel')"
+    >
+      退回上一级
+    </el-button>
+    <el-button
+      v-if="nodeModelCp.isCurrentNode"
+      type="warning"
+      size="small"
+      @click="dialogVisible = true"
+    >
+      <!-- doApprovel(WorkFlowNodeState.驳回, 'return') -->
       退回
     </el-button>
     <el-button
-      type="warning"
-      @click="doApprovel(WorkFlowNodeState.驳回, 'bh')"
+      type="danger"
+      size="small"
+      @click="doApprovel(WorkFlowNodeState.驳回, 'reject')"
     >
       驳回
     </el-button>
   </ElFormItem>
+  <ZzG6Picker
+    v-model:visible="dialogVisible"
+    v-model:selected-node="selectedNode"
+    :model-value="instanceData"
+    @besure="besure"
+  ></ZzG6Picker>
 </template>
 
 <script setup lang="ts">
-
 import { PropType, computed, ref, watch } from 'vue'
-// import { User } from '@skzz-platform/api/system/user'
 import { WorkFlowNodeState, doApproveNodeWithForm, rFormInfo } from '@skzz-platform/api/system/workflow'
 import { getCurrentNodeId } from '../utils'
 import { useUserStore } from '@skzz-platform/stores/user'
@@ -59,9 +83,14 @@ import { Deferred } from '@vunk/core/shared/utils-promise'
 import { ElMessage, FormInstance, FormRules } from 'element-plus'
 import { CoreFormItem } from '@skzz-platform/components/app-form/src/types'
 import { TotalFlow } from '@skzz-platform/api/system/workflow/node/types'
-
+import ZzG6Picker from '@/components/ZzG6Picker/index.vue'
+import { Graph, GraphData } from '@antv/g6'
 
 const props = defineProps({
+  flowInstId: {
+    type: String,
+    required: true,
+  },
   flowId: {
     type: String,
     required: true,
@@ -70,6 +99,7 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  // 选中节点的model数据
   nodeModel: {
     type: Object as PropType<Required<TotalFlow['nodes']>[0]>,
     default: () => ({}),
@@ -86,7 +116,12 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  instanceData: {
+    type: Object,
+    default: () => ({}),
+  },
 })
+
 const emit = defineEmits(['approvalSuccess'])
 
 const userStore = useUserStore()
@@ -107,6 +142,9 @@ const rules = ref<FormRules>({})
 const formTableCp = computed(() => props.formTable)
 
 const def = new Deferred<FormInstance>()
+const dialogVisible = ref(false)
+const selectedNode = ref<GraphData['data']['node']>([])
+
 /**
  * 是否有对选中节点的审批权限
  * 节点的操作人中是否有当前登录用户
@@ -150,6 +188,21 @@ watch(() => props.nodeModel, (v) => {
 //   hasAssistAuth.value = judgeAuth(v.opers || [])
 // }, { immediate: true })
 
+function besure () {
+  if (selectedNode.value.length !== 1) {
+    ElMessage.warning('请选择一个节点！')
+    return
+  }
+
+  if (selectedNode.value[0].getModel().auditStatus !== 1) {
+    ElMessage.warning('无法退回到未审批的节点！')
+    return
+  }
+
+  doApprovel(WorkFlowNodeState.驳回, 'return')
+  dialogVisible.value = false
+}
+
 /**
  * 审批  
  * 1. 驳回逻辑为直接将整个流程中已审批的流程全部退回，传的为实例id,字段为 nodeInstId  
@@ -158,7 +211,7 @@ watch(() => props.nodeModel, (v) => {
  */
 async function doApprovel (type: WorkFlowNodeState, e: string) {
   const formIns = await def.promise
-  if (e !== 'bh') {
+  if (e === 'pass') {
     try {
       const valid = await formIns.validate()
       if (!valid) {
@@ -173,9 +226,10 @@ async function doApprovel (type: WorkFlowNodeState, e: string) {
 
   let currentBackId
   let currentNodeId
-  if (e === 'bh') {
+  if (e === 'reject' || e === 'withdraw') {
     currentNodeId = currentNodeInstIdsCp.value[0]
   } else {
+    // 退回情况
     currentNodeId = getCurrentNodeId(currentNodeInstIdsCp.value, nodeModelCp.value)
     if (!currentNodeId) {
       ElMessage.warning('nodeInstId为空！')
@@ -183,8 +237,14 @@ async function doApprovel (type: WorkFlowNodeState, e: string) {
     }
   }
 
-  if (e === 'th') {
+  if (e === 'withdraw') {
     currentBackId = nodeModelCp.value.id
+  }
+  if (e === 'return') {
+    currentBackId = selectedNode.value[0].getModel().id
+  }
+  if (e === 'returnUpperLevel') {
+    currentBackId = -1
   }
   doApproveNodeWithForm(
     {
@@ -194,13 +254,14 @@ async function doApprovel (type: WorkFlowNodeState, e: string) {
       nodeInstId: currentNodeId,
       backNodeId: currentBackId,
     },
-    e == 'bh' ? undefined : nodeFormData.value,
+    e !== 'pass' ? undefined : nodeFormData.value,
     props.itemId,
     formTableCp.value,
   ).then(() => {
     emit('approvalSuccess')
   })
 }
+
 
 defineExpose({
   doApprovel,

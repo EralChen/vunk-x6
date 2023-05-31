@@ -36,12 +36,14 @@
                       @bind-success="r" :isFlowStart="isFlowStart"></BindAssitsOpers> -->
                     <Approval
                       ref="approvalInstance"
+                      :flow-inst-id="id"
                       :item-id="flowData.itemId"
                       :flow-id="flowId"
                       :node-model="nodeModel"
                       :current-node-inst-ids="bindState.currentNodeInstIds"
                       :is-flow-start="isFlowStart"
                       :form-table="flowData.formTable"
+                      :instance-data="model"
                       @approvalSuccess="approvalSuccess"
                     ></Approval>
                   </ElForm>
@@ -111,9 +113,10 @@ async function r () {
 
   if (raws.currentNodeInstIds[0])
     // 测试 获取 实例详情 暂时无用
-    rFlowInstanceDetail(raws.currentNodeInstIds[0]).then(() => {
+    rFlowInstanceDetail(raws.currentNodeInstIds[0])
+      .then(() => {
       // console.log(res)
-    })
+      })
 
   flowData.value = rows
   if (nodeModel.value.id) {
