@@ -64,9 +64,10 @@
     </el-button>
   </ElFormItem>
   <ZzG6Picker
+    v-if="dialogVisible"
     v-model:visible="dialogVisible"
     v-model:selected-node="selectedNode"
-    :model-value="instanceData"
+    :flow-inst-id="flowInstId"
     @besure="besure"
   ></ZzG6Picker>
 </template>
@@ -201,6 +202,7 @@ function besure () {
 
   doApprovel(WorkFlowNodeState.驳回, 'return')
   dialogVisible.value = false
+
 }
 
 /**
