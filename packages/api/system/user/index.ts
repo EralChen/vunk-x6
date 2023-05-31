@@ -1,11 +1,12 @@
 import { Pagination } from '@skzz-platform/shared'
 import { request } from '@skzz-platform/shared/fetch/platform'
-import { QueryRData, RestFetchQueryOptions, RestFetchSaveOptions } from '@vunk/skzz'
+import { QueryRData, RestFetchExecOptions, RestFetchQueryOptions, RestFetchSaveOptions } from '@vunk/skzz'
 import { RestFetchOp } from '@vunk/skzz/shared/utils-fetch'
 import { rBtns } from '@skzz-platform/api/basic'
 import { MENU_DATA } from './const'
 import { BoundUser, User } from './types'
 import { NormalObject } from '@vunk/core'
+import { pickObject } from '@vunk/core/shared/utils-object'
 
 export const rUsers = (query: Partial<User>, pagination: Pagination) => {
   return request<[QueryRData<User>]>({
@@ -62,26 +63,51 @@ export const dUsers = (ids: string[]) => {
 
 export const cuUser = (user: Partial<User>) => {
   const op = user.id ? RestFetchOp.u : RestFetchOp.c
-  return request({
-    method: 'POST',
-    url: '/core/busi/save',
-    data: {
-      'datas': [
-        {
-          'datasetId': '1',
-          'rows': [
-            {
-              ...user,
-              op,
-            },
-          ],
+  const tasks = [
+    request({
+      method: 'POST',
+      url: '/core/busi/save',
+      data: {
+        'datas': [
+          {
+            'datasetId': '1',
+            'rows': [
+              {
+                ...pickObject(user, {
+                  excludes: ['password'],
+                }),
+                op,
+              },
+            ],
+          },
+        ],
+        ...MENU_DATA,
+      },
+    } as RestFetchSaveOptions, {
+      msg: '保存成功',
+    }),
+  ]
+  
+  if (op === RestFetchOp.u && user.password) {
+    tasks.push(request({
+      method: 'POST',
+      url: '/core/busi/exec',
+      data: {
+        'buttonId': 'login',
+        'dir': 'system',
+        'menuId': 'sso',
+        'modelId': 'sso',
+        datasetId: '1',
+        condition: {
+          uid: user.id,
+          newPassword: user.password,
+          op: 'changePass',
         },
-      ],
-      ...MENU_DATA,
-    },
-  } as RestFetchSaveOptions, {
-    msg: '保存成功',
-  })
+      },
+    } as RestFetchExecOptions))
+  }
+
+  return Promise.all(tasks)
 }
 
 
