@@ -170,11 +170,13 @@ function cdBindMenus (menuIds: string[], op?: RestFetchOp) {
     >
       <template #one>
         <!-- 左侧放角色列表 -->
-        <SkRoleTreesSelect
-          v-model="roleState.current"
-          :filter="(v) => !(v.isSys && v.lv <= 1)"
-          class="w-12em"
-        />
+        <ElScrollbar>
+          <SkRoleTreesSelect
+            v-model="roleState.current"
+            :filter="(v) => !(v.isSys && v.lv <= 1)"
+            class="w-14em pr-2"
+          />
+        </ElScrollbar>
       </template>
       <!-- 右侧放菜单table -->
       <ElEmpty
