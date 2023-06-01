@@ -1,14 +1,31 @@
 <template>
   <PageOver>
-    <SkAppCard class="h-full" header="节点详情">
+    <SkAppCard
+      class="h-full"
+      header="节点详情"
+    >
       <template #header>
         <span>节点详情</span>
-        <el-button type="primary" @click="doRunWorkflow">生成实例</el-button>
+        <el-button
+          type="primary"
+          @click="doRunWorkflow"
+        >
+          生成实例
+        </el-button>
       </template>
-      <div class="editor-x" sk-flex="row">
+      <div
+        class="editor-x"
+        sk-flex="row"
+      >
         <div class="editor">
-          <ZzG6Editor :selectNodeId="nodeModel.id" :mode="'default'" :model-value="model"
-            @nodeselectchange="nodeSelectChange" :active-tab-name="'expend'" :form-id="flowData.formId">
+          <ZzG6Editor
+            :select-node-id="nodeModel.id"
+            :mode="'default'"
+            :model-value="model"
+            :active-tab-name="'expend'"
+            :form-id="flowData.formId"
+            @nodeselectchange="nodeSelectChange"
+          >
             <template #form>
               <el-tab-pane
                 label="扩展属性"
@@ -106,7 +123,6 @@ const nodeSelectChange = (e: any) => {
     nodeModel.value = cloneDeep(m)
   } else {
     nodeModel.value = {} as any
-
   }
 }
 

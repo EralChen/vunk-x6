@@ -62,7 +62,7 @@ const tableState = reactive({
       label: '操作',
       width: '450em',
       slots: ({ row }) => {
-        const modules = [...operationsModules.value]
+        const modules = [...operationsModules.value, 'callback']
         const uAfterIndex = modules.indexOf(ButtonId.modify) + 1
 
         // 流程没启动前可以绑定表单
