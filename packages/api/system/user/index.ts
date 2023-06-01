@@ -73,9 +73,13 @@ export const cuUser = (user: Partial<User>) => {
             'datasetId': '1',
             'rows': [
               {
-                ...(user.id ? pickObject(user, {
-                  excludes: ['password'],
-                }) : user),
+                ...(
+                  op === RestFetchOp.u
+                    ? pickObject(user, {
+                      excludes: ['password'],
+                    }) 
+                    : user
+                ),
                 op,
               },
             ],
