@@ -73,9 +73,9 @@ export const cuUser = (user: Partial<User>) => {
             'datasetId': '1',
             'rows': [
               {
-                ...pickObject(user, {
+                ...(user.id ? pickObject(user, {
                   excludes: ['password'],
-                }),
+                }) : user),
                 op,
               },
             ],
