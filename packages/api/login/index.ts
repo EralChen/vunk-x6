@@ -19,6 +19,12 @@ export const uUserPassword = (data: {
   return request({
     url: '/core/busi/exec',
     method: 'POST',
+    setRequestInit: (config: RequestInit) => {
+      const headers = config.headers as Headers
+      headers.set('application', 'platform')
+      headers.set('tenant', 'default')
+      return config
+    },
     data: {
       'dir': 'system',
       'menuId': 'sso',

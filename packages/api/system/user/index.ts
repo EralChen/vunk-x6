@@ -73,9 +73,13 @@ export const cuUser = (user: Partial<User>) => {
             'datasetId': '1',
             'rows': [
               {
-                ...(user.id ? pickObject(user, {
-                  excludes: ['password'],
-                }) : user),
+                ...(
+                  op === RestFetchOp.u
+                    ? pickObject(user, {
+                      excludes: ['password'],
+                    }) 
+                    : user
+                ),
                 op,
               },
             ],
@@ -92,6 +96,12 @@ export const cuUser = (user: Partial<User>) => {
     tasks.push(request({
       method: 'POST',
       url: '/core/busi/exec',
+      setRequestInit: (config: RequestInit) => {
+        const headers = config.headers as Headers
+        headers.set('application', 'platform')
+        headers.set('tenant', 'default')
+        return config
+      },
       data: {
         'buttonId': 'login',
         'dir': 'system',
