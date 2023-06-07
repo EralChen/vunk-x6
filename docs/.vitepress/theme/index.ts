@@ -6,7 +6,10 @@ import 'uno.css'
 import './style.css'
 import type { Theme } from 'vitepress'
 import '@vunk/core/index.css'
+import '@vunk/form/index.css'
+import { createPinia } from 'pinia'
 
+const pinia = createPinia()
 
 export default define<Theme>({
   NotFound,
@@ -14,6 +17,7 @@ export default define<Theme>({
   enhanceApp: ({ app }) => {
     app.use(ElementPlus)
     app.use(Entry)
+    app.use(pinia)
     globals.forEach(([name, Comp]) => {
       app.component(name, Comp)
     })
