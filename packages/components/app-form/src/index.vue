@@ -11,12 +11,14 @@ import { Deferred } from '@vunk/core/shared/utils-promise'
 import type { ElForm } from 'element-plus'
 import { AnyFunc, NormalObject } from '@vunk/core/shared/types'
 import { PATTERN } from '@skzz-platform/shared/utils-form'
+import { SkUpload } from '@skzz-platform/components/upload'
 export default defineComponent({
   name: 'SkAppForm',
   components: {
     VkfForm, VkfFormItemRendererTemplateLayout,
     VkfFormItemRendererTemplate,
     SkCssColorPicker,
+    SkUpload,
   },
   props,
   emits,
@@ -180,6 +182,22 @@ export default defineComponent({
           />
         </template>
       </VkfFormItemRendererTemplate>
+
+      <VkfFormItemRendererTemplate
+        :type="'VkfUpload'"
+      >
+        <template #default="{ data: bindProps }">
+          <SkUpload
+            v-bind="bindProps"
+            :model-value="data[bindProps.prop]"
+            @update:modelValue="$emit('setData', {
+              k: bindProps.prop,
+              v: $event,
+            })"
+          ></SkUpload>
+        </template>
+      </VkfFormItemRendererTemplate>
     </template>
+    <slot></slot>
   </VkfForm>
 </template>
