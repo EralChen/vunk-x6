@@ -212,6 +212,8 @@ function besure () {
  * 3. auditStatus 用来判断是否审批过，用来控制退回按钮是否出现
  */
 async function doApprovel (type: WorkFlowNodeState, e: string) {
+  // console.log(nodeFormItem.value, 'nodeFormItem.value')
+  // return 
   const formIns = await def.promise
   if (e === 'pass') {
     try {
@@ -256,7 +258,7 @@ async function doApprovel (type: WorkFlowNodeState, e: string) {
       nodeInstId: currentNodeId,
       backNodeId: currentBackId,
     },
-    e !== 'pass' ? undefined : nodeFormData.value,
+    e !== 'pass' ? undefined : nodeFormItem.value.length ? nodeFormData.value : undefined,
     props.itemId,
     formTableCp.value,
   ).then(() => {

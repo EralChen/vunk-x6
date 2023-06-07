@@ -144,11 +144,16 @@ export default defineComponent({
             opers: ops,
           }) 
         }
-        if (item.deadLine)
+        console.log(item.deadLine)
+        if (item.deadLine) {
           nodesDeadLine.push({
             nodeId: item.id,
             deadLine: parseInt(item.deadLine),
           })
+        } else {
+          isOk = false
+        }
+
       }
 
       return {
@@ -163,7 +168,7 @@ export default defineComponent({
     function doGen () {
       const { skipNodes, nodeOpers, isOk, nodesDeadLine } = filterOpers()
       if (!isOk) {
-        ElMessage.warning('请选择操作人！')
+        ElMessage.warning('请选择操作人并填写超时时间！')
         return
       }
       if (!props.flowData.formTable) {
