@@ -11,7 +11,7 @@ import UndergroundVue from './underground.vue'
 const url = 'http://116.63.63.191/geoscene/rest/services/XZ/dk_sw3857/SceneServer'
 
 const viewModel = reactive({
-  tiltEnabled: false,
+  tiltEnabled: true,
 })
 
 const formItems: FormItemRendererSource[] = [
@@ -36,16 +36,16 @@ const layerLoad:__VaSceneLayer.OnLoad = async ({
     }"
   >
     <template #before>
-      <VkfForm
+      <!-- <VkfForm
         :form-items="formItems"
         :data="viewModel"
         @setData="setData(viewModel, $event)"
-      ></VkfForm>
+      ></VkfForm> -->
     </template>
 
     <VaTdtBasemap 
       :type="'vec_w'"
-      :anno="false" 
+      :anno="true" 
   
       :spatial-reference="{
         wkid: 3857
