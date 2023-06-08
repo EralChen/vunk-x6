@@ -28,10 +28,10 @@ importers:
       '@vuesri/core': ^0.0.16
       '@vueuse/core': ^9.12.0
       '@vumap/core': 0.0.0-alpha.23
-      '@vunk/core': 0.0.0-alpha.76
-      '@vunk/form': 0.0.1-alpha.51
+      '@vunk/core': 0.0.0-alpha.79
+      '@vunk/form': 0.0.1-alpha.52
       '@vunk/formaker': 0.0.0-alpha.23
-      '@vunk/skzz': 0.0.0-alpha.86
+      '@vunk/skzz': 0.0.0-alpha.88
       chroma-js: ^2.4.2
       consola: ^2.15.3
       element-plus: npm:element-plus@latest
@@ -69,12 +69,12 @@ importers:
       '@vuesri/core': 0.0.16
       '@vueuse/core': 9.13.0_vue@3.3.4
       '@vumap/core': 0.0.0-alpha.23
-      '@vunk/core': 0.0.0-alpha.76
-      '@vunk/form': 0.0.1-alpha.51
+      '@vunk/core': 0.0.0-alpha.79
+      '@vunk/form': 0.0.1-alpha.52
       '@vunk/formaker': 0.0.0-alpha.23
-      '@vunk/skzz': 0.0.0-alpha.86
+      '@vunk/skzz': 0.0.0-alpha.88
       chroma-js: 2.4.2
-      element-plus: 2.3.5_vue@3.3.4
+      element-plus: 2.3.6_vue@3.3.4
       mapbox-gl: 2.14.1
       vue: 3.3.4
     devDependencies:
@@ -1901,7 +1901,7 @@ packages:
     dev: false
 
   /@element-plus/icons-vue/2.1.0_vue@3.3.4:
-    resolution: {integrity: sha512-PSBn3elNoanENc1vnCfh+3WA9fimRC7n+fWkf3rE5jvv+aBohNHABC/KAR5KWPecxWxDTVT1ERpRbOMRcOV/vA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/@element-plus/icons-vue/-/icons-vue-2.1.0.tgz}
+    resolution: {integrity: sha512-PSBn3elNoanENc1vnCfh+3WA9fimRC7n+fWkf3rE5jvv+aBohNHABC/KAR5KWPecxWxDTVT1ERpRbOMRcOV/vA==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
@@ -3860,12 +3860,12 @@ packages:
     resolution: {integrity: sha512-CjP6s9nrCEbJOMTKpynF+PF5TMycxsLrsf/P5ivVfJUW8zl9I5hOqSuO7Y0gCK1g3lb5nhry2ppgApmaLMXu0w==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/@vumap/core/-/core-0.0.0-alpha.23.tgz}
     dev: false
 
-  /@vunk/core/0.0.0-alpha.76:
-    resolution: {integrity: sha512-QCEhx8CJrK41aYZd4W6T6dfVA63sk56eB3dwd7uniGRvEJa6CwRtJF2CJitg9so8gpKp/xRzPSNJ4OWGiJvnog==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/@vunk/core/-/core-0.0.0-alpha.76.tgz}
-    dev: false
-
   /@vunk/core/0.0.0-alpha.78:
     resolution: {integrity: sha512-6s3AvrT591SKDk3Uz0opg46Dbx5rgB/vaynXRyOCUJKFuBHu1g7s2FTLRvGLoPeXfgNAYDzstQN32xq08ZRnhQ==}
+    dev: false
+
+  /@vunk/core/0.0.0-alpha.79:
+    resolution: {integrity: sha512-8LUvmk2tBZegQnEyYg9T2Z2mL0tT6vnBfISLRhe3k6xiNeQanLfo3BQ83/71fgDhoquBahpVInsSsdd/mcp6TQ==}
     dev: false
 
   /@vunk/form/0.0.1-alpha.45:
@@ -3874,18 +3874,18 @@ packages:
       '@vunk/core': 0.0.0-alpha.78
     dev: false
 
-  /@vunk/form/0.0.1-alpha.51:
-    resolution: {integrity: sha512-l9gmWFGaVpuEzmOZqNfEDPtpL9ncKuIL3AlXoTKdmOgqC9z9x7OjBmw0QlndzWLp1DtWVO/1HXRZyEG24n7uzg==}
+  /@vunk/form/0.0.1-alpha.52:
+    resolution: {integrity: sha512-rPXUI/rUuMkX/qbjCQLDet4+5TjFSip7Pz5NGIl8GbqJhGmB3id3H9rLauNjKrkF/0z7Ed7x0hvnti3IWeonfA==}
     dependencies:
-      '@vunk/core': 0.0.0-alpha.78
+      '@vunk/core': 0.0.0-alpha.79
     dev: false
 
   /@vunk/formaker/0.0.0-alpha.23:
     resolution: {integrity: sha512-JjfYNgQLEQXVyq2j2PQhrKYbbgnCFYQ/twHcssjdSAfN5pKccNEgQVVj7eZBL1NDC1ni6M5+fzVnPhWaCLeyMA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/@vunk/formaker/-/formaker-0.0.0-alpha.23.tgz}
     dev: false
 
-  /@vunk/skzz/0.0.0-alpha.86:
-    resolution: {integrity: sha512-URn1fCkAMh23dx3E6mrm/hRdHWDUi+4ThglZLDfHKlfnZyLHwOv1m3Q74Ds5EjkBXz0ETaD76LagHPt5d+3KYg==}
+  /@vunk/skzz/0.0.0-alpha.88:
+    resolution: {integrity: sha512-o7iHDCxABg1cMVtL/ymZrl4HtDKTjWdEf0UvuB78b000g5tu6PR6+IsTr3LsEJbGuj+oQGSoCjInPLJa+SSuNA==}
     dev: false
 
   /@zzg6/flow/0.0.0-alpha.62:
@@ -5166,6 +5166,31 @@ packages:
 
   /element-plus/2.3.5_vue@3.3.4:
     resolution: {integrity: sha512-g27DHm2C5/tPwte9H6Juu+JOdzT9z1ALHTIvia6MwnBdCrI4kd77o6KcYdodU15/tYiPBoCEmobhl/7GUDb+1Q==}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      '@ctrl/tinycolor': 3.6.0
+      '@element-plus/icons-vue': 2.1.0_vue@3.3.4
+      '@floating-ui/dom': 1.2.7
+      '@popperjs/core': /@sxzz/popperjs-es/2.11.7
+      '@types/lodash': 4.14.194
+      '@types/lodash-es': 4.17.7
+      '@vueuse/core': 9.13.0_vue@3.3.4
+      async-validator: 4.2.5
+      dayjs: 1.11.7
+      escape-html: 1.0.3
+      lodash: 4.17.21
+      lodash-es: 4.17.21
+      lodash-unified: 1.0.3_tknf7errc3xdqocd3ryzzla7vq
+      memoize-one: 6.0.0
+      normalize-wheel-es: 1.2.0
+      vue: 3.3.4
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+    dev: false
+
+  /element-plus/2.3.6_vue@3.3.4:
+    resolution: {integrity: sha512-GLz0pXUYI2zRfIgyI6W7SWmHk6dSEikP9yR++hsQUyy63+WjutoiGpA3SZD4cGPSXUzRFeKfVr8CnYhK5LqXZw==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
