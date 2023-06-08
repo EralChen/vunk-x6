@@ -12,16 +12,6 @@
     v-show="isFlowStart && hasApprovelAuth"
     label="审批"
   >
-    <div
-      mt-page
-      mb-page
-      w-100
-    >
-      <el-input
-        v-model="memo"
-        type="textarea"
-      />
-    </div>
     <el-button
       v-if="nodeModelCp.isCurrentNode && hasApprovelAuth"
       type="primary"
@@ -67,6 +57,7 @@
     v-if="dialogVisible"
     v-model:visible="dialogVisible"
     v-model:selected-node="selectedNode"
+    v-model:memo="memo"
     :flow-inst-id="flowInstId"
     @besure="besure"
   ></ZzG6Picker>
@@ -190,19 +181,14 @@ watch(() => props.nodeModel, (v) => {
 // }, { immediate: true })
 
 function besure () {
-  if (selectedNode.value.length !== 1) {
-    ElMessage.warning('请选择一个节点！')
-    return
-  }
-
-  if (selectedNode.value[0].getModel().auditStatus !== 1) {
-    ElMessage.warning('无法退回到未审批的节点！')
-    return
-  }
-
   doApprovel(WorkFlowNodeState.驳回, 'return')
-  dialogVisible.value = false
+    .then(res => {
+      if (res?.code === 200) {
+        memo.value = ''
+        dialogVisible.value = false
+      }
 
+    })
 }
 
 /**
@@ -250,7 +236,7 @@ async function doApprovel (type: WorkFlowNodeState, e: string) {
   if (e === 'returnUpperLevel') {
     currentBackId = -1
   }
-  doApproveNodeWithForm(
+  return doApproveNodeWithForm(
     {
       itemId: props.flowId,
       status: type,
@@ -261,8 +247,9 @@ async function doApprovel (type: WorkFlowNodeState, e: string) {
     e !== 'pass' ? undefined : nodeFormItem.value.length ? nodeFormData.value : undefined,
     props.itemId,
     formTableCp.value,
-  ).then(() => {
+  ).then((res) => {
     emit('approvalSuccess')
+    return res
   })
 }
 

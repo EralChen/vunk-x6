@@ -296,7 +296,6 @@ export const doApproveNodeWithForm = (data: {
       'menuId': formTable,
       'buttonId': 'modify',
     },
-
   } as RestFetchExecOptions, {
     msg: '操作成功',
   })
