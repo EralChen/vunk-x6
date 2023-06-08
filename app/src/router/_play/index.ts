@@ -80,6 +80,12 @@ export default [
           },
         ],
       },
+
     ],
+  },
+
+  {
+    path: '/_play/vuesri/slice',
+    component: () => import('_v/_play/vuesri/slice/index.vue'), 
   },
 ] as RouteRecordRaw[]
