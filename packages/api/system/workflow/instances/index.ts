@@ -40,7 +40,7 @@ export type InstanceBindOpers = {
 }
 
 export type NodesDeadLine = {
-  deadLine: number
+  deadLine: string
   nodeId: string
 }
 /**
