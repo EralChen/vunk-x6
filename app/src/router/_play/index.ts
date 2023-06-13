@@ -88,4 +88,12 @@ export default [
     path: '/_play/vuesri/slice',
     component: () => import('_v/_play/vuesri/slice/index.vue'), 
   },
+  {
+    path: '/_play/test4',
+    meta: {
+      title: 'test4',
+      hidden: true,
+    },
+    component: () => import('_v/_play/test4/index.vue'),
+  },
 ] as RouteRecordRaw[]
