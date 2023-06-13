@@ -10,6 +10,7 @@
         :mode="'preview'"
         :model-value="model"
         @nodeselectchange="nodeSelectChange"
+        @load="graphRef = $event.graph"
       ></ZzG6Editor>
     </div>
     <ElForm
@@ -41,10 +42,10 @@
 
 <script setup lang="ts">
 import ZzG6Editor from '@/components/ZzG6Editor/index.vue'
-import { GraphData, IG6GraphEvent, Node } from '@antv/g6'
+import { Graph, GraphData, IG6GraphEvent, Node } from '@antv/g6'
 import { rInstanceList, rWorkflowNodeRaw } from '@skzz-platform/api/system/workflow'
 import { ElForm, ElMessage, FormRules } from 'element-plus'
-import { PropType, computed, reactive, ref, watch } from 'vue'
+import { PropType, computed, nextTick, reactive, ref, watch } from 'vue'
 
 const props = defineProps({
   flowInstId: {
@@ -68,6 +69,7 @@ const props = defineProps({
 const emit = defineEmits(['update:visible', 'update:selectedNode', 'besure', 'update:memo'])
 const model = ref({} as any)
 const formNode = ref<InstanceType<typeof ElForm>>()
+const graphRef = ref<Graph | null>(null)
 const rules = ref<FormRules>({
   memo: [
     { required: true, message: '请输入理由', trigger: 'blur' },
@@ -105,6 +107,9 @@ async function r () {
   })
 
   model.value = raws as GraphData
+  nextTick(() => {
+    graphRef.value?.fitView()
+  })
 }
 
 watch(() => props.flowInstId, r, { immediate: true })
