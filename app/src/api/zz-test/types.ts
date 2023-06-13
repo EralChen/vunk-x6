@@ -1,5 +1,3 @@
-import { GraphData } from '@antv/g6'
-
 export interface Workflow {
   name: string,
   id: string, // 流程主键
@@ -16,48 +14,3 @@ export interface Workflow {
   formTable?: string 
 }
 
-export interface WorkflowNode {
-  id: string;
-  name: string;
-  isJointly: 0 | 1;
-  isCurrentNode: 0 | 1;
-  label: string;
-  opers: { id: string, name: string }[];
-  nodeInstId: string;
-  assistOpers: { id: string, name: string, nodeId: string }[];
-  [k: string]: any
-}
-
-export interface WorkflowNodeRaw {
-  nextNodes: string;
-  currentNodeInstId: string;
-  name: string;
-  prevNodes: string;
-  isCurrentNode: 0 | 1;
-  id: string;
-}
-
-
-export type WorkflowData = GraphData 
-
-export interface WorkflowOper {
-  operId: string;
-  operName: string;
-}
-
-export enum WorkFlowNodeState {
-  '待审核' = 0,
-  '通过' = 10,
-  '驳回' = -10,
-}
-
-
-export type FlowNodeInstance = {
-  itemId: string
-  name: string
-  id: string
-  flowId: string
-  status: number
-  formTable: string
-
-}
