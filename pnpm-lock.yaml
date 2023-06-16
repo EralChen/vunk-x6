@@ -18,7 +18,7 @@ importers:
       '@skzz-template/shared': workspace:*
       '@skzz-template/stores': workspace:*
       '@skzz-template/theme': workspace:*
-      '@skzz/platform': 0.0.0-alpha.17
+      '@skzz/platform': 0.0.0-alpha.18
       '@skzz/template': workspace:*
       '@types/arcgis-js-api': ^4.25.0
       '@types/chroma-js': ^2.1.4
@@ -27,7 +27,7 @@ importers:
       '@vuesri/core': ^0.0.6
       '@vueuse/core': ^9.12.0
       '@vunk/core': 0.0.0-alpha.76
-      '@vunk/form': 0.0.1-alpha.45
+      '@vunk/form': ^1.0.1
       '@vunk/skzz': 0.0.0-alpha.84
       chroma-js: ^2.4.2
       consola: ^2.15.3
@@ -59,12 +59,12 @@ importers:
       '@skzz-template/shared': link:packages/shared
       '@skzz-template/stores': link:packages/stores
       '@skzz-template/theme': link:packages/theme
-      '@skzz/platform': 0.0.0-alpha.17
+      '@skzz/platform': 0.0.0-alpha.18
       '@skzz/template': link:packages/entry
       '@vuesri/core': 0.0.6
       '@vueuse/core': 9.13.0_vue@3.2.47
       '@vunk/core': 0.0.0-alpha.76
-      '@vunk/form': 0.0.1-alpha.45
+      '@vunk/form': 1.0.1
       '@vunk/skzz': 0.0.0-alpha.84
       chroma-js: 2.4.2
       element-plus: 2.3.6_vue@3.2.47
@@ -2525,8 +2525,8 @@ packages:
       picomatch: 2.3.1
     dev: true
 
-  /@skzz/platform/0.0.0-alpha.17:
-    resolution: {integrity: sha512-r6NG6Pueizm/BKECelGNQgBCEKrBblPp1F9reMVyzF5ysRslnWRrvmfJfQwvOHfNpUWkkoy34xBSuEVkBodFrg==}
+  /@skzz/platform/0.0.0-alpha.18:
+    resolution: {integrity: sha512-7coI9bDfH6rqZgDXOy9T5JfE268OqKMCgHGH0ADJBmp73f88pbwSvbOxWa5za1SyqfaFCn06mBqGr5ZsVH78kQ==}
     dev: false
 
   /@stencil/core/2.20.0:
@@ -3442,8 +3442,8 @@ packages:
     resolution: {integrity: sha512-8LUvmk2tBZegQnEyYg9T2Z2mL0tT6vnBfISLRhe3k6xiNeQanLfo3BQ83/71fgDhoquBahpVInsSsdd/mcp6TQ==}
     dev: false
 
-  /@vunk/form/0.0.1-alpha.45:
-    resolution: {integrity: sha512-uFXuHYEYkoGCRFzqml2GeK3jwnYG57e/bxacNgikT72+ZX+9f49O5y0XX/2lf/NFnQPJ6Npch0akKVGJSMrpdw==}
+  /@vunk/form/1.0.1:
+    resolution: {integrity: sha512-aDUVunKGTCEYX1LJPfuWyduu+Mh4wrQ3q/+SsLStqGXMlQGJ1LklwYsFw82Bpfwy7zrVNyv5QpKo/aLxw0um7g==}
     dependencies:
       '@vunk/core': 0.0.0-alpha.79
     dev: false
