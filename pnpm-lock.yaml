@@ -18,17 +18,17 @@ importers:
       '@skzz-template/shared': workspace:*
       '@skzz-template/stores': workspace:*
       '@skzz-template/theme': workspace:*
-      '@skzz/platform': 0.0.0-alpha.18
+      '@skzz/platform': 0.0.0-alpha.22
       '@skzz/template': workspace:*
       '@types/arcgis-js-api': ^4.25.0
       '@types/chroma-js': ^2.1.4
       '@types/gulp': ^4.0.9
       '@types/node': ^18.0.4
-      '@vuesri/core': ^0.0.6
+      '@vuesri/core': ^0.0.19
       '@vueuse/core': ^9.12.0
-      '@vunk/core': 0.0.0-alpha.76
-      '@vunk/form': ^1.0.1
-      '@vunk/skzz': 0.0.0-alpha.84
+      '@vunk/core': 0.0.0-alpha.92
+      '@vunk/form': ^1.1.13
+      '@vunk/skzz': 0.0.0-alpha.91
       chroma-js: ^2.4.2
       consola: ^2.15.3
       element-plus: npm:element-plus@latest
@@ -59,15 +59,15 @@ importers:
       '@skzz-template/shared': link:packages/shared
       '@skzz-template/stores': link:packages/stores
       '@skzz-template/theme': link:packages/theme
-      '@skzz/platform': 0.0.0-alpha.18
+      '@skzz/platform': 0.0.0-alpha.22
       '@skzz/template': link:packages/entry
-      '@vuesri/core': 0.0.6
+      '@vuesri/core': 0.0.19
       '@vueuse/core': 9.13.0_vue@3.2.47
-      '@vunk/core': 0.0.0-alpha.76
-      '@vunk/form': 1.0.1
-      '@vunk/skzz': 0.0.0-alpha.84
+      '@vunk/core': 0.0.0-alpha.92
+      '@vunk/form': 1.1.13
+      '@vunk/skzz': 0.0.0-alpha.91
       chroma-js: 2.4.2
-      element-plus: 2.3.6_vue@3.2.47
+      element-plus: 2.3.7_vue@3.2.47
       vue: 3.2.47
     devDependencies:
       '@lib-env/app-utils': link:internal/app-utils
@@ -2525,8 +2525,8 @@ packages:
       picomatch: 2.3.1
     dev: true
 
-  /@skzz/platform/0.0.0-alpha.18:
-    resolution: {integrity: sha512-7coI9bDfH6rqZgDXOy9T5JfE268OqKMCgHGH0ADJBmp73f88pbwSvbOxWa5za1SyqfaFCn06mBqGr5ZsVH78kQ==}
+  /@skzz/platform/0.0.0-alpha.22:
+    resolution: {integrity: sha512-wNTC5zBset/DZL7btWGObnTvBNZeZy4Y59BbfLb0Ld5NMEAKPOb0/wpIBQhXrQt34ImsRb3i/ZN1aGl4VvRsRw==}
     dev: false
 
   /@stencil/core/2.20.0:
@@ -3405,8 +3405,8 @@ packages:
     resolution: {integrity: sha512-yRrdT1FUWhuLNgj3UUasmToYZ0zR0SOdmVyLa0FHIzbnn00LOiK4lZoPRELMRMnyPy6wwwWHRNmItUeWc2ZGPQ==}
     dev: true
 
-  /@vuesri/core/0.0.6:
-    resolution: {integrity: sha512-lsB1lft1pBQv5TdyxMflxGlroocNRXOjZOPetoa+Mwef3h/+kMhgPs8p0XsaFoObGPH0gMvXyNaNHWuKZT+ZEg==}
+  /@vuesri/core/0.0.19:
+    resolution: {integrity: sha512-IHTMYp2wAtLxvfBqe8T25YHbtg1EnImPuTcKz1Dz2T1xGm4xINuMJwfPXib4A9Gg/MlMRLVUQLjgmHeDZcozrA==}
     dev: false
 
   /@vueuse/core/9.13.0_vue@3.2.47:
@@ -3434,22 +3434,18 @@ packages:
       - vue
     dev: false
 
-  /@vunk/core/0.0.0-alpha.76:
-    resolution: {integrity: sha512-QCEhx8CJrK41aYZd4W6T6dfVA63sk56eB3dwd7uniGRvEJa6CwRtJF2CJitg9so8gpKp/xRzPSNJ4OWGiJvnog==}
+  /@vunk/core/0.0.0-alpha.92:
+    resolution: {integrity: sha512-ECcxGCBszFa7B0iYWQb/fCjR42O1TRVcdVDAEdmgruN639aZSMubgZCnoyRrAr1nt4vQmir0bTkjoPab0kTPpA==}
     dev: false
 
-  /@vunk/core/0.0.0-alpha.79:
-    resolution: {integrity: sha512-8LUvmk2tBZegQnEyYg9T2Z2mL0tT6vnBfISLRhe3k6xiNeQanLfo3BQ83/71fgDhoquBahpVInsSsdd/mcp6TQ==}
-    dev: false
-
-  /@vunk/form/1.0.1:
-    resolution: {integrity: sha512-aDUVunKGTCEYX1LJPfuWyduu+Mh4wrQ3q/+SsLStqGXMlQGJ1LklwYsFw82Bpfwy7zrVNyv5QpKo/aLxw0um7g==}
+  /@vunk/form/1.1.13:
+    resolution: {integrity: sha512-0Xup8Kix0N3FgDiCkTX46jCupK+9pWIM3CNcaUcIQG6qJ5fr+5xX3Lq5DFhp5Y/k67yaxF1z2C8uG/gykgWAwg==}
     dependencies:
-      '@vunk/core': 0.0.0-alpha.79
+      '@vunk/core': 0.0.0-alpha.92
     dev: false
 
-  /@vunk/skzz/0.0.0-alpha.84:
-    resolution: {integrity: sha512-QTOJLONbimNT86ax70IvjJ7StbsWzwVwP/rwmvhnp7B+26JFKk1ohJM30ZP/Mwseij5OCFRsZAJknpiDV+H5wg==}
+  /@vunk/skzz/0.0.0-alpha.91:
+    resolution: {integrity: sha512-MuAYkXmhXwPJHCZm5pwX38DuW8GZ4Xtb3UHr6z6+UwMA+eZ1xMiObnOE5pvoTSPOzuQ8TQEDspq956X3TSTcGQ==}
     dev: false
 
   /acorn-jsx/5.3.2_acorn@8.8.2:
@@ -4640,8 +4636,8 @@ packages:
     resolution: {integrity: sha512-I97q0MmRAAqj53+a8vZsDkEXBZki+ehYAOPzwtQzALip52aEp2+BJqHFtTlsfjoqVZYwPpHC8wM6MbsSZQ/Eqw==}
     dev: true
 
-  /element-plus/2.3.6_vue@3.2.47:
-    resolution: {integrity: sha512-GLz0pXUYI2zRfIgyI6W7SWmHk6dSEikP9yR++hsQUyy63+WjutoiGpA3SZD4cGPSXUzRFeKfVr8CnYhK5LqXZw==}
+  /element-plus/2.3.7_vue@3.2.47:
+    resolution: {integrity: sha512-h6TxclbaLUJxg/Bv5j/ZKsK+K5yadQliw5+R30HWyE69pXlqXTX24oYx+yw3pA4Dy+lqEDi5501FQ0CORk3OSA==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
