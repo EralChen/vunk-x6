@@ -8,7 +8,7 @@ export const restFetch  = new RestFetch({
     // 自定义后台成功的返回码
     return res.code === 0
   },
-  errHandler () {
+  onerror () {
     /**
      * 在 request 出现异常时调用 默认如下
      *   throttle((res) => {
