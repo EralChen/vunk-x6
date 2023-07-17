@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
-import { ref, shallowRef } from 'vue'
-import { RouteLocationNormalizedLoaded, RouteRecordRaw } from 'vue-router'
+import { ref, shallowRef, watch } from 'vue'
+import { RouteLocationNormalizedLoaded, RouteRecordRaw, useRoute } from 'vue-router'
 import { pickObject } from '@vunk/core/shared/utils-object'
 
 type BaseView = RouteRecordRaw & { fullPath: string }
@@ -41,39 +41,72 @@ export const useViewsStore = defineStore('views', () => {
 
   
   const visitedViews = ref<RouteLocationNormalizedLoaded[]>([])
-  const addVisitedView = (route: RouteLocationNormalizedLoaded) => {
-    if (visitedViews.value.some((v) => {
-      return v.fullPath === route.fullPath
-    })) {
-      return
+  const addVisitedView = (route: RouteLocationNormalizedLoaded, index?: number) => {
+
+    const routeInfo =  pickObject(route, {
+      // [TODO] 持久化储存的数据是否需要这部分
+      excludes: ['matched', 'redirectedFrom'],
+    }) as RouteLocationNormalizedLoaded
+
+    if (typeof index === 'number' && index >= 0) {
+      visitedViews.value.splice(index, 0, routeInfo)
+    } else {
+      visitedViews.value.push(routeInfo)
     }
 
-    visitedViews.value.push( 
-      pickObject(route, {
-        // [TODO] 持久化储存的数据是否需要这部分
-        excludes: ['matched', 'redirectedFrom'],
-      }) as RouteLocationNormalizedLoaded,
-    )
+   
   }
 
-  const delVisitedViewByFullpath = (fullPath: string) => {
+  const setVisitedViews = (routes: RouteLocationNormalizedLoaded[]) => {
+    visitedViews.value = routes
+  }
+
+
+  const delVisitedView = (query: {
+    fullPath?: string
+    path?: string
+  }) => {
+   
     const index = visitedViews.value.findIndex((v) => {
-      return v.fullPath === fullPath
+      return  Object.keys(query).every((key) => {
+        const _key = key as keyof typeof query
+        return query[_key] === undefined || v[_key] === query[_key]
+      })
     })
     let item: RouteLocationNormalizedLoaded | undefined
     if (index >= 0) {
       item = visitedViews.value.splice(index, 1)[0]
     }
-
     return {
       index,
-      item, 
+      item,
     }
-   
+
+  }
+  const collectingVisitedViews = () => {
+    const route = useRoute()
+  
+    watch(route, (newRoute) => {
+      if (
+        visitedViews.value
+          .some((v) => v.fullPath === newRoute.fullPath)
+      ) {
+        return
+      }
+      
+      if (
+        newRoute.meta?.title
+        && newRoute.meta?.tagsView !== false
+      ) {
+ 
+        const { index } = delVisitedView({ path: newRoute.path }) 
+
+        addVisitedView({ ...newRoute }, index)
+      }
+      
+    }, { immediate: true })
   }
 
-  
-  // const cachedViews = shallowRef<RouteRecordRaw[]>([])
 
   return { 
     currentBaseView,
@@ -84,8 +117,10 @@ export const useViewsStore = defineStore('views', () => {
     findBaseViewByFullPath,
 
     visitedViews,
+    setVisitedViews,
     addVisitedView,
-    delVisitedViewByFullpath,
+    delVisitedView,
+    collectingVisitedViews,
 
   }
 }, {

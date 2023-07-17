@@ -2,27 +2,18 @@
 import { useViewsStore } from '@/stores/views'
 import { Close } from '@element-plus/icons-vue'
 import { AnyFunc } from '@vunk/core'
-import { watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 const route = useRoute()
 const router = useRouter()
 const viewsStore = useViewsStore()
 
 /* vue3 监听路由变化 */
-watch(route, (newRoute) => {
-  if (
-    newRoute.meta?.title
-    && newRoute.meta?.tagsView !== false
-  ) {
-    viewsStore.addVisitedView({ ...newRoute })
-  }
-  
-}, { immediate: true })
+viewsStore.collectingVisitedViews()
 
 const linkClose = (e: MouseEvent, fullPath: string) => {
   e.preventDefault()
   e.stopPropagation()
-  const { item, index } = viewsStore.delVisitedViewByFullpath(fullPath)
+  const { item, index } = viewsStore.delVisitedView({ fullPath })
   if (item) {
     if (item.fullPath === route.fullPath) { // 将要关闭的路由是当前路由
       // 将路由跳转到 该路由的上一个路由
