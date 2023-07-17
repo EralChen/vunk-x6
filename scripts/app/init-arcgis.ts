@@ -8,7 +8,6 @@ import fs from 'fs'
 
 const assetsDir = path.resolve(workRoot, './node_modules/@arcgis/core/assets')
 
-
 const tasks = appRootDirs.map(appRoot => {
   const appPublicDir  = path.resolve(appRoot, 'public')
   const srcThemesDir = path.resolve(appRoot, 'src/styles/esri/_themes')
@@ -29,14 +28,7 @@ const tasks = appRootDirs.map(appRoot => {
     }),
   
     taskWithName('addThemes', async () => {
-  
-      fs.cpSync(
-        path.resolve(assetsDir, 'esri/themes'), srcThemesDir,
-        {
-          recursive: true,
-        },
-      )
-  
+      copyFiles(path.resolve(assetsDir, 'esri/themes'), srcThemesDir)
     }),
   
     taskWithName('resolveThemesFontsPath',  async () => {
@@ -63,3 +55,17 @@ const tasks = appRootDirs.map(appRoot => {
 
 export default series(tasks)
 
+
+function copyFiles (srcDir: string, destDir: string) {
+  const files = fs.readdirSync(srcDir)
+  for (const file of files) {
+    const srcPath = path.join(srcDir, file)
+    const destPath = path.join(destDir, file)
+    if (fs.statSync(srcPath).isDirectory()) {
+      fs.mkdirSync(destPath, { recursive: true })
+      copyFiles(srcPath, destPath)
+    } else {
+      fs.copyFileSync(srcPath, destPath)
+    }
+  }
+}

@@ -1,7 +1,6 @@
 import { baseGap, namedGap, baseFontSize, namedFontSize, unoShortcuts, unoThemeColors } from '@skzz/platform/theme'
 import { NormalObject } from '@vunk/core/shared/types'
 
-
 export const vunkPresetsTheme = {
 
   baseGap: Object.keys(baseGap).reduce((a, c) => {
