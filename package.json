@@ -38,7 +38,7 @@
 		"@skzz-template/shared": "workspace:*",
 		"@skzz-template/stores": "workspace:*",
 		"@skzz-template/theme": "workspace:*",
-		"@skzz/platform": "npm:@skzz/platform@alpha",
+		"@skzz/platform": "0.0.0-alpha.49",
 		"@skzz/template": "workspace:*",
 		"@vuesri/core": "^0.0.19",
 		"@vueuse/core": "^9.12.0",
