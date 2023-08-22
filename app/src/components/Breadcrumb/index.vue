@@ -34,7 +34,8 @@ const handleLink = (item:RouteLocationMatched) => {
 <template>
   <!-- bg-bg-overlay border-b border-b-border-base -->
   <ElBreadcrumb 
-    class="pa-page" 
+    
+    class="pa-page breadcrumb" 
     :separator="'>'"
   >
     <!-- <TransitionGroup name="breadcrumb"> -->
@@ -51,3 +52,8 @@ const handleLink = (item:RouteLocationMatched) => {
     <!-- </TransitionGroup> -->
   </ElBreadcrumb>
 </template>
+<style scoped>
+.breadcrumb{
+  height: 40px;
+}
+</style>

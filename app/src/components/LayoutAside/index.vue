@@ -3,7 +3,7 @@ import { ElMenu } from 'element-plus'
 import { VkRoutesMenuContent } from '@vunk/skzz/components/routes-menu-content'
 import LinkVue from '_c/MenuLink/index.vue'
 import { useLayoutStore } from '@/stores/layout'
-import { nextTick, onMounted, Ref, ref, watch } from 'vue'
+import { computed, nextTick, onMounted, Ref, ref, watch } from 'vue'
 import CollapseVue from './Collapse.vue'
 import { useViewsStore } from '@/stores/views'
 import { usePermissionStore } from '@/stores/permission'
@@ -23,6 +23,11 @@ const permissionStore = usePermissionStore()
 const route = useRoute()
 const menuNode = ref() as Ref<{ open: AnyFunc }>
 useSharedMenuClick()
+
+
+const finalRoutes = computed(() => {
+  return viewsStore.currentBaseView?.children || [...permissionStore.routes, ...constRoutes]
+})
 
 const initOpenMenu = () => {
   if (layoutStore.asideInfo.menuCollapse) {
@@ -58,7 +63,7 @@ onMounted(async () => {
         :collapse="layoutStore.asideInfo.menuCollapse"
       >
         <VkRoutesMenuContent 
-          :data="viewsStore.currentBaseView?.children || [...permissionStore.routes, ...constRoutes]" 
+          :data="finalRoutes" 
           :base-path="viewsStore.currentBaseView?.fullPath || ''"
           :popper-class="'layout-default-aside-popper'"
         >
@@ -72,7 +77,7 @@ onMounted(async () => {
                 v-if="data.meta?.icon"
                 class="layout-default-aside-item-icon" 
                 :icon="data.meta.icon"
-              ></SkAppIcon>
+              />
             </LinkVue>
           </template>
 
@@ -90,7 +95,7 @@ onMounted(async () => {
                 v-if="data.meta?.icon"
                 class="layout-default-aside-item-icon" 
                 :icon="data.meta.icon"
-              ></SkAppIcon>
+              />
             </LinkVue>
 
             <span class="layout-default-aside-item-span"> {{ data.meta?.title || data.meta?.name }}</span>
@@ -99,15 +104,16 @@ onMounted(async () => {
       </ElMenu>
     </ElScrollbar>
 
-    <CollapseVue class="layout-default-aside-collapse"></CollapseVue>
+    <CollapseVue class="layout-default-aside-collapse" />
   </div>
 </template>
 
 <slyle lang="scss">
-.layout-default-aside-menu[style*="--el-menu-level:0"] > li{
+.layout-default-aside-menu[style*="--el-menu-level: 0"] > li{
   font-weight: bold;
 }
-.layout-default-aside-menu[style*="--el-menu-level:0"] > li > ul{
+
+.layout-default-aside-menu[style*="--el-menu-level: 0"] > li > ul{
   font-weight: initial;
 }
 </slyle>

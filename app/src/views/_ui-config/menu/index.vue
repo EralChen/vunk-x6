@@ -16,15 +16,15 @@ const themeStore = useThemeStore()
       class="h-100%"
       :header="'菜单配置'"
     >
-      <div
+      <el-scrollbar
         plr-form-pl
         ptb-form-pt
       >
         <ElMenuConfigForm
           :data="themeStore.menuStyles"
           @setData="setData(themeStore.menuStyles, $event)"
-        ></ElMenuConfigForm>
-      </div>
+        />
+      </el-scrollbar>
     </SkAppCard>
   </div>
 </template>

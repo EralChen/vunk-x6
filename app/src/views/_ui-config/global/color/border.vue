@@ -87,8 +87,7 @@ const formItemsWithDemo = computed(() => {
   <SkAppForm
     :form-items="formItemsWithDemo"
     v-bind="$attrs"
-  >
-  </SkAppForm>
+  />
 </template>
 <style>
 

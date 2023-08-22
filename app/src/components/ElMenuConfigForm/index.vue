@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { FormItemRendererSource, VkfForm } from '@vunk/form'
+import { AllTemplatesSource, VkfForm } from '@vunk/form'
 import { elMenuTheme } from '@skzz/platform/theme'
 
-const formItems: FormItemRendererSource<`--el-menu-${keyof typeof elMenuTheme['default']}`>[] = [
+const formItems: AllTemplatesSource<keyof typeof elMenuTheme['default']>[] = [
   {
     templateType: 'VkfColorPicker',
     showAlpha: true,
@@ -38,25 +38,25 @@ const formItems: FormItemRendererSource<`--el-menu-${keyof typeof elMenuTheme['d
     templateType: 'VkfInput',
     prop: '--el-menu-item-height',
     label: 'Item Height',
-    placeholder: elMenuTheme.default['item-height'],
+    placeholder: elMenuTheme.default['--el-menu-item-height'],
   },
   {
     templateType: 'VkfInput',
     prop: '--el-menu-sub-item-height',
     label: 'Sub Item Height',
-    placeholder: elMenuTheme.default['sub-item-height'],
+    placeholder: elMenuTheme.default['--el-menu-sub-item-height'],
   },
   {
     templateType: 'VkfInput',
     prop: '--el-menu-horizontal-sub-item-height',
     label: 'Horizontal Sub Item Height',
-    placeholder: elMenuTheme.default['horizontal-sub-item-height'],
+    placeholder: elMenuTheme.default['--el-menu-horizontal-sub-item-height'],
   },
   {
     templateType: 'VkfInput',
     prop: '--el-menu-item-font-size',
     label: 'Item Font Size',
-    placeholder: elMenuTheme.default['item-font-size'],
+    placeholder: elMenuTheme.default['--el-menu-item-font-size'],
   },
   {
     templateType: 'VkfColorPicker',
@@ -77,19 +77,19 @@ const formItems: FormItemRendererSource<`--el-menu-${keyof typeof elMenuTheme['d
     
     prop: '--el-menu-base-level-padding',
     label: 'Base Level Padding',
-    placeholder: elMenuTheme.default['base-level-padding'],
+    placeholder: elMenuTheme.default['--el-menu-base-level-padding'],
   },
   {
     templateType: 'VkfInput',
     prop: '--el-menu-level-padding',
     label: 'Level Padding',
-    placeholder: elMenuTheme.default['level-padding'],
+    placeholder: elMenuTheme.default['--el-menu-level-padding'],
   },
   {
     templateType: 'VkfInput',
     prop: '--el-menu-icon-width',
     label: 'Icon Width',
-    placeholder: elMenuTheme.default['icon-width'],
+    placeholder: elMenuTheme.default['--el-menu-icon-width'],
   },
 
 
@@ -101,5 +101,5 @@ const formItems: FormItemRendererSource<`--el-menu-${keyof typeof elMenuTheme['d
     class="bg-bg-overlay"
     :label-width="'14em'"
     :form-items="formItems"
-  ></VkfForm>
+  />
 </template>

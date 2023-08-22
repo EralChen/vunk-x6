@@ -71,6 +71,7 @@ const { layoutTopClassName } = useThemeStore()
 <style>
 .layout-top{
   background: var(--layout-top-bg, var(--el-color-primary));
+  min-height: 60px;
 }
 .layout-top-title{
   min-width: var(--layout-aside-width);

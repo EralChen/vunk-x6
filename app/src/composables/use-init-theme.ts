@@ -1,6 +1,6 @@
 import { useSharedDark } from '@skzz/platform/composables'
 import { useThemeStore } from '@/stores/theme'
-import { elColorWithMode, elBgColorWithMode, elTextColorWithMode, elFillColorWithMode, elBorderColorWithMode, layoutTopTheme, baseFontSize, namedFontSize, baseGap, namedGap, elTableV2Theme  } from '@skzz/platform/theme'
+import { elColorWithMode, elBgColorWithMode, elTextColorWithMode, elFillColorWithMode, elBorderColorWithMode, layoutTopTheme, baseFontSize, namedFontSize, baseGap, namedGap, elTableV2Theme, elMenuTheme  } from '@skzz/platform/theme'
 import { NormalObject } from '@vunk/core' 
 import { nextTick, watch } from 'vue'
 
@@ -26,6 +26,7 @@ const useElementPlusTheme = () => {
       setElColor(v ? elTextColorWithMode.dark : elTextColorWithMode.default)
       setElColor(v ? elFillColorWithMode.dark : elFillColorWithMode.default)
       setElColor(v ? elBorderColorWithMode.dark : elBorderColorWithMode.default)
+      setElColor(v ? elMenuTheme.dark : elMenuTheme.default)
     })
   
   }, { immediate: true })
