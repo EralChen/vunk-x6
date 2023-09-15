@@ -6,6 +6,33 @@
 4. `pnpm i`
 5. 启动应用 `pnpm run -C [name] dev`
 
+## 使用 arcgis/core
+1. pnpm i
+2. npm run app:init-arcgis
+
+## 删除 arcgis/core
+
+1. 删除依赖 "@arcgis/core": "^4.25.5", "@types/arcgis-js-api": "^4.25.0",
+
+2. 清理 types 
+```ts
+// app/ tsconfig.json
+  "types": [
+    "node",
+    - "arcgis-js-api",
+  ],
+```
+3. 清除 styles
+```ts 
+// styles index.ts
+- import './esri'
+```
+
+4. 重置 Viewer 组件
+```jsx
+// app/components/Viewer/index.vue
+
+```
 
 
 ## 改造为新的lib仓库
