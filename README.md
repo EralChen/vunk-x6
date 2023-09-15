@@ -10,9 +10,11 @@
 1. pnpm i
 2. npm run app:init-arcgis
 
+3. main.ts 配置 esriConfig 
+
 ## 删除 arcgis/core
 
-1. 删除依赖 "@arcgis/core": "^4.25.5", "@types/arcgis-js-api": "^4.25.0",
+1. 删除依赖 "@arcgis/core", "@types/arcgis-js-api", "@vuesri/core"
 
 2. 清理 types 
 ```ts
@@ -22,6 +24,7 @@
     - "arcgis-js-api",
   ],
 ```
+
 3. 清除 styles
 ```ts 
 // styles index.ts
@@ -31,9 +34,14 @@
 4. 重置 Viewer 组件
 ```jsx
 // app/components/Viewer/index.vue
-
+<script lang="ts" setup>
+</script>
+<template>
+  <div></div>
+</template>
 ```
 
+5. pnpm i
 
 ## 改造为新的lib仓库
 
