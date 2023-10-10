@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@docsearch/js": "^3.1.0",
-    "@element-plus/icons-vue": "^2.0.6",
     "@vue/shared": "^3.2.37",
     "axios": "^0.27.2",
     "clipboard-copy": "^4.0.1",
