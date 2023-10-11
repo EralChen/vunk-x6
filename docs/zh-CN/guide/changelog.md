@@ -33,3 +33,5 @@ lang: zh-CN
    ```
 
 5. 更新替换 scripts/app/init-arcgis.ts 文件
+
+6. .gitignore 文件中删除 `app/src/styles/esri/_themes`
