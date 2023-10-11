@@ -8,6 +8,9 @@ import ElementPlus from 'element-plus'
 import * as ElIconsVue from '@element-plus/icons-vue'
 import PageX from '_c/PageX/index.vue'
 import PageOver from '_c/PageOver/index.vue'
+
+import './init-esri'
+
 // 初始化 api 配置
 import '@/api'
 

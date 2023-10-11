@@ -3,6 +3,7 @@ import { useThemeStore } from '@/stores/theme'
 import { elColorWithMode, elBgColorWithMode, elTextColorWithMode, elFillColorWithMode, elBorderColorWithMode, layoutTopTheme, baseFontSize, namedFontSize, baseGap, namedGap, elTableV2Theme, elMenuTheme  } from '@skzz/platform/theme'
 import { NormalObject } from '@vunk/core' 
 import { nextTick, watch } from 'vue'
+import { useInitEsriTheme } from './use-init-esri-theme'
 
 const useElementPlusTheme = () => {
   const themeStore = useThemeStore()
@@ -128,4 +129,5 @@ export const useInitTheme = () => {
   useNamedGapTheme()
   useLayoutTopTheme()
   useTableV2Theme()
+  useInitEsriTheme()
 }
