@@ -41,7 +41,7 @@
 		"@skzz-template/theme": "workspace:*",
 		"@skzz/platform": "0.0.0-alpha.49",
 		"@skzz/template": "workspace:*",
-		"@vuesri/core": "^0.0.19",
+		"@vuesri/core": "^0.0.40",
 		"@vueuse/core": "^9.12.0",
 		"@vunk/core": "0.0.0-alpha.92",
 		"@vunk/form": "^1.1.13",

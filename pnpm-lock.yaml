@@ -42,8 +42,8 @@ importers:
         specifier: workspace:*
         version: link:packages/entry
       '@vuesri/core':
-        specifier: ^0.0.19
-        version: 0.0.19
+        specifier: ^0.0.40
+        version: 0.0.40
       '@vueuse/core':
         specifier: ^9.12.0
         version: 9.13.0(vue@3.3.4)
@@ -3674,8 +3674,8 @@ packages:
       - typescript
     dev: true
 
-  /@vuesri/core@0.0.19:
-    resolution: {integrity: sha512-IHTMYp2wAtLxvfBqe8T25YHbtg1EnImPuTcKz1Dz2T1xGm4xINuMJwfPXib4A9Gg/MlMRLVUQLjgmHeDZcozrA==}
+  /@vuesri/core@0.0.40:
+    resolution: {integrity: sha512-MaWyWD+7KgEDcJ0NZCh9kUEhJpIB3n9y3P00JD7fImkBKdzIQ3Rp92v8rKqS4XMi/wBv7rf78YaSSCsCMeSwEQ==}
     dev: false
 
   /@vueuse/core@9.13.0(vue@3.3.4):
