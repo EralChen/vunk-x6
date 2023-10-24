@@ -21,8 +21,8 @@ function updateDom() {
       <Content
         ref="content"
         class="doc-content"
-        @vnode-mounted="updateDom"
-        @vnode-updated="updateDom"
+        @vue:mounted="updateDom"
+        @vue:updated="updateDom"
       />
       <VPPageFooter />
       <VPPageNav />
