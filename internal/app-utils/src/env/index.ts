@@ -1,10 +1,8 @@
 import path from 'path'
 import { readFileSync } from 'fs'
+import { appRoot } from '@lib-env/path'
 
-export function getEnv (
-  appRoot: string,
-  mode: string,
-): ImportMetaEnv {
+export function getEnv (mode: string): ImportMetaEnv {
   const envFilePath = path.resolve(appRoot, `./.env.${mode}`)
 
   const data = readFileSync(envFilePath).toString()

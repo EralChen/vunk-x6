@@ -1,0 +1,7 @@
+.vp-doc [class*='language-'] code {
+  box-sizing: border-box;
+}
+
+.vp-doc h2 .header-anchor {
+  top: 22px;
+}
