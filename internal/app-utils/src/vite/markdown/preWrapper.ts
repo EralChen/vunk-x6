@@ -1,8 +1,7 @@
 import type MarkdownIt from 'markdown-it'
+import { PreWrapperOptions } from './types'
 
-export interface Options {
-  hasSingleTheme: boolean
-}
+export type Options  = PreWrapperOptions
 
 export function preWrapperPlugin (md: MarkdownIt, options: Options = {
   hasSingleTheme: true,

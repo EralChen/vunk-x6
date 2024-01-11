@@ -2,6 +2,7 @@
 /// <reference types="element-plus/global" />
 
 import '@vue/runtime-core'
+import 'vite/client'
 
 declare module '@vue/runtime-core' {
   // GlobalComponents for Volar

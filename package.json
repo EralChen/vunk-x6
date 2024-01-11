@@ -31,7 +31,6 @@
 	"dependencies": {
 		"@arcgis/core": "^4.25.5",
 		"@element-plus/icons-vue": "^2.1.0",
-		"@element-plus/utils": "workspace:*",
 		"@skzz-template/api": "workspace:*",
 		"@skzz-template/components": "workspace:*",
 		"@skzz-template/composables": "workspace:*",

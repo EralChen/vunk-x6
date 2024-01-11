@@ -1,15 +1,20 @@
 import type MarkdownIt from 'markdown-it'
 import type Token from 'markdown-it/lib/token'
 import container from 'markdown-it-container'
-import { appRoot } from '@lib-env/path'
 import fs from 'fs'
 import path from 'path'
 import { fixPath } from '@lib-env/build-utils'
+import { DemoOptions } from '../types'
 
 // demo container
 export const demoContainerPlugin = (
   md: MarkdownIt,
+  options: DemoOptions = {
+    root: process.cwd(),
+  },
 ) => {
+  const appRoot = options.root
+
   md.use(container, 'demo', {
     validate (params: string) {
       return !!params.trim().match(/^demo\s*(.*)$/)

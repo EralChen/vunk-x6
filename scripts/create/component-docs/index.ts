@@ -56,20 +56,27 @@ export default series(
 
   taskWithName('add md to docs', async () => {
     // pages\zh-CN\component\${mriData.l}\+Page.md
-    const componentMdPath = path.resolve(docRoot, './pages/zh-CN/component')
+    const componentMdRoot = path.resolve(docRoot, './pages/zh-CN/component')
     
     // 如果没有这个目录，就创建
     try {
-      await fsp.mkdir(componentMdPath, {
+      await fsp.mkdir(componentMdRoot, {
         recursive: true,
       })
     } catch {}
     
 
     const mdStr = createMd(mriData.t, mriData.l)
+    
+    // 新建组件文件夹
+    const componentDir = path.resolve(componentMdRoot, mriData.l)
+    await fsp.mkdir(componentDir, {
+      recursive: true,
+    })
+
 
     await fsp.writeFile(
-      path.resolve(componentMdPath, `${mriData.l}/+Page.md`),
+      path.resolve(componentDir, `+Page.md`),
       mdStr,
       {
         encoding: 'utf-8',

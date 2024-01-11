@@ -10,3 +10,14 @@ export type ThemeOptions =
       light: ThemeRegistration | BuiltinTheme
       dark: ThemeRegistration | BuiltinTheme
     }
+
+
+
+    
+export interface DemoOptions {
+  root: string
+}
+
+export interface PreWrapperOptions {
+  hasSingleTheme: boolean
+}

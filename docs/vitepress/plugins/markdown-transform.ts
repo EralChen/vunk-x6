@@ -1,7 +1,7 @@
 import path from 'path'
 import type { Plugin } from 'vite'
 import { glob } from 'fast-glob'
-import { appRoot } from '@lib-env/path'
+import { appRoot } from '../../path.config'
 
 type Append = Record<'headers' | 'footers' | 'scriptSetups', string[]>
 

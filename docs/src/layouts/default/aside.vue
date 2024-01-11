@@ -136,9 +136,7 @@ function initOpenMenu () {
         <ElMenu
           ref="menuComponent"
           class="layout-default-aside-menu"
-          :default-active="[
-            pathname,
-          ]"
+          :default-active="pathname"
         >
           <VkRoutesMenuContent
             :data="filterMenu"
