@@ -1,21 +1,17 @@
-import { defineConfig } from 'vite'
+import path from 'path'
+import { defineConfig, loadEnv , UserConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJSX from '@vitejs/plugin-vue-jsx'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
-import { windowEnvPlugin, vunkPresetsTheme, vunkPresetsShortcuts, unoThemeColors, getEnv } from '@lib-env/app-utils'
-import path from 'path'
+import { windowEnvPlugin, unocssPreferences } from '@lib-env/app-utils'
 import { packagesDir } from '@lib-env/path'
-// import legacy from '@vitejs/plugin-legacy'
 import { viteExternalsPlugin } from 'vite-plugin-externals'
-import unocss from 'unocss/vite'
-import { presetAttributify, presetWind } from 'unocss'
-import { presetFlex, presetFont, presetGap } from 'unocss-preset-vunk'
 import { appRoot, srcRoot } from './path.config'
 
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  const env = getEnv(appRoot, mode)
+  const env = loadEnv(mode, process.cwd()) as unknown as ImportMetaEnv
   return {
     base: env.VITE_BASE_URL + '/',
     build: {
@@ -37,40 +33,8 @@ export default defineConfig(({ mode }) => {
       vue(),
       vueJSX(),
   
-      windowEnvPlugin(appRoot),
-      unocss({
-        presets: [
-          presetAttributify(),
-          presetWind(),
-          presetFont({
-            theme: {
-              ...vunkPresetsTheme.baseFontSize,
-              ...vunkPresetsTheme.namedFontSize,
-            },
-          }),
-          presetGap({
-            theme: {
-              ...vunkPresetsTheme.baseGap, 
-              ...vunkPresetsTheme.namedGap,
-            },
-          }),
-          presetFlex({
-            prefix: 'sk',
-          }),
-        
-        ],
-        shortcuts: {
-          ...vunkPresetsShortcuts,
-        },
-    
-    
-        theme: {
-          colors: {
-            ...unoThemeColors,
-           
-          },
-        },
-      }),
+      windowEnvPlugin(),
+      unocssPreferences(),
       // legacy({
       //   modernPolyfills: ['esnext.array.at'],
       // }),
@@ -87,22 +51,22 @@ export default defineConfig(({ mode }) => {
 
     ],
 
-    css: {
-      postcss: {
-        plugins: [
-          {
-            postcssPlugin: 'internal:charset-removal',
-            AtRule: {
-              charset: (atRule) => {
-                if (atRule.name === 'charset') {
-                  atRule.remove()
-                }
-              },
-            },
-          },
-        ],
-      },
-    },
-  }
+    // css: {
+    //   postcss: {
+    //     plugins: [
+    //       {
+    //         postcssPlugin: 'internal:charset-removal',
+    //         AtRule: {
+    //           charset: (atRule) => {
+    //             if (atRule.name === 'charset') {
+    //               atRule.remove()
+    //             }
+    //           },
+    //         },
+    //       },
+    //     ],
+    //   },
+    // },
+  } as UserConfig
 
 })

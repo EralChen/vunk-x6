@@ -3,17 +3,19 @@ import PageOver from '_c/PageOver/index.vue'
 import { SkAppCard } from '@skzz/platform/components/app-card'
 import { SkAppForm, __SkAppForm } from '@skzz/platform/components/app-form'
 import { cuRole } from '@skzz/platform/api/system/role'
-import { ref } from 'vue'
+import { onBeforeUnmount, ref } from 'vue'
 import { FirstParameter, setData } from '@vunk/core'
-import { useRouterTo } from '@skzz/platform/composables'
+import { useRouteSocket, useRouterTo } from '@skzz/platform/composables'
 defineProps({
   uid: {
     type: String,
     default: '',
   },
 })
+const { createSender } = useRouteSocket()
 const { routerBack } = useRouterTo()
 const formData = ref({} as FirstParameter<typeof cuRole>)
+const routeSender = createSender()
 
 const formItems:__SkAppForm.CoreFormItem[] = [
   {
@@ -33,11 +35,16 @@ function c () {
   cuRole(formData.value).then(() => {
     routerBack({
       path: 'create',
-    }, {
-      addQueryU: true,
     })
   })
 }
+
+onBeforeUnmount(() => {
+  routeSender.send({
+    to: ['report/route/index.vue'],
+    message: '离开详情页，通知列表页刷新',
+  })
+})
 
 </script>
 <template>

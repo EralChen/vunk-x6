@@ -26,7 +26,7 @@ export const docPackage = path.resolve(docRoot, 'package.json')
 export const entryPackage = path.resolve(pkgsEntryDir, 'package.json')
 
 // app
-// export const appRoot = path.resolve(workRoot, 'app')
+export const appRoot = path.resolve(workRoot, 'app')
 export const appRootDirs = [
   path.resolve(workRoot, 'app'),
 ]

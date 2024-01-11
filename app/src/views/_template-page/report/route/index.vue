@@ -10,13 +10,15 @@ import { ApiReturnType, NormalObject, setData, VkDuplexCalc } from '@vunk/core'
 import { reactive, ref, watch } from 'vue'
 import { rRoles, dRoles } from '@skzz/platform/api/system/role'
 import { genColumn } from '@skzz/platform/shared/utils-data'
-import { useRouterTo, useResolveQueryU } from '@skzz/platform/composables'
+import { useRouterTo, useRouteSocket } from '@skzz/platform/composables'
+
 type Res = ApiReturnType<typeof rRoles>
+
+const { createReceiver } = useRouteSocket()
 const { routerNext } = useRouterTo()
-// when router back 
-useResolveQueryU(() => {
-  r() 
-})
+const receiver = createReceiver()
+
+receiver.addListener(r)
 
 
 /* query */
@@ -46,12 +48,14 @@ const tableState = reactive({
 })
 
 
+
 const operationsCol: __SkAppTables.Column = {
   title: '操作',
   key: 'operations',
   width: 150,
   flexGrow: 1,
   align: 'center',
+  
   cellRenderer: ({ rowData }) => <SkAppOperations
     modules={['u','d']}
     onD={ () => { d([rowData.id]) } }

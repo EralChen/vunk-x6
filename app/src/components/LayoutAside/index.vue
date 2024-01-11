@@ -107,8 +107,7 @@ onMounted(async () => {
     <CollapseVue class="layout-default-aside-collapse" />
   </div>
 </template>
-
-<slyle lang="scss">
+<style>
 .layout-default-aside-menu[style*="--el-menu-level: 0"] > li{
   font-weight: bold;
 }
@@ -116,9 +115,15 @@ onMounted(async () => {
 .layout-default-aside-menu[style*="--el-menu-level: 0"] > li > ul{
   font-weight: initial;
 }
-</slyle>
 
-<style>
+.layout-default-aside-menu[style*="--el-menu-level:0"] > li{
+  font-weight: bold;
+}
+
+.layout-default-aside-menu[style*="--el-menu-level:0"] > li > ul{
+  font-weight: initial;
+}
+
 .layout-default-aside-collapse{
   position: absolute;
   top: 50%;
@@ -140,9 +145,7 @@ onMounted(async () => {
 .layout-default-aside-item-icon{
   margin-bottom: .2em;
 }
-</style>
 
-<style>
 .layout-default-aside:hover .layout-default-aside-collapse{
   opacity: 1;
 }
@@ -150,6 +153,6 @@ onMounted(async () => {
   opacity: 0;
   transition: opacity 3s cubic-bezier(.15,.84,0,1.06);
 }
-</style>
 
+</style>
 
