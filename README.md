@@ -118,7 +118,7 @@ export const libExternal = [
 
 ### 清理 docs 
 
-1. 重写 `docs\.vitepress\crowdin\zh-CN\pages\component.json` 
+1. 重写 `docs\renderer\crowdin\zh-CN\pages\component.json` 
 
    ```json
    {	/* 将会作为一个栏目, 在组件文档左侧栏显示 */
@@ -134,9 +134,9 @@ export const libExternal = [
    }
    ```
 
-2.  删除 `docs\examples` 所有文件夹，不包括文件
+2.  删除 `docs\examples` 所有文件及文件夹
 
-3.  删除 `docs\zh-CN\component`  md 文件
+3.  删除 `docs\pages\zh-CN\component`  所有文件及文件夹
 
 
 
@@ -156,16 +156,10 @@ export const libExternal = [
   npm run ccd -- --p basic --l map --t "Map 地图"
   ```
 
-  + 该命令会自动在 `docs\.vitepress\crowdin\zh-CN\pages\component.json`生成记录
+  + 该命令会自动在 `docs\renderer\crowdin\zh-CN\pages\component.json`生成记录
     + `--p` 指的是 `pages/component.json` 中的栏目
     + `--l`  、`--t` 分别用于该栏目 `children`  下的 `link` 、`text`
-  + 该命令会自动在 `docs\zh-CN\component` 生成基础的 md 文件
-
-
-
-### docs component 页面重定向
-
-全局替换 `/component/hello-world` => `/component/[第一个组件的link]`
+  + 该命令会自动在 `docs\pages\zh-CN\component` 生成基础的 md 文件
 
 
 

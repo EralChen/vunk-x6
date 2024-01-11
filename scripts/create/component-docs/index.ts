@@ -6,7 +6,15 @@ import path from 'path'
 import { createMd, createVue } from './temp'
 import fsp from 'fs/promises'
 import { camelize, capitalize } from 'vue'
-type MriDataP = keyof typeof import('../../../docs/.vitepress/crowdin/zh-CN/pages/component.json')
+type MriDataP = keyof typeof import(
+  '../../../docs/renderer/crowdin/zh-CN/pages/component.json'
+)
+
+const componentJsonFile = path.resolve(
+  docRoot, 
+  './renderer/crowdin/zh-CN/pages/component.json',
+)
+
 interface MriData {
   p: MriDataP // parent
   l: string // link aaa-bbb
@@ -27,7 +35,6 @@ export default series(
   
   taskWithName('crowdin pages add link', async () => {
     // 读到 crowdin pages 中的 component.json 目录
-    const componentJsonFile = path.resolve(docRoot, './.vitepress/crowdin/zh-CN/pages/component.json')
     const json = readJson(componentJsonFile)
   
     const whereAdd = json[mriData.p]
@@ -48,7 +55,8 @@ export default series(
   }),
 
   taskWithName('add md to docs', async () => {
-    const componentMdPath = path.resolve(docRoot, './zh-CN/component')
+    // pages\zh-CN\component\${mriData.l}\+Page.md
+    const componentMdPath = path.resolve(docRoot, './pages/zh-CN/component')
     
     // 如果没有这个目录，就创建
     try {
@@ -61,7 +69,7 @@ export default series(
     const mdStr = createMd(mriData.t, mriData.l)
 
     await fsp.writeFile(
-      path.resolve(componentMdPath, `${mriData.l}.md`),
+      path.resolve(componentMdPath, `${mriData.l}/+Page.md`),
       mdStr,
       {
         encoding: 'utf-8',
