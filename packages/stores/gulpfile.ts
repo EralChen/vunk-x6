@@ -18,7 +18,7 @@ const buildFile = '**/index.ts'
 
 export default series(
 
-  taskWithName('bundleApiJs', async () => {
+  taskWithName('bundleStoresJs', async () => {
 
     const filePaths = await glob(buildFile, {
       cwd: path.resolve(__dirname, './'),
@@ -37,7 +37,7 @@ export default series(
 
   }),
 
-  taskWithName('genApiTypes', async () => {
+  taskWithName('genStoresTypes', async () => {
     genTypes({
       filesRoot: path.resolve(__dirname),
       source: buildFile,

@@ -4,9 +4,12 @@ import clearDist from './clear-dist'
 import toDistType from './to-dist-type'
 import mergeCssToDist from './merge-css-to-dist'
 export default series(
-  // 并行打包 packages 下的内容
+
   clearDist,
+
+  // 并行打包 packages 下的内容
   taskWithName('buildPackages', async () => run('pnpm run --filter "./packages/**" --parallel build')),
+  
   toDistType,
   mergeCssToDist,
 )
