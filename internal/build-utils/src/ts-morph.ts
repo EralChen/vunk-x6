@@ -1,4 +1,4 @@
-import { Project, SourceFile } from 'ts-morph'
+import { ModuleResolutionKind, Project, ScriptTarget, SourceFile } from 'ts-morph'
 import path from 'path'
 import { distTypesDir, pkgsEntryFile, workRoot } from '@lib-env/path'
 import { LIB_ALIAS, LIB_NAME } from '@lib-env/build-constants'
@@ -9,6 +9,7 @@ import { bold } from 'chalk'
 import { fixPath } from './alias'
 import consola from 'consola'
 import { JsxEmit } from 'typescript'
+
 export async function genTypes (opts = {} as {
   filesRoot: string
   source?: string
@@ -35,14 +36,18 @@ export async function genTypes (opts = {} as {
         [`${LIB_NAME}/*`]: ['packages/*'],
         [`${LIB_ALIAS}/*`]: ['packages/*'],
       },
+
+      moduleResolution: ModuleResolutionKind.Node10,
+      target: ScriptTarget.ESNext,
+
       skipLibCheck: true,
       skipDefaultLibCheck: true,
-
     },
+    
     tsConfigFilePath: path.resolve(workRoot, 'tsconfig.json'),
     skipAddingFilesFromTsConfig: true,
   })
-
+  
   const filePaths = await glob(_opts.source, {
     cwd: _opts.filesRoot,
     onlyFiles: true,
@@ -90,9 +95,13 @@ export async function genTypes (opts = {} as {
   ])
 
   const diagnostics = project.getPreEmitDiagnostics()
-  consola.warn(
-    project.formatDiagnosticsWithColorAndContext(diagnostics),
-  )
+
+  if (diagnostics.length > 0) {
+    consola.warn(
+      project.formatDiagnosticsWithColorAndContext(diagnostics),
+    )
+  }
+
 
   // 发射.d.ts 文件到内存
   await project.emit({
