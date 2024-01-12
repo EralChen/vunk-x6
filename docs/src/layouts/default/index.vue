@@ -4,6 +4,38 @@ import { ElScrollbar } from 'element-plus'
 import Navbar from './navbar.vue'
 import Aside from './aside.vue'
 import Toc from './toc.vue'
+import { nextTick, shallowRef } from 'vue'
+import { onContentUpdated } from '#/renderer/page'
+import { PageContext } from 'vike/types'
+
+const scrollbarNode = shallowRef<InstanceType<typeof ElScrollbar>>()
+
+const currentScrollTopCache = {} as Record<string, number>
+
+const currentPath = shallowRef('')
+
+onContentUpdated((ctx: PageContext) => {
+  currentPath.value = ctx.urlOriginal
+
+  if (ctx.urlParsed.hash) {
+    return
+  }
+
+  nextTick(() => {
+    scrollbarNode.value?.setScrollTop(
+      currentScrollTopCache[currentPath.value] ?? 0,
+    )
+  })
+
+}, {
+  hooks: ['mounted'],
+})
+
+onContentUpdated(() => {
+  currentScrollTopCache[currentPath.value] = scrollbarNode.value?.wrapRef?.scrollTop ?? 0
+}, {
+  hooks: ['beforeUnmount'],
+})
 
 </script>
 <template>
@@ -29,6 +61,7 @@ import Toc from './toc.vue'
       >
         <ElScrollbar
           id="VPScrollView"
+          ref="scrollbarNode"
         >
           <main class="page-content">
             <div class="doc-content-wrapper">

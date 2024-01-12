@@ -3,11 +3,8 @@ import type { Component, PageProps } from 'vike-vue/dist/renderer/types'
 import type { Config, PageContext } from 'vike/types'
 import { setPageContext } from 'vike-vue/usePageContext'
 import { objectAssign } from '../vike-vue/utils/objectAssign'
-import { contentUpdatedCallbacks } from './page'
+import { contentUpdatedCallbacks, ContentUpdatedCallbackHook } from './page'
 export { createVueApp }
-
-
-const runCbs = () => contentUpdatedCallbacks.forEach((fn) => fn())
 
 
 /**
@@ -23,6 +20,13 @@ function createVueApp (
   ssrApp = true, 
   renderHead = false,
 ) {
+  
+  const runCbs = (hook: ContentUpdatedCallbackHook) => {
+    contentUpdatedCallbacks
+      .filter((obj) => obj.hook === hook)
+      .forEach((obj) => obj.callback(pageContext))
+  }
+
   const { Page } = pageContext
   const Head = renderHead 
     ? (pageContext.config.Head as Component) 
@@ -48,9 +52,10 @@ function createVueApp (
     render () {
       const propsWithHooks = {
         ...this.pageProps,
-        onVnodeMounted: runCbs,
-        onVnodeUpdated: runCbs,
-        onVnodeUnmounted: runCbs,
+        onVnodeMounted: () => runCbs('mounted'),
+        onVnodeUpdated: () => runCbs('updated'),
+        onVnodeUnmounted: () => runCbs('unmounted'),
+        onVnodeBeforeUnmount: () => runCbs('beforeUnmount'),
       }
       if (!!this.config.Layout && !renderHead) {
         return h(
