@@ -126,6 +126,7 @@ function initOpenMenu () {
     <template #one>
       <ElInput
         v-model="filterTitle"
+        :form="''"
         :size="'large'"
         class="layout-default-aside-search"
         :placeholder="'搜索组件'"

@@ -56,6 +56,7 @@ export default defineConfig(async ({ mode }) => {
   const base = env.VITE_BASE_URL + '/'
 
   const config: UserConfig = {
+    
     base,
     resolve: {
       alias,
