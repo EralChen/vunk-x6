@@ -5,6 +5,23 @@ import { appRoot } from '../../path.config'
 
 type Append = Record<'headers' | 'footers' | 'scriptSetups', string[]>
 
+
+function getRelativeDemoPath (
+  fullPath: string,
+  name: string,
+) {
+  const regex = new RegExp(`.*?${name}/(.*)`)
+  const match = fullPath.match(regex)
+
+  if (match) {
+    // match[1] 包含捕获组中的匹配部分
+    return name + `/${match[1]}`
+  } else {
+    // 如果没有匹配，返回原始路径
+    return fullPath
+  }
+}
+
 export function MarkdownTransform (): Plugin {
   return {
     name: 'element-plus-md-transform',
@@ -28,7 +45,12 @@ export function MarkdownTransform (): Plugin {
       })
   
       const demoRaws = vueExamples.map(path => {
-        const relativePath = componentId + path.split(componentId).at(-1)
+    
+        const relativePath = getRelativeDemoPath(
+          path,  componentId,
+        )
+
+
         return {
           key: relativePath,
           value: `defineAsyncComponent(() => import('#e/${relativePath}'))`,
