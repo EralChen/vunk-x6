@@ -57,6 +57,7 @@
 		"postinstall": "pnpm stub",
 		"docs:dev": "pnpm run -C docs dev",
 		"docs:build": "pnpm run -C docs build",
+		"docs:init-arcgis": "gulp -f scripts/docs/init-arcgis.ts",
 		"publish": "gulp -f scripts/publish.ts",
 		"docker:publish": "gulp -f scripts/docker/publish.ts",
 		"cc": "gulp -f scripts/create/component/index.ts",
