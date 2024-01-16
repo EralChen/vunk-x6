@@ -6,8 +6,9 @@ import { dangerouslySkipEscape, escapeInject } from 'vike/server'
 import { getTitle } from '../vike-vue/renderer/getTitle'
 import type { OnRenderHtmlAsync } from 'vike/types'
 import { createVueApp } from './app'
-import { App } from 'vue'
 import { rCrowdinFilesAsReflect, CrowdinFileLang } from './crowdin'
+import { App } from 'vue'
+import { getLang } from '#/vike-vue/renderer/getLang'
 
 
 import '#s/styles'
@@ -17,27 +18,26 @@ import 'uno.css'
 
 const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRenderHtmlAsync> => {
   const { stream } = pageContext.config
-  const lang = pageContext.lang as CrowdinFileLang
+  const lang = getLang(pageContext) as CrowdinFileLang
 
 
   let pageView: ReturnType<typeof dangerouslySkipEscape> | ReturnType<typeof renderToNodeStream> | string = ''
+  let fromHtmlRenderer = undefined
 
 
   pageContext.crowdin = await rCrowdinFilesAsReflect(lang)
 
   if (!!pageContext.Page) {
     // SSR is enabled
-    const app = createVueApp(pageContext)
-    if (pageContext.config.vuePlugins) {
-      pageContext.config.vuePlugins.forEach(({ plugin, options }) => {
-        app.use(plugin, options)
-      })
-    }
+    const ctxWithApp = await createVueApp(pageContext)
+    const { app } = ctxWithApp 
+
     pageView = !stream
       ? dangerouslySkipEscape(
         await renderToStringWithErrorHandling(app),
       )
       : renderToNodeStreamWithErrorHandling(app)
+    fromHtmlRenderer = await pageContext.config.onAfterRenderSSRApp?.(ctxWithApp)
   }
 
 
@@ -53,7 +53,7 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
 
   let headHtml: ReturnType<typeof dangerouslySkipEscape> | string = ''
   if (!!pageContext.config.Head) {
-    const app = createVueApp(
+    const { app } = await createVueApp(
       pageContext, 
       /*ssrApp*/ true, 
       /*renderHead*/ true,
@@ -82,6 +82,7 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
     documentHtml,
     pageContext: {
       enableEagerStreaming: true,
+      fromHtmlRenderer,
     },
   }
 }

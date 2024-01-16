@@ -1,5 +1,5 @@
 import { createApp, createSSRApp, defineComponent, h, markRaw, nextTick, reactive } from 'vue'
-import type { Component, PageProps } from 'vike-vue/dist/renderer/types'
+import type { Component, PageProps, PageContextWithApp, PageContextWithoutApp } from 'vike-vue/dist/renderer/types'
 import type { Config, PageContext } from 'vike/types'
 import { setPageContext } from 'vike-vue/usePageContext'
 import { objectAssign } from '../vike-vue/utils/objectAssign'
@@ -15,7 +15,7 @@ export { createVueApp }
  * @param ssrApp Whether to use `createSSRApp()` or `createApp()`. See https://vuejs.org/api/application.html
  * @param renderHead If true, `pageContext.config.Head` will be rendered instead of `pageContext.Page`.
  */
-function createVueApp (
+async function createVueApp (
   pageContext: PageContext, 
   ssrApp = true, 
   renderHead = false,
@@ -68,7 +68,7 @@ function createVueApp (
           },
         )
       }
-      return h(this.Page, propsWithHooks)
+      return h(this.Page, this.pageProps)
     },
   })
 
@@ -102,13 +102,19 @@ function createVueApp (
 
   // When doing Client Routing, we mutate pageContext (see usage of `app.changePage()` in `onRenderClient.ts`).
   // We therefore use a reactive pageContext.
-  const pageContextReactive = reactive(pageContext)
+  const pageContextReactive = reactive(pageContext as PageContextWithoutApp)
+
+  objectAssign(pageContext, { app })
+  const pageContextWithApp = pageContext as PageContextWithApp
+
+  await pageContextWithApp.config.onCreateApp?.(pageContext)
+  await pageContextWithApp.config.onCreateAppPinia?.(pageContext)
 
 
   // Make `pageContext` accessible from any Vue component
   setPageContext(app, pageContextReactive)
 
-  return app
+  return pageContextWithApp
 }
 
 

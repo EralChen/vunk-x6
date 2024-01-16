@@ -8,6 +8,7 @@
 		"@lib-env/shared": "workspace:*",
 		"@types/gulp": "^4.0.17",
 		"@types/node": "^18.0.4",
+		"@vue/compiler-sfc": "^3.4.14",
 		"arcgis-js-api": "^4.28.10",
 		"consola": "^3.2.3",
 		"eslint": "^8.56.0",
@@ -45,7 +46,7 @@
 		"@vunk/form": "^1.1.65",
 		"@vunk/skzz": "0.0.0-alpha.109",
 		"element-plus": "npm:element-plus@latest",
-		"vue": "^3.4.7"
+		"vue": "^3.4.14"
 	},
 	"scripts": {
 		"dev": "pnpm run -C app dev",

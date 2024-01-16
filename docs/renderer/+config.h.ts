@@ -40,7 +40,7 @@ export default {
   // be used by the renderers.
   // It is a cumulative config option, so a web app using vike-vue can extend
   // this list.
-  passToClient: ['pageProps', 'title', 'crowdin', 'lang'],
+  passToClient: ['pageProps', 'title', 'crowdin', 'lang',  'fromHtmlRenderer'],
 
   clientRouting: true,
   hydrationCanBeAborted: true,
@@ -71,15 +71,17 @@ export default {
     stream: {
       env: { server: true },
     },
-    vuePlugins: {
-      // List of vue plugins to be installed with app.vue() in onRenderHtml and
-      // onRenderClient. We make this config available both on the server and
-      // the client always, but if SSR is disabled, onRenderHtml won't make use
-      // of it.
-      env: { 
-        server: true, 
-        client: true, 
-      },
+    onCreateApp: {
+      env: { server: true, client: true },
+    },
+    onCreateAppPinia: {
+      env: { server: true, client: true },
+    },
+    onAfterRenderSSRApp: {
+      env: { server: true },
+    },
+    onBeforeMountApp: {
+      env: { server: false, client: true },
     },
   },
 } satisfies Config

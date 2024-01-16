@@ -11,7 +11,7 @@
     "gsap": "^3.12.4",
     "prism-theme-vars": "^0.2.4",
     "vike": "0.4.156",
-    "vike-vue": "^0.5.3"
+    "vike-vue": "^0.5.4"
   },
   "devDependencies": {
     "@iconify-json/ri": "^1.1.4",
