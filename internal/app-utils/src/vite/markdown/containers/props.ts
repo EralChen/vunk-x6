@@ -5,7 +5,7 @@ import fs from 'fs'
 import path from 'path'
 import { fixPath } from '@lib-env/build-utils'
 import { PropsOptions } from '../types'
-import { createSourceFile, ScriptTarget, SyntaxKind, VariableStatement, Statement, ObjectLiteralExpression, JSDoc, PropertyName, PropertyAssignment, Identifier, AsExpression, Expression, TypeReferenceNode, EntityName, TypeNode, QualifiedName, StringLiteral, NumericLiteral, FunctionExpression, createPrinter, EmitHint, ArrayTypeNode, UnionTypeNode, LiteralTypeNode, IndexedAccessTypeNode } from 'typescript'
+import { createSourceFile, ScriptTarget, SyntaxKind, VariableStatement, Statement, ObjectLiteralExpression, JSDoc, PropertyName, PropertyAssignment, Identifier, AsExpression, Expression, TypeReferenceNode, EntityName, TypeNode, QualifiedName, StringLiteral, NumericLiteral, FunctionExpression, createPrinter, EmitHint, ArrayTypeNode, UnionTypeNode, LiteralTypeNode, IndexedAccessTypeNode, BindingName } from 'typescript'
 import { NormalObject } from '@vunk/core'
 import md from 'markdown-it'
 import { mdLinkOpenPlugin } from '../linkOpen'
@@ -65,14 +65,36 @@ export const vuePropsContainerPlugin = (
             const declarationList = item.declarationList
         
             const declaration = declarationList.declarations[0]
-            const name = declaration?.name.kind === SyntaxKind.Identifier 
-              ? declaration.name.text 
-              : ''
+            const name = getName(declaration.name)
             return name === 'props'
           }
         }) as VariableStatement | undefined
       
         /* end of 过滤出 props 变量声明  in statement */
+
+        /* 获取 emitNames */
+        const emitsStatement = sourceFile.statements.find((item) => {
+          if (isVariableStatement(item)) {
+            const declarationList = item.declarationList
+        
+            const declaration = declarationList.declarations[0]
+            const name = getName(declaration.name)
+            return name === 'emits'
+          }
+        }) as VariableStatement | undefined
+        const emitsProperties = emitsStatement 
+          ? getProperties(emitsStatement)
+          : [] as unknown as ReturnType<typeof getProperties>
+
+        const emitNames = emitsProperties.reduce((a, value) => {
+          if (value.kind === SyntaxKind.PropertyAssignment) {
+            const name = getName(value.name) 
+            a.push(name)
+            return a
+          }
+          return a
+        }, [] as string[])
+        /* end of 获取 emitNames */
 
 
         /* 获取变量定义下的所有属性  PropertyAssignment */
@@ -92,7 +114,7 @@ export const vuePropsContainerPlugin = (
             && getName(item.name) === name
           }) as PropertyAssignment | undefined
         }
-        function getName (value: PropertyName | EntityName |QualifiedName) {
+        function getName (value: PropertyName | EntityName |QualifiedName | BindingName) {
           if (value.kind === SyntaxKind.Identifier) {
             return value.text
           }
@@ -257,6 +279,12 @@ export const vuePropsContainerPlugin = (
             const initializer = value.initializer as ObjectLiteralExpression
 
             let prop = getName(value.name) 
+
+            if (emitNames.includes(`update:${prop}`)) {
+              prop === 'modelValue' 
+                ? prop = 'v-model' 
+                : prop = `v-model:${prop}`
+            }
 
             const jsdocs:JSDoc[] = (value as NormalObject).jsDoc ?? [] 
 

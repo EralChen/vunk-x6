@@ -26,6 +26,7 @@ defineProps({
 <style lang="scss" scoped>
 .example-showcase {
   background-color: var(--bg-color);
+  padding: var(--gap-page);
 }
 </style>
 <style>

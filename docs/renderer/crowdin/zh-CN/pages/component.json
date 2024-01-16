@@ -7,5 +7,14 @@
         "text": "MapView"
       }
     ]
+  },
+  "select": {
+    "text": "Select 选择器",
+    "children": [
+      {
+        "link": "/user-select-tables",
+        "text": "UserSelectTables"
+      }
+    ]
   }
 }
