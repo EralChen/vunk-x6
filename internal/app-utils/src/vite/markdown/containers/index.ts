@@ -1,14 +1,15 @@
 import { ContainerOptions, basicContainerPlugin } from './basic'
 import { demoContainerPlugin } from './demo'
 import type MarkdownIt from 'markdown-it'
-import { docRoot } from '@lib-env/path'
+import { docRoot, pkgsComponentsDir } from '@lib-env/path'
 import { Options } from '../preWrapper'
-import { DemoOptions } from '../types'
+import { DemoOptions, PropsOptions } from '../types'
+import { vuePropsContainerPlugin } from './props'
 
 export const containerPlugin = (
   md: MarkdownIt,
   options: Partial<
-    Options & DemoOptions
+    Options & DemoOptions & PropsOptions
   > = {},
   containerOptions?: ContainerOptions,
 ) => {
@@ -16,12 +17,15 @@ export const containerPlugin = (
   const defaultOptions = {
     hasSingleTheme: true,
     root: docRoot,
+    componentsPath: pkgsComponentsDir,
     ...options,
   }
   
   basicContainerPlugin(md, defaultOptions, containerOptions)
   
   demoContainerPlugin(md, defaultOptions)
+
+  vuePropsContainerPlugin(md, defaultOptions)
 
 
 }

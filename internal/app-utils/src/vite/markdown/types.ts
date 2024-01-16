@@ -13,6 +13,10 @@ export type ThemeOptions =
 
 
 
+
+export interface PropsOptions {
+  componentsPath: string
+}
     
 export interface DemoOptions {
   root: string
