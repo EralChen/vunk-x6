@@ -9,7 +9,7 @@ import { useCopyCode } from '#/vitepress/composables/copy-code'
 
 import { esriConfig } from '@vuesri/core/arcgis'
 import { VikeVueApp } from 'vike-vue/dist/renderer/types'
-esriConfig.assetsPath = import.meta.env.VITE_BASE_URL + '/Esri'
+// esriConfig.assetsPath = import.meta.env.VITE_BASE_URL + '/Esri'
 esriConfig.apiKey = 'AAPKb14837d0d1fd48c2a9e834966b090d71jkWd8RL_697p0sRB9s87pEWRaefvBwcC_pdbOKwZd3Ka8xiulyqbHPassAKuHBxH'
 
 
