@@ -1,6 +1,6 @@
 # MapView
 
-## 基础用法
+## Basic
 
 :::demo 
 map-view/basic

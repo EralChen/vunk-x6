@@ -8,7 +8,7 @@ lang: zh-CN
 UserSelectTables
 
 
-## 基础用法
+## Basic
 
 :::demo 
 user-select-tables/basic

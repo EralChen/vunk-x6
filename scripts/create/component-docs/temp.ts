@@ -8,7 +8,7 @@ lang: zh-CN
 ${t}
 
 
-## 基础用法
+## Basic
 
 :::demo 
 ${l}/basic
