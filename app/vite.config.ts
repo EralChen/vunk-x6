@@ -1,5 +1,5 @@
 import path from 'path'
-import { defineConfig, loadEnv , UserConfig } from 'vite'
+import { defineConfig, loadEnv, UserConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJSX from '@vitejs/plugin-vue-jsx'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'

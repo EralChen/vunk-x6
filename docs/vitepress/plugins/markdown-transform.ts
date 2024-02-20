@@ -1,26 +1,27 @@
 import path from 'path'
 import type { Plugin } from 'vite'
-import { glob } from 'fast-glob'
+import glob from 'fast-glob'
 import { appRoot } from '../../path.config'
+import { DOCS_DIR_NAME } from '@lib-env/build-constants'
 
 type Append = Record<'headers' | 'footers' | 'scriptSetups', string[]>
 
 
-function getRelativeDemoPath (
-  fullPath: string,
-  name: string,
-) {
-  const regex = new RegExp(`.*?${name}/(.*)`)
-  const match = fullPath.match(regex)
+// function getRelativeDemoPath (
+//   fullPath: string,
+//   name: string,
+// ) {
+//   const regex = new RegExp(`.*?${name}/(.*)`)
+//   const match = fullPath.match(regex)
 
-  if (match) {
-    // match[1] 包含捕获组中的匹配部分
-    return name + `/${match[1]}`
-  } else {
-    // 如果没有匹配，返回原始路径
-    return fullPath
-  }
-}
+//   if (match) {
+//     // match[1] 包含捕获组中的匹配部分
+//     return name + `/${match[1]}`
+//   } else {
+//     // 如果没有匹配，返回原始路径
+//     return fullPath
+//   }
+// }
 
 export function MarkdownTransform (): Plugin {
   return {
@@ -29,7 +30,10 @@ export function MarkdownTransform (): Plugin {
     enforce: 'pre',
 
     async transform (code, id) {
+   
       if (!id.endsWith('.md')) return
+
+      if (code.startsWith('<script setup>')) return
 
       let componentId = path.basename(id, '.md')
       
@@ -43,12 +47,12 @@ export function MarkdownTransform (): Plugin {
         cwd: path.resolve(appRoot, './examples'),
         absolute: true,
       })
-  
+
+
+
       const demoRaws = vueExamples.map(path => {
     
-        const relativePath = getRelativeDemoPath(
-          path,  componentId,
-        )
+        const relativePath = path.split(`${DOCS_DIR_NAME}/examples/`)[1]
 
 
         return {
@@ -74,6 +78,7 @@ export function MarkdownTransform (): Plugin {
           `,
         ],
       }
+
 
 
       return combineMarkdown(
