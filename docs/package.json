@@ -16,7 +16,6 @@
   "devDependencies": {
     "@iconify-json/ri": "^1.1.4",
     "@mdit-vue/shared": "^2.0.0",
-    "@vitejs/plugin-vue-jsx": "^1.3.10",
     "markdown-it-anchor": "^8.6.7",
     "unplugin-icons": "^0.18.1",
     "unplugin-vue-components": "^0.20.1",

@@ -1,16 +1,25 @@
 
 import { fixPath } from  './alias'
 import { rollup, InputOptions, OutputOptions } from 'rollup'
-import vue from 'rollup-plugin-vue'
+import vue from '@vitejs/plugin-vue'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 import css from 'rollup-plugin-css-only'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import esbuild from 'rollup-plugin-esbuild'
 import { libExternal } from '@lib-env/build-constants'
 import commonjs from '@rollup/plugin-commonjs'
-import vueJsx from 'unplugin-vue-jsx/rollup'
 import alias from '@rollup/plugin-alias'
 import multiInput from 'rollup-plugin-multi-input'
 
+const esbuildPlugin = esbuild({
+  target: 'esnext',
+  tsconfigRaw: {
+    compilerOptions: {
+      experimentalDecorators: true,
+      useDefineForClassFields: false,
+    },
+  },
+})
 
 export function rollupComponents (opts: {
   files: string[],
@@ -36,12 +45,10 @@ export function rollupComponents (opts: {
           output: 'index.css',
         }),
         
-        vue({
-          preprocessStyles: false,
-        }),
+        vue(),
         vueJsx({}),
  
-        esbuild(),
+        esbuildPlugin,
         commonjs(),
       ],
       external: [
@@ -82,11 +89,11 @@ export async function rollupFile (opts: {
         extensions: ['.js', '.json', '.ts'],
         browser: true,
       }),
-      css({
-        output: 'index.css',
-      }),
-      vue(),
-      esbuild(), 
+      // css({
+      //   output: 'index.css',
+      // }),
+      // vue(),
+      esbuildPlugin,
       commonjs(),
     ],
     external: [
