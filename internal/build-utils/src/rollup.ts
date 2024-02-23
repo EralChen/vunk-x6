@@ -1,6 +1,6 @@
 
 import { fixPath } from  './alias'
-import { rollup, InputOptions, OutputOptions } from 'rollup'
+import { rollup, InputOptions, OutputOptions, RollupOptions, InputPluginOption } from 'rollup'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import css from 'rollup-plugin-css-only'
@@ -101,9 +101,11 @@ export async function rollupFile (opts: {
       ...opts.external ?? [],
     ],
     
-  }
+  } as RollupOptions
 
-  opts.multi && inputConfig.plugins.push(multiInput())
+  opts.multi 
+    && (inputConfig.plugins as InputPluginOption[])
+      .push(multiInput())
 
   const outConfig: OutputOptions = {
     format: 'esm',
