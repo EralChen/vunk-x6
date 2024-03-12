@@ -18,10 +18,7 @@ import 'uno.css'
 
 const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRenderHtmlAsync> => {
   const { stream } = pageContext.config
-  const lang = getLang(pageContext) as CrowdinFileLang
-    || CrowdinFileLang.zhCN
-  
-
+  const lang = (getLang(pageContext) || 'zh-CN') as CrowdinFileLang
 
   let pageView: ReturnType<typeof dangerouslySkipEscape> | ReturnType<typeof renderToNodeStream> | string = ''
   let fromHtmlRenderer = undefined
@@ -46,8 +43,8 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
   const title = getTitle(pageContext)
   const titleTag = !title ? '' : escapeInject`<title>${title}</title>`
 
-  const { description } = pageContext.config
-  const descriptionTag = !description ? '' : escapeInject`<meta name="description" content="${description}" />`
+  // const { description } = pageContext.config
+  // const descriptionTag = !description ? '' : escapeInject`<meta name="description" content="${description}" />`
 
   const { favicon } = pageContext.config
   const faviconTag = !favicon ? '' : escapeInject`<link rel="icon" href="${favicon}" />`
@@ -71,7 +68,6 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
         <meta charset="UTF-8" />
         ${faviconTag}
         ${titleTag}
-        ${descriptionTag}
         ${headHtml}
       </head>
       <body>

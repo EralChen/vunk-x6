@@ -1,12 +1,11 @@
 {
-  "view": {
-    "text": "View",
+  "select": {
+    "text": "Select",
     "children": [
       {
-        "link": "/map-view",
-        "text": "MapView"
+        "link": "/user-select-tables",
+        "text": "UserSelectTables"
       }
     ]
   }
-
 }

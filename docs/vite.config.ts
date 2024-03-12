@@ -4,7 +4,7 @@ import markdown from 'unplugin-vue-markdown/vite'
 import vike from 'vike/plugin'
 
 import { AliasOptions, UserConfig, defineConfig, loadEnv } from 'vite'
-import { unocssPreferences , containerPlugin, getDefaultHighlight, preWrapperPlugin } from '@lib-env/app-utils'
+import { unocssPreferences, containerPlugin, getDefaultHighlight, preWrapperPlugin } from '@lib-env/app-utils'
 import { appRoot, srcRoot } from './path.config'
 
 import path from 'path'
@@ -38,11 +38,6 @@ const alias: AliasOptions = [
     find: '#e',
     replacement: path.resolve(appRoot,'./examples'),
   },
-  {
-    find: 'esri/',
-    replacement: '@arcgis/core/',
-  },
-
   {
     find: '#',
     replacement: path.resolve(appRoot),
