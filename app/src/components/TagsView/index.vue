@@ -4,8 +4,10 @@ import { Close } from '@element-plus/icons-vue'
 import { AnyFunc } from '@vunk/core'
 import { RouteLocationNormalizedLoaded, useRouter } from 'vue-router'
 import { ContextMenu, ContextMenuItem, MenuOptions } from '@imengyu/vue3-context-menu'
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import '@imengyu/vue3-context-menu/lib/vue3-context-menu.css'
+import ActiveEffect from './active-effect.vue'
+import { ElScrollbar } from 'element-plus'
 
 interface ContextmenuState {
   current: RouteLocationNormalizedLoaded | null
@@ -115,9 +117,46 @@ function handleCloseRight (route: RouteLocationNormalizedLoaded | null) {
 
 
 }
+
+/* item 激活时 滚动条调整 */
+const scrollbarNode = ref<InstanceType<typeof ElScrollbar>>()
+const handleItemActive = (itemInfo: {
+    
+    containerWidth: number,
+    scrollLeft: number,
+
+    offsetLeft: number,
+}) => {
+
+
+  const { containerWidth, scrollLeft, offsetLeft } = itemInfo
+
+
+  const currentVisibleLeft = scrollLeft
+  const currentVisibleRight = scrollLeft + containerWidth
+
+
+  //  offsetLeft 在不在可视区域内
+  if (
+    offsetLeft < currentVisibleLeft ||
+    offsetLeft > currentVisibleRight
+  ) {
+    // 动画滚动
+    scrollbarNode.value?.scrollTo({
+      left: offsetLeft,
+      behavior: 'smooth',
+    })
+  }
+
+
+}
+/* end of    item 激活时 滚动条调整 */
 </script>
 <template>
-  <ElScrollbar class="bg-bg-overlay tags-view">
+  <ElScrollbar
+    ref="scrollbarNode"
+    class="bg-bg-overlay tags-view"
+  >
     <div sk-flex>
       <RouterLink 
         v-for="item of viewsStore.visitedViews"
@@ -140,6 +179,13 @@ function handleCloseRight (route: RouteLocationNormalizedLoaded | null) {
             @click="linkClick($event, navigate)"
             @contextmenu="onContextMenu($event, item)"
           >
+
+            <ActiveEffect 
+              :is-active="isExactActive"
+              @active="handleItemActive"
+            >
+            </ActiveEffect>
+
             <span>{{ item.meta.title || '未命名' }}</span>
 
             <span
