@@ -1,5 +1,5 @@
 {
-  "name": "@vuesri-core/app",
+  "name": "@skzz-template/docs",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -8,20 +8,20 @@
   "dependencies": {
     "@vunk/gsap": "0.0.0-alpha.3",
     "deepdash-es": "^5.3.9",
-    "gsap": "^3.12.4",
+    "gsap": "^3.12.5",
     "prism-theme-vars": "^0.2.4",
-    "vike": "0.4.156",
-    "vike-vue": "^0.5.4"
+    "vike": "0.4.165",
+    "vike-vue": "^0.6.3"
   },
   "devDependencies": {
-    "@iconify-json/ri": "^1.1.4",
+    "@iconify-json/ri": "^1.1.20",
     "@mdit-vue/shared": "^2.0.0",
     "markdown-it-anchor": "^8.6.7",
     "unplugin-icons": "^0.18.1",
-    "unplugin-vue-components": "^0.20.1",
-    "unplugin-vue-markdown": "^0.25.2",
-    "vite-plugin-inspect": "^0.8.1",
-    "vitepress": "1.0.0-rc.33",
-    "vue-router": "^4.2.5"
+    "unplugin-vue-components": "^0.26.0",
+    "unplugin-vue-markdown": "=0.25.2",
+    "vite-plugin-inspect": "^0.8.3",
+    "vitepress": "1.0.0-rc.45",
+    "vue-router": "^4.3.0"
   }
 }

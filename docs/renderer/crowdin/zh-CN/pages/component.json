@@ -1,13 +1,4 @@
 {
-  "map": {
-    "text": "Map 地图",
-    "children": [
-      {
-        "link": "/map-view",
-        "text": "MapView"
-      }
-    ]
-  },
   "select": {
     "text": "Select 选择器",
     "children": [

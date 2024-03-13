@@ -6,23 +6,6 @@ import { DOCS_DIR_NAME } from '@lib-env/build-constants'
 
 type Append = Record<'headers' | 'footers' | 'scriptSetups', string[]>
 
-
-// function getRelativeDemoPath (
-//   fullPath: string,
-//   name: string,
-// ) {
-//   const regex = new RegExp(`.*?${name}/(.*)`)
-//   const match = fullPath.match(regex)
-
-//   if (match) {
-//     // match[1] 包含捕获组中的匹配部分
-//     return name + `/${match[1]}`
-//   } else {
-//     // 如果没有匹配，返回原始路径
-//     return fullPath
-//   }
-// }
-
 export function MarkdownTransform (): Plugin {
   return {
     name: 'element-plus-md-transform',
@@ -30,10 +13,7 @@ export function MarkdownTransform (): Plugin {
     enforce: 'pre',
 
     async transform (code, id) {
-   
       if (!id.endsWith('.md')) return
-
-      if (code.startsWith('<script setup>')) return
 
       let componentId = path.basename(id, '.md')
       
@@ -78,7 +58,6 @@ export function MarkdownTransform (): Plugin {
           `,
         ],
       }
-
 
 
       return combineMarkdown(
