@@ -98,16 +98,21 @@ function handleCloseRight (route: RouteLocationNormalizedLoaded | null) {
   if (index === -1) return
 
   const leftViews = viewsStore.visitedViews.slice(0, index + 1)
+  const rightViews = viewsStore.visitedViews.slice(index + 1)
   viewsStore.setVisitedViews(leftViews)
-  const inLeft = leftViews.some((item) => {
-    if (item.fullPath === router.currentRoute.value.fullPath) {
-      return false
+
+  // 如果当前路由在右侧，则说明当前路由已经被关闭了，需要跳转到左侧最后一个路由
+  const inRight = rightViews.some(
+    (item) => item.fullPath === router.currentRoute.value.fullPath,
+  )
+
+  if (inRight) {
+    const lastLeft = leftViews[leftViews.length - 1]
+    if (lastLeft) {
+      router.replace(lastLeft.fullPath)
     }
-    return true
-  })
-  if (!inLeft) {
-    router.replace(leftViews[leftViews.length - 1].fullPath)
   }
+
 
 }
 </script>
