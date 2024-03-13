@@ -2,41 +2,113 @@
 import { useViewsStore } from '@/stores/views'
 import { Close } from '@element-plus/icons-vue'
 import { AnyFunc } from '@vunk/core'
-import { useRoute, useRouter } from 'vue-router'
-const route = useRoute()
+import { RouteLocationNormalizedLoaded, useRouter } from 'vue-router'
+import { ContextMenu, ContextMenuItem, MenuOptions } from '@imengyu/vue3-context-menu'
+import { reactive } from 'vue'
+import '@imengyu/vue3-context-menu/lib/vue3-context-menu.css'
+
+interface ContextmenuState {
+  current: RouteLocationNormalizedLoaded | null
+  show: boolean
+  options: MenuOptions
+}
+
 const router = useRouter()
 const viewsStore = useViewsStore()
 
 /* vue3 监听路由变化 */
 viewsStore.collectingVisitedViews()
 
-const linkClose = (e: MouseEvent, fullPath: string) => {
+const linkClose = (
+  e: MouseEvent, 
+  route: RouteLocationNormalizedLoaded,
+) => {
   e.preventDefault()
   e.stopPropagation()
-  const { item, index } = viewsStore.delVisitedView({ fullPath })
-  if (item) {
-    if (item.fullPath === route.fullPath) { // 将要关闭的路由是当前路由
-      // 将路由跳转到 该路由的上一个路由
-      const prevItem = viewsStore.visitedViews[index - 1]
-      if (prevItem) {
-        router.push(prevItem.fullPath)
-      } else {
-        // 如果没有上一个路由，跳转到后面的路由
-        const nextItem = viewsStore.visitedViews[index]
-        if (nextItem) {
-          router.push(nextItem.fullPath)
-        } else {
-          // 如果没有后面的路由，跳转到首页
-          router.push('/')
-        }
-
-      }
-    }
-  }
+  handleCloseCurrent(route)
 }
 const linkClick = (e: MouseEvent, navigate: AnyFunc) => {
   e.preventDefault()
   navigate()
+}
+
+
+const contextmenuState = reactive({
+  current: null,
+  options: {
+    x: 0,
+    y: 0,
+    minWidth: 210,
+  },
+  show: false,
+}) as ContextmenuState
+
+const onContextMenu = (
+  e: MouseEvent, 
+  route: RouteLocationNormalizedLoaded,
+) => {
+  e.preventDefault()
+  contextmenuState.current = route
+  contextmenuState.options.x = e.x
+  contextmenuState.options.y = e.y
+  contextmenuState.show = true
+}
+function handleCloseCurrent (route: RouteLocationNormalizedLoaded | null) {
+  if  (!route) return
+  const { item, index } = viewsStore.delVisitedView({ 
+    fullPath: route.fullPath,
+  })
+
+  if (!item) return
+  if (item.fullPath === route.fullPath) { // 将要关闭的路由是当前路由
+    // 将路由跳转到 该路由的上一个路由
+    const prevItem = viewsStore.visitedViews[index - 1]
+    if (prevItem) {
+      router.push(prevItem.fullPath)
+    } else {
+      // 如果没有上一个路由，跳转到后面的路由
+      const nextItem = viewsStore.visitedViews[index]
+      if (nextItem) {
+        router.push(nextItem.fullPath)
+      } else {
+        // 如果没有后面的路由，跳转到首页
+        router.push('/')
+      }
+
+    }
+  }
+  
+}
+function handleCloseOther (route: RouteLocationNormalizedLoaded | null) {
+  if (!route) return
+  viewsStore.setVisitedViews([route])
+
+  if (route.fullPath !== router.currentRoute.value.fullPath) {
+    router.replace(route.fullPath)
+  }
+
+
+}
+
+function handleCloseRight (route: RouteLocationNormalizedLoaded | null) {
+  if (!route) return
+  const index = viewsStore.visitedViews.findIndex(
+    (item) => item.fullPath === route.fullPath,
+  )
+  if (index === -1) return
+
+  const leftViews = viewsStore.visitedViews.slice(0, index + 1)
+  viewsStore.setVisitedViews(leftViews)
+  const inLeft = leftViews.some((item) => {
+    if (item.fullPath === router.currentRoute.value.fullPath) {
+      return false
+    }
+    return true
+  })
+  if (!inLeft) {
+    router.replace(leftViews[leftViews.length - 1].fullPath)
+  }
+
 }
 </script>
 <template>
@@ -61,12 +133,13 @@ const linkClick = (e: MouseEvent, navigate: AnyFunc) => {
             }"
             sub:ml-xxs
             @click="linkClick($event, navigate)"
+            @contextmenu="onContextMenu($event, item)"
           >
             <span>{{ item.meta.title || '未命名' }}</span>
 
             <span
               sk-flex="row_center"
-              @click="linkClose($event, item.fullPath)"
+              @click="linkClose($event, item)"
             >
               <ElIcon
                 class="tags-view-icon-close"
@@ -80,6 +153,29 @@ const linkClick = (e: MouseEvent, navigate: AnyFunc) => {
         </template>
       </RouterLink>
     </div>
+
+    <ContextMenu
+      v-model:show="contextmenuState.show"
+      :options="contextmenuState.options"
+    >
+      <ContextMenuItem 
+        @click="handleCloseCurrent(contextmenuState.current)"
+      >
+        关闭标签页
+      </ContextMenuItem>
+      
+      <ContextMenuItem
+        @click="handleCloseOther(contextmenuState.current)"
+      >
+        关闭其他标签页
+      </ContextMenuItem>
+
+      <ContextMenuItem
+        @click="handleCloseRight(contextmenuState.current)"
+      >
+        关闭右侧标签页
+      </ContextMenuItem>
+    </ContextMenu>
   </ElScrollbar>
 </template>
 <style scoped>
