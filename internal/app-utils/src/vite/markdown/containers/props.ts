@@ -5,7 +5,7 @@ import fs from 'fs'
 import path from 'path'
 import { fixPath } from '@lib-env/build-utils'
 import { PropsOptions } from '../types'
-import { createSourceFile, ScriptTarget, SyntaxKind, VariableStatement, Statement, ObjectLiteralExpression, JSDoc, PropertyName, PropertyAssignment, Identifier, AsExpression, Expression, TypeReferenceNode, EntityName, TypeNode, QualifiedName, StringLiteral, NumericLiteral, FunctionExpression, createPrinter, EmitHint, ArrayTypeNode, UnionTypeNode, LiteralTypeNode, IndexedAccessTypeNode } from 'typescript'
+import { createSourceFile, ScriptTarget, SyntaxKind, VariableStatement, Statement, ObjectLiteralExpression, JSDoc, PropertyName, PropertyAssignment, Identifier, AsExpression, Expression, TypeReferenceNode, EntityName, TypeNode, QualifiedName, StringLiteral, NumericLiteral, FunctionExpression, createPrinter, EmitHint, ArrayTypeNode, UnionTypeNode, LiteralTypeNode, IndexedAccessTypeNode, FunctionTypeNode, BindingName } from 'typescript'
 import { NormalObject } from '@vunk/core'
 import md from 'markdown-it'
 import { mdLinkOpenPlugin } from '../linkOpen'
@@ -92,7 +92,7 @@ export const vuePropsContainerPlugin = (
             && getName(item.name) === name
           }) as PropertyAssignment | undefined
         }
-        function getName (value: PropertyName | EntityName |QualifiedName) {
+        function getName (value: PropertyName | EntityName |QualifiedName | BindingName) {
           if (value.kind === SyntaxKind.Identifier) {
             return value.text
           }
@@ -110,6 +110,20 @@ export const vuePropsContainerPlugin = (
         }
 
         function getFullTypeName (uktype: TypeNode): string {
+
+          
+          if (uktype.kind === SyntaxKind.StringKeyword) {
+            return 'string'
+          }
+          if (uktype.kind === SyntaxKind.NumberKeyword) {
+            return 'number'
+          }
+          if (uktype.kind === SyntaxKind.BooleanKeyword) {
+            return 'boolean'
+          }
+          if (uktype.kind === SyntaxKind.AnyKeyword) {
+            return 'any'
+          }
 
           if (uktype.kind === SyntaxKind.TypeReference) {
             const type = uktype as TypeReferenceNode
@@ -170,6 +184,32 @@ export const vuePropsContainerPlugin = (
             const indexName = getFullTypeName(type.indexType)
             return `${typeName}[${indexName}]`
           }
+
+
+          if (
+            [
+              SyntaxKind.FunctionType, 
+            ].includes(uktype.kind)
+          ) {
+            const type = uktype as FunctionTypeNode
+            const paramsStr = type.parameters.reduce(
+              (a, raw) => {
+                const nameStr = getName(raw.name)
+                if (!raw.type)  {
+                  a.push(nameStr)
+                  return a
+                }
+
+                const typeStr = getFullTypeName(raw.type)
+                a.push(
+                  `${nameStr}: ${typeStr}`,
+                )
+                return a
+              }, [] as string[])
+            const returnStr = getFullTypeName(type.type)
+            return `(${paramsStr}) => ${returnStr}`
+          }
+
 
           console.warn('uktype', uktype)
 
