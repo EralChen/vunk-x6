@@ -7,6 +7,7 @@ import { windowEnvPlugin, unocssPreferences } from '@lib-env/app-utils'
 import { packagesDir } from '@lib-env/path'
 import { viteExternalsPlugin } from 'vite-plugin-externals'
 import { appRoot, srcRoot } from './path.config'
+import VueDevTools from 'vite-plugin-vue-devtools'
 
 
 // https://vitejs.dev/config/
@@ -30,6 +31,7 @@ export default defineConfig(({ mode }) => {
     },
 
     plugins: [
+      VueDevTools(),
       vue(),
       vueJSX(),
   
