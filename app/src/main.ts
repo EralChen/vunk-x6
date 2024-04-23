@@ -19,7 +19,6 @@ import './permission'
 import './styles'
 import 'uno.css'
 
-
 const app = createApp(App)
 
 app
