@@ -1,50 +1,66 @@
 // https://vike.dev/onRenderClient
 export { onRenderClient }
 
-import { createVueApp } from './app'
-import { getTitle } from '../vike-vue/renderer/getTitle'
-import { getLang } from '../vike-vue/renderer/getLang'
+import { createVueApp } from './createVueApp.js'
+import { getHeadSetting } from '#/vike-vue/renderer/getHeadSetting'
 import type { OnRenderClientAsync } from 'vike/types'
-import { useCopyCode } from '../vitepress/composables/copy-code'
+import type { VikeVueApp } from 'vike-vue/dist/types/PageContext'
 
 import { esriConfig } from '@vuesri/core/arcgis'
-import { VikeVueApp } from 'vike-vue/dist/types/PageContext'
-// esriConfig.assetsPath = import.meta.env.VITE_BASE_URL + '/Esri'
+
+import { useCopyCode } from '../vitepress/composables/copy-code'
+
+
+// 初始化代码复制功能
+useCopyCode()
+
 esriConfig.apiKey = 'AAPKb14837d0d1fd48c2a9e834966b090d71jkWd8RL_697p0sRB9s87pEWRaefvBwcC_pdbOKwZd3Ka8xiulyqbHPassAKuHBxH'
 
 
 
 let app: VikeVueApp | undefined = undefined
-// 初始化代码复制功能
-useCopyCode()
-
 const onRenderClient: OnRenderClientAsync = async (pageContext): ReturnType<OnRenderClientAsync> => {
   if (!app) {
     // First rendering/hydration
 
-    const container = document.getElementById('page-view')!
+    const container = document.getElementById('vue-root')!
     const ssr = container.innerHTML !== ''
-    const ctxWithApp = await createVueApp(pageContext, ssr)
-
+    const ctxWithApp = await createVueApp(pageContext, ssr, 'Page')
     app = ctxWithApp.app
+
+    // Do this in two steps to allow users to access plugins in their onBeforeMountApp hook
+    pageContext.config.onBeforeMountAppPinia?.(ctxWithApp)
+    pageContext.config.onBeforeMountAppVueQuery?.(ctxWithApp)
 
     await pageContext.config.onBeforeMountApp?.(ctxWithApp)
 
-    app?.mount(container)
+    app.mount(container)
   } else {
-    // Client routing
-    // See https://vike.dev/server-routing-vs-client-routing
+    // Client-side navigation
 
     await app.changePage(pageContext)
 
-    // Get the page's `title` config value, which may be different from the
-    // previous page. It can even be null, in which case we should unset the
-    // document title.
-    const title = getTitle(pageContext)
-    const lang = getLang(pageContext)
+    const title = getHeadSetting('title', pageContext) || ''
+    const lang = getHeadSetting('lang', pageContext) || 'zh-CN'
+    const favicon = getHeadSetting('favicon', pageContext)
 
-    document.title = title || ''
-    document.documentElement.lang = lang || 'zh-CN'
-
+    if (title !== undefined) document.title = title
+    if (lang !== undefined) document.documentElement.lang = lang
+    if (favicon !== undefined) setFavicon(favicon)
   }
+}
+
+// https://stackoverflow.com/questions/260857/changing-website-favicon-dynamically/260876#260876
+function setFavicon (faviconUrl: string | null) {
+  let link: HTMLLinkElement | null = document.querySelector("link[rel~='icon']")
+  if (!faviconUrl) {
+    if (link) document.head.removeChild(link)
+    return
+  }
+  if (!link) {
+    link = document.createElement('link')
+    link.rel = 'icon'
+    document.head.appendChild(link)
+  }
+  link.href = faviconUrl
 }

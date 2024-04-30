@@ -1,12 +1,10 @@
+export { config }
 
 import type { Config, ConfigEffect } from 'vike/types'
-// import { onRenderClient } from './onRenderClient'
-// import { onRenderHtml } from './onRenderHtml'
-
 
 // Depending on the value of `config.meta.ssr`, set other config options' `env`
 // accordingly.
-// See https://vike.dev/meta#modify-existing-configurations
+// See https://vike.dev/meta#:~:text=Modifying%20the%20environment%20of%20existing%20hooks
 const toggleSsrRelatedConfig: ConfigEffect = ({ configDefinedAt, configValue }) => {
   if (typeof configValue !== 'boolean') {
     throw new Error(`${configDefinedAt} should be a boolean`)
@@ -26,24 +24,19 @@ const toggleSsrRelatedConfig: ConfigEffect = ({ configDefinedAt, configValue }) 
   }
 }
 
-
 const config = {
+  name: 'vike-vue',
+  
   onRenderHtml: 'import:./onRenderHtml.ts:onRenderHtml',
   onRenderClient: 'import:./onRenderClient.ts:onRenderClient',
 
 
-  // TODO/next-major-release: remove pageProps (i.e. tell users to use data() instead of onBeforeRender() to fetch data)
-  // TODO/next-major-release: remove support for setting title over onBeforeRender()
-  // A page can define an onBeforeRender() hook to be run on the server, which
-  // can fetch data and return it as additional page context. Typically it will
-  // return the page's root Vue component's props and additional data that can
-  // be used by the renderers.
-  // It is a cumulative config option, so a web app using vike-vue can extend
-  // this list.
   passToClient: ['pageProps', 'title', 'crowdin', 'lang',  'fromHtmlRenderer'],
 
+  // https://vike.dev/clientRouting
   clientRouting: true,
   hydrationCanBeAborted: true,
+  // https://vike.dev/meta
   meta: {
     Head: {
       env: { server: true },
@@ -54,16 +47,12 @@ const config = {
     title: {
       env: { server: true, client: true },
     },
-    description: {
-      env: { server: true },
-    },
     favicon: {
-      env: { server: true },
+      env: { server: true, client: true },
     },
     lang: {
       env: { server: true, client: true },
     },
-
     ssr: {
       env: { config: true },
       effect: toggleSsrRelatedConfig,
@@ -71,20 +60,43 @@ const config = {
     stream: {
       env: { server: true },
     },
+    vuePlugins: {
+      // List of vue plugins to be installed with app.vue() in onRenderHtml and
+      // onRenderClient. We make this config available both on the server and
+      // the client always, but if SSR is disabled, onRenderHtml won't make use
+      // of it.
+      env: { server: true, client: true },
+    },
     onCreateApp: {
       env: { server: true, client: true },
     },
     onCreateAppPinia: {
       env: { server: true, client: true },
     },
+    onCreateAppVueQuery: {
+      env: { server: true, client: true },
+    },
     onAfterRenderSSRApp: {
+      env: { server: true },
+    },
+    onAfterRenderSSRAppPinia: {
+      env: { server: true },
+    },
+    onAfterRenderSSRAppVueQuery: {
       env: { server: true },
     },
     onBeforeMountApp: {
       env: { server: false, client: true },
     },
+    onBeforeMountAppPinia: {
+      env: { server: false, client: true },
+    },
+    onBeforeMountAppVueQuery: {
+      env: { server: false, client: true },
+    },
+    // Vike already defines the setting 'name', but we redundantly define it here for older Vike versions (otherwise older Vike versions will complain that 'name` is an unknown config).
+    name: {
+      env: { config: true },
+    },
   },
 } satisfies Config
-
-
-export default config

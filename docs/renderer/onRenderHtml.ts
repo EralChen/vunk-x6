@@ -3,75 +3,68 @@ export { onRenderHtml }
 
 import { renderToNodeStream, renderToString } from 'vue/server-renderer'
 import { dangerouslySkipEscape, escapeInject } from 'vike/server'
-import { getTitle } from '../vike-vue/renderer/getTitle'
-import type { OnRenderHtmlAsync } from 'vike/types'
-import { createVueApp } from './app'
-import { rCrowdinFilesAsReflect, CrowdinFileLang } from './crowdin'
+import { getHeadSetting } from '#/vike-vue/renderer/getHeadSetting'
+import type { OnRenderHtmlAsync, PageContext } from 'vike/types'
+import { createVueApp } from './createVueApp'
 import { App } from 'vue'
-import { getLang } from '#/vike-vue/renderer/getLang'
-
 
 import '#s/styles'
 
 import 'uno.css'
+import { CrowdinFileLang, rCrowdinFilesAsReflect } from './crowdin'
 
 
 const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRenderHtmlAsync> => {
-  const { stream } = pageContext.config
-  const lang = (getLang(pageContext) || 'zh-CN') as CrowdinFileLang
+  const title = getHeadSetting('title', pageContext)
+  const favicon = getHeadSetting('favicon', pageContext)
+  const lang = getHeadSetting('lang', pageContext) || 'zh-CN'
+
+  pageContext.crowdin = await rCrowdinFilesAsReflect(
+    lang as CrowdinFileLang,
+  )
+
+
+  const titleTag = !title ? '' : escapeInject`<title>${title}</title>`
+  const faviconTag = !favicon ? '' : escapeInject`<link rel="icon" href="${favicon}" />`
 
   let pageView: ReturnType<typeof dangerouslySkipEscape> | ReturnType<typeof renderToNodeStream> | string = ''
-  let fromHtmlRenderer = undefined
-
-
-  pageContext.crowdin = await rCrowdinFilesAsReflect(lang)
+  const fromHtmlRenderer: PageContext['fromHtmlRenderer'] = {}
 
   if (!!pageContext.Page) {
     // SSR is enabled
-    const ctxWithApp = await createVueApp(pageContext)
-    const { app } = ctxWithApp 
-
-    pageView = !stream
-      ? dangerouslySkipEscape(
-        await renderToStringWithErrorHandling(app),
-      )
+    const ctxWithApp = await createVueApp(pageContext, true, 'Page')
+    const { app } = ctxWithApp
+    pageView = !pageContext.config.stream
+      ? dangerouslySkipEscape(await renderToStringWithErrorHandling(app))
       : renderToNodeStreamWithErrorHandling(app)
-    fromHtmlRenderer = await pageContext.config.onAfterRenderSSRApp?.(ctxWithApp)
+
+    const pluginContexts = [
+      pageContext.config.onAfterRenderSSRAppPinia?.(ctxWithApp),
+      pageContext.config.onAfterRenderSSRAppVueQuery?.(ctxWithApp),
+    ]
+    Object.assign(fromHtmlRenderer, ...pluginContexts)
+
+    // make sure user can override the context by assigning this last
+    const userFromHtmlRenderer = await pageContext.config.onAfterRenderSSRApp?.(ctxWithApp)
+    Object.assign(fromHtmlRenderer, userFromHtmlRenderer)
   }
 
-
-  const title = getTitle(pageContext)
-  const titleTag = !title ? '' : escapeInject`<title>${title}</title>`
-
-  // const { description } = pageContext.config
-  // const descriptionTag = !description ? '' : escapeInject`<meta name="description" content="${description}" />`
-
-  const { favicon } = pageContext.config
-  const faviconTag = !favicon ? '' : escapeInject`<link rel="icon" href="${favicon}" />`
-
-
   let headHtml: ReturnType<typeof dangerouslySkipEscape> | string = ''
-  if (!!pageContext.config.Head) {
-    const { app } = await createVueApp(
-      pageContext, 
-      /*ssrApp*/ true, 
-      /*renderHead*/ true,
-    )
-    headHtml = dangerouslySkipEscape(
-      await renderToStringWithErrorHandling(app),
-    )
+  if (pageContext.config.Head) {
+    const { app } = await createVueApp(pageContext, true, 'Head')
+    headHtml = dangerouslySkipEscape(await renderToStringWithErrorHandling(app))
   }
 
   const documentHtml = escapeInject`<!DOCTYPE html>
     <html lang='${lang}'>
       <head>
         <meta charset="UTF-8" />
-        ${faviconTag}
         ${titleTag}
         ${headHtml}
+        ${faviconTag}
       </head>
       <body>
-        <div id="page-view">${pageView}</div>
+        <div id="vue-root">${pageView}</div>
       </body>
       <!-- built with https://github.com/vikejs/vike-vue -->
     </html>`
@@ -119,5 +112,4 @@ function renderToNodeStreamWithErrorHandling (app: App) {
   if (err) throw err
   return appHtml
 }
-
 

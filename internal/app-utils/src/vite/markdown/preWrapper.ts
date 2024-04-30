@@ -1,11 +1,10 @@
 import type MarkdownIt from 'markdown-it'
-import { PreWrapperOptions } from './types'
 
-export type Options  = PreWrapperOptions
+export interface Options {
+  hasSingleTheme: boolean
+}
 
-export function preWrapperPlugin (md: MarkdownIt, options: Options = {
-  hasSingleTheme: true,
-}) {
+export function preWrapperPlugin (md: MarkdownIt, options: Options) {
   const fence = md.renderer.rules.fence!
   md.renderer.rules.fence = (...args) => {
     const [tokens, idx] = args
@@ -21,12 +20,12 @@ export function preWrapperPlugin (md: MarkdownIt, options: Options = {
     const rawCode = fence(...args)
     return `<div class="language-${lang}${getAdaptiveThemeMarker(
       options,
-    )}${active}"><button title="Copy Code" class="copy"></button><span class="lang is-hidden">${lang}</span>${rawCode}</div>`
+    )}${active}"><button title="Copy Code" class="copy"></button><span class="lang">${lang}</span>${rawCode}</div>`
   }
 }
 
 export function getAdaptiveThemeMarker (options: Options) {
-  return options.hasSingleTheme ? '' : ' vp-adaptive-theme'
+  return options?.hasSingleTheme ? '' : ' vp-adaptive-theme'
 }
 
 export function extractTitle (info: string, html = false) {
