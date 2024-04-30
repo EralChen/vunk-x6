@@ -6,7 +6,7 @@ import Aside from './aside.vue'
 import Toc from './toc.vue'
 import { nextTick, shallowRef } from 'vue'
 import { onContentUpdated } from '#/renderer/page'
-import { PageContext } from 'vike/types'
+import type { PageContext } from 'vike/types'
 
 const scrollbarNode = shallowRef<InstanceType<typeof ElScrollbar>>()
 

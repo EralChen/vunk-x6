@@ -1,7 +1,7 @@
 
 <script lang="ts" setup>
 import type { Data } from './+data'
-import { useData } from '#/vike-vue/useData'
+import { useData } from 'vike-vue/useData'
 const data = useData<Data>()
 const base = import.meta.env.VITE_BASE_URL
 </script>
