@@ -2,28 +2,47 @@ import globals from 'globals'
 import tseslint from 'typescript-eslint'
 import pluginVue from 'eslint-plugin-vue'
 import importLint from 'eslint-plugin-import'
+import parserVue from 'vue-eslint-parser'
 
-import path from 'path'
-import { fileURLToPath } from 'url'
-import { FlatCompat } from '@eslint/eslintrc'
-import pluginJs from '@eslint/js'
-
+// import path from 'path'
+// import { fileURLToPath } from 'url'
+// import { FlatCompat } from '@eslint/eslintrc'
+// import pluginJs from '@eslint/js'
 // mimic CommonJS variables -- not needed if using CommonJS
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-const compat = new FlatCompat({ baseDirectory: __dirname, recommendedConfig: pluginJs.configs.recommended })
+// const __filename = fileURLToPath(import.meta.url)
+// const __dirname = path.dirname(__filename)
+// const compat = new FlatCompat({ 
+//   baseDirectory: __dirname, 
+//   recommendedConfig: pluginJs.configs.recommended, 
+// })
 
 export default [
-  { languageOptions: { globals: globals.browser } },
-  {
-    plugins: {
-      vue: pluginVue,
-      import: importLint,
+  { 
+    languageOptions: { 
+      globals: globals.browser,
     },
   },
-  ...compat.extends(),
+  ...pluginVue.configs['flat/recommended'],
   ...tseslint.configs.recommended,
-  ...pluginVue.configs['flat/essential'],
+
+  {
+    plugins: {
+      import: importLint,
+      '@typescript-eslint': tseslint.plugin,
+      // jest: jestPlugin,
+    },
+  },
+  { 
+    languageOptions: { 
+      parser: parserVue,
+      parserOptions: {
+        'parser': tseslint.parser,
+      },
+    },
+  },
+
+  // ...compat.extends(),
+  // ...pluginVue.configs['flat/essential'],
   {
     rules: {
       // https://eslint.org/docs/rules/ for js
