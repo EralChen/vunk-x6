@@ -36,6 +36,9 @@ export default [
     languageOptions: { 
       parser: parserVue,
       parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
         'parser': tseslint.parser,
       },
     },
@@ -76,6 +79,7 @@ export default [
       'vue/no-v-model-argument': 'off',
       'vue/no-v-for-template-key': 'off',
       'vue/no-multiple-template-root': 'off',
+      'vue/max-attributes-per-line': 'off',
 
       // for import
       'import/no-duplicates': 'error', // 禁止重复 import 同一模块

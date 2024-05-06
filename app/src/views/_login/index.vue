@@ -21,9 +21,10 @@ const currentPage = ref('1')
       </div>
       <div class="flex-1 overflow-hidden ">
         <div class="pl-80px pr-80px ">
-          <div class="c-primary fw-bold text-28px pt-90px
-            pb-56px text-center
-          ">
+          <div
+            class="c-primary fw-bold text-28px pt-90px
+            pb-56px text-center"
+          >
             智子开发平台
           </div>
 

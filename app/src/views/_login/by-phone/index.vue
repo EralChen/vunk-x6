@@ -89,7 +89,7 @@ function rCode () {
   <SkAppForm
     :data="formData"
     :form-items="formItems"
-    @setData="setData(formData, $event)"
+    @set-data="setData(formData, $event)"
   >
   </SkAppForm>
 </template>
