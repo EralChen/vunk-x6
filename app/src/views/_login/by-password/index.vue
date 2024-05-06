@@ -19,7 +19,7 @@ const router = useRouter()
 
 
 const formData = ref({
-  userCode: 'root',
+  userCode: 'gyzz',
   password: '123456',
 } as LoginFormData)
 
@@ -86,7 +86,7 @@ const formItems: __SkAppForm.FormItem<keyof LoginFormData>[] = [
   <SkAppForm 
     :data="formData"
     :form-items="formItems"
-    @setData="setData(formData, $event)"
+    @set-data="setData(formData, $event)"
     @enter="login"
   >
   </SkAppForm>
