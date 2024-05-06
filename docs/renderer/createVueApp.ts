@@ -4,9 +4,10 @@ import { createApp, createSSRApp, defineComponent, h, markRaw, nextTick, reactiv
 import type { PageContextWithApp, PageContextWithoutApp } from 'vike-vue/dist/types/PageContext'
 import type { PageContext } from 'vike/types'
 import { setPageContext } from 'vike-vue/usePageContext'
-import { objectAssign } from '../vike-vue/utils/objectAssign'
+import { objectAssign } from '@vunk/core/shared/utils-object'
 
 import { contentUpdatedCallbacks, ContentUpdatedCallbackHook } from './page'
+import { FirstParameter } from '@vunk/core'
 
 
 
@@ -81,15 +82,24 @@ async function createVueApp (
   const pageContextReactive = reactive(pageContext as PageContextWithoutApp)
 
   objectAssign(pageContext, { app })
+
   const pageContextWithApp = pageContext as PageContextWithApp
 
-  pageContextWithApp.config.onCreateAppPinia?.(pageContext)
-  pageContextWithApp.config.onCreateAppVueQuery?.(pageContext)
+  pageContextWithApp.config.onCreateAppPinia?.(
+    pageContextWithApp,
+  )
+  pageContextWithApp.config.onCreateAppVueQuery?.(
+    pageContextWithApp,
+  )
 
-  await pageContextWithApp.config.onCreateApp?.(pageContext)
+  await pageContextWithApp.config.onCreateApp?.(
+    pageContextWithApp,
+  )
 
   // Make `pageContext` accessible from any Vue component
-  setPageContext(app, pageContextReactive)
+  type TheApp = FirstParameter<typeof setPageContext>
+
+  ;setPageContext(app as TheApp, pageContextReactive)
 
   return pageContextWithApp
 }

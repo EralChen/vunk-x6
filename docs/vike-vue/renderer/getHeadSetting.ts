@@ -1,7 +1,7 @@
 export { getHeadSetting }
 
 import type { PageContext } from 'vike/types'
-import { isCallable } from './utils/isCallable'
+import { isCallable } from '@vunk/core/shared/utils-function'
 
 function getHeadSetting (
   headSetting: 'title' | 'favicon' | 'lang',
