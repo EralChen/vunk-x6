@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "jsx": "preserve",
+    "allowJs": true,
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "lib": ["esnext", "dom"],
+    "rootDir": "../"
+  },
+  "include": [
+    "typings/**/*.d.ts",
+    "../typings/**/*.d.ts",
+    "server/**/*.ts",
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

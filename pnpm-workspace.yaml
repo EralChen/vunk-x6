@@ -3,4 +3,5 @@ packages:
   - packages/*
   - docs
   - app
+  - app-ssr
   
