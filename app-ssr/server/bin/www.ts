@@ -1,4 +1,4 @@
-import app from '../app'
+import { createApp } from '../app'
 import debuger from 'debug'
 import http from 'http'
 import mri from 'mri'
@@ -12,19 +12,26 @@ interface MriData {
 
 const argv = process.argv.slice(2)
 const mriData = mri<MriData>(argv)
+const debug = debuger('http')
 const env = loadEnv(mriData.mode, appRoot, '') as SsrMetaEnv
-
 const port = normalizePort(env.SERVER_PORT ?? 3000) 
 
 
 
-// https://www.npmjs.com/package/debug#windows-command-prompt-notes
-const debug = debuger('http')
-const server = http.createServer(app)
+createServer()
 
-server.listen(port)
-server.on('error', onError)
-server.on('listening', onListening)
+async function createServer () {
+  const app = await createApp()
+
+  // https://www.npmjs.com/package/debug#windows-command-prompt-notes
+
+  const server = http.createServer(app)
+
+  server.listen(port)
+  server.on('error', onError)
+  server.on('listening', () => listeningHandler(server))
+  
+}
 
 
 
@@ -78,7 +85,7 @@ function onError (error: NodeJS.ErrnoException) {
  * Event listener for HTTP server "listening" event.
  */
 
-function onListening () {
+function listeningHandler (server: http.Server) {
   const addr = server.address()
   const bind = typeof addr === 'string'
     ? 'pipe ' + addr
