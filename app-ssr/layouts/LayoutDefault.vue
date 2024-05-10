@@ -6,7 +6,7 @@
         Welcome
       </Link>
 
-      <Link href="/star-wars">
+      <Link :href="base + '/star-wars'">
         Data Fetching
       </Link>
     </Sidebar>
@@ -19,6 +19,7 @@ import Content from '../components/Content.vue'
 import Link from '../components/Link.vue'
 import Logo from '../components/Logo.vue'
 import Sidebar from '../components/Sidebar.vue'
+const base = import.meta.env.VITE_BASE_URL ?? ''
 </script>
 
 <style>

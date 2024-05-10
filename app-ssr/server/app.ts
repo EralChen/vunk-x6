@@ -1,14 +1,16 @@
 import express, { ErrorRequestHandler } from 'express'
 import morgan from 'morgan'
 import cookieParser from 'cookie-parser'
-import usersRouter from './routes/users'
+import mri from 'mri'
 import httpErrors from 'http-errors'
 import path from 'path'
 import { serverRoot, appRoot } from '../path.config'
 import { renderPage } from 'vike/server'
 import { loadEnv, createServer } from 'vite'
 
-import mri from 'mri'
+import testRouter from './routes/test'
+import usersRouter from './routes/users'
+
 
 interface MriData {
   mode: string
@@ -21,12 +23,12 @@ const isProduction = process.env.NODE_ENV === 'production'
 export async function createApp () {
 
   const app = express()
-  console.log('isProduction', isProduction)
-  
+
   if (isProduction) {
     app.use(express.static(`${appRoot}/dist/client`))
   } else {
-    const env = loadEnv(mriData.mode, appRoot, '') as SsrMetaEnv
+    const mode = mriData.mode || 'development'
+    const env = loadEnv(mode, appRoot, '') as SsrMetaEnv
     const port = env.SERVER_HMR_PORT ?? 24678
 
 
@@ -61,6 +63,7 @@ export async function createApp () {
 
 
 
+  app.use('/test', testRouter)
 
   app.use('/users', usersRouter)
 

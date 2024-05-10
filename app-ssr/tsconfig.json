@@ -16,7 +16,15 @@
   "include": [
     "typings/**/*.d.ts",
     "../typings/**/*.d.ts",
+
     "server/**/*.ts",
+    "api/**/*.ts",
+    "layouts/**/*.vue",
+    "components/**/*.vue",
+    "pages/**/*.vue",
+    "pages/**/*.ts",
+    
+    "vite.config.ts"
   ],
   "exclude": [
     "node_modules"

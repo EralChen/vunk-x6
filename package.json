@@ -52,6 +52,7 @@
 	},
 	"scripts": {
 		"dev": "pnpm run -C app dev",
+		"ssr:dev": "pnpm run -C app-ssr dev",
 		"lint:fix": "eslint . --fix",
 		"lint": "eslint --fix app/**/*.{ts,tsx,vue}",
 		"build": "pnpm run -C app build",
