@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts" setup>
-import Counter from '#/components/Counter.vue'
+import Counter from '@/components/Counter.vue'
 import { useData } from 'vike-vue/useData'
 import type { Data } from './+data'
 const helloWorld = useData<Data>()

@@ -4,7 +4,7 @@ import vike from 'vike/plugin'
 
 import { AliasOptions, UserConfig, defineConfig, loadEnv } from 'vite'
 import { unocssPreferences } from '@lib-env/app-utils'
-import { appRoot } from './path.config'
+import { appRoot, clientRoot } from './path.config'
 
 import path from 'path'
 
@@ -13,6 +13,10 @@ const alias: AliasOptions = [
   {
     find: '#',
     replacement: path.resolve(appRoot),
+  },
+  {
+    find: '@',
+    replacement: path.resolve(clientRoot),
   },
 ]
 
@@ -46,6 +50,7 @@ export default defineConfig(async ({ mode }) => {
     plugins: [
       
       vike({
+ 
       }),
 
       unocssPreferences(),

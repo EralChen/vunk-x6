@@ -14,7 +14,7 @@ import 'uno.css'
 import { CrowdinFileLang, rCrowdinFilesAsReflect } from './crowdin'
 
 
-const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRenderHtmlAsync> => {
+const onRenderHtml: OnRenderHtmlAsync = async (pageContext):ReturnType<OnRenderHtmlAsync> => {
   const title = getHeadSetting('title', pageContext)
   const favicon = getHeadSetting('favicon', pageContext)
   const lang = getHeadSetting('lang', pageContext) || 'zh-CN'

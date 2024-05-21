@@ -1,7 +1,7 @@
 import vikeVue from 'vike-vue/config'
 import type { Config } from 'vike/types'
-import Head from '../layouts/HeadDefault.vue'
-import Layout from '../layouts/LayoutDefault.vue'
+import Head from '../client/layouts/HeadDefault.vue'
+import Layout from '../client/layouts/LayoutDefault.vue'
 
 // Default config (can be overridden by pages)
 export default {
@@ -10,4 +10,7 @@ export default {
   // <title>
   title: 'My Vike App',
   extends: vikeVue,
+  passToClient: [
+    'crowdin',
+  ],
 } satisfies Config

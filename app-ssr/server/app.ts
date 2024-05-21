@@ -11,6 +11,8 @@ import { loadEnv, createServer } from 'vite'
 import testRouter from './routes/test'
 import usersRouter from './routes/users'
 
+import { rCrowdinReflect } from './crowdin'
+import { CrowdinFileLang } from './crowdin/output'
 
 interface MriData {
   mode: string
@@ -21,6 +23,7 @@ const isProduction = process.env.NODE_ENV === 'production'
 
 
 export async function createApp () {
+  const crowdinReflect = await rCrowdinReflect()
 
   const app = express()
 
@@ -59,7 +62,7 @@ export async function createApp () {
   // 解析所有传入请求的cookie，并将它们存储在req.cookies对象中
   app.use(cookieParser())
   // 设置静态资源目录
-  app.use(express.static(path.join(serverRoot, 'public')))
+  app.use(express.static(path.join(appRoot, 'public')))
 
 
 
@@ -67,26 +70,60 @@ export async function createApp () {
 
   app.use('/users', usersRouter)
 
+
+  Reflect.ownKeys(crowdinReflect).forEach((v) => {
+
+    const lang = v as CrowdinFileLang
+    app.use(`/${lang}/*`, createVikeHandler(lang))
+  })
+
+
   /**
    * Vike route
    *
    * @link {@see https://vike.dev}
    **/
-  app.all('*', async (req, res, next) => {
-    const pageContextInit = { urlOriginal: req.originalUrl }
+  app.all('*', createVikeHandler())
 
-    const pageContext = await renderPage(pageContextInit)
-    const { httpResponse } = pageContext
 
-    if (!httpResponse) {
-      return next()
-    } else {
-      const { statusCode, headers } = httpResponse
-      headers.forEach(([name, value]) => res.setHeader(name, value))
-      res.status(statusCode)
-      httpResponse.pipe(res)
+  function createVikeHandler (lang = CrowdinFileLang.zhCN) {
+
+    return async function vikeHandler (
+      req: express.Request,
+      res: express.Response,
+      next: express.NextFunction,
+    ) {
+
+          
+      const pageContextInit = { 
+        urlOriginal: req.originalUrl,
+        headersOriginal: req.headers,
+
+        // ***************************************
+        // **** Custom pageContext properties ****
+        // ***************************************
+        lang,
+        crowdin: crowdinReflect[lang],
+      }
+
+    
+
+      const pageContext = await renderPage(pageContextInit)
+
+      const { httpResponse } = pageContext
+
+      if (!httpResponse) {
+        return next()
+      } else {
+        const { statusCode, headers } = httpResponse
+        headers.forEach(([name, value]) => res.setHeader(name, value))
+        res.status(statusCode)
+        httpResponse.pipe(res)
+      }
+     
     }
-  })
+  
+  }
 
 
   // catch 404 and forward to error handler

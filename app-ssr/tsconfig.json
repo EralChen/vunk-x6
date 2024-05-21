@@ -11,19 +11,29 @@
     "esModuleInterop": true,
     "baseUrl": ".",
     "lib": ["esnext", "dom"],
-    "rootDir": "../"
+    "rootDir": "../",
+    "paths": {
+      "#/*": [
+        "*"
+      ],
+      "@/*": [
+        "client/*"
+      ],
+    },
   },
   "include": [
     "typings/**/*.d.ts",
     "../typings/**/*.d.ts",
 
     "server/**/*.ts",
-    "api/**/*.ts",
-    "layouts/**/*.vue",
-    "components/**/*.vue",
+    "client/**/*.ts",
+    "client/**/*.vue",
+
     "pages/**/*.vue",
     "pages/**/*.ts",
-    
+
+    "api/**/*.ts",
+
     "vite.config.ts"
   ],
   "exclude": [

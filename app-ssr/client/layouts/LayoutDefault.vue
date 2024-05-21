@@ -2,7 +2,7 @@
   <div class="layout">
     <Sidebar>
       <Logo />
-      <Link href="/">
+      <Link :href="base + '/'">
         Welcome
       </Link>
 

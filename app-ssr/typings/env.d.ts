@@ -6,3 +6,6 @@ interface SsrMetaEnv {
   VITE_SSR_API_URL?: string
 }
 
+interface ImportMetaEnv {
+  VITE_SSR_API_URL: string
+}
