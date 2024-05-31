@@ -8,6 +8,7 @@ import { serverRoot, appRoot } from '../path.config'
 import { renderPage } from 'vike/server'
 import { loadEnv, createServer } from 'vite'
 
+
 import testRouter from './routes/test'
 import usersRouter from './routes/users'
 
@@ -20,6 +21,10 @@ interface MriData {
 const argv = process.argv.slice(2)
 const mriData = mri<MriData>(argv)
 const isProduction = process.env.NODE_ENV === 'production'
+const mode = mriData.mode || (
+  isProduction ? 'production' : 'development'
+)
+const env = loadEnv(mode, appRoot, '') as SsrMetaEnv
 
 
 export async function createApp () {
@@ -27,14 +32,15 @@ export async function createApp () {
 
   const app = express()
 
+  app.use('/test', testRouter)
+
+  app.use('/users', usersRouter)
+
+
   if (isProduction) {
     app.use(express.static(`${appRoot}/dist/client`))
   } else {
-    const mode = mriData.mode || 'development'
-    const env = loadEnv(mode, appRoot, '') as SsrMetaEnv
     const port = env.SERVER_HMR_PORT ?? 24678
-
-
     // Instantiate Vite's development server and integrate its middleware to our server.
     // ⚠️ We should instantiate it *only* in development. (It isn't needed in production
     // and would unnecessarily bloat our server in production.)
@@ -66,15 +72,14 @@ export async function createApp () {
 
 
 
-  app.use('/test', testRouter)
-
-  app.use('/users', usersRouter)
 
 
   Reflect.ownKeys(crowdinReflect).forEach((v) => {
-
     const lang = v as CrowdinFileLang
-    app.use(`/${lang}/*`, createVikeHandler(lang))
+    const handler = createVikeHandler(lang)
+    app.use(`/${lang}`, handler)
+    // app.use(`/zh-CN`, createVikeHandler(CrowdinFileLang.zhCN))
+
   })
 
 
@@ -83,18 +88,13 @@ export async function createApp () {
    *
    * @link {@see https://vike.dev}
    **/
-  app.all('*', createVikeHandler())
-
-
   function createVikeHandler (lang = CrowdinFileLang.zhCN) {
-
+    
     return async function vikeHandler (
       req: express.Request,
       res: express.Response,
       next: express.NextFunction,
     ) {
-
-          
       const pageContextInit = { 
         urlOriginal: req.originalUrl,
         headersOriginal: req.headers,

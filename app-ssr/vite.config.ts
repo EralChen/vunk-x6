@@ -24,7 +24,7 @@ const alias: AliasOptions = [
 export default defineConfig(async ({ mode }) => {
 
   const env = loadEnv(mode, process.cwd()) as unknown as SsrMetaEnv
-  const base = env.VITE_BASE_URL + '/'
+  const base = (env.VITE_BASE_URL ?? '') + '/'
 
   const config: UserConfig = {
     

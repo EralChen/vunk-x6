@@ -9,7 +9,6 @@ function importGlob (pattern: string) {
     cwd: __dirname,
   })
   
-  console.log(pattern, files)
   return files.reduce((acc, file) => {
     acc[file] = () => import(file) // 使用动态 import 来模拟异步导入
     return acc
