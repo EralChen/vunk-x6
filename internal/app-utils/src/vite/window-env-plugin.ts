@@ -1,5 +1,4 @@
-import { PluginOption } from 'vite'
-import { getEnv } from '../env'
+import { PluginOption, loadEnv } from 'vite'
 
 export function windowEnvPlugin (): PluginOption {
   let mode = ''
@@ -22,7 +21,9 @@ export function windowEnvPlugin (): PluginOption {
     transformIndexHtml (html) {
       return html.replace(`<script id="env"></script>`,
         `<script id="env">
-          ${'window.__env__ =' + JSON.stringify(getEnv(mode), null, 2)}
+          ${'window.__env__ =' + JSON.stringify(
+    loadEnv(mode, process.cwd()), null, 2,
+  )}
         </script>`)
     },
   }

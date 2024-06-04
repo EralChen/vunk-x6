@@ -19,7 +19,6 @@
     "unplugin-icons": "^0.18.1",
     "unplugin-vue-components": "^0.26.0",
     "vite-plugin-inspect": "^0.8.3",
-    "vitepress": "^1.1.4",
-    "vue-router": "^4.3.2"
+    "vitepress": "^1.1.4"
   }
 }

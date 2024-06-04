@@ -3,11 +3,12 @@ import { defineConfig, loadEnv, UserConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJSX from '@vitejs/plugin-vue-jsx'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
-import { windowEnvPlugin, unocssPreferences } from '@lib-env/app-utils'
+import { windowEnvPlugin } from '@lib-env/app-utils'
 import { packagesDir } from '@lib-env/path'
 import { viteExternalsPlugin } from 'vite-plugin-externals'
 import { appRoot, srcRoot } from './path.config'
 import VueDevTools from 'vite-plugin-vue-devtools'
+import unocss from 'unocss/vite'
 
 
 // https://vitejs.dev/config/
@@ -36,7 +37,7 @@ export default defineConfig(({ mode }) => {
       vueJSX(),
   
       windowEnvPlugin(),
-      unocssPreferences(),
+      unocss(),
       // legacy({
       //   modernPolyfills: ['esnext.array.at'],
       // }),
