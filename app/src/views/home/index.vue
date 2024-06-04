@@ -14,5 +14,7 @@ export default defineComponent({
 })
 </script>
 <template>
-  <div>{{ testName }}</div>
+  <div class="bg-test">
+    {{ testName }}
+  </div>
 </template>

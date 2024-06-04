@@ -44,6 +44,7 @@
 		"@vueuse/core": "^10.9.0",
 		"@vunk/core": "0.0.0-alpha.116",
 		"@vunk/form": "^1.1.76",
+		"@vunk/shared": "^0.2.1",
 		"@vunk/skzz": "0.0.0-alpha.110",
 		"element-plus": "npm:element-plus@latest",
 		"vue": "^3.4.21"
