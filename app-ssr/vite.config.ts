@@ -3,10 +3,10 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import vike from 'vike/plugin'
 
 import { AliasOptions, UserConfig, defineConfig, loadEnv } from 'vite'
-import { unocssPreferences } from '@lib-env/app-utils'
 import { appRoot, clientRoot } from './path.config'
 
 import path from 'path'
+import unocss from 'unocss/vite'
 
 
 const alias: AliasOptions = [
@@ -53,7 +53,7 @@ export default defineConfig(async ({ mode }) => {
  
       }),
 
-      unocssPreferences(),
+      unocss(),
       
       vue({
         include: [/\.vue$/, /\.md$/],
