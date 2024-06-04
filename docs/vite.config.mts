@@ -1,10 +1,9 @@
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import markdown from 'unplugin-vue-markdown/vite'
 import vike from 'vike/plugin'
 
 import { AliasOptions, UserConfig, defineConfig, loadEnv } from 'vite'
-import { unocssPreferences, containerPlugin, getDefaultHighlight, preWrapperPlugin } from '@lib-env/app-utils'
+import { vuePropsContainerPlugin } from '@lib-env/app-utils'
 import { appRoot, srcRoot } from './path.config'
 
 import path from 'path'
@@ -15,10 +14,10 @@ import IconsResolver from 'unplugin-icons/resolver'
 
 import Components from 'unplugin-vue-components/vite'
 
-import { MarkdownTransform } from './vitepress/plugins/markdown-transform'
-import { linkPlugin } from './vitepress/plugins/link'
-import { anchorPlugin } from './vitepress/plugins/anchor'
-
+import { createMarkdownPlugin } from '@vunk/shared/vite/markdown'
+import { fixPath } from '@lib-env/build-utils'
+import { workRoot } from '@lib-env/path'
+import unocss from 'unocss/vite'
 
 
 const alias: AliasOptions = [
@@ -77,55 +76,33 @@ export default defineConfig(async ({ mode }) => {
     
     plugins: [
       
-      MarkdownTransform(),
       vike({
         prerender: true, 
       }),
 
-      unocssPreferences(),
-      
+
       vue({
         include: [/\.vue$/, /\.md$/],
       }),
       vueJsx({}),
-
- 
-
-      markdown({
-        
-        markdownItOptions: {
-          html: true,
-          linkify: true,
-          highlight: (await getDefaultHighlight()),
-        },
-        
-        markdownItSetup (md) {
-          md
-            .use(preWrapperPlugin)
-            .use(containerPlugin)
-            .use(linkPlugin,
-              { 
-                target: '_blank', 
-                rel: 'noreferrer', 
-              },
-              {
-                base,
-                cleanUrls: true,
-              },
-            )
-            .use(anchorPlugin)
-  
-        },
-        wrapperClasses: [
-          'vp-doc',
-          'VPDoc',
-          'doc-content',
-        ],
-        
-      }),
       
+      unocss(),
 
-
+      await createMarkdownPlugin({
+        base: base,
+        demoContainerPluginSettings: {
+          root: path.resolve(appRoot, './examples'),
+          codeSourceTransform: fixPath,
+        },
+        sourceContainerPluginSettings: {
+          root: path.resolve(workRoot, 'packages'),
+        },
+        markdownItSetup (mdit) {
+          mdit.use(vuePropsContainerPlugin, {
+            componentsPath: path.resolve(workRoot, 'packages'),
+          })
+        },
+      }),
 
       Components({
         resolvers: [
