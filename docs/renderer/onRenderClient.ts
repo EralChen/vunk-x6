@@ -8,7 +8,6 @@ import type { VikeVueApp } from 'vike-vue/dist/types/PageContext'
 
 import { esriConfig } from '@vuesri/core/arcgis'
 
-import { useCopyCode } from '../vitepress/composables/copy-code'
 
 
 // 初始化代码复制功能
