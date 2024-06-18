@@ -12,6 +12,7 @@
 		"@vitejs/plugin-vue-jsx": "^3.1.0",
 		"@vue/compiler-sfc": "^3.4.21",
 		"arcgis-js-api": "^4.29.7",
+		"comment-parser": "^1.4.1",
 		"eslint": "^9.1.1",
 		"fast-glob": "^3.3.2",
 		"gulp": "^4.0.2",
@@ -44,7 +45,7 @@
 		"@vueuse/core": "^10.9.0",
 		"@vunk/core": "0.0.0-alpha.116",
 		"@vunk/form": "^1.1.77",
-		"@vunk/shared": "^0.2.1",
+		"@vunk/shared": "^0.3.3",
 		"@vunk/skzz": "0.0.0-alpha.110",
 		"element-plus": "npm:element-plus@latest",
 		"vue": "^3.4.21"

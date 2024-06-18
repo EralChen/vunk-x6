@@ -11,7 +11,6 @@ import { esriConfig } from '@vuesri/core/arcgis'
 
 
 // 初始化代码复制功能
-useCopyCode()
 
 esriConfig.apiKey = 'AAPKb14837d0d1fd48c2a9e834966b090d71jkWd8RL_697p0sRB9s87pEWRaefvBwcC_pdbOKwZd3Ka8xiulyqbHPassAKuHBxH'
 

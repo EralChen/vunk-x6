@@ -3,7 +3,6 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import vike from 'vike/plugin'
 
 import { AliasOptions, UserConfig, defineConfig, loadEnv } from 'vite'
-import { vuePropsContainerPlugin } from '@lib-env/app-utils'
 import { appRoot, srcRoot } from './path.config'
 
 import path from 'path'
@@ -97,10 +96,8 @@ export default defineConfig(async ({ mode }) => {
         sourceContainerPluginSettings: {
           root: path.resolve(workRoot, 'packages'),
         },
-        markdownItSetup (mdit) {
-          mdit.use(vuePropsContainerPlugin, {
-            componentsPath: path.resolve(workRoot, 'packages'),
-          })
+        propsContainerPluginSettings: {
+          root: path.resolve(workRoot, 'packages/components'),
         },
       }),
 
