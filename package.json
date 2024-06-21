@@ -8,6 +8,7 @@
 		"@lib-env/shared": "workspace:*",
 		"@types/gulp": "^4.0.17",
 		"@types/node": "18.0.4",
+		"@types/three": "^0.165.0",
 		"@vitejs/plugin-vue": "^5.0.4",
 		"@vitejs/plugin-vue-jsx": "^3.1.0",
 		"@vue/compiler-sfc": "^3.4.21",
@@ -42,12 +43,14 @@
 		"@skzz/platform": "0.0.0-alpha.73",
 		"@skzz/template": "workspace:*",
 		"@vuesri/core": "^1.0.9",
+		"@vuesri/three": "0.0.0-alpha.8",
 		"@vueuse/core": "^10.9.0",
 		"@vunk/core": "0.0.0-alpha.116",
 		"@vunk/form": "^1.1.77",
-		"@vunk/shared": "^0.3.3",
+		"@vunk/shared": "^0.3.4",
 		"@vunk/skzz": "0.0.0-alpha.110",
 		"element-plus": "npm:element-plus@latest",
+		"three": "^0.165.0",
 		"vue": "^3.4.21"
 	},
 	"scripts": {
