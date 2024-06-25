@@ -26,7 +26,11 @@
       ]
     },
     "lib": ["esnext", "dom"],
-    "rootDir": "../"
+    "rootDir": "../",
+
+
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false
   },
   "include": [
     "src/**/*.ts", 
