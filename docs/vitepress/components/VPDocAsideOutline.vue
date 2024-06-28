@@ -124,9 +124,9 @@ function setCurrentLinkByScroll () {
 </template>
 
 <style scoped>
+
 .vp-doc-outline-x{
   position: relative;
-  padding-left: 16px;
    --vk-float-block-color: var(--el-color-primary);
 }
 .VPDocAsideOutline {
@@ -141,6 +141,7 @@ function setCurrentLinkByScroll () {
   position: relative;
   border-left: 1px solid var(--vp-c-divider);
   /* padding-left: 16px; */
+  margin-left: 16px;
   font-size: 13px;
   font-weight: 500;
 }

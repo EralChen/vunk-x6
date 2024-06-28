@@ -44,10 +44,10 @@
 		"@vuesri/core": "^1.0.9",
 		"@vuesri/three": "0.0.0-alpha.8",
 		"@vueuse/core": "^10.9.0",
-		"@vunk/core": "0.0.0-alpha.116",
+		"@vunk/core": "0.0.0-alpha.121",
 		"@vunk/form": "^1.1.77",
-		"@vunk/shared": "^0.5.1",
-		"@vunk/skzz": "0.0.0-alpha.110",
+		"@vunk/shared": "^0.5.2",
+		"@vunk/skzz": "0.0.0-alpha.111",
 		"element-plus": "npm:element-plus@latest",
 		"three": "^0.165.0",
 		"vue": "^3.4.21"
