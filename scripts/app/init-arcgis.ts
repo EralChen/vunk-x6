@@ -1,5 +1,6 @@
 import { appRootDirs, workRoot } from '@lib-env/path'
-import { taskWithName, run } from '@lib-env/shared'
+import { gulpTask } from '@vunk/shared/function'
+import { run } from '@vunk/shared/node/process'
 import { series, dest, src } from 'gulp'
 import path from 'path'
 
@@ -10,10 +11,10 @@ const assetsDir = path.resolve(workRoot, './node_modules/@arcgis/core/assets')
 const tasks = appRootDirs.map(appRoot => {
   const appPublicDir  = path.resolve(appRoot, 'public')
   return [
-    taskWithName('clean', async () => {
+    gulpTask('clean', async () => {
       await run('rm -rf Esri', appPublicDir)
     }),
-    taskWithName('add', async () => {
+    gulpTask('add', async () => {
       src(
         path.resolve(assetsDir, '**/*'),
       ).pipe(

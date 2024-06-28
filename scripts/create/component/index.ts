@@ -1,6 +1,7 @@
 import { parallel, series } from 'gulp'
 import mri from 'mri'
-import { taskWithName } from '@lib-env/shared'
+import { gulpTask } from '@vunk/shared/function'
+
 import fsp from 'fs/promises'
 import path from 'path'
 import { pkgsComponentsDir } from '@lib-env/path'
@@ -23,25 +24,25 @@ export default series(
     recursive: true,
   }),
   parallel(
-    taskWithName('createIndex', async () => {
+    gulpTask('createIndex', async () => {
       return fsp.appendFile(
         path.resolve(componentPath, './index.ts'),
         createIndexStr(capName),
       )
     }),
-    taskWithName('createTypesFile', async () => {
+    gulpTask('createTypesFile', async () => {
       return fsp.appendFile(
         path.resolve(srcPath, './types.ts'),
         createTypesStr(),
       )
     }),
-    taskWithName('createVueFile', async () => {
+    gulpTask('createVueFile', async () => {
       return fsp.appendFile(
         path.resolve(srcPath, './index.vue'),
         createVueStr(capName),
       )
     }),
-    taskWithName('createCtxFile', async () => {
+    gulpTask('createCtxFile', async () => {
       return fsp.appendFile(
         path.resolve(srcPath, './ctx.ts'),
         createCtxStr(),

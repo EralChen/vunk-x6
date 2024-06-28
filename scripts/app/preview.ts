@@ -1,13 +1,16 @@
 import { appRootDirs } from '@lib-env/path'
-import { taskWithName, run } from '@lib-env/shared'
+import { gulpTask } from '@vunk/shared/function'
+import { run } from '@vunk/shared/node/process'
 import { series } from 'gulp'
 import path from 'path'
 
 export default series([
-  taskWithName('build', async () => {
+
+  gulpTask('build', async () => {
     await run('npm run build', appRootDirs[0])
   }),
-  taskWithName('http-server', async () => {
+  gulpTask('http-server', async () => {
     await run('npx http-server ./', path.resolve(appRootDirs[0], 'dist'))
   }),
+  
 ])
