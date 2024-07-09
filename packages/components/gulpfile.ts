@@ -1,6 +1,6 @@
 import { parallel } from 'gulp'
 import path from 'path'
-import { globSync } from 'fast-glob'
+import { sync } from 'fast-glob'
 import { distDir } from '@lib-env/path'
 import { filePathIgnore } from '@lib-env/build-constants'
 import { genTypes, rollupFiles } from '@lib-env/build-utils'
@@ -11,7 +11,7 @@ const buildFile = '**/index.ts'
 const baseDirname = __dirname.split(path.sep).pop() as string
 const external = []
 
-const filePaths = globSync(buildFile, {
+const filePaths = sync(buildFile, {
   cwd: path.resolve(__dirname, './'),
   onlyFiles: true,
   absolute: true,
