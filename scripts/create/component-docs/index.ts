@@ -98,7 +98,7 @@ export default series(
 
     await fsp.writeFile(
       path.resolve(theExamplesPath, `basic.vue`),
-      createVue(),
+      createVue(mriData),
       {
         encoding: 'utf-8',
       },
