@@ -82,6 +82,8 @@ export async function createApp () {
 
   })
 
+  app.use('/', createVikeHandler())
+  app.use('/star-wars', createVikeHandler())
 
   /**
    * Vike route

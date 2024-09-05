@@ -12,5 +12,6 @@
 import { useData } from 'vike-vue/useData'
 import type { Data } from './+data.js'
 const base = import.meta.env.VITE_BASE_URL ?? ''
-const movies = useData<Data>()
+const { movies } = useData<Data>()
+
 </script>

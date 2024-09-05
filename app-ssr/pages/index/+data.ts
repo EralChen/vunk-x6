@@ -6,7 +6,6 @@ export type Data = ApiReturnType<typeof data>
 
 
 export async function data () {
-
   return request<{
     name: string
   }>({
@@ -15,6 +14,6 @@ export async function data () {
     params: {
       name: 'world',
     },
-  }).then(res => res.name)
+  })
 }
 

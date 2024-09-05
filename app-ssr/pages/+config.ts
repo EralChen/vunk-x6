@@ -9,7 +9,7 @@ export default {
   Head,
   // <title>
   title: 'My Vike App',
-  extends: vikeVue,
+  extends: [vikeVue],
   passToClient: [
     'crowdin',
   ],
