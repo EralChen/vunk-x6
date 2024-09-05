@@ -1,3 +1,5 @@
+import { capitalize } from 'vue'
+import { LIB_PRE } from '@lib-env/build-constants'
 export const createMd = (t: string, l: string) => `--- 
 title: ${t}
 lang: zh-CN
@@ -17,8 +19,11 @@ ${l}/basic
 ## ${t} 其他
 `
 
-export const createVue = () => `<script lang="ts" setup>
-
+export const createVue = (mriData: {
+  t: string
+  l: string
+}) => `<script lang="ts" setup>
+import { ${capitalize(LIB_PRE)}${mriData.t} } from '@skzz-layershop/components/${mriData.l}'
 </script>
 <template>
   <div></div>

@@ -1,4 +1,4 @@
-import { errorAndExit, readJson, taskWithName, writeJson } from '@lib-env/shared'
+/* eslint-disable no-console */
 import { series } from 'gulp'
 import mri from 'mri'
 import { docRoot } from '@lib-env/path'
@@ -6,6 +6,9 @@ import path from 'path'
 import { createMd, createVue } from './temp'
 import fsp from 'fs/promises'
 import { camelize, capitalize } from 'vue'
+import { gulpTask } from '@vunk/shared/function'
+import { readJsonSync, writeJsonSync } from '@vunk/shared/node/fs'
+
 type MriDataP = keyof typeof import(
   '../../../docs/renderer/crowdin/zh-CN/pages/component.json'
 )
@@ -24,7 +27,8 @@ interface MriData {
 const argv = process.argv.slice(2)
 const mriData = mri<MriData>(argv)
 if (!mriData.l) {
-  errorAndExit(new Error('请输入 link 和 title 作为参数'))
+  console.error('请输入 link 和 title 作为参数')
+  process.exit(1)
 }
 
 if (!mriData.t) {
@@ -33,13 +37,14 @@ if (!mriData.t) {
 
 export default series(
   
-  taskWithName('crowdin pages add link', async () => {
+  gulpTask('crowdin pages add link', async () => {
     // 读到 crowdin pages 中的 component.json 目录
-    const json = readJson(componentJsonFile)
+    const json = readJsonSync(componentJsonFile)
   
     const whereAdd = json[mriData.p]
     if (!whereAdd) {
-      return errorAndExit(new Error(`componentJson 中 找不到 p = ${mriData.p}  的键`))
+      console.error(`componentJson 中 找不到 p = ${mriData.p}  的键`)
+      process.exit(1)
     }
 
     whereAdd.children ||= []
@@ -49,12 +54,12 @@ export default series(
       text: mriData.t,
     })
 
-    writeJson(componentJsonFile, json, 2)
+    writeJsonSync(componentJsonFile, json, 2)
 
 
   }),
 
-  taskWithName('add md to docs', async () => {
+  gulpTask('add md to docs', async () => {
     // pages\zh-CN\component\${mriData.l}\+Page.md
     const componentMdRoot = path.resolve(docRoot, './pages/zh-CN/component')
     
@@ -85,7 +90,7 @@ export default series(
 
   }),
 
-  taskWithName('add vue to docs examples', async () => {
+  gulpTask('add vue to docs examples', async () => {
     const theExamplesPath = path.resolve(docRoot, `./examples/${mriData.l}`)
     await fsp.mkdir(theExamplesPath, {
       recursive: true,
@@ -93,7 +98,7 @@ export default series(
 
     await fsp.writeFile(
       path.resolve(theExamplesPath, `basic.vue`),
-      createVue(),
+      createVue(mriData),
       {
         encoding: 'utf-8',
       },

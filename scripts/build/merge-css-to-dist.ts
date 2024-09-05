@@ -1,12 +1,13 @@
 import { dest, series, src } from 'gulp'
-import { taskWithName } from '@lib-env/shared'
+import { gulpTask } from '@vunk/shared/function'
+
 import { distDir } from '@lib-env/path'
 import path from 'path'
 import { sync } from 'fast-glob'
 import concat from 'gulp-concat'
 export default series(
   // 合并所有css到入口
-  taskWithName('buildCss', async () => {
+  gulpTask('buildCss', async () => {
 
     const cssOutPath = path.resolve(distDir, './components')
 

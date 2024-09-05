@@ -3,12 +3,12 @@ import { defineConfig, loadEnv, UserConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJSX from '@vitejs/plugin-vue-jsx'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
-import { windowEnvPlugin } from '@lib-env/app-utils'
 import { packagesDir } from '@lib-env/path'
 import { viteExternalsPlugin } from 'vite-plugin-externals'
 import { appRoot, srcRoot } from './path.config'
 import VueDevTools from 'vite-plugin-vue-devtools'
 import unocss from 'unocss/vite'
+import { windowEnv } from '@vunk/shared/vite/plain'
 
 
 // https://vitejs.dev/config/
@@ -36,7 +36,7 @@ export default defineConfig(({ mode }) => {
       vue(),
       vueJSX(),
   
-      windowEnvPlugin(),
+      windowEnv(),
       unocss(),
       // legacy({
       //   modernPolyfills: ['esnext.array.at'],
@@ -54,22 +54,7 @@ export default defineConfig(({ mode }) => {
 
     ],
 
-    // css: {
-    //   postcss: {
-    //     plugins: [
-    //       {
-    //         postcssPlugin: 'internal:charset-removal',
-    //         AtRule: {
-    //           charset: (atRule) => {
-    //             if (atRule.name === 'charset') {
-    //               atRule.remove()
-    //             }
-    //           },
-    //         },
-    //       },
-    //     ],
-    //   },
-    // },
+
   } as UserConfig
 
 })

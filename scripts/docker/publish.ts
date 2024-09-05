@@ -1,5 +1,6 @@
 import { workRoot } from '@lib-env/path'
-import { taskWithName, run } from '@lib-env/shared'
+import { gulpTask } from '@vunk/shared/function'
+import { run } from '@vunk/shared/node/process'
 import { series } from 'gulp'
 import mri from 'mri'
 
@@ -13,13 +14,13 @@ if (!mriData.v) {
   mriData.v = 'latest'
 }
 export default series([
-  taskWithName('docker build', async () => {
+  gulpTask('docker build', async () => {
     await run(`docker build -t zz-platform-config:${mriData.v} .`, workRoot)
   }),
-  taskWithName('docker tag', async () => {
+  gulpTask('docker tag', async () => {
     await run(`docker tag zz-platform-config:${mriData.v} t1.zjsophon.com:58088/snapshot/zz-platform-config:${mriData.v}`, workRoot)
   }),
-  taskWithName('docker push', async () => {
+  gulpTask('docker push', async () => {
     await run(`docker push t1.zjsophon.com:58088/snapshot/zz-platform-config:${mriData.v}`, workRoot)
   }),
  

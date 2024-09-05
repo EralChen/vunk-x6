@@ -4,9 +4,11 @@ import { ElScrollbar } from 'element-plus'
 import Navbar from './navbar.vue'
 import Aside from './aside.vue'
 import Toc from './toc.vue'
-import { nextTick, shallowRef } from 'vue'
-import { onContentUpdated } from '#/renderer/page'
+import { nextTick, ref, shallowRef } from 'vue'
+import { onContentUpdated } from '@vunk/shared/vike/vue/hooks'
 import type { PageContext } from 'vike/types'
+import { ArrowLeft } from '@element-plus/icons-vue'
+import { VkCollapseTransitionHorizontal } from '@vunk/core/components/collapse-transition-horizontal'
 
 const scrollbarNode = shallowRef<InstanceType<typeof ElScrollbar>>()
 
@@ -37,6 +39,12 @@ onContentUpdated(() => {
   hooks: ['beforeUnmount'],
 })
 
+/* aside 收起 */
+const asideCollapsed = ref(false)
+const asideToggle = () => {
+  asideCollapsed.value = !asideCollapsed.value
+}
+/* end of aside 收起 */
 </script>
 <template>
   <VkDuplex class="layout-default">
@@ -48,11 +56,40 @@ onContentUpdated(() => {
 
     <div
       sk-flex
-      class="h-100%"
+      class="h-100% relative"
     >
-      <div class="layout-default-aside-x">
-        <div class="layout-default-aside">
-          <Aside></Aside>
+      <div class="layout-default-aside-x bg-bg-base" sk-flex>
+        <VkCollapseTransitionHorizontal>
+          <div
+            v-show="!asideCollapsed" class="layout-default-aside"
+            :class="{
+              'is-collapsed': asideCollapsed,
+            }"
+          >
+            <Aside></Aside>
+          </div>
+        </VkCollapseTransitionHorizontal>
+     
+        <div 
+          bg-fill-light
+          border-r-1
+          border-l-1
+          border-t-0
+          border-b-0
+          border-solid
+          border-color-border-base
+          cursor-pointer
+          sk-flex="col-center2"
+          @click="asideToggle"
+        >
+          <ElIcon
+            :class="{
+              'rotate-180': asideCollapsed,
+              'transition-transform': true,
+            }"
+          >
+            <ArrowLeft></ArrowLeft>
+          </ElIcon>
         </div>
       </div>
 
@@ -104,7 +141,6 @@ body, #app, #page-view {
 }
 .doc-content-container{
   flex-grow: 1;
-  padding-right: 64px;
 }
 .layout-default {
   --layout-aside-width: 300px;
@@ -119,10 +155,13 @@ body, #app, #page-view {
   border-bottom: var(--el-border-color) 1px solid;
 }
 .layout-default-aside{
-  min-width: var(--layout-aside-width);
+  /* min-width: var(--layout-aside-width); */
   height: 100%;
 }
 
+.layout-default-aside.is-collapsed{
+  min-width: 0;
+}
 
 </style>
 
@@ -136,4 +175,15 @@ body, #app, #page-view {
 .layout-default-main {
   width: 100%;
 }
+</style>
+
+<style>
+/* 手机尺寸下 */
+@media screen and (max-width: 768px){
+  .layout-default-aside-x{
+    position: absolute;
+    z-index: 5;
+  }
+}
+
 </style>
