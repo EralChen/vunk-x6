@@ -4,12 +4,11 @@ import vue from '@vitejs/plugin-vue'
 import vueJSX from '@vitejs/plugin-vue-jsx'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { packagesDir } from '@lib-env/path'
-import { viteExternalsPlugin } from 'vite-plugin-externals'
 import { appRoot, srcRoot } from './path.config'
 import VueDevTools from 'vite-plugin-vue-devtools'
 import unocss from 'unocss/vite'
 import { windowEnv } from '@vunk/shared/vite/plain'
-
+import createExternal from 'vite-plugin-external'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -41,7 +40,11 @@ export default defineConfig(({ mode }) => {
       // legacy({
       //   modernPolyfills: ['esnext.array.at'],
       // }),
-      viteExternalsPlugin(),
+      createExternal({
+        externals: {
+        },
+      }),
+      
       createSvgIconsPlugin({
         // Specify the icon folder to be cached
         iconDirs: [
