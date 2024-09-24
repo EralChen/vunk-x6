@@ -1,41 +1,43 @@
 import express, { ErrorRequestHandler } from 'express'
 import morgan from 'morgan'
 import cookieParser from 'cookie-parser'
-import mri from 'mri'
 import httpErrors from 'http-errors'
 import path from 'path'
 import { serverRoot, appRoot } from '../path.config'
 import { renderPage } from 'vike/server'
-import { loadEnv, createServer } from 'vite'
+import { createServer } from 'vite'
 
 
-import testRouter from './routes/test'
-import usersRouter from './routes/users'
+import useTestRouter from './routes/test'
+import useUsersRouter from './routes/users'
+
 
 import { rCrowdinReflect } from './crowdin'
 import { CrowdinFileLang } from './crowdin/output'
+import { createProxyMiddleware, fixRequestBody } from 'http-proxy-middleware'
+import { loadSsrMetaEnv } from './utils/readSsrMetaEnv'
 
-interface MriData {
-  mode: string
-}
-const argv = process.argv.slice(2)
-const mriData = mri<MriData>(argv)
 const isProduction = process.env.NODE_ENV === 'production'
-const mode = mriData.mode || (
-  isProduction ? 'production' : 'development'
-)
-const env = loadEnv(mode, appRoot, '') as SsrMetaEnv
-
+const env = loadSsrMetaEnv()
 
 export async function createApp () {
+
   const crowdinReflect = await rCrowdinReflect()
 
   const app = express()
 
-  app.use('/test', testRouter)
+  // 开启日志
+  app.use(morgan('dev'))
+  // 处理 application/json 格式的请求体
+  app.use(express.json())
+  // 处理 application/x-www-form-urlencoded 格式的请求体
+  app.use(express.urlencoded({ extended: false }))
+  // 解析所有传入请求的cookie，并将它们存储在req.cookies对象中
+  app.use(cookieParser())
 
-  app.use('/users', usersRouter)
-
+  
+  useTestRouter(app)
+  useUsersRouter(app)
 
   if (isProduction) {
     app.use(express.static(`${appRoot}/dist/client`))
@@ -59,16 +61,25 @@ export async function createApp () {
   app.set('views', path.join(serverRoot, 'views'))
   app.set('view engine', 'pug')
 
-  // 开启日志
-  app.use(morgan('dev'))
-  // 处理 application/json 格式的请求体
-  app.use(express.json())
-  // 处理 application/x-www-form-urlencoded 格式的请求体
-  app.use(express.urlencoded({ extended: false }))
-  // 解析所有传入请求的cookie，并将它们存储在req.cookies对象中
-  app.use(cookieParser())
-  // 设置静态资源目录
-  app.use(express.static(path.join(appRoot, 'public')))
+
+  if (env.VITE_PROXY_TARGET_URL) {
+  // 创建代理中间件
+    const proxy = createProxyMiddleware({
+      target: env.VITE_PROXY_TARGET_URL, // 目标服务器的地址
+      changeOrigin: true,
+      pathRewrite: {
+        '^/proxy': '', // 重写请求，去掉 /proxy
+      },
+    
+      on: {
+        proxyReq: fixRequestBody,
+      },
+
+    })
+    app.use('/proxy', proxy)
+  }
+
+
 
 
 
@@ -132,7 +143,6 @@ export async function createApp () {
   app.use(function (req, res, next) {
     next(httpErrors(404))
   })
-
 
 
   // error handler

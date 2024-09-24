@@ -1,20 +1,17 @@
 import express from 'express'
+import { createApiRoute } from '../utils/createApiRoute'
 
 
-/**
- * @description
- * '/test' 路由
- */
-const router = express.Router()
+export default function (
+  app: express.Express,
+) {
+  const router = createApiRoute(app, '/test')
 
-router.get('/', (req, res, next) => {
-  if (req.query.name) {
+  router.get('/', (req, res) => {
     res.json({
-      name: req.query.name,
+      name: 'test',
     })
-  } else {
-    next(new Error('no name provided'))
-  }
-})
-
-export default router
+  })
+  
+  return router
+}

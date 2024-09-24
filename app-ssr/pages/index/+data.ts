@@ -11,9 +11,6 @@ export async function data () {
   }>({
     method: 'GET',
     url: '/test',
-    params: {
-      name: 'world',
-    },
   })
 }
 

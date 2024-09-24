@@ -7,6 +7,7 @@ import { loadEnv } from 'vite'
 import consola from 'consola'
 import os from 'os'
 import express from 'express'
+import { networkServers } from '@vunk/shared/node/os'
 
 interface MriData {
   mode: string
@@ -20,11 +21,10 @@ const mode = mriData.mode || (
   isProduction ? 'production' : 'development'
 )
 const env = loadEnv(mode, appRoot, '') as SsrMetaEnv
-const port = normalizePort(env.SERVER_PORT ?? 3000) 
+const port = normalizePort(env.SERVER_PORT ?? 3000)  as number
 
 const base = env.VITE_BASE_URL ?? '/'
 
-const networks = getNetworks()
 
 
 const app = express()
@@ -102,9 +102,13 @@ function listeningHandler (server: http.Server) {
   const addr = server.address()
   if (!addr) return
 
+
   if (typeof addr === 'string') {
     debug(`Listening on pipe ${addr}`)
   } else {
+    const networks = networkServers({
+      port,
+    })
     const addrStr = addr.address
     if (addrStr === '::') {
       networks.forEach((network) => {
@@ -115,32 +119,5 @@ function listeningHandler (server: http.Server) {
 }
 
 
-// 获取所有网络接口的函数
-function getNetworks () {
-  const interfaces = os.networkInterfaces()
-  const networks: string[] = []
-  for (const name of Object.keys(interfaces)) {
-    const item = interfaces[name]
-    if (!item) {
-      continue
-    }
-    for (const iface of item) {
-      if (
-        'IPv4' !== iface.family 
-        || iface.internal !== false
-      ) {
-        // 跳过本地主机和非 ipv4 地址
-        continue
-      }
 
-
-      networks.push(
-        `http://${iface.address}:${port}`,
-      )
-    
-    }
-  }
-
-  return networks
-}
 

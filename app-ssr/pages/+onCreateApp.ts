@@ -2,6 +2,8 @@ import ElmentPlus from 'element-plus'
 import type { OnCreateAppSync } from 'vike-vue'
 
 import '../api/init'
+import '../client/styles'
+
 import 'uno.css'
 
 export const onCreateApp: OnCreateAppSync = (pageContext) => {

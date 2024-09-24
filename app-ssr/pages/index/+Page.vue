@@ -1,7 +1,10 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
-const data = ref('')
+import { useData } from 'vike-vue/useData'
+import type { Data } from './+data'
+import { computed } from 'vue'
+const data = useData<Data>()
+const name = computed(() => data.name)
 </script>
 <template>
-  <div>{{ data }}</div>
+  <div>{{ name }}</div>
 </template>
