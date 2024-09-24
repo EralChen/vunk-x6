@@ -5,7 +5,6 @@ import mri from 'mri'
 import { appRoot } from '../../path.config'
 import { loadEnv } from 'vite'
 import consola from 'consola'
-import os from 'os'
 import express from 'express'
 import { networkServers } from '@vunk/shared/node/os'
 
