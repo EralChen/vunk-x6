@@ -4,6 +4,7 @@ import oxlint from 'eslint-plugin-oxlint'
 export default eslint({
   ...oxlint.configs['flat/recommended'],
   rules: {
+    'no-empty': 'off',
     'node/prefer-global/process': 'off',
     'vue/html-self-closing': 'off',
     'array-callback-return': 'off',

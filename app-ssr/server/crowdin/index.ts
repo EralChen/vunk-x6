@@ -1,8 +1,8 @@
+import type { CrowdinFile, CrowdinFileLangMedia, CrowdinFilePath } from '#/shared'
 import type { NormalObject } from '@vunk/core'
-import type { CrowdinFilePath } from './output'
 import path from 'node:path'
+import { CrowdinFileLang } from '#/shared'
 import { globSync } from 'fast-glob'
-import { CrowdinFileLang } from './output'
 
 function importGlob (pattern: string) {
   const files = globSync(pattern, {
@@ -15,21 +15,9 @@ function importGlob (pattern: string) {
   }, {} as Record<string, () => Promise<NormalObject>>)
 }
 
-interface CrowdinFile<S extends NormalObject = NormalObject> {
-  lang: string
-  path: string
-  basename: string
-  source: S
-}
-
 /* lang */
 
-interface CrowdinFileLangMedia {
-  label: string
-  value: CrowdinFileLang
-  glob: Record<string, () => Promise<NormalObject>>
-}
-const CrowdinFileLangOptions: CrowdinFileLangMedia[] = [
+const crowdinFileLangOptions: CrowdinFileLangMedia[] = [
   {
     label: '中文',
     value: CrowdinFileLang.zhCN,
@@ -41,7 +29,7 @@ const CrowdinFileLangOptions: CrowdinFileLangMedia[] = [
     glob: importGlob('./en-US/**/*.json'),
   },
 ]
-const CrowdinFileLangReflect = CrowdinFileLangOptions.reduce((acc, cur) => {
+const crowdinFileLangReflect = crowdinFileLangOptions.reduce((acc, cur) => {
   acc[cur.value] = cur
   return acc
 }, {} as Record<CrowdinFileLang, CrowdinFileLangMedia>)
@@ -50,7 +38,7 @@ const CrowdinFileLangReflect = CrowdinFileLangOptions.reduce((acc, cur) => {
 async function rCrowdinFiles (
   lang: CrowdinFileLang = CrowdinFileLang.zhCN,
 ) {
-  const files = CrowdinFileLangReflect[lang]?.glob || []
+  const files = crowdinFileLangReflect[lang]?.glob || []
   const crowdinFiles: CrowdinFile[] = []
 
   for (const filepath in files) {
@@ -81,11 +69,9 @@ export async function rCrowdinReflect () {
     CrowdinFileLang,
     Record<CrowdinFilePath, CrowdinFile>
   >
-
-  for (const lang of CrowdinFileLangOptions) {
+  for (const lang of crowdinFileLangOptions) {
     const files = await rCrowdin(lang.value)
     crowdinReflect[lang.value] = files
   }
-
   return crowdinReflect
 }
