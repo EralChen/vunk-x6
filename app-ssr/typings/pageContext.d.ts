@@ -1,4 +1,4 @@
-import { Crowdin } from '../shared/crowdin'
+import type { Crowdin } from '../shared/crowdin'
 
 declare global {
   namespace Vike {
@@ -9,7 +9,7 @@ declare global {
     }
   }
 }
- 
+
 // If you define Vike.PageContext in a .d.ts file then
 // make sure there is at least one export/import statment.
 // Tell TypeScript this file isn't an ambient module:

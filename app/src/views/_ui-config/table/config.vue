@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-import { SkAppForm, __SkAppForm } from '@skzz/platform'
-import { elTableV2Theme } from '@skzz/platform/theme'
+import type { __SkAppForm } from '@skzz/platform'
+import type { elTableV2Theme } from '@skzz/platform/theme'
+import { SkAppForm } from '@skzz/platform'
 
 const formItems: __SkAppForm.CoreFormItem<keyof typeof elTableV2Theme>[] = [
   {
@@ -58,12 +59,13 @@ const formItems: __SkAppForm.CoreFormItem<keyof typeof elTableV2Theme>[] = [
     prop: '--el-table-expanded-cell-bg-color',
     label: '展开行背景颜色',
   },
-  
+
 ]
 </script>
+
 <template>
   <SkAppForm
-    :label-position="'top'"
+    label-position="top"
     :layout="true"
     :form-items="formItems"
   >

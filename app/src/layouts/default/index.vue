@@ -1,7 +1,8 @@
 <script lang="ts" setup>
+import type { Ref } from 'vue'
 import { VkDuplexCalc } from '@vunk/core'
-import { defineAsyncComponent, Ref, ref } from 'vue'
 import { ElScrollbar } from 'element-plus'
+import { defineAsyncComponent, ref } from 'vue'
 import { onBeforeRouteUpdate } from 'vue-router'
 
 const AppMain = defineAsyncComponent(() => import('./app-main.vue'))
@@ -19,10 +20,8 @@ onBeforeRouteUpdate(() => {
     scrollbarNode.value?.update()
   }, 400)
 })
-
-
-
 </script>
+
 <template>
   <VkDuplexCalc class="layout-default">
     <template #one>
@@ -42,10 +41,10 @@ onBeforeRouteUpdate(() => {
         ></LayoutAside>
       </div>
 
-      <VkDuplexCalc 
-        v-if="asideReady" 
+      <VkDuplexCalc
+        v-if="asideReady"
         class="flex-1 overflow-hidden"
-        :height-property="'--zz-page-height'"
+        height-property="--zz-page-height"
       >
         <template #one>
           <TagsView></TagsView>
@@ -74,7 +73,6 @@ onBeforeRouteUpdate(() => {
   content-visibility: auto;
 } */
 </style>
-
 
 <style>
 .layout-default-aside-x,

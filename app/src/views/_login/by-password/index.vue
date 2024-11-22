@@ -1,10 +1,12 @@
 <script lang="tsx" setup>
+import type { __SkAppForm } from '@skzz/platform/components/app-form'
+import type { SetDataEvent } from '@vunk/core'
+import type { LoginFormData } from '../types'
 import { loginByPassword } from '@skzz/platform/api/login'
-import { setData, SetDataEvent } from '@vunk/core'
-import { SkAppForm, __SkAppForm } from '@skzz/platform/components/app-form'
+import { SkAppForm } from '@skzz/platform/components/app-form'
+import { setData } from '@vunk/core'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { LoginFormData } from '../types'
 import CaptchaVue from './captcha.vue'
 
 // const props = defineProps({
@@ -16,14 +18,12 @@ const emit = defineEmits({
 /* --------------------- */
 const router = useRouter()
 
-
-
 const formData = ref({
   userCode: 'gyzz',
   password: '123456',
 } as LoginFormData)
 
-const login = () => {
+function login () {
   loginByPassword(formData.value).then(() => {
     router.push({ path: '/home' })
   })
@@ -43,7 +43,7 @@ const formItems: __SkAppForm.FormItem<keyof LoginFormData>[] = [
       required: true,
       message: '请输入用户名',
     },
-    
+
   },
   {
     templateType: 'VkfInput',
@@ -57,14 +57,17 @@ const formItems: __SkAppForm.FormItem<keyof LoginFormData>[] = [
   {
     templateType: 'Component',
     // will set captchaId and captcha
-    is: () => <CaptchaVue
-      data={formData.value}
-      prop="captcha"
-      {
-        ...defaultFormItemProps
-      }
-      onSetData={e => setData(formData.value, e)}
-    ></CaptchaVue>,
+    is: () => (
+      <CaptchaVue
+        data={formData.value}
+        prop="captcha"
+        {
+          ...defaultFormItemProps
+        }
+        onSetData={e => setData(formData.value, e)}
+      >
+      </CaptchaVue>
+    ),
   },
   {
     templateType: 'VkfButton',
@@ -72,7 +75,7 @@ const formItems: __SkAppForm.FormItem<keyof LoginFormData>[] = [
     class: 'sub-btn-full pt-56px',
     type: 'primary',
     size: 'large',
-    
+
     validate: true,
     onClick: () => {
       login()
@@ -80,10 +83,10 @@ const formItems: __SkAppForm.FormItem<keyof LoginFormData>[] = [
     },
   },
 ]
-
 </script>
+
 <template>
-  <SkAppForm 
+  <SkAppForm
     :data="formData"
     :form-items="formItems"
     @set-data="setData(formData, $event)"

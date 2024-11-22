@@ -1,5 +1,7 @@
 <script lang="ts" setup>
-import { SkAppForm, __SkAppForm } from '@skzz/platform/components/app-form'
+import type { __SkAppForm } from '@skzz/platform/components/app-form'
+import { SkAppForm } from '@skzz/platform/components/app-form'
+
 const formItems: __SkAppForm.CoreFormItem[] = [
   {
     templateType: 'VkfInput',
@@ -74,11 +76,12 @@ const formItems: __SkAppForm.CoreFormItem[] = [
     label: '禁用边框颜色',
   },
 
-] 
+]
 </script>
+
 <template>
   <SkAppForm
-    :label-position="'top'"
+    label-position="top"
     :layout="true"
     :form-items="formItems"
   >

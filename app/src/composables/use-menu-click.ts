@@ -1,6 +1,7 @@
-import { onScopeDispose } from 'vue'
 import { createSharedComposable } from '@vueuse/core'
-const useMenuClick = () => {
+import { onScopeDispose } from 'vue'
+
+function useMenuClick () {
   document.addEventListener('click', upLinkClickToItem)
   onScopeDispose(() => {
     document.removeEventListener('click', upLinkClickToItem)
@@ -13,11 +14,9 @@ const useMenuClick = () => {
     }) as HTMLElement
 
     if (elMenuItem) {
-      elMenuItem.getElementsByTagName('a')[0]?.click()                 
+      elMenuItem.getElementsByTagName('a')[0]?.click()
     }
   }
-
 }
 
 export const useSharedMenuClick = createSharedComposable(useMenuClick)
-

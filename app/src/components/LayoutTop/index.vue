@@ -1,23 +1,24 @@
 <script lang="ts" setup>
-import DarkSwitch from '_c/DarkSwitch/index.vue'
-import { defineAsyncComponent } from 'vue'
 import { useThemeStore } from '@/stores/theme'
-import { ElAvatar } from 'element-plus'
 import { logout } from '@skzz/platform/api/login'
+import DarkSwitch from '_c/DarkSwitch/index.vue'
 import SizeCtrl from '_c/SizeCtrl/index.vue'
+import { ElAvatar } from 'element-plus'
+import { defineAsyncComponent } from 'vue'
+
 defineEmits({
-  'load': null,
+  load: null,
 })
 const LayoutTopMenu = defineAsyncComponent(() => import('_c/LayoutTopMenu/index.vue'))
 const { layoutTopClassName } = useThemeStore()
-
 </script>
+
 <template>
   <div
     sk-flex="row-between-center"
     class="layout-top text-white"
     :class="{
-      [layoutTopClassName]: true
+      [layoutTopClassName]: true,
     }"
   >
     <div sk-flex="row_center">
@@ -28,15 +29,14 @@ const { layoutTopClassName } = useThemeStore()
         @load="$emit('load')"
       ></LayoutTopMenu>
     </div>
-      
+
     <div
       class="pr-l sub-ml-widget-space "
       sk-flex="row_center"
     >
       <DarkSwitch></DarkSwitch>
-                
-      <SizeCtrl></SizeCtrl>
 
+      <SizeCtrl></SizeCtrl>
 
       <ElDropdown>
         <ElAvatar
@@ -53,7 +53,7 @@ const { layoutTopClassName } = useThemeStore()
             <!-- <el-dropdown-item disabled>Action 4</el-dropdown-item> -->
             <el-dropdown-item divided>
               <ElLink
-                :type="'danger'"
+                type="danger"
                 @click="logout"
               >
                 退出登录
@@ -63,11 +63,11 @@ const { layoutTopClassName } = useThemeStore()
         </template>
       </ElDropdown>
 
-      
       <!-- <ElButton @click="logout">退出</ElButton> -->
     </div>
   </div>
 </template>
+
 <style>
 .layout-top{
   background: var(--layout-top-bg, var(--el-color-primary));

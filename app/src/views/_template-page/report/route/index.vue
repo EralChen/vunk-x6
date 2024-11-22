@@ -1,16 +1,17 @@
 <script lang="tsx" setup>
-import PageX from '_c/PageX/index.vue'
-import { 
-  SkAppTables, __SkAppTables, 
-  SkAppQueryForm, __SkAppQueryForm, 
+import type { __SkAppQueryForm, __SkAppTables, Pagination } from '@skzz/platform'
+import type { ApiReturnType, NormalObject } from '@vunk/core'
+import {
   SkAppOperations,
-  Pagination,
+  SkAppQueryForm,
+  SkAppTables,
 } from '@skzz/platform'
-import { ApiReturnType, NormalObject, setData, VkDuplexCalc } from '@vunk/core'
-import { reactive, ref, watch } from 'vue'
-import { rRoles, dRoles } from '@skzz/platform/api/system/role'
-import { genColumn } from '@skzz/platform/shared/utils-data'
+import { dRoles, rRoles } from '@skzz/platform/api/system/role'
 import { useRouterTo, useRouteSocket } from '@skzz/platform/composables'
+import { genColumn } from '@skzz/platform/shared/utils-data'
+import { setData, VkDuplexCalc } from '@vunk/core'
+import PageX from '_c/PageX/index.vue'
+import { reactive, ref, watch } from 'vue'
 
 type Res = ApiReturnType<typeof rRoles>
 
@@ -19,7 +20,6 @@ const { routerNext } = useRouterTo()
 const receiver = createReceiver()
 
 receiver.addListener(r)
-
 
 /* query */
 const queryItems: __SkAppQueryForm.FormItem[] = [
@@ -35,19 +35,16 @@ const pagination = ref<Pagination>({
   pageSize: 10,
   start: 0,
 })
-watch(pagination, r, { deep: true , immediate: true })
+watch(pagination, r, { deep: true, immediate: true })
 // watch(queryData, r, { deep: true , immediate: true })
-
 
 /* query end */
 
 const tableState = reactive({
-  columns: [] as  __SkAppTables.Column[],
+  columns: [] as __SkAppTables.Column[],
   data: [] as Res['rows'],
   total: 0,
 })
-
-
 
 const operationsCol: __SkAppTables.Column = {
   title: '操作',
@@ -55,25 +52,29 @@ const operationsCol: __SkAppTables.Column = {
   width: 150,
   flexGrow: 1,
   align: 'center',
-  
-  cellRenderer: ({ rowData }) => <SkAppOperations
-    modules={['u','d']}
-    onD={ () => { d([rowData.id]) } }
-  ></SkAppOperations>,
-} 
+
+  cellRenderer: ({ rowData }) => (
+    <SkAppOperations
+      modules={['u', 'd']}
+      onD={() => { d([rowData.id]) }}
+    >
+    </SkAppOperations>
+  ),
+}
 function r () {
-  return rRoles(queryData.value, pagination.value).then(res => {
+  return rRoles(queryData.value, pagination.value).then((res) => {
     if (!tableState.columns.length) {
       tableState.columns = res.columns.reduce((a, c) => {
         if (c.type === 'selection') {
-
-  
-        } else if (c.type === 'button') {
+          return a
+        }
+        if (c.type === 'button') {
           a.push(operationsCol)
-        } else {
+        }
+        else {
           a.push(genColumn(c))
         }
-  
+
         return a
       }, [] as __SkAppTables.Column[])
     }
@@ -90,18 +91,16 @@ function precI () {
     mode: 'push',
   })
 }
-
-
-
 </script>
+
 <template>
-  <PageX> 
+  <PageX>
     <VkDuplexCalc class="gap-main-x">
       <template #one>
-        <SkAppQueryForm 
-          :data="queryData" 
-          :form-items="queryItems" 
-          @setData="setData(queryData, $event)"
+        <SkAppQueryForm
+          :data="queryData"
+          :form-items="queryItems"
+          @set-data="setData(queryData, $event)"
           @enter="r"
         >
           <template #options>
@@ -112,7 +111,7 @@ function precI () {
               查询
             </ElButton>
             <ElButton
-              type="primary" 
+              type="primary"
               @click="precI"
             >
               新增
@@ -121,10 +120,10 @@ function precI () {
         </SkAppQueryForm>
       </template>
 
-      <SkAppTables 
-        v-bind="tableState" 
+      <SkAppTables
+        v-bind="tableState"
         v-model:start="pagination.start"
-        v-model:pageSize="pagination.pageSize"
+        v-model:page-size="pagination.pageSize"
         class="h-100%"
       >
       </SkAppTables>

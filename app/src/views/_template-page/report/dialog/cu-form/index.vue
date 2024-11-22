@@ -1,7 +1,9 @@
 <script lang="ts">
-import { PropType, defineComponent } from 'vue'
-import { SkAppForm, __SkAppForm } from '@skzz/platform/components/app-form'
-import { Row } from '../types'
+import type { __SkAppForm } from '@skzz/platform/components/app-form'
+import type { PropType } from 'vue'
+import type { Row } from '../types'
+import { SkAppForm } from '@skzz/platform/components/app-form'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   components: {
@@ -9,7 +11,7 @@ export default defineComponent({
   },
   props: {
     data: {
-      type: Object as PropType<Row>,
+      type: Object as PropType<Partial<Row>>,
       required: true,
     },
   },
@@ -46,8 +48,9 @@ export default defineComponent({
   },
 })
 </script>
+
 <template>
-  <SkAppForm 
+  <SkAppForm
     :data="data"
     :form-items="formItems"
   ></SkAppForm>

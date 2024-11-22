@@ -1,6 +1,7 @@
-import { CrowdinFileLang, CrowdinFilePath, type Crowdin } from '../../server/crowdin/output'
-
+import { type Crowdin, CrowdinFileLang, CrowdinFilePath } from '../../server/crowdin/output'
 
 export {
-  CrowdinFileLang, CrowdinFilePath, Crowdin,
+  Crowdin,
+  CrowdinFileLang,
+  CrowdinFilePath,
 }

@@ -1,10 +1,12 @@
 <script lang="ts" setup>
-import { SkAppForm, __SkAppForm } from '@skzz/platform'
+import type { __SkAppForm } from '@skzz/platform'
+import type { elButtonPrimaryTheme } from '@skzz/platform/theme'
 import { useThemeStore } from '@/stores/theme'
-import { elButtonPrimaryTheme } from '@skzz/platform/theme'
+import { SkAppForm } from '@skzz/platform'
 import { setData } from '@vunk/core'
+
 const themeStore = useThemeStore()
-/* 
+/*
   --el-button-text-color: var(--el-color-white);
   --el-button-bg-color: var(--el-color-primary);
   --el-button-border-color: var(--el-color-primary);
@@ -92,16 +94,17 @@ const formItems: __SkAppForm.CoreFormItem<keyof typeof elButtonPrimaryTheme>[] =
     label: '禁用边框颜色',
   },
 
-] 
+]
 </script>
+
 <template>
-  <SkAppForm 
-    :label-position="'top'"
+  <SkAppForm
+    label-position="top"
     :layout="true"
     :label-width="150"
     class="plr-form-pl ptb-form-pt"
     :form-items="formItems"
     :data="themeStore.cardStyles"
-    @setData="setData(themeStore.cardStyles, $event)"
+    @set-data="setData(themeStore.cardStyles, $event)"
   ></SkAppForm>
 </template>

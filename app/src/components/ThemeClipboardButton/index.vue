@@ -1,15 +1,15 @@
 <script lang="ts">
-import { defineComponent, PropType, watch } from 'vue'
+import type { PropType } from 'vue'
 import { useThemeStore } from '@/stores/theme'
 import { useClipboard } from '@vueuse/core'
 import { ElMessage } from 'element-plus'
-
+import { defineComponent, watch } from 'vue'
 
 export default defineComponent({
   name: 'ThemeClipboardButton',
   props: {
     target: {
-      type: String as PropType<'fontSizeStyles'|'colorStyles'|'layoutTopStyles'>,
+      type: String as PropType<'fontSizeStyles' | 'colorStyles' | 'layoutTopStyles'>,
       required: true,
     },
   },
@@ -31,11 +31,12 @@ export default defineComponent({
   },
 })
 </script>
+
 <template>
   <ElButton
-    :type="'primary'"
+    type="primary"
     @click="clipboard.copy()"
-  > 
-    <span>复制</span> 
-  </ElButton> 
+  >
+    <span>复制</span>
+  </ElButton>
 </template>

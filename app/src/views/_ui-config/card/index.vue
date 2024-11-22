@@ -1,9 +1,12 @@
 <script lang="ts" setup>
-import PageX from '_c/PageX/index.vue'
-import { SkAppCard, SkAppForm, __SkAppForm } from '@skzz/platform'
+import type { __SkAppForm } from '@skzz/platform'
+import type { elCardTheme } from '@skzz/platform/theme'
 import { useThemeStore } from '@/stores/theme'
-import { baseGapOptions, elCardTheme } from '@skzz/platform/theme'
+import { SkAppCard, SkAppForm } from '@skzz/platform'
+import { baseGapOptions } from '@skzz/platform/theme'
 import { setData } from '@vunk/core'
+import PageX from '_c/PageX/index.vue'
+
 const themeStore = useThemeStore()
 const formItems: __SkAppForm.CoreFormItem<keyof typeof elCardTheme>[] = [
   {
@@ -29,20 +32,21 @@ const formItems: __SkAppForm.CoreFormItem<keyof typeof elCardTheme>[] = [
     allowCreate: true,
     filterable: true,
   },
-] 
+]
 </script>
+
 <template>
   <PageX>
     <SkAppCard
       class="h-100%"
-      :header="'卡片配置'"
+      header="卡片配置"
     >
-      <SkAppForm 
+      <SkAppForm
         :label-width="100"
         class="plr-form-pl ptb-form-pt"
         :form-items="formItems"
         :data="themeStore.cardStyles"
-        @setData="setData(themeStore.cardStyles, $event)"
+        @set-data="setData(themeStore.cardStyles, $event)"
       ></SkAppForm>
     </SkAppCard>
   </PageX>

@@ -1,17 +1,18 @@
 <script lang="tsx" setup>
-import PageX from '_c/PageX/index.vue'
-import GoldMapX from '_c/GoldMapX/index.vue'
+import type { __SkAppQueryForm, __SkAppTables } from '@skzz/platform'
+import type { NormalObject } from '@vunk/core'
 import {
-  SkAppCard, SkCheckTags,
-  SkAppTables, __SkAppTables,
-  SkAppQueryForm, __SkAppQueryForm,
+  SkAppCard,
   SkAppOperations,
+  SkAppQueryForm,
+  SkAppTables,
+  SkCheckTags,
 } from '@skzz/platform'
-import { NormalObject, setData, VkDuplexCalc } from '@vunk/core'
-import { ref } from 'vue'
+import { setData, VkDuplexCalc } from '@vunk/core'
+import GoldMapX from '_c/GoldMapX/index.vue'
+import PageX from '_c/PageX/index.vue'
 import { FixedDir } from 'element-plus/es/components/table-v2/src/constants'
-
-
+import { ref } from 'vue'
 
 const queryItems: __SkAppQueryForm.FormItem[] = [
   {
@@ -102,47 +103,46 @@ const colSource: __SkAppTables.Column[] = [
     align: 'center',
     fixed: FixedDir.RIGHT,
     cellRenderer: () => {
-      return <SkAppOperations
-        modules={['r', 'u', 'd']}
-  
-      ></SkAppOperations>
+      return (
+        <SkAppOperations
+          modules={['r', 'u', 'd']}
+        >
+        </SkAppOperations>
+      )
     },
   },
 ]
-
 
 const formData = ref({
   type: 'all',
 } as NormalObject)
 
-const data = [
-  ...Array.from({ length: 100 }).map((_, i) => {
-    return {
-      name: `cx${i}`,
-      id: i,
-    }
-  }),
-]
-
+const data = Array.from({ length: 100 }).map((_, i) => {
+  return {
+    name: `cx${i}`,
+    id: i,
+  }
+})
 </script>
+
 <template>
   <PageX>
     <SkAppCard
-      :header="'地图+表格'"
+      header="地图+表格"
       class="h-100%"
     >
       <GoldMapX
         :viewer-index="1"
-        :type="'rtl'"
+        type="rtl"
         class="h-100%"
       >
         <VkDuplexCalc class="gap-main-x">
           <template #one>
-            <SkAppQueryForm 
-              :fixes="2" 
-              :data="formData" 
-              :form-items="queryItems" 
-              @setData="setData(formData, $event)"
+            <SkAppQueryForm
+              :fixes="2"
+              :data="formData"
+              :form-items="queryItems"
+              @set-data="setData(formData, $event)"
             >
             </SkAppQueryForm>
             <div

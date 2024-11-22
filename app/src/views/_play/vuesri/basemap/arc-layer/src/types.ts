@@ -1,8 +1,7 @@
-import { ThreeRenderer } from '@vuesri/three'
+import type { ThreeRenderer } from '@vuesri/three'
+import type { __VathEntityLayerEvents } from '@vuesri/three/components/entity-layer-events'
+import type { ReturnVoid } from '@vunk/core'
 import type { ArcLayer } from './core'
-import { ReturnVoid } from '@vunk/core'
-import { __VathEntityLayerEvents } from '@vuesri/three/components/entity-layer-events'
-
 
 export interface ArcEntityProperties {
   layer: ArcLayer
@@ -17,7 +16,6 @@ export interface LoadEvent {
 
 export type OnLoad = (e: LoadEvent) => ReturnVoid
 
-
 export interface ClikEvent extends __VathEntityLayerEvents.ClickEvent {
   layer: ArcLayer
 }
@@ -29,6 +27,5 @@ export interface PointerMoveEvent extends __VathEntityLayerEvents.PointerMoveEve
 }
 
 export type OnPointerMove = (e: PointerMoveEvent) => ReturnVoid
-
 
 export {}

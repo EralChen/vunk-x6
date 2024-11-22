@@ -1,29 +1,29 @@
 <script lang="tsx" setup>
-import { 
-  SkAppCard, SkCheckTags,
-  SkAppTables, __SkAppTables, 
-  SkAppQueryForm, __SkAppQueryForm, 
+import type { __SkAppQueryForm, __SkAppTables } from '@skzz/platform'
+import type { NormalObject } from '@vunk/core'
+import {
+  SkAppCard,
   SkAppOperations,
+  SkAppQueryForm,
+  SkAppTables,
+  SkCheckTags,
 } from '@skzz/platform'
-import { NormalObject, setData, VkDuplexCalc } from '@vunk/core'
-import { ref } from 'vue'
+import { setData, VkDuplexCalc } from '@vunk/core'
 import { FixedDir } from 'element-plus/es/components/table-v2/src/constants'
+import { ref } from 'vue'
 
-const generateColumns = (length = 10, prefix = 'column-', props?: any) =>
-  Array.from({ length }).map((_, columnIndex) => ({
+function generateColumns (length = 10, prefix = 'column-', props?: any) {
+  return Array.from({ length }).map((_, columnIndex) => ({
     ...props,
     key: `${prefix}${columnIndex}`,
     dataKey: `${prefix}${columnIndex}`,
     title: `Column ${columnIndex}`,
     width: 150,
   }))
+}
 
-const generateData = (
-  columns: ReturnType<typeof generateColumns>,
-  length = 200,
-  prefix = 'row-',
-) =>
-  Array.from({ length }).map((_, rowIndex) => {
+function generateData (columns: ReturnType<typeof generateColumns>, length = 200, prefix = 'row-') {
+  return Array.from({ length }).map((_, rowIndex) => {
     return columns.reduce(
       (rowData, column, columnIndex) => {
         rowData[column.dataKey] = `Row ${rowIndex} - Col ${columnIndex}`
@@ -35,6 +35,7 @@ const generateData = (
       },
     )
   })
+}
 
 const columns = generateColumns(10)
 const data = generateData(columns, 1000)
@@ -110,26 +111,25 @@ const colSource: __SkAppTables.Column[] = [
     width: 260,
     fixed: FixedDir.RIGHT,
     cellRenderer: () => {
-      return <SkAppOperations 
-        modules={[ 'r', 'u', 'd']}
-
-      ></SkAppOperations>
+      return (
+        <SkAppOperations
+          modules={['r', 'u', 'd']}
+        >
+        </SkAppOperations>
+      )
     },
   },
 ]
 
-
 const formData = ref({
   type: 'all',
 } as NormalObject)
-
-
-
 </script>
+
 <template>
   <PageX>
     <SkAppCard
-      :header="'表格'"
+      header="表格"
       class="h-100%"
     >
       <VkDuplexCalc class="gap-main-x">
@@ -138,7 +138,7 @@ const formData = ref({
             :fixes="2"
             :data="formData"
             :form-items="queryItems"
-            @setData="setData(formData, $event)"
+            @set-data="setData(formData, $event)"
           >
           </SkAppQueryForm>
           <div
@@ -155,9 +155,9 @@ const formData = ref({
           </div>
         </template>
 
-        <SkAppTables 
+        <SkAppTables
           :fixed="true"
-          class="h-100%" 
+          class="h-100%"
           :data="data"
           :columns="colSource"
           :total="100"

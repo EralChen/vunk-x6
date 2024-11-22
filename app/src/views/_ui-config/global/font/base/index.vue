@@ -1,36 +1,38 @@
-<script lang="tsx">
-export default {
-  inheritAttrs: false,
-}
-</script>
 <script lang="tsx" setup>
+import type { __SkAppForm } from '@skzz/platform/components/app-form'
+import type { baseFontSize } from '@skzz/platform/theme'
+import type { NormalObject, SetDataEvent } from '@vunk/core'
 import { useThemeStore } from '@/stores/theme'
+import { SkAppForm } from '@skzz/platform/components/app-form'
+import { setData } from '@vunk/core'
 import { computed } from 'vue'
-import { NormalObject, setData, SetDataEvent } from '@vunk/core'
-import { SkAppForm, __SkAppForm } from '@skzz/platform/components/app-form'
-import { baseFontSize } from '@skzz/platform/theme'
+
+defineOptions({
+  inheritAttrs: false,
+})
+
 const themeStore = useThemeStore()
 
 const formData = computed(() => {
-  const obj:NormalObject = {}
+  const obj: NormalObject = {}
   Object.entries(themeStore.fontSizeStyles).forEach(([k, v]) => {
     if (k.startsWith('--f-')) {
       obj[k] = +v.replace('rem', '')
-    } else {
+    }
+    else {
       obj[k] = v
     }
-
   })
   return obj
 })
-const setFormData = (e: SetDataEvent) => {
+function setFormData (e: SetDataEvent) {
   if (e.k.startsWith('--f-')) {
     e.v = `${e.v}rem`
-  } 
+  }
   setData(themeStore.fontSizeStyles, e)
 }
 
-const formItems: __SkAppForm.CoreFormItem<'font-size'|keyof typeof baseFontSize>[] = [
+const formItems: __SkAppForm.CoreFormItem<'font-size' | keyof typeof baseFontSize>[] = [
   {
     templateType: 'VkfInput',
     prop: 'font-size',
@@ -83,7 +85,7 @@ const formItems: __SkAppForm.CoreFormItem<'font-size'|keyof typeof baseFontSize>
 ]
 
 const formItemsWithDemo = computed(() => {
-  return formItems.map(item => {
+  return formItems.map((item) => {
     return {
       templateType: 'VkfFlex',
       align: 'baseline',
@@ -95,32 +97,37 @@ const formItemsWithDemo = computed(() => {
             item,
           ],
         },
-       
+
         {
           templateType: 'Component',
-          is: () => <div style={
-            {
-              fontSize: `var(${item.prop})`,
+          is: () => (
+            <div style={
+              {
+                fontSize: `var(${item.prop})`,
+              }
             }
-          }>{item.label}</div>,
+            >
+              {item.label}
+            </div>
+          ),
         },
       ],
     } as __SkAppForm.FormItem
   })
 })
-
-
 </script>
+
 <template>
-  <SkAppForm 
+  <SkAppForm
     :label-width="100"
-    :form-items="formItemsWithDemo" 
+    :form-items="formItemsWithDemo"
     :data="formData"
     v-bind="$attrs"
-    @setData="setFormData"
+    @set-data="setFormData"
   >
   </SkAppForm>
 </template>
+
 <style>
 
 </style>

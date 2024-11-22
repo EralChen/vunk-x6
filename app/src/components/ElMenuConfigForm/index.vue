@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-import { AllTemplatesSource, VkfForm } from '@vunk/form'
+import type { AllTemplatesSource } from '@vunk/form'
 import { elMenuTheme } from '@skzz/platform/theme'
+import { VkfForm } from '@vunk/form'
 
 const formItems: AllTemplatesSource<keyof typeof elMenuTheme['default']>[] = [
   {
@@ -74,7 +75,7 @@ const formItems: AllTemplatesSource<keyof typeof elMenuTheme['default']>[] = [
   },
   {
     templateType: 'VkfInput',
-    
+
     prop: '--el-menu-base-level-padding',
     label: 'Base Level Padding',
     placeholder: elMenuTheme.default['--el-menu-base-level-padding'],
@@ -92,14 +93,13 @@ const formItems: AllTemplatesSource<keyof typeof elMenuTheme['default']>[] = [
     placeholder: elMenuTheme.default['--el-menu-icon-width'],
   },
 
-
 ]
-
 </script>
+
 <template>
   <VkfForm
     class="bg-bg-overlay"
-    :label-width="'14em'"
+    label-width="14em"
     :form-items="formItems"
   />
 </template>

@@ -1,5 +1,6 @@
 /* 扩展 RouteMeta */
-import *  as Icons from '@element-plus/icons-vue'
+import type * as Icons from '@element-plus/icons-vue'
+
 declare module 'vue-router' {
 
   interface RouteMeta {
@@ -7,7 +8,7 @@ declare module 'vue-router' {
      * 标题
      */
     title?: string
-    
+
     /**
      * 图标
      */
@@ -28,23 +29,22 @@ declare module 'vue-router' {
      * 1: 缓存
      * 2: 自定义缓存策略
      */
-    noCache?: 0|1|2
-    
+    noCache?: 0 | 1 | 2
+
     /**
-     * 控制当前路由是否出现在面包屑 
-     * */
+     * 控制当前路由是否出现在面包屑
+     */
     breadcrumb?: boolean
-    
+
     /**
      * 如果有路由被 header标记, 侧边菜单则仅展示该路由下的子路由
-     * */ 
-    header?: boolean 
+     */
+    header?: boolean
 
     /**
      *  控制当前路由是否出现在标签页
      */
     tagsView?: boolean
-
 
   }
 }

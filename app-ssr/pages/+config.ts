@@ -1,5 +1,5 @@
-import vikeVue from 'vike-vue/config'
 import type { Config } from 'vike/types'
+import vikeVue from 'vike-vue/config'
 import Head from '../client/layouts/HeadDefault.vue'
 import Layout from '../client/layouts/LayoutDefault.vue'
 

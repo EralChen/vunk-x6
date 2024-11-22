@@ -1,11 +1,7 @@
 import express from 'express'
 import { readSsrMetaEnv } from './readSsrMetaEnv'
 
-
-export const createApiRoute = (
-  app: express.Express, 
-  path: string,
-) => {
+export function createApiRoute (app: express.Express, path: string) {
   const env = readSsrMetaEnv()
   const base = env.VITE_API_PREFIX ?? ''
 
@@ -17,7 +13,7 @@ export const createApiRoute = (
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization')
     next()
   })
-      
+
   app.use(`${base}${path}`, router)
 
   return router

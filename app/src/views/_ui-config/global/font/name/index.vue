@@ -1,15 +1,16 @@
-<script lang="tsx">
-export default {
-  inheritAttrs: false,
-}
-</script>
 <script lang="tsx" setup>
+import type { __SkAppForm } from '@skzz/platform/components/app-form'
+import type { namedFontSize } from '@skzz/platform/theme'
 import { useThemeStore } from '@/stores/theme'
+import { SkAppForm } from '@skzz/platform/components/app-form'
+import { baseFontSizeOptions } from '@skzz/platform/theme'
 import { setData } from '@vunk/core'
-import { SkAppForm, __SkAppForm } from '@skzz/platform/components/app-form'
-import { namedFontSize, baseFontSizeOptions } from '@skzz/platform/theme'
-const themeStore = useThemeStore()
 
+defineOptions({
+  inheritAttrs: false,
+})
+
+const themeStore = useThemeStore()
 
 const formItems: __SkAppForm.FormItem<keyof typeof namedFontSize>[] = [
   {
@@ -23,9 +24,11 @@ const formItems: __SkAppForm.FormItem<keyof typeof namedFontSize>[] = [
   },
   {
     templateType: 'Component',
-    is: () => <p class='text-text-secondary mb-xl'>
-      模块标题字体大小
-    </p>,
+    is: () => (
+      <p class="text-text-secondary mb-xl">
+        模块标题字体大小
+      </p>
+    ),
   },
 
   {
@@ -39,25 +42,27 @@ const formItems: __SkAppForm.FormItem<keyof typeof namedFontSize>[] = [
   },
   {
     templateType: 'Component',
-    is: () => <p class='text-text-secondary mb-xl'>
-      卡片标题字体大小
-    </p>,
+    is: () => (
+      <p class="text-text-secondary mb-xl">
+        卡片标题字体大小
+      </p>
+    ),
   },
 
-
 ]
-
 </script>
+
 <template>
-  <SkAppForm 
+  <SkAppForm
     :label-width="110"
-    :form-items="formItems" 
+    :form-items="formItems"
     :data="themeStore.fontSizeNamedStyles"
     v-bind="$attrs"
-    @setData="setData(themeStore.fontSizeNamedStyles, $event)"
+    @set-data="setData(themeStore.fontSizeNamedStyles, $event)"
   >
   </SkAppForm>
 </template>
+
 <style>
 
 </style>

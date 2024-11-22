@@ -1,14 +1,14 @@
 import type { NormalObject } from '@vunk/core'
-import path from 'path'
-import { CrowdinFileLang, CrowdinFilePath } from './output'
+import type { CrowdinFilePath } from './output'
+import path from 'node:path'
 import { globSync } from 'fast-glob'
-
+import { CrowdinFileLang } from './output'
 
 function importGlob (pattern: string) {
   const files = globSync(pattern, {
     cwd: __dirname,
   })
-  
+
   return files.reduce((acc, file) => {
     acc[file] = () => import(file) // 使用动态 import 来模拟异步导入
     return acc
@@ -29,7 +29,7 @@ interface CrowdinFileLangMedia {
   value: CrowdinFileLang
   glob: Record<string, () => Promise<NormalObject>>
 }
-const CrowdinFileLangOptions: CrowdinFileLangMedia[]  = [
+const CrowdinFileLangOptions: CrowdinFileLangMedia[] = [
   {
     label: '中文',
     value: CrowdinFileLang.zhCN,
@@ -44,16 +44,12 @@ const CrowdinFileLangOptions: CrowdinFileLangMedia[]  = [
 const CrowdinFileLangReflect = CrowdinFileLangOptions.reduce((acc, cur) => {
   acc[cur.value] = cur
   return acc
-} , {} as Record<CrowdinFileLang, CrowdinFileLangMedia>)
+}, {} as Record<CrowdinFileLang, CrowdinFileLangMedia>)
 /* end of lang */
 
-
-
-
 async function rCrowdinFiles (
-  lang: CrowdinFileLang =  CrowdinFileLang.zhCN,
+  lang: CrowdinFileLang = CrowdinFileLang.zhCN,
 ) {
-
   const files = CrowdinFileLangReflect[lang]?.glob || []
   const crowdinFiles: CrowdinFile[] = []
 
@@ -77,13 +73,12 @@ async function rCrowdin (
   return res.reduce((acc, cur) => {
     acc[cur.path as CrowdinFilePath] = cur
     return acc
-  }, {} as  Record<CrowdinFilePath, CrowdinFile>)
+  }, {} as Record<CrowdinFilePath, CrowdinFile>)
 }
 
 export async function rCrowdinReflect () {
-
   const crowdinReflect = {} as Record<
-    CrowdinFileLang, 
+    CrowdinFileLang,
     Record<CrowdinFilePath, CrowdinFile>
   >
 
@@ -94,4 +89,3 @@ export async function rCrowdinReflect () {
 
   return crowdinReflect
 }
-

@@ -1,7 +1,8 @@
+import type { RouteLocationNormalizedLoaded, RouteRecordRaw } from 'vue-router'
+import { pickObject } from '@vunk/core/shared/utils-object'
 import { defineStore } from 'pinia'
 import { ref, shallowRef, watch } from 'vue'
-import { RouteLocationNormalizedLoaded, RouteRecordRaw, useRoute } from 'vue-router'
-import { pickObject } from '@vunk/core/shared/utils-object'
+import { useRoute } from 'vue-router'
 
 type BaseView = RouteRecordRaw & { fullPath: string }
 
@@ -11,16 +12,13 @@ export const useViewsStore = defineStore('views', () => {
     currentBaseView.value = route
   }
 
-
-
   const baseViewsRecord = shallowRef<Record<string, BaseView>>({})
   const addBaseViewToRecord = (fullPath: string, route: RouteRecordRaw) => {
     baseViewsRecord.value[fullPath] = {
       ...route,
-      fullPath: fullPath,
+      fullPath,
     }
   }
-
 
   const findBaseViewByFullPath = (fullPath: string) => {
     const keys = Object.keys(baseViewsRecord.value)
@@ -33,42 +31,34 @@ export const useViewsStore = defineStore('views', () => {
     })
     if (key) {
       return baseViewsRecord.value[key]
-    } 
-
+    }
   }
 
-
-
-  
   const visitedViews = ref<RouteLocationNormalizedLoaded[]>([])
   const addVisitedView = (route: RouteLocationNormalizedLoaded, index?: number) => {
-
-    const routeInfo =  pickObject(route, {
+    const routeInfo = pickObject(route, {
       // [TODO] 持久化储存的数据是否需要这部分
       excludes: ['matched', 'redirectedFrom'],
     }) as RouteLocationNormalizedLoaded
 
     if (typeof index === 'number' && index >= 0) {
       visitedViews.value.splice(index, 0, routeInfo)
-    } else {
+    }
+    else {
       visitedViews.value.push(routeInfo)
     }
-
-   
   }
 
   const setVisitedViews = (routes: RouteLocationNormalizedLoaded[]) => {
     visitedViews.value = routes
   }
 
-
   const delVisitedView = (query: {
     fullPath?: string
     path?: string
   }) => {
-   
     const index = visitedViews.value.findIndex((v) => {
-      return  Object.keys(query).every((key) => {
+      return Object.keys(query).every((key) => {
         const _key = key as keyof typeof query
         return query[_key] === undefined || v[_key] === query[_key]
       })
@@ -81,34 +71,30 @@ export const useViewsStore = defineStore('views', () => {
       index,
       item,
     }
-
   }
   const collectingVisitedViews = () => {
     const route = useRoute()
-  
+
     watch(route, (newRoute) => {
       if (
         visitedViews.value
-          .some((v) => v.fullPath === newRoute.fullPath)
+          .some(v => v.fullPath === newRoute.fullPath)
       ) {
         return
       }
-      
+
       if (
         newRoute.meta?.title
         && newRoute.meta?.tagsView !== false
       ) {
- 
-        const { index } = delVisitedView({ path: newRoute.path }) 
+        const { index } = delVisitedView({ path: newRoute.path })
 
         addVisitedView({ ...newRoute }, index)
       }
-      
     }, { immediate: true })
   }
 
-
-  return { 
+  return {
     currentBaseView,
     setCurrentBaseView,
 

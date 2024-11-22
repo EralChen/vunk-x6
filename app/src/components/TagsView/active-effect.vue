@@ -6,21 +6,18 @@ const props = defineProps({
 })
 
 const emit = defineEmits({
-  'active': (e: {
-    el: HTMLAnchorElement,
-    offsetLeft: number,
-    containerWidth: number,
-    scrollLeft: number,
+  active: (e: {
+    el: HTMLAnchorElement
+    offsetLeft: number
+    containerWidth: number
+    scrollLeft: number
   }) => e,
 })
 
 const vm = getCurrentInstance()
 
-
-
 watch(() => props.isActive, (isActive) => {
   if (isActive && vm) {
-
     nextTick(() => {
       const textEl = vm.vnode.el as HTMLElement
       const aEl = textEl.parentElement as HTMLAnchorElement
@@ -28,18 +25,15 @@ watch(() => props.isActive, (isActive) => {
       const container = aEl.parentElement as HTMLElement
       const containerWidth = container.offsetWidth
 
-
       const scrollbarView = container.parentElement as HTMLElement
 
       const scrollbarWrap = scrollbarView.parentElement as HTMLElement
-
-
 
       emit('active', {
         el: aEl,
         offsetLeft: aEl.offsetLeft,
         scrollLeft: scrollbarWrap.scrollLeft,
-        containerWidth: containerWidth,
+        containerWidth,
       })
     })
   }

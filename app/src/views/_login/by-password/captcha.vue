@@ -1,9 +1,11 @@
 <script lang="tsx" setup>
-import { PropType, ref } from 'vue'
-import { VkfInput } from '@vunk/form/components/input'
+import type { ApiReturnType, SetDataEvent } from '@vunk/core'
+import type { PropType } from 'vue'
+import type { LoginFormData } from '../types'
 import { rCaptcha } from '@skzz/platform/api/login'
-import { ApiReturnType, SetDataEvent } from '@vunk/core'
-import { LoginFormData } from '../types'
+import { VkfInput } from '@vunk/form/components/input'
+import { ref } from 'vue'
+
 defineProps({
   prop: {
     type: String as PropType<'captcha'>,
@@ -27,15 +29,15 @@ const captcha = ref({
 r()
 
 function r () {
-  return rCaptcha().then(res => {
+  return rCaptcha().then((res) => {
     captcha.value = res
-    emit('setData',{
+    emit('setData', {
       k: 'captchaId',
       v: res.captchaId,
     })
   })
 }
-const append = () => {
+function append () {
   return <img src={captcha.value.captcha} onClick={r} />
 }
 </script>
@@ -46,14 +48,15 @@ const append = () => {
     class="captcha-input"
     :model-value="data[prop]"
     :input-slots="{
-      append
+      append,
     }"
-    @update:modelValue="$emit('setData', {
+    @update:model-value="$emit('setData', {
       k: 'captcha',
-      v: $event
+      v: $event,
     })"
   ></VkfInput>
 </template>
+
 <style lang="scss">
 .captcha-input {
   .el-input-group__append{

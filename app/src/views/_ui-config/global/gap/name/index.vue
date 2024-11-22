@@ -1,13 +1,15 @@
-<script lang="tsx">
-export default {
-  inheritAttrs: false,
-}
-</script>
 <script lang="tsx" setup>
+import type { __SkAppForm } from '@skzz/platform/components/app-form'
+import type { namedGap } from '@skzz/platform/theme'
 import { useThemeStore } from '@/stores/theme'
+import { SkAppForm } from '@skzz/platform/components/app-form'
+import { baseGapOptions } from '@skzz/platform/theme'
 import { setData } from '@vunk/core'
-import { namedGap, baseGapOptions } from '@skzz/platform/theme'
-import { SkAppForm, __SkAppForm } from '@skzz/platform/components/app-form'
+
+defineOptions({
+  inheritAttrs: false,
+})
+
 const themeStore = useThemeStore()
 
 const formItems: __SkAppForm.FormItem<keyof typeof namedGap>[] = [
@@ -16,13 +18,15 @@ const formItems: __SkAppForm.FormItem<keyof typeof namedGap>[] = [
     prop: '--gap-page',
     label: 'gap-page',
     options: baseGapOptions,
-    
+
   },
   {
     templateType: 'Component',
-    is: () => <p class='text-text-secondary mb-xl'>
-      页面间距: 系统页面主体的间距， 如：页面主体周围的间距
-    </p>,
+    is: () => (
+      <p class="text-text-secondary mb-xl">
+        页面间距: 系统页面主体的间距， 如：页面主体周围的间距
+      </p>
+    ),
   },
 
   {
@@ -36,9 +40,11 @@ const formItems: __SkAppForm.FormItem<keyof typeof namedGap>[] = [
   },
   {
     templateType: 'Component',
-    is: () => <p class='text-text-secondary mb-xl'>
-      主体上下间距: 主体上下的间距。如：卡片body的上下间距
-    </p>,
+    is: () => (
+      <p class="text-text-secondary mb-xl">
+        主体上下间距: 主体上下的间距。如：卡片body的上下间距
+      </p>
+    ),
   },
 
   {
@@ -52,12 +58,12 @@ const formItems: __SkAppForm.FormItem<keyof typeof namedGap>[] = [
   },
   {
     templateType: 'Component',
-    is: () => <p class='text-text-secondary mb-xl'>
-      表单左间距: 表单左侧的间距
-    </p>,
+    is: () => (
+      <p class="text-text-secondary mb-xl">
+        表单左间距: 表单左侧的间距
+      </p>
+    ),
   },
-
-
 
   {
     templateType: 'VkfSelect',
@@ -70,9 +76,11 @@ const formItems: __SkAppForm.FormItem<keyof typeof namedGap>[] = [
   },
   {
     templateType: 'Component',
-    is: () => <p class='text-text-secondary mb-xl'>
-      表单上下间距: 表单上下的间距
-    </p>,
+    is: () => (
+      <p class="text-text-secondary mb-xl">
+        表单上下间距: 表单上下的间距
+      </p>
+    ),
   },
 
   {
@@ -86,12 +94,13 @@ const formItems: __SkAppForm.FormItem<keyof typeof namedGap>[] = [
   },
   {
     templateType: 'Component',
-    is: () => <p class='text-text-secondary mb-xl'>
-      页签上下间距: 页签上下的间距
-    </p>,
+    is: () => (
+      <p class="text-text-secondary mb-xl">
+        页签上下间距: 页签上下的间距
+      </p>
+    ),
   },
 
-  
   {
     templateType: 'VkfSelect',
     prop: '--gap-tab-space',
@@ -104,9 +113,11 @@ const formItems: __SkAppForm.FormItem<keyof typeof namedGap>[] = [
 
   {
     templateType: 'Component',
-    is: () => <p class='text-text-secondary mb-xl'>
-      页签间距: 页签之间的间距
-    </p>,
+    is: () => (
+      <p class="text-text-secondary mb-xl">
+        页签间距: 页签之间的间距
+      </p>
+    ),
   },
 
   {
@@ -120,27 +131,28 @@ const formItems: __SkAppForm.FormItem<keyof typeof namedGap>[] = [
   },
   {
     templateType: 'Component',
-    is: () => <p class='text-text-secondary mb-xl'>
-      小部件间距: 小部件之间的间距。如button、tag 等
-    </p>,
+    is: () => (
+      <p class="text-text-secondary mb-xl">
+        小部件间距: 小部件之间的间距。如button、tag 等
+      </p>
+    ),
   },
 
-
-
 ]
-
 </script>
+
 <template>
-  <SkAppForm 
+  <SkAppForm
     :label-width="200"
-   
-    :form-items="formItems" 
+
+    :form-items="formItems"
     :data="themeStore.gapNamedStyles"
     v-bind="$attrs"
-    @setData="setData(themeStore.gapNamedStyles, $event)"
+    @set-data="setData(themeStore.gapNamedStyles, $event)"
   >
   </SkAppForm>
 </template>
+
 <style>
 
 </style>

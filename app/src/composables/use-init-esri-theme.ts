@@ -1,7 +1,7 @@
-import { ToggleHandler } from '@vunk/core/shared/utils-class'
-import { useSharedDark } from '@skzz/platform/composables'
-import { watch } from 'vue'
 import esriConfig from '@arcgis/core/config'
+import { useSharedDark } from '@skzz/platform/composables'
+import { ToggleHandler } from '@vunk/core/shared/utils-class'
+import { watch } from 'vue'
 
 class DarkThemeToggle extends ToggleHandler {
   private head: HTMLHeadElement = document.head
@@ -14,41 +14,44 @@ class DarkThemeToggle extends ToggleHandler {
       this.head.appendChild(this.lightLink)
     }
   }
+
   add () {
     if (this.head.contains(this.lightLink)) {
       this.head.replaceChild(
-        this.darkLink, 
+        this.darkLink,
         this.lightLink,
       )
-    } else { 
+    }
+    else {
       this.head.appendChild(this.darkLink)
     }
     this.removeHandler = () => {
       if (this.head.contains(this.darkLink)) {
         this.head.replaceChild(
-          this.lightLink, 
+          this.lightLink,
           this.darkLink,
         )
       }
     }
   }
+
   createLink (type: 'dark' | 'light') {
     const link = document.createElement('link')
     link.rel = 'stylesheet'
-    link.href = esriConfig.assetsPath + `/esri/themes/${type}/main.css`
+    link.href = `${esriConfig.assetsPath}/esri/themes/${type}/main.css`
     return link
   }
 }
 
 const darkThemeToggle = new DarkThemeToggle()
 
-
-const useInitEsriTheme = () => {
+function useInitEsriTheme () {
   const isDark = useSharedDark()
   watch(() => isDark.value, (v) => {
     if (v) {
       darkThemeToggle.add()
-    } else {
+    }
+    else {
       darkThemeToggle.remove()
     }
   }, { immediate: true })
@@ -57,4 +60,3 @@ const useInitEsriTheme = () => {
 export {
   useInitEsriTheme,
 }
-

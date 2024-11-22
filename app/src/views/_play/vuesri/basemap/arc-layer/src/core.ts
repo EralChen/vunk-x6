@@ -1,10 +1,11 @@
-import { Entity, EntityLayer, ThreeContext } from '@vuesri/three/shared'
-import { MaterialManager } from '@vuesri/three/components/manager'
+import type { Entity, ThreeContext } from '@vuesri/three/shared'
+import type { ArcEntityProperties } from './types'
 import { property, subclass } from '@arcgis/core/core/accessorSupport/decorators'
-import { CatmullRomCurve3, DoubleSide, Group, Mesh, MeshBasicMaterial, MeshPhongMaterial, RepeatWrapping, Texture, TextureLoader, TubeGeometry, Vector3 } from 'three'
-
-import { ArcEntityProperties } from './types'
 import { _VathEntityLayerUtils } from '@vuesri/three/components/entity-layer'
+import { MaterialManager } from '@vuesri/three/components/manager'
+
+import { EntityLayer } from '@vuesri/three/shared'
+import { CatmullRomCurve3, DoubleSide, Group, Mesh, MeshBasicMaterial, MeshPhongMaterial, RepeatWrapping, Texture, TextureLoader, TubeGeometry, Vector3 } from 'three'
 import { defaultTextureUrl } from './const'
 
 export class ArcEntity implements Entity {
@@ -26,9 +27,8 @@ export class ArcEntity implements Entity {
     const userData = {
       graphic: this.graphic,
     }
-  
-    const subgroups = threeGeometries.map((geometry) => {
 
+    const subgroups = threeGeometries.map((geometry) => {
       // 一根管道
       const g = new Group()
 
@@ -51,17 +51,17 @@ export class ArcEntity implements Entity {
       )
       shellMesh.renderOrder = 1
       shellMesh.userData = userData
- 
 
       g.add(shellMesh)
       g.add(mesh)
- 
+
       return g
     })
 
     this.group.add(...subgroups)
     this.layer.group.add(this.group)
   }
+
   render (): void {}
   dispose (): void {
     this.group.clear()
@@ -94,10 +94,7 @@ export class ArcEntity implements Entity {
     const geometry = new TubeGeometry(curve, 20, 100, 8, false)
 
     return geometry
-    
   }
-
-
 
   private pathsFromGraphic (): __esri.Point[][] {
     const geometry = this.graphic.geometry as __esri.Polyline
@@ -106,27 +103,23 @@ export class ArcEntity implements Entity {
     }
     return _VathEntityLayerUtils.pathsFromGeometry(geometry)
   }
-  
 }
-
 
 @subclass('vuesri.three.ArcLayer')
 export class ArcLayer extends MaterialManager(EntityLayer) {
-
   @property({
     type: Texture,
   })
   public texture: Texture = (function () {
-      const texture = new TextureLoader().load(defaultTextureUrl)
-      texture.wrapS = RepeatWrapping
-      texture.wrapT = RepeatWrapping
-      texture.repeat.set(20, 4)
-      // texture.needsUpdate = true
-      return texture
-    })()
+    const texture = new TextureLoader().load(defaultTextureUrl)
+    texture.wrapS = RepeatWrapping
+    texture.wrapT = RepeatWrapping
+    texture.repeat.set(20, 4)
+    // texture.needsUpdate = true
+    return texture
+  })()
 
   protected init () {
-
     this.material = new MeshBasicMaterial({
       color: 0x85A9A9,
       side: DoubleSide,
@@ -143,19 +136,20 @@ export class ArcLayer extends MaterialManager(EntityLayer) {
       }),
     )
 
-    this.entities = this.source.map(item => {
+    this.entities = this.source.map((item) => {
       return new ArcEntity({
         graphic: item,
         layer: this,
       })
     })
-    
   }
 
   animate (ctx: ThreeContext): void {
-    if (!this.visible) return
+    if (!this.visible)
+      return
     const texture = this.getMaterial().map
-    if (!texture) return
+    if (!texture)
+      return
     texture.offset.x += 0.01
     ctx.renderNode?.requestRender()
   }
@@ -167,21 +161,20 @@ export class ArcLayer extends MaterialManager(EntityLayer) {
   /* 外壳材质 */
   private sShellMaterial = Symbol('sShellMaterial')
   private defaultShellMaterial = new MeshPhongMaterial({
-    color: 0xaaaaaa,
+    color: 0xAAAAAA,
     transparent: true,
-    opacity: 0.25,  
+    opacity: 0.25,
   })
 
   get shellMaterial () {
     const material = this
       .materialMap
       .get(this.sShellMaterial) as MeshPhongMaterial
-    return  material || this.defaultShellMaterial
+    return material || this.defaultShellMaterial
   }
 
   set shellMaterial (e: MeshPhongMaterial) {
     this.materialMap.set(this.sShellMaterial, e)
   }
   /* end of 外壳材质 */
-  
 }

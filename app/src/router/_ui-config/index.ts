@@ -1,5 +1,7 @@
-import { RouteRecordRaw, RouterView } from 'vue-router'
+import type { RouteRecordRaw } from 'vue-router'
 import Layout from '@/layouts/default/index.vue'
+import { RouterView } from 'vue-router'
+
 export default [
   {
     path: '/_ui-config',
@@ -21,7 +23,7 @@ export default [
         children: [
           {
             path: 'color',
-            meta: { 
+            meta: {
               title: '颜色配置',
             },
             component: () => import('_v/_ui-config/global/color/index.vue'),
@@ -82,11 +84,10 @@ export default [
             },
             component: () => import('_v/_ui-config/table/index.vue'),
           },
-    
+
         ],
       },
-      
-    
+
       {
         path: 'top',
         meta: {
@@ -94,7 +95,7 @@ export default [
         },
         component: () => import('_v/_ui-config/top/index.vue'),
       },
-    
+
     ],
   },
 ] as RouteRecordRaw[]

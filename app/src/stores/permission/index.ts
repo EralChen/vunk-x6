@@ -1,11 +1,11 @@
+import type { RouteRecordRaw } from 'vue-router'
+import { createRemoteRoutes } from '@/router/_remote'
+import { rMenus } from '@skzz/platform/api/login'
 import { usePermissionStore as useVkPermissionStore } from '@vunk/skzz/stores/permission'
 import { defineStore } from 'pinia'
 import { computed } from 'vue'
-import { rMenus  } from '@skzz/platform/api/login'
-import { createRemoteRoutes } from '@/router/_remote'
-import { RouteRecordRaw } from 'vue-router'
 
-export const usePermissionStore = defineStore('permission', () => { 
+export const usePermissionStore = defineStore('permission', () => {
   const vkPermissionStore = useVkPermissionStore()
   const setMenusByToken = (client?: string) => {
     vkPermissionStore.setPathToRouteInfo(createRemoteRoutes() as Record<string, RouteRecordRaw>)
@@ -15,7 +15,6 @@ export const usePermissionStore = defineStore('permission', () => {
     })
   }
 
-  
   return {
     setPathToRouteInfo: vkPermissionStore.setPathToRouteInfo,
     setMenusByToken,

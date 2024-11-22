@@ -1,13 +1,13 @@
+import * as ElIconsVue from '@element-plus/icons-vue'
+import { VkSvgIcon } from '@vunk/core'
+import PageOver from '_c/PageOver/index.vue'
+import PageX from '_c/PageX/index.vue'
+
+import ElementPlus from 'element-plus'
 import { createApp } from 'vue'
 import App from './App.vue'
-import store from './stores'
 import router from './router'
-
-import { VkSvgIcon } from '@vunk/core'
-import ElementPlus from 'element-plus'
-import * as ElIconsVue from '@element-plus/icons-vue'
-import PageX from '_c/PageX/index.vue'
-import PageOver from '_c/PageOver/index.vue'
+import store from './stores'
 
 import './init-esri'
 
@@ -29,8 +29,6 @@ app
   .component('PageX', PageX)
   .component('PageOver', PageOver)
   .mount('#app')
-
-
 
 for (const [key, component] of Object.entries(ElIconsVue)) {
   app.component(key, component)

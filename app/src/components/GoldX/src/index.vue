@@ -1,13 +1,15 @@
 <script lang="ts">
 import { computed, defineComponent, normalizeClass } from 'vue'
 import { props } from './ctx'
+
 export default defineComponent({
   props,
   setup (props) {
     const skFlex = computed(() => {
-      if (['rtl', 'ltr'].includes(props.type))  {
+      if (['rtl', 'ltr'].includes(props.type)) {
         return 'sk-flex-row'
-      } else {
+      }
+      else {
         return 'sk-flex-col'
       }
     })
@@ -22,6 +24,7 @@ export default defineComponent({
   },
 })
 </script>
+
 <template>
   <div
     :class="{
@@ -29,27 +32,27 @@ export default defineComponent({
     }"
   >
     <div
-      :class="normalizeClass({
+      :class="`${normalizeClass({
         'g-primary': isFirstMain,
         'g-second': !isFirstMain,
-      }) + ' ' + normalizeClass(itemClass)"
+      })} ${normalizeClass(itemClass)}`"
     >
       <slot name="one"></slot>
     </div>
 
     <div
-      :class="normalizeClass({
+      :class="`${normalizeClass({
         'g-second': isFirstMain,
         'g-primary': !isFirstMain,
-      }) + ' ' + normalizeClass(itemClass)"
+      })} ${normalizeClass(itemClass)}`"
     >
       <slot name="two"></slot>
       <slot></slot>
     </div>
   </div>
 </template>
-<style scoped>
 
+<style scoped>
 .g-primary{
   flex: 1125;
 }

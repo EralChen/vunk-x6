@@ -1,6 +1,6 @@
-import { defineConfig } from 'unocss'
-import { createUnocssSettings } from '@vunk/shared/vite/unocss'
 import { namedFontSize, namedGap, unoShortcuts } from '@skzz/platform/theme'
+import { createUnocssSettings } from '@vunk/shared/vite/unocss'
+import { defineConfig } from 'unocss'
 
 /**
  * @link
@@ -29,7 +29,6 @@ const settings = createUnocssSettings({
 })
 
 settings.shortcuts = unoShortcuts
-
 
 // const theme = settings.theme as NormalObject
 // theme['colors'].test = '#ff0000'
