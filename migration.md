@@ -43,10 +43,10 @@ app.component('ClientOnly', VkClientOnly)
 9. 重定向首页
 
 ```ts
-// pages/index/+guard.ts
+// pages/index/+data.ts
 import { redirect } from 'vike/abort'
 
-export async function guard() {
+export async function data() {
     throw redirect(import.meta.env.BASE_URL + 'zh-CN/guide/introduction')
 }
 
