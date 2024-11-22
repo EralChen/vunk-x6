@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { CrowdinFile, NavRaw } from '#/shared'
+import type { RouteRecordRaw } from 'vue-router'
 import { CrowdinFilePath, useCrowdinFile } from '#/src/composables/crowdin'
 import VpThemeToggler from '#/vitepress/components/navbar/vp-theme-toggler.vue'
 import { VkRoutesMenuContent } from '@vunk/plus/components/routes-menu-content'
@@ -24,7 +25,7 @@ const menuData = computed(() => {
         title: row.label,
       },
       redirect: row.redirect,
-    }
+    } as RouteRecordRaw
   })
 })
 
