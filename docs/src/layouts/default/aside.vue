@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { CrowdinFile } from '#/shared'
+import type { CrowdinFile, MenuRaw } from '#/shared'
 import type { Ref } from 'vue'
 import type { RouteRecordRaw } from 'vue-router'
 import { CrowdinFilePath, useCrowdinFile } from '#s/composables/crowdin'
@@ -16,12 +16,6 @@ defineProps({
     default: true,
   },
 })
-
-interface MenuRaw {
-  text: string
-  link?: string
-  children: MenuRaw[]
-}
 
 const menuComponent = ref() as Ref<{
   open: (index: string) => void

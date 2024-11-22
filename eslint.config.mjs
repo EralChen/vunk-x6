@@ -11,5 +11,5 @@ export default eslint({
     '@stylistic/indent': ['error', 2],
     '@stylistic/space-before-function-paren': ['error', 'always'],
   },
-  ignores: ['node_modules', 'dist'],
+  ignores: ['node_modules', 'dist', '*.md'],
 })
