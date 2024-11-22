@@ -1,7 +1,8 @@
 <script lang="ts">
-import { NormalObject } from '@vunk/core'
+import type { NormalObject } from '@vunk/core'
 import { defineComponent } from 'vue'
 import testData from './data.json'
+
 export default defineComponent({
   setup () {
     const childrenNameToNode = {} as NormalObject
@@ -21,9 +22,7 @@ export default defineComponent({
 
     const checkedTree = [] as NormalObject[]
     for (const item of testData) {
-
       if (!checkedNameToNodeWithoutTop[item.name]) {
-        
         if (Array.isArray(item.children)) {
           item.children = (item.children as any[]).reduce((acc, cur) => {
             if (checkedNameToNodeWithoutTop[cur.name]) {
@@ -32,11 +31,10 @@ export default defineComponent({
             return acc
           }, [] as NormalObject[])
         }
-    
-        checkedTree.push(item)
-        
-      } else {
 
+        checkedTree.push(item)
+      }
+      else {
         const treeItem = checkedNameToNodeWithoutTop[item.name]
 
         if (Array.isArray(treeItem.children)) {
@@ -47,8 +45,6 @@ export default defineComponent({
             return acc
           }, [] as NormalObject[])
         }
-
-      
       }
     }
 
@@ -59,6 +55,7 @@ export default defineComponent({
   },
 })
 </script>
+
 <template>
   <div text-blue>
     checkedTree

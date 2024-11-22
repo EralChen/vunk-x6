@@ -1,10 +1,10 @@
-
 <script lang="ts" setup>
 import { VaSceneView, VaTdtBasemap } from '@vuesri/core'
+import { Graphic, Polyline } from '@vuesri/core/arcgis'
 import { VathThreeRenderNode } from '@vuesri/three/components/three-render-node'
 // import { VathPipeLayer, __VathPipeLayer } from '@vuesri/three/components/pipe-layer'
-import { VathArcLayer, __VathArcLayer } from './arc-layer'
-import { Graphic, Polyline } from '@vuesri/core/arcgis'
+import type { __VathArcLayer } from './arc-layer'
+import { VathArcLayer } from './arc-layer'
 
 const pipeSource = [
   new Graphic({
@@ -30,13 +30,14 @@ const layerLoad: __VathArcLayer.OnLoad = (e) => {
   })
 }
 </script>
+
 <template>
   <page-x>
     <VaSceneView>
       <VaTdtBasemap
-        :type="'vec_w'"
+        type="vec_w"
         :spatial-reference="{
-          wkid: 3857
+          wkid: 3857,
         }"
       ></VaTdtBasemap>
 

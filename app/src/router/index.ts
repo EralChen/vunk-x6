@@ -1,8 +1,9 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
+import type { RouteRecordRaw } from 'vue-router'
 import Layout from '@/layouts/default/index.vue'
-import _UI_CONFIG from './_ui-config'
-import _TEMPLATE_PAGE from './_template-page'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import _PLAY from './_play'
+import _TEMPLATE_PAGE from './_template-page'
+import _UI_CONFIG from './_ui-config'
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -13,7 +14,7 @@ export const routes: Array<RouteRecordRaw> = [
     meta: {
       display: 0,
     },
-  }, 
+  },
 
   {
     path: '/home',
@@ -37,7 +38,7 @@ export const routes: Array<RouteRecordRaw> = [
       },
     ],
   },
-  
+
   {
     path: '/login',
     meta: {
@@ -60,7 +61,7 @@ export const routes: Array<RouteRecordRaw> = [
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(import.meta.env.VITE_BASE_URL + '/'),
+  history: createWebHashHistory(`${import.meta.env.VITE_BASE_URL}/`),
   routes,
 })
 

@@ -1,13 +1,15 @@
 <script lang="ts" setup>
-import { ElDropdown, ElSlider } from 'element-plus'
 import { useLayoutStore } from '@/stores/layout'
+import { ElDropdown, ElSlider } from 'element-plus'
+
 const layoutStore = useLayoutStore()
 // const currentSize = ref(14)
 </script>
+
 <template>
-  <ElDropdown :trigger="'click'">
+  <ElDropdown trigger="click">
     <SvgIcon
-      :icon-class="'size'"
+      icon-class="size"
       class="cursor-pointer text-white"
     ></SvgIcon>
     <template #dropdown>
@@ -16,8 +18,8 @@ const layoutStore = useLayoutStore()
         pa-page
       >
         <ElSlider
-          v-model="layoutStore.fontSize" 
-          :size="'small'" 
+          v-model="layoutStore.fontSize"
+          size="small"
           :min="12"
           :max="18"
         ></ElSlider>
@@ -25,6 +27,7 @@ const layoutStore = useLayoutStore()
     </template>
   </ElDropdown>
 </template>
+
 <style>
 
 </style>

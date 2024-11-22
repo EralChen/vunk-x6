@@ -1,3 +1,5 @@
+<script setup lang="ts"></script>
+
 <template>
   <div
     id="sidebar"
@@ -13,4 +15,3 @@
     <slot />
   </div>
 </template>
-<script setup lang="ts"></script>

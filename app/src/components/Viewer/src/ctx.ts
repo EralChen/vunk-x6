@@ -1,5 +1,5 @@
+import type { PropType } from 'vue'
 import { bindPropsFactory } from '@vunk/core/shared/utils-vue'
-import { PropType } from 'vue'
 
 export const props = {
   defaultOptions: {

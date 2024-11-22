@@ -1,20 +1,22 @@
+<script setup lang="ts">
+import { useLayoutStore } from '@/stores/layout'
+import { ArrowLeft, ArrowRight } from '@element-plus/icons-vue'
+
+const layoutStore = useLayoutStore()
+</script>
+
 <template>
   <div
     class="layout-default-aside-collapse"
     @click="layoutStore.asideInfo.menuCollapse = !layoutStore.asideInfo.menuCollapse"
   >
-    <el-icon 
-      :size="'1.2em'"
+    <el-icon
+      size="1.2em"
     >
       <component :is="layoutStore.asideInfo.menuCollapse ? ArrowRight : ArrowLeft" />
     </el-icon>
   </div>
 </template>
-<script setup lang="ts">
-import { ArrowLeft, ArrowRight } from '@element-plus/icons-vue'
-import { useLayoutStore } from '@/stores/layout'
-const layoutStore = useLayoutStore()
-</script>
 
 <style>
 .layout-default-aside-collapse{
@@ -24,5 +26,4 @@ const layoutStore = useLayoutStore()
   display: flex;
   align-items: center;
 }
-
 </style>

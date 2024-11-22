@@ -1,6 +1,8 @@
+import type { Dictionary } from '@skzz/platform/api/system/dictionary'
+import type { Ref } from 'vue'
+import { rDic } from '@skzz/platform/api/system/dictionary'
 import { defineStore } from 'pinia'
-import { rDic, Dictionary } from '@skzz/platform/api/system/dictionary'
-import { Ref, reactive } from 'vue'
+import { reactive } from 'vue'
 
 type withDic<T extends string[]> = {
   [key in T[number]]: Dictionary[]
@@ -8,10 +10,9 @@ type withDic<T extends string[]> = {
 
 export const useDictionaryStore = defineStore('dictionary', () => {
   const types = reactive<withDic<['消息接收端', '业务类型']>>({
-    '消息接收端': [],
-    '业务类型': [],
+    消息接收端: [],
+    业务类型: [],
   })
-
 
   async function getTypes (type: string, key: keyof typeof types, ref?: Ref<any>) {
     if (types[key].length) {

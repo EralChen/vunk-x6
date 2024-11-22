@@ -1,5 +1,6 @@
-import { RouteRecordRaw } from 'vue-router'
-export const createRemoteRoutes = () => { 
+import type { RouteRecordRaw } from 'vue-router'
+
+export function createRemoteRoutes () {
   return {
 
   } as Record<string, Partial<RouteRecordRaw>>

@@ -1,18 +1,19 @@
 <script lang="tsx" setup>
-import PageX from '_c/PageX/index.vue'
-import { 
-  SkAppTables, __SkAppTables, 
-  SkAppQueryForm, __SkAppQueryForm, 
+import type { __SkAppQueryForm, __SkAppTables, Pagination } from '@skzz/platform'
+import type { NormalObject } from '@vunk/core'
+import type { Row } from './types'
+import {
   SkAppOperations,
-  Pagination,
+  SkAppQueryForm,
+  SkAppTables,
 } from '@skzz/platform'
-import { NormalObject, setData, VkDuplexCalc } from '@vunk/core'
-import { reactive, ref, watch } from 'vue'
-import { rRoles, dRoles, cuRole } from '@skzz/platform/api/system/role'
-import { genColumn } from '@skzz/platform/shared/utils-data'
-import CuForm from './cu-form/index.vue'
+import { cuRole, dRoles, rRoles } from '@skzz/platform/api/system/role'
 import { SkAppDialog } from '@skzz/platform/components/app-dialog'
-import { Row } from './types'
+import { genColumn } from '@skzz/platform/shared/utils-data'
+import { setData, VkDuplexCalc } from '@vunk/core'
+import PageX from '_c/PageX/index.vue'
+import { reactive, ref, watch } from 'vue'
+import CuForm from './cu-form/index.vue'
 
 /* query */
 const queryItems: __SkAppQueryForm.FormItem[] = [
@@ -28,12 +29,12 @@ const pagination = ref<Pagination>({
   pageSize: 10,
   start: 0,
 })
-watch(pagination, r, { deep: true , immediate: true })
+watch(pagination, r, { deep: true, immediate: true })
 // watch(queryData, r, { deep: true , immediate: true })
 /* query end */
 
 const tableState = reactive({
-  columns: [] as  __SkAppTables.Column[],
+  columns: [] as __SkAppTables.Column[],
   data: [] as Row[],
   total: 0,
 })
@@ -50,25 +51,30 @@ const operationsCol: __SkAppTables.Column = {
   width: 150,
   flexGrow: 1,
   align: 'center',
-  cellRenderer: ({ rowData }) => <SkAppOperations
-    modules={['u','d']}
-    onD={ () => { d([rowData.id]) } }
-    onU={ () => { preuI(rowData) } }
-  ></SkAppOperations>,
-} 
+  cellRenderer: ({ rowData }) => (
+    <SkAppOperations
+      modules={['u', 'd']}
+      onD={() => { d([rowData.id]) }}
+      onU={() => { preuI(rowData) }}
+    >
+    </SkAppOperations>
+  ),
+}
 function r () {
-  rRoles(queryData.value, pagination.value).then(res => {
+  rRoles(queryData.value, pagination.value).then((res) => {
     if (!tableState.columns.length) {
       tableState.columns = res.columns.reduce((a, c) => {
         if (c.type === 'selection') {
+          return a
+        }
 
-  
-        } else if (c.type === 'button') {
+        if (c.type === 'button') {
           a.push(operationsCol)
-        } else {
+        }
+        else {
           a.push(genColumn(c))
         }
-  
+
         return a
       }, [] as __SkAppTables.Column[])
     }
@@ -86,7 +92,7 @@ function precI () {
 }
 function preuI (data: Row) {
   cuIState.visible = true
-  cuIState.formData = {...data}
+  cuIState.formData = { ...data }
   cuIState.title = '修改角色'
 }
 function cuI () {
@@ -94,16 +100,16 @@ function cuI () {
     cuIState.visible = false
   })
 }
-
 </script>
+
 <template>
   <PageX>
     <VkDuplexCalc class="gap-main-x">
       <template #one>
-        <SkAppQueryForm 
-          :data="queryData" 
-          :form-items="queryItems" 
-          @setData="setData(queryData, $event)"
+        <SkAppQueryForm
+          :data="queryData"
+          :form-items="queryItems"
+          @set-data="setData(queryData, $event)"
           @enter="r"
         >
           <template #options>
@@ -114,7 +120,7 @@ function cuI () {
               查询
             </ElButton>
             <ElButton
-              type="primary" 
+              type="primary"
               @click="precI"
             >
               新增
@@ -123,10 +129,10 @@ function cuI () {
         </SkAppQueryForm>
       </template>
 
-      <SkAppTables 
-        v-bind="tableState" 
+      <SkAppTables
+        v-bind="tableState"
         v-model:start="pagination.start"
-        v-model:pageSize="pagination.pageSize"
+        v-model:page-size="pagination.pageSize"
         class="h-100%"
       >
       </SkAppTables>
@@ -138,7 +144,7 @@ function cuI () {
     >
       <CuForm
         :data="cuIState.formData"
-        @setData="setData(cuIState.formData, $event)"
+        @set-data="setData(cuIState.formData, $event)"
         @submit="cuI"
       ></CuForm>
     </SkAppDialog>

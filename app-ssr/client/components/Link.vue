@@ -1,9 +1,3 @@
-<template>
-  <a :class="{ active: isActive }">
-    <slot />
-  </a>
-</template>
-
 <script lang="ts" setup>
 import { usePageContext } from 'vike-vue/usePageContext'
 import { computed, useAttrs } from 'vue'
@@ -15,6 +9,12 @@ const isActive = computed(() => {
   return href === '/' ? urlPathname === href : urlPathname.startsWith(href)
 })
 </script>
+
+<template>
+  <a :class="{ active: isActive }">
+    <slot />
+  </a>
+</template>
 
 <style scoped>
 a {

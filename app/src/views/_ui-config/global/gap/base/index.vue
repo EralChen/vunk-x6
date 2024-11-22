@@ -1,34 +1,35 @@
-<script lang="tsx">
-export default {
-  inheritAttrs: false,
-}
-</script>
 <script lang="tsx" setup>
+import type { __SkAppForm } from '@skzz/platform/components/app-form'
+import type { baseGap } from '@skzz/platform/theme'
+import type { NormalObject, SetDataEvent } from '@vunk/core'
 // import { FormItemRendererSource, VkfForm } from '@vunk/form'
 import { useThemeStore } from '@/stores/theme'
+import { SkAppForm } from '@skzz/platform/components/app-form'
+import { setData } from '@vunk/core'
 import { computed } from 'vue'
-import { NormalObject, setData, SetDataEvent } from '@vunk/core'
-import { baseGap } from '@skzz/platform/theme'
-import { SkAppForm, __SkAppForm } from '@skzz/platform/components/app-form'
+
+defineOptions({
+  inheritAttrs: false,
+})
+
 const themeStore = useThemeStore()
 
 const formData = computed(() => {
-  const obj:NormalObject = {}
+  const obj: NormalObject = {}
   Object.entries(themeStore.gapBaseStyles).forEach(([k, v]) => {
-
     if (k.startsWith('--gap-')) {
       obj[k] = +v.replace('rem', '')
-    } else {
+    }
+    else {
       obj[k] = v
     }
-
   })
   return obj
 })
-const setFormData = (e: SetDataEvent) => {
+function setFormData (e: SetDataEvent) {
   if (e.k.startsWith('--gap-')) {
     e.v = `${e.v}rem`
-  } 
+  }
   setData(themeStore.gapBaseStyles, e)
 }
 
@@ -84,36 +85,56 @@ const formItemWithLayout = computed(() => {
         {
           templateType: 'Component',
           is: () => {
-            return <div class="ml-4r">
-              <span> {item.label} </span>
-              <span style={
-                {
-                  marginLeft: `var(${item.prop})`,
+            return (
+              <div class="ml-4r">
+                <span>
+                  {' '}
+                  {item.label}
+                  {' '}
+                </span>
+                <span style={
+                  {
+                    marginLeft: `var(${item.prop})`,
+                  }
                 }
-              }> {item.label} </span>
-              <span style={
-                {
-                  marginLeft: `var(${item.prop})`,
+                >
+                  {' '}
+                  {item.label}
+                  {' '}
+
+                </span>
+                <span style={
+                  {
+                    marginLeft: `var(${item.prop})`,
+                  }
                 }
-              }> {item.label} </span>
-            </div>
-          },  
+                >
+                  {' '}
+                  {item.label}
+                  {' '}
+
+                </span>
+              </div>
+            )
+          },
         },
       ],
     } as __SkAppForm.FormItem
   })
 })
 </script>
+
 <template>
-  <SkAppForm 
-    :label-width="'6em'"
-    :form-items="formItemWithLayout" 
+  <SkAppForm
+    label-width="6em"
+    :form-items="formItemWithLayout"
     :data="formData"
     v-bind="$attrs"
-    @setData="setFormData"
+    @set-data="setFormData"
   >
   </SkAppForm>
 </template>
+
 <style>
 
 </style>

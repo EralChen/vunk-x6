@@ -6,10 +6,10 @@ export default defineComponent({
     const uA = () => {
       a.value = 'world'
     }
-      
+
     return () => (
       <div>
-        <button onClick={ uA }>setValue</button>
+        <button onClick={uA}>setValue</button>
         <span>{a.value}</span>
       </div>
     )

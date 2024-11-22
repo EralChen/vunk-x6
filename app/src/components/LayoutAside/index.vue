@@ -1,20 +1,21 @@
 <script lang="ts" setup>
-import { ElMenu } from 'element-plus'
+import type { AnyFunc } from '@vunk/core'
+import type { Ref } from 'vue'
+import { useSharedMenuClick } from '@/composables'
+import { routes as constRoutes } from '@/router'
+import { useLayoutStore } from '@/stores/layout'
+import { usePermissionStore } from '@/stores/permission'
+import { useViewsStore } from '@/stores/views'
+import { SkAppIcon } from '@skzz/platform/components/app-icon'
 import { VkRoutesMenuContent } from '@vunk/skzz/components/routes-menu-content'
 import LinkVue from '_c/MenuLink/index.vue'
-import { useLayoutStore } from '@/stores/layout'
-import { computed, nextTick, onMounted, Ref, ref, watch } from 'vue'
-import CollapseVue from './Collapse.vue'
-import { useViewsStore } from '@/stores/views'
-import { usePermissionStore } from '@/stores/permission'
-import { routes as constRoutes } from '@/router'
-import { AnyFunc } from '@vunk/core'
+import { ElMenu } from 'element-plus'
+import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { useSharedMenuClick } from '@/composables'
-import { SkAppIcon } from '@skzz/platform/components/app-icon'
+import CollapseVue from './Collapse.vue'
 
 const emit = defineEmits({
-  'load': null,
+  load: null,
 })
 
 const viewsStore = useViewsStore()
@@ -24,12 +25,11 @@ const route = useRoute()
 const menuNode = ref() as Ref<{ open: AnyFunc }>
 useSharedMenuClick()
 
-
 const finalRoutes = computed(() => {
   return viewsStore.currentBaseView?.children || [...permissionStore.routes, ...constRoutes]
 })
 
-const initOpenMenu = () => {
+function initOpenMenu () {
   if (layoutStore.asideInfo.menuCollapse) {
     return
   }
@@ -39,10 +39,10 @@ const initOpenMenu = () => {
     try {
       menuNode.value.open(index)
       break
-    } catch {
+    }
+    catch {
       continue
     }
-       
   }
 }
 
@@ -54,18 +54,19 @@ onMounted(async () => {
   emit('load')
 })
 </script>
+
 <template>
   <div class="layout-default-aside h-100%">
     <ElScrollbar>
-      <ElMenu 
+      <ElMenu
         ref="menuNode"
         class="layout-default-aside-menu"
         :collapse="layoutStore.asideInfo.menuCollapse"
       >
-        <VkRoutesMenuContent 
-          :data="finalRoutes" 
+        <VkRoutesMenuContent
+          :data="finalRoutes"
           :base-path="viewsStore.currentBaseView?.fullPath || ''"
-          :popper-class="'layout-default-aside-popper'"
+          popper-class="layout-default-aside-popper"
         >
           <template #item="{ data, href }">
             <LinkVue
@@ -73,16 +74,16 @@ onMounted(async () => {
               :data="data"
               :to="href"
             >
-              <SkAppIcon 
+              <SkAppIcon
                 v-if="data.meta?.icon"
-                class="layout-default-aside-item-icon" 
+                class="layout-default-aside-item-icon"
                 :icon="data.meta.icon"
               />
             </LinkVue>
           </template>
 
           <template #itemTitle="{ data }">
-            <span>{{ data.meta?.title || data.meta?.name }}</span> 
+            <span>{{ data.meta?.title || data.meta?.name }}</span>
           </template>
 
           <template #menuTitle="{ data, href }">
@@ -91,9 +92,9 @@ onMounted(async () => {
               :data="data"
               :to="href"
             >
-              <SkAppIcon 
+              <SkAppIcon
                 v-if="data.meta?.icon"
-                class="layout-default-aside-item-icon" 
+                class="layout-default-aside-item-icon"
                 :icon="data.meta.icon"
               />
             </LinkVue>
@@ -107,6 +108,7 @@ onMounted(async () => {
     <CollapseVue class="layout-default-aside-collapse" />
   </div>
 </template>
+
 <style>
 .layout-default-aside-menu[style*="--el-menu-level: 0"] > li{
   font-weight: bold;
@@ -153,6 +155,4 @@ onMounted(async () => {
   opacity: 0;
   transition: opacity 3s cubic-bezier(.15,.84,0,1.06);
 }
-
 </style>
-

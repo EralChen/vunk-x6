@@ -1,8 +1,9 @@
 <script lang="ts">
-import { AnyFunc } from '@vunk/core'
-import { defineComponent, nextTick, PropType } from 'vue'
-import { RouteRecordRaw } from 'vue-router'
+import type { AnyFunc } from '@vunk/core'
+import type { PropType } from 'vue'
+import type { RouteRecordRaw } from 'vue-router'
 import { VkSpreadTo } from '@vunk/core/components/spread-to'
+import { defineComponent, nextTick } from 'vue'
 
 export default defineComponent({
   components: {
@@ -41,6 +42,7 @@ export default defineComponent({
   },
 })
 </script>
+
 <template>
   <RouterLink
     :to="to"
@@ -49,7 +51,7 @@ export default defineComponent({
     <template #default="{ navigate, isActive, isExactActive, href }">
       <VkSpreadTo
         :target="getSpreadTarget"
-        :type="'class'"
+        type="class"
         :data="{
           'is-active': isActive,
           'is-exact-active': isExactActive,
@@ -76,6 +78,7 @@ export default defineComponent({
     </template>
   </RouterLink>
 </template>
+
 <style>
 .layout-default-aside-link {
   text-decoration: none;
@@ -86,4 +89,3 @@ export default defineComponent({
   color: var(--el-menu-item-active-color);
 }
 </style>
-

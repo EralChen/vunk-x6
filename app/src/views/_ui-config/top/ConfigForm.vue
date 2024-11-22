@@ -1,6 +1,8 @@
 <script lang="ts" setup>
-import { baseGapOptions, layoutTopTheme } from '@skzz/platform/theme'
-import { SkAppForm, __SkAppForm } from '@skzz/platform/components/app-form'
+import type { __SkAppForm } from '@skzz/platform/components/app-form'
+import type { layoutTopTheme } from '@skzz/platform/theme'
+import { SkAppForm } from '@skzz/platform/components/app-form'
+import { baseGapOptions } from '@skzz/platform/theme'
 
 const formItems: __SkAppForm.CoreFormItem<keyof typeof layoutTopTheme>[] = [
   {
@@ -35,7 +37,6 @@ const formItems: __SkAppForm.CoreFormItem<keyof typeof layoutTopTheme>[] = [
     label: '--el-menu-hover-text-color',
   },
 
-  
   {
     templateType: 'VkfSelect',
     prop: '--layout-top-menu-item-space',
@@ -48,8 +49,8 @@ const formItems: __SkAppForm.CoreFormItem<keyof typeof layoutTopTheme>[] = [
   },
 
 ]
-
 </script>
+
 <template>
   <SkAppForm :form-items="formItems"></SkAppForm>
 </template>

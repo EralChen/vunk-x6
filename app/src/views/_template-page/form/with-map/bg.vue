@@ -1,18 +1,20 @@
-<script lang="tsx">
-export default {
-  inheritAttrs: false,
-}
-</script>
 <script lang="tsx" setup>
-import { SkAppForm, __SkAppForm } from '@skzz/platform/components/app-form'
-import { elBgColorWithMode } from '@skzz/platform/theme'
+import type { __SkAppForm } from '@skzz/platform/components/app-form'
+import type { elBgColorWithMode } from '@skzz/platform/theme'
+import { SkAppForm } from '@skzz/platform/components/app-form'
 import { computed } from 'vue'
+
+defineOptions({
+  inheritAttrs: false,
+})
+
 const props = defineProps({
   formItemBasis: {
     type: String,
     default: '150px',
   },
 })
+
 const formItems: __SkAppForm.CoreFormItem <keyof typeof elBgColorWithMode['default']>[] = [
   {
     templateType: 'VkfColorPicker',
@@ -35,7 +37,7 @@ const formItems: __SkAppForm.CoreFormItem <keyof typeof elBgColorWithMode['defau
 ]
 
 const formItemsWithDemo = computed(() => {
-  return formItems.map(item => {
+  return formItems.map((item) => {
     return {
       templateType: 'VkfFlex',
       align: 'baseline',
@@ -49,30 +51,34 @@ const formItemsWithDemo = computed(() => {
         },
         {
           templateType: 'Component',
-          is: () => <div class="bg-info plr-m ptb-xxs">
-            <div style={
-              {
-                background: `var(${item.prop})`,
+          is: () => (
+            <div class="bg-info plr-m ptb-xxs">
+              <div style={
+                {
+                  background: `var(${item.prop})`,
+                }
+
               }
-      
-            }>
-              { item.prop }
+              >
+                { item.prop }
+              </div>
             </div>
-          </div>,
+          ),
         },
       ],
 
     } as __SkAppForm.FormItem
   })
 })
-
 </script>
+
 <template>
   <SkAppForm
     :form-items="formItemsWithDemo"
     v-bind="$attrs"
   ></SkAppForm>
 </template>
+
 <style>
 
 </style>

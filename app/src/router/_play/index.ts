@@ -1,5 +1,6 @@
-import { RouteRecordRaw } from 'vue-router'
+import type { RouteRecordRaw } from 'vue-router'
 import Layout from '@/layouts/default/index.vue'
+
 export default [
   {
     path: '/_play',
@@ -33,7 +34,6 @@ export default [
         },
         component: () => import('_v/_play/test3/index'),
       },
-
 
       {
         path: 'vuesri',

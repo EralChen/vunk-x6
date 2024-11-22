@@ -1,10 +1,11 @@
 <script lang="ts">
-import { props, emits } from './ctx'
-import { defineComponent, provide, watch } from 'vue'
+import { _VathEntityLayerEventsCtx, VathEntityLayerEvents } from '@vuesri/three/components/entity-layer-events'
 import { _VathLayerUse } from '@vuesri/three/components/layer'
 import { useThreeRenderer } from '@vuesri/three/composables'
-import { VathEntityLayerEvents, _VathEntityLayerEventsCtx } from '@vuesri/three/components/entity-layer-events'
+import { defineComponent, provide, watch } from 'vue'
 import { ArcLayer } from './core'
+import { emits, props } from './ctx'
+
 export default defineComponent({
   name: 'VathArcLayer',
   components: {
@@ -37,6 +38,7 @@ export default defineComponent({
   },
 })
 </script>
+
 <template>
   <VathEntityLayerEvents
     v-on="eventsEmits"

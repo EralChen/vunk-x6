@@ -1,26 +1,27 @@
+<script lang="ts" setup>
+import Content from '../components/Content.vue'
+import Link from '../components/Link.vue'
+import Logo from '../components/Logo.vue'
+import Sidebar from '../components/Sidebar.vue'
+
+const base = import.meta.env.VITE_BASE_URL ?? ''
+</script>
+
 <template>
   <div class="layout">
     <Sidebar>
       <Logo />
-      <Link :href="base + '/'">
+      <Link :href="`${base}/`">
         Welcome
       </Link>
 
-      <Link :href="base + '/star-wars'">
+      <Link :href="`${base}/star-wars`">
         Data Fetching
       </Link>
     </Sidebar>
     <Content><slot /></Content>
   </div>
 </template>
-
-<script lang="ts" setup>
-import Content from '../components/Content.vue'
-import Link from '../components/Link.vue'
-import Logo from '../components/Logo.vue'
-import Sidebar from '../components/Sidebar.vue'
-const base = import.meta.env.VITE_BASE_URL ?? ''
-</script>
 
 <style>
   body {

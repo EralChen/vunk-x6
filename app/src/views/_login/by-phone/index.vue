@@ -1,5 +1,6 @@
 <script lang="tsx" setup>
-import { SkAppForm, __SkAppForm } from '@skzz/platform/components/app-form'
+import type { __SkAppForm } from '@skzz/platform/components/app-form'
+import { SkAppForm } from '@skzz/platform/components/app-form'
 import { setData } from '@vunk/core'
 import { ElButton } from 'element-plus'
 import { computed, ref } from 'vue'
@@ -12,7 +13,7 @@ const formData = ref({
 const count = ref(0)
 const timer = ref(0)
 // 获取验证码的按钮, 包含倒计时逻辑
-const startCount = () => {
+function startCount () {
   count.value = 60
   timer.value = window.setInterval(() => {
     count.value--
@@ -21,16 +22,25 @@ const startCount = () => {
     }
   }, 1000)
 }
-const codeBtn = () => {
-  return count.value ? <ElButton>
-    {count.value}秒后重试
-  </ElButton> : <ElButton
-    class={'bg-primary text-white'}
-    onClick={() => {
-      startCount()
-      rCode()
-    }}
-  >获取验证码</ElButton>
+function codeBtn () {
+  return count.value
+    ? (
+      <ElButton>
+        {count.value}
+        秒后重试
+      </ElButton>
+    )
+    : (
+      <ElButton
+        class="bg-primary text-white"
+        onClick={() => {
+          startCount()
+          rCode()
+        }}
+      >
+        获取验证码
+      </ElButton>
+    )
 }
 const baseFomrItemProps = {
   labelWidth: 0,
@@ -85,6 +95,7 @@ function rCode () {
   // 获取验证码
 }
 </script>
+
 <template>
   <SkAppForm
     :data="formData"
@@ -93,6 +104,7 @@ function rCode () {
   >
   </SkAppForm>
 </template>
+
 <style>
 .no-count .el-input-group__append{
   background-color: var(--el-color-primary);

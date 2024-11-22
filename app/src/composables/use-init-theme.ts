@@ -1,15 +1,15 @@
-import { useSharedDark } from '@skzz/platform/composables'
+import type { NormalObject } from '@vunk/core'
 import { useThemeStore } from '@/stores/theme'
-import { elColorWithMode, elBgColorWithMode, elTextColorWithMode, elFillColorWithMode, elBorderColorWithMode, layoutTopTheme, baseFontSize, namedFontSize, baseGap, namedGap, elTableV2Theme, elMenuTheme  } from '@skzz/platform/theme'
-import { NormalObject } from '@vunk/core' 
+import { useSharedDark } from '@skzz/platform/composables'
+import { baseFontSize, baseGap, elBgColorWithMode, elBorderColorWithMode, elColorWithMode, elFillColorWithMode, elMenuTheme, elTableV2Theme, elTextColorWithMode, layoutTopTheme, namedFontSize, namedGap } from '@skzz/platform/theme'
 import { nextTick, watch } from 'vue'
 import { useInitEsriTheme } from './use-init-esri-theme'
 
-const useElementPlusTheme = () => {
+function useElementPlusTheme () {
   const themeStore = useThemeStore()
   const isDark = useSharedDark()
 
-  function setElColor (obj: NormalObject) { 
+  function setElColor (obj: NormalObject) {
     Object.keys(obj).forEach((_key) => {
       const key = _key as keyof typeof obj
       if (themeStore.colorStyles[key]) {
@@ -20,7 +20,6 @@ const useElementPlusTheme = () => {
   }
 
   watch(() => isDark.value, (v) => {
-
     nextTick(() => {
       setElColor(v ? elColorWithMode.dark : elColorWithMode.default)
       setElColor(v ? elBgColorWithMode.dark : elBgColorWithMode.default)
@@ -29,16 +28,13 @@ const useElementPlusTheme = () => {
       setElColor(v ? elBorderColorWithMode.dark : elBorderColorWithMode.default)
       setElColor(v ? elMenuTheme.dark : elMenuTheme.default)
     })
-  
   }, { immediate: true })
-
 }
 
-const useFontSizeTheme = () => {
+function useFontSizeTheme () {
   const themeStore = useThemeStore()
 
   function setFontSize () {
-
     Object.keys(baseFontSize).forEach((_key) => {
       const key = _key as keyof typeof baseFontSize
       if (themeStore.fontSizeStyles[key]) {
@@ -48,10 +44,9 @@ const useFontSizeTheme = () => {
     })
   }
   setFontSize()
-
 }
 
-const useNamedFontSizeTheme = () => {
+function useNamedFontSizeTheme () {
   const themeStore = useThemeStore()
   const setFontSize = () => {
     Object.keys(namedFontSize).forEach((_key) => {
@@ -65,7 +60,7 @@ const useNamedFontSizeTheme = () => {
   setFontSize()
 }
 
-const useBaseGapTheme = () => {
+function useBaseGapTheme () {
   const themeStore = useThemeStore()
   const setBaseGap = () => {
     Object.keys(baseGap).forEach((_key) => {
@@ -79,7 +74,7 @@ const useBaseGapTheme = () => {
   setBaseGap()
 }
 
-const useNamedGapTheme = () => {
+function useNamedGapTheme () {
   const themeStore = useThemeStore()
   const setNamedGap = () => {
     Object.keys(namedGap).forEach((_key) => {
@@ -93,7 +88,7 @@ const useNamedGapTheme = () => {
   setNamedGap()
 }
 
-const useLayoutTopTheme = () => {
+function useLayoutTopTheme () {
   const themeStore = useThemeStore()
   const setLayoutTop = () => {
     Object.keys(layoutTopTheme).forEach((_key) => {
@@ -107,7 +102,7 @@ const useLayoutTopTheme = () => {
   setLayoutTop()
 }
 
-const useTableV2Theme = () => {
+function useTableV2Theme () {
   const themeStore = useThemeStore()
   const setTableV2 = () => {
     Object.keys(elTableV2Theme).forEach((_key) => {
@@ -121,7 +116,7 @@ const useTableV2Theme = () => {
   setTableV2()
 }
 
-export const useInitTheme = () => {   
+export function useInitTheme () {
   useElementPlusTheme()
   useFontSizeTheme()
   useNamedFontSizeTheme()

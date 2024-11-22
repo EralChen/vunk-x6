@@ -13,7 +13,6 @@ interface SsrMetaEnv {
 
 }
 
-
 interface ImportMetaEnv {
   // express api full url
   VITE_SSR_API_URL: string

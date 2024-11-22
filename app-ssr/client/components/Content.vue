@@ -1,3 +1,5 @@
+<script setup lang="ts"></script>
+
 <template>
   <div id="page-container">
     <div
@@ -12,8 +14,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts"></script>
 
 <style>
   /* Page Transition Animation */

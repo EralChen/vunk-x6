@@ -1,11 +1,11 @@
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
 import { rTestData } from '@/api/test'
-import { useRoute } from 'vue-router'
+import { defineComponent, ref } from 'vue'
+
 export default defineComponent({
   setup () {
     const testName = ref('')
-    rTestData().then(res => {
+    rTestData().then((res) => {
       testName.value = res.name
     })
 
@@ -15,6 +15,7 @@ export default defineComponent({
   },
 })
 </script>
+
 <template>
   <div class="bg-test">
     {{ testName }}

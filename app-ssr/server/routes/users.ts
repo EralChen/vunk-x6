@@ -1,4 +1,4 @@
-import express from 'express'
+import type express from 'express'
 import { createApiRoute } from '../utils/createApiRoute'
 
 export default function (app: express.Express) {

@@ -1,11 +1,12 @@
 <script lang="ts" setup>
+import { ref } from 'vue'
+import ByDing from './by-ding/index.vue'
 import ByPassword from './by-password/index.vue'
 import ByPhone from './by-phone/index.vue'
-import ByDing from './by-ding/index.vue'
-import { ref } from 'vue'
-const currentPage = ref('1')
 
+const currentPage = ref('1')
 </script>
+
 <template>
   <div sk-flex="col-center2" class="h-100% bg-bg-page">
     <div class="w-1200px h-680px bg-bg-overlay rd-16px overflow-hidden" sk-flex>
@@ -46,6 +47,7 @@ const currentPage = ref('1')
     </div>
   </div>
 </template>
+
 <style lang="scss" scoped>
 .bg-login-bg {
   background-image: url('/imgs/login-bg.png');

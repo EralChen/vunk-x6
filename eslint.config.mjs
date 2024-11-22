@@ -1,18 +1,14 @@
-import lintConfigArr from '@lib-env/eslint-config'
+import eslint from '@antfu/eslint-config'
+import oxlint from 'eslint-plugin-oxlint'
 
-export default [
-  ...lintConfigArr,
-  {
-    ignores: [
-      'node_modules',
-      'dist',
-      'pnpm-lock.yaml',
-      'CHANGELOG.en-US.md',
-      '!.*',
-      'docs/components.d.ts',
-      'coverage',
-      'ssr-testing/cases/*',
-    ],
+export default eslint({
+  ...oxlint.configs['flat/recommended'],
+  rules: {
+    'node/prefer-global/process': 'off',
+    'vue/html-self-closing': 'off',
+    'array-callback-return': 'off',
+    '@stylistic/indent': ['error', 2],
+    '@stylistic/space-before-function-paren': ['error', 'always'],
   },
-]
-
+  ignores: ['node_modules', 'dist'],
+})

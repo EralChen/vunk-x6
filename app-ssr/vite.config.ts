@@ -1,13 +1,13 @@
+import type { AliasOptions, UserConfig } from 'vite'
+import path from 'node:path'
 import vue from '@vitejs/plugin-vue'
+
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import vike from 'vike/plugin'
-
-import { AliasOptions, UserConfig, defineConfig, loadEnv } from 'vite'
-import { appRoot, clientRoot } from './path.config'
-
-import path from 'path'
 import unocss from 'unocss/vite'
 
+import vike from 'vike/plugin'
+import { defineConfig, loadEnv } from 'vite'
+import { appRoot, clientRoot } from './path.config'
 
 const alias: AliasOptions = [
   {
@@ -20,19 +20,17 @@ const alias: AliasOptions = [
   },
 ]
 
-
 export default defineConfig(async ({ mode }) => {
-
   const env = loadEnv(mode, process.cwd()) as unknown as SsrMetaEnv
-  const base = (env.VITE_BASE_URL ?? '') + '/'
+  const base = `${env.VITE_BASE_URL ?? ''}/`
 
   const config: UserConfig = {
-    
+
     base,
     resolve: {
       alias,
     },
-  
+
     ssr: {
       noExternal: [
         '@vuesri-core/**',
@@ -46,29 +44,29 @@ export default defineConfig(async ({ mode }) => {
     build: {
       target: ['esnext'],
     },
-    
+
     plugins: [
-      
+
       vike({
 
       }),
 
       unocss(),
-      
+
       vue({
         include: [/\.vue$/, /\.md$/],
       }),
       vueJsx({}),
     ],
     // We manually add a list of dependencies to be pre-bundled, in order to avoid a page reload at dev start which breaks vike's CI
-    optimizeDeps: { 
+    optimizeDeps: {
       esbuildOptions: {
         target: 'esnext',
         define: {
           global: 'globalThis',
         },
         supported: {
-          bigint: true, 
+          bigint: true,
         },
       },
 

@@ -1,5 +1,5 @@
-import { defineConfig } from 'unocss'
 import { createUnocssSettings } from '@vunk/shared/vite/unocss'
+import { defineConfig } from 'unocss'
 // import { NormalObject } from '@vunk/shared'
 
 /**
@@ -15,7 +15,6 @@ const settings = createUnocssSettings({
    */
   presetGapPrefix: '',
 })
-
 
 // const theme = settings.theme as NormalObject
 // theme['colors'].test = '#ff0000'

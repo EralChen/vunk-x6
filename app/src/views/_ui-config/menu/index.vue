@@ -3,9 +3,10 @@ import { useThemeStore } from '@/stores/theme'
 import { SkAppCard } from '@skzz/platform/components/app-card'
 import { setData } from '@vunk/core'
 import ElMenuConfigForm from '_c/ElMenuConfigForm/index.vue'
-const themeStore = useThemeStore()
 
+const themeStore = useThemeStore()
 </script>
+
 <template>
   <div
     plr-page
@@ -14,7 +15,7 @@ const themeStore = useThemeStore()
   >
     <SkAppCard
       class="h-100%"
-      :header="'菜单配置'"
+      header="菜单配置"
     >
       <el-scrollbar
         plr-form-pl
@@ -22,7 +23,7 @@ const themeStore = useThemeStore()
       >
         <ElMenuConfigForm
           :data="themeStore.menuStyles"
-          @setData="setData(themeStore.menuStyles, $event)"
+          @set-data="setData(themeStore.menuStyles, $event)"
         />
       </el-scrollbar>
     </SkAppCard>

@@ -1,9 +1,11 @@
 <script lang="ts">
+import type { PropType } from 'vue'
+import { _GoldXCtx, GoldX } from '_c/GoldX'
+import { Viewer } from '_c/Viewer'
 import MapView from 'esri/views/MapView'
 import SceneView from 'esri/views/SceneView'
-import { defineComponent, PropType, provide, ref } from 'vue'
-import { GoldX, _GoldXCtx } from '_c/GoldX'
-import { Viewer } from '_c/Viewer'
+import { defineComponent, provide, ref } from 'vue'
+
 export default defineComponent({
   components: {
     GoldX,
@@ -27,11 +29,11 @@ export default defineComponent({
       // 判断 是否是 MapView 实例
       if (e.view instanceof MapView) {
         provide('vaMapView', e.view)
-      } 
+      }
       if (e.view instanceof SceneView) {
         provide('vaSceneView', e.view)
       }
-  
+
       ready.value = true
     }
     return {
@@ -42,6 +44,7 @@ export default defineComponent({
   },
 })
 </script>
+
 <template>
   <GoldX v-bind="goldProps">
     <template #one>
@@ -50,13 +53,12 @@ export default defineComponent({
         class="h-100% ptb-page pl-page"
       >
         <component
-          :is="viewer" 
+          :is="viewer"
           @load="viewLoad"
         >
           <slot name="map"></slot>
         </component>
       </div>
-
 
       <slot v-else-if="ready"></slot>
     </template>

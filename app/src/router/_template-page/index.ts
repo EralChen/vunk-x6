@@ -1,5 +1,6 @@
-import { RouteRecordRaw } from 'vue-router'
+import type { RouteRecordRaw } from 'vue-router'
 import Layout from '@/layouts/default/index.vue'
+
 export default [
   {
     path: '/_template-page',
@@ -34,13 +35,13 @@ export default [
             component: () => import('@/views/_template-page/table/classic/index.vue'),
           },
           {
-      
+
             meta: {
               title: '少量表格',
             },
             path: 'few',
             component: () => import('@/views/_template-page/table/few/index.vue'),
-          
+
           },
           {
             path: 'with-map',
@@ -50,8 +51,7 @@ export default [
             component: () => import('@/views/_template-page/table/with-map/index.vue'),
           },
         ],
-       
-        
+
       },
 
       {
@@ -69,7 +69,7 @@ export default [
             component: () => import('@/views/_template-page/form/basic/index.vue'),
           },
           {
-          
+
             meta: {
               title: '多列表单',
               noCache: 1,
@@ -85,9 +85,9 @@ export default [
             component: () => import('@/views/_template-page/form/with-map/index.vue'),
           },
         ],
-        
+
       },
-      
+
       {
         path: 'report',
         meta: {

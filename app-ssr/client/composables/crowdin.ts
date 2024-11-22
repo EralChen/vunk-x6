@@ -5,11 +5,7 @@ export {
   CrowdinFilePath,
 }
 
-
-export const useCrowdinFile = (
-  path: CrowdinFilePath,
-) => {
+export function useCrowdinFile (path: CrowdinFilePath) {
   const pageContext = usePageContext()
   return pageContext.crowdin[path]
 }
-
