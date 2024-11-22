@@ -1,17 +1,12 @@
 {
   "compilerOptions": {
     "target": "esnext",
+    "jsx": "preserve",
+    "lib": ["esnext", "dom"],
+    "baseUrl": ".",
+    "rootDir": "../",
     "module": "esnext",
     "moduleResolution": "node",
-    "strict": true,
-    "jsx": "preserve",
-    "allowJs": true,
-    "sourceMap": true,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "baseUrl": ".",
-    "lib": ["esnext", "dom"],
-    "rootDir": "../",
     "paths": {
       "#/*": [
         "*"
@@ -19,7 +14,15 @@
       "@/*": [
         "client/*"
       ],
+      "_c/*": [
+        "client/components/*"
+      ]
     },
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "strict": true,
+    "sourceMap": true,
+    "esModuleInterop": true
   },
   "include": [
     "typings/**/*.d.ts",
@@ -34,7 +37,7 @@
 
     "api/**/*.ts",
 
-    "vite.config.ts"
+    "vite.config.mts"
   ],
   "exclude": [
     "node_modules"

@@ -15,7 +15,7 @@ import './init-esri'
 import '@/api'
 
 import 'virtual:svg-icons-register'
-import './permission'
+// import './permission'
 import './styles'
 import 'uno.css'
 

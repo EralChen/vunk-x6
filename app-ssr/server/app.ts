@@ -1,23 +1,23 @@
 import type { ErrorRequestHandler } from 'express'
 import path from 'node:path'
+import { CrowdinFileLang } from '#/shared'
 import cookieParser from 'cookie-parser'
 import express from 'express'
 import httpErrors from 'http-errors'
 import { createProxyMiddleware, fixRequestBody } from 'http-proxy-middleware'
 import morgan from 'morgan'
 import { renderPage } from 'vike/server'
+
 import { createServer } from 'vite'
-
 import { appRoot, serverRoot } from '../path.config'
-import { rCrowdinReflect } from './crowdin'
 
-import { CrowdinFileLang } from './crowdin/output'
+import { rCrowdinReflect } from './crowdin'
 import useTestRouter from './routes/test'
 import useUsersRouter from './routes/users'
-import { loadSsrMetaEnv } from './utils/readSsrMetaEnv'
+import { createCORSRoute } from './utils/createCORSRoute'
+import { readSsrMetaEnv } from './utils/readSsrMetaEnv'
 
-const isProduction = process.env.NODE_ENV === 'production'
-const env = loadSsrMetaEnv()
+const { env, isProduction } = readSsrMetaEnv()
 
 export async function createApp () {
   const crowdinReflect = await rCrowdinReflect()
@@ -59,7 +59,7 @@ export async function createApp () {
   app.set('view engine', 'pug')
 
   if (env.VITE_PROXY_TARGET_URL) {
-  // 创建代理中间件
+    // 创建代理中间件
     const proxy = createProxyMiddleware({
       target: env.VITE_PROXY_TARGET_URL, // 目标服务器的地址
       changeOrigin: true,
@@ -70,9 +70,11 @@ export async function createApp () {
       on: {
         proxyReq: fixRequestBody,
       },
-
     })
-    app.use('/proxy', proxy)
+
+    const router = createCORSRoute()
+    router.use('/', proxy)
+    app.use('/proxy', router)
   }
 
   Reflect.ownKeys(crowdinReflect).forEach((v) => {
@@ -122,6 +124,9 @@ export async function createApp () {
       }
     }
   }
+
+  // 设置静态资源目录
+  app.use(express.static(path.join(appRoot, 'public')))
 
   // catch 404 and forward to error handler
   app.use((req, res, next) => {
