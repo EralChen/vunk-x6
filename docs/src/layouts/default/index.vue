@@ -61,31 +61,34 @@ function searchCollapsedToggle () {
       sk-flex
       class="h-100% relative"
     >
-      <div class="layout-default-aside-x bg-bg-base" sk-flex>
+      <div class="layout-default-aside-x bg-bg-base">
         <VkCollapseTransitionHorizontal>
-          <div
+          <VkDuplex
             v-show="!asideCollapsed" class="layout-default-aside"
             :class="{
               'is-collapsed': asideCollapsed,
             }"
+            gap="var(--gap-page)"
           >
-            <div
-              class="page-agent-main-top-options"
-              sk-flex="row-between-center"
-              mlr-m
-              mt-m
-            >
-              <IconFold
-                @click="asideCollapsed = true"
-              ></IconFold>
+            <template #one>
+              <div
+                class="page-agent-main-top-options"
+                sk-flex="row-between-center"
+                mlr-m
+                mt-m
+              >
+                <IconFold
+                  @click="asideCollapsed = true"
+                ></IconFold>
 
-              <IconSearch
-                @click="searchCollapsedToggle"
-              ></IconSearch>
-            </div>
+                <IconSearch
+                  @click="searchCollapsedToggle"
+                ></IconSearch>
+              </div>
+            </template>
 
-            <Aside :search="!searchCollapsed" mt-m></Aside>
-          </div>
+            <Aside :search="!searchCollapsed"></Aside>
+          </VkDuplex>
         </VkCollapseTransitionHorizontal>
       </div>
 
