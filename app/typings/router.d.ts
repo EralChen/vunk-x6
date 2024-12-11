@@ -46,6 +46,12 @@ declare module 'vue-router' {
      */
     tagsView?: boolean
 
+    /**
+     * 添加到标签页的主键
+     * @default path
+     */
+    tagsViewBy?: 'path' | 'name'
+
   }
 }
 

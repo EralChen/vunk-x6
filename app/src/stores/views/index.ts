@@ -87,8 +87,11 @@ export const useViewsStore = defineStore('views', () => {
         newRoute.meta?.title
         && newRoute.meta?.tagsView !== false
       ) {
-        const { index } = delVisitedView({ path: newRoute.path })
+        const tagsViewBy = newRoute.meta?.tagsViewBy || 'path'
 
+        const { index } = delVisitedView({
+          [tagsViewBy]: newRoute[tagsViewBy],
+        })
         addVisitedView({ ...newRoute }, index)
       }
     }, { immediate: true })

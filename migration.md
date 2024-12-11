@@ -42,13 +42,69 @@ app.component('ClientOnly', VkClientOnly)
 
 9. 重定向首页
 
-```ts
-// pages/index/+data.ts
-import { redirect } from 'vike/abort'
+```vue
+<!-- pages/index/+Page.vue -->
+<script lang="ts">
+import { defineComponent, onBeforeMount } from 'vue'
+import { navigate } from 'vike/client/router'
+export default defineComponent({
+  setup () {
 
-export async function data() {
-    throw redirect(import.meta.env.BASE_URL + 'zh-CN/guide/introduction')
+    onBeforeMount(() => {
+      navigate(import.meta.env.BASE_URL + 'zh-CN/guide/introduction')
+    })
+
+    return () => null
+  },
+})
+</script>
+```
+
+10. 如果 docs 将部署到 github pages，添加 `onHydrationEnd` 以规范URL
+
+```ts
+// page/+onHydrationEnd.ts
+import type { PageContext } from 'vike/types'
+import { navigate } from 'vike/client/router'
+export async function onHydrationEnd (pageContext: PageContext) {
+  const { urlOriginal } = pageContext
+  if (urlOriginal.endsWith('/')) { // clean up trailing slash
+    navigate(urlOriginal.slice(0, -1))
+  }
 }
 
+```
+
+
+## App
+
+1. 新增 `tagsViewBy` 路由选项
+
+```ts
+// app/typings/router.d.ts
+interface RouteMeta {
+  // ...
+
+  /**
+   * 添加到标签页的主键
+   * @default path
+   */
+  tagsViewBy?: 'path' | 'name'
+}
+```
+```ts
+// app/src/stores/views/index.ts
+// collectingVisitedViews function 逻辑替换
+if (
+  newRoute.meta?.title
+  && newRoute.meta?.tagsView !== false
+) {
+  const tagsViewBy = newRoute.meta?.tagsViewBy || 'path'
+
+  const { index } = delVisitedView({
+    [tagsViewBy]: newRoute[tagsViewBy],
+  })
+  addVisitedView({ ...newRoute }, index)
+}
 ```
 
