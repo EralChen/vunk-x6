@@ -56,11 +56,13 @@ export const useViewsStore = defineStore('views', () => {
   const delVisitedView = (query: {
     fullPath?: string
     path?: string
+    name?: string
   }) => {
     const index = visitedViews.value.findIndex((v) => {
       return Object.keys(query).every((key) => {
         const _key = key as keyof typeof query
-        return query[_key] === undefined || v[_key] === query[_key]
+        return query[_key] === undefined
+          || v[_key] === query[_key]
       })
     })
     let item: RouteLocationNormalizedLoaded | undefined

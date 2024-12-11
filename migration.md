@@ -106,5 +106,14 @@ if (
   })
   addVisitedView({ ...newRoute }, index)
 }
+
+// delVisitedView query 参数添加
+const delVisitedView = (query: {
+  fullPath?: string
+  path?: string
+  name?: string
+}) => {
+  // ...
+}
 ```
 
