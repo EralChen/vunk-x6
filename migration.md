@@ -39,6 +39,8 @@ app.component('ClientOnly', VkClientOnly)
 
 8. 替换 `h.docs/public` 到 ..
 
+9. 替换 `h.docs/renderer/crowdin/zh-CN/pages/component.json` 到 ..
+
 
 9. 重定向首页
 

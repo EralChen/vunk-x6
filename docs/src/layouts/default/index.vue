@@ -68,7 +68,7 @@ function searchCollapsedToggle () {
             :class="{
               'is-collapsed': asideCollapsed,
             }"
-            gap="var(--gap-page)"
+            gap="var(--gap-m)"
           >
             <template #one>
               <div
