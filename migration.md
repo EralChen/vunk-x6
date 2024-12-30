@@ -65,7 +65,7 @@ export default defineComponent({
 10. 如果 docs 将部署到 github pages，添加 `onHydrationEnd` 以规范URL
 
 ```ts
-// page/+onHydrationEnd.ts
+// page/zh-CN/+onHydrationEnd.ts
 import type { PageContext } from 'vike/types'
 import { navigate } from 'vike/client/router'
 export async function onHydrationEnd (pageContext: PageContext) {
