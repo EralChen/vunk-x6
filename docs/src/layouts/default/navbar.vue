@@ -47,7 +47,7 @@ const currentCrowname = computed(() => {
     class="h-full layout-default-navbar"
   >
     <div class="font-600 plr-l ptb-s text-primary">
-      @skzz/tempalte
+      @vunk/x6
     </div>
 
     <div sk-flex="row_center" sub:gml-s>
