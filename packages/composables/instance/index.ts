@@ -1,4 +1,4 @@
-import type { Graph } from '@antv/x6'
+import type { Graph, Node } from '@antv/x6'
 import { inject } from 'vue'
 
 export function useGraph () {
@@ -7,4 +7,12 @@ export function useGraph () {
     throw new Error('Graph is not provided')
   }
   return graph
+}
+
+export function useNode () {
+  const node = inject<Node | null>('vk_node', null)
+  if (!node) {
+    throw new Error('Node is not provided')
+  }
+  return node
 }

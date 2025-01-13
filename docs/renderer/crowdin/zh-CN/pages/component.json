@@ -5,6 +5,19 @@
       {
         "link": "/graph",
         "text": "Graph 画布"
+      },
+      {
+        "link": "/node",
+        "text": "Node"
+      }
+    ]
+  },
+  "node": {
+    "text": "Node 节点",
+    "children": [
+      {
+        "link": "/node-component",
+        "text": "NodeComponent"
       }
     ]
   }

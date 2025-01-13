@@ -11,6 +11,9 @@ importers:
       '@antv/x6':
         specifier: ^2.18.1
         version: 2.18.1
+      '@antv/x6-vue-shape':
+        specifier: ^2.1.2
+        version: 2.1.2(@antv/x6@2.18.1)(vue@3.5.13(typescript@5.6.3))
       '@arcgis/core':
         specifier: ^4.31.5
         version: 4.31.5(@floating-ui/utils@0.2.8)
@@ -485,6 +488,16 @@ packages:
 
   '@antv/x6-geometry@2.0.5':
     resolution: {integrity: sha512-MId6riEQkxphBpVeTcL4ZNXL4lScyvDEPLyIafvWMcWNTGK0jgkK7N20XSzqt8ltJb0mGUso5s56mrk8ysHu2A==}
+
+  '@antv/x6-vue-shape@2.1.2':
+    resolution: {integrity: sha512-lfLNJ2ztK8NP2JBAWTD6m5Wol0u6tOqj2KdOhWZoT8EtEw9rMmAdxsr8uTi9MRJO9pDMM0nbsR3cidnMh7VeDQ==}
+    peerDependencies:
+      '@antv/x6': ^2.x
+      '@vue/composition-api': ^1.0.0-rc.1
+      vue: ^2.0.0 || >=3.0.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
 
   '@antv/x6@2.18.1':
     resolution: {integrity: sha512-FkWdbLOpN9J7dfJ+kiBxzowSx2N6syBily13NMVdMs+wqC6Eo5sLXWCZjQHateTFWgFw7ZGi2y9o3Pmdov1sXw==}
@@ -7120,6 +7133,12 @@ snapshots:
       utility-types: 3.11.0
 
   '@antv/x6-geometry@2.0.5': {}
+
+  '@antv/x6-vue-shape@2.1.2(@antv/x6@2.18.1)(vue@3.5.13(typescript@5.6.3))':
+    dependencies:
+      '@antv/x6': 2.18.1
+      vue: 3.5.13(typescript@5.6.3)
+      vue-demi: 0.14.10(vue@3.5.13(typescript@5.6.3))
 
   '@antv/x6@2.18.1':
     dependencies:
