@@ -16,7 +16,7 @@ html {
   -webkit-tap-highlight-color: transparent;
 }
 
-body {
+html > body {
   margin: 0;
   width: 100%;
   min-width: 320px;

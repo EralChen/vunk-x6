@@ -1,5 +1,4 @@
 import type { LoadEvent } from './types'
-import { PropType } from 'vue'
 
 export const props = {
   id: {
@@ -13,11 +12,11 @@ export const props = {
 
   width: {
     type: Number,
-    default: 120,
+    default: 1,
   },
   height: {
     type: Number,
-    default: 50,
+    default: 1,
   },
   x: {
     type: Number,
