@@ -26,6 +26,11 @@ export const props = {
     type: Number,
     default: 0,
   },
+
+  data: {
+    type: Object,
+    default: () => ({}),
+  },
 }
 
 export const emits = {

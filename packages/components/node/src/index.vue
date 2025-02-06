@@ -24,6 +24,10 @@ export default defineComponent({
     })
 
     watchEffect(() => {
+      node.setData(props.data)
+    })
+
+    watchEffect(() => {
       node.prop('position', {
         x: props.x,
         y: props.y,

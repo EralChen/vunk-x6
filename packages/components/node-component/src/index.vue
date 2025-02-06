@@ -2,7 +2,7 @@
 import { Graph } from '@antv/x6'
 import { getTeleport, register } from '@antv/x6-vue-shape'
 import { useResizeObserver } from '@vueuse/core'
-import { defineComponent, onUnmounted, ref } from 'vue'
+import { defineComponent, onUnmounted, ref, shallowRef } from 'vue'
 import { emits, props } from './ctx'
 
 const TeleportContainer = getTeleport()
@@ -14,7 +14,7 @@ export default defineComponent({
   },
   props,
   emits,
-  setup (props, { emit, slots }) {
+  setup (props, { slots }) {
     register({
       shape: props.shape,
       component: {
@@ -23,12 +23,23 @@ export default defineComponent({
           graph: null,
         },
         setup (nodeProps) {
-          if (!props.autoSize) {
-            return () => slots.default?.({
+          const data = shallowRef(nodeProps.node.getData())
+
+          nodeProps.node.on('change:data', () => {
+            data.value = nodeProps.node.getData()
+          })
+
+          const renderSlot = () => {
+            return slots.default?.({
               node: nodeProps.node,
               attrs: nodeProps.node.attrs,
               graph: nodeProps.graph,
+              data: data.value,
             })
+          }
+
+          if (!props.autoSize) {
+            return renderSlot
           }
           const containerRef = ref<HTMLElement>()
           const setContainerRef = e => containerRef.value = e
@@ -48,13 +59,7 @@ export default defineComponent({
                   props.autoSizeContainerClass}`
               }
             >
-              {
-                slots.default?.({
-                  node: nodeProps.node,
-                  attrs: nodeProps.node.attrs,
-                  graph: nodeProps.graph,
-                })
-              }
+              { renderSlot() }
             </div>
           )
         },
