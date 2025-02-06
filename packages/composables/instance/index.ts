@@ -1,4 +1,4 @@
-import type { Graph, Node } from '@antv/x6'
+import type { Edge, Graph, Node } from '@antv/x6'
 import { inject } from 'vue'
 
 export function useGraph () {
@@ -15,4 +15,12 @@ export function useNode () {
     throw new Error('Node is not provided')
   }
   return node
+}
+
+export function useEdage () {
+  const edge = inject<Edge | null>('vk_edge', null)
+  if (!edge) {
+    throw new Error('Edge is not provided')
+  }
+  return edge
 }

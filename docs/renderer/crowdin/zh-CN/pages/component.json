@@ -9,6 +9,10 @@
       {
         "link": "/node",
         "text": "Node"
+      },
+      {
+        "link": "/edge",
+        "text": "Edge"
       }
     ]
   },
