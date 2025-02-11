@@ -2,9 +2,13 @@
 import { Graph } from '@antv/x6'
 import { defineComponent, onMounted, provide, ref, shallowRef } from 'vue'
 import { emits, props } from './ctx'
+import Emitter from './emitter.vue'
 
 export default defineComponent({
   name: 'VkGraph',
+  components: {
+    Emitter,
+  },
   inheritAttrs: false,
   props,
   emits,
@@ -48,7 +52,9 @@ export default defineComponent({
       v-bind="$attrs"
       ref="graphMainNode"
     ></div>
-    <slot v-if="ready"></slot>
+    <Emitter v-if="ready">
+      <slot></slot>
+    </Emitter>
   </div>
 </template>
 

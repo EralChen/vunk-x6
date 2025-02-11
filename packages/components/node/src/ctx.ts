@@ -1,4 +1,4 @@
-import type { LoadEvent } from './types'
+import type { ClickEvent, LoadEvent } from './types'
 
 export const props = {
   id: {
@@ -35,4 +35,5 @@ export const props = {
 
 export const emits = {
   load: (e: LoadEvent) => e,
+  click: (e: ClickEvent) => e,
 }

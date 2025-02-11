@@ -11,6 +11,9 @@ import { VkNode } from '@vunk-x6/components/node'
         :height="100"
         :x="140"
         :y="100"
+        @click="(e) => {
+          console.log('Node clicked:', e)
+        }"
       ></VkNode>
     </VkGraph>
   </div>

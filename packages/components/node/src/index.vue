@@ -1,5 +1,5 @@
 <script lang="ts">
-import { useGraph } from '@vunk-x6/composables'
+import { useGraph, useGraphEmitter } from '@vunk-x6/composables'
 import { defineComponent, onUnmounted, provide, watchEffect } from 'vue'
 import { emits, props } from './ctx'
 
@@ -9,6 +9,7 @@ export default defineComponent({
   emits,
   setup (props, { emit }) {
     const graph = useGraph()
+    const { graphEmitterOn } = useGraphEmitter()
     const node = graph.addNode({
       id: props.id,
       shape: props.shape,
@@ -39,6 +40,16 @@ export default defineComponent({
       node,
     })
     provide('vk_node', node)
+
+    graphEmitterOn('node:click', (event) => {
+      if (event.node.id === node.id) {
+        emit('click', {
+          event,
+          graph,
+          node,
+        })
+      }
+    })
 
     onUnmounted(() => {
       graph.removeNode(node)

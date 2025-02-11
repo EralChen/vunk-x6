@@ -5,7 +5,7 @@ import { defaultGroups } from './const'
 export const props = {
   shape: {
     type: String,
-    required: true as const,
+    default: 'node-component',
   },
 
   groups: {
