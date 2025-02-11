@@ -6,12 +6,11 @@ export interface LoadEvent {
   graph: Graph
   node: Node
 }
+export type OnLoad = (event: LoadEvent) => ReturnVoid
 
 export interface ClickEvent {
   node: Node
   graph: Graph
   event: __VkGraph.GraphEvents['node:click']
 }
-
-export type OnLoad = (event: LoadEvent) => ReturnVoid
 export type OnClick = (event: ClickEvent) => ReturnVoid

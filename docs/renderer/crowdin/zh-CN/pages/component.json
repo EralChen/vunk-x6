@@ -33,5 +33,14 @@
         "text": "StartNode"
       }
     ]
+  },
+  "plugin": {
+    "text": "plugin 插件",
+    "children": [
+      {
+        "link": "/selection",
+        "text": "Selection"
+      }
+    ]
   }
 }

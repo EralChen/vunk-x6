@@ -1,5 +1,6 @@
-import { App } from 'vue'
+import type { App } from 'vue'
 import VkGraph from './src/index.vue'
+
 export * as __VkGraph from './src/types'
 
 VkGraph.install = (app: App): void => {

@@ -1,5 +1,6 @@
-import { App } from 'vue'
+import type { App } from 'vue'
 import VkNodeComponent from './src/index.vue'
+
 export * as __VkNodeComponent from './src/types'
 
 VkNodeComponent.install = (app: App): void => {

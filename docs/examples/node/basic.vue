@@ -1,6 +1,11 @@
 <script lang="ts" setup>
+import type { __VkNode } from '@vunk-x6/components/node'
 import { VkGraph } from '@vunk-x6/components/graph'
 import { VkNode } from '@vunk-x6/components/node'
+
+const nodeClick: __VkNode.OnClick = (e) => {
+  console.log('Node clicked:', e.event)
+}
 </script>
 
 <template>
@@ -9,11 +14,7 @@ import { VkNode } from '@vunk-x6/components/node'
       <VkNode
         :width="200"
         :height="100"
-        :x="140"
-        :y="100"
-        @click="(e) => {
-          console.log('Node clicked:', e)
-        }"
+        @click="nodeClick"
       ></VkNode>
     </VkGraph>
   </div>
