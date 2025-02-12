@@ -16,6 +16,7 @@ export default defineComponent({
       multiple: props.mutiple,
       rubberband: props.rubberband,
       showNodeSelectionBox: true,
+      ...props.defaultOptions,
     })
     graph.use(selection)
 

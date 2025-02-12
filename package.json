@@ -38,7 +38,7 @@
     "@vunk/core": "1.2.3",
     "@vunk/form": "^1.4.4",
     "@vunk/plus": "^0.2.0",
-    "@vunk/shared": "^0.5.37",
+    "@vunk/shared": "^0.5.49",
     "@vunk/skzz": "0.0.0-alpha.111",
     "@vunk/x6": "workspace:*",
     "element-plus": "npm:element-plus@latest",
