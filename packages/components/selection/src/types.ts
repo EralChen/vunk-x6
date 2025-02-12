@@ -7,4 +7,6 @@ export interface LoadEvent {
   selection: Selection
 }
 
+export type SelectionDisplayContent = Selection.Content
+
 export type OnLoad = (e: LoadEvent) => ReturnVoid
