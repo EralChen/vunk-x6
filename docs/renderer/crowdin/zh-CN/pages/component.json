@@ -13,6 +13,10 @@
       {
         "link": "/edge",
         "text": "Edge"
+      },
+      {
+        "link": "/port",
+        "text": "Port"
       }
     ]
   },
