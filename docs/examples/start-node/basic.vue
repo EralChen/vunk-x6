@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import type { Graph } from '@antv/x6'
 import type { __VkNode } from '@vunk-x6/components/node'
 import { VkGraph } from '@vunk-x6/components/graph'
 import { VkNode } from '@vunk-x6/components/node'
@@ -13,11 +14,17 @@ const startNodeData = reactive({
     },
   ],
 })
+
+const graphOptions: Graph.Options = {
+  connecting: {
+
+  },
+}
 </script>
 
 <template>
   <div class="h-400px border-1 border-gray">
-    <VkGraph>
+    <VkGraph :default-options="graphOptions">
       <!-- 注册开始节点 -->
       <VkStartNode></VkStartNode>
 
