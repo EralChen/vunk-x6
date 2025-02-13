@@ -45,7 +45,7 @@ const formItems: __VkfInformation.FormItem[] = [
 
 const ports: PortManager.PortMetadata[] = [
   {
-    group: 'left',
+    group: 'right',
     id: StartNodePort.output,
   },
 ]
