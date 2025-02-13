@@ -20,8 +20,8 @@
       }
     ]
   },
-  "node": {
-    "text": "Node 节点",
+  "custom": {
+    "text": "custom 定制",
     "children": [
       {
         "link": "/node-component",
@@ -29,8 +29,8 @@
       }
     ]
   },
-  "material": {
-    "text": "Material 物料",
+  "register": {
+    "text": "Register 注册",
     "children": [
       {
         "link": "/register-start-node",
