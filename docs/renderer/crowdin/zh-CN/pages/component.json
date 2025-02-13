@@ -33,8 +33,8 @@
     "text": "Material 物料",
     "children": [
       {
-        "link": "/start-node",
-        "text": "StartNode"
+        "link": "/register-start-node",
+        "text": "RegisterStartNode"
       }
     ]
   },

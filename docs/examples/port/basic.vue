@@ -1,13 +1,13 @@
 <script lang="ts" setup>
 import type { __VkNode } from '@vunk-x6/components/node'
 import type { __VkPort } from '@vunk-x6/components/port'
-import type { __VkStartNode } from '@vunk-x6/components/start-node'
+import type { __VkRegisterStartNode } from '@vunk-x6/components/register-start-node'
 import { VkGraph } from '@vunk-x6/components/graph'
 import { VkNode } from '@vunk-x6/components/node'
 import { VkPort } from '@vunk-x6/components/port'
-import { VkStartNode } from '@vunk-x6/components/start-node'
+import { VkRegisterStartNode } from '@vunk-x6/components/register-start-node'
 
-const startNodeData: __VkStartNode.Data = {
+const RegisterStartNodeData: __VkRegisterStartNode.Data = {
   input: [
     {
       name: '变量1',
@@ -24,11 +24,11 @@ function nodeLoad (e: __VkNode.LoadEvent) {
 <template>
   <div h-400px>
     <VkGraph>
-      <VkStartNode></VkStartNode>
+      <VkRegisterStartNode></VkRegisterStartNode>
 
       <VkNode
-        :shape="VkStartNode.name"
-        :data="startNodeData"
+        :shape="VkRegisterStartNode.name"
+        :data="RegisterStartNodeData"
         @load="nodeLoad"
       >
         <VkPort group="bottom"></VkPort>

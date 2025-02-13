@@ -5,10 +5,10 @@ import { VkfInformation } from '@vunk/form'
 import { VkfInformationTemplatesDefault } from '@vunk/form/components/information-templates-default'
 import { VkNodeComponent } from '@vunk-x6/components/node-component'
 import { ElCard } from 'element-plus'
-import { StartNodePort } from './const'
+import { RegisterStartNodePort } from './const'
 
 defineOptions({
-  name: 'VkStartNode',
+  name: 'VkRegisterStartNode',
 })
 
 const formItems: __VkfInformation.FormItem[] = [
@@ -46,21 +46,21 @@ const formItems: __VkfInformation.FormItem[] = [
 const ports: PortManager.PortMetadata[] = [
   {
     group: 'right',
-    id: StartNodePort.output,
+    id: RegisterStartNodePort.output,
   },
 ]
 </script>
 
 <template>
   <VkNodeComponent
-    shape="VkStartNode"
+    shape="VkRegisterStartNode"
     :auto-size="true"
     :items="ports"
   >
     <template #default="{ data }">
-      <ElCard class="vk-start-node" shadow="hover">
+      <ElCard class="vk-register-start-node" shadow="hover">
         <template #header>
-          <div class="vk-start-node__header">
+          <div class="vk-register-start-node__header">
             <img src="https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-Start-v2.jpg" />
             <span>开始</span>
           </div>
@@ -78,23 +78,23 @@ const ports: PortManager.PortMetadata[] = [
 </template>
 
 <style>
-.vk-start-node {
+.vk-register-start-node {
   --el-card-padding: 12px;
   --el-card-border-color: var(--el-color-primary-light-5);
 }
 
-.vk-start-node__header {
+.vk-register-start-node__header {
   font-size: 1.2em;
   font-weight: bold;
   display: flex;
   align-items: center;
 }
-.vk-start-node__header img{
+.vk-register-start-node__header img{
   width: 1em;
   height: 1em;
   margin-right: 8px;
 }
-.vk-start-node{
+.vk-register-start-node{
   min-width: 300px;
 }
 </style>
