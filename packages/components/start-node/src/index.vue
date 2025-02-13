@@ -14,11 +14,20 @@ const formItems: __VkfInformation.FormItem[] = [
     templateType: 'VkfInputCollection',
     label: '输入',
     prop: 'input',
+    summaryLabel (data) {
+      return `${data.name}`
+    },
     columns: [
+      {
+        label: '变量名称',
+        prop: 'name',
+        templateType: 'VkfInput',
+      },
       {
         prop: 'type',
         templateType: 'VkfSelect',
         label: '类型',
+
         templateProps: {
           options: [
             {

@@ -6,7 +6,12 @@ import { VkStartNode } from '@vunk-x6/components/start-node'
 import { reactive } from 'vue'
 
 const startNodeData = reactive({
-  title: '开始',
+  input: [
+    {
+      name: 'USER_INPUT',
+      type: 'string',
+    },
+  ],
 })
 </script>
 
