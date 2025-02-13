@@ -9,6 +9,10 @@ export const props = {
     type: String,
     default: 'rect',
   },
+  label: {
+    type: String,
+    default: undefined,
+  },
 
   width: {
     type: Number,

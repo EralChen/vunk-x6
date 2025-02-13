@@ -13,8 +13,7 @@ export default defineComponent({
     const node = graph.addNode({
       id: props.id,
       shape: props.shape,
-      label: 'Node',
-
+      label: props.label,
     })
 
     watchEffect(() => {

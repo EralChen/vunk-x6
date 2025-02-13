@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import type { __VkNode } from '@vunk-x6/components/node'
+import type { __VkPort } from '@vunk-x6/components/port'
 import type { __VkStartNode } from '@vunk-x6/components/start-node'
 import { VkGraph } from '@vunk-x6/components/graph'
 import { VkNode } from '@vunk-x6/components/node'
@@ -13,6 +15,10 @@ const startNodeData: __VkStartNode.Data = {
     },
   ],
 }
+
+function nodeLoad (e: __VkNode.LoadEvent) {
+  console.log('nodeLoad', e)
+}
 </script>
 
 <template>
@@ -23,9 +29,9 @@ const startNodeData: __VkStartNode.Data = {
       <VkNode
         :shape="VkStartNode.name"
         :data="startNodeData"
+        @load="nodeLoad"
       >
-        <!-- 添加连接桩 -->
-        <VkPort></VkPort>
+        <VkPort group="bottom"></VkPort>
       </VkNode>
     </VkGraph>
   </div>

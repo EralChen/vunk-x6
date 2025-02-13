@@ -1,3 +1,4 @@
+import type { PortManager } from '@antv/x6/es/model/port'
 import type { PropType } from 'vue'
 import type { Groups } from './types'
 import { defaultGroups } from './const'
@@ -24,6 +25,11 @@ export const props = {
   autoSizeContainerClass: {
     type: String,
     default: '',
+  },
+
+  items: {
+    type: Array as PropType<PortManager.PortMetadata[]>,
+    default: () => [],
   },
 
 }

@@ -66,6 +66,7 @@ export default defineComponent({
       },
       ports: {
         groups: props.groups,
+        items: props.items,
       },
 
     })

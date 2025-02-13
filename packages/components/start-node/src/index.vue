@@ -1,9 +1,11 @@
 <script lang="ts" setup>
+import type { PortManager } from '@antv/x6/es/model/port'
 import type { __VkfInformation } from '@vunk/form'
 import { VkfInformation } from '@vunk/form'
 import { VkfInformationTemplatesDefault } from '@vunk/form/components/information-templates-default'
 import { VkNodeComponent } from '@vunk-x6/components/node-component'
 import { ElCard } from 'element-plus'
+import { StartNodePort } from './const'
 
 defineOptions({
   name: 'VkStartNode',
@@ -40,12 +42,20 @@ const formItems: __VkfInformation.FormItem[] = [
     ],
   },
 ]
+
+const ports: PortManager.PortMetadata[] = [
+  {
+    group: 'left',
+    id: StartNodePort.output,
+  },
+]
 </script>
 
 <template>
   <VkNodeComponent
     shape="VkStartNode"
     :auto-size="true"
+    :items="ports"
   >
     <template #default="{ data }">
       <ElCard class="vk-start-node" shadow="hover">
