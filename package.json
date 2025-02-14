@@ -1,4 +1,6 @@
 {
+  "name": "vunk-x6",
+  "description": "基于 [x6](https://x6.antv.antgroup.com/) 的 Vue3 组件库, 基于业务二次封装。",
   "scripts": {
     "dev": "pnpm run -C docs dev",
     "lint:fix": "oxlint . --fix",
@@ -29,12 +31,9 @@
     "@vuesri/core": "^1.0.59",
     "@vuesri/three": "0.0.4",
     "@vueuse/core": "^11.3.0",
-    "@vunk-x6/api": "workspace:*",
     "@vunk-x6/components": "workspace:*",
     "@vunk-x6/composables": "workspace:*",
     "@vunk-x6/shared": "workspace:*",
-    "@vunk-x6/stores": "workspace:*",
-    "@vunk-x6/theme": "workspace:*",
     "@vunk/core": "1.2.3",
     "@vunk/form": "^2.4.0",
     "@vunk/plus": "^0.2.0",
@@ -83,14 +82,7 @@
     "vite-plugin-vue-devtools": "^7.6.4",
     "vitest": "^2.1.5"
   },
-  "name": "vunk-x6",
-  "description": "基于 [x6](https://x6.antv.antgroup.com/) 的 Vue3 组件库, 基于业务二次封装。",
-  "version": "1.0.0",
-  "main": "index.js",
   "directories": {
     "doc": "docs"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  }
 }

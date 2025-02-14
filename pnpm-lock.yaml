@@ -35,9 +35,6 @@ importers:
       '@vueuse/core':
         specifier: ^11.3.0
         version: 11.3.0(vue@3.5.13(typescript@5.6.3))
-      '@vunk-x6/api':
-        specifier: workspace:*
-        version: link:packages/api
       '@vunk-x6/components':
         specifier: workspace:*
         version: link:packages/components
@@ -47,12 +44,6 @@ importers:
       '@vunk-x6/shared':
         specifier: workspace:*
         version: link:packages/shared
-      '@vunk-x6/stores':
-        specifier: workspace:*
-        version: link:packages/stores
-      '@vunk-x6/theme':
-        specifier: workspace:*
-        version: link:packages/theme
       '@vunk/core':
         specifier: 1.2.3
         version: 1.2.3
@@ -258,15 +249,11 @@ importers:
 
   internal/path: {}
 
-  packages/api: {}
-
   packages/components: {}
 
   packages/composables: {}
 
   packages/entry: {}
-
-  packages/icons: {}
 
   packages/shared:
     dependencies:
@@ -277,10 +264,6 @@ importers:
       '@types/qs':
         specifier: ^6.9.7
         version: 6.9.17
-
-  packages/stores: {}
-
-  packages/theme: {}
 
 packages:
 

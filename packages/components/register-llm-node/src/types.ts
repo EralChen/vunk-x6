@@ -1,19 +1,9 @@
-export interface Field {
-  name: string
-  type: string
-  description?: string
-}
+import type { Field, FieldWithValue } from '@vunk-x6/shared'
 
-export interface ValueRef {
-  id: string
-  name: string
-}
-
-export interface FieldWithValue extends Field {
-  valueRef: ValueRef
-}
-
-export interface Data {
+/**
+ * @description 节点需要的配置数据
+ */
+export interface NodeData {
   modelId: string
   output: Field[]
   input: FieldWithValue[]

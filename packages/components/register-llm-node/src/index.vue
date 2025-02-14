@@ -1,17 +1,20 @@
 <script lang="ts" setup>
 import type { PortManager } from '@antv/x6/es/model/port'
 import type { __VkfInformation } from '@vunk/form'
+import type { NodeData } from './types'
 import { VkfInformation } from '@vunk/form'
 import { VkfInformationTemplatesDefault } from '@vunk/form/components/information-templates-default'
 import { VkNodeComponent } from '@vunk-x6/components/node-component'
 import { ElCard } from 'element-plus'
 import { RegisterLlmNodePort } from './const'
 
+type FormItem = __VkfInformation.FormItem<keyof NodeData>
+
 defineOptions({
   name: 'VkRegisterLlmNode',
 })
 
-const formItems: __VkfInformation.FormItem[] = [
+const formItems: FormItem[] = [
   {
     templateType: 'VkfInput',
     label: '模型ID',

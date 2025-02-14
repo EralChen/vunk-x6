@@ -38,7 +38,6 @@ const formItems: __VkfInformation.FormItem[] = [
           ],
         },
       },
-
       {
         prop: 'description',
         templateType: 'VkfInput',
