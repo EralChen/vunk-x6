@@ -9,13 +9,13 @@ export interface ValueRef {
   name: string
 }
 
-export interface InputField extends Field {
+export interface FieldWithValue extends Field {
   valueRef: ValueRef
 }
 
 export interface Data {
   modelId: string
   output: Field[]
-  input: InputField[]
+  input: FieldWithValue[]
   prompt: string
 }
