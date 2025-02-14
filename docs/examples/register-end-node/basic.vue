@@ -15,8 +15,12 @@ const registerStartNodeData = reactive({
       name: 'query',
       type: 'string',
     },
+    {
+      name: 'conversationId',
+      type: 'string',
+    },
   ],
-} as __VkRegisterStartNode.Data)
+} as __VkRegisterStartNode.NodeData)
 
 const llmNodeData = reactive({
   modelId: 'gpt-3.5-turbo',
