@@ -38,6 +38,15 @@ function nodeLoad (e: __VkNode.LoadEvent) {
         </template>
       </VkNodeComponent>
 
+      <VkNodeComponent
+        shape="custom-vue-node2"
+      ></VkNodeComponent>
+
+      <VkNodeComponent
+        shape="custom-vue-node3"
+        :auto-size="true"
+      ></VkNodeComponent>
+
       <VkNode
         shape="custom-vue-node"
         :x="140"

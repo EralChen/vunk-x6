@@ -35,6 +35,10 @@
       {
         "link": "/register-start-node",
         "text": "RegisterStartNode"
+      },
+      {
+        "link": "/register-llm-node",
+        "text": "RegisterLlmNode"
       }
     ]
   },

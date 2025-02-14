@@ -1,17 +1,12 @@
 <script lang="tsx">
 import { Graph } from '@antv/x6'
-import { getTeleport, register } from '@antv/x6-vue-shape'
+import { register } from '@antv/x6-vue-shape'
 import { useResizeObserver } from '@vueuse/core'
 import { defineComponent, onUnmounted, ref, shallowRef } from 'vue'
 import { emits, props } from './ctx'
 
-const TeleportContainer = getTeleport()
-
 export default defineComponent({
   name: 'VkNodeComponent',
-  components: {
-    TeleportContainer,
-  },
   props,
   emits,
   setup (props, { slots }) {
@@ -68,21 +63,15 @@ export default defineComponent({
         groups: props.groups,
         items: props.items,
       },
-
     })
 
     onUnmounted(() => {
       Graph.unregisterNode(props.shape)
     })
-
-    return {}
+    return () => null
   },
 })
 </script>
-
-<template>
-  <TeleportContainer></TeleportContainer>
-</template>
 
 <style>
 .vk-node-component-size-container{

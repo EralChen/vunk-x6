@@ -3,22 +3,22 @@ import type { Graph } from '@antv/x6'
 import type { __VkNode } from '@vunk-x6/components/node'
 import { VkGraph } from '@vunk-x6/components/graph'
 import { VkNode } from '@vunk-x6/components/node'
+import { VkRegisterLlmNode } from '@vunk-x6/components/register-llm-node'
 import { VkRegisterStartNode } from '@vunk-x6/components/register-start-node'
 import { reactive } from 'vue'
 
-const RegisterStartNodeData = reactive({
+const registerStartNodeData = reactive({
   input: [
     {
-      name: 'query',
+      name: 'USER_INPUT',
       type: 'string',
-      description: '用户输入',
-    },
-    {
-      name: 'conversationId',
-      type: 'string',
-      description: '会话 ID',
     },
   ],
+})
+
+const llmNodeData = reactive({
+  modelId: 'gpt-3.5-turbo',
+  prompt: '你好',
 })
 
 const graphOptions: Graph.Options = {
@@ -30,16 +30,29 @@ const graphOptions: Graph.Options = {
 
 <template>
   <div class="h-400px border-1 border-gray">
+    {{ VkRegisterLlmNode.name }}
+    {{ VkRegisterStartNode.name }}
     <VkGraph :default-options="graphOptions">
       <!-- 注册开始节点 -->
       <VkRegisterStartNode></VkRegisterStartNode>
+      <!-- 注册 LLM 节点 -->
+      <VkRegisterLlmNode></VkRegisterLlmNode>
 
       <!-- 使用开始节点渲染实例 -->
       <VkNode
+        id="node1"
         :shape="VkRegisterStartNode.name"
         :x="100"
         :y="100"
-        :data="RegisterStartNodeData"
+        :data="registerStartNodeData"
+      />
+
+      <VkNode
+        id="node2"
+        :shape="VkRegisterLlmNode.name"
+        :x="300"
+        :y="100"
+        :data="llmNodeData"
       />
     </VkGraph>
   </div>

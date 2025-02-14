@@ -1,13 +1,17 @@
 <script lang="ts">
 import { Graph } from '@antv/x6'
-import { defineComponent, onMounted, provide, ref, shallowRef } from 'vue'
+import { getTeleport } from '@antv/x6-vue-shape'
+import { computed, defineComponent, onMounted, provide, ref, shallowRef } from 'vue'
 import { emits, props } from './ctx'
 import Emitter from './emitter.vue'
+
+const TeleportContainer = getTeleport()
 
 export default defineComponent({
   name: 'VkGraph',
   components: {
     Emitter,
+    TeleportContainer,
   },
   inheritAttrs: false,
   props,
@@ -16,6 +20,9 @@ export default defineComponent({
     const graphMainNode = ref<HTMLElement>()
     const ready = ref(false)
     const graph = shallowRef<Graph>()
+    const hasTeleport = computed(() => {
+      return props.modules.includes('vue_shape_teleport')
+    })
 
     onMounted(() => {
       graph.value = new Graph({
@@ -41,6 +48,7 @@ export default defineComponent({
     return {
       ready,
       graphMainNode,
+      hasTeleport,
     }
   },
 })
@@ -55,6 +63,10 @@ export default defineComponent({
     <Emitter v-if="ready">
       <slot></slot>
     </Emitter>
+
+    <TeleportContainer
+      v-if="hasTeleport"
+    ></TeleportContainer>
   </div>
 </template>
 

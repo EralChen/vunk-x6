@@ -1,0 +1,40 @@
+## 大模型节点
+
+## 参考
+
+可以参考 RegisterStartNode 组件的实现方式，实现 RegisterLlmNode
+
+## Path
+
+RegisterStartNode: `packages\components\register-start-node\src`
+
+RegisterLlmNode： `packages\components\register-llm-node\src`
+
+## 技术设计
+
+大模型节点字段
+
+| 字段名 | 类型 | 描述 |
+| --- | --- | --- |
+| modelId | string | 基础模型ID |
+| output | Field[] | 输出 |
+| input | InputField[] | 温度 |
+| prompt | string | 提示词 |
+
+```ts
+interface Field {
+  name: string
+  type: string
+  description?: string
+}
+
+interface ValueRef {
+  id: string
+  name: string
+}
+
+interface InputField extends Field {
+  // 值引用
+  valueRef: ValueRef
+}
+```

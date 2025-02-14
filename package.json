@@ -82,5 +82,15 @@
     "vite-plugin-external": "^4.3.1",
     "vite-plugin-vue-devtools": "^7.6.4",
     "vitest": "^2.1.5"
-  }
+  },
+  "name": "vunk-x6",
+  "description": "基于 [x6](https://x6.antv.antgroup.com/) 的 Vue3 组件库, 基于业务二次封装。",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
