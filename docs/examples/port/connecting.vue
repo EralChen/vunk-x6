@@ -47,7 +47,7 @@ const graphOptions: Graph.Options = {
 
 <template>
   <div class="h-400px border-1 border-gray">
-    <VkGraph :default-options="graphOptions">
+    <VkGraph :default-options="graphOptions" :modules="[]">
       <!-- 注册开始节点 -->
       <VkRegisterStartNode></VkRegisterStartNode>
       <!-- 注册 LLM 节点 -->
