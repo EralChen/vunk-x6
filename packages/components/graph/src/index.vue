@@ -82,4 +82,10 @@ export default defineComponent({
 .vk-graph .x6-node [magnet-rule='passive'] {
   cursor: default;
 }
+.vk-graph .x6-graph-svg {
+  z-index: 2;
+}
+.vk-graph .x6-widget-selection {
+  z-index: 1;
+}
 </style>

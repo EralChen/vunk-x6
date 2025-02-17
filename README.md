@@ -63,3 +63,16 @@ Graph组件已内置以下验证逻辑：
 - Start节点：设置 magnet-rule="active"，确保只能作为起点
 - End节点：设置 magnet-rule="passive"，确保只能作为终点
 - 中间处理节点：不设置magnet-rule，允许双向连接
+
+### Selction ZIndex
+
+默认的选中框会被节点覆盖
+
+```css
+.vk-graph .x6-graph-svg {
+  z-index: 2;
+}
+.vk-graph .x6-widget-selection {
+  z-index: 1;
+}
+```

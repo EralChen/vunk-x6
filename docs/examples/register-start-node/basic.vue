@@ -5,6 +5,7 @@ import type { __VkRegisterStartNode } from '@vunk-x6/components/register-start-n
 import { VkGraph } from '@vunk-x6/components/graph'
 import { VkNode } from '@vunk-x6/components/node'
 import { VkRegisterStartNode } from '@vunk-x6/components/register-start-node'
+import { VkSelection } from '@vunk-x6/components/selection'
 import { reactive } from 'vue'
 
 const registerStartNodeData = reactive({
@@ -23,9 +24,6 @@ const registerStartNodeData = reactive({
 })
 
 const graphOptions: Graph.Options = {
-  connecting: {
-
-  },
 }
 </script>
 
@@ -34,6 +32,8 @@ const graphOptions: Graph.Options = {
     <VkGraph :default-options="graphOptions">
       <!-- 注册开始节点 -->
       <VkRegisterStartNode></VkRegisterStartNode>
+
+      <VkSelection></VkSelection>
 
       <!-- 使用开始节点渲染实例 -->
       <VkNode
