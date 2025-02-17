@@ -26,6 +26,10 @@
       {
         "link": "/node-component",
         "text": "NodeComponent"
+      },
+      {
+        "link": "/node-drawer",
+        "text": "NodeDrawer"
       }
     ]
   },
