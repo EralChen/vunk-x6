@@ -9,6 +9,11 @@ export const props = {
     type: String,
     required: true,
   },
+
+  size: {
+    type: [String, Number] as PropType<string | number>,
+    default: 300,
+  },
 }
 
 export const emits = {

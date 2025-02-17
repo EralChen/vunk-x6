@@ -10,10 +10,17 @@ const visible = ref(false)
 const shape = 'custom-node'
 const selectedNodes = ref([])
 
-// Example node data
-const nodeData = {
+// Example node data with reactivity
+const nodeData = ref({
   title: 'Custom Node',
   description: 'Example node with custom content',
+  count: 0,
+})
+
+// Function to update node data
+function updateNodeData () {
+  nodeData.value.count++
+  nodeData.value.description = `Example node with custom content (Updated: ${nodeData.value.count})`
 }
 </script>
 
@@ -49,25 +56,59 @@ const nodeData = {
       >
         <template #header>
           <div class="flex items-center gap-2">
-            <img
-              class="w-6 h-6"
-              src="https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-NodeBasic-v3.jpg"
-            />
             <span>Node Settings</span>
           </div>
         </template>
 
-        <div class="p-4 space-y-4">
-          <div class="flex items-center gap-2">
-            <div class="w-2 h-2 bg-blue-500 rounded-full" />
-            <span>Selected: {{ selectedNodes.length > 0 ? 'Yes' : 'No' }}</span>
-          </div>
+        <template #default="{ data, attrs }">
+          <div class="p-4 space-y-4">
+            <!-- Display node data -->
+            <div v-if="data" class="space-y-3">
+              <div class="flex items-center gap-2">
+                <div class="w-2 h-2 bg-blue-500 rounded-full" />
+                <span>Node Data</span>
+              </div>
 
-          <p class="text-sm text-gray-600">
-            The drawer opens automatically when the node is selected.
-            Try selecting/unselecting the node to see the drawer behavior.
-          </p>
-        </div>
+              <div class="p-3 bg-gray-50 rounded space-y-3">
+                <div class="flex gap-2">
+                  <span class="text-gray-500">Title:</span>
+                  <span>{{ data.title }}</span>
+                </div>
+                <div class="flex gap-2">
+                  <span class="text-gray-500">Description:</span>
+                  <span>{{ data.description }}</span>
+                </div>
+
+                <div class="flex gap-2">
+                  <span class="text-gray-500">Count:</span>
+                  <span>{{ data.count }}</span>
+                </div>
+
+                <button
+                  class="mt-2 px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+                  @click="updateNodeData"
+                >
+                  Update Node Data
+                </button>
+              </div>
+            </div>
+
+            <!-- Display node attributes -->
+            <div v-if="attrs" class="space-y-3">
+              <div class="flex items-center gap-2">
+                <div class="w-2 h-2 bg-green-500 rounded-full" />
+                <span>Node Attributes</span>
+              </div>
+
+              <pre class="p-3 bg-gray-50 rounded text-sm">{{ attrs }}</pre>
+            </div>
+
+            <p class="text-sm text-gray-600">
+              The drawer opens automatically when selecting a node of type "{{ shape }}".
+              Try selecting/unselecting the node to see the drawer behavior.
+            </p>
+          </div>
+        </template>
       </VkNodeDrawer>
     </VkGraph>
   </div>
