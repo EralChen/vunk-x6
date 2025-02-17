@@ -16,7 +16,7 @@ export const props = {
    */
   modelValue: {
     type: Array as PropType<Cell[]>,
-    default: () => [],
+    default: undefined,
   },
   /**
    * 是否允许同时选择多个单元格

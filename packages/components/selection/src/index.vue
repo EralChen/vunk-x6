@@ -1,6 +1,7 @@
 <script lang="ts">
 import { Selection } from '@antv/x6-plugin-selection'
 import { watchPausable } from '@vueuse/core'
+import { useModelComputed } from '@vunk/core/composables'
 import { useGraph } from '@vunk-x6/composables/instance'
 import { defineComponent, nextTick, onBeforeUnmount, provide, watchEffect } from 'vue'
 import { emits, props } from './ctx'
@@ -11,6 +12,10 @@ export default defineComponent({
   emits,
   setup (props, { emit, slots }) {
     const graph = useGraph()
+    const theModel = useModelComputed({
+      default: [],
+      key: 'modelValue',
+    }, props, emit)
 
     // Initialize selection plugin
     const selection = new Selection({
@@ -25,7 +30,7 @@ export default defineComponent({
     provide('vk_selection', selection)
 
     // Watch external v-model changes
-    const selectionSync = watchPausable(() => [...props.modelValue], (nodes) => {
+    const selectionSync = watchPausable(() => [...theModel.value], (nodes) => {
       selection.clean()
       if (nodes.length) {
         selection.select(nodes)
@@ -36,7 +41,7 @@ export default defineComponent({
     const onSelectionChanged = ({ selected }) => {
       const selectedCells = selected
       selectionSync.pause()
-      emit('update:modelValue', selectedCells)
+      theModel.value = selectedCells
       nextTick(() => {
         selectionSync.resume()
       })
