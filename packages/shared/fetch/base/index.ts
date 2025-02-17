@@ -1,4 +1,4 @@
-import type { RestFetchRequest } from '@vunk/skzz/shared'
+import type { RestFetchExecOptions, RestFetchRequest } from '@vunk/skzz/shared'
 import { RestFetch } from '@vunk/skzz/shared/utils-fetch'
 
 export const restFetch = new RestFetch({
@@ -30,9 +30,15 @@ interface R<T> { // 一个自定义的泛型接口
   msg: string
 }
 
-export function request<T> (...args: Parameters<RestFetchRequest>) {
-  const p = restFetch
-    .request(...args) as unknown as Promise<R<T>>
+const userList = restFetch.skzz()
+  .menu({
+    dir: 'system',
+    modelId: 'sso',
+    menuId: 'sso',
+  })
+  .dataset('1', {
 
-  return p
-}
+  })
+
+const a = userList.query()
+const b = userList.save()

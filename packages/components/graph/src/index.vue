@@ -77,6 +77,7 @@ export default defineComponent({
 .vk-graph {
   width: 100%;
   height: 100%;
+  position: relative;
 }
 
 .vk-graph .x6-node [magnet-rule='passive'] {
