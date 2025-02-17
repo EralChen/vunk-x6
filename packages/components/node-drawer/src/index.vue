@@ -103,17 +103,19 @@ export default defineComponent({
     :show-close="false"
   >
     <template #header>
-      <CustomHeader @close="modelValue = false">
-        <template #title>
-          <slot name="title" v-bind="slotArgs" />
-        </template>
-        <template #actions>
-          <slot name="actions" v-bind="slotArgs" />
-        </template>
-        <template #description>
-          <slot name="description" v-bind="slotArgs" />
-        </template>
-      </CustomHeader>
+      <slot name="header" v-bind="slotArgs">
+        <CustomHeader @close="modelValue = false">
+          <template #title>
+            <slot name="title" v-bind="slotArgs" />
+          </template>
+          <template #actions>
+            <slot name="actions" v-bind="slotArgs" />
+          </template>
+          <template #description>
+            <slot name="description" v-bind="slotArgs" />
+          </template>
+        </CustomHeader>
+      </slot>
     </template>
     <slot v-bind="slotArgs" />
   </ElDrawer>
