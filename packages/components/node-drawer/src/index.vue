@@ -4,12 +4,14 @@ import { useModelComputed } from '@vunk/core/composables'
 import { useGraph } from '@vunk-x6/composables'
 import { ElDrawer } from 'element-plus'
 import { computed, defineComponent, onBeforeUnmount, shallowRef } from 'vue'
+import CustomHeader from './components/custom-header.vue'
 import { emits, props } from './ctx'
 
 export default defineComponent({
   name: 'VkNodeDrawer',
   components: {
     ElDrawer,
+    CustomHeader,
   },
   props,
   emits,
@@ -98,9 +100,20 @@ export default defineComponent({
     :close-on-click-modal="false"
     :close-on-press-escape="false"
     :size="size"
+    :show-close="false"
   >
     <template #header>
-      <slot name="header" v-bind="slotArgs" />
+      <CustomHeader @close="modelValue = false">
+        <template #title>
+          <slot name="title" v-bind="slotArgs" />
+        </template>
+        <template #actions>
+          <slot name="actions" v-bind="slotArgs" />
+        </template>
+        <template #description>
+          <slot name="description" v-bind="slotArgs" />
+        </template>
+      </CustomHeader>
     </template>
     <slot v-bind="slotArgs" />
   </ElDrawer>

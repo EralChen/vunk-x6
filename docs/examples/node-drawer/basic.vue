@@ -54,10 +54,18 @@ function updateNodeData () {
         v-model="visible"
         :shape="shape"
       >
-        <template #header>
-          <div class="flex items-center gap-2">
-            <span>Node Settings</span>
-          </div>
+        <template #title>
+          <span>Node Settings</span>
+        </template>
+
+        <template #actions>
+          <el-button type="primary" size="small" @click="updateNodeData">
+            Update
+          </el-button>
+        </template>
+
+        <template #description>
+          Configure the selected node's properties and data
         </template>
 
         <template #default="{ data, attrs }">
