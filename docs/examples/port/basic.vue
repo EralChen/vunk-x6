@@ -7,7 +7,7 @@ import { VkNode } from '@vunk-x6/components/node'
 import { VkPort } from '@vunk-x6/components/port'
 import { VkRegisterStartNode } from '@vunk-x6/components/register-start-node'
 
-const RegisterStartNodeData: __VkRegisterStartNode.Data = {
+const registerStartNodeData = {
   input: [
     {
       name: '变量1',
@@ -28,7 +28,7 @@ function nodeLoad (e: __VkNode.LoadEvent) {
 
       <VkNode
         :shape="VkRegisterStartNode.name"
-        :data="RegisterStartNodeData"
+        :data="registerStartNodeData"
         @load="nodeLoad"
       >
         <VkPort group="bottom"></VkPort>

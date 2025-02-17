@@ -1,10 +1,12 @@
 <script lang="ts" setup>
 import type { PortManager } from '@antv/x6/es/model/port'
 import type { __VkfInformation } from '@vunk/form'
+import type { __VkNodeComponent } from '@vunk-x6/components/node-component'
 import type { NodeData } from './types'
 import { VkfInformation } from '@vunk/form'
 import { VkfInformationTemplatesDefault } from '@vunk/form/components/information-templates-default'
 import { VkNodeComponent } from '@vunk-x6/components/node-component'
+import { defaultAttrs } from '@vunk-x6/components/port'
 import { ElCard } from 'element-plus'
 import { RegisterLlmNodePort } from './const'
 
@@ -105,11 +107,12 @@ const formItems: FormItem[] = [
 
 const ports: PortManager.PortMetadata[] = [
   {
-    group: 'left',
+    group: 'passiveLeft' as __VkNodeComponent.DefaultGroup,
     id: RegisterLlmNodePort.input,
+
   },
   {
-    group: 'right',
+    group: 'activeRight' as __VkNodeComponent.DefaultGroup,
     id: RegisterLlmNodePort.output,
   },
 ]

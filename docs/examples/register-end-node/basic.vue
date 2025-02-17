@@ -39,9 +39,6 @@ const endNodeData = reactive({
 } as __VkRegisterEndNode.NodeData)
 
 const graphOptions: Graph.Options = {
-  connecting: {
-
-  },
 }
 </script>
 

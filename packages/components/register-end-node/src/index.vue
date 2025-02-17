@@ -1,6 +1,7 @@
 <script lang="ts">
 import type { PortManager } from '@antv/x6/es/model/port'
 import type { __VkfInformation } from '@vunk/form'
+import type { __VkNodeComponent } from '@vunk-x6/components/node-component'
 import type { NodeData } from './types'
 import { VkfInformation } from '@vunk/form'
 import { VkfInformationTemplatesDefault } from '@vunk/form/components/information-templates-default'
@@ -66,7 +67,7 @@ export default defineComponent({
   setup () {
     const ports: PortManager.PortMetadata[] = [
       {
-        group: 'left',
+        group: 'passiveLeft' as __VkNodeComponent.DefaultGroup,
         id: RegisterEndNodePort.input,
       },
     ]

@@ -2,6 +2,7 @@
 import { Graph } from '@antv/x6'
 import { getTeleport } from '@antv/x6-vue-shape'
 import { computed, defineComponent, onMounted, provide, ref, shallowRef } from 'vue'
+import { defaultConnecting, defaultHighlighting } from './const'
 import { emits, props } from './ctx'
 import Emitter from './emitter.vue'
 
@@ -34,6 +35,8 @@ export default defineComponent({
           enabled: true,
           modifiers: [],
         },
+        connecting: defaultConnecting,
+        highlighting: defaultHighlighting,
         ...props.defaultOptions,
       })
       provide('vk_graph', graph.value)
@@ -74,5 +77,9 @@ export default defineComponent({
 .vk-graph {
   width: 100%;
   height: 100%;
+}
+
+.vk-graph .x6-node [magnet-rule='passive'] {
+  cursor: default;
 }
 </style>
