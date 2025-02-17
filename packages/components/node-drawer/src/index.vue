@@ -42,6 +42,9 @@ export default defineComponent({
     }
 
     function onSelectionChanged () {
+      if (!graph.getSelectedCells)
+        return
+
       const selectedCells = graph.getSelectedCells()
       const last = selectedCells.at(-1)
 
