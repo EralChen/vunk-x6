@@ -1,9 +1,10 @@
 <script lang="ts">
 import type { Cell } from '@antv/x6'
 import { useModelComputed } from '@vunk/core/composables'
+import { useNodeData } from '@vunk-x6/components/node'
 import { useGraph } from '@vunk-x6/composables'
 import { ElDrawer } from 'element-plus'
-import { computed, defineComponent, onBeforeUnmount, shallowRef } from 'vue'
+import { computed, defineComponent, nextTick, onBeforeUnmount, ref, shallowRef, watchEffect } from 'vue'
 import CustomHeader from './components/custom-header.vue'
 import { emits, props } from './ctx'
 
@@ -25,21 +26,7 @@ export default defineComponent({
     }, props, emit)
 
     const currentNode = shallowRef<Cell>()
-    const nodeData = shallowRef<any>({})
-
-    // Store data change handler for cleanup
-    const onDataChanged = () => {
-      if (currentNode.value) {
-        nodeData.value = currentNode.value.getData()
-      }
-    }
-
-    // Clean up current node listeners
-    function cleanupCurrentNode () {
-      if (currentNode.value) {
-        currentNode.value.off('change:data', onDataChanged)
-      }
-    }
+    const { nodeData } = useNodeData(currentNode)
 
     function onSelectionChanged () {
       if (!graph.getSelectedCells)
@@ -51,19 +38,12 @@ export default defineComponent({
       // Update model value based on shape
       modelValue.value = last?.shape === props.shape
 
-      // Clean up previous listeners
-      cleanupCurrentNode()
-
       // Track current node and update data
       if (last?.shape === props.shape && last) {
         currentNode.value = last
-        nodeData.value = last.getData()
-        // Listen for data changes
-        last.on('change:data', onDataChanged)
       }
       else {
         currentNode.value = undefined
-        nodeData.value = {}
       }
     }
 
@@ -80,7 +60,6 @@ export default defineComponent({
 
     // Cleanup event listeners on unmount
     onBeforeUnmount(() => {
-      cleanupCurrentNode()
       graph.off('selection:changed', onSelectionChanged)
       graph.off('node:click', onSelectionChanged)
     })

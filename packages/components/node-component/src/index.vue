@@ -2,7 +2,8 @@
 import { Graph } from '@antv/x6'
 import { register } from '@antv/x6-vue-shape'
 import { useResizeObserver } from '@vueuse/core'
-import { defineComponent, onUnmounted, ref, shallowRef } from 'vue'
+import { useNodeData } from '@vunk-x6/components/node'
+import { defineComponent, onUnmounted, ref } from 'vue'
 import { emits, props } from './ctx'
 
 export default defineComponent({
@@ -18,18 +19,14 @@ export default defineComponent({
           graph: null,
         },
         setup (nodeProps) {
-          const data = shallowRef(nodeProps.node.getData())
-
-          nodeProps.node.on('change:data', () => {
-            data.value = nodeProps.node.getData()
-          })
+          const { nodeData } = useNodeData(nodeProps.node)
 
           const renderSlot = () => {
             return slots.default?.({
               node: nodeProps.node,
               attrs: nodeProps.node.attrs,
               graph: nodeProps.graph,
-              data: data.value,
+              data: nodeData.value,
             })
           }
 

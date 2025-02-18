@@ -1,6 +1,17 @@
 <script lang="ts" setup>
+import type { __VkfForm } from '@vunk/form'
+import type { __VkfInputCollection } from '@vunk/form/components/input-collection'
+import type { NodeData } from './types'
+import { setData } from '@vunk/core'
+import { VkfForm, VkfFormItemRendererTemplate } from '@vunk/form'
+import { VkfInputCollection } from '@vunk/form/components/input-collection'
 import { VkNodeDrawer } from '@vunk-x6/components/node-drawer'
 import Title from './title.vue'
+
+type Keys = keyof NodeData
+
+type FormItem = __VkfForm.FormItem<Keys>
+  | __VkfInputCollection.Source<Keys>
 
 defineProps({
   modelValue: {
@@ -16,6 +27,39 @@ defineProps({
 defineEmits({
   'update:modelValue': null,
 })
+
+const formItems: FormItem[] = [
+  {
+    templateType: 'VkfInputCollection',
+    prop: 'input',
+    label: '输入',
+    columns: [
+      {
+        label: '字段',
+        prop: 'name',
+        templateType: 'VkfInput',
+      },
+      {
+        prop: 'type',
+        templateType: 'VkfSelect',
+        label: '类型',
+        templateProps: {
+          options: [
+            {
+              label: '字符串',
+              value: 'string',
+            },
+          ],
+        },
+      },
+      // {
+      //   prop: 'description',
+      //   templateType: 'VkfInput',
+      //   label: '描述',
+      // },
+    ],
+  },
+]
 </script>
 
 <template>
@@ -29,6 +73,28 @@ defineEmits({
     </template>
     <template #description>
       工作流的起始节点，用于设定启动工作流需要的信息
+    </template>
+
+    <template #default="{ data }">
+      <VkfForm
+        :data="data"
+        :form-items="formItems"
+        label-position="top"
+        @set-data="setData(data, $event)"
+      >
+        <template #rendererTemplate>
+          <VkfFormItemRendererTemplate type="VkfInputCollection">
+            <template #default="{ props, input, value }">
+              <VkfInputCollection
+                :inherit-templates="true"
+                v-bind="props"
+                :model-value="value"
+                @update:model-value="input"
+              ></VkfInputCollection>
+            </template>
+          </VkfFormItemRendererTemplate>
+        </template>
+      </VkfForm>
     </template>
   </VkNodeDrawer>
 </template>
