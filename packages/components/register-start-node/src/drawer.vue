@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { VkNodeDrawer } from '@vunk-x6/components/node-drawer'
+import Header from './header.vue'
 
 defineProps({
   modelValue: {
@@ -24,12 +25,7 @@ defineEmits({
     @update:model-value="$emit('update:modelValue', $event)"
   >
     <template #header>
-      <div class="vk-register-start-node__header">
-        <img
-          src="https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-Start-v2.jpg"
-        />
-        <span>开始</span>
-      </div>
+      <Header></Header>
     </template>
   </VkNodeDrawer>
 </template>

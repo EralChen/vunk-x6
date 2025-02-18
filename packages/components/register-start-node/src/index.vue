@@ -9,6 +9,7 @@ import { useGraph } from '@vunk-x6/composables'
 import { ElCard } from 'element-plus'
 import { RegisterStartNodePort } from './const'
 import Drawer from './drawer.vue'
+import Header from './header.vue'
 
 defineOptions({
   name: 'VkRegisterStartNode',
@@ -74,10 +75,7 @@ const ports: PortManager.PortMetadata[] = [
     <template #default="{ data }">
       <ElCard class="vk-register-start-node" shadow="hover">
         <template #header>
-          <div class="vk-register-start-node__header">
-            <img src="https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-Start-v2.jpg" />
-            <span>开始</span>
-          </div>
+          <Header />
         </template>
 
         <VkfInformation
@@ -101,17 +99,6 @@ const ports: PortManager.PortMetadata[] = [
   --el-card-border-color: var(--el-color-primary-light-5);
 }
 
-.vk-register-start-node__header {
-  font-size: 1.2em;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-}
-.vk-register-start-node__header img{
-  width: 1em;
-  height: 1em;
-  margin-right: 8px;
-}
 .vk-register-start-node{
   min-width: 300px;
 }
