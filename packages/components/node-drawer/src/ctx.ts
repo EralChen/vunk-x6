@@ -12,7 +12,7 @@ export const props = {
 
   size: {
     type: [String, Number] as PropType<string | number>,
-    default: 300,
+    default: 400,
   },
 }
 

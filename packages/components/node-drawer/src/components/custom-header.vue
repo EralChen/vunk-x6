@@ -38,9 +38,8 @@ export default defineComponent({
 
 <style>
 .vk-node-drawer-header {
-  padding: var(--el-drawer-padding-primary);
   margin-bottom:0;
-  border-bottom: 1px solid var(--el-border-color);
+
 }
 
 .vk-node-drawer-header__top {

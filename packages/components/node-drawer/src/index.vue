@@ -132,7 +132,9 @@ export default defineComponent({
 }
 
 .vk-node-drawer__modal .el-drawer__header {
-  margin-bottom: 10px;
+  margin-bottom: 0;
+  padding-bottom: var(--el-drawer-padding-primary);
+  border-bottom: 1px solid var(--el-border-color);
 }
 
 .vk-node-drawer__modal .el-drawer {

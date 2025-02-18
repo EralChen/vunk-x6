@@ -9,7 +9,7 @@ import { useGraph } from '@vunk-x6/composables'
 import { ElCard } from 'element-plus'
 import { RegisterStartNodePort } from './const'
 import Drawer from './drawer.vue'
-import Header from './header.vue'
+import Title from './title.vue'
 
 defineOptions({
   name: 'VkRegisterStartNode',
@@ -75,7 +75,7 @@ const ports: PortManager.PortMetadata[] = [
     <template #default="{ data }">
       <ElCard class="vk-register-start-node" shadow="hover">
         <template #header>
-          <Header />
+          <Title />
         </template>
 
         <VkfInformation

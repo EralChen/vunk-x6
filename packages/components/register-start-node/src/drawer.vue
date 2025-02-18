@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { VkNodeDrawer } from '@vunk-x6/components/node-drawer'
-import Header from './header.vue'
+import Title from './title.vue'
 
 defineProps({
   modelValue: {
@@ -24,8 +24,11 @@ defineEmits({
     :shape="shape"
     @update:model-value="$emit('update:modelValue', $event)"
   >
-    <template #header>
-      <Header></Header>
+    <template #title>
+      <Title></Title>
+    </template>
+    <template #description>
+      工作流的起始节点，用于设定启动工作流需要的信息
     </template>
   </VkNodeDrawer>
 </template>
