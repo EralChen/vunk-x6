@@ -1,23 +1,17 @@
-import type { AliasOptions, UserConfig } from 'vite'
-import path from 'node:path'
-import { fixPath } from '@lib-env/build-utils'
-
-import { workRoot } from '@lib-env/path'
 import vue from '@vitejs/plugin-vue'
-
 import vueJsx from '@vitejs/plugin-vue-jsx'
-
+import vike from 'vike/plugin'
+import { AliasOptions, UserConfig, defineConfig, loadEnv } from 'vite'
+import { appRoot, srcRoot } from './path.config'
+import path from 'path'
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
+import Components from 'unplugin-vue-components/vite'
+import vueDevTools from 'vite-plugin-vue-devtools'
+import { workRoot } from '@lib-env/path'
+import { fixPath } from '@lib-env/build-utils'
 import { createMarkdownPlugin } from '@vunk/shared/vite/markdown'
 import unocss from 'unocss/vite'
-import IconsResolver from 'unplugin-icons/resolver'
-
-import Icons from 'unplugin-icons/vite'
-
-import Components from 'unplugin-vue-components/vite'
-import vike from 'vike/plugin'
-import { defineConfig, loadEnv } from 'vite'
-import Inspect from 'vite-plugin-inspect'
-import { appRoot, srcRoot } from './path.config'
 
 const alias: AliasOptions = [
   {
@@ -72,6 +66,7 @@ export default defineConfig(async ({ mode }) => {
     },
 
     plugins: [
+      vueDevTools(),
 
       vike({
         prerender: true,
@@ -105,7 +100,6 @@ export default defineConfig(async ({ mode }) => {
       }),
 
       Icons(),
-      Inspect(),
     ],
     // We manually add a list of dependencies to be pre-bundled, in order to avoid a page reload at dev start which breaks vike's CI
     optimizeDeps: {

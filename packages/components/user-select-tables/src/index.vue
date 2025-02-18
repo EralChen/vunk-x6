@@ -1,11 +1,10 @@
 <script lang="ts">
-import { props, emits } from './ctx'
-import { defineComponent, onMounted, ref } from 'vue'
+import type { __SkAppTablesV1 } from '@skzz/platform'
+import type { Row } from './types'
 import { SkTablesCheckbox } from '@skzz/platform/components/tables-checkbox'
 import { rUsers } from '@skzz-template/api/user'
-import { __SkAppTablesV1 } from '@skzz/platform'
-import { Row } from './types'
-
+import { defineComponent, onMounted, ref } from 'vue'
+import { emits, props } from './ctx'
 
 type Col = __SkAppTablesV1.Column<Row>
 
@@ -17,7 +16,6 @@ export default defineComponent({
   props,
   emits,
   setup () {
-
     const data = ref<Row[]>([])
 
     const cols: Col[] = [
@@ -35,12 +33,11 @@ export default defineComponent({
       },
     ]
 
-
     onMounted(() => {
       read()
     })
     function read () {
-      rUsers().then(res => {
+      rUsers().then((res) => {
         data.value = res
       })
     }
@@ -51,9 +48,10 @@ export default defineComponent({
   },
 })
 </script>
+
 <template>
-  <SkTablesCheckbox 
-    :oid-field="'id'"
+  <SkTablesCheckbox
+    oid-field="id"
     :modules="[]"
     :multiple="multiple"
     :data="data"
