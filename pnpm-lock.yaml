@@ -48,8 +48,8 @@ importers:
         specifier: 1.2.3
         version: 1.2.3
       '@vunk/form':
-        specifier: ^2.4.0
-        version: 2.4.0
+        specifier: ^2.5.0
+        version: 2.5.0
       '@vunk/plus':
         specifier: ^0.2.0
         version: 0.2.0
@@ -2233,8 +2233,8 @@ packages:
   '@vunk/core@1.2.3':
     resolution: {integrity: sha512-wlpbLl2x7Re9z2qceZEvIvdaxCzfyTeDqo6xRu6TgsVf0mSiVMABFu7NAllYfaPKLUcqc1zwB0oawEaQl/bZ/A==}
 
-  '@vunk/form@2.4.0':
-    resolution: {integrity: sha512-qNvydHtD/yQ0oWSHZATPSiUYFh0/sDqvG7YHxqhJ+M3MJc5ztH9d3RlxmrVC5cBI0D25HslHK22jKiBY0dI6OA==}
+  '@vunk/form@2.5.0':
+    resolution: {integrity: sha512-K1gTNfjoSHCuBFoNp1XDgrF1W9W7cDQxGfdIZYzRQBxg1s8rvBAnHN9TITfLFQmjKzTMy/Z3BOqZYmF67b2BUw==}
 
   '@vunk/gsap@0.0.0-alpha.3':
     resolution: {integrity: sha512-UTyP4VmeAoMY+eab/OhFyyXrd21W4zgQuV2px4r/5x8iox187yf3AH42zuI//ub+loVTgE74iu9MQasTJ8NdMw==}
@@ -7362,7 +7362,7 @@ snapshots:
 
   '@vunk/core@1.2.3': {}
 
-  '@vunk/form@2.4.0': {}
+  '@vunk/form@2.5.0': {}
 
   '@vunk/gsap@0.0.0-alpha.3': {}
 

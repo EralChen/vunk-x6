@@ -33,17 +33,22 @@ const formItems: FormItem[] = [
     templateType: 'VkfInputCollection',
     prop: 'input',
     label: '输入',
+    splicable: false,
     columns: [
       {
         label: '字段',
         prop: 'name',
         templateType: 'VkfInput',
+        templateProps: {
+          readonly: true,
+        },
       },
       {
         prop: 'type',
         templateType: 'VkfSelect',
         label: '类型',
         templateProps: {
+          readonly: true,
           options: [
             {
               label: '字符串',
@@ -52,11 +57,13 @@ const formItems: FormItem[] = [
           ],
         },
       },
-      // {
-      //   prop: 'description',
-      //   templateType: 'VkfInput',
-      //   label: '描述',
-      // },
+      {
+        prop: 'description',
+        templateType: 'VkfInput',
+        label: '描述',
+        expandVisible: true,
+        hidden: true,
+      },
     ],
   },
 ]
@@ -78,17 +85,19 @@ const formItems: FormItem[] = [
     <template #default="{ data }">
       <VkfForm
         :data="data"
+        size="small"
         :form-items="formItems"
         label-position="top"
+        class="vk-register-start-drawer__form"
         @set-data="setData(data, $event)"
       >
         <template #rendererTemplate>
           <VkfFormItemRendererTemplate type="VkfInputCollection">
             <template #default="{ props, input, value }">
               <VkfInputCollection
-                :inherit-templates="true"
                 v-bind="props"
                 :model-value="value"
+                :label-actions="true"
                 @update:model-value="input"
               ></VkfInputCollection>
             </template>
@@ -98,3 +107,9 @@ const formItems: FormItem[] = [
     </template>
   </VkNodeDrawer>
 </template>
+
+<style>
+.vk-register-start-drawer__form .vkf-input-collection-table{
+  margin-top: 0;
+}
+</style>
