@@ -1,0 +1,392 @@
+{
+  "cells": [
+    {
+      "position": {
+        "x": -220,
+        "y": 210
+      },
+      "size": {
+        "width": 300,
+        "height": 105.265625
+      },
+      "view": "vue-shape-view",
+      "shape": "VkRegisterStartNode",
+      "ports": {
+        "groups": {
+          "top": {
+            "position": "top",
+            "attrs": {
+              "r": 8,
+              "stroke": "#2B65FF",
+              "fill": "#fff",
+              "magnet": true
+            }
+          },
+          "right": {
+            "position": "right",
+            "attrs": {
+              "r": 8,
+              "stroke": "#2B65FF",
+              "fill": "#fff",
+              "magnet": true
+            }
+          },
+          "bottom": {
+            "position": "bottom",
+            "attrs": {
+              "r": 8,
+              "stroke": "#2B65FF",
+              "fill": "#fff",
+              "magnet": true
+            }
+          },
+          "left": {
+            "position": "left",
+            "attrs": {
+              "r": 8,
+              "stroke": "#2B65FF",
+              "fill": "#fff",
+              "magnet": true
+            }
+          },
+          "activeTop": {
+            "position": "top",
+            "attrs": {
+              "circle": {
+                "r": 8,
+                "stroke": "#2B65FF",
+                "fill": "#fff",
+                "magnet": true,
+                "magnetRule": "active"
+              }
+            }
+          },
+          "activeRight": {
+            "position": "right",
+            "attrs": {
+              "circle": {
+                "r": 8,
+                "stroke": "#2B65FF",
+                "fill": "#fff",
+                "magnet": true,
+                "magnetRule": "active"
+              }
+            }
+          },
+          "passiveBottom": {
+            "position": "bottom",
+            "attrs": {
+              "circle": {
+                "r": 8,
+                "stroke": "#2B65FF",
+                "fill": "#fff",
+                "magnet": true,
+                "magnetRule": "passive"
+              }
+            }
+          },
+          "passiveLeft": {
+            "position": "left",
+            "attrs": {
+              "circle": {
+                "r": 8,
+                "stroke": "#2B65FF",
+                "fill": "#fff",
+                "magnet": true,
+                "magnetRule": "passive"
+              }
+            }
+          }
+        },
+        "items": [
+          {
+            "group": "right",
+            "id": "start_node_port_output",
+            "attrs": {
+              "circle": {
+                "r": 8,
+                "stroke": "#2B65FF",
+                "fill": "#fff",
+                "magnet": true,
+                "magnetRule": "active"
+              }
+            }
+          }
+        ]
+      },
+      "id": "ce4b0c0e-8307-406d-aca5-217dbcf7ac6f",
+      "zIndex": 1,
+      "data": {
+        "input": [
+          {
+            "name": "query",
+            "type": "string"
+          },
+          {
+            "name": "conversationId",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "position": {
+        "x": 240,
+        "y": 70
+      },
+      "size": {
+        "width": 300,
+        "height": 201.265625
+      },
+      "view": "vue-shape-view",
+      "shape": "VkRegisterLlmNode",
+      "ports": {
+        "groups": {
+          "top": {
+            "position": "top",
+            "attrs": {
+              "r": 8,
+              "stroke": "#2B65FF",
+              "fill": "#fff",
+              "magnet": true
+            }
+          },
+          "right": {
+            "position": "right",
+            "attrs": {
+              "r": 8,
+              "stroke": "#2B65FF",
+              "fill": "#fff",
+              "magnet": true
+            }
+          },
+          "bottom": {
+            "position": "bottom",
+            "attrs": {
+              "r": 8,
+              "stroke": "#2B65FF",
+              "fill": "#fff",
+              "magnet": true
+            }
+          },
+          "left": {
+            "position": "left",
+            "attrs": {
+              "r": 8,
+              "stroke": "#2B65FF",
+              "fill": "#fff",
+              "magnet": true
+            }
+          },
+          "activeTop": {
+            "position": "top",
+            "attrs": {
+              "circle": {
+                "r": 8,
+                "stroke": "#2B65FF",
+                "fill": "#fff",
+                "magnet": true,
+                "magnetRule": "active"
+              }
+            }
+          },
+          "activeRight": {
+            "position": "right",
+            "attrs": {
+              "circle": {
+                "r": 8,
+                "stroke": "#2B65FF",
+                "fill": "#fff",
+                "magnet": true,
+                "magnetRule": "active"
+              }
+            }
+          },
+          "passiveBottom": {
+            "position": "bottom",
+            "attrs": {
+              "circle": {
+                "r": 8,
+                "stroke": "#2B65FF",
+                "fill": "#fff",
+                "magnet": true,
+                "magnetRule": "passive"
+              }
+            }
+          },
+          "passiveLeft": {
+            "position": "left",
+            "attrs": {
+              "circle": {
+                "r": 8,
+                "stroke": "#2B65FF",
+                "fill": "#fff",
+                "magnet": true,
+                "magnetRule": "passive"
+              }
+            }
+          }
+        },
+        "items": [
+          {
+            "group": "passiveLeft",
+            "id": "llm_node_port_input"
+          },
+          {
+            "group": "activeRight",
+            "id": "llm_node_port_output"
+          }
+        ]
+      },
+      "id": "c26a0ec1-8ce6-4eb2-8677-6d0399e13187",
+      "zIndex": 2,
+      "data": {
+        "modelId": "gpt-3.5-turbo",
+        "prompt": "你好"
+      }
+    },
+    {
+      "position": {
+        "x": 640,
+        "y": 250
+      },
+      "size": {
+        "width": 300,
+        "height": 137.265625
+      },
+      "view": "vue-shape-view",
+      "shape": "VkRegisterEndNode",
+      "ports": {
+        "groups": {
+          "top": {
+            "position": "top",
+            "attrs": {
+              "r": 8,
+              "stroke": "#2B65FF",
+              "fill": "#fff",
+              "magnet": true
+            }
+          },
+          "right": {
+            "position": "right",
+            "attrs": {
+              "r": 8,
+              "stroke": "#2B65FF",
+              "fill": "#fff",
+              "magnet": true
+            }
+          },
+          "bottom": {
+            "position": "bottom",
+            "attrs": {
+              "r": 8,
+              "stroke": "#2B65FF",
+              "fill": "#fff",
+              "magnet": true
+            }
+          },
+          "left": {
+            "position": "left",
+            "attrs": {
+              "r": 8,
+              "stroke": "#2B65FF",
+              "fill": "#fff",
+              "magnet": true
+            }
+          },
+          "activeTop": {
+            "position": "top",
+            "attrs": {
+              "circle": {
+                "r": 8,
+                "stroke": "#2B65FF",
+                "fill": "#fff",
+                "magnet": true,
+                "magnetRule": "active"
+              }
+            }
+          },
+          "activeRight": {
+            "position": "right",
+            "attrs": {
+              "circle": {
+                "r": 8,
+                "stroke": "#2B65FF",
+                "fill": "#fff",
+                "magnet": true,
+                "magnetRule": "active"
+              }
+            }
+          },
+          "passiveBottom": {
+            "position": "bottom",
+            "attrs": {
+              "circle": {
+                "r": 8,
+                "stroke": "#2B65FF",
+                "fill": "#fff",
+                "magnet": true,
+                "magnetRule": "passive"
+              }
+            }
+          },
+          "passiveLeft": {
+            "position": "left",
+            "attrs": {
+              "circle": {
+                "r": 8,
+                "stroke": "#2B65FF",
+                "fill": "#fff",
+                "magnet": true,
+                "magnetRule": "passive"
+              }
+            }
+          }
+        },
+        "items": [
+          {
+            "group": "passiveLeft",
+            "id": "input"
+          }
+        ]
+      },
+      "id": "c176d8c8-bc54-4e9c-9068-ac16275822c9",
+      "zIndex": 3,
+      "data": {
+        "output": [
+          {
+            "name": "response",
+            "type": "string"
+          }
+        ],
+        "textTemplate": "{{response}}"
+      }
+    },
+    {
+      "shape": "edge",
+      "id": "b9fa4711-e0ac-49e2-9a5f-6741ac892c1a",
+      "source": {
+        "cell": "ce4b0c0e-8307-406d-aca5-217dbcf7ac6f",
+        "port": "start_node_port_output"
+      },
+      "target": {
+        "cell": "c26a0ec1-8ce6-4eb2-8677-6d0399e13187",
+        "port": "llm_node_port_input"
+      },
+      "zIndex": 4
+    },
+    {
+      "shape": "edge",
+      "id": "e9bc8e69-4f0e-4a18-b66a-01c5fca1efab",
+      "source": {
+        "cell": "c26a0ec1-8ce6-4eb2-8677-6d0399e13187",
+        "port": "llm_node_port_output"
+      },
+      "target": {
+        "cell": "c176d8c8-bc54-4e9c-9068-ac16275822c9",
+        "port": "input"
+      },
+      "zIndex": 5
+    }
+  ]
+}
