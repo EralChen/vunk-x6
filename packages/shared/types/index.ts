@@ -1,6 +1,7 @@
 export interface Field<T = string> {
   name: T
   type: string
+  default?: string
   description?: string
 }
 

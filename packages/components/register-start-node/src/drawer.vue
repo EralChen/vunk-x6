@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import type { __VkfForm } from '@vunk/form'
 import type { __VkfInputCollection } from '@vunk/form/components/input-collection'
+import type { Field } from '@vunk-x6/shared'
 import type { NodeData } from './types'
 import { setData } from '@vunk/core'
 import { VkfForm, VkfFormItemRendererTemplate } from '@vunk/form'
@@ -40,7 +41,7 @@ const formItems: FormItem[] = [
         prop: 'name',
         templateType: 'VkfInput',
         templateProps: {
-          readonly: true,
+          disabled: true,
         },
       },
       {
@@ -48,7 +49,7 @@ const formItems: FormItem[] = [
         templateType: 'VkfSelect',
         label: '类型',
         templateProps: {
-          readonly: true,
+          disabled: true,
           options: [
             {
               label: '字符串',
@@ -58,11 +59,37 @@ const formItems: FormItem[] = [
         },
       },
       {
+        templateType: 'VkfInput',
+        prop: 'default',
+        label: '默认值',
+        hidden: true,
+        expandVisible: true,
+        createTemplateProps (e) {
+          const data = e.row as Field
+          if (data.name === 'USER_INPUT') {
+            return {
+              placeholder: '默认参数值, 在没有传入时使用',
+            }
+          }
+          else {
+            return {
+              disabled: true,
+            }
+          }
+        },
+      },
+
+      {
         prop: 'description',
         templateType: 'VkfInput',
         label: '描述',
         expandVisible: true,
         hidden: true,
+        templateProps: {
+          type: 'textarea',
+          rows: 2,
+          disabled: true,
+        },
       },
     ],
   },
@@ -111,5 +138,8 @@ const formItems: FormItem[] = [
 <style>
 .vk-register-start-drawer__form .vkf-input-collection-table{
   margin-top: 0;
+}
+.vk-input-collection__expand-fieldset .el-form-item__label {
+  font-size: 0.9em;
 }
 </style>

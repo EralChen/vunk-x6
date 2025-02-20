@@ -60,6 +60,7 @@ export default defineComponent({
         groups: props.groups,
         items: props.items,
       },
+      data: props.data,
     })
 
     onUnmounted(() => {

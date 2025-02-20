@@ -1,19 +1,23 @@
 <script lang="ts" setup>
 import type { PortManager } from '@antv/x6/es/model/port'
 import type { __VkfInformation } from '@vunk/form'
+import type { NodeData } from './types'
 import { VkfInformation } from '@vunk/form'
 import { VkfInformationTemplatesDefault } from '@vunk-x6/components/information-templates-default'
 import { VkNodeComponent } from '@vunk-x6/components/node-component'
 import { defaultAttrs } from '@vunk-x6/components/port'
 import { useGraph } from '@vunk-x6/composables'
 import { ElCard } from 'element-plus'
-import { RegisterStartNodePort } from './const'
+import { cloneDeep } from 'lodash-es'
+import { defaultData, RegisterStartNodePort } from './const'
 import Drawer from './drawer.vue'
 import Title from './title.vue'
 
 defineOptions({
   name: 'VkRegisterStartNode',
 })
+
+const nodeData = cloneDeep(defaultData)
 
 const formItems: __VkfInformation.FormItem[] = [
   {
@@ -46,6 +50,7 @@ const formItems: __VkfInformation.FormItem[] = [
         prop: 'description',
         templateType: 'VkfInput',
         label: '描述',
+
       },
     ],
   },
@@ -71,6 +76,7 @@ const ports: PortManager.PortMetadata[] = [
     shape="VkRegisterStartNode"
     :auto-size="true"
     :items="ports"
+    :data="nodeData"
   >
     <template #default="{ data }">
       <ElCard class="vk-register-start-node" shadow="hover">

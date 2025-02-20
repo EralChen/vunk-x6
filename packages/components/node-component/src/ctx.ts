@@ -1,4 +1,5 @@
 import type { PortManager } from '@antv/x6/es/model/port'
+import type { NormalObject } from '@vunk/shared'
 import type { PropType } from 'vue'
 import type { Groups } from './types'
 import { defaultGroups } from './const'
@@ -30,6 +31,11 @@ export const props = {
   items: {
     type: Array as PropType<PortManager.PortMetadata[]>,
     default: () => [],
+  },
+
+  data: {
+    type: Object as PropType<NormalObject>,
+    default: () => ({}),
   },
 
 }

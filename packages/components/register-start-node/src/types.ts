@@ -4,8 +4,8 @@ import type { Field } from '@vunk-x6/shared'
  * @description 开始节点用户输入数据
  */
 export interface StartRow {
-  query: string
-  conversationId: string
+  USER_INPUT: string
+  CONVERSATION_NAME: string
 }
 
 /**

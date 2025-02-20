@@ -9,18 +9,7 @@ import { VkSelection } from '@vunk-x6/components/selection'
 import { reactive } from 'vue'
 
 const registerStartNodeData = reactive({
-  input: [
-    {
-      name: 'query',
-      type: 'string',
-      description: '用户输入',
-    },
-    {
-      name: 'conversationId',
-      type: 'string',
-      description: '会话 ID',
-    },
-  ] as __VkRegisterStartNode.InputItem[],
+
 })
 
 const graphOptions: Graph.Options = {
