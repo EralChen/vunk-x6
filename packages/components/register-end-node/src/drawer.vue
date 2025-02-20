@@ -3,6 +3,7 @@ import type { __VkNodeDrawer } from '@vunk-x6/components/node-drawer'
 import { setData } from '@vunk/core'
 import { VkfForm } from '@vunk/form'
 import { VkNodeDrawer } from '@vunk-x6/components/node-drawer'
+import { OutputMode, outputModeOptions } from './const'
 import Title from './title.vue'
 
 defineProps({
@@ -25,21 +26,11 @@ const formItems: __VkNodeDrawer.FormItem[] = [
   {
     templateType: 'VkfRadio',
     prop: 'outputMode',
-    label: '回答模式',
-    options: [
-      {
-        label: '返回变量',
-        value: 'returnVariables',
-      },
-      {
-        label: '返回文本',
-        value: 'returnDirectText',
-      },
-    ],
+    label: '输出模式',
+    options: outputModeOptions,
     labelPosition: 'right',
     formItemSize: 'default',
-    defaultModelValue: 'returnVariables',
-
+    defaultModelValue: OutputMode.returnText,
   },
 
   {
@@ -47,44 +38,21 @@ const formItems: __VkNodeDrawer.FormItem[] = [
     prop: 'output',
     label: '输出变量',
     labelTip: '这些变量将在智能体调用工作流完成后被输出。在“返回变量”模式中，这些变量会被智能体总结后回复用户；在“直接回答”模式中，智能体只会回复你设定的“回答内容”。但在任何模式中，这些变量都可以在配置卡片时使用。',
-    splicable: false,
     columns: [
       {
         label: '字段',
         prop: 'name',
         templateType: 'VkfInput',
-        templateProps: {
-          disabled: true,
-        },
       },
       {
-        prop: 'type',
-        templateType: 'VkfSelect',
-        label: '类型',
-        templateProps: {
-          disabled: true,
-          options: [
-            {
-              label: '字符串',
-              value: 'string',
-            },
-          ],
-        },
-      },
-      {
-        prop: 'description',
+        label: '值',
+        prop: 'valueRef',
         templateType: 'VkfInput',
-        label: '描述',
-        expandVisible: true,
-        hidden: true,
-        templateProps: {
-          type: 'textarea',
-          rows: 2,
-          disabled: true,
-        },
       },
+
     ],
   },
+
   {
     templateType: 'VkfInput',
     label: '回答文本',
@@ -92,7 +60,7 @@ const formItems: __VkNodeDrawer.FormItem[] = [
     type: 'textarea',
     rows: 4,
     labelTip: '编辑智能体的回复内容，即工作流运行完成后，智能体中的LLM将不再组织语言，而是直接用这里编辑的内容原文回复对话。 可以使用{{变量名}}的方式引用输入参数中的变量',
-
+    templateIf: data => data.outputMode === OutputMode.returnText,
   },
 ]
 </script>

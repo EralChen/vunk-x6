@@ -11,5 +11,5 @@ export interface ValueRef {
 }
 
 export interface FieldWithValue<T = string> extends Field<T> {
-  valueRef: ValueRef
+  valueRef?: ValueRef
 }

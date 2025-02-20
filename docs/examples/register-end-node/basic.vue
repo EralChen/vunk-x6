@@ -5,21 +5,14 @@ import type { __VkRegisterEndNode } from '@vunk-x6/components/register-end-node'
 import type { __VkRegisterStartNode } from '@vunk-x6/components/register-start-node'
 import { VkGraph } from '@vunk-x6/components/graph'
 import { VkNode } from '@vunk-x6/components/node'
-import { VkRegisterEndNode } from '@vunk-x6/components/register-end-node'
+import { defaultData, VkRegisterEndNode } from '@vunk-x6/components/register-end-node'
 import { VkRegisterLlmNode } from '@vunk-x6/components/register-llm-node'
 import { VkRegisterStartNode } from '@vunk-x6/components/register-start-node'
 import { VkSelection } from '@vunk-x6/components/selection'
+import { cloneDeep } from 'lodash-es'
 import { reactive, ref } from 'vue'
 
-const endNodeData = reactive({
-  output: [
-    {
-      name: 'response',
-      type: 'string',
-    },
-  ],
-  textTemplate: '{{response}}',
-} as __VkRegisterEndNode.NodeData)
+const endNodeData = reactive(cloneDeep(defaultData))
 
 const graphOptions: Graph.Options = {}
 

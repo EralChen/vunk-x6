@@ -8,7 +8,7 @@ import { VkfInformationTemplatesDefault } from '@vunk/form/components/informatio
 import { VkNodeComponent } from '@vunk-x6/components/node-component'
 import { ElCard } from 'element-plus'
 import { defineComponent } from 'vue'
-import { RegisterEndNodePort } from './const'
+import { outputModeOptions, RegisterEndNodePort } from './const'
 import { emits, props } from './ctx'
 import Drawer from './drawer.vue'
 
@@ -28,30 +28,13 @@ const formItems: FormItem[] = [
         prop: 'name',
         templateType: 'VkfInput',
       },
-      {
-        prop: 'type',
-        templateType: 'VkfSelect',
-        label: '类型',
-        templateProps: {
-          options: [
-            {
-              label: '字符串',
-              value: 'string',
-            },
-          ],
-        },
-      },
-      {
-        prop: 'description',
-        templateType: 'VkfInput',
-        label: '描述',
-      },
     ],
   },
   {
-    templateType: 'VkfInput',
-    label: '文本模板',
-    prop: 'textTemplate',
+    templateType: 'VkfSelect',
+    label: '输出模式',
+    prop: 'outputMode',
+    options: outputModeOptions,
   },
 ]
 
