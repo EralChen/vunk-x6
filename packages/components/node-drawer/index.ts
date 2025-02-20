@@ -1,5 +1,6 @@
-import { App } from 'vue'
+import type { App } from 'vue'
 import VkNodeDrawer from './src/index.vue'
+
 export * as __VkNodeDrawer from './src/types'
 
 VkNodeDrawer.install = (app: App): void => {

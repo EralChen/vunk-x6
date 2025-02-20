@@ -1,16 +1,9 @@
 <script lang="ts" setup>
-import type { __VkfForm } from '@vunk/form'
-import type { __VkfInputCollection } from '@vunk/form/components/input-collection'
 import type { __VkNodeDrawer } from '@vunk-x6/components/node-drawer'
-import type { Field } from '@vunk-x6/shared'
-import type { NodeData } from './types'
 import { setData } from '@vunk/core'
 import { VkfForm } from '@vunk/form'
 import { VkNodeDrawer } from '@vunk-x6/components/node-drawer'
 import Title from './title.vue'
-
-type Keys = keyof NodeData
-type FormItem = __VkNodeDrawer.FormItem<Keys>
 
 defineProps({
   modelValue: {
@@ -19,7 +12,7 @@ defineProps({
   },
   shape: {
     type: String,
-    default: 'VkRegisterStartNode',
+    default: 'VkRegisterEndNode',
   },
 })
 
@@ -27,11 +20,33 @@ defineEmits({
   'update:modelValue': null,
 })
 
-const formItems: FormItem[] = [
+const formItems: __VkNodeDrawer.FormItem[] = [
+
+  {
+    templateType: 'VkfRadio',
+    prop: 'outputMode',
+    label: '回答模式',
+    options: [
+      {
+        label: '返回变量',
+        value: 'returnVariables',
+      },
+      {
+        label: '返回文本',
+        value: 'returnDirectText',
+      },
+    ],
+    labelPosition: 'right',
+    formItemSize: 'default',
+    defaultModelValue: 'returnVariables',
+
+  },
+
   {
     templateType: 'VkfInputCollection',
-    prop: 'input',
-    label: '输入',
+    prop: 'output',
+    label: '输出变量',
+    labelTip: '这些变量将在智能体调用工作流完成后被输出。在“返回变量”模式中，这些变量会被智能体总结后回复用户；在“直接回答”模式中，智能体只会回复你设定的“回答内容”。但在任何模式中，这些变量都可以在配置卡片时使用。',
     splicable: false,
     columns: [
       {
@@ -57,27 +72,6 @@ const formItems: FormItem[] = [
         },
       },
       {
-        templateType: 'VkfInput',
-        prop: 'default',
-        label: '默认值',
-        hidden: true,
-        expandVisible: true,
-        createTemplateProps (e) {
-          const data = e.row as Field
-          if (data.name === 'USER_INPUT') {
-            return {
-              placeholder: '默认参数值, 在没有传入时使用',
-            }
-          }
-          else {
-            return {
-              disabled: true,
-            }
-          }
-        },
-      },
-
-      {
         prop: 'description',
         templateType: 'VkfInput',
         label: '描述',
@@ -90,6 +84,15 @@ const formItems: FormItem[] = [
         },
       },
     ],
+  },
+  {
+    templateType: 'VkfInput',
+    label: '回答文本',
+    prop: 'textTemplate',
+    type: 'textarea',
+    rows: 4,
+    labelTip: '编辑智能体的回复内容，即工作流运行完成后，智能体中的LLM将不再组织语言，而是直接用这里编辑的内容原文回复对话。 可以使用{{变量名}}的方式引用输入参数中的变量',
+
   },
 ]
 </script>
@@ -104,7 +107,7 @@ const formItems: FormItem[] = [
       <Title></Title>
     </template>
     <template #description>
-      工作流的起始节点，用于设定启动工作流需要的信息
+      工作流的结束节点，用于设定最终输出的文本模板
     </template>
 
     <template #default="{ data }">
@@ -113,7 +116,7 @@ const formItems: FormItem[] = [
         size="small"
         :form-items="formItems"
         label-position="top"
-        class="vk-register-start-drawer__form"
+        class="vk-register-end-drawer__form"
         @set-data="setData(data, $event)"
       >
       </VkfForm>

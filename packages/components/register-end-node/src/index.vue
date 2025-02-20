@@ -10,6 +10,7 @@ import { ElCard } from 'element-plus'
 import { defineComponent } from 'vue'
 import { RegisterEndNodePort } from './const'
 import { emits, props } from './ctx'
+import Drawer from './drawer.vue'
 
 type FormItem = __VkfInformation.FormItem<keyof NodeData>
 
@@ -61,6 +62,7 @@ export default defineComponent({
     VkfInformationTemplatesDefault,
     ElCard,
     VkNodeComponent,
+    Drawer,
   },
   props,
   emits,
@@ -81,6 +83,7 @@ export default defineComponent({
 </script>
 
 <template>
+  <Drawer shape="VkRegisterEndNode" />
   <VkNodeComponent
     shape="VkRegisterEndNode"
     :auto-size="true"
