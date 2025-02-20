@@ -1,15 +1,5 @@
-export interface Field<T = string> {
-  name: T
-  type: string
-  default?: string
-  description?: string
-}
+import type { __VkRegisterNode } from '@vunk-x6/components/register-node'
 
-export interface ValueRef {
-  id: string
-  name: string
-}
+export type Field<T = string> = __VkRegisterNode.Field<T>
 
-export interface FieldWithValue<T = string> extends Field<T> {
-  valueRef?: ValueRef
-}
+export type FieldWithValue<T = string> = __VkRegisterNode.FieldWithValue<T>

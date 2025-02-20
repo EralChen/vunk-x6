@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { __VkfForm } from '@vunk/form'
+import type { __VkfForm, __VkfInput } from '@vunk/form'
 import type { __VkfInputCollection } from '@vunk/form/components/input-collection'
 import type { __VkNodeDrawer } from '@vunk-x6/components/node-drawer'
 import type { Field } from '@vunk-x6/shared'
@@ -7,6 +7,7 @@ import type { NodeData } from './types'
 import { setData } from '@vunk/core'
 import { VkfForm } from '@vunk/form'
 import { VkNodeDrawer } from '@vunk-x6/components/node-drawer'
+import { fieldColumnMap } from '@vunk-x6/components/register-node'
 import Title from './title.vue'
 
 type Keys = keyof NodeData
@@ -35,59 +36,37 @@ const formItems: FormItem[] = [
     splicable: false,
     columns: [
       {
-        label: '字段',
-        prop: 'name',
-        templateType: 'VkfInput',
-        templateProps: {
+        ...fieldColumnMap.name,
+        createTemplateProps: () => ({
           disabled: true,
-        },
+        }),
       },
       {
-        prop: 'type',
-        templateType: 'VkfSelect',
-        label: '类型',
-        templateProps: {
+        ...fieldColumnMap.type,
+        createTemplateProps: () => ({
           disabled: true,
-          options: [
-            {
-              label: '字符串',
-              value: 'string',
-            },
-          ],
-        },
+        }),
       },
       {
-        templateType: 'VkfInput',
-        prop: 'default',
-        label: '默认值',
-        hidden: true,
-        expandVisible: true,
+        ...fieldColumnMap.default,
         createTemplateProps (e) {
           const data = e.row as Field
-          if (data.name === 'USER_INPUT') {
-            return {
-              placeholder: '默认参数值, 在没有传入时使用',
-            }
+          const config = {
+            ...fieldColumnMap.default.templateProps,
+          } as __VkfInput.Source
+
+          if (data.name !== 'USER_INPUT') {
+            config.disabled = true
           }
-          else {
-            return {
-              disabled: true,
-            }
-          }
+
+          return config
         },
       },
-
       {
-        prop: 'description',
-        templateType: 'VkfInput',
-        label: '描述',
-        expandVisible: true,
-        hidden: true,
-        templateProps: {
-          type: 'textarea',
-          rows: 2,
+        ...fieldColumnMap.description,
+        createTemplateProps: () => ({
           disabled: true,
-        },
+        }),
       },
     ],
   },
