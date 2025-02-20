@@ -7,9 +7,16 @@ import { VkGraph } from '@vunk-x6/components/graph'
 import { VkNode } from '@vunk-x6/components/node'
 import { VkRegisterEndNode } from '@vunk-x6/components/register-end-node'
 import { VkRegisterLlmNode } from '@vunk-x6/components/register-llm-node'
-import { VkRegisterStartNode } from '@vunk-x6/components/register-start-node'
-import { VkSelection } from '@vunk-x6/components/selection'
+import { defaultData, VkRegisterStartNode } from '@vunk-x6/components/register-start-node'
+import { cloneDeep } from 'lodash-es'
 import { reactive, ref } from 'vue'
+
+const registerStartNodeData = reactive(cloneDeep(defaultData))
+
+const llmNodeData = reactive({
+  modelId: 'gpt-3.5-turbo',
+  prompt: '你好',
+})
 
 const endNodeData = reactive({
   output: [
@@ -21,7 +28,8 @@ const endNodeData = reactive({
   textTemplate: '{{response}}',
 } as __VkRegisterEndNode.NodeData)
 
-const graphOptions: Graph.Options = {}
+const graphOptions: Graph.Options = {
+}
 
 const graphInstance = ref<Graph>()
 const exportedConfig = ref('')
@@ -33,6 +41,7 @@ function handleLoad (e: { graph: Graph }) {
 function handleExport () {
   if (!graphInstance.value)
     return
+
   const config = graphInstance.value.toJSON()
   exportedConfig.value = JSON.stringify(config, null, 2)
 }
@@ -45,13 +54,27 @@ function handleExport () {
         :default-options="graphOptions"
         @load="handleLoad"
       >
-        <VkSelection></VkSelection>
         <!-- 注册开始节点 -->
         <VkRegisterStartNode></VkRegisterStartNode>
         <!-- 注册 LLM 节点 -->
         <VkRegisterLlmNode></VkRegisterLlmNode>
         <!-- 注册结束节点 -->
         <VkRegisterEndNode></VkRegisterEndNode>
+
+        <!-- 使用开始节点渲染实例 -->
+        <VkNode
+          :shape="VkRegisterStartNode.name"
+          :x="100"
+          :y="100"
+          :data="registerStartNodeData"
+        />
+
+        <VkNode
+          :shape="VkRegisterLlmNode.name"
+          :x="300"
+          :y="100"
+          :data="llmNodeData"
+        />
 
         <VkNode
           :shape="VkRegisterEndNode.name"

@@ -118,28 +118,7 @@ const formItems: FormItem[] = [
         class="vk-register-start-drawer__form"
         @set-data="setData(data, $event)"
       >
-        <template #rendererTemplate>
-          <VkfFormItemRendererTemplate type="VkfInputCollection">
-            <template #default="{ props, input, value }">
-              <VkfInputCollection
-                v-bind="props"
-                :model-value="value"
-                :label-actions="true"
-                @update:model-value="input"
-              ></VkfInputCollection>
-            </template>
-          </VkfFormItemRendererTemplate>
-        </template>
       </VkfForm>
     </template>
   </VkNodeDrawer>
 </template>
-
-<style>
-.vk-register-start-drawer__form .vkf-input-collection-table{
-  margin-top: 0;
-}
-.vk-input-collection__expand-fieldset .el-form-item__label {
-  font-size: 0.9em;
-}
-</style>

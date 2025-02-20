@@ -1,10 +1,14 @@
 <script lang="ts">
 import type { Cell } from '@antv/x6'
 import { useModelComputed } from '@vunk/core/composables'
+import { VkfFormItemRendererTemplate } from '@vunk/form'
+import VkfInputCollection from '@vunk/form/components/input-collection'
+import { VkfTemplateInstancesProvider } from '@vunk/form/components/template-instances-provider'
+import { VkfTemplatesDefault } from '@vunk/form/components/templates-default'
 import { useNodeData } from '@vunk-x6/components/node'
 import { useGraph } from '@vunk-x6/composables'
 import { ElDrawer } from 'element-plus'
-import { computed, defineComponent, nextTick, onBeforeUnmount, ref, shallowRef, watchEffect } from 'vue'
+import { computed, defineComponent, onBeforeUnmount, shallowRef } from 'vue'
 import CustomHeader from './components/custom-header.vue'
 import { emits, props } from './ctx'
 
@@ -13,6 +17,10 @@ export default defineComponent({
   components: {
     ElDrawer,
     CustomHeader,
+    VkfTemplateInstancesProvider,
+    VkfFormItemRendererTemplate,
+    VkfInputCollection,
+    VkfTemplatesDefault,
   },
   props,
   emits,
@@ -76,14 +84,15 @@ export default defineComponent({
 <template>
   <ElDrawer
     v-model="modelValue"
-    :append-to="appendTo"
     class="vk-node-drawer"
+    :append-to-body="true"
     modal-class="vk-node-drawer__modal"
     :close-on-click-modal="false"
     :close-on-press-escape="false"
     :size="size"
     :show-close="false"
   >
+    <!--    :append-to="appendTo" -->
     <template #header>
       <slot name="header" v-bind="slotArgs">
         <CustomHeader @close="modelValue = false">
@@ -99,7 +108,21 @@ export default defineComponent({
         </CustomHeader>
       </slot>
     </template>
-    <slot v-bind="slotArgs" />
+    <VkfTemplateInstancesProvider>
+      <VkfTemplatesDefault />
+      <VkfFormItemRendererTemplate type="VkfInputCollection">
+        <template #default="{ props, input, value }">
+          <VkfInputCollection
+            v-bind="props"
+            :model-value="value"
+            :label-actions="true"
+            @update:model-value="input"
+          ></VkfInputCollection>
+        </template>
+      </VkfFormItemRendererTemplate>
+
+      <slot v-bind="slotArgs" />
+    </VkfTemplateInstancesProvider>
   </ElDrawer>
 </template>
 
@@ -109,7 +132,6 @@ export default defineComponent({
   background-color: transparent;
   pointer-events: none;
 }
-
 .vk-node-drawer__modal .el-drawer__header {
   margin-bottom: 0;
   padding-bottom: var(--el-drawer-padding-primary);
@@ -119,8 +141,14 @@ export default defineComponent({
 .vk-node-drawer__modal .el-drawer {
   --el-drawer-padding-primary: 10px;
 }
-
 .vk-node-drawer__modal > * {
   pointer-events: initial;
+}
+
+.vk-input-collection__expand-fieldset .el-form-item__label {
+  font-size: 0.8em;
+}
+.vkf-input-collection-table{
+  margin-top: 0;
 }
 </style>

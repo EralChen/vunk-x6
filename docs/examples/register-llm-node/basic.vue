@@ -30,22 +30,11 @@ const graphOptions: Graph.Options = {
 
 <template>
   <div class="h-400px border-1 border-gray">
-    {{ VkRegisterLlmNode.name }}
-    {{ VkRegisterStartNode.name }}
     <VkGraph :default-options="graphOptions">
       <!-- 注册开始节点 -->
       <VkRegisterStartNode></VkRegisterStartNode>
       <!-- 注册 LLM 节点 -->
       <VkRegisterLlmNode></VkRegisterLlmNode>
-
-      <!-- 使用开始节点渲染实例 -->
-      <VkNode
-        id="node1"
-        :shape="VkRegisterStartNode.name"
-        :x="100"
-        :y="100"
-        :data="registerStartNodeData"
-      />
 
       <VkNode
         id="node2"
