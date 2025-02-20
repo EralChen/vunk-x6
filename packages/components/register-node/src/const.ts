@@ -106,4 +106,4 @@ export const fieldWithValueInfomationItem = {
       },
     },
   ],
-}
+} as __VkfInputCollection.Source<any>

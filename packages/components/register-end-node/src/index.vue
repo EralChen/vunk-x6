@@ -6,6 +6,7 @@ import type { NodeData } from './types'
 import { VkfInformation } from '@vunk/form'
 import { VkfInformationTemplatesDefault } from '@vunk/form/components/information-templates-default'
 import { VkNodeComponent } from '@vunk-x6/components/node-component'
+import { fieldWithValueInfomationItem } from '@vunk-x6/components/register-node'
 import { ElCard } from 'element-plus'
 import { defineComponent } from 'vue'
 import { outputModeOptions, RegisterEndNodePort } from './const'
@@ -16,19 +17,9 @@ type FormItem = __VkfInformation.FormItem<keyof NodeData>
 
 const formItems: FormItem[] = [
   {
-    templateType: 'VkfInputCollection',
+    ...fieldWithValueInfomationItem,
     label: '输出',
     prop: 'output',
-    summaryLabel (data) {
-      return `${data.name}`
-    },
-    columns: [
-      {
-        label: '字段',
-        prop: 'name',
-        templateType: 'VkfInput',
-      },
-    ],
   },
   {
     templateType: 'VkfSelect',

@@ -1,5 +1,4 @@
 import type { NodeData } from './types'
-import { FieldType } from '@vunk-x6/shared'
 
 export const RegisterEndNodePort = {
   input: 'input',
@@ -30,12 +29,7 @@ export const defaultData: NodeData = {
   output: [
     {
       name: 'output',
-      type: FieldType.ArrayObject,
-      valueRef: {
-        id: 'xxxx',
-        name: 'xxx',
-      },
-
+      type: '' as never,
     },
   ],
   outputMode: OutputMode.returnText,
