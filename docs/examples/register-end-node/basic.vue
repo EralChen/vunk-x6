@@ -53,8 +53,14 @@ function handleExport () {
         />
 
         <VkNode
+          :shape="VkRegisterLlmNode.name"
+          :x="200"
+          :y="100"
+        />
+
+        <VkNode
           :shape="VkRegisterEndNode.name"
-          :x="600"
+          :x="400"
           :y="100"
           :data="endNodeData"
         />

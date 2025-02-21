@@ -4,6 +4,10 @@ import type { SetDataEvent } from '@vunk/core'
 import type { __VkNodeDrawer } from '@vunk-x6/components/node-drawer'
 import type { PropType } from 'vue'
 import { VkfForm } from '@vunk/form'
+import { isEmptyObject } from '@vunk/shared/object'
+import { getAllPredecessors } from '@vunk-x6/components/register-node'
+import { useGraph } from '@vunk-x6/composables'
+import { computed } from 'vue'
 import { OutputMode, outputModeOptions } from './const'
 
 const props = defineProps({
@@ -18,8 +22,22 @@ defineEmits({
   setData: (e: SetDataEvent) => e,
 })
 
-// props.node 是 x6 的节点对象
-console.log('node', props.node)
+const graph = useGraph()
+
+// 获取前置节点的变量选项
+const previousNodeOptions = computed(() => {
+  if (!props.node || isEmptyObject(props.node))
+    return []
+
+  // 递归获取所有前置节点
+  const predecessors = getAllPredecessors(graph, props.node.id)
+
+  // 转换为选项
+  return predecessors.map(node => ({
+    label: `${node.getData()?.label || node.id} - 输出`,
+    value: `${node.id}.output`,
+  }))
+})
 
 const formItems: __VkNodeDrawer.FormItem[] = [
   {
@@ -46,7 +64,12 @@ const formItems: __VkNodeDrawer.FormItem[] = [
       {
         label: '值',
         prop: 'valueRef',
-        templateType: 'VkfInput',
+        templateType: 'VkfSelect',
+        createTemplateProps () {
+          return {
+            options: previousNodeOptions.value,
+          }
+        },
       },
 
     ],
@@ -57,7 +80,6 @@ const formItems: __VkNodeDrawer.FormItem[] = [
     label: '回答文本',
     prop: 'textTemplate',
     type: 'textarea',
-    rows: 4,
     labelTip: '编辑智能体的回复内容，即工作流运行完成后，智能体中的LLM将不再组织语言，而是直接用这里编辑的内容原文回复对话。 可以使用{{变量名}}的方式引用输入参数中的变量',
     templateIf: data => data.outputMode === OutputMode.returnText,
   },
