@@ -1,5 +1,10 @@
 <script lang="ts" setup>
-
+defineProps({
+  label: {
+    type: String,
+    default: '开始',
+  },
+})
 </script>
 
 <template>
@@ -7,7 +12,7 @@
     <img
       src="https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-Start-v2.jpg"
     />
-    <span>开始</span>
+    <span>{{ label }}</span>
   </div>
 </template>
 

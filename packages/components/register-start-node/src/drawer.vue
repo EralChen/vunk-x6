@@ -48,11 +48,11 @@ const formItems: FormItem[] = [
         }),
       },
       {
-        ...fieldColumnMap.default,
+        ...fieldColumnMap.defaultValue,
         createTemplateProps (e) {
           const data = e.row as Field
           const config = {
-            ...fieldColumnMap.default.templateProps,
+            ...fieldColumnMap.defaultValue.templateProps,
           } as __VkfInput.Source
 
           if (data.name !== 'USER_INPUT') {
@@ -79,8 +79,10 @@ const formItems: FormItem[] = [
     :shape="shape"
     @update:model-value="$emit('update:modelValue', $event)"
   >
-    <template #title>
-      <Title></Title>
+    <template #title="{ data }">
+      <Title
+        :label="data.label"
+      ></Title>
     </template>
     <template #description>
       工作流的起始节点，用于设定启动工作流需要的信息

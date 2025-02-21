@@ -1,15 +1,14 @@
 <script lang="ts">
 import type { Cell } from '@antv/x6'
 import { useModelComputed } from '@vunk/core/composables'
-import { VkfFormItemRendererTemplate } from '@vunk/form'
-import VkfInputCollection from '@vunk/form/components/input-collection'
 import { VkfTemplateInstancesProvider } from '@vunk/form/components/template-instances-provider'
-import { VkfTemplatesDefault } from '@vunk/form/components/templates-default'
+
 import { useNodeData } from '@vunk-x6/components/node'
 import { useGraph } from '@vunk-x6/composables'
 import { ElDrawer } from 'element-plus'
 import { computed, defineComponent, onBeforeUnmount, shallowRef } from 'vue'
 import CustomHeader from './components/custom-header.vue'
+import FormTemplates from './components/form-templates.vue'
 import { emits, props } from './ctx'
 
 export default defineComponent({
@@ -18,9 +17,7 @@ export default defineComponent({
     ElDrawer,
     CustomHeader,
     VkfTemplateInstancesProvider,
-    VkfFormItemRendererTemplate,
-    VkfInputCollection,
-    VkfTemplatesDefault,
+    FormTemplates,
   },
   props,
   emits,
@@ -109,18 +106,7 @@ export default defineComponent({
       </slot>
     </template>
     <VkfTemplateInstancesProvider>
-      <VkfTemplatesDefault />
-      <VkfFormItemRendererTemplate type="VkfInputCollection">
-        <template #default="{ props, input, value }">
-          <VkfInputCollection
-            v-bind="props"
-            :model-value="value"
-            :label-actions="true"
-            @update:model-value="input"
-          ></VkfInputCollection>
-        </template>
-      </VkfFormItemRendererTemplate>
-
+      <FormTemplates></FormTemplates>
       <slot v-bind="slotArgs" />
     </VkfTemplateInstancesProvider>
   </ElDrawer>

@@ -29,9 +29,12 @@ defineEmits({
     :shape="shape"
     @update:model-value="$emit('update:modelValue', $event)"
   >
-    <template #title>
-      <Title></Title>
+    <template #title="{ data }">
+      <Title
+        :label="data.label"
+      ></Title>
     </template>
+
     <template #description>
       工作流的结束节点，用于设定最终输出的文本模板
     </template>

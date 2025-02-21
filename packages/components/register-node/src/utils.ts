@@ -1,4 +1,8 @@
 import type { Graph, Node } from '@antv/x6'
+import type { __VkRegisterStartNode } from '@vunk-x6/components/register-start-node'
+import type { Field } from './types'
+import { VkRegisterStartNode } from '@vunk-x6/components/register-start-node'
+import { FieldType } from './const'
 
 /**
  * 获取节点的前驱节点
@@ -68,4 +72,27 @@ export function getPredecessors (
   }
 
   return nodes
+}
+
+/**
+ * 从一个节点中提取它的可用字段
+ */
+export function extractFieldFromNode (node: Node) {
+  const data = node.getData()
+  const field: Field = {
+    name: node.id,
+    type: FieldType.Object,
+    label: data.label ?? '未命名节点',
+  }
+
+  // 开始节点的可用字段在 StartNode 中定义
+  if (node.shape === VkRegisterStartNode.name) {
+    const nodeData: __VkRegisterStartNode.NodeData = data
+    field.children = nodeData.input
+  }
+  else {
+    field.children = data.output
+  }
+
+  return field
 }

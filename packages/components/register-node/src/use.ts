@@ -1,8 +1,8 @@
 import type { Edge, Node } from '@antv/x6'
 import type { MaybeRef, Ref } from 'vue'
 import { useGraph } from '@vunk-x6/composables'
-import { onUnmounted, ref, unref, watchEffect } from 'vue'
-import { getPredecessors } from './utils'
+import { computed, onUnmounted, ref, unref, watchEffect } from 'vue'
+import { extractFieldFromNode, getPredecessors } from './utils'
 
 export function usePredecessors (
   nodeMbRef: MaybeRef<Node>,
@@ -63,5 +63,22 @@ export function usePredecessors (
 
   return {
     predecessors,
+  }
+}
+
+export function useFieldValueRefOpitons (
+  nodeMbRef: MaybeRef<Node>,
+) {
+  const { predecessors } = usePredecessors(nodeMbRef)
+
+  const fieldValueRefOptions = computed(() => {
+    return predecessors.value
+      .map(extractFieldFromNode)
+      .filter(v => !!v.children)
+  })
+
+  return {
+    predecessors,
+    fieldValueRefOptions,
   }
 }

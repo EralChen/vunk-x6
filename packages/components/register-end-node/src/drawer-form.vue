@@ -4,8 +4,7 @@ import type { SetDataEvent } from '@vunk/core'
 import type { __VkNodeDrawer } from '@vunk-x6/components/node-drawer'
 import type { PropType } from 'vue'
 import { VkfForm } from '@vunk/form'
-import { usePredecessors } from '@vunk-x6/components/register-node'
-import { computed } from 'vue'
+import { useFieldValueRefOpitons } from '@vunk-x6/components/register-node'
 import { OutputMode, outputModeOptions } from './const'
 
 const props = defineProps({
@@ -20,16 +19,7 @@ defineEmits({
   setData: (e: SetDataEvent) => e,
 })
 
-const { predecessors } = usePredecessors(props.node)
-
-// 获取前置节点的变量选项
-const previousNodeOptions = computed(() => {
-  // 转换为选项
-  return predecessors.value.map(node => ({
-    label: `${node.getData()?.label || node.id} - 输出`,
-    value: `${node.id}.output`,
-  }))
-})
+const { fieldValueRefOptions } = useFieldValueRefOpitons(props.node)
 
 const formItems: __VkNodeDrawer.FormItem[] = [
   {
@@ -56,10 +46,10 @@ const formItems: __VkNodeDrawer.FormItem[] = [
       {
         label: '值',
         prop: 'valueRef',
-        templateType: 'VkfSelect',
+        templateType: 'VkfCascader',
         createTemplateProps () {
           return {
-            options: previousNodeOptions.value,
+            options: fieldValueRefOptions.value,
           }
         },
       },

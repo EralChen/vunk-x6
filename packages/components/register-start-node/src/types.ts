@@ -12,6 +12,7 @@ export interface StartRow {
  * @description 节点需要的配置数据
  */
 export interface NodeData {
+  label: string
   input: InputItem[]
 }
 

@@ -19,10 +19,10 @@ const typeColumn = {
   },
 } as const
 
-const defaultColumn: Column<'default'> = {
+const defaultValueColumn: Column<'defaultValue'> = {
   expandVisible: true,
   hidden: true,
-  prop: 'default',
+  prop: 'defaultValue',
   templateType: 'VkfInput',
   label: '默认值',
   templateProps: {
@@ -46,6 +46,6 @@ const descriptionColumn: Column<'description'> = {
 export const fieldColumnMap = {
   name: nameColumn,
   type: typeColumn,
-  default: defaultColumn,
+  defaultValue: defaultValueColumn,
   description: descriptionColumn,
 }

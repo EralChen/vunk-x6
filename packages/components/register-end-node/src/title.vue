@@ -1,13 +1,16 @@
 <script lang="ts" setup>
-defineOptions({
-  name: 'VkRegisterEndNodeTitle',
+defineProps({
+  label: {
+    type: String,
+    default: '',
+  },
 })
 </script>
 
 <template>
   <div class="vk-register-end-node-title">
     <img src="https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-End-v2.jpg" />
-    <span>结束节点</span>
+    <span>{{ label }}</span>
   </div>
 </template>
 

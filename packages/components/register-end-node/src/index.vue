@@ -12,6 +12,7 @@ import { defineComponent } from 'vue'
 import { outputModeOptions, RegisterEndNodePort } from './const'
 import { emits, props } from './ctx'
 import Drawer from './drawer.vue'
+import TitleModule from './title.vue'
 
 type FormItem = __VkfInformation.FormItem<keyof NodeData>
 
@@ -37,6 +38,7 @@ export default defineComponent({
     ElCard,
     VkNodeComponent,
     Drawer,
+    TitleModule,
   },
   props,
   emits,
@@ -66,10 +68,9 @@ export default defineComponent({
     <template #default="{ data }">
       <ElCard class="vk-register-end-node" shadow="hover">
         <template #header>
-          <div class="vk-register-end-node__header">
-            <img src="https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-End-v2.jpg" />
-            <span>{{ data.label }}</span>
-          </div>
+          <TitleModule
+            :label="data.label"
+          ></TitleModule>
         </template>
 
         <VkfInformation
