@@ -26,6 +26,7 @@ export const outputModeMap = outputModeOptions.reduce((acc, cur) => {
 }, {} as Record<OutputMode, typeof outputModeOptions[number]>)
 
 export const defaultData: NodeData = {
+  label: '结束',
   output: [
     {
       name: 'output',

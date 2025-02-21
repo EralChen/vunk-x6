@@ -4,9 +4,7 @@ import type { SetDataEvent } from '@vunk/core'
 import type { __VkNodeDrawer } from '@vunk-x6/components/node-drawer'
 import type { PropType } from 'vue'
 import { VkfForm } from '@vunk/form'
-import { isEmptyObject } from '@vunk/shared/object'
-import { getAllPredecessors } from '@vunk-x6/components/register-node'
-import { useGraph } from '@vunk-x6/composables'
+import { usePredecessors } from '@vunk-x6/components/register-node'
 import { computed } from 'vue'
 import { OutputMode, outputModeOptions } from './const'
 
@@ -22,18 +20,12 @@ defineEmits({
   setData: (e: SetDataEvent) => e,
 })
 
-const graph = useGraph()
+const { predecessors } = usePredecessors(props.node)
 
 // 获取前置节点的变量选项
 const previousNodeOptions = computed(() => {
-  if (!props.node || isEmptyObject(props.node))
-    return []
-
-  // 递归获取所有前置节点
-  const predecessors = getAllPredecessors(graph, props.node.id)
-
   // 转换为选项
-  return predecessors.map(node => ({
+  return predecessors.value.map(node => ({
     label: `${node.getData()?.label || node.id} - 输出`,
     value: `${node.id}.output`,
   }))

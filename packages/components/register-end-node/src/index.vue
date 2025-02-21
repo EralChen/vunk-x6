@@ -68,7 +68,7 @@ export default defineComponent({
         <template #header>
           <div class="vk-register-end-node__header">
             <img src="https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-End-v2.jpg" />
-            <span>结束</span>
+            <span>{{ data.label }}</span>
           </div>
         </template>
 
