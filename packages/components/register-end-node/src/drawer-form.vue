@@ -2,9 +2,11 @@
 import type { Node } from '@antv/x6'
 import type { SetDataEvent } from '@vunk/core'
 import type { __VkNodeDrawer } from '@vunk-x6/components/node-drawer'
+import type { Field } from '@vunk-x6/shared'
+import type { CascaderNode } from 'element-plus'
 import type { PropType } from 'vue'
 import { VkfForm } from '@vunk/form'
-import { useFieldValueRefOpitons } from '@vunk-x6/components/register-node'
+import { fieldColumnMap, useFieldValueRefOpitons } from '@vunk-x6/components/register-node'
 import { OutputMode, outputModeOptions } from './const'
 
 const props = defineProps({
@@ -38,22 +40,15 @@ const formItems: __VkNodeDrawer.FormItem[] = [
     label: '输出变量',
     labelTip: '这些变量将在智能体调用工作流完成后被输出。在“返回变量”模式中，这些变量会被智能体总结后回复用户；在“直接回答”模式中，智能体只会回复你设定的“回答内容”。但在任何模式中，这些变量都可以在配置卡片时使用。',
     columns: [
+      fieldColumnMap.name,
       {
-        label: '字段',
-        prop: 'name',
-        templateType: 'VkfInput',
-      },
-      {
-        label: '值',
-        prop: 'valueRef',
-        templateType: 'VkfCascader',
+        ...fieldColumnMap.valueRef,
         createTemplateProps () {
           return {
             options: fieldValueRefOptions.value,
           }
         },
       },
-
     ],
   },
 
@@ -77,5 +72,6 @@ const formItems: __VkNodeDrawer.FormItem[] = [
     class="vk-register-end-drawer__form"
     @set-data="$emit('setData', $event)"
   >
+    {{ data }}
   </VkfForm>
 </template>

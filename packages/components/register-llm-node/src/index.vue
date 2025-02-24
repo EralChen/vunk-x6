@@ -7,13 +7,23 @@ import { VkfInformation } from '@vunk/form'
 import { VkfInformationTemplatesDefault } from '@vunk/form/components/information-templates-default'
 import { VkNodeComponent } from '@vunk-x6/components/node-component'
 import { ElCard } from 'element-plus'
-import { RegisterLlmNodePort } from './const'
 
-type FormItem = __VkfInformation.FormItem<keyof NodeData>
+import { watchEffect } from 'vue'
+import { RegisterLlmNodePort } from './const'
+import { props as dProps } from './ctx'
 
 defineOptions({
   name: 'VkRegisterLlmNode',
 })
+
+const props = defineProps(dProps)
+
+watchEffect(() => {
+  // eslint-disable-next-line vue/no-mutating-props
+  props.client.apiKey = props.apiKey
+})
+
+type FormItem = __VkfInformation.FormItem<keyof NodeData>
 
 const formItems: FormItem[] = [
   {
@@ -57,16 +67,6 @@ const formItems: FormItem[] = [
         prop: 'description',
         templateType: 'VkfInput',
         label: '描述',
-      },
-      {
-        prop: 'valueRef.id',
-        templateType: 'VkfInput',
-        label: '值引用ID',
-      },
-      {
-        prop: 'valueRef.name',
-        templateType: 'VkfInput',
-        label: '值引用名称',
       },
     ],
   },

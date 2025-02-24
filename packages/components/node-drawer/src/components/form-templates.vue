@@ -1,14 +1,9 @@
 <script lang="tsx" setup>
 import { VkfFormItemRendererTemplate } from '@vunk/form'
-import { __VkfCascader, VkfCascader } from '@vunk/form/components/cascader'
+import { __VkfCascader } from '@vunk/form/components/cascader'
 import VkfInputCollection from '@vunk/form/components/input-collection'
 import { VkfTemplatesDefault } from '@vunk/form/components/templates-default'
-
-const cascaderSlots = {
-  default: ({ data }) => {
-    return <span>{ data.label || data.name }</span>
-  },
-}
+import VkfCascader from './VkfCascader.vue'
 </script>
 
 <template>
@@ -25,12 +20,17 @@ const cascaderSlots = {
   </VkfFormItemRendererTemplate>
 
   <VkfFormItemRendererTemplate type="VkfCascader">
-    <template #default="{ props, input, value }">
+    <template
+      #default="{
+        props, input, value,
+        emitSetData,
+      }"
+    >
       <VkfCascader
-        :show-all-levels="false"
-        v-bind="props"
         :model-value="value"
-        :cascader-slots="cascaderSlots"
+        :input="input"
+        :emit-set-data="emitSetData"
+        v-bind="props"
         @update:model-value="input"
       >
       </VkfCascader>
