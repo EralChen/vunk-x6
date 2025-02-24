@@ -17,9 +17,10 @@ defineOptions({
 
 const formItems: FormItem[] = [
   {
-    templateType: 'VkfInput',
-    label: '模型ID',
-    prop: 'modelId',
+    templateType: 'VkfSelect',
+    label: '模型',
+    prop: 'model',
+
   },
   {
     templateType: 'VkfInput',

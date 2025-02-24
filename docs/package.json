@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@vunk/gsap": "0.0.0-alpha.3",
+    "crypto-js": "^4.2.0",
     "deepdash-es": "^5.3.9",
     "gsap": "^3.12.5",
     "prism-theme-vars": "^0.2.4"
@@ -15,11 +16,13 @@
   "devDependencies": {
     "@iconify-json/ri": "^1.1.20",
     "@mdit-vue/shared": "^2.0.0",
+    "@types/crypto-js": "^4.2.2",
     "markdown-it-anchor": "^8.6.7",
     "markdown-it-container": "^4.0.0",
     "unplugin-icons": "^0.18.1",
     "unplugin-vue-components": "^0.26.0",
     "vite-plugin-inspect": "^0.8.3",
-    "vitepress": "^1.1.4"
+    "vitepress": "^1.1.4",
+    "vue-router": "^4.5.0"
   }
 }
