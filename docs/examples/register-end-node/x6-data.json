@@ -2,15 +2,34 @@
   "cells": [
     {
       "position": {
-        "x": -220,
-        "y": 210
+        "x": -300,
+        "y": -40
       },
       "size": {
-        "width": 300,
+        "width": 327.296875,
         "height": 105.265625
       },
       "view": "vue-shape-view",
       "shape": "VkRegisterStartNode",
+      "data": {
+        "label": "开始",
+        "input": [
+          {
+            "name": "USER_INPUT",
+            "type": "String",
+            "defaultValue": "",
+            "description": "用户输入",
+            "label": "USER_INPUT"
+          },
+          {
+            "name": "CONVERSATION_NAME",
+            "type": "String",
+            "defaultValue": "DEFAULT",
+            "description": "本次请求绑定的会话，会自动写入消息、会从该会话读对话历史。",
+            "label": "CONVERSATION_NAME"
+          }
+        ]
+      },
       "ports": {
         "groups": {
           "top": {
@@ -114,32 +133,41 @@
           }
         ]
       },
-      "id": "ce4b0c0e-8307-406d-aca5-217dbcf7ac6f",
-      "zIndex": 1,
-      "data": {
-        "input": [
-          {
-            "name": "query",
-            "type": "string"
-          },
-          {
-            "name": "conversationId",
-            "type": "string"
-          }
-        ]
-      }
+      "id": "dc36e2b5-a43b-4745-b9a2-358cd5d75187",
+      "zIndex": 1
     },
     {
       "position": {
-        "x": 240,
-        "y": 70
+        "x": 40,
+        "y": 160
       },
       "size": {
         "width": 300,
-        "height": 201.265625
+        "height": 169.265625
       },
       "view": "vue-shape-view",
       "shape": "VkRegisterLlmNode",
+      "data": {
+        "label": "大模型",
+        "output": [
+          {
+            "name": "output",
+            "type": "String",
+            "label": "output"
+          }
+        ],
+        "modelId": "gpt-3.5-turbo",
+        "input": [
+          {
+            "name": "input",
+            "valueRef": [
+              "dc36e2b5-a43b-4745-b9a2-358cd5d75187",
+              "USER_INPUT"
+            ],
+            "type": "String"
+          }
+        ]
+      },
       "ports": {
         "groups": {
           "top": {
@@ -238,17 +266,13 @@
           }
         ]
       },
-      "id": "c26a0ec1-8ce6-4eb2-8677-6d0399e13187",
-      "zIndex": 2,
-      "data": {
-        "modelId": "gpt-3.5-turbo",
-        "prompt": "你好"
-      }
+      "id": "e917b92a-2fe7-4617-9906-941d1e9bf6dd",
+      "zIndex": 2
     },
     {
       "position": {
-        "x": 640,
-        "y": 250
+        "x": 390,
+        "y": -70
       },
       "size": {
         "width": 300,
@@ -256,6 +280,21 @@
       },
       "view": "vue-shape-view",
       "shape": "VkRegisterEndNode",
+      "data": {
+        "label": "结束",
+        "output": [
+          {
+            "name": "output",
+            "type": "String",
+            "valueRef": [
+              "e917b92a-2fe7-4617-9906-941d1e9bf6dd",
+              "output"
+            ]
+          }
+        ],
+        "outputMode": "returnText",
+        "textTemplate": "{{output}}"
+      },
       "ports": {
         "groups": {
           "top": {
@@ -350,40 +389,31 @@
           }
         ]
       },
-      "id": "c176d8c8-bc54-4e9c-9068-ac16275822c9",
-      "zIndex": 3,
-      "data": {
-        "output": [
-          {
-            "name": "response",
-            "type": "string"
-          }
-        ],
-        "textTemplate": "{{response}}"
-      }
+      "id": "5e1d9024-a734-46af-b0a2-0964b70e8810",
+      "zIndex": 3
     },
     {
       "shape": "edge",
-      "id": "b9fa4711-e0ac-49e2-9a5f-6741ac892c1a",
+      "id": "24bb79ac-5bc1-4b58-b784-3ac38dbd926a",
       "source": {
-        "cell": "ce4b0c0e-8307-406d-aca5-217dbcf7ac6f",
+        "cell": "dc36e2b5-a43b-4745-b9a2-358cd5d75187",
         "port": "start_node_port_output"
       },
       "target": {
-        "cell": "c26a0ec1-8ce6-4eb2-8677-6d0399e13187",
+        "cell": "e917b92a-2fe7-4617-9906-941d1e9bf6dd",
         "port": "llm_node_port_input"
       },
       "zIndex": 4
     },
     {
       "shape": "edge",
-      "id": "e9bc8e69-4f0e-4a18-b66a-01c5fca1efab",
+      "id": "58c2ec09-3e43-45a1-8693-271c5797801b",
       "source": {
-        "cell": "c26a0ec1-8ce6-4eb2-8677-6d0399e13187",
+        "cell": "e917b92a-2fe7-4617-9906-941d1e9bf6dd",
         "port": "llm_node_port_output"
       },
       "target": {
-        "cell": "c176d8c8-bc54-4e9c-9068-ac16275822c9",
+        "cell": "5e1d9024-a734-46af-b0a2-0964b70e8810",
         "port": "input"
       },
       "zIndex": 5

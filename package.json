@@ -34,7 +34,7 @@
     "@vunk-x6/composables": "workspace:*",
     "@vunk-x6/shared": "workspace:*",
     "@vunk/core": "1.2.3",
-    "@vunk/form": "^2.5.3",
+    "@vunk/form": "^2.5.4",
     "@vunk/plus": "^0.2.0",
     "@vunk/shared": "^0.5.49",
     "@vunk/skzz": "0.0.0-alpha.111",

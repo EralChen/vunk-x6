@@ -6,6 +6,9 @@ import type { ChatCompletionCreateParamsNonStreaming } from 'openai/resources'
  * @description 节点需要的配置数据
  */
 export interface NodeData {
+
+  label: string
+
   /**
    * @description 模型的 id
    */
@@ -25,7 +28,7 @@ export interface NodeData {
    * @description 大模型对话的配置
    * @link https://app.apifox.com/link/project/2100343/apis/api-67883981
    */
-  chatCompletionCreateParams: Partial<ChatCompletionCreateParamsNonStreaming>
+  chatCompletionCreateParams?: Partial<ChatCompletionCreateParamsNonStreaming>
 }
 
 export {

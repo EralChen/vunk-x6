@@ -9,8 +9,9 @@ import { VkNodeComponent } from '@vunk-x6/components/node-component'
 import { fieldColumnMap, fieldInfomationItem, fieldWithValueInfomationItem } from '@vunk-x6/components/register-node'
 
 import { ElCard } from 'element-plus'
+import { cloneDeep } from 'lodash-es'
 import { watchEffect } from 'vue'
-import { RegisterLlmNodePort } from './const'
+import { defaultData, RegisterLlmNodePort } from './const'
 import { props as dProps } from './ctx'
 import Drawer from './drawer.vue'
 
@@ -19,6 +20,8 @@ defineOptions({
 })
 
 const props = defineProps(dProps)
+
+const nodeData = cloneDeep(defaultData)
 
 watchEffect(() => {
   // eslint-disable-next-line vue/no-mutating-props
@@ -71,6 +74,7 @@ const ports: PortManager.PortMetadata[] = [
     shape="VkRegisterLlmNode"
     :auto-size="true"
     :items="ports"
+    :data="nodeData"
   >
     <template #default="{ data }">
       <ElCard class="vk-register-llm-node" shadow="hover">

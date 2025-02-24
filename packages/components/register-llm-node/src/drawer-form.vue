@@ -2,12 +2,15 @@
 import type { Node } from '@antv/x6'
 import type { SetDataEvent } from '@vunk/core'
 import type { Media } from '@vunk/shared'
+import type { __VkNodeDrawer } from '@vunk-x6/components/node-drawer'
 import type OpenAI from 'openai'
 import type { PropType } from 'vue'
+import type { NodeData } from './types'
 import { VkfForm } from '@vunk/form'
-import { fieldColumnMap } from '@vunk-x6/components/register-node'
+import { fieldColumnMap, useFieldValueRefOpitons } from '@vunk-x6/components/register-node'
 import { onMounted, ref } from 'vue'
 
+type FormItem = __VkNodeDrawer.FormItem<keyof NodeData>
 const props = defineProps({
   data: null,
   node: {
@@ -28,6 +31,8 @@ defineEmits({
   setData: (e: SetDataEvent) => e,
 })
 
+const { fieldValueRefOptions } = useFieldValueRefOpitons(props.node)
+
 const modelList = ref<Media[]>([])
 
 onMounted(async () => {
@@ -43,12 +48,16 @@ onMounted(async () => {
   }
 })
 
-const formItems = [
+const formItems: FormItem[] = [
   {
     templateType: 'VkfSelect',
     prop: 'modelId',
     label: '模型',
-    options: modelList,
+    templateProps () {
+      return {
+        options: modelList.value,
+      }
+    },
   },
   {
     templateType: 'VkfInputCollection',
@@ -56,7 +65,14 @@ const formItems = [
     label: '输入变量',
     columns: [
       fieldColumnMap.name,
-      fieldColumnMap.valueRef,
+      {
+        ...fieldColumnMap.valueRef,
+        createTemplateProps () {
+          return {
+            options: fieldValueRefOptions.value,
+          }
+        },
+      },
     ],
   },
   {
