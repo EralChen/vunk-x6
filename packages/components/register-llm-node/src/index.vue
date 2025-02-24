@@ -6,8 +6,9 @@ import type { NodeData } from './types'
 import { VkfInformation } from '@vunk/form'
 import { VkfInformationTemplatesDefault } from '@vunk/form/components/information-templates-default'
 import { VkNodeComponent } from '@vunk-x6/components/node-component'
-import { ElCard } from 'element-plus'
+import { fieldColumnMap, fieldInfomationItem, fieldWithValueInfomationItem } from '@vunk-x6/components/register-node'
 
+import { ElCard } from 'element-plus'
 import { watchEffect } from 'vue'
 import { RegisterLlmNodePort } from './const'
 import { props as dProps } from './ctx'
@@ -29,79 +30,19 @@ const formItems: FormItem[] = [
   {
     templateType: 'VkfSelect',
     label: '模型',
-    prop: 'model',
+    prop: 'modelId',
+  },
 
-  },
   {
-    templateType: 'VkfInput',
-    label: '提示词',
-    prop: 'prompt',
-  },
-  {
-    templateType: 'VkfInputCollection',
     label: '输入',
     prop: 'input',
-    summaryLabel (data) {
-      return `${data.name}`
-    },
-    columns: [
-      {
-        label: '字段',
-        prop: 'name',
-        templateType: 'VkfInput',
-      },
-      {
-        prop: 'type',
-        templateType: 'VkfSelect',
-        label: '类型',
-        templateProps: {
-          options: [
-            {
-              label: '字符串',
-              value: 'string',
-            },
-          ],
-        },
-      },
-      {
-        prop: 'description',
-        templateType: 'VkfInput',
-        label: '描述',
-      },
-    ],
+    ...fieldWithValueInfomationItem,
   },
+
   {
-    templateType: 'VkfInputCollection',
     label: '输出',
     prop: 'output',
-    summaryLabel (data) {
-      return `${data.name}`
-    },
-    columns: [
-      {
-        label: '字段',
-        prop: 'name',
-        templateType: 'VkfInput',
-      },
-      {
-        prop: 'type',
-        templateType: 'VkfSelect',
-        label: '类型',
-        templateProps: {
-          options: [
-            {
-              label: '字符串',
-              value: 'string',
-            },
-          ],
-        },
-      },
-      {
-        prop: 'description',
-        templateType: 'VkfInput',
-        label: '描述',
-      },
-    ],
+    ...fieldInfomationItem,
   },
 ]
 

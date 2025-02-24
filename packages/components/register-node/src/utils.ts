@@ -3,7 +3,7 @@ import type { __VkRegisterStartNode } from '@vunk-x6/components/register-start-n
 import type { Field } from './types'
 import { VkRegisterStartNode } from '@vunk-x6/components/register-start-node'
 import { eachDeep } from 'deepdash-es/standalone'
-import { FieldType } from './const'
+import { FieldType } from './const-field-type'
 
 /**
  * 获取节点的前驱节点

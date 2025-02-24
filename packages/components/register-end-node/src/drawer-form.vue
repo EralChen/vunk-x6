@@ -72,6 +72,5 @@ const formItems: __VkNodeDrawer.FormItem[] = [
     class="vk-register-end-drawer__form"
     @set-data="$emit('setData', $event)"
   >
-    {{ data }}
   </VkfForm>
 </template>

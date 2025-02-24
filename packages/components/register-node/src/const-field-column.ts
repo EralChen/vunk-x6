@@ -3,7 +3,7 @@ import type { __VkfInputCollection } from '@vunk/form/components/input-collectio
 import type { __VkNodeDrawer } from '@vunk-x6/components/node-drawer'
 import type { Field, FieldWithValue } from '@vunk-x6/shared'
 import { nextTick } from 'vue'
-import { fieldTypeOptions } from './const'
+import { fieldTypeOptions } from './const-field-type'
 
 type Column<F> = __VkfInputCollection.Column<FieldWithValue<F>>
 
