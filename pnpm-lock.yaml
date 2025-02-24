@@ -17,9 +17,6 @@ importers:
       '@antv/x6-vue-shape':
         specifier: ^2.1.2
         version: 2.1.2(@antv/x6@2.18.1)(vue@3.5.13(typescript@5.6.3))
-      '@arcgis/core':
-        specifier: ^4.31.5
-        version: 4.31.5(@floating-ui/utils@0.2.8)
       '@element-plus/icons-vue':
         specifier: ^2.3.1
         version: 2.3.1(vue@3.5.13(typescript@5.6.3))
@@ -48,8 +45,8 @@ importers:
         specifier: 1.2.3
         version: 1.2.3
       '@vunk/form':
-        specifier: ^2.5.0
-        version: 2.5.0
+        specifier: ^2.5.2
+        version: 2.5.2
       '@vunk/plus':
         specifier: ^0.2.0
         version: 0.2.0
@@ -62,6 +59,9 @@ importers:
       '@vunk/x6':
         specifier: workspace:*
         version: link:packages/entry
+      deepdash-es:
+        specifier: ^5.3.9
+        version: 5.3.9
       element-plus:
         specifier: npm:element-plus@latest
         version: 2.8.8(vue@3.5.13(typescript@5.6.3))
@@ -102,9 +102,6 @@ importers:
       '@vue/compiler-sfc':
         specifier: ^3.5.13
         version: 3.5.13
-      arcgis-js-api:
-        specifier: ^4.31.5
-        version: 4.31.5
       comment-parser:
         specifier: ^1.4.1
         version: 1.4.1
@@ -2233,8 +2230,8 @@ packages:
   '@vunk/core@1.2.3':
     resolution: {integrity: sha512-wlpbLl2x7Re9z2qceZEvIvdaxCzfyTeDqo6xRu6TgsVf0mSiVMABFu7NAllYfaPKLUcqc1zwB0oawEaQl/bZ/A==}
 
-  '@vunk/form@2.5.0':
-    resolution: {integrity: sha512-K1gTNfjoSHCuBFoNp1XDgrF1W9W7cDQxGfdIZYzRQBxg1s8rvBAnHN9TITfLFQmjKzTMy/Z3BOqZYmF67b2BUw==}
+  '@vunk/form@2.5.2':
+    resolution: {integrity: sha512-m9GcJDPkKyFdvpLcPdcr1wFSJynAzv1IvQ2AR3u4HmHDfTYUUGTh9w/o54MytrrM+aW+ioMxQn2AjSfuuB/bIg==}
 
   '@vunk/gsap@0.0.0-alpha.3':
     resolution: {integrity: sha512-UTyP4VmeAoMY+eab/OhFyyXrd21W4zgQuV2px4r/5x8iox187yf3AH42zuI//ub+loVTgE74iu9MQasTJ8NdMw==}
@@ -2297,10 +2294,6 @@ packages:
   anymatch@3.1.3:
     resolution: {integrity: sha512-KMReFUr0B4t+D+OBkjR3KYqvocp2XaSzO55UcB6mgQMd3KbcE+mWTyvVV7D/zsdEbNnV6acZUutkiHQXvTr1Rw==}
     engines: {node: '>= 8'}
-
-  arcgis-js-api@4.31.5:
-    resolution: {integrity: sha512-lamDYIRD+qZrevLjP1klADplnmLMsNk/o7hVqoTIBaM3e9mil6j87gKDqS1KcX44R8mPM5/x8NLQLbE+aio0eg==}
-    deprecated: Use @arcgis/core instead.
 
   are-docs-informative@0.0.2:
     resolution: {integrity: sha512-ixiS0nLNNG5jNQzgZJNoUpBKdo9yTYZMGJ+QgT2jmjR7G7+QHRCc4v6LQ3NgE7EBJq+o0ams3waJwkrlBom8Ig==}
@@ -7362,7 +7355,7 @@ snapshots:
 
   '@vunk/core@1.2.3': {}
 
-  '@vunk/form@2.5.0': {}
+  '@vunk/form@2.5.2': {}
 
   '@vunk/gsap@0.0.0-alpha.3': {}
 
@@ -7424,8 +7417,6 @@ snapshots:
     dependencies:
       normalize-path: 3.0.0
       picomatch: 2.3.1
-
-  arcgis-js-api@4.31.5: {}
 
   are-docs-informative@0.0.2: {}
 

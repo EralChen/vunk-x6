@@ -34,6 +34,7 @@ const formItems: FormItem[] = [
     prop: 'input',
     label: '输入',
     splicable: false,
+    defaultExpandAll: true,
     columns: [
       {
         ...fieldColumnMap.name,

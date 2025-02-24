@@ -27,6 +27,7 @@ const cascaderSlots = {
   <VkfFormItemRendererTemplate type="VkfCascader">
     <template #default="{ props, input, value }">
       <VkfCascader
+        :show-all-levels="false"
         v-bind="props"
         :model-value="value"
         :cascader-slots="cascaderSlots"

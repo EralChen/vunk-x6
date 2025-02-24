@@ -2,6 +2,7 @@ import type { Graph, Node } from '@antv/x6'
 import type { __VkRegisterStartNode } from '@vunk-x6/components/register-start-node'
 import type { Field } from './types'
 import { VkRegisterStartNode } from '@vunk-x6/components/register-start-node'
+import { eachDeep } from 'deepdash-es/standalone'
 import { FieldType } from './const'
 
 /**
@@ -93,6 +94,14 @@ export function extractFieldFromNode (node: Node) {
   else {
     field.children = data.output
   }
+
+  eachDeep(field, (v: Field) => {
+    if (!v.label) {
+      v.label = v.name
+    }
+  }, {
+    childrenPath: ['children'],
+  })
 
   return field
 }
