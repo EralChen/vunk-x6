@@ -12,6 +12,7 @@ import { ElCard } from 'element-plus'
 import { watchEffect } from 'vue'
 import { RegisterLlmNodePort } from './const'
 import { props as dProps } from './ctx'
+import Drawer from './drawer.vue'
 
 defineOptions({
   name: 'VkRegisterLlmNode',
@@ -60,6 +61,12 @@ const ports: PortManager.PortMetadata[] = [
 </script>
 
 <template>
+  <Drawer
+    shape="VkRegisterLlmNode"
+    :client="props.client"
+    :api-key="props.apiKey"
+  />
+
   <VkNodeComponent
     shape="VkRegisterLlmNode"
     :auto-size="true"
@@ -70,7 +77,7 @@ const ports: PortManager.PortMetadata[] = [
         <template #header>
           <div class="vk-register-llm-node__header">
             <img src="https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-LLM-v2.jpg" />
-            <span>大模型</span>
+            <span>{{ data.label || '大模型' }}</span>
           </div>
         </template>
 
