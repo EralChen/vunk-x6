@@ -28,7 +28,7 @@ importers:
         version: 0.0.0-alpha.73
       '@vuesri/core':
         specifier: ^1.0.59
-        version: 1.0.59(@arcgis/core@4.31.5(@floating-ui/utils@0.2.8))(@vunk/core@1.2.3)(vue@3.5.13(typescript@5.6.3))
+        version: 1.0.59(@arcgis/core@4.31.5(@floating-ui/utils@0.2.8))(@vunk/core@1.3.1)(vue@3.5.13(typescript@5.6.3))
       '@vuesri/three':
         specifier: 0.0.4
         version: 0.0.4
@@ -45,8 +45,8 @@ importers:
         specifier: workspace:*
         version: link:packages/shared
       '@vunk/core':
-        specifier: 1.2.3
-        version: 1.2.3
+        specifier: 1.3.1
+        version: 1.3.1
       '@vunk/form':
         specifier: ^2.5.4
         version: 2.5.4
@@ -2256,8 +2256,8 @@ packages:
   '@vueuse/shared@9.13.0':
     resolution: {integrity: sha512-UrnhU+Cnufu4S6JLCPZnkWh0WwZGUp72ktOF2DFptMlOs3TOdVv8xJN53zhHGARmVOsz5KqOls09+J1NR6sBKw==}
 
-  '@vunk/core@1.2.3':
-    resolution: {integrity: sha512-wlpbLl2x7Re9z2qceZEvIvdaxCzfyTeDqo6xRu6TgsVf0mSiVMABFu7NAllYfaPKLUcqc1zwB0oawEaQl/bZ/A==}
+  '@vunk/core@1.3.1':
+    resolution: {integrity: sha512-NT1htwmEU66TK6f95D4iQR97oY6DKvXQ6W1q9L8UNdVvvFkbs1LBcmW3OvuadYKxI5KSEml6HkzPl1DDXCXdzw==}
 
   '@vunk/form@2.5.4':
     resolution: {integrity: sha512-Ub7JB5Vw2oHzYdEw1tWKapfmS6E+1OMdHr0Igunc+lr8k79Yn4rhnsE6UXUJZb1djKzEzqWJkpv5jbLB5pCfUQ==}
@@ -7458,11 +7458,11 @@ snapshots:
 
   '@vue/shared@3.5.13': {}
 
-  '@vuesri/core@1.0.59(@arcgis/core@4.31.5(@floating-ui/utils@0.2.8))(@vunk/core@1.2.3)(vue@3.5.13(typescript@5.6.3))':
+  '@vuesri/core@1.0.59(@arcgis/core@4.31.5(@floating-ui/utils@0.2.8))(@vunk/core@1.3.1)(vue@3.5.13(typescript@5.6.3))':
     dependencies:
       '@arcgis/core': 4.31.5(@floating-ui/utils@0.2.8)
       '@vueuse/core': 10.11.1(vue@3.5.13(typescript@5.6.3))
-      '@vunk/core': 1.2.3
+      '@vunk/core': 1.3.1
       lodash-es: 4.17.21
       vue: 3.5.13(typescript@5.6.3)
     transitivePeerDependencies:
@@ -7540,7 +7540,7 @@ snapshots:
       - '@vue/composition-api'
       - vue
 
-  '@vunk/core@1.2.3': {}
+  '@vunk/core@1.3.1': {}
 
   '@vunk/form@2.5.4': {}
 

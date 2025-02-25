@@ -62,5 +62,14 @@
         "text": "Dnd"
       }
     ]
+  },
+  "template": {
+    "text": "template 模板",
+    "children": [
+      {
+        "link": "/templates-default",
+        "text": "TemplatesDefault"
+      }
+    ]
   }
 }
