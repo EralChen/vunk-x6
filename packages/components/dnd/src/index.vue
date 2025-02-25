@@ -61,7 +61,13 @@ export default defineComponent({
 
 <style>
 .vk-dnd {
-  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  /* background: greenyellow; */
+
+  width: 300px;
   height: 100%;
 }
 </style>

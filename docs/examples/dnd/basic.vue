@@ -69,17 +69,5 @@ function handleExport () {
         <VkDnd></VkDnd>
       </VkGraph>
     </div>
-    <div class="px-4">
-      <button
-        class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-        @click="handleExport"
-      >
-        导出图形配置
-      </button>
-
-      <pre v-if="exportedConfig" class="mt-4 p-4 bg-gray-100 rounded overflow-auto">
-        {{ exportedConfig }}
-      </pre>
-    </div>
   </div>
 </template>
