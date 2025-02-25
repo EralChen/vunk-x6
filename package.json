@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@antv/x6": "^2.18.1",
+    "@antv/x6-plugin-dnd": "^2.1.1",
     "@antv/x6-plugin-selection": "^2.2.2",
     "@antv/x6-vue-shape": "^2.1.2",
     "@element-plus/icons-vue": "^2.3.1",
