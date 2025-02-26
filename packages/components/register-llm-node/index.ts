@@ -1,6 +1,7 @@
 import type { App } from 'vue'
 import VkRegisterLlmNode from './src/index.vue'
 
+export * from './src/const'
 export * as __VkRegisterLlmNode from './src/types'
 
 VkRegisterLlmNode.install = (app: App): void => {

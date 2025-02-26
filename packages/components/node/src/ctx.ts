@@ -35,9 +35,15 @@ export const props = {
     type: Object,
     default: () => ({}),
   },
+
+  orphan: {
+    type: Boolean,
+    default: false,
+  },
 }
 
 export const emits = {
-  load: (e: LoadEvent) => e,
-  click: (e: ClickEvent) => e,
+  'load': (e: LoadEvent) => e,
+  'click': (e: ClickEvent) => e,
+  'update:orphan': null,
 }

@@ -1,6 +1,6 @@
 <script lang="ts">
 import { useGraph, useGraphEmitter } from '@vunk-x6/composables'
-import { defineComponent, onUnmounted, provide, watchEffect } from 'vue'
+import { defineComponent, onBeforeUnmount, onUnmounted, provide, watchEffect } from 'vue'
 import { emits, props } from './ctx'
 
 export default defineComponent({
@@ -10,11 +10,24 @@ export default defineComponent({
   setup (props, { emit }) {
     const graph = useGraph()
     const { graphEmitterOn } = useGraphEmitter()
-    const node = graph.addNode({
+    const node = graph.createNode({
       id: props.id,
       shape: props.shape,
       label: props.label,
     })
+
+    const handleAdded = () => {
+      emit('update:orphan', false)
+    }
+
+    node.on('added', handleAdded)
+    onBeforeUnmount(() => {
+      node.off('added', handleAdded)
+    })
+
+    if (!props.orphan) {
+      graph.addNode(node)
+    }
 
     watchEffect(() => {
       node.prop('size', {
@@ -24,7 +37,9 @@ export default defineComponent({
     })
 
     watchEffect(() => {
-      node.setData(props.data)
+      node.setData(props.data, {
+        overwrite: true,
+      })
     })
 
     watchEffect(() => {

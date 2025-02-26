@@ -17,10 +17,11 @@ export default defineComponent({
 
 <template>
   <VkRendererTemplate type="VkRegisterLlmNode">
-    <template #default="{ props }">
+    <template #default="{ props, getDataValue }">
       <VkNode
-        shape="VkRegisterLlmNode"
         v-bind="props"
+        shape="VkRegisterLlmNode"
+        :data="getDataValue(props.id)"
       ></VkNode>
     </template>
   </VkRendererTemplate>

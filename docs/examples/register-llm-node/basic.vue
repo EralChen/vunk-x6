@@ -5,20 +5,10 @@ import { VkGraph } from '@vunk-x6/components/graph'
 import { VkNode } from '@vunk-x6/components/node'
 import { VkRegisterLlmNode } from '@vunk-x6/components/register-llm-node'
 import { VkRegisterStartNode } from '@vunk-x6/components/register-start-node'
-import { reactive } from 'vue'
+import { VkSelection } from '@vunk-x6/components/selection'
+import { ref } from 'vue'
 
-const registerStartNodeData = reactive({
-  input: [
-    {
-      name: 'USER_INPUT',
-      type: 'string',
-    },
-  ],
-})
-
-const llmNodeData = reactive({
-  modelId: 'gpt-3.5-turbo',
-  prompt: '你好',
+const llmNodeData = ref({
 })
 
 const graphOptions: Graph.Options = {
@@ -30,7 +20,10 @@ const graphOptions: Graph.Options = {
 
 <template>
   <div class="h-400px border-1 border-gray">
+    {{ llmNodeData }}
     <VkGraph :default-options="graphOptions">
+      <VkSelection></VkSelection>
+
       <!-- 注册开始节点 -->
       <VkRegisterStartNode></VkRegisterStartNode>
       <!-- 注册 LLM 节点 -->

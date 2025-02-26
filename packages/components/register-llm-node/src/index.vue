@@ -21,8 +21,6 @@ defineOptions({
 
 const props = defineProps(dProps)
 
-const nodeData = cloneDeep(defaultData)
-
 watchEffect(() => {
   // eslint-disable-next-line vue/no-mutating-props
   props.client.apiKey = props.apiKey
@@ -74,7 +72,6 @@ const ports: PortManager.PortMetadata[] = [
     shape="VkRegisterLlmNode"
     :auto-size="true"
     :items="ports"
-    :data="nodeData"
   >
     <template #default="{ data }">
       <ElCard class="vk-register-llm-node" shadow="hover">
