@@ -89,7 +89,7 @@ Graph组件已内置以下验证逻辑：
   left: 0;
   right: 0;
   bottom: 0;
-  border: 3px dashed var(--el-color-warning, #ff9900);
+  border: 3px solid var(--el-color-warning, #ff9900);
   pointer-events: none;
   border-radius: 4px;
 }
