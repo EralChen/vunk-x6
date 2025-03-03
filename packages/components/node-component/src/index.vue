@@ -20,7 +20,10 @@ export default defineComponent({
           graph: null,
         },
         setup (nodeProps) {
-          const { nodeData } = useNodeData(nodeProps.node)
+          const { nodeData } = useNodeData(
+            nodeProps.node,
+            props.defaultInstanceData,
+          )
 
           const graph = nodeProps.graph
           const isActive = ref(false)

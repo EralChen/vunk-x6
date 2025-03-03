@@ -46,7 +46,7 @@ const ports: PortManager.PortMetadata[] = [
     shape="VkRegisterStartNode"
     :auto-size="true"
     :items="ports"
-    :data="nodeData"
+    :default-instance-data="nodeData"
   >
     <template #default="{ data }">
       <ElCard class="vk-register-start-node" shadow="hover">

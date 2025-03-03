@@ -9,6 +9,7 @@ export const fieldInfomationItem = {
   columns: [
     fieldColumnMap.name,
     fieldColumnMap.type,
+    fieldColumnMap.defaultValue,
     fieldColumnMap.description,
   ],
 } as __VkfInputCollection.Source<any>

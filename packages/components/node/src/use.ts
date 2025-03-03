@@ -6,14 +6,25 @@ import { nextTick, onBeforeUnmount, ref, unref, watch } from 'vue'
 /**
  * 获取具有响应式的节点数据
  */
-export function useNodeData<T extends NormalObject = NormalObject> (nodeRef: MaybeRef<Cell | undefined>) {
+export function useNodeData<T extends NormalObject = NormalObject> (
+  nodeRef: MaybeRef<Cell | undefined>,
+  defaultValue?: T,
+) {
   /* init */
-  const nodeData = ref({} as T)
+  const nodeData = ref(defaultValue ?? {})
   const initNode = unref(nodeRef)
+
+  if (defaultValue && initNode) {
+    initNode.setData(nodeData.value, {
+      silent: true,
+    })
+  }
+
   if (initNode) {
     Object.assign(nodeData.value, initNode.getData())
     initNode.on('change:data', onDataChanged)
   }
+
   /* endof init */
 
   watch(nodeData, () => {

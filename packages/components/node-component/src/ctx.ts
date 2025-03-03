@@ -33,7 +33,18 @@ export const props = {
     default: () => [],
   },
 
+  /**
+   * register config data
+   */
   data: {
+    type: Object as PropType<NormalObject>,
+    default: () => ({}),
+  },
+
+  /**
+   * 默认实例数据
+   */
+  defaultInstanceData: {
     type: Object as PropType<NormalObject>,
     default: () => ({}),
   },

@@ -9,7 +9,7 @@ import { VkNodeComponent } from '@vunk-x6/components/node-component'
 import { fieldWithValueInfomationItem } from '@vunk-x6/components/register-node'
 import { ElCard } from 'element-plus'
 import { defineComponent } from 'vue'
-import { outputModeOptions, RegisterEndNodePort } from './const'
+import { defaultData, outputModeOptions, RegisterEndNodePort } from './const'
 import { emits, props } from './ctx'
 import Drawer from './drawer.vue'
 import TitleModule from './title.vue'
@@ -53,6 +53,7 @@ export default defineComponent({
     return {
       formItems,
       ports,
+      defaultData,
     }
   },
 })
@@ -64,6 +65,7 @@ export default defineComponent({
     shape="VkRegisterEndNode"
     :auto-size="true"
     :items="ports"
+    :default-instance-data="defaultData"
   >
     <template #default="{ data }">
       <ElCard class="vk-register-end-node" shadow="hover">
