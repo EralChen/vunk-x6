@@ -1,9 +1,10 @@
 <script lang="tsx">
-import { Graph } from '@antv/x6'
+import { Graph, Node } from '@antv/x6'
 import { register } from '@antv/x6-vue-shape'
 import { useResizeObserver } from '@vueuse/core'
 import { useNodeData } from '@vunk-x6/components/node'
-import { defineComponent, onUnmounted, ref } from 'vue'
+import { useGraphEmitter } from '@vunk-x6/composables'
+import { computed, defineComponent, onBeforeUnmount, onUnmounted, ref } from 'vue'
 import { emits, props } from './ctx'
 
 export default defineComponent({
@@ -21,12 +22,24 @@ export default defineComponent({
         setup (nodeProps) {
           const { nodeData } = useNodeData(nodeProps.node)
 
+          const graph = nodeProps.graph
+          const isActive = ref(false)
+          const handleActive = () => {
+            isActive.value = graph.getSelectedCells()
+              .includes(nodeProps.node)
+          }
+          graph.on('selection:changed', handleActive)
+          onBeforeUnmount(() => {
+            graph.off('selection:changed', handleActive)
+          })
+
           const renderSlot = () => {
             return slots.default?.({
               node: nodeProps.node,
               attrs: nodeProps.node.attrs,
               graph: nodeProps.graph,
               data: nodeData.value,
+              isActive: isActive.value,
             })
           }
 
@@ -48,7 +61,12 @@ export default defineComponent({
               ref={setContainerRef}
               class={
                 `vk-node-component-size-container ${
-                  props.autoSizeContainerClass}`
+                  props.autoSizeContainerClass
+                } ${
+                  isActive.value
+                    ? 'is-active'
+                    : ''
+                }`
               }
             >
               { renderSlot() }
@@ -74,5 +92,17 @@ export default defineComponent({
 <style>
 .vk-node-component-size-container{
   width: max-content;
+
+}
+.vk-node-component-size-container.is-active::after{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 3px dashed var(--el-color-warning, #ff9900);
+  pointer-events: none;
+  border-radius: 4px;
 }
 </style>

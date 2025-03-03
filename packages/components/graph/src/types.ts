@@ -12,6 +12,8 @@ export type OnLoad = (event: LoadEvent) => ReturnVoid
 
 export interface GraphEvents {
   'node:click': EventArgs['node:click']
+  'node:mousedown': EventArgs['node:mousedown']
+  'selection:changed': EventArgs['selection:changed']
   [key: string | symbol]: any
 }
 export type GraphEmitter = Emitter<GraphEvents>

@@ -11,6 +11,14 @@ graph.on('node:click', (args) => {
   emitter.emit('node:click', args)
 })
 
+graph.on('node:mousedown', (args) => {
+  emitter.emit('node:mousedown', args)
+})
+
+graph.on('selection:changed', (args) => {
+  emitter.emit('selection:changed', args)
+})
+
 provide('vk_graph_emitter', emitter)
 </script>
 

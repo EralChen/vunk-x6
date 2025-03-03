@@ -89,4 +89,13 @@ export default defineComponent({
 .vk-graph .x6-widget-selection {
   z-index: 1;
 }
+
+.vk-graph  .x6-widget-selection-box {
+  border: none;
+  display: none;
+}
+
+.vk-graph .x6-widget-selection-inner {
+  border:none;
+}
 </style>

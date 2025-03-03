@@ -64,15 +64,35 @@ Graph组件已内置以下验证逻辑：
 - End节点：设置 magnet-rule="passive"，确保只能作为终点
 - 中间处理节点：不设置magnet-rule，允许双向连接
 
-### Selction ZIndex
+### Selction 样式
 
-默认的选中框会被节点覆盖
+#### 全局的选中状态默认隐藏
 
 ```css
-.vk-graph .x6-graph-svg {
-  z-index: 2;
+.vk-graph .x6-widget-selection-box {
+  border: none;
+  display: none;
 }
-.vk-graph .x6-widget-selection {
-  z-index: 1;
+
+.vk-graph.x6-widget-selection-inner {
+  border:none;
 }
 ```
+
+#### 在节点上的选中状态
+
+```css
+.vk-node-component-size-container.is-active::after{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 3px dashed var(--el-color-warning, #ff9900);
+  pointer-events: none;
+  border-radius: 4px;
+}
+```
+
+
