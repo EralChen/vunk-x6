@@ -104,25 +104,7 @@ export default defineComponent({
 </template>
 
 <style>
-.vk-dnd {
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 100;
-  width: 300px;
-  height: 100%;
-  padding: 16px;
-  background: #f5f5f5;
-}
-
-.vk-dnd__content {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
 .vk-dnd-item {
   cursor: move;
-  border: 1px solid #d9d9d9;
 }
 </style>
