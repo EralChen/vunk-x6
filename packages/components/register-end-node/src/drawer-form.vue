@@ -17,7 +17,7 @@ const props = defineProps({
     default: null,
   },
 })
-defineEmits({
+const emit = defineEmits({
   setData: (e: SetDataEvent) => e,
 })
 
@@ -41,7 +41,20 @@ const formItems: __VkNodeDrawer.FormItem[] = [
     labelTip: '这些变量将在智能体调用工作流完成后被输出。在“返回变量”模式中，这些变量会被智能体总结后回复用户；在“直接回答”模式中，智能体只会回复你设定的“回答内容”。但在任何模式中，这些变量都可以在配置卡片时使用。',
     columns: [
       fieldColumnMap.name,
-      fieldColumnMap.type,
+      {
+        ...fieldColumnMap.type,
+        createTemplateProps ({ $index }) {
+          return {
+            onChange: () => {
+              // 重置当前字段的值
+              emit('setData', {
+                k: ['output', $index, 'value'],
+                v: undefined,
+              })
+            },
+          }
+        },
+      },
       fieldValueColumn.value,
     ],
   },

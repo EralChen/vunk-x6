@@ -118,6 +118,7 @@ export function useDynamicFieldValueColumn (
         }
         return {}
       },
+
     } as __VkfInputCollection.Column<FieldWithValue>
   })
 
