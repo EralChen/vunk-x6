@@ -66,7 +66,7 @@ const formItems: FormItem[] = [
     columns: [
       fieldColumnMap.name,
       {
-        ...fieldColumnMap.valueRef,
+        ...fieldColumnMap.value,
         createTemplateProps () {
           return {
             options: fieldValueRefOptions.value,

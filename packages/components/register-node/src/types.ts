@@ -1,4 +1,4 @@
-import type { FieldType } from './const'
+import type { FieldType } from './const-field-type'
 
 export interface Field<T = string> {
   /**
@@ -13,10 +13,17 @@ export interface Field<T = string> {
    * 显示名称
    */
   label?: string
+
   /**
    * 默认值
    */
   defaultValue?: string
+
+  /**
+   * 字段运行时的值
+   */
+  value?: any
+
   /**
    * 描述
    */
@@ -26,8 +33,4 @@ export interface Field<T = string> {
    * 如果是 Object/Array<Object> 类型，可以包含子字段
    */
   children?: Field[]
-}
-
-export interface FieldWithValue<T = string> extends Field<T> {
-  valueRef?: string[]
 }

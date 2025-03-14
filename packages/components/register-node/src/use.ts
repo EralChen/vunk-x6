@@ -1,9 +1,14 @@
 import type { Edge, Node } from '@antv/x6'
+import type { __VkfInputCollection } from '@vunk/form/components/input-collection'
 import type { MaybeRef, Ref } from 'vue'
 import { useGraph } from '@vunk-x6/composables'
+import { FieldType, type FieldWithValue } from '@vunk-x6/shared'
 import { computed, onUnmounted, ref, unref, watchEffect } from 'vue'
 import { extractFieldFromNode, getPredecessors } from './utils'
 
+/**
+ * @description 获取当前节点的前置节点
+ */
 export function usePredecessors (
   nodeMbRef: MaybeRef<Node>,
   options: {
@@ -66,6 +71,9 @@ export function usePredecessors (
   }
 }
 
+/**
+ * @description 获取当前节点可用的 Refenrence 值
+ */
 export function useFieldValueRefOpitons (
   nodeMbRef: MaybeRef<Node>,
 ) {
@@ -80,5 +88,40 @@ export function useFieldValueRefOpitons (
   return {
     predecessors,
     fieldValueRefOptions,
+  }
+}
+
+/**
+ * @description 一个可以根据 Field.type 自动调整的, 表格列中的 FormItem
+ */
+export function useDynamicFieldValueColumn (
+  nodeMbRef: MaybeRef<Node>,
+) {
+  const { fieldValueRefOptions } = useFieldValueRefOpitons(nodeMbRef)
+
+  const fieldValueColumn = computed(() => {
+    return {
+      templateType: 'VkfInput',
+      label: '值',
+      prop: 'value',
+      createTemplateProps ({ row }) {
+        if (row.type === FieldType.Refenrence) {
+          return {
+            templateType: 'VkfCascader',
+            options: fieldValueRefOptions.value,
+          }
+        }
+        if (row.type === FieldType.Boolean) {
+          return {
+            templateType: 'VkfSwitch',
+          }
+        }
+        return {}
+      },
+    } as __VkfInputCollection.Column<FieldWithValue>
+  })
+
+  return {
+    fieldValueColumn,
   }
 }

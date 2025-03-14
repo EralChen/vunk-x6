@@ -2,6 +2,7 @@
 import { useGraph, useGraphEmitter } from '@vunk-x6/composables'
 import { defineComponent, onBeforeUnmount, onUnmounted, provide, watchEffect } from 'vue'
 import { emits, props } from './ctx'
+
 // 创建一个 Symbol 作为 zIndex 计数器的 key
 const Z_INDEX_COUNTER = Symbol('z-index-counter')
 

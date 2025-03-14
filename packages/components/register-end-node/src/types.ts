@@ -1,4 +1,4 @@
-import type { FieldWithValue } from '@vunk-x6/shared'
+import type { Field } from '@vunk-x6/shared'
 import type { OutputMode } from './const'
 
 /**
@@ -6,7 +6,7 @@ import type { OutputMode } from './const'
  */
 export interface NodeData {
   label: string
-  output: FieldWithValue[]
+  output: Field[]
   outputMode: OutputMode
   textTemplate: string
 }

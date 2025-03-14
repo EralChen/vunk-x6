@@ -6,7 +6,7 @@ import type { Field } from '@vunk-x6/shared'
 import type { CascaderNode } from 'element-plus'
 import type { PropType } from 'vue'
 import { VkfForm } from '@vunk/form'
-import { fieldColumnMap, useFieldValueRefOpitons } from '@vunk-x6/components/register-node'
+import { fieldColumnMap, useDynamicFieldValueColumn, useFieldValueRefOpitons } from '@vunk-x6/components/register-node'
 import { OutputMode, outputModeOptions } from './const'
 
 const props = defineProps({
@@ -21,7 +21,7 @@ defineEmits({
   setData: (e: SetDataEvent) => e,
 })
 
-const { fieldValueRefOptions } = useFieldValueRefOpitons(props.node)
+const { fieldValueColumn } = useDynamicFieldValueColumn(props.node)
 
 const formItems: __VkNodeDrawer.FormItem[] = [
   {
@@ -41,14 +41,8 @@ const formItems: __VkNodeDrawer.FormItem[] = [
     labelTip: '这些变量将在智能体调用工作流完成后被输出。在“返回变量”模式中，这些变量会被智能体总结后回复用户；在“直接回答”模式中，智能体只会回复你设定的“回答内容”。但在任何模式中，这些变量都可以在配置卡片时使用。',
     columns: [
       fieldColumnMap.name,
-      {
-        ...fieldColumnMap.valueRef,
-        createTemplateProps () {
-          return {
-            options: fieldValueRefOptions.value,
-          }
-        },
-      },
+      fieldColumnMap.type,
+      fieldValueColumn.value,
     ],
   },
 
