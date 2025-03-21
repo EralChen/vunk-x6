@@ -1,6 +1,7 @@
 <script lang="ts">
+import { useModelComputed } from '@vunk/core/composables'
 import { useGraph, useGraphEmitter } from '@vunk-x6/composables'
-import { defineComponent, onBeforeUnmount, onUnmounted, provide, watchEffect } from 'vue'
+import { defineComponent, onBeforeUnmount, onUnmounted, provide, watch, watchEffect } from 'vue'
 import { emits, props } from './ctx'
 
 // 创建一个 Symbol 作为 zIndex 计数器的 key
@@ -15,6 +16,11 @@ export default defineComponent({
     if (!graph[Z_INDEX_COUNTER]) {
       graph[Z_INDEX_COUNTER] = 1
     }
+
+    const theData = useModelComputed({
+      default: {},
+      key: 'data',
+    }, props, emit)
 
     const { graphEmitterOn } = useGraphEmitter()
     const node = graph.createNode({
@@ -45,9 +51,17 @@ export default defineComponent({
     })
 
     watchEffect(() => {
-      node.setData(props.data, {
+      node.setData(theData.value, {
         overwrite: true,
       })
+    })
+
+    const syncData = () => {
+      theData.value = node.getData()
+    }
+    node.on('change:data', syncData)
+    onBeforeUnmount(() => {
+      node.off('change:data', syncData)
     })
 
     watchEffect(() => {

@@ -38,16 +38,21 @@ function updateNodeData () {
             </h3>
             <p class="text-sm text-gray-500">
               {{ data.description }}
+              {{ data.count }}
             </p>
+
+            <button @click="() => data.count++">
+              Increment Count
+            </button>
           </div>
         </template>
       </VkNodeComponent>
 
       <VkNode
+        v-model:data="nodeData"
         :shape="shape"
         :x="100"
         :y="100"
-        :data="nodeData"
       />
 
       <VkNodeDrawer

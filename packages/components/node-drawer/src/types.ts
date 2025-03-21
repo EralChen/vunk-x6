@@ -3,7 +3,7 @@ import type { MaybeArray, SetDataEvent } from '@vunk/core'
 import type { __VkfCascader } from '@vunk/form'
 import type { __VkfInputCollection } from '@vunk/form/components/input-collection'
 import type { __VkfTemplatesDefault } from '@vunk/form/components/templates-default'
-import type { NormalObject } from '@vunk/shared'
+import type { Keyof, NormalObject } from '@vunk/shared'
 import type { CascaderNode } from 'element-plus'
 
 export interface SlotArguments {
@@ -28,3 +28,10 @@ export type FormItem<P extends string = string>
   )
   | __VkfTemplatesDefault.Source<P>
   | __VkfInputCollection.Source<P>
+
+export type InputCollectionColumn<
+  R extends NormalObject = NormalObject,
+> = __VkfInputCollection.Column<
+  R,
+  FormItem<Keyof<R>>
+>

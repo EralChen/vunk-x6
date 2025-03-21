@@ -14,6 +14,10 @@ export enum FieldType {
 }
 export const fieldTypeOptions = [
   {
+    label: 'Reference',
+    value: FieldType.Refenrence,
+  },
+  {
     label: 'String',
     value: FieldType.String,
   },
@@ -52,10 +56,6 @@ export const fieldTypeOptions = [
   {
     label: 'Array<Object>',
     value: FieldType.ArrayObject,
-  },
-  {
-    label: 'Reference',
-    value: FieldType.Refenrence,
   },
 ]
 export const fieldTypeMap = fieldTypeOptions.reduce((acc, cur) => {

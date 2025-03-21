@@ -46,7 +46,7 @@ export const props = {
    */
   defaultInstanceData: {
     type: Object as PropType<NormalObject>,
-    default: () => ({}),
+    default: undefined,
   },
 
 }

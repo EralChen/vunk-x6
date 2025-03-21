@@ -31,10 +31,10 @@ const graphOptions: Graph.Options = {
 
       <VkNode
         id="node2"
+        v-model:data="llmNodeData"
         :shape="VkRegisterLlmNode.name"
         :x="300"
         :y="100"
-        :data="llmNodeData"
       />
     </VkGraph>
   </div>

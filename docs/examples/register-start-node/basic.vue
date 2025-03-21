@@ -4,13 +4,15 @@ import type { __VkNode } from '@vunk-x6/components/node'
 import type { __VkRegisterStartNode } from '@vunk-x6/components/register-start-node'
 import { VkGraph } from '@vunk-x6/components/graph'
 import { VkNode } from '@vunk-x6/components/node'
-import { VkRegisterStartNode } from '@vunk-x6/components/register-start-node'
+import { defaultData, VkRegisterStartNode } from '@vunk-x6/components/register-start-node'
 import { VkSelection } from '@vunk-x6/components/selection'
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 
-const registerStartNodeData = reactive({
-
-})
+const startNodeData = ref(defaultData)
+const startNodeData2 = {
+  ...defaultData,
+  label: '开始节点2',
+} as __VkRegisterStartNode.NodeData
 
 const graphOptions: Graph.Options = {
 }
@@ -24,12 +26,15 @@ const graphOptions: Graph.Options = {
 
       <VkSelection></VkSelection>
 
+      <button @click="startNodeData = startNodeData2">
+        更新开始节点数据
+      </button>
       <!-- 使用开始节点渲染实例 -->
       <VkNode
+        v-model:data="startNodeData"
         :shape="VkRegisterStartNode.name"
         :x="100"
         :y="100"
-        :data="registerStartNodeData"
       />
     </VkGraph>
   </div>
