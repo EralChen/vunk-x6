@@ -7,7 +7,7 @@ import type { FieldWithValue } from '@vunk-x6/shared'
 import type { PropType } from 'vue'
 import type { NodeData } from './types'
 import { VkfForm } from '@vunk/form'
-import { fieldColumnMap, useDynamicFieldValueColumn } from '@vunk-x6/components/register-node'
+import { fieldColumnMap, FieldType, useDynamicFieldValueColumn } from '@vunk-x6/components/register-node'
 import { OutputMode, outputModeOptions } from './const'
 
 type FormItem = __VkNodeDrawer.FormItem<keyof NodeData>
@@ -32,12 +32,16 @@ const outputColumns: ConlectionColumn[] = [
   fieldColumnMap.name,
   {
     ...fieldColumnMap.type,
-    createTemplateProps ({ $index }) {
+    createTemplateProps (_, { prop }) {
+      const objectProp = prop.slice(0, -1)
       return {
-        onChange: () => {
-          // 重置当前字段的值
+        onChange: () => { // 类型改变时，清空值和子项
           emit('setData', {
-            k: ['output', $index, 'value'],
+            k: [objectProp, 'value'],
+            v: undefined,
+          })
+          emit('setData', {
+            k: [objectProp, 'children'],
             v: undefined,
           })
         },
@@ -54,13 +58,17 @@ const outputColumns: ConlectionColumn[] = [
     templateProps: {
       labelPosition: 'top',
     },
-    createTemplateProps () {
+    createTemplateProps ({ row }) {
       return {
         columns: outputColumns,
+        templateIf: () => {
+          return row.type === FieldType.Object
+        },
       }
     },
-
   },
+  fieldColumnMap.defaultValue,
+  fieldColumnMap.description,
 ]
 
 const formItems: FormItem[] = [
@@ -104,3 +112,9 @@ const formItems: FormItem[] = [
   >
   </VkfForm>
 </template>
+
+<style>
+.vk-register-end-drawer__form .vk-input-collection__expand-fieldset > * {
+  margin-bottom: 18px;
+}
+</style>

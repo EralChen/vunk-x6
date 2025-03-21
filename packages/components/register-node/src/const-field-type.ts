@@ -1,16 +1,15 @@
 export enum FieldType {
+  Refenrence = 'Reference',
   String = 'String',
   Integer = 'Integer',
   Boolean = 'Boolean',
   Number = 'Number',
   Object = 'Object',
-  ArrayString = 'ArrayString',
-  ArrayInteger = 'ArrayInteger',
-  ArrayBoolean = 'ArrayBoolean',
-  ArrayNumber = 'ArrayNumber',
-  ArrayObject = 'ArrayObject',
-
-  Refenrence = 'Reference',
+  // ArrayString = 'ArrayString',
+  // ArrayInteger = 'ArrayInteger',
+  // ArrayBoolean = 'ArrayBoolean',
+  // ArrayNumber = 'ArrayNumber',
+  // ArrayObject = 'ArrayObject',
 }
 export const fieldTypeOptions = [
   {
@@ -37,26 +36,26 @@ export const fieldTypeOptions = [
     label: 'Object',
     value: FieldType.Object,
   },
-  {
-    label: 'Array<String>',
-    value: FieldType.ArrayString,
-  },
-  {
-    label: 'Array<Integer>',
-    value: FieldType.ArrayInteger,
-  },
-  {
-    label: 'Array<Boolean>',
-    value: FieldType.ArrayBoolean,
-  },
-  {
-    label: 'Array<Number>',
-    value: FieldType.ArrayNumber,
-  },
-  {
-    label: 'Array<Object>',
-    value: FieldType.ArrayObject,
-  },
+  // {
+  //   label: 'Array<String>',
+  //   value: FieldType.ArrayString,
+  // },
+  // {
+  //   label: 'Array<Integer>',
+  //   value: FieldType.ArrayInteger,
+  // },
+  // {
+  //   label: 'Array<Boolean>',
+  //   value: FieldType.ArrayBoolean,
+  // },
+  // {
+  //   label: 'Array<Number>',
+  //   value: FieldType.ArrayNumber,
+  // },
+  // {
+  //   label: 'Array<Object>',
+  //   value: FieldType.ArrayObject,
+  // },
 ]
 export const fieldTypeMap = fieldTypeOptions.reduce((acc, cur) => {
   acc[cur.value] = cur

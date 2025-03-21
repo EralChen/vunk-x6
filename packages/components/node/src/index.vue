@@ -64,11 +64,13 @@ export default defineComponent({
       node.off('change:data', syncData)
     })
 
-    watchEffect(() => {
+    watch(() => [props.x, props.y], ([x, y]) => {
       node.prop('position', {
-        x: props.x,
-        y: props.y,
+        x,
+        y,
       })
+    }, {
+      immediate: true,
     })
 
     emit('load', {

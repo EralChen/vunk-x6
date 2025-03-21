@@ -1,9 +1,12 @@
 import type { Edge, Node } from '@antv/x6'
 import type { __VkfInputCollection } from '@vunk/form/components/input-collection'
 import type { MaybeRef, Ref } from 'vue'
+import type { __VkNodeDrawer } from '../../node-drawer'
 import { useGraph } from '@vunk-x6/composables'
 import { FieldType, type FieldWithValue } from '@vunk-x6/shared'
-import { computed, onUnmounted, ref, unref, watchEffect } from 'vue'
+import { computed, h, onUnmounted, ref, unref, watchEffect } from 'vue'
+
+import { fieldColumnMap } from './const-field-column'
 import { extractFieldFromNode, getPredecessors } from './utils'
 
 /**
@@ -92,7 +95,7 @@ export function useFieldValueRefOpitons (
 }
 
 /**
- * @description 一个可以根据 Field.type 自动调整的, 表格列中的 FormItem
+ * @description 一个可以根据 Field.type 自动调整的表格列中的 Field.value 的表单项
  */
 export function useDynamicFieldValueColumn (
   nodeMbRef: MaybeRef<Node>,
@@ -101,10 +104,8 @@ export function useDynamicFieldValueColumn (
 
   const fieldValueColumn = computed(() => {
     return {
-      templateType: 'VkfInput',
-      label: '值',
-      prop: 'value',
-      createTemplateProps ({ row }) {
+      ...fieldColumnMap.value,
+      createTemplateProps ({ row, $index }, _, { addExpandRowKey }) {
         if (row.type === FieldType.Refenrence) {
           return {
             templateType: 'VkfCascader',
@@ -116,10 +117,34 @@ export function useDynamicFieldValueColumn (
             templateType: 'VkfSwitch',
           }
         }
+        if (row.type === FieldType.Number) {
+          return {
+            templateType: 'VkfInput',
+            type: 'number',
+          }
+        }
+        if (row.type === FieldType.Integer) {
+          return {
+            templateType: 'VkfInputNumber',
+            step: 1,
+            stepStrictly: true,
+            precision: 0,
+          }
+        }
+        if (row.type === FieldType.Object) {
+          return {
+            templateType: 'VkfInputTag',
+            readonly: true,
+            modelValue: row.children?.map(item => item.name),
+            placeholder: '请添加子项',
+            onFocus () {
+              addExpandRowKey(`${$index}`)
+            },
+          }
+        }
         return {}
       },
-
-    } as __VkfInputCollection.Column<FieldWithValue>
+    } as __VkNodeDrawer.InputCollectionColumn<FieldWithValue>
   })
 
   return {

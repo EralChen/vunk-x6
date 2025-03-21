@@ -4,7 +4,7 @@ import type { __VkNodeDrawer } from '@vunk-x6/components/node-drawer'
 import type { FieldWithValue } from '@vunk-x6/shared'
 import { fieldTypeOptions } from './const-field-type'
 
-type Column<F> = __VkfInputCollection.Column<FieldWithValue<F>>
+type Column<F> = __VkNodeDrawer.InputCollectionColumn<FieldWithValue<F>>
 
 const nameColumn: Column<'name'> = {
   templateType: 'VkfInput',
@@ -45,10 +45,21 @@ const descriptionColumn: Column<'description'> = {
   },
 }
 
-const valueColumn: Column<'valueRef'> = {
+const valueColumn: Column<'value'> = {
   templateType: 'VkfInput',
   label: '值',
   prop: 'value',
+}
+
+const childrenColumn: Column<'children'> = {
+  prop: 'children',
+  label: '子项',
+  templateType: 'VkfInputCollection',
+  expandVisible: true,
+  hidden: true,
+  templateProps: {
+    labelPosition: 'top',
+  },
 }
 
 export const fieldColumnMap = {
@@ -57,4 +68,5 @@ export const fieldColumnMap = {
   defaultValue: defaultValueColumn,
   description: descriptionColumn,
   value: valueColumn,
+  children: childrenColumn,
 }
