@@ -40,6 +40,7 @@ export const props = {
     type: Boolean,
     default: false,
   },
+
 }
 
 export const emits = {

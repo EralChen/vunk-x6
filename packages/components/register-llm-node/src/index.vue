@@ -4,12 +4,12 @@ import type { __VkfInformation } from '@vunk/form'
 import type { __VkNodeComponent } from '@vunk-x6/components/node-component'
 import type { NodeData } from './types'
 import { VkfInformation } from '@vunk/form'
-import { VkfInformationTemplatesDefault } from '@vunk/form/components/information-templates-default'
+
+import { VkInformationTemplates } from '@vunk-x6/components/information-templates'
 import { VkNodeComponent } from '@vunk-x6/components/node-component'
-import { fieldColumnMap, fieldInfomationItem, fieldWithValueInfomationItem } from '@vunk-x6/components/register-node'
+import { fieldInfomationItem, fieldWithValueInfomationItem } from '@vunk-x6/components/register-node'
 
 import { ElCard } from 'element-plus'
-import { cloneDeep } from 'lodash-es'
 import { watchEffect } from 'vue'
 import { defaultData, RegisterLlmNodePort } from './const'
 import { props as dProps } from './ctx'
@@ -72,6 +72,7 @@ const ports: PortManager.PortMetadata[] = [
     shape="VkRegisterLlmNode"
     :auto-size="true"
     :items="ports"
+    :default-instance-data="defaultData"
   >
     <template #default="{ data }">
       <ElCard class="vk-register-llm-node" shadow="hover">
@@ -86,7 +87,7 @@ const ports: PortManager.PortMetadata[] = [
           :data="data"
           :form-items="formItems"
         >
-          <VkfInformationTemplatesDefault />
+          <VkInformationTemplates />
         </VkfInformation>
       </ElCard>
     </template>

@@ -8,16 +8,19 @@ import { defaultData, VkRegisterLlmNode } from '@vunk-x6/components/register-llm
 import { VkSelection } from '@vunk-x6/components/selection'
 import { VkTemplatesDefault } from '@vunk-x6/components/templates-default'
 import { cloneDeep } from 'lodash-es'
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 
-const source: __VkTemplatesDefault.SourceItem[] = [
-  {
+const source = ref([] as __VkTemplatesDefault.SourceItem[])
+
+setTimeout(() => {
+  const sourceItem = {
     id: 'id1',
     templateType: 'VkRegisterLlmNode',
     x: 100,
     y: 100,
-  },
-]
+  } as __VkTemplatesDefault.SourceItem
+  source.value.push(sourceItem)
+}, 1000)
 
 const data = reactive({
   id1: cloneDeep(defaultData),
@@ -32,11 +35,11 @@ const data = reactive({
       <VkSelection></VkSelection>
       <VkRegisterLlmNode></VkRegisterLlmNode>
 
-      <VkRendererData :data="data" @set-data="setData(data, $event)">
-        <VkRenderer :source="source">
-          <VkTemplatesDefault></VkTemplatesDefault>
-        </VkRenderer>
-      </VkRendererData>
+      <!-- <VkRendererData :data="data" @set-data="setData(data, $event)"> -->
+      <VkRenderer :source="source">
+        <VkTemplatesDefault></VkTemplatesDefault>
+      </VkRenderer>
+      <!-- </VkRendererData> -->
     </VkGraph>
   </div>
 </template>

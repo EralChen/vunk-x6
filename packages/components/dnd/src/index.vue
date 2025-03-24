@@ -8,10 +8,13 @@ import { Deferred } from '@vunk/core/shared/utils-promise'
 import { VkDndItem } from '@vunk-x6/components/dnd-item'
 import { VkTemplatesDefault } from '@vunk-x6/components/templates-default'
 import { useGraph } from '@vunk-x6/composables'
-import { defineComponent, onBeforeUnmount, onMounted, provide, ref, shallowRef } from 'vue'
+import { defineComponent, markRaw, onBeforeUnmount, onMounted, provide, ref, shallowRef } from 'vue'
 import { emits, props } from './ctx'
 
-type NodeSourceItem = __VkTemplatesDefault.SourceItem
+const instanceKey = Symbol('instanceKey')
+type NodeSourceItem = __VkTemplatesDefault.SourceItem & {
+  [instanceKey]?: Node
+}
 
 export default defineComponent({
   name: 'VkDnd',
@@ -36,6 +39,21 @@ export default defineComponent({
       dnd.value = new Dnd({
         target: graph,
         dndContainer: dndNodeRef.value,
+        getDragNode: (node) => {
+          const nNode = node.clone({ keepId: true })
+          return nNode
+        },
+        getDropNode: (node) => {
+          const source = dndNodeSource.value
+            .find((item) => {
+              if (!item[instanceKey]) {
+                throw new Error('Instance is not found')
+              }
+              return item[instanceKey].id === node.id
+            }) as unknown as { [instanceKey]: Node }
+
+          return source[instanceKey]
+        },
         ...props.defaultOptions,
       })
 
@@ -55,11 +73,13 @@ export default defineComponent({
           return
 
         const nodeDef = new Deferred<Node>()
+
         const nodeSourceItem: NodeSourceItem = {
           templateType: type as never,
           orphan: true,
           onLoad: ({ node }) => {
             nodeDef.resolve(node)
+            nodeSourceItem[instanceKey] = markRaw(node)
           },
           width: 300,
           height: 200,

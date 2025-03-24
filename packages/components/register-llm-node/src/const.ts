@@ -24,8 +24,8 @@ export const defaultData: NodeData = {
   input: [
     {
       name: 'input',
-      valueRef: [],
-      type: FieldType.String,
+      type: FieldType.Refenrence,
+      value: [],
     },
   ],
 
