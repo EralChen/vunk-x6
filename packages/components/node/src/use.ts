@@ -2,7 +2,7 @@ import type { Cell } from '@antv/x6'
 import type { NormalObject } from '@vunk/shared'
 import type { MaybeRef } from 'vue'
 import { isEmptyObject } from '@vunk/shared/object'
-import { computed, onBeforeUnmount, ref, unref, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, ref, unref, watch } from 'vue'
 
 /**
  * 获取具有响应式的节点数据
@@ -47,6 +47,9 @@ export function useNodeData<T extends NormalObject = NormalObject> (
       )
     ) {
       nodeData.value = { ...defaultValue }
+      nextTick(() => { //  nodeData.value 设置后, node 中的data 会在下一次渲染中被包装成响应式对象
+        nodeDataEffect.value++
+      })
     }
     if (node) {
       node.on('change:data', onDataChanged)

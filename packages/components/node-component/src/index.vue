@@ -3,7 +3,7 @@ import { Graph } from '@antv/x6'
 import { register } from '@antv/x6-vue-shape'
 import { useResizeObserver } from '@vueuse/core'
 import { useNodeData } from '@vunk-x6/components/node'
-import { defineComponent, onBeforeUnmount, onUnmounted, ref } from 'vue'
+import { defineComponent, onBeforeUnmount, onUnmounted, ref, watchEffect } from 'vue'
 import { emits, props } from './ctx'
 
 export default defineComponent({
@@ -73,6 +73,7 @@ export default defineComponent({
             >
 
               { renderSlot() }
+
             </div>
           )
         },
