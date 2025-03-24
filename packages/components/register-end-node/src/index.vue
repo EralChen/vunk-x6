@@ -4,7 +4,7 @@ import type { __VkfInformation } from '@vunk/form'
 import type { __VkNodeComponent } from '@vunk-x6/components/node-component'
 import type { NodeData } from './types'
 import { VkfInformation } from '@vunk/form'
-import { VkfInformationTemplatesDefault } from '@vunk/form/components/information-templates-default'
+import { VkInformationTemplates } from '@vunk-x6/components/information-templates'
 import { VkNodeComponent } from '@vunk-x6/components/node-component'
 import { fieldWithValueInfomationItem } from '@vunk-x6/components/register-node'
 import { ElCard } from 'element-plus'
@@ -34,7 +34,7 @@ export default defineComponent({
   name: 'VkRegisterEndNode',
   components: {
     VkfInformation,
-    VkfInformationTemplatesDefault,
+    VkInformationTemplates,
     ElCard,
     VkNodeComponent,
     Drawer,
@@ -80,7 +80,7 @@ export default defineComponent({
           :form-items="formItems"
           @update:data="$emit('update:data', $event)"
         >
-          <VkfInformationTemplatesDefault />
+          <VkInformationTemplates />
         </VkfInformation>
       </ElCard>
     </template>

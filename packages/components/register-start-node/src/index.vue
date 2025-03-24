@@ -2,7 +2,7 @@
 import type { PortManager } from '@antv/x6/es/model/port'
 import type { __VkfInformation } from '@vunk/form'
 import { VkfInformation } from '@vunk/form'
-import { VkfInformationTemplatesDefault } from '@vunk-x6/components/information-templates-default'
+import { VkInformationTemplates } from '@vunk-x6/components/information-templates'
 import { VkNodeComponent } from '@vunk-x6/components/node-component'
 import { defaultAttrs } from '@vunk-x6/components/port'
 import { fieldInfomationItem } from '@vunk-x6/components/register-node'
@@ -60,7 +60,7 @@ const ports: PortManager.PortMetadata[] = [
           :data="data"
           :form-items="formItems"
         >
-          <VkfInformationTemplatesDefault />
+          <VkInformationTemplates />
         </VkfInformation>
       </ElCard>
     </template>
@@ -78,6 +78,6 @@ const ports: PortManager.PortMetadata[] = [
 }
 
 .vk-register-start-node{
-  min-width: 300px;
+  min-width: 350px;
 }
 </style>

@@ -40,10 +40,6 @@ function updateNodeData () {
               {{ data.description }}
               {{ data.count }}
             </p>
-
-            <button @click="() => data.count++">
-              Increment Count
-            </button>
           </div>
         </template>
       </VkNodeComponent>

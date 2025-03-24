@@ -46,7 +46,7 @@ function handleExport () {
         <!-- 注册结束节点 -->
         <VkRegisterEndNode></VkRegisterEndNode>
 
-        <VkNode
+        <!-- <VkNode
           :shape="VkRegisterStartNode.name"
           :x="0"
           :y="100"
@@ -56,13 +56,12 @@ function handleExport () {
           :shape="VkRegisterLlmNode.name"
           :x="200"
           :y="100"
-        />
+        /> -->
 
         <VkNode
           :shape="VkRegisterEndNode.name"
           :x="400"
           :y="100"
-          :data="endNodeData"
         />
       </VkGraph>
     </div>

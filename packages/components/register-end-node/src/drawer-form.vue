@@ -29,9 +29,13 @@ const emit = defineEmits({
 const { fieldValueColumn } = useDynamicFieldValueColumn(props.node)
 
 const outputColumns: ConlectionColumn[] = [
-  fieldColumnMap.name,
+  {
+    ...fieldColumnMap.name,
+    width: '120',
+  },
   {
     ...fieldColumnMap.type,
+    width: '120',
     createTemplateProps (_, { prop }) {
       const objectProp = prop.slice(0, -1)
       return {
