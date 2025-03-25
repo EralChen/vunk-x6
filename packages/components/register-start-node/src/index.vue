@@ -5,7 +5,7 @@ import { VkfInformation } from '@vunk/form'
 import { VkInformationTemplates } from '@vunk-x6/components/information-templates'
 import { VkNodeComponent } from '@vunk-x6/components/node-component'
 import { defaultAttrs } from '@vunk-x6/components/port'
-import { fieldInfomationItem } from '@vunk-x6/components/register-node'
+import { fieldInformationItem } from '@vunk-x6/components/register-node'
 import { ElCard } from 'element-plus'
 import { cloneDeep } from 'lodash-es'
 import { defaultData, RegisterStartNodePort } from './const'
@@ -20,7 +20,7 @@ const nodeData = cloneDeep(defaultData)
 
 const formItems: __VkfInformation.FormItem[] = [
   {
-    ...fieldInfomationItem,
+    ...fieldInformationItem,
     label: '输入',
     prop: 'input',
   },

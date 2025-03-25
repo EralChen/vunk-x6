@@ -12,6 +12,6 @@ export const props = {
 }
 
 export const emits = {
-  dragstart: (_: DragStartEvent) => true,
-  dragend: (_: DragEndEvent) => true,
+  // dragstart: (_: DragStartEvent) => true,
+  // dragend: (_: DragEndEvent) => true,
 }

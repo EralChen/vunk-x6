@@ -62,6 +62,7 @@ function handleExport () {
           :shape="VkRegisterEndNode.name"
           :x="400"
           :y="100"
+          :data="endNodeData"
         />
       </VkGraph>
     </div>

@@ -25,7 +25,7 @@ export default defineComponent({
   },
   props,
   emits,
-  setup (props, { emit }) {
+  setup (props) {
     const graph = useGraph()
     const dndNodeRef = ref() as Ref<HTMLDivElement>
 

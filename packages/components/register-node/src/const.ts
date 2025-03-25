@@ -1,23 +1,37 @@
 import type { __VkfInputCollection } from '@vunk/form/components/input-collection'
+import type { Field } from './types'
 import { fieldColumnMap } from './const-field-column'
 
-export const fieldInfomationItem = {
+export const fieldInformationItem = {
   templateType: 'VkfInputCollection',
-  summaryLabel (data) {
-    return `${data.name}`
+  information: true,
+  informationProps: {
+    typeRender: (item: Field) => item.name
+      ? 'primary'
+      : 'warning',
+    labelRender: (item: Field) => item.name
+      ? item.name
+      : '未定义',
   },
   columns: [
     fieldColumnMap.name,
     fieldColumnMap.type,
-    fieldColumnMap.defaultValue,
     fieldColumnMap.description,
+    fieldColumnMap.defaultValue,
+
   ],
 } as __VkfInputCollection.Source<any>
 
-export const fieldWithValueInfomationItem = {
+export const fieldWithValueInformationItem = {
   templateType: 'VkfInputCollection',
-  summaryLabel (data) {
-    return `${data.name}`
+  information: true,
+  informationProps: {
+    typeRender: (item: Field) => item.name
+      ? 'primary'
+      : 'warning',
+    labelRender: (item: Field) => item.name
+      ? item.name
+      : '未定义',
   },
   columns: [
     fieldColumnMap.name,

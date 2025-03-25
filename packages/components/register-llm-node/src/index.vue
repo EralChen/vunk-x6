@@ -7,7 +7,7 @@ import { VkfInformation } from '@vunk/form'
 
 import { VkInformationTemplates } from '@vunk-x6/components/information-templates'
 import { VkNodeComponent } from '@vunk-x6/components/node-component'
-import { fieldInfomationItem, fieldWithValueInfomationItem } from '@vunk-x6/components/register-node'
+import { fieldInformationItem, fieldWithValueInformationItem } from '@vunk-x6/components/register-node'
 
 import { ElCard } from 'element-plus'
 import { watchEffect } from 'vue'
@@ -38,13 +38,13 @@ const formItems: FormItem[] = [
   {
     label: '输入',
     prop: 'input',
-    ...fieldWithValueInfomationItem,
+    ...fieldWithValueInformationItem,
   },
 
   {
     label: '输出',
     prop: 'output',
-    ...fieldInfomationItem,
+    ...fieldInformationItem,
   },
 ]
 

@@ -4,7 +4,7 @@ import type { MaybeRef, Ref } from 'vue'
 import type { __VkNodeDrawer } from '../../node-drawer'
 import { useGraph } from '@vunk-x6/composables'
 import { FieldType, type FieldWithValue } from '@vunk-x6/shared'
-import { computed, h, onUnmounted, ref, unref, watchEffect } from 'vue'
+import { computed, onUnmounted, ref, unref, watchEffect } from 'vue'
 
 import { fieldColumnMap } from './const-field-column'
 import { extractFieldFromNode, getPredecessors } from './utils'
