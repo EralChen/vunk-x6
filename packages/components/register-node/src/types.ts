@@ -1,3 +1,4 @@
+import type { __VkNodeDrawer } from '@vunk-x6/components/node-drawer'
 import type { FieldType } from './const-field-type'
 
 export interface Field<T = string> {
@@ -34,3 +35,5 @@ export interface Field<T = string> {
    */
   children?: Field[]
 }
+
+export type FieldConlectionColumn = __VkNodeDrawer.InputCollectionColumn<Field>

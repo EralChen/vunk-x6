@@ -7,9 +7,9 @@ import { useNodeData } from '@vunk-x6/components/node'
 import { useGraph } from '@vunk-x6/composables'
 import { ElDrawer } from 'element-plus'
 import { computed, defineComponent, onBeforeUnmount, shallowRef } from 'vue'
-import CustomHeader from './components/custom-header.vue'
-import FormTemplates from './components/form-templates.vue'
 import { emits, props } from './ctx'
+import CustomHeader from './custom-header.vue'
+import FormTemplates from './form-templates.vue'
 
 export default defineComponent({
   name: 'VkNodeDrawer',

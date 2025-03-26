@@ -3,7 +3,7 @@ import { VkfFormItemRendererTemplate } from '@vunk/form'
 import { __VkfCascader } from '@vunk/form/components/cascader'
 import VkfInputCollection from '@vunk/form/components/input-collection'
 import { VkfTemplatesDefault } from '@vunk/form/components/templates-default'
-import VkfCascader from './VkfCascader.vue'
+import VkfCascader from './form-item-templates/VkfCascader.vue'
 </script>
 
 <template>
@@ -23,13 +23,10 @@ import VkfCascader from './VkfCascader.vue'
     <template
       #default="{
         props, input, value,
-        emitSetData,
       }"
     >
       <VkfCascader
         :model-value="value"
-        :input="input"
-        :emit-set-data="emitSetData"
         v-bind="props"
         @update:model-value="input"
       >

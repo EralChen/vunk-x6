@@ -2,10 +2,11 @@ import type { Edge, Node } from '@antv/x6'
 import type { __VkfInputCollection } from '@vunk/form/components/input-collection'
 import type { MaybeRef, Ref } from 'vue'
 import type { __VkNodeDrawer } from '../../node-drawer'
+import type { Field, FieldConlectionColumn } from './types'
 import { useGraph } from '@vunk-x6/composables'
 import { FieldType, type FieldWithValue } from '@vunk-x6/shared'
-import { computed, onUnmounted, ref, unref, watchEffect } from 'vue'
 
+import { computed, nextTick, onUnmounted, ref, unref, watchEffect } from 'vue'
 import { fieldColumnMap } from './const-field-column'
 import { extractFieldFromNode, getPredecessors } from './utils'
 
@@ -150,4 +151,63 @@ export function useDynamicFieldValueColumn (
   return {
     fieldValueColumn,
   }
+}
+
+/**
+ * @description 获取当前节点关于 Field 的表单项（即InputCollection表格列）
+ */
+export function useFieldInputCollectionColumns (
+  nodeMbRef: MaybeRef<Node>,
+) {
+  const { fieldValueColumn } = useDynamicFieldValueColumn(nodeMbRef)
+
+  const columns = [
+    {
+      ...fieldColumnMap.name,
+      width: '120',
+    },
+    {
+      ...fieldColumnMap.type,
+      width: '120',
+      createTemplateProps ({ row }) {
+        return {
+          inputEffect (value, { emitSetData, parentProp }) {
+            emitSetData({
+              k: parentProp,
+              v: { // 重置当前行的值
+                type: value,
+                name: row.name,
+                defaultValue: row.defaultValue,
+                description: row.description,
+                value: undefined,
+                children: undefined,
+              } as Field,
+            })
+          },
+        }
+      },
+    },
+    fieldValueColumn.value,
+    {
+      prop: 'children',
+      label: '子项',
+      templateType: 'VkfInputCollection',
+      expandVisible: true,
+      hidden: true,
+      templateProps: {
+        labelPosition: 'top',
+      },
+      createTemplateProps ({ row }) {
+        return {
+          columns,
+          templateIf: () => {
+            return row.type === FieldType.Object
+          },
+        }
+      },
+    },
+    fieldColumnMap.description,
+  ] as FieldConlectionColumn[]
+
+  return columns
 }

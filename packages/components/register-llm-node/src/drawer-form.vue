@@ -7,7 +7,7 @@ import type OpenAI from 'openai'
 import type { PropType } from 'vue'
 import type { NodeData } from './types'
 import { VkfForm } from '@vunk/form'
-import { fieldColumnMap, useFieldValueRefOpitons } from '@vunk-x6/components/register-node'
+import { fieldColumnMap, useFieldInputCollectionColumns, useFieldValueRefOpitons } from '@vunk-x6/components/register-node'
 import { onMounted, ref } from 'vue'
 
 type FormItem = __VkNodeDrawer.FormItem<keyof NodeData>
@@ -31,7 +31,7 @@ defineEmits({
   setData: (e: SetDataEvent) => e,
 })
 
-const { fieldValueRefOptions } = useFieldValueRefOpitons(props.node)
+const inputColumns = useFieldInputCollectionColumns(props.node)
 
 const modelList = ref<Media[]>([])
 
@@ -63,17 +63,7 @@ const formItems: FormItem[] = [
     templateType: 'VkfInputCollection',
     prop: 'input',
     label: '输入变量',
-    columns: [
-      fieldColumnMap.name,
-      {
-        ...fieldColumnMap.value,
-        createTemplateProps () {
-          return {
-            options: fieldValueRefOptions.value,
-          }
-        },
-      },
-    ],
+    columns: inputColumns,
   },
   {
     templateType: 'VkfInputCollection',

@@ -7,7 +7,7 @@ import type { FieldWithValue } from '@vunk-x6/shared'
 import type { PropType } from 'vue'
 import type { NodeData } from './types'
 import { VkfForm } from '@vunk/form'
-import { fieldColumnMap, FieldType, useDynamicFieldValueColumn } from '@vunk-x6/components/register-node'
+import { fieldColumnMap, FieldType, useFieldInputCollectionColumns } from '@vunk-x6/components/register-node'
 import { OutputMode, outputModeOptions } from './const'
 
 type FormItem = __VkNodeDrawer.FormItem<keyof NodeData>
@@ -22,58 +22,11 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits({
+defineEmits({
   setData: (e: SetDataEvent) => e,
 })
 
-const { fieldValueColumn } = useDynamicFieldValueColumn(props.node)
-
-const outputColumns: ConlectionColumn[] = [
-  {
-    ...fieldColumnMap.name,
-    width: '120',
-  },
-  {
-    ...fieldColumnMap.type,
-    width: '120',
-    createTemplateProps (_, { prop }) {
-      const objectProp = prop.slice(0, -1)
-      return {
-        onChange: () => { // 类型改变时，清空值和子项
-          emit('setData', {
-            k: [objectProp, 'value'],
-            v: undefined,
-          })
-          emit('setData', {
-            k: [objectProp, 'children'],
-            v: undefined,
-          })
-        },
-      }
-    },
-  },
-  fieldValueColumn.value,
-  {
-    prop: 'children',
-    label: '子项',
-    templateType: 'VkfInputCollection',
-    expandVisible: true,
-    hidden: true,
-    templateProps: {
-      labelPosition: 'top',
-    },
-    createTemplateProps ({ row }) {
-      return {
-        columns: outputColumns,
-        templateIf: () => {
-          return row.type === FieldType.Object
-        },
-      }
-    },
-  },
-  fieldColumnMap.defaultValue,
-  fieldColumnMap.description,
-]
+const outputColumns = useFieldInputCollectionColumns(props.node)
 
 const formItems: FormItem[] = [
   {
