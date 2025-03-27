@@ -4,6 +4,9 @@ import { VkNode } from '@vunk-x6/components/node'
 import { VkRegisterEndNode } from '@vunk-x6/components/register-end-node'
 import { VkRegisterStartNode } from '@vunk-x6/components/register-start-node'
 import { VkSelection } from '@vunk-x6/components/selection'
+import { ref } from 'vue'
+
+const selectedNodes = ref([])
 </script>
 
 <template>
@@ -15,7 +18,9 @@ import { VkSelection } from '@vunk-x6/components/selection'
       <!-- 注册结束节点 -->
       <VkRegisterEndNode />
       <!-- 选中插件 -->
-      <VkSelection />
+      <VkSelection
+        v-model="selectedNodes"
+      />
 
       <!-- 实例化开始节点 -->
       <VkNode
