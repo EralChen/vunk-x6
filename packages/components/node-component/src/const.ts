@@ -38,8 +38,18 @@ export const defaultGroups = {
     },
   },
 
-  passiveBottom: {
+  activeBottom: {
     position: 'bottom',
+    attrs: {
+      circle: {
+        ...defaultAttrs.circle,
+        magnetRule: MagnetRule.active,
+      },
+    },
+  },
+
+  passiveTop: {
+    position: 'top',
     attrs: {
       circle: {
         ...defaultAttrs.circle,

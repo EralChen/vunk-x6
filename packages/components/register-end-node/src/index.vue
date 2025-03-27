@@ -45,7 +45,7 @@ export default defineComponent({
   setup () {
     const ports: PortManager.PortMetadata[] = [
       {
-        group: 'passiveLeft' as __VkNodeComponent.DefaultGroup,
+        group: 'passiveTop' as __VkNodeComponent.DefaultGroup,
         id: RegisterEndNodePort.input,
       },
     ]

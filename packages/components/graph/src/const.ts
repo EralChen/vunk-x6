@@ -19,7 +19,7 @@ export const defaultConnecting = {
   router: {
     name: 'er',
     args: {
-      direction: 'H',
+      direction: 'V',
     },
   },
 
