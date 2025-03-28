@@ -59,10 +59,13 @@ export default defineComponent({
 
 <template>
   <div class="vk-graph">
+    <slot name="before"></slot>
+
     <div
       v-bind="$attrs"
       ref="graphMainNode"
     ></div>
+
     <Emitter v-if="ready">
       <slot></slot>
     </Emitter>
@@ -70,6 +73,8 @@ export default defineComponent({
     <TeleportContainer
       v-if="hasTeleport"
     ></TeleportContainer>
+
+    <slot name="after"></slot>
   </div>
 </template>
 

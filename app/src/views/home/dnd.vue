@@ -23,15 +23,13 @@ const collapseValue = ref(['Basic'])
 
 <style>
 .home-page-dnd .el-collapse-item__header {
-  padding-left: var(--gap-m);
+  --el-collapse-header-height: initial;
+  padding: var(--gap-s) 0 var(--gap-s) var(--gap-m);
   white-space: nowrap;
 }
 
 .home-page-dnd .vk-dnd-item {
-  padding-left: var(--gap-m);
-  padding-top: var(--gap-xxs);
-  padding-bottom: var(--gap-xxs);
-
+  padding: var(--gap-xxs) 0 var(--gap-xxs) var(--gap-m);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -40,6 +38,6 @@ const collapseValue = ref(['Basic'])
   background-color: var(--el-color-primary-light-9);
 }
 .home-page-dnd .el-collapse-item__content {
-  padding-bottom: var(--gap-m);
+  padding-bottom: var(--gap-s);
 }
 </style>
