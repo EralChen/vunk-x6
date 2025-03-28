@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { VkStartAvatar } from '@vunk-x6/icons/start'
+
 defineProps({
   label: {
     type: String,
@@ -9,9 +11,10 @@ defineProps({
 
 <template>
   <div class="vk-register-start-node__title">
-    <img
-      src="https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-Start-v2.jpg"
-    />
+    <VkStartAvatar
+      :size="24"
+      color="var(--el-color-success)"
+    ></VkStartAvatar>
     <span>{{ label }}</span>
   </div>
 </template>
@@ -23,9 +26,8 @@ defineProps({
   display: flex;
   align-items: center;
 }
-.vk-register-start-node__title img{
-  width: 1em;
-  height: 1em;
+.vk-register-start-node__title .el-avatar {
+
   margin-right: 8px;
 }
 </style>

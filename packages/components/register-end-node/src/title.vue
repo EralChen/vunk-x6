@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { VkEndAvatar } from '@vunk-x6/icons/end'
+
 defineProps({
   label: {
     type: String,
@@ -9,7 +11,10 @@ defineProps({
 
 <template>
   <div class="vk-register-end-node-title">
-    <img src="https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-End-v2.jpg" />
+    <VkEndAvatar
+      :size="24"
+      color="var(--el-color-success)"
+    ></VkEndAvatar>
     <span>{{ label }}</span>
   </div>
 </template>
@@ -22,9 +27,7 @@ defineProps({
   font-weight: bold;
 }
 
-.vk-register-end-node-title img {
-  width: 1em;
-  height: 1em;
+.vk-register-end-node-title .el-avatar {
   margin-right: 8px;
 }
 </style>
