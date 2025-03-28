@@ -80,8 +80,9 @@ const ports: PortManager.PortMetadata[] = [
         <template #header>
           <div class="vk-register-llm-node__header">
             <VkLlmAvatar
-              color="white"
-              background="var(--el-color-primary)"
+              color="var(--el-color-black)"
+              :size="24"
+              background="var(--el-fill-color-darker)"
             ></VkLlmAvatar>
 
             <span>{{ data.label || '大模型' }}</span>
