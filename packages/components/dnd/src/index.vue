@@ -5,7 +5,6 @@ import type { Ref } from 'vue'
 import { Dnd } from '@antv/x6-plugin-dnd'
 import { VkRenderer } from '@vunk/core/components/renderer'
 import { Deferred } from '@vunk/core/shared/utils-promise'
-import { VkDndItem } from '@vunk-x6/components/dnd-item'
 import { VkTemplatesDefault } from '@vunk-x6/components/templates-default'
 import { useGraph } from '@vunk-x6/composables'
 import { defineComponent, markRaw, onBeforeUnmount, onMounted, provide, ref, shallowRef } from 'vue'
@@ -19,7 +18,6 @@ type NodeSourceItem = __VkTemplatesDefault.SourceItem & {
 export default defineComponent({
   name: 'VkDnd',
   components: {
-    VkDndItem,
     VkRenderer,
     VkTemplatesDefault,
   },
@@ -112,9 +110,7 @@ export default defineComponent({
 <template>
   <div ref="dndNodeRef" class="vk-dnd">
     <div v-if="ready" class="vk-dnd__content">
-      <VkDndItem shape="VkRegisterLlmNode">
-        大模型
-      </VkDndItem>
+      <slot></slot>
     </div>
 
     <VkRenderer :source="dndNodeSource">

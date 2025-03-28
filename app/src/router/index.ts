@@ -1,4 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router'
+import { SplitGrid } from '@/layouts/split-grid/index'
 import { createRouter, createWebHashHistory } from 'vue-router'
 
 export const routes: Array<RouteRecordRaw> = [
@@ -10,8 +11,15 @@ export const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/home',
-    name: 'home',
-    component: () => import('_v/home/index.vue'),
+    component: SplitGrid,
+    children: [
+      {
+        path: '',
+        name: 'home',
+        component: () => import('_v/home/index.vue'),
+      },
+    ],
+
   },
 ]
 

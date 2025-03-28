@@ -50,12 +50,12 @@ const formItems: FormItem[] = [
 
 const ports: PortManager.PortMetadata[] = [
   {
-    group: 'passiveLeft' as __VkNodeComponent.DefaultGroup,
+    group: 'passiveTop' as __VkNodeComponent.DefaultGroup,
     id: RegisterLlmNodePort.input,
 
   },
   {
-    group: 'activeRight' as __VkNodeComponent.DefaultGroup,
+    group: 'activeBottom' as __VkNodeComponent.DefaultGroup,
     id: RegisterLlmNodePort.output,
   },
 ]

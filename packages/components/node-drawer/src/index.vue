@@ -88,6 +88,7 @@ export default defineComponent({
     :close-on-press-escape="false"
     :size="size"
     :show-close="false"
+    :append-to="appendTo"
   >
     <!--    :append-to="appendTo" -->
     <template #header>
@@ -129,6 +130,11 @@ export default defineComponent({
 }
 .vk-node-drawer__modal > * {
   pointer-events: initial;
+}
+
+.vk-node-drawer {
+  box-shadow: none;
+  border-left: var(--el-border-color) solid 1px;
 }
 
 .vk-input-collection__expand-fieldset .el-form-item__label {
