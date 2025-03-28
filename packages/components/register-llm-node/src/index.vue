@@ -8,6 +8,7 @@ import { VkfInformation } from '@vunk/form'
 import { VkInformationTemplates } from '@vunk-x6/components/information-templates'
 import { VkNodeComponent } from '@vunk-x6/components/node-component'
 import { fieldInformationItem, fieldWithValueInformationItem } from '@vunk-x6/components/register-node'
+import { VkLlmAvatar } from '@vunk-x6/icons/llm'
 
 import { ElCard } from 'element-plus'
 import { watchEffect } from 'vue'
@@ -78,7 +79,11 @@ const ports: PortManager.PortMetadata[] = [
       <ElCard class="vk-register-llm-node" shadow="hover">
         <template #header>
           <div class="vk-register-llm-node__header">
-            <img src="https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-LLM-v2.jpg" />
+            <VkLlmAvatar
+              color="white"
+              background="var(--el-color-primary)"
+            ></VkLlmAvatar>
+
             <span>{{ data.label || '大模型' }}</span>
           </div>
         </template>
@@ -107,9 +112,7 @@ const ports: PortManager.PortMetadata[] = [
   align-items: center;
 }
 
-.vk-register-llm-node__header img {
-  width: 1em;
-  height: 1em;
+.vk-register-llm-node__header .el-avatar {
   margin-right: 8px;
 }
 

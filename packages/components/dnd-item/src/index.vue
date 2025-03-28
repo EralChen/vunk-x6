@@ -13,3 +13,10 @@ export default defineComponent({
     <slot></slot>
   </div>
 </template>
+
+<style>
+.vk-dnd-item {
+  display: flex;
+  align-items: center;
+}
+</style>

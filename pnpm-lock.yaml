@@ -35,6 +35,9 @@ importers:
       '@vunk-x6/composables':
         specifier: workspace:*
         version: link:packages/composables
+      '@vunk-x6/icons':
+        specifier: workspace:*
+        version: link:packages/icons
       '@vunk-x6/shared':
         specifier: workspace:*
         version: link:packages/shared
@@ -45,11 +48,11 @@ importers:
         specifier: 2.8.0
         version: 2.8.0
       '@vunk/plus':
-        specifier: ^0.2.0
-        version: 0.2.0
+        specifier: 1.2.0
+        version: 1.2.0
       '@vunk/shared':
-        specifier: ^0.5.49
-        version: 0.5.49
+        specifier: 0.5.56
+        version: 0.5.56
       '@vunk/skzz':
         specifier: 0.0.0-alpha.111
         version: 0.0.0-alpha.111
@@ -288,6 +291,8 @@ importers:
   packages/composables: {}
 
   packages/entry: {}
+
+  packages/icons: {}
 
   packages/shared:
     dependencies:
@@ -2736,11 +2741,11 @@ packages:
   '@vunk/gsap@0.0.0-alpha.3':
     resolution: {integrity: sha512-UTyP4VmeAoMY+eab/OhFyyXrd21W4zgQuV2px4r/5x8iox187yf3AH42zuI//ub+loVTgE74iu9MQasTJ8NdMw==}
 
-  '@vunk/plus@0.2.0':
-    resolution: {integrity: sha512-0xhteHuzJDNg0gAP5Cscqeoo1rygq9qJSQ9tUZWYxQz1+hLa0sLRtUzFUR++CMsvbykv6ZVIjmm6oQgQhNVyFQ==}
+  '@vunk/plus@1.2.0':
+    resolution: {integrity: sha512-gKfxG0VM8ybGiGqewfWURzzw4rsixO3bUfSmov4UpBdYNUBaiT2Hs46NeBTY0gy0MssFpWeAFspA4Y+UFmaQsQ==}
 
-  '@vunk/shared@0.5.49':
-    resolution: {integrity: sha512-E/sj3PXVFh0Z0jrgKgexZNYnGuzf1bv0WooxS+INhUz1m93uxBos/IyNWpgs8zxnQ29D7dL6qLaQlvt6A2K/bw==}
+  '@vunk/shared@0.5.56':
+    resolution: {integrity: sha512-O+LC3jicMcu0qtHjCdIlE02fEX6hPVMhSClzjiaaQoB9BC260XRFwhn2jtfPr+sBLo1GFrY7HG7wLjacV36gMw==}
 
   '@vunk/skzz@0.0.0-alpha.111':
     resolution: {integrity: sha512-Vk/47vffp+RsFXIN0qjdZ943YibHqMuv9SHzsSXGQImXY8p3EO4nJgdXvEyig4FaKZZhIGxNXsYAO9VC8wl3YA==}
@@ -9299,9 +9304,9 @@ snapshots:
 
   '@vunk/gsap@0.0.0-alpha.3': {}
 
-  '@vunk/plus@0.2.0': {}
+  '@vunk/plus@1.2.0': {}
 
-  '@vunk/shared@0.5.49': {}
+  '@vunk/shared@0.5.56': {}
 
   '@vunk/skzz@0.0.0-alpha.111': {}
 
