@@ -67,12 +67,12 @@ export default defineComponent({
     ></div>
 
     <Emitter v-if="ready">
+      <TeleportContainer
+        v-if="hasTeleport"
+      ></TeleportContainer>
+
       <slot></slot>
     </Emitter>
-
-    <TeleportContainer
-      v-if="hasTeleport"
-    ></TeleportContainer>
 
     <slot name="after"></slot>
   </div>

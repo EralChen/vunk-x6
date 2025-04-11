@@ -35,6 +35,11 @@ export function useSelection () {
   return selection
 }
 
+export function tryUseSelection () {
+  const selection = inject<Selection | null>('vk_selection', null)
+  return selection
+}
+
 export function useDnd () {
   const dnd = inject<Dnd | null>('vk_dnd', null)
   if (!dnd) {

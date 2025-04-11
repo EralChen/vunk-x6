@@ -7,8 +7,9 @@ import type { NodeData } from './types'
 import { setData } from '@vunk/core'
 import { VkfForm } from '@vunk/form'
 import { VkNodeDrawer } from '@vunk-x6/components/node-drawer'
+import { VkNodeHeader } from '@vunk-x6/components/node-header'
 import { fieldColumnMap } from '@vunk-x6/components/register-node'
-import Title from './title.vue'
+import { VkStartIcon } from '@vunk-x6/icons/start'
 
 type Keys = keyof NodeData
 type FormItem = __VkNodeDrawer.FormItem<Keys>
@@ -76,17 +77,21 @@ const formItems: FormItem[] = [
 
 <template>
   <VkNodeDrawer
+    class="vk-node-drawer"
     :model-value="modelValue"
     :shape="shape"
     @update:model-value="$emit('update:modelValue', $event)"
   >
-    <template #title="{ data }">
-      <Title
-        :label="data.label"
-      ></Title>
-    </template>
-    <template #description>
-      工作流的起始节点，用于设定启动工作流需要的信息
+    <template #header="{ data, node }">
+      <VkNodeHeader
+        :node="node"
+        :title="data.label"
+        description="工作流的起始节点，用于设定启动工作流需要的信息"
+      >
+        <template #icon>
+          <VkStartIcon color="var(--el-color-success)"></VkStartIcon>
+        </template>
+      </VkNodeHeader>
     </template>
 
     <template #default="{ data }">
@@ -102,3 +107,9 @@ const formItems: FormItem[] = [
     </template>
   </VkNodeDrawer>
 </template>
+
+<style>
+.vk-node-drawer .vk-node-header__title{
+  font-size: 1.2em;
+}
+</style>

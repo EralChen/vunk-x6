@@ -4,13 +4,14 @@ import type { __VkfInformation } from '@vunk/form'
 import { VkfInformation } from '@vunk/form'
 import { VkInformationTemplates } from '@vunk-x6/components/information-templates'
 import { VkNodeComponent } from '@vunk-x6/components/node-component'
+import { VkNodeHeader } from '@vunk-x6/components/node-header'
 import { defaultAttrs } from '@vunk-x6/components/port'
 import { fieldInformationItem } from '@vunk-x6/components/register-node'
+import { VkStartIcon } from '@vunk-x6/icons/start'
 import { ElCard } from 'element-plus'
 import { cloneDeep } from 'lodash-es'
 import { defaultData, RegisterStartNodePort } from './const'
 import Drawer from './drawer.vue'
-import Title from './title.vue'
 
 defineOptions({
   name: 'VkRegisterStartNode',
@@ -48,12 +49,17 @@ const ports: PortManager.PortMetadata[] = [
     :items="ports"
     :default-instance-data="nodeData"
   >
-    <template #default="{ data }">
+    <template #default="{ data, node }">
       <ElCard class="vk-register-start-node" shadow="hover">
         <template #header>
-          <Title
-            :label="data.label"
-          />
+          <VkNodeHeader
+            v-model:title="data.label"
+            :node="node"
+          >
+            <template #icon>
+              <VkStartIcon color="var(--el-color-success)"></VkStartIcon>
+            </template>
+          </VkNodeHeader>
         </template>
 
         <VkfInformation
@@ -78,6 +84,6 @@ const ports: PortManager.PortMetadata[] = [
 }
 
 .vk-register-start-node{
-  min-width: 350px;
+  min-width: 380px;
 }
 </style>

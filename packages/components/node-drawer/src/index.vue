@@ -8,14 +8,12 @@ import { useGraph } from '@vunk-x6/composables'
 import { ElDrawer } from 'element-plus'
 import { computed, defineComponent, onBeforeUnmount, shallowRef } from 'vue'
 import { emits, props } from './ctx'
-import CustomHeader from './custom-header.vue'
 import FormTemplates from './form-templates.vue'
 
 export default defineComponent({
   name: 'VkNodeDrawer',
   components: {
     ElDrawer,
-    CustomHeader,
     VkfTemplateInstancesProvider,
     FormTemplates,
   },
@@ -53,6 +51,7 @@ export default defineComponent({
     }
 
     // Computed slot args with reactive data
+
     const slotArgs = computed(() => ({
       node: currentNode.value ?? {},
       attrs: currentNode.value?.attrs ?? {},
@@ -88,24 +87,13 @@ export default defineComponent({
     :close-on-press-escape="false"
     :size="size"
     :show-close="false"
-    :append-to="appendTo"
+    :with-header="withHeader"
   >
     <!--    :append-to="appendTo" -->
     <template #header>
-      <slot name="header" v-bind="slotArgs">
-        <CustomHeader @close="modelValue = false">
-          <template #title>
-            <slot name="title" v-bind="slotArgs" />
-          </template>
-          <template #actions>
-            <slot name="actions" v-bind="slotArgs" />
-          </template>
-          <template #description>
-            <slot name="description" v-bind="slotArgs" />
-          </template>
-        </CustomHeader>
-      </slot>
+      <slot name="header" v-bind="slotArgs"></slot>
     </template>
+
     <VkfTemplateInstancesProvider>
       <FormTemplates></FormTemplates>
       <slot v-bind="slotArgs" />

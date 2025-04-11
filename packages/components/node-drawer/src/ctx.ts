@@ -14,6 +14,11 @@ export const props = {
     type: [String, Number] as PropType<string | number>,
     default: 550,
   },
+
+  withHeader: {
+    type: Boolean,
+    default: true,
+  },
 }
 
 export const emits = {
