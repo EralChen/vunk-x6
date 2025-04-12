@@ -10,14 +10,13 @@ export default defineComponent({
   emits,
   setup (props, { emit }) {
     const graph = useGraph()
+    const { graphEmitterOn } = useGraphEmitter()
 
     const theData = useModelComputed({
-      default: {},
+      default: props.node?.data ?? {},
       key: 'data',
     }, props, emit)
-
-    const { graphEmitterOn } = useGraphEmitter()
-    const node = graph.createNode({
+    const node = props.node ?? graph.createNode({
       id: props.id,
       shape: props.shape,
       label: props.label,
@@ -57,7 +56,10 @@ export default defineComponent({
       node.off('change:data', syncData)
     })
 
-    watch(() => [props.x, props.y], ([x, y]) => {
+    watch(() => [
+      props.x ?? node?.prop('position')?.x ?? 0,
+      props.y ?? node?.prop('position')?.y ?? 0,
+    ], ([x, y]) => {
       node.prop('position', {
         x,
         y,

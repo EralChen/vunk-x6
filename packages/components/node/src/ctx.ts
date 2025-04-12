@@ -1,6 +1,16 @@
+import type { Node } from '@antv/x6'
+import type { PropType } from 'vue'
 import type { ClickEvent, LoadEvent } from './types'
 
 export const props = {
+  /**
+   * 可基于已有 node 创建
+   */
+  node: {
+    type: Object as PropType<Node>,
+    default: undefined,
+  },
+
   id: {
     type: String,
     default: undefined,
@@ -24,11 +34,11 @@ export const props = {
   },
   x: {
     type: Number,
-    default: 0,
+    default: undefined,
   },
   y: {
     type: Number,
-    default: 0,
+    default: undefined,
   },
 
   data: {

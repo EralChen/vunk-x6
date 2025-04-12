@@ -1,8 +1,10 @@
 <script lang="ts">
+import type { Node } from '@antv/x6'
+import type { ElInput } from 'element-plus'
 import { Select } from '@element-plus/icons-vue'
+import { VkNode } from '@vunk-x6/components/node'
 import { useGraph } from '@vunk-x6/composables'
-import { type ElInput, valueEquals } from 'element-plus'
-import { computed, defineComponent, nextTick, onBeforeUnmount, ref } from 'vue'
+import { computed, defineComponent, nextTick, onBeforeUnmount, ref, shallowReactive } from 'vue'
 import ActionMore from './action-more.vue'
 import { emits, props } from './ctx'
 
@@ -10,7 +12,7 @@ export default defineComponent({
   name: 'VkNodeHeader',
   components: {
     ActionMore,
-
+    VkNode,
   },
   props,
   emits,
@@ -53,8 +55,21 @@ export default defineComponent({
         graph.removeCell(props.node.id)
       }
     }
-
     /* endof 删除节点 */
+
+    /* 复制节点 */
+    const clonedNodes = shallowReactive([]) as Node[]
+    function handleCopy () {
+      if (props.node) {
+        const nNode = props.node.clone()
+
+        // 左上角偏移
+        const { x, y } = nNode.position()
+        nNode.position(x + 40, y + 40)
+        clonedNodes.push(nNode)
+      }
+    }
+    /* endof 复制节点  */
 
     return {
       labelEditing,
@@ -64,6 +79,8 @@ export default defineComponent({
       handleLabelEditing,
       editDone,
       handleDelete,
+      handleCopy,
+      clonedNodes,
     }
   },
 })
@@ -96,6 +113,7 @@ export default defineComponent({
         <ActionMore
           @edit-pen="handleLabelEditing"
           @delete="handleDelete"
+          @copy="handleCopy"
         ></ActionMore>
       </div>
     </div>
@@ -107,6 +125,9 @@ export default defineComponent({
         {{ description }}
       </slot>
     </div>
+
+    <!-- copyed node -->
+    <VkNode v-for="node in clonedNodes" :key="node.id" :node="node"></VkNode>
   </div>
 </template>
 
