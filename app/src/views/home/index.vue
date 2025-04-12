@@ -1,9 +1,12 @@
 <script lang="ts" setup>
 import { SplitGridSidebar } from '@/layouts/split-grid'
+import { DocumentCopy } from '@element-plus/icons-vue'
+import { VkAvatar } from '@vunk/plus/components/avatar'
 import { VkGraph } from '@vunk-x6/components/graph'
 import Core from './core.vue'
 import Dnd from './dnd.vue'
 import Registers from './registers.vue'
+import Topbar from './topbar.vue'
 </script>
 
 <template>
@@ -15,7 +18,7 @@ import Registers from './registers.vue'
 
     <!-- 主视图 topbar -->
     <template #before>
-      <div>2311</div>
+      <Topbar />
     </template>
 
     <Registers></Registers>

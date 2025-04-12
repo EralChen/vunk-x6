@@ -22,8 +22,14 @@ const collapseValue = ref(['Basic'])
 </template>
 
 <style>
-.home-page-dnd .el-collapse-item__header {
+.home-page-dnd .el-collapse {
   --el-collapse-header-height: initial;
+  --el-collapse-border-color: transparent;
+  --el-collapse-header-font-size: initial;
+  --el-collapse-content-font-size: initial;
+}
+
+.home-page-dnd .el-collapse-item__header {
   padding: var(--gap-s) 0 var(--gap-s) var(--gap-m);
   white-space: nowrap;
 }

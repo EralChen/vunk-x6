@@ -84,6 +84,7 @@ export default defineComponent({
     :size="size"
     :show-close="false"
     :with-header="withHeader"
+    :append-to="appendTo"
   >
     <!--    :append-to="appendTo" -->
     <template #header>
@@ -134,7 +135,7 @@ export default defineComponent({
 
 .vk-node-drawer {
   box-shadow: none;
-  border-left: var(--el-border-color) solid 1px;
+  /* border-left: var(--el-border-color) solid 1px; */
 }
 
 .vk-input-collection__expand-fieldset .el-form-item__label {

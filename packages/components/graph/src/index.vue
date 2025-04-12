@@ -58,9 +58,8 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="vk-graph">
-    <slot name="before"></slot>
-
+  <slot name="before"></slot>
+  <div class="vk-graph" v-bind="$attrs">
     <div
       v-bind="$attrs"
       ref="graphMainNode"
@@ -73,9 +72,8 @@ export default defineComponent({
 
       <slot></slot>
     </Emitter>
-
-    <slot name="after"></slot>
   </div>
+  <slot name="after"></slot>
 </template>
 
 <style>
