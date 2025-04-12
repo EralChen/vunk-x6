@@ -4,9 +4,9 @@ import { useModelComputed } from '@vunk/core/composables'
 import { VkfTemplateInstancesProvider } from '@vunk/form/components/template-instances-provider'
 
 import { useNodeData } from '@vunk-x6/components/node'
-import { useGraph } from '@vunk-x6/composables'
+import { useGraph, useGraphEmitter } from '@vunk-x6/composables'
 import { ElDrawer } from 'element-plus'
-import { computed, defineComponent, onBeforeUnmount, shallowRef } from 'vue'
+import { computed, defineComponent, shallowRef } from 'vue'
 import { emits, props } from './ctx'
 import FormTemplates from './form-templates.vue'
 
@@ -21,6 +21,7 @@ export default defineComponent({
   emits,
   setup (props, { emit }) {
     const graph = useGraph()
+    const { graphEmitterOn } = useGraphEmitter()
     const appendTo = graph.container.parentElement as HTMLDivElement
 
     const modelValue = useModelComputed({
@@ -31,27 +32,7 @@ export default defineComponent({
     const currentNode = shallowRef<Cell>()
     const { nodeData } = useNodeData(currentNode)
 
-    function onSelectionChanged () {
-      if (!graph.getSelectedCells)
-        return
-
-      const selectedCells = graph.getSelectedCells()
-      const last = selectedCells.at(-1)
-
-      // Update model value based on shape
-      modelValue.value = last?.shape === props.shape
-
-      // Track current node and update data
-      if (last?.shape === props.shape && last) {
-        currentNode.value = last
-      }
-      else {
-        currentNode.value = undefined
-      }
-    }
-
     // Computed slot args with reactive data
-
     const slotArgs = computed(() => ({
       node: currentNode.value ?? {},
       attrs: currentNode.value?.attrs ?? {},
@@ -59,13 +40,21 @@ export default defineComponent({
       data: nodeData.value,
     }))
 
-    graph.on('selection:changed', onSelectionChanged)
-    graph.on('node:click', onSelectionChanged)
-
-    // Cleanup event listeners on unmount
-    onBeforeUnmount(() => {
-      graph.off('selection:changed', onSelectionChanged)
-      graph.off('node:click', onSelectionChanged)
+    // graph.on('selection:changed', onSelectionChanged)
+    graphEmitterOn('node:click', ({ node }) => {
+      // 当前点击的节点是不是该 drawer 对应的shape
+      if (node.shape === props.shape) {
+        currentNode.value = node
+        modelValue.value = true
+      }
+      else {
+        currentNode.value = undefined
+        modelValue.value = false
+      }
+    })
+    graphEmitterOn('blank:click', () => {
+      currentNode.value = undefined
+      modelValue.value = false
     })
 
     return {

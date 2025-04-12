@@ -1,9 +1,10 @@
 <script lang="ts">
 import type { Node } from '@antv/x6'
 import type { ElInput } from 'element-plus'
+import type { Ref } from 'vue'
 import { Select } from '@element-plus/icons-vue'
 import { VkNode } from '@vunk-x6/components/node'
-import { useGraph } from '@vunk-x6/composables'
+import { useGraph, useGraphEmitter } from '@vunk-x6/composables'
 import { computed, defineComponent, nextTick, onBeforeUnmount, ref, shallowReactive } from 'vue'
 import ActionMore from './action-more.vue'
 import { emits, props } from './ctx'
@@ -18,6 +19,8 @@ export default defineComponent({
   emits,
   setup (props, { emit }) {
     const graph = useGraph()
+    const { graphEmitterOn } = useGraphEmitter()
+    const actionsRef = ref() as Ref<HTMLDivElement>
 
     /* label 修改 */
     const labelEditing = ref(false)
@@ -71,6 +74,20 @@ export default defineComponent({
     }
     /* endof 复制节点  */
 
+    /* 阻止 actions 冒泡 */
+
+    graphEmitterOn('node:mouseup', ({ e }) => {
+      const path = e.originalEvent.composedPath()
+      if (
+        path.includes(actionsRef.value)
+        || path.includes(labelInputRef.value?.$el)
+      ) {
+        e.stopPropagation()
+      }
+    })
+
+    /* endof 阻止 actions 冒泡 */
+
     return {
       labelEditing,
       Select,
@@ -81,6 +98,7 @@ export default defineComponent({
       handleDelete,
       handleCopy,
       clonedNodes,
+      actionsRef,
     }
   },
 })
@@ -108,7 +126,7 @@ export default defineComponent({
           <span v-else>{{ theTitle }}</span>
         </div>
       </slot>
-      <div class="vk-node-header__actions">
+      <div ref="actionsRef" class="vk-node-header__actions">
         <slot name="actions" />
         <ActionMore
           @edit-pen="handleLabelEditing"

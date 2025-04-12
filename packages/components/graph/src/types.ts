@@ -14,6 +14,8 @@ export interface GraphEvents {
   'node:click': EventArgs['node:click']
   'node:mousedown': EventArgs['node:mousedown']
   'selection:changed': EventArgs['selection:changed']
+  'blank:click': EventArgs['blank:click']
+  'node:mouseup': EventArgs['node:mouseup']
   [key: string | symbol]: any
 }
 export type GraphEmitter = Emitter<GraphEvents>
