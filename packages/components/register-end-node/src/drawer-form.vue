@@ -3,15 +3,13 @@ import type { Node } from '@antv/x6'
 import type { SetDataEvent } from '@vunk/core'
 import type { __VkfInputCollection } from '@vunk/form/components/input-collection'
 import type { __VkNodeDrawer } from '@vunk-x6/components/node-drawer'
-import type { FieldWithValue } from '@vunk-x6/shared'
 import type { PropType } from 'vue'
 import type { NodeData } from './types'
 import { VkfForm } from '@vunk/form'
-import { fieldColumnMap, FieldType, useFieldInputCollectionColumns } from '@vunk-x6/components/register-node'
+import { useFieldInputCollectionColumns } from '@vunk-x6/components/register-node'
 import { OutputMode, outputModeOptions } from './const'
 
 type FormItem = __VkNodeDrawer.FormItem<keyof NodeData>
-type ConlectionColumn = __VkNodeDrawer.InputCollectionColumn<FieldWithValue>
 
 const props = defineProps({
   data: null,

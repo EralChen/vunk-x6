@@ -1,9 +1,12 @@
 <script lang="ts">
-import type { Cell } from '@antv/x6'
+import type { Node } from '@antv/x6'
+import { Close } from '@element-plus/icons-vue'
 import { useModelComputed } from '@vunk/core/composables'
-import { VkfTemplateInstancesProvider } from '@vunk/form/components/template-instances-provider'
 
+import { VkfTemplateInstancesProvider } from '@vunk/form/components/template-instances-provider'
+import { VkAvatar } from '@vunk/plus/components/avatar'
 import { useNodeData } from '@vunk-x6/components/node'
+import { VkNodeHeader } from '@vunk-x6/components/node-header'
 import { useGraph, useGraphEmitter } from '@vunk-x6/composables'
 import { ElDrawer } from 'element-plus'
 import { computed, defineComponent, shallowRef } from 'vue'
@@ -16,6 +19,8 @@ export default defineComponent({
     ElDrawer,
     VkfTemplateInstancesProvider,
     FormTemplates,
+    VkNodeHeader,
+    VkAvatar,
   },
   props,
   emits,
@@ -29,7 +34,7 @@ export default defineComponent({
       default: false,
     }, props, emit)
 
-    const currentNode = shallowRef<Cell>()
+    const currentNode = shallowRef<Node>()
     const { nodeData } = useNodeData(currentNode)
 
     // Computed slot args with reactive data
@@ -61,6 +66,8 @@ export default defineComponent({
       modelValue,
       appendTo,
       slotArgs,
+      currentNode,
+      Close,
     }
   },
 })
@@ -80,7 +87,23 @@ export default defineComponent({
   >
     <!--    :append-to="appendTo" -->
     <template #header>
-      <slot name="header" v-bind="slotArgs"></slot>
+      <VkNodeHeader
+        :title="currentNode?.data.label"
+        :node="currentNode"
+        :description="description"
+        @update:title="currentNode && (currentNode.data.label = $event)"
+        @action:delete="modelValue = false"
+      >
+        <template #icon>
+          <slot name="header_icon"></slot>
+        </template>
+        <template #actions_after>
+          <VkAvatar
+            :icon="Close"
+            @click="modelValue = false"
+          ></VkAvatar>
+        </template>
+      </VkNodeHeader>
     </template>
 
     <VkfTemplateInstancesProvider>

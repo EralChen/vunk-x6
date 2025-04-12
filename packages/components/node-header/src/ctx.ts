@@ -18,4 +18,5 @@ export const props = {
 
 export const emits = {
   'update:title': null,
+  'action:delete': null,
 }

@@ -19,6 +19,12 @@ export const props = {
     type: Boolean,
     default: true,
   },
+
+  description: {
+    type: String,
+    default: '',
+  },
+
 }
 
 export const emits = {

@@ -7,7 +7,7 @@ import type OpenAI from 'openai'
 import type { PropType } from 'vue'
 import type { NodeData } from './types'
 import { VkfForm } from '@vunk/form'
-import { fieldColumnMap, useFieldInputCollectionColumns, useFieldValueRefOpitons } from '@vunk-x6/components/register-node'
+import { fieldColumnMap, useFieldInputCollectionColumns } from '@vunk-x6/components/register-node'
 import { onMounted, ref } from 'vue'
 
 type FormItem = __VkNodeDrawer.FormItem<keyof NodeData>
@@ -19,11 +19,7 @@ const props = defineProps({
   },
   client: {
     type: Object as PropType<OpenAI>,
-    required: true,
-  },
-  apiKey: {
-    type: String,
-    required: true,
+    required: false,
   },
 })
 
@@ -36,6 +32,9 @@ const inputColumns = useFieldInputCollectionColumns(props.node)
 const modelList = ref<Media[]>([])
 
 onMounted(async () => {
+  if (!props.client) {
+    return
+  }
   try {
     const models = await props.client.models.list()
     modelList.value = models.data.map(model => ({

@@ -56,6 +56,7 @@ export default defineComponent({
     function handleDelete () {
       if (props.node) {
         graph.removeCell(props.node.id)
+        emit('action:delete', props.node)
       }
     }
     /* endof 删除节点 */
@@ -75,7 +76,6 @@ export default defineComponent({
     /* endof 复制节点  */
 
     /* 阻止 actions 冒泡 */
-
     graphEmitterOn('node:mouseup', ({ e }) => {
       const path = e.originalEvent.composedPath()
       if (
@@ -85,7 +85,6 @@ export default defineComponent({
         e.stopPropagation()
       }
     })
-
     /* endof 阻止 actions 冒泡 */
 
     return {
@@ -127,12 +126,13 @@ export default defineComponent({
         </div>
       </slot>
       <div ref="actionsRef" class="vk-node-header__actions">
-        <slot name="actions" />
+        <slot name="actions_before" />
         <ActionMore
           @edit-pen="handleLabelEditing"
           @delete="handleDelete"
           @copy="handleCopy"
         ></ActionMore>
+        <slot name="actions_after" />
       </div>
     </div>
     <div

@@ -3,18 +3,18 @@ import type { PortManager } from '@antv/x6/es/model/port'
 import type { __VkfInformation } from '@vunk/form'
 import type { __VkNodeComponent } from '@vunk-x6/components/node-component'
 import type { NodeData } from './types'
+import { setData } from '@vunk/core'
+
 import { VkfInformation } from '@vunk/form'
-
 import { VkInformationTemplates } from '@vunk-x6/components/information-templates'
-import { VkNodeComponent } from '@vunk-x6/components/node-component'
-import { fieldInformationItem, fieldWithValueInformationItem } from '@vunk-x6/components/register-node'
-import { VkLlmAvatar } from '@vunk-x6/icons/llm'
+import { VkNodeCard } from '@vunk-x6/components/node-card'
 
-import { ElCard } from 'element-plus'
+import { fieldInformationItem, fieldWithValueInformationItem } from '@vunk-x6/components/register-node'
+import { VkLlmIcon } from '@vunk-x6/icons/llm'
 import { watchEffect } from 'vue'
 import { defaultData, RegisterLlmNodePort } from './const'
 import { props as dProps } from './ctx'
-import Drawer from './drawer.vue'
+import DrawerForm from './drawer-form.vue'
 
 defineOptions({
   name: 'VkRegisterLlmNode',
@@ -27,9 +27,9 @@ watchEffect(() => {
   props.client.apiKey = props.apiKey
 })
 
-type FormItem = __VkfInformation.FormItem<keyof NodeData>
+type CardFormItem = __VkfInformation.FormItem<keyof NodeData>
 
-const formItems: FormItem[] = [
+const cardFormItems: CardFormItem[] = [
   {
     templateType: 'VkfSelect',
     label: '模型',
@@ -63,61 +63,29 @@ const ports: PortManager.PortMetadata[] = [
 </script>
 
 <template>
-  <Drawer
+  <VkNodeCard
     shape="VkRegisterLlmNode"
-    :client="props.client"
-    :api-key="props.apiKey"
-  />
-
-  <VkNodeComponent
-    shape="VkRegisterLlmNode"
-    :auto-size="true"
-    :items="ports"
-    :default-instance-data="defaultData"
+    :default-data="defaultData"
+    :ports="ports"
+    description=" 大模型节点，用于配置模型参数和输入输出"
   >
-    <template #default="{ data }">
-      <ElCard class="vk-register-llm-node" shadow="hover">
-        <template #header>
-          <div class="vk-register-llm-node__header">
-            <VkLlmAvatar
-              color="var(--el-color-black)"
-              :size="24"
-              background="var(--el-fill-color-darker)"
-            ></VkLlmAvatar>
-
-            <span>{{ data.label || '大模型' }}</span>
-          </div>
-        </template>
-
-        <VkfInformation
-          :data="data"
-          :form-items="formItems"
-        >
-          <VkInformationTemplates />
-        </VkfInformation>
-      </ElCard>
+    <template #icon>
+      <VkLlmIcon></VkLlmIcon>
     </template>
-  </VkNodeComponent>
+    <template #default="{ data }">
+      <VkfInformation
+        :data="data"
+        :form-items="cardFormItems"
+      >
+        <VkInformationTemplates />
+      </VkfInformation>
+    </template>
+    <template #drawer="{ data, node }">
+      <DrawerForm
+        :node="node"
+        :data="data"
+        @set-data="setData(data, $event)"
+      ></DrawerForm>
+    </template>
+  </VkNodeCard>
 </template>
-
-<style>
-.vk-register-llm-node {
-  --el-card-padding: 12px;
-  --el-card-border-color: var(--el-color-primary-light-5);
-}
-
-.vk-register-llm-node__header {
-  font-size: 1.2em;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-}
-
-.vk-register-llm-node__header .el-avatar {
-  margin-right: 8px;
-}
-
-.vk-register-llm-node {
-  min-width: 300px;
-}
-</style>

@@ -1,22 +1,29 @@
-<script lang="ts">
+<script lang="ts" setup>
 import type { PortManager } from '@antv/x6/es/model/port'
 import type { __VkfInformation } from '@vunk/form'
 import type { __VkNodeComponent } from '@vunk-x6/components/node-component'
 import type { NodeData } from './types'
+import { setData } from '@vunk/core'
 import { VkfInformation } from '@vunk/form'
 import { VkInformationTemplates } from '@vunk-x6/components/information-templates'
-import { VkNodeComponent } from '@vunk-x6/components/node-component'
+import { VkNodeCard } from '@vunk-x6/components/node-card'
 import { fieldWithValueInformationItem } from '@vunk-x6/components/register-node'
-import { ElCard } from 'element-plus'
-import { defineComponent } from 'vue'
+import { VkEndIcon } from '@vunk-x6/icons/end'
+
 import { defaultData, outputModeOptions, RegisterEndNodePort } from './const'
-import { emits, props } from './ctx'
-import Drawer from './drawer.vue'
-import TitleModule from './title.vue'
+import DrawerForm from './drawer-form.vue'
+// import { emits as dEmits, props as dProps } from './ctx'
 
 type FormItem = __VkfInformation.FormItem<keyof NodeData>
 
-const formItems: FormItem[] = [
+defineOptions({
+  name: 'VkRegisterEndNode',
+})
+
+// defineProps(dProps)
+// defineEmits(dEmits)
+
+const cardFormItems: FormItem[] = [
   {
     ...fieldWithValueInformationItem,
     label: '输出',
@@ -30,61 +37,43 @@ const formItems: FormItem[] = [
   },
 ]
 
-export default defineComponent({
-  name: 'VkRegisterEndNode',
-  components: {
-    VkfInformation,
-    VkInformationTemplates,
-    ElCard,
-    VkNodeComponent,
-    Drawer,
-    TitleModule,
+const ports: PortManager.PortMetadata[] = [
+  {
+    group: 'passiveTop' as __VkNodeComponent.DefaultGroup,
+    id: RegisterEndNodePort.input,
   },
-  props,
-  emits,
-  setup () {
-    const ports: PortManager.PortMetadata[] = [
-      {
-        group: 'passiveTop' as __VkNodeComponent.DefaultGroup,
-        id: RegisterEndNodePort.input,
-      },
-    ]
-
-    return {
-      formItems,
-      ports,
-      defaultData,
-    }
-  },
-})
+]
 </script>
 
 <template>
-  <Drawer shape="VkRegisterEndNode" />
-  <VkNodeComponent
+  <VkNodeCard
     shape="VkRegisterEndNode"
-    :auto-size="true"
-    :items="ports"
-    :default-instance-data="defaultData"
+    :ports="ports"
+    :default-data="defaultData"
+    description="工作流的结束节点，用于设定最终输出的文本模板"
   >
-    <template #default="{ data }">
-      <ElCard class="vk-register-end-node" shadow="hover">
-        <template #header>
-          <TitleModule
-            :label="data.label"
-          ></TitleModule>
-        </template>
-
-        <VkfInformation
-          :data="data"
-          :form-items="formItems"
-          @update:data="$emit('update:data', $event)"
-        >
-          <VkInformationTemplates />
-        </VkfInformation>
-      </ElCard>
+    <template #icon>
+      <VkEndIcon color="var(--el-color-danger)"></VkEndIcon>
     </template>
-  </VkNodeComponent>
+
+    <template #default="{ data }">
+      <VkfInformation
+        :data="data"
+        :form-items="cardFormItems"
+      >
+        <VkInformationTemplates />
+      </VkfInformation>
+    </template>
+
+    <template #drawer="{ data, node }">
+      <DrawerForm
+        :data="data"
+        :node="node"
+        @set-data="setData(data, $event)"
+      >
+      </DrawerForm>
+    </template>
+  </VkNodeCard>
 </template>
 
 <style>
