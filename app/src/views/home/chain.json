@@ -1,0 +1,458 @@
+{
+  "cells": [
+    {
+      "shape": "edge",
+      "id": "abaf4751-04b2-4f8d-99d1-c8a0f8f47c23",
+      "source": {
+        "cell": "1e7ee85c-b409-4a31-a1ae-d212bd3f3e5b",
+        "port": "start_node_port_output"
+      },
+      "target": {
+        "cell": "6f0e173e-e34e-4737-9ff8-29257ec92e2c",
+        "port": "llm_node_port_input"
+      },
+      "zIndex": 4
+    },
+    {
+      "shape": "edge",
+      "id": "9d41a028-aabb-4766-ab2d-f76a7c2211cd",
+      "source": {
+        "cell": "6f0e173e-e34e-4737-9ff8-29257ec92e2c",
+        "port": "llm_node_port_output"
+      },
+      "target": {
+        "cell": "a1be383a-8f29-4467-88bd-c1cca7eecbd1",
+        "port": "input"
+      },
+      "zIndex": 5
+    },
+    {
+      "position": {
+        "x": 100,
+        "y": 300
+      },
+      "size": {
+        "width": 380,
+        "height": 119
+      },
+      "view": "vue-shape-view",
+      "shape": "VkRegisterStartNode",
+      "data": {
+        "label": "开始",
+        "input": [
+          {
+            "name": "USER_INPUT",
+            "type": "String",
+            "defaultValue": "",
+            "description": "用户输入",
+            "label": "USER_INPUT"
+          },
+          {
+            "name": "CONVERSATION_NAME",
+            "type": "String",
+            "defaultValue": "DEFAULT",
+            "description": "本次请求绑定的会话，会自动写入消息、会从该会话读对话历史。",
+            "label": "CONVERSATION_NAME"
+          }
+        ]
+      },
+      "ports": {
+        "groups": {
+          "top": {
+            "position": "top",
+            "attrs": {
+              "r": 8,
+              "stroke": "#2B65FF",
+              "fill": "#fff",
+              "magnet": true
+            }
+          },
+          "right": {
+            "position": "right",
+            "attrs": {
+              "r": 8,
+              "stroke": "#2B65FF",
+              "fill": "#fff",
+              "magnet": true
+            }
+          },
+          "bottom": {
+            "position": "bottom",
+            "attrs": {
+              "r": 8,
+              "stroke": "#2B65FF",
+              "fill": "#fff",
+              "magnet": true
+            }
+          },
+          "left": {
+            "position": "left",
+            "attrs": {
+              "r": 8,
+              "stroke": "#2B65FF",
+              "fill": "#fff",
+              "magnet": true
+            }
+          },
+          "activeTop": {
+            "position": "top",
+            "attrs": {
+              "circle": {
+                "r": 8,
+                "stroke": "#2B65FF",
+                "fill": "#fff",
+                "magnet": true,
+                "magnetRule": "active"
+              }
+            }
+          },
+          "activeRight": {
+            "position": "right",
+            "attrs": {
+              "circle": {
+                "r": 8,
+                "stroke": "#2B65FF",
+                "fill": "#fff",
+                "magnet": true,
+                "magnetRule": "active"
+              }
+            }
+          },
+          "activeBottom": {
+            "position": "bottom",
+            "attrs": {
+              "circle": {
+                "r": 8,
+                "stroke": "#2B65FF",
+                "fill": "#fff",
+                "magnet": true,
+                "magnetRule": "active"
+              }
+            }
+          },
+          "passiveTop": {
+            "position": "top",
+            "attrs": {
+              "circle": {
+                "r": 8,
+                "stroke": "#2B65FF",
+                "fill": "#fff",
+                "magnet": true,
+                "magnetRule": "passive"
+              }
+            }
+          },
+          "passiveLeft": {
+            "position": "left",
+            "attrs": {
+              "circle": {
+                "r": 8,
+                "stroke": "#2B65FF",
+                "fill": "#fff",
+                "magnet": true,
+                "magnetRule": "passive"
+              }
+            }
+          }
+        },
+        "items": [
+          {
+            "group": "activeBottom",
+            "id": "start_node_port_output",
+            "attrs": {
+              "circle": {
+                "r": 8,
+                "stroke": "#2B65FF",
+                "fill": "#fff",
+                "magnet": true,
+                "magnetRule": "active"
+              }
+            }
+          }
+        ]
+      },
+      "id": "1e7ee85c-b409-4a31-a1ae-d212bd3f3e5b",
+      "zIndex": 17
+    },
+    {
+      "position": {
+        "x": 100,
+        "y": 610
+      },
+      "size": {
+        "width": 380,
+        "height": 183
+      },
+      "view": "vue-shape-view",
+      "shape": "VkRegisterLlmNode",
+      "data": {
+        "label": "大模型",
+        "output": [
+          {
+            "name": "output",
+            "type": "String",
+            "label": "output"
+          }
+        ],
+        "modelId": "gpt-3.5-turbo",
+        "input": [
+          {
+            "name": "input",
+            "type": "Reference",
+            "value": [
+              "1e7ee85c-b409-4a31-a1ae-d212bd3f3e5b",
+              "USER_INPUT"
+            ]
+          }
+        ]
+      },
+      "ports": {
+        "groups": {
+          "top": {
+            "position": "top",
+            "attrs": {
+              "r": 8,
+              "stroke": "#2B65FF",
+              "fill": "#fff",
+              "magnet": true
+            }
+          },
+          "right": {
+            "position": "right",
+            "attrs": {
+              "r": 8,
+              "stroke": "#2B65FF",
+              "fill": "#fff",
+              "magnet": true
+            }
+          },
+          "bottom": {
+            "position": "bottom",
+            "attrs": {
+              "r": 8,
+              "stroke": "#2B65FF",
+              "fill": "#fff",
+              "magnet": true
+            }
+          },
+          "left": {
+            "position": "left",
+            "attrs": {
+              "r": 8,
+              "stroke": "#2B65FF",
+              "fill": "#fff",
+              "magnet": true
+            }
+          },
+          "activeTop": {
+            "position": "top",
+            "attrs": {
+              "circle": {
+                "r": 8,
+                "stroke": "#2B65FF",
+                "fill": "#fff",
+                "magnet": true,
+                "magnetRule": "active"
+              }
+            }
+          },
+          "activeRight": {
+            "position": "right",
+            "attrs": {
+              "circle": {
+                "r": 8,
+                "stroke": "#2B65FF",
+                "fill": "#fff",
+                "magnet": true,
+                "magnetRule": "active"
+              }
+            }
+          },
+          "activeBottom": {
+            "position": "bottom",
+            "attrs": {
+              "circle": {
+                "r": 8,
+                "stroke": "#2B65FF",
+                "fill": "#fff",
+                "magnet": true,
+                "magnetRule": "active"
+              }
+            }
+          },
+          "passiveTop": {
+            "position": "top",
+            "attrs": {
+              "circle": {
+                "r": 8,
+                "stroke": "#2B65FF",
+                "fill": "#fff",
+                "magnet": true,
+                "magnetRule": "passive"
+              }
+            }
+          },
+          "passiveLeft": {
+            "position": "left",
+            "attrs": {
+              "circle": {
+                "r": 8,
+                "stroke": "#2B65FF",
+                "fill": "#fff",
+                "magnet": true,
+                "magnetRule": "passive"
+              }
+            }
+          }
+        },
+        "items": [
+          {
+            "group": "passiveTop",
+            "id": "llm_node_port_input"
+          },
+          {
+            "group": "activeBottom",
+            "id": "llm_node_port_output"
+          }
+        ]
+      },
+      "id": "6f0e173e-e34e-4737-9ff8-29257ec92e2c",
+      "zIndex": 18
+    },
+    {
+      "position": {
+        "x": 100,
+        "y": 1000
+      },
+      "size": {
+        "width": 380,
+        "height": 151
+      },
+      "view": "vue-shape-view",
+      "shape": "VkRegisterEndNode",
+      "data": {
+        "label": "结束",
+        "output": [
+          {
+            "name": "output",
+            "type": "Reference",
+            "value": [
+              "6f0e173e-e34e-4737-9ff8-29257ec92e2c",
+              "output"
+            ]
+          }
+        ],
+        "outputMode": "returnText",
+        "textTemplate": "{{output}}"
+      },
+      "ports": {
+        "groups": {
+          "top": {
+            "position": "top",
+            "attrs": {
+              "r": 8,
+              "stroke": "#2B65FF",
+              "fill": "#fff",
+              "magnet": true
+            }
+          },
+          "right": {
+            "position": "right",
+            "attrs": {
+              "r": 8,
+              "stroke": "#2B65FF",
+              "fill": "#fff",
+              "magnet": true
+            }
+          },
+          "bottom": {
+            "position": "bottom",
+            "attrs": {
+              "r": 8,
+              "stroke": "#2B65FF",
+              "fill": "#fff",
+              "magnet": true
+            }
+          },
+          "left": {
+            "position": "left",
+            "attrs": {
+              "r": 8,
+              "stroke": "#2B65FF",
+              "fill": "#fff",
+              "magnet": true
+            }
+          },
+          "activeTop": {
+            "position": "top",
+            "attrs": {
+              "circle": {
+                "r": 8,
+                "stroke": "#2B65FF",
+                "fill": "#fff",
+                "magnet": true,
+                "magnetRule": "active"
+              }
+            }
+          },
+          "activeRight": {
+            "position": "right",
+            "attrs": {
+              "circle": {
+                "r": 8,
+                "stroke": "#2B65FF",
+                "fill": "#fff",
+                "magnet": true,
+                "magnetRule": "active"
+              }
+            }
+          },
+          "activeBottom": {
+            "position": "bottom",
+            "attrs": {
+              "circle": {
+                "r": 8,
+                "stroke": "#2B65FF",
+                "fill": "#fff",
+                "magnet": true,
+                "magnetRule": "active"
+              }
+            }
+          },
+          "passiveTop": {
+            "position": "top",
+            "attrs": {
+              "circle": {
+                "r": 8,
+                "stroke": "#2B65FF",
+                "fill": "#fff",
+                "magnet": true,
+                "magnetRule": "passive"
+              }
+            }
+          },
+          "passiveLeft": {
+            "position": "left",
+            "attrs": {
+              "circle": {
+                "r": 8,
+                "stroke": "#2B65FF",
+                "fill": "#fff",
+                "magnet": true,
+                "magnetRule": "passive"
+              }
+            }
+          }
+        },
+        "items": [
+          {
+            "group": "passiveTop",
+            "id": "input"
+          }
+        ]
+      },
+      "id": "a1be383a-8f29-4467-88bd-c1cca7eecbd1",
+      "zIndex": 19
+    }
+  ]
+}

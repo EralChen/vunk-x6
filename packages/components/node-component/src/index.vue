@@ -1,9 +1,12 @@
 <script lang="tsx">
+import type { Node } from '@antv/x6'
 import { Graph } from '@antv/x6'
 import { register } from '@antv/x6-vue-shape'
 import { useResizeObserver } from '@vueuse/core'
-import { useNodeData } from '@vunk-x6/components/node'
-import { defineComponent, onBeforeUnmount, onUnmounted, ref } from 'vue'
+import { isEmptyObject } from '@vunk/shared/object'
+import { useGraphEmitter } from '@vunk-x6/composables'
+import { cloneDeep } from 'lodash-es'
+import { defineComponent, onBeforeUnmount, onUnmounted, ref, watchEffect } from 'vue'
 import { emits, props } from './ctx'
 
 export default defineComponent({
@@ -18,11 +21,38 @@ export default defineComponent({
           node: null,
           graph: null,
         },
-        setup (nodeProps) {
-          const { nodeData } = useNodeData(
-            nodeProps.node,
-            props.defaultInstanceData,
-          )
+        setup (nodeProps: { node: Node, graph: Graph }) {
+          const { graphEmitterOn } = useGraphEmitter()
+
+          const initData = (function () {
+            let data = nodeProps.node.getData()
+            if (!data || isEmptyObject(data)) {
+              data = props.defaultInstanceData ?? {}
+            }
+            return cloneDeep(data)
+          })()
+
+          const theData = ref(initData)
+
+          watchEffect(() => {
+            nodeProps.node.setData(theData.value, {
+              overwrite: true,
+            })
+          })
+          /* 当 node.data 改变时, 同步到响应式数据 */
+          watchEffect(() => {
+            nodeProps.node.setData(theData.value, {
+              overwrite: true,
+            })
+          })
+          const syncData = () => {
+            theData.value = nodeProps.node.getData()
+          }
+          nodeProps.node.on('change:data', syncData)
+          onBeforeUnmount(() => {
+            nodeProps.node.off('change:data', syncData)
+          })
+          /* endof 当 node.data 改变时, 同步到响应式数据 */
 
           const graph = nodeProps.graph
           const isActive = ref(false)
@@ -35,12 +65,19 @@ export default defineComponent({
             graph.off('selection:changed', handleActive)
           })
 
+          graphEmitterOn('node:mousedown', (event) => {
+            // 点击时将节点提升到最上层
+            if (event.node.id === nodeProps.node.id) {
+              nodeProps.node.toFront()
+            }
+          })
+
           const renderSlot = () => {
             return slots.default?.({
               node: nodeProps.node,
               attrs: nodeProps.node.attrs,
               graph: nodeProps.graph,
-              data: nodeData.value,
+              data: theData.value,
               isActive: isActive.value,
             })
           }

@@ -40,12 +40,6 @@ export const props = {
     type: Number,
     default: undefined,
   },
-
-  data: {
-    type: Object,
-    default: undefined,
-  },
-
   orphan: {
     type: Boolean,
     default: false,
@@ -57,5 +51,4 @@ export const emits = {
   'load': (e: LoadEvent) => e,
   'click': (e: ClickEvent) => e,
   'update:orphan': null,
-  'update:data': null,
 }

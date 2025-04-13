@@ -1,8 +1,12 @@
 <script lang="ts" setup>
-import { DocumentCopy } from '@element-plus/icons-vue'
+import MonacoEnvironment from '@/components/MonacoEnvironment.vue'
+import { DocumentAdd, Share } from '@element-plus/icons-vue'
 import { VkAvatar } from '@vunk/plus/components/avatar'
+import { VkMonacoEditor } from '@vunk/plus/components/monaco-editor'
 import { useGraph } from '@vunk-x6/composables'
 import { ElMessage } from 'element-plus'
+import { ref } from 'vue'
+import chainJson from './chain.json?raw'
 
 const graph = useGraph()
 
@@ -23,6 +27,17 @@ function getGraphJson () {
 
   return json
 }
+
+/* 导入 x6 json */
+const jsonValue = ref(chainJson)
+const importJsonDialog = ref(false)
+function preImportGraphJson () {
+  importJsonDialog.value = true
+}
+function doImportGraphJson () {
+  graph.fromJSON(JSON.parse(jsonValue.value))
+}
+/* endof 导入 x6 json */
 </script>
 
 <template>
@@ -37,10 +52,42 @@ function getGraphJson () {
     <div>
       <VkAvatar
         class="cursor-pointer"
-        :icon="DocumentCopy"
+        :icon="DocumentAdd"
+        @click="preImportGraphJson"
+      ></VkAvatar>
+
+      <VkAvatar
+        class="cursor-pointer"
+        :icon="Share"
         @click="getGraphJson"
       ></VkAvatar>
     </div>
+
+    <ElDialog v-model="importJsonDialog" title="导入 X6 JSON" width="80%">
+      <div h-66vh>
+        <MonacoEnvironment>
+          <VkMonacoEditor
+            v-model="jsonValue"
+            :default-options="{
+              language: 'json',
+            }"
+          ></VkMonacoEditor>
+        </MonacoEnvironment>
+      </div>
+      <template #footer>
+        <ElButton
+          type="primary"
+          @click="doImportGraphJson"
+        >
+          确定
+        </ElButton>
+        <ElButton
+          @click="importJsonDialog = false"
+        >
+          取消
+        </ElButton>
+      </template>
+    </ElDialog>
   </div>
 </template>
 
