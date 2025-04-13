@@ -1,4 +1,4 @@
---- 
+---
 title: NodeDrawer
 lang: zh-CN
 ---
@@ -7,11 +7,14 @@ lang: zh-CN
 
 NodeDrawer
 
-
 ## Basic
 
-:::demo 
+:::demo
 node-drawer/basic
 :::
 
-## NodeDrawer 其他
+## NodeDrawer Props
+
+:::props
+node-drawer/src/ctx
+:::

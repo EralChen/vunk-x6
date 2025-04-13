@@ -1,4 +1,4 @@
---- 
+---
 title: NodeComponent
 lang: zh-CN
 ---
@@ -7,11 +7,14 @@ lang: zh-CN
 
 NodeComponent
 
-
 ## Basic
 
-:::demo 
+:::demo
 node-component/basic
 :::
 
-## NodeComponent 其他
+## NodeComponent Props
+
+:::props
+node-component/src/ctx
+:::

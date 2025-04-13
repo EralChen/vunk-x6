@@ -1,10 +1,16 @@
 import type { PropType } from 'vue'
 
 export const props = {
+  /**
+   * @description v-model 是否展示 drawer
+   */
   modelValue: {
     type: Boolean as PropType<boolean>,
     default: undefined,
   },
+  /**
+   * @description drawer 对应的节点类型
+   */
   shape: {
     type: String,
     required: true,

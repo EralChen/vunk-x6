@@ -1,8 +1,9 @@
 <script lang="ts">
 import type { Node } from '@antv/x6'
+import type { __VkNodeComponent } from '../../node-component'
 import { Close } from '@element-plus/icons-vue'
-import { useModelComputed } from '@vunk/core/composables'
 
+import { useModelComputed } from '@vunk/core/composables'
 import { VkfTemplateInstancesProvider } from '@vunk/form/components/template-instances-provider'
 import { VkAvatar } from '@vunk/plus/components/avatar'
 import { useNodeData } from '@vunk-x6/components/node'
@@ -43,7 +44,8 @@ export default defineComponent({
       attrs: currentNode.value?.attrs ?? {},
       graph,
       data: nodeData.value,
-    }))
+      isActive: modelValue.value,
+    } as __VkNodeComponent.SlotArgument))
 
     // graph.on('selection:changed', onSelectionChanged)
     graphEmitterOn('node:click', ({ node }) => {
@@ -86,7 +88,6 @@ export default defineComponent({
     :with-header="withHeader"
     :append-to="appendTo"
   >
-    <!--    :append-to="appendTo" -->
     <template #header>
       <VkNodeHeader
         :title="currentNode?.data.label"
