@@ -13,7 +13,7 @@ export interface StartRow {
  */
 export interface NodeData {
   label: string
-  input: InputItem[]
+  output: InputItem[]
 }
 
 export interface InputItem extends Field<keyof StartRow> {}

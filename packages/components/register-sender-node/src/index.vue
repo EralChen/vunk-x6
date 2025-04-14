@@ -15,9 +15,9 @@ export default defineComponent({
   emits,
   setup (props, { emit }) {
     const ports: __VkNodeCard.Port[] = [
-      {
-        group: 'passiveTop',
-      },
+      // {
+      //   group: 'passiveTop',
+      // },
       {
         group: 'activeBottom',
       },
@@ -42,6 +42,7 @@ export default defineComponent({
   >
     <template #default="{ data }">
       <VkSender
+        v-model="data.USER_INPUT"
         class="vk-node-card-stop__click"
         :auto-size="true"
       ></VkSender>

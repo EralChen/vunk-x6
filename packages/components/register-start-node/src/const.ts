@@ -7,7 +7,7 @@ export enum RegisterStartNodePort {
 
 export const defaultData: NodeData = {
   label: '开始',
-  input: [
+  output: [
     {
       name: 'USER_INPUT',
       type: FieldType.String,

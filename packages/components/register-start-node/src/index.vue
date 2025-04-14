@@ -1,14 +1,14 @@
 <script lang="ts" setup>
 import type { PortManager } from '@antv/x6/es/model/port'
-import type { __VkfInformation, __VkfInput } from '@vunk/form'
 import type { Field } from '@vunk-x6/shared'
-import { setData } from '@vunk/core'
-import { VkfForm, VkfInformation } from '@vunk/form'
+import type { __VkfInformation, __VkfInput } from '@vunk/form'
 import { VkInformationTemplates } from '@vunk-x6/components/information-templates'
 import { VkNodeCard } from '@vunk-x6/components/node-card'
 import { defaultAttrs } from '@vunk-x6/components/port'
 import { fieldColumnMap, fieldInformationItem } from '@vunk-x6/components/register-node'
 import { VkStartIcon } from '@vunk-x6/icons/start'
+import { setData } from '@vunk/core'
+import { VkfForm, VkfInformation } from '@vunk/form'
 import { defaultData, RegisterStartNodePort } from './const'
 
 defineOptions({
@@ -18,16 +18,16 @@ defineOptions({
 const cardFormItems: __VkfInformation.FormItem[] = [
   {
     ...fieldInformationItem,
-    label: '输入',
-    prop: 'input',
+    label: '输出',
+    prop: 'output',
   },
 ]
 
 const drawerFormItems: __VkfInformation.FormItem[] = [
   {
     templateType: 'VkfInputCollection',
-    prop: 'input',
-    label: '输入',
+    prop: 'output',
+    label: '输出',
     splicable: false,
     defaultExpandAll: true,
     columns: [
