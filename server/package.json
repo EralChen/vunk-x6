@@ -1,0 +1,20 @@
+{
+  "name": "@vunk-x6/server",
+  "version": "1.0.0",
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "main": "src/main.ts",
+  "scripts": {
+    "dev": "tsx src/main.ts"
+  },
+  "dependencies": {
+    "@koa/router": "^13.1.0",
+    "busboy": "^1.6.0",
+    "koa-body-parsers": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/busboy": "^1.5.4",
+    "@types/koa__router": "^12.0.4"
+  }
+}

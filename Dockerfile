@@ -17,7 +17,7 @@ WORKDIR /app/v-admin
 RUN pnpm install
 
 # 执行一些自定义的 init 脚本
-RUN pnpm run app:init-arcgis
+# RUN pnpm run app:init-arcgis
 
 # 构建
 RUN pnpm build
