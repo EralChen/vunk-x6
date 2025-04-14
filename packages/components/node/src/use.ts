@@ -40,6 +40,7 @@ export function useNodeData<T extends NormalObject = NormalObject> (
   function init () {
     const node = unref(nodeRef)
     const initData = node?.getData()
+
     if (
       defaultValue && (
         initData === undefined

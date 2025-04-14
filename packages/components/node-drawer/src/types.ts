@@ -1,16 +1,11 @@
-import type { Graph, Node } from '@antv/x6'
 import type { MaybeArray, SetDataEvent } from '@vunk/core'
 import type { __VkfCascader } from '@vunk/form'
 import type { __VkfInputCollection } from '@vunk/form/components/input-collection'
 import type { __VkfTemplatesDefault } from '@vunk/form/components/templates-default'
 import type { Keyof, NormalObject } from '@vunk/shared'
+import type { __VkNodeComponent } from '@vunk-x6/components/node-component'
 
-export interface SlotArguments {
-  node?: Node
-  attrs: any
-  graph: Graph
-  data: NormalObject
-}
+export type SlotArgument = __VkNodeComponent.SlotArgument
 
 export interface ChangeEffectContext {
   prop: MaybeArray<string | number>

@@ -12,16 +12,10 @@ const selectedNodes = ref([])
 
 // Example node data with reactivity
 const nodeData = ref({
-  title: 'Custom Node',
+  label: 'Custom Node',
   description: 'Example node with custom content',
   count: 0,
 })
-
-// Function to update node data
-function updateNodeData () {
-  nodeData.value.count++
-  nodeData.value.description = `Example node with custom content (Updated: ${nodeData.value.count})`
-}
 </script>
 
 <template>
@@ -34,7 +28,7 @@ function updateNodeData () {
         <template #default="{ data }">
           <div class="p-2 bg-white border rounded-md w-40">
             <h3 class="text-lg font-medium">
-              {{ data.title }}
+              {{ data.label }}
             </h3>
             <p class="text-sm text-gray-500">
               {{ data.description }}
@@ -54,21 +48,8 @@ function updateNodeData () {
       <VkNodeDrawer
         v-model="visible"
         :shape="shape"
+        description="This is a custom node with a drawer"
       >
-        <template #title>
-          <span>Node Settings</span>
-        </template>
-
-        <template #actions>
-          <el-button type="primary" size="small" @click="updateNodeData">
-            Update
-          </el-button>
-        </template>
-
-        <template #description>
-          Configure the selected node's properties and data
-        </template>
-
         <template #default="{ data, attrs }">
           <div class="p-4 space-y-4">
             <!-- Display node data -->
@@ -92,13 +73,6 @@ function updateNodeData () {
                   <span class="text-gray-500">Count:</span>
                   <span>{{ data.count }}</span>
                 </div>
-
-                <button
-                  class="mt-2 px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
-                  @click="updateNodeData"
-                >
-                  Update Node Data
-                </button>
               </div>
             </div>
 

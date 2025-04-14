@@ -1,28 +1,33 @@
 <script lang="ts">
-import type { Cell } from '@antv/x6'
+import type { Node } from '@antv/x6'
+import type { __VkNodeComponent } from '../../node-component'
+import { Close } from '@element-plus/icons-vue'
+
 import { useModelComputed } from '@vunk/core/composables'
 import { VkfTemplateInstancesProvider } from '@vunk/form/components/template-instances-provider'
-
+import { VkAvatar } from '@vunk/plus/components/avatar'
 import { useNodeData } from '@vunk-x6/components/node'
-import { useGraph } from '@vunk-x6/composables'
+import { VkNodeHeader } from '@vunk-x6/components/node-header'
+import { useGraph, useGraphEmitter } from '@vunk-x6/composables'
 import { ElDrawer } from 'element-plus'
-import { computed, defineComponent, onBeforeUnmount, shallowRef } from 'vue'
+import { computed, defineComponent, shallowRef } from 'vue'
 import { emits, props } from './ctx'
-import CustomHeader from './custom-header.vue'
 import FormTemplates from './form-templates.vue'
 
 export default defineComponent({
   name: 'VkNodeDrawer',
   components: {
     ElDrawer,
-    CustomHeader,
     VkfTemplateInstancesProvider,
     FormTemplates,
+    VkNodeHeader,
+    VkAvatar,
   },
   props,
   emits,
   setup (props, { emit }) {
     const graph = useGraph()
+    const { graphEmitterOn } = useGraphEmitter()
     const appendTo = graph.container.parentElement as HTMLDivElement
 
     const modelValue = useModelComputed({
@@ -30,27 +35,8 @@ export default defineComponent({
       default: false,
     }, props, emit)
 
-    const currentNode = shallowRef<Cell>()
+    const currentNode = shallowRef<Node>()
     const { nodeData } = useNodeData(currentNode)
-
-    function onSelectionChanged () {
-      if (!graph.getSelectedCells)
-        return
-
-      const selectedCells = graph.getSelectedCells()
-      const last = selectedCells.at(-1)
-
-      // Update model value based on shape
-      modelValue.value = last?.shape === props.shape
-
-      // Track current node and update data
-      if (last?.shape === props.shape && last) {
-        currentNode.value = last
-      }
-      else {
-        currentNode.value = undefined
-      }
-    }
 
     // Computed slot args with reactive data
     const slotArgs = computed(() => ({
@@ -58,21 +44,32 @@ export default defineComponent({
       attrs: currentNode.value?.attrs ?? {},
       graph,
       data: nodeData.value,
-    }))
+      isActive: modelValue.value,
+    } as __VkNodeComponent.SlotArgument))
 
-    graph.on('selection:changed', onSelectionChanged)
-    graph.on('node:click', onSelectionChanged)
-
-    // Cleanup event listeners on unmount
-    onBeforeUnmount(() => {
-      graph.off('selection:changed', onSelectionChanged)
-      graph.off('node:click', onSelectionChanged)
+    // graph.on('selection:changed', onSelectionChanged)
+    graphEmitterOn('node:click', ({ node }) => {
+      // 当前点击的节点是不是该 drawer 对应的shape
+      if (node.shape === props.shape) {
+        currentNode.value = node
+        modelValue.value = true
+      }
+      else {
+        currentNode.value = undefined
+        modelValue.value = false
+      }
+    })
+    graphEmitterOn('blank:click', () => {
+      currentNode.value = undefined
+      modelValue.value = false
     })
 
     return {
       modelValue,
       appendTo,
       slotArgs,
+      currentNode,
+      Close,
     }
   },
 })
@@ -88,24 +85,29 @@ export default defineComponent({
     :close-on-press-escape="false"
     :size="size"
     :show-close="false"
+    :with-header="withHeader"
     :append-to="appendTo"
   >
-    <!--    :append-to="appendTo" -->
     <template #header>
-      <slot name="header" v-bind="slotArgs">
-        <CustomHeader @close="modelValue = false">
-          <template #title>
-            <slot name="title" v-bind="slotArgs" />
-          </template>
-          <template #actions>
-            <slot name="actions" v-bind="slotArgs" />
-          </template>
-          <template #description>
-            <slot name="description" v-bind="slotArgs" />
-          </template>
-        </CustomHeader>
-      </slot>
+      <VkNodeHeader
+        :title="currentNode?.data.label"
+        :node="currentNode"
+        :description="description"
+        @update:title="currentNode && (currentNode.data.label = $event)"
+        @action:delete="modelValue = false"
+      >
+        <template #icon>
+          <slot name="header_icon"></slot>
+        </template>
+        <template #actions_after>
+          <VkAvatar
+            :icon="Close"
+            @click="modelValue = false"
+          ></VkAvatar>
+        </template>
+      </VkNodeHeader>
     </template>
+
     <VkfTemplateInstancesProvider>
       <FormTemplates></FormTemplates>
       <slot v-bind="slotArgs" />
@@ -134,7 +136,7 @@ export default defineComponent({
 
 .vk-node-drawer {
   box-shadow: none;
-  border-left: var(--el-border-color) solid 1px;
+  /* border-left: var(--el-border-color) solid 1px; */
 }
 
 .vk-input-collection__expand-fieldset .el-form-item__label {
