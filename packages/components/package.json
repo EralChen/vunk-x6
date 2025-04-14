@@ -6,8 +6,5 @@
   "keywords": [],
   "scripts": {
     "build": "gulp -f gulpfile.ts"
-  },
-  "dependencies": {
-    "ant-design-x-vue": "^1.1.0"
   }
 }

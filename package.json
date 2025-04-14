@@ -13,20 +13,17 @@
     "docs:dev": "pnpm run -C docs dev",
     "docs:build": "pnpm run -C docs build",
     "docs:init-arcgis": "gulp -f scripts/docs/init-arcgis.ts",
-
     "publish": "gulp -f scripts/publish.ts",
     "docker:publish": "gulp -f scripts/docker/publish.ts",
     "cc": "gulp -f scripts/create/component/index.ts",
     "ccd": "gulp -f scripts/create/component-docs/index.ts",
     "app:preview": "gulp -f scripts/app/preview.ts",
-
     "prisma:generate": "prisma generate",
     "prisma:studio": "prisma studio",
     "prisma:pull": "prisma db pull",
     "prisma:reset": "prisma migrate reset",
     "prisma:dev": "prisma migrate dev --name init",
     "prisma:ppg": "npx @prisma/ppg-tunnel --port 5432",
-
     "run:task": "gulp -f scripts/task.ts",
     "rm:nm": "find . -name \"node_modules\" -type d -prune -exec rm -rf '{}' +"
   },
@@ -51,6 +48,8 @@
     "@vunk/shared": "0.5.56",
     "@vunk/skzz": "0.0.0-alpha.111",
     "@vunk/x6": "workspace:*",
+    "ant-design-vue": "^4.2.6",
+    "ant-design-x-vue": "^1.1.0",
     "deepdash-es": "^5.3.9",
     "element-plus": "^2.9.7",
     "koa": "^2.16.1",

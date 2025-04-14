@@ -3,8 +3,8 @@ import type { Node } from '@antv/x6'
 import { Graph } from '@antv/x6'
 import { register } from '@antv/x6-vue-shape'
 import { useResizeObserver } from '@vueuse/core'
-import { isEmptyObject } from '@vunk/shared/object'
 import { useGraphEmitter } from '@vunk-x6/composables'
+import { isEmptyObject } from '@vunk/shared/object'
 import { cloneDeep } from 'lodash-es'
 import { defineComponent, onBeforeUnmount, onUnmounted, ref, watchEffect } from 'vue'
 import { emits, props } from './ctx'
@@ -142,7 +142,7 @@ export default defineComponent({
   left: 0;
   right: 0;
   bottom: 0;
-  border: 3px solid var(--el-color-warning, #ff9900);
+  border: 3px dashed var(--el-color-primary);
   pointer-events: none;
   border-radius: 4px;
 }
