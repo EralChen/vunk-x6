@@ -11,4 +11,4 @@ Node 用例目录 `docs\examples\node`
 ## TODO
 
 - [x] 在 Node 组件中，实现 zIndex 的逻辑。
-- [ ] 在用例中，测试 zIndex 的逻辑。
+- [x] 在用例中，测试 zIndex 的逻辑。
