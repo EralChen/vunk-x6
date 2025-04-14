@@ -1,6 +1,6 @@
 <script lang="ts">
-import { VkRendererTemplate } from '@vunk/core/components/renderer-template'
 import { VkNode } from '@vunk-x6/components/node'
+import { VkRendererTemplate } from '@vunk/core/components/renderer-template'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
@@ -10,17 +10,27 @@ export default defineComponent({
     VkNode,
   },
   setup () {
-    return {}
+    const simpleTemplates = [
+      'VkRegisterLlmNode',
+      'VkRegisterSenderNode',
+    ]
+    return {
+      simpleTemplates,
+    }
   },
 })
 </script>
 
 <template>
-  <VkRendererTemplate type="VkRegisterLlmNode">
+  <VkRendererTemplate
+    v-for="shape of simpleTemplates"
+    :key="shape"
+    :type="shape"
+  >
     <template #default="{ props }">
       <VkNode
         v-bind="props"
-        shape="VkRegisterLlmNode"
+        :shape="shape"
       ></VkNode>
     </template>
   </VkRendererTemplate>

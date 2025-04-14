@@ -1,6 +1,7 @@
-import type { Graph } from '@antv/x6'
+import type { CellView } from '@antv/x6'
 import { Options } from '@antv/x6'
 import { MagnetRule } from '@vunk-x6/components/port'
+import { SymbolNodeMovable } from '@vunk-x6/shared'
 
 export const defaultConnecting = {
   snap: true, // 启用连线的自动吸附
@@ -61,5 +62,13 @@ export const defaultHighlighting: Partial<Options.Highlighting> = {
         'stroke': '#67C23A',
       },
     },
+  },
+}
+
+export const defaultInteracting: CellView.Interacting = {
+  nodeMovable (cellView) {
+    const cell = cellView.cell
+    const nodeMovable = cell[SymbolNodeMovable]
+    return nodeMovable
   },
 }

@@ -2,7 +2,7 @@
 import { Graph } from '@antv/x6'
 import { getTeleport } from '@antv/x6-vue-shape'
 import { computed, defineComponent, onMounted, provide, ref, shallowRef } from 'vue'
-import { defaultConnecting, defaultHighlighting } from './const'
+import { defaultConnecting, defaultHighlighting, defaultInteracting } from './const'
 import { emits, props } from './ctx'
 import Emitter from './emitter.vue'
 
@@ -37,6 +37,7 @@ export default defineComponent({
         },
         connecting: defaultConnecting,
         highlighting: defaultHighlighting,
+        interacting: defaultInteracting,
         ...props.defaultOptions,
       })
       provide('vk_graph', graph.value)

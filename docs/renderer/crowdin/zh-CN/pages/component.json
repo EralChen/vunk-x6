@@ -51,6 +51,10 @@
       {
         "link": "/register-end-node",
         "text": "RegisterEndNode"
+      },
+      {
+        "link": "/register-sender-node",
+        "text": "RegisterSenderNode"
       }
     ]
   },

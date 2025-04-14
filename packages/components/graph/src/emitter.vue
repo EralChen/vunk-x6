@@ -10,8 +10,14 @@ const emitter = mitt() as GraphEmitter
 graph.on('node:click', (args) => {
   emitter.emit('node:click', args)
 })
+graph.on('node:move', (args) => {
+  emitter.emit('node:move', args)
+})
 graph.on('node:mouseup', (args) => {
   emitter.emit('node:mouseup', args)
+})
+graph.on('node:mousemove', (args) => {
+  emitter.emit('node:mousemove', args)
 })
 graph.on('node:mousedown', (args) => {
   emitter.emit('node:mousedown', args)

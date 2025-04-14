@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { VkDnd, VkDndItem } from '@vunk-x6/components/dnd'
 import { VkRegisterLlmNode } from '@vunk-x6/components/register-llm-node'
+import { VkRegisterSenderNode } from '@vunk-x6/components/register-sender-node'
 import { VkLlmAvatar } from '@vunk-x6/icons/llm'
 import { ElCollapse, ElCollapseItem } from 'element-plus'
 import { ref } from 'vue'
@@ -15,6 +16,10 @@ const collapseValue = ref(['Basic'])
         <VkDndItem :shape="VkRegisterLlmNode.name">
           <VkLlmAvatar></VkLlmAvatar>
           大模型
+        </VkDndItem>
+
+        <VkDndItem :shape="VkRegisterSenderNode.name">
+          发送
         </VkDndItem>
       </ElCollapseItem>
     </ElCollapse>
