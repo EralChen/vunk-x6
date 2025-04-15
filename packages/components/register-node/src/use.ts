@@ -1,10 +1,11 @@
 import type { Edge, Node } from '@antv/x6'
+import type { FieldWithValue } from '@vunk-x6/shared'
 import type { __VkfInputCollection } from '@vunk/form/components/input-collection'
 import type { MaybeRef, Ref } from 'vue'
 import type { __VkNodeDrawer } from '../../node-drawer'
 import type { Field, FieldConlectionColumn } from './types'
 import { useGraph } from '@vunk-x6/composables'
-import { FieldType, type FieldWithValue } from '@vunk-x6/shared'
+import { FieldType } from '@vunk-x6/shared'
 
 import { computed, nextTick, onUnmounted, ref, unref, watchEffect } from 'vue'
 import { fieldColumnMap } from './const-field-column'

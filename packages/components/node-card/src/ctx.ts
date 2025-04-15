@@ -49,6 +49,14 @@ export const props = {
     type: Array<string>,
     default: () => ['vk-node-card-stop__move'],
   },
+
+  /**
+   * @description 某些 card 中的交互, 会冒泡到 card 上, 节点缩放, 你可以通过给对应的元素添加这个 class 来阻止事件冒泡
+   */
+  stopZoomClass: {
+    type: Array<string>,
+    default: () => ['vk-node-card-stop__zoom'],
+  },
 }
 
 export const emits = {

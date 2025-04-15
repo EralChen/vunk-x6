@@ -3,7 +3,7 @@ import type { Node } from '@antv/x6'
 import { VkNodeComponent } from '@vunk-x6/components/node-component'
 import { VkNodeDrawer } from '@vunk-x6/components/node-drawer'
 import { VkNodeHeader } from '@vunk-x6/components/node-header'
-import { useGraph, useGraphEmitter } from '@vunk-x6/composables'
+import { useGraph, useGraphEmitter, useMousewheelGuardClass } from '@vunk-x6/composables'
 import { SymbolNodeMovable } from '@vunk-x6/shared'
 import { ElCard } from 'element-plus'
 import { cloneDeep } from 'lodash-es'
@@ -75,6 +75,13 @@ function unHandleNodeMousedown () {
   graph.togglePanning(currentPannable)
 }
 /* 阻止 drag END */
+
+/* 阻止 zoom */
+const { addMousewheelGuardClass } = useMousewheelGuardClass()
+for (const className of props.stopZoomClass) {
+  addMousewheelGuardClass(className)
+}
+/* 阻止 zoom END */
 </script>
 
 <template>

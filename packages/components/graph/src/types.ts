@@ -8,6 +8,12 @@ export interface LoadEvent {
   graph: Graph
 }
 
+export interface MousewheelGuardClassContext {
+  getMousewheelGuardClass: () => string[]
+  addMousewheelGuardClass: (className: string) => void
+  removeMousewheelGuardClass: (className: string) => void
+}
+
 export type OnLoad = (event: LoadEvent) => ReturnVoid
 
 export interface GraphEvents {
@@ -20,4 +26,5 @@ export interface GraphEvents {
   'node:mousemove': EventArgs['node:mousemove']
   [key: string | symbol]: any
 }
+
 export type GraphEmitter = Emitter<GraphEvents>

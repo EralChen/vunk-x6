@@ -5,6 +5,7 @@ import { computed, defineComponent, onMounted, provide, ref, shallowRef } from '
 import { defaultConnecting, defaultHighlighting, defaultInteracting } from './const'
 import { emits, props } from './ctx'
 import Emitter from './emitter.vue'
+import { initMousewheelGuardClass } from './use'
 
 const TeleportContainer = getTeleport()
 
@@ -25,6 +26,8 @@ export default defineComponent({
       return props.modules.includes('vue_shape_teleport')
     })
 
+    const { getMousewheelGuardClass } = initMousewheelGuardClass()
+
     onMounted(() => {
       graph.value = new Graph({
         container: graphMainNode.value,
@@ -33,6 +36,19 @@ export default defineComponent({
         panning: true,
         mousewheel: {
           enabled: true,
+          guard (e) {
+            const path = e.composedPath()
+            for (const item of path) {
+              if (item instanceof HTMLElement) {
+                for (const className of getMousewheelGuardClass()) {
+                  if (item.classList.contains(className)) {
+                    return false
+                  }
+                }
+              }
+            }
+            return true
+          },
           modifiers: [],
         },
         connecting: defaultConnecting,

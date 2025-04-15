@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { SplitGridSidebar } from '@/layouts/split-grid'
 import { DocumentCopy } from '@element-plus/icons-vue'
-import { VkAvatar } from '@vunk/plus/components/avatar'
 import { VkGraph } from '@vunk-x6/components/graph'
+import { VkAvatar } from '@vunk/plus/components/avatar'
 import Core from './core.vue'
 import Dnd from './dnd.vue'
 import Registers from './registers.vue'

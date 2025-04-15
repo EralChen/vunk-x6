@@ -1,2 +1,2 @@
-export * from './emitter'
+export * from './exports'
 export * from './instance'

@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import MonacoEnvironment from '@/components/MonacoEnvironment.vue'
 import { DocumentAdd, Share } from '@element-plus/icons-vue'
+import { useGraph } from '@vunk-x6/composables'
 import { VkAvatar } from '@vunk/plus/components/avatar'
 import { VkMonacoEditor } from '@vunk/plus/components/monaco-editor'
-import { useGraph } from '@vunk-x6/composables'
 import { ElMessage } from 'element-plus'
 import { ref } from 'vue'
 import chainJson from './chain.json?raw'

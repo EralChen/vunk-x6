@@ -86,14 +86,7 @@ export function extractFieldFromNode (node: Node) {
     label: data.label ?? '未命名节点',
   }
 
-  // 开始节点的可用字段在 StartNode 中定义
-  if (node.shape === VkRegisterStartNode.name) {
-    const nodeData: __VkRegisterStartNode.NodeData = data
-    field.children = nodeData.input
-  }
-  else {
-    field.children = data.output
-  }
+  field.children = data.output
 
   eachDeep(field, (v: Field) => {
     if (!v.label) {

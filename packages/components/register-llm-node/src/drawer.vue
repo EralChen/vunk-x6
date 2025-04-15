@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import type OpenAI from 'openai'
 import type { PropType } from 'vue'
-import { setData } from '@vunk/core'
-
 import { VkNodeDrawer } from '@vunk-x6/components/node-drawer'
+
+import { setData } from '@vunk/core'
 import DrawerForm from './drawer-form.vue'
 
 const props = defineProps({
