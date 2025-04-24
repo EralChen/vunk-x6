@@ -6,7 +6,7 @@ interface MriData {
   mode: string
 }
 
-export function loadEnvMeta () {
+export function getEnvironmentContext () {
   const argv = process.argv.slice(2)
   const mriData = mri<MriData>(argv)
   const isProduction = process.env.NODE_ENV === 'production'

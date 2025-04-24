@@ -66,19 +66,6 @@ Graph组件已内置以下验证逻辑：
 
 ### Selction 样式
 
-#### 全局的选中状态默认隐藏
-
-```css
-.vk-graph .x6-widget-selection-box {
-  border: none;
-  display: none;
-}
-
-.vk-graph.x6-widget-selection-inner {
-  border:none;
-}
-```
-
 #### 在节点上的选中状态
 
 ```css
@@ -89,7 +76,7 @@ Graph组件已内置以下验证逻辑：
   left: 0;
   right: 0;
   bottom: 0;
-  border: 3px solid var(--el-color-warning, #ff9900);
+  border: 3px dashed var(--el-color-primary);
   pointer-events: none;
   border-radius: 4px;
 }

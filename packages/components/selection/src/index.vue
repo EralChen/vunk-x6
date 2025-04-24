@@ -1,8 +1,8 @@
 <script lang="ts">
 import { Selection } from '@antv/x6-plugin-selection'
 import { watchPausable } from '@vueuse/core'
-import { useModelComputed } from '@vunk/core/composables'
 import { useGraph } from '@vunk-x6/composables/instance'
+import { useModelComputed } from '@vunk/core/composables'
 import { defineComponent, nextTick, onBeforeUnmount, provide, watchEffect } from 'vue'
 import { emits, props } from './ctx'
 

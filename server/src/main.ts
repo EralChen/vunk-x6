@@ -4,14 +4,14 @@ import { CatchErrorMiddleware, middleware, restFetch } from '@vunk/server'
 import consola from 'consola'
 import Koa from 'koa'
 import KoaBodyParsers from 'koa-body-parsers'
-import { loadEnvMeta } from './utils/loadEnv'
+import { getEnvironmentContext } from './utils'
 import DownloadView from './views/download'
 import FileView from './views/file'
+import OpenaiInvokeView from './views/openai/invoke'
 import UploadView from './views/upload'
 
-const { env } = loadEnvMeta()
+const { env } = getEnvironmentContext()
 restFetch.baseURL = env.VITE_BASE_API
-consola.info('restFetch.baseURL', restFetch.baseURL)
 
 const app = new Koa()
 const router = new KoaRouter()
@@ -24,11 +24,13 @@ app.use(async (ctx, next) => {
   await next()
 })
 app.use(CatchErrorMiddleware)
-app.use(middleware(UploadView))
 
 router.post('/upload', middleware(UploadView))
 router.get('/file', middleware(FileView))
 router.get('/download/:id', middleware(DownloadView))
+router.get('/openai/invoke', middleware(OpenaiInvokeView))
+
+app.use(router.routes()).use(router.allowedMethods())
 
 process.on('unhandledRejection', (err) => {
   // 将错误信息发送到 dist/err.log 文件
@@ -37,7 +39,6 @@ process.on('unhandledRejection', (err) => {
     `${new Date().toISOString()} - ${err}\n\n`,
   )
 })
-
 app.listen(process.env.PORT || 4545, () => {
   consola.info(`Server is running on http://localhost:${process.env.PORT || 4545}`)
 })

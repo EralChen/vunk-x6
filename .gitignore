@@ -5,4 +5,5 @@ docs/public/Esri
 .pnpm-store
 *.tar
 /.env
+*.local
 

@@ -10,6 +10,10 @@
   },
   "dependencies": {
     "@koa/router": "^13.1.0",
+    "@langchain/community": "^0.3.41",
+    "@langchain/core": "^0.3.47",
+    "@langchain/langgraph": "^0.2.66",
+    "@langchain/openai": "^0.5.6",
     "busboy": "^1.6.0",
     "koa-body-parsers": "^5.0.0"
   },
