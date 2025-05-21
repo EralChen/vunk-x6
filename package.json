@@ -41,7 +41,7 @@
     "@vunk-x16/composables": "workspace:*",
     "@vunk-x16/icons": "workspace:*",
     "@vunk-x16/shared": "workspace:*",
-    "@vunk/core": "1.5.0",
+    "@vunk/core": "1.5.1",
     "@vunk/form": "2.9.1",
     "@vunk/plus": "1.4.3",
     "@vunk/server": "^0.2.3",

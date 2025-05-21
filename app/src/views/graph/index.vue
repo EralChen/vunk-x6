@@ -1,21 +1,27 @@
 <script lang="ts" setup>
 import type { Ref } from 'vue'
 import { DocumentCopy } from '@element-plus/icons-vue'
-import { VkAppSidebarSegment } from '@vunk-x16/components/app-sidebar-segment'
+import { useAppSidebarSegmentViewContext, VkAppSidebarSegment } from '@vunk-x16/components/app-sidebar-segment'
 import { VkAppTooltipButton } from '@vunk-x16/components/app-tooltip-button'
 import { VkGraph } from '@vunk-x16/components/graph'
 import { VkAsyncTeleport } from '@vunk/core'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import Dnd from './dnd.vue'
 import Registers from './registers.vue'
 
 const dndWrapper = ref() as Ref<HTMLDivElement>
+
+const { attrs } = useAppSidebarSegmentViewContext()
+
+onMounted(() => {
+  attrs['sidebar-props'].tabsModelValue || (
+    attrs['sidebar-props'].tabsModelValue = 'Explorer'
+  )
+})
 </script>
 
 <template>
   <VkGraph>
-    <Registers></Registers>
-
     <VkAppSidebarSegment name="Explorer">
       <template #label>
         <VkAppTooltipButton
@@ -32,5 +38,7 @@ const dndWrapper = ref() as Ref<HTMLDivElement>
     >
       <Dnd></Dnd>
     </VkAsyncTeleport>
+
+    <Registers></Registers>
   </VkGraph>
 </template>

@@ -2,15 +2,24 @@
 import SplitGrid from '@/components/SplitGrid.vue'
 import { VkAppSidebarSegmentRenderer, VkAppSidebarSegmentView } from '@vunk-x16/components/app-sidebar-segment'
 import { ElTabPane, ElTabs } from 'element-plus'
+import { reactive } from 'vue'
+
+const sidebarProps = reactive({
+  tabsModelValue: '',
+})
 </script>
 
 <template>
-  <VkAppSidebarSegmentRenderer>
+  <VkAppSidebarSegmentRenderer :sidebar-props="sidebarProps">
     <SplitGrid>
       <template #sidebar>
         <VkAppSidebarSegmentView>
           <template #default="{ items }">
-            <ElTabs h-full class="layout-sidebar-tabs">
+            <ElTabs
+              v-model="sidebarProps.tabsModelValue"
+              h-full
+              class="layout-sidebar-tabs"
+            >
               <ElTabPane
                 v-for="item in items"
                 :key="item.attrs.name"
