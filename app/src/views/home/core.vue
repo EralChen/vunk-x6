@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { VkNode } from '@vunk-x6/components/node'
-import { VkRegisterEndNode } from '@vunk-x6/components/register-end-node'
-import { VkRegisterStartNode } from '@vunk-x6/components/register-start-node'
-import { VkSelection } from '@vunk-x6/components/selection'
+import { VkNode } from '@vunk-x16/components/node'
+import { VkRegisterEndNode } from '@vunk-x16/components/register-end-node'
+import { VkRegisterStartNode } from '@vunk-x16/components/register-start-node'
+import { VkSelection } from '@vunk-x16/components/selection'
 import { ref } from 'vue'
 
 const selectedNodes = ref([])
@@ -15,16 +15,16 @@ const selectedNodes = ref([])
   />
 
   <!-- 实例化开始节点 -->
-  <VkNode
+  <!-- <VkNode
     :shape="VkRegisterStartNode.name"
     :x="100"
     :y="300"
-  ></VkNode>
+  ></VkNode> -->
 
   <!-- 实例化结束节点 -->
-  <VkNode
+  <!-- <VkNode
     :shape="VkRegisterEndNode.name"
     :x="100"
     :y="1000"
-  ></VkNode>
+  ></VkNode> -->
 </template>

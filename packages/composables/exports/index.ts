@@ -1,1 +1,1 @@
-export { useGraphEmitter, useMousewheelGuardClass } from '@vunk-x6/components/graph'
+export { useGraphEmitter, useMousewheelGuardClass } from '@vunk-x16/components/graph'

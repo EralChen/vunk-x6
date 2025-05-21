@@ -1,12 +1,12 @@
 <script lang="ts">
 import type { Node } from '@antv/x6'
-import type { __VkTemplatesDefault } from '@vunk-x6/components/templates-default'
+import type { __VkTemplatesDefault } from '@vunk-x16/components/templates-default'
 import type { Ref } from 'vue'
 import { Dnd } from '@antv/x6-plugin-dnd'
+import { VkTemplatesDefault } from '@vunk-x16/components/templates-default'
+import { useGraph } from '@vunk-x16/composables'
 import { VkRenderer } from '@vunk/core/components/renderer'
 import { Deferred } from '@vunk/core/shared/utils-promise'
-import { VkTemplatesDefault } from '@vunk-x6/components/templates-default'
-import { useGraph } from '@vunk-x6/composables'
 import { defineComponent, markRaw, onBeforeUnmount, onMounted, provide, ref, shallowRef } from 'vue'
 import { emits, props } from './ctx'
 

@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import type { __VkNode } from '@vunk-x6/components/node'
-import type { __VkPort } from '@vunk-x6/components/port'
-import type { __VkRegisterStartNode } from '@vunk-x6/components/register-start-node'
-import { VkGraph } from '@vunk-x6/components/graph'
-import { VkNode } from '@vunk-x6/components/node'
-import { VkPort } from '@vunk-x6/components/port'
-import { VkRegisterStartNode } from '@vunk-x6/components/register-start-node'
+import type { __VkNode } from '@vunk-x16/components/node'
+import type { __VkPort } from '@vunk-x16/components/port'
+import type { __VkRegisterStartNode } from '@vunk-x16/components/register-start-node'
+import { VkGraph } from '@vunk-x16/components/graph'
+import { VkNode } from '@vunk-x16/components/node'
+import { VkPort } from '@vunk-x16/components/port'
+import { VkRegisterStartNode } from '@vunk-x16/components/register-start-node'
 
 const registerStartNodeData = {
   input: [

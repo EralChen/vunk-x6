@@ -1,4 +1,4 @@
-import type { Field, FieldWithValue } from '@vunk-x6/shared'
+import type { Field, FieldWithValue } from '@vunk-x16/shared'
 
 import type { ChatCompletionCreateParamsNonStreaming } from 'openai/resources'
 

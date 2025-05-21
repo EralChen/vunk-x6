@@ -1,5 +1,5 @@
 <script lang="ts">
-import { VkNode } from '@vunk-x6/components/node'
+import { VkNode } from '@vunk-x16/components/node'
 import { VkRendererTemplate } from '@vunk/core/components/renderer-template'
 import { defineComponent } from 'vue'
 

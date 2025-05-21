@@ -1,5 +1,5 @@
 import type { App } from 'vue'
-import { VkDndItem } from '@vunk-x6/components/dnd-item'
+import { VkDndItem } from '@vunk-x16/components/dnd-item'
 import VkDnd from './src/index.vue'
 
 export * as __VkDnd from './src/types'

@@ -1,13 +1,13 @@
 <script lang="ts" setup>
 import type { PortManager } from '@antv/x6/es/model/port'
-import type { __VkNodeComponent } from '@vunk-x6/components/node-component'
+import type { __VkNodeComponent } from '@vunk-x16/components/node-component'
 import type { __VkfInformation } from '@vunk/form'
 import type { NodeData } from './types'
-import { VkInformationTemplates } from '@vunk-x6/components/information-templates'
+import { VkInformationTemplates } from '@vunk-x16/components/information-templates'
 
-import { VkNodeCard } from '@vunk-x6/components/node-card'
-import { fieldInformationItem, fieldWithValueInformationItem } from '@vunk-x6/components/register-node'
-import { VkLlmIcon } from '@vunk-x6/icons/llm'
+import { VkNodeCard } from '@vunk-x16/components/node-card'
+import { fieldInformationItem, fieldWithValueInformationItem } from '@vunk-x16/components/register-node'
+import { VkLlmIcon } from '@vunk-x16/icons/llm'
 
 import { setData } from '@vunk/core'
 import { VkfInformation } from '@vunk/form'

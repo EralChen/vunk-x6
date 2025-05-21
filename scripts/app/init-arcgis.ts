@@ -1,16 +1,14 @@
+import fs from 'node:fs'
+import path from 'node:path'
 import { appRootDirs, workRoot } from '@lib-env/path'
 import { gulpTask } from '@vunk/shared/function'
 import { run } from '@vunk/shared/node/process'
 import { series } from 'gulp'
-import path from 'path'
-import fs from 'fs'
-
-
 
 const assetsDir = path.resolve(workRoot, './node_modules/@arcgis/core/assets')
 
-const tasks = appRootDirs.map(appRoot => {
-  const appPublicDir  = path.resolve(appRoot, 'public')
+const tasks = appRootDirs.map((appRoot) => {
+  const appPublicDir = path.resolve(appRoot, 'public')
   return [
     gulpTask('clean', async () => {
       await run('rm -rf Esri', appPublicDir)
@@ -23,7 +21,6 @@ const tasks = appRootDirs.map(appRoot => {
 
 export default series(tasks)
 
-
 function copyFiles (srcDir: string, destDir: string) {
   const files = fs.readdirSync(srcDir)
   for (const file of files) {
@@ -32,7 +29,8 @@ function copyFiles (srcDir: string, destDir: string) {
     if (fs.statSync(srcPath).isDirectory()) {
       fs.mkdirSync(destPath, { recursive: true })
       copyFiles(srcPath, destPath)
-    } else {
+    }
+    else {
       fs.copyFileSync(srcPath, destPath)
     }
   }

@@ -1,8 +1,9 @@
 <script lang="ts" setup>
-import { VkDnd, VkDndItem } from '@vunk-x6/components/dnd'
-import { VkRegisterLlmNode } from '@vunk-x6/components/register-llm-node'
-import { VkRegisterSenderNode } from '@vunk-x6/components/register-sender-node'
-import { VkLlmAvatar } from '@vunk-x6/icons/llm'
+import { VkDnd, VkDndItem } from '@vunk-x16/components/dnd'
+import { VkRegisterLlmNode } from '@vunk-x16/components/register-llm-node'
+import { VkRegisterSenderNode } from '@vunk-x16/components/register-sender-node'
+import { VkLlmAvatar } from '@vunk-x16/icons/llm'
+import { VkSendAvatar } from '@vunk-x16/icons/send'
 import { ElCollapse, ElCollapseItem } from 'element-plus'
 import { ref } from 'vue'
 
@@ -19,8 +20,13 @@ const collapseValue = ref(['Basic'])
         </VkDndItem>
 
         <VkDndItem :shape="VkRegisterSenderNode.name">
+          <VkSendAvatar></VkSendAvatar>
           发送
         </VkDndItem>
+      </ElCollapseItem>
+
+      <ElCollapseItem name="NPC" title="NPC">
+        <VkDndItem>Alex</VkDndItem>
       </ElCollapseItem>
     </ElCollapse>
   </VkDnd>

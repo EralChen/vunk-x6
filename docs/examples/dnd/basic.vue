@@ -1,14 +1,14 @@
 <script lang="ts" setup>
 import type { Graph } from '@antv/x6'
-import type { __VkNode } from '@vunk-x6/components/node'
-import type { __VkRegisterEndNode } from '@vunk-x6/components/register-end-node'
-import type { __VkRegisterStartNode } from '@vunk-x6/components/register-start-node'
-import { VkDnd } from '@vunk-x6/components/dnd'
-import { VkGraph } from '@vunk-x6/components/graph'
-import { VkRegisterEndNode } from '@vunk-x6/components/register-end-node'
-import { VkRegisterLlmNode } from '@vunk-x6/components/register-llm-node'
-import { VkRegisterStartNode } from '@vunk-x6/components/register-start-node'
-import { VkSelection } from '@vunk-x6/components/selection'
+import type { __VkNode } from '@vunk-x16/components/node'
+import type { __VkRegisterEndNode } from '@vunk-x16/components/register-end-node'
+import type { __VkRegisterStartNode } from '@vunk-x16/components/register-start-node'
+import { VkDnd } from '@vunk-x16/components/dnd'
+import { VkGraph } from '@vunk-x16/components/graph'
+import { VkRegisterEndNode } from '@vunk-x16/components/register-end-node'
+import { VkRegisterLlmNode } from '@vunk-x16/components/register-llm-node'
+import { VkRegisterStartNode } from '@vunk-x16/components/register-start-node'
+import { VkSelection } from '@vunk-x16/components/selection'
 </script>
 
 <template>

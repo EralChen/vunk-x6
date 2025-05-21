@@ -7,4 +7,6 @@ interface ImportMetaEnv {
   OPENAI_API_KEY: string
   OPENAI_BASE_URL: string
 
+  MEMORY_API_KEY: string
+
 }

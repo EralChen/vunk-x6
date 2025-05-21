@@ -1,7 +1,7 @@
+import type { __VkNodeDrawer } from '@vunk-x16/components/node-drawer'
+import type { FieldWithValue } from '@vunk-x16/shared'
 import type { __VkfCascader } from '@vunk/form'
 import type { __VkfInputCollection } from '@vunk/form/components/input-collection'
-import type { __VkNodeDrawer } from '@vunk-x6/components/node-drawer'
-import type { FieldWithValue } from '@vunk-x6/shared'
 import { fieldTypeOptions } from './const-field-type'
 
 type Column<F> = __VkNodeDrawer.InputCollectionColumn<FieldWithValue<F>>

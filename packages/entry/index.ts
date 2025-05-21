@@ -1,3 +1,3 @@
-export * from '@vunk-x6/shared'
+export * from '@vunk-x16/shared'
 
 /* [PLACEHOLDER] components export */

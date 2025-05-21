@@ -1,5 +1,5 @@
 <script lang="ts">
-import { useGraph, useGraphEmitter } from '@vunk-x6/composables'
+import { useGraph, useGraphEmitter } from '@vunk-x16/composables'
 import { defineComponent, onBeforeUnmount, onUnmounted, provide, watch, watchEffect } from 'vue'
 import { emits, props } from './ctx'
 

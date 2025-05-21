@@ -1,5 +1,5 @@
 import type { NodeData } from './types'
-import { FieldType } from '@vunk-x6/shared'
+import { FieldType } from '@vunk-x16/shared'
 
 export const defaultData: NodeData = {
   label: 'Sender',

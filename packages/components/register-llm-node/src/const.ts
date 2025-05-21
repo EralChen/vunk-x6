@@ -1,5 +1,5 @@
 import type { NodeData } from './types'
-import { FieldType } from '@vunk-x6/shared'
+import { FieldType } from '@vunk-x16/shared'
 import OpenAI from 'openai'
 
 export enum RegisterLlmNodePort {

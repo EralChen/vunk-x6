@@ -1,4 +1,4 @@
-import type { Field } from '@vunk-x6/shared'
+import type { Field } from '@vunk-x16/shared'
 
 /**
  * @description 开始节点用户输入数据

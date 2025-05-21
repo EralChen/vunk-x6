@@ -1,7 +1,7 @@
 {
-  "name": "@vunk-x6/webdriver",
-  "private": true,
+  "name": "@vunk-x16/webdriver",
   "type": "module",
+  "private": true,
   "scripts": {
     "pixel-me": "gulp -f pixel-me/gulpfile.ts"
   },

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { VkGraph } from '@vunk-x6/components/graph'
-import { VkNode } from '@vunk-x6/components/node'
-import { VkSelection } from '@vunk-x6/components/selection'
+import { VkGraph } from '@vunk-x16/components/graph'
+import { VkNode } from '@vunk-x16/components/node'
+import { VkSelection } from '@vunk-x16/components/selection'
 import { ref } from 'vue'
 
 const selected = ref([])

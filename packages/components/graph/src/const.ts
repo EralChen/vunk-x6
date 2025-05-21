@@ -1,7 +1,7 @@
 import type { CellView } from '@antv/x6'
 import { Options } from '@antv/x6'
-import { MagnetRule } from '@vunk-x6/components/port'
-import { SymbolNodeMovable } from '@vunk-x6/shared'
+import { MagnetRule } from '@vunk-x16/components/port'
+import { SymbolNodeMovable } from '@vunk-x16/shared'
 
 export const defaultConnecting = {
   snap: true, // 启用连线的自动吸附

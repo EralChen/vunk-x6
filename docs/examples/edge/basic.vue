@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { VkEdge } from '@vunk-x6/components/edge'
-import { VkGraph } from '@vunk-x6/components/graph'
-import { VkNode } from '@vunk-x6/components/node'
+import { VkEdge } from '@vunk-x16/components/edge'
+import { VkGraph } from '@vunk-x16/components/graph'
+import { VkNode } from '@vunk-x16/components/node'
 </script>
 
 <template>

@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 import type { Node } from '@antv/x6'
-import type { __VkNodeDrawer } from '@vunk-x6/components/node-drawer'
+import type { __VkNodeDrawer } from '@vunk-x16/components/node-drawer'
 import type { SetDataEvent } from '@vunk/core'
 import type { Media } from '@vunk/shared'
 import type OpenAI from 'openai'
 import type { PropType } from 'vue'
 import type { NodeData } from './types'
-import { fieldColumnMap, useFieldInputCollectionColumns } from '@vunk-x6/components/register-node'
+import { fieldColumnMap, useFieldInputCollectionColumns } from '@vunk-x16/components/register-node'
 import { VkfForm } from '@vunk/form'
 import { onMounted, ref } from 'vue'
 

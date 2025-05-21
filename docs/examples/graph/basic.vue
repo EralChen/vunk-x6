@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { VkGraph } from '@vunk-x6/components/graph'
+import { VkGraph } from '@vunk-x16/components/graph'
 </script>
 
 <template>

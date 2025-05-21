@@ -1,13 +1,19 @@
 import type { RouteRecordRaw } from 'vue-router'
+import { DefaultLayout } from '@/layouts/default'
 import { SplitGrid } from '@/layouts/split-grid/index'
 import { createRouter, createWebHashHistory } from 'vue-router'
 
 export const routes: Array<RouteRecordRaw> = [
   {
-    path: '/',
-    redirect: {
-      name: 'home',
-    },
+    path: '/graph',
+    component: DefaultLayout,
+    children: [
+      {
+        path: '',
+        name: 'graph',
+        component: () => import('_v/graph/index.vue'),
+      },
+    ],
   },
   {
     path: '/home',

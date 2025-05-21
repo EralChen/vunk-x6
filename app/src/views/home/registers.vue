@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { VkRegisterEndNode } from '@vunk-x6/components/register-end-node'
-import { VkRegisterLlmNode } from '@vunk-x6/components/register-llm-node'
-import { VkRegisterSenderNode } from '@vunk-x6/components/register-sender-node'
-import { VkRegisterStartNode } from '@vunk-x6/components/register-start-node'
+import { VkRegisterEndNode } from '@vunk-x16/components/register-end-node'
+import { VkRegisterLlmNode } from '@vunk-x16/components/register-llm-node'
+import { VkRegisterSenderNode } from '@vunk-x16/components/register-sender-node'
+import { VkRegisterStartNode } from '@vunk-x16/components/register-start-node'
 </script>
 
 <template>

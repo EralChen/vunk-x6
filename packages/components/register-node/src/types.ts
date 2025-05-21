@@ -1,4 +1,4 @@
-import type { __VkNodeDrawer } from '@vunk-x6/components/node-drawer'
+import type { __VkNodeDrawer } from '@vunk-x16/components/node-drawer'
 import type { FieldType } from './const-field-type'
 
 export interface Field<T = string> {

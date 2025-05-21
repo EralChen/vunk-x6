@@ -1,5 +1,5 @@
 <script lang="ts">
-import { useGraph, useNode } from '@vunk-x6/composables'
+import { useGraph, useNode } from '@vunk-x16/composables'
 import { computed, defineComponent, onBeforeUnmount, useId } from 'vue'
 import { emits, props } from './ctx'
 

@@ -1,4 +1,4 @@
-import type { __VkGraph } from '@vunk-x6/components/graph'
+import type { __VkGraph } from '@vunk-x16/components/graph'
 import type { MousewheelGuardClassContext } from './types'
 import { inject, onBeforeUnmount, onDeactivated, provide, ref } from 'vue'
 

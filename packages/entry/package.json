@@ -1,12 +1,12 @@
 {
-  "name": "@vunk/x6",
+  "name": "@vunk/x16",
   "version": "0.0.0-alpha.1",
   "description": "",
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
   "main": "index.ts",
   "scripts": {
     "build": "gulp -f gulpfile.ts"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  }
 }

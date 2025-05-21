@@ -1,5 +1,5 @@
 import type { NodeData } from './types'
-import { FieldType } from '@vunk-x6/shared'
+import { FieldType } from '@vunk-x16/shared'
 
 export enum RegisterStartNodePort {
   output = 'start_node_port_output',

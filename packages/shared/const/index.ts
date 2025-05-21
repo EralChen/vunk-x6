@@ -1,2 +1,2 @@
 export * from './symbol'
-export { FieldType } from '@vunk-x6/components/register-node'
+export { FieldType } from '@vunk-x16/components/register-node'

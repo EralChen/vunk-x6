@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { GraphEmitter } from './types'
-import { useGraph } from '@vunk-x6/composables'
+import { useGraph } from '@vunk-x16/composables'
 import mitt from 'mitt'
 import { provide } from 'vue'
 

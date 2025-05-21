@@ -1,4 +1,4 @@
-import type { Field } from '@vunk-x6/shared'
+import type { Field } from '@vunk-x16/shared'
 
 export interface NodeData {
   label: string

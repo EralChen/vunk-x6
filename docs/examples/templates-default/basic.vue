@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import type { __VkTemplatesDefault } from '@vunk-x6/components/templates-default'
+import type { __VkTemplatesDefault } from '@vunk-x16/components/templates-default'
+import { VkGraph } from '@vunk-x16/components/graph'
+import { defaultData, VkRegisterLlmNode } from '@vunk-x16/components/register-llm-node'
+import { VkSelection } from '@vunk-x16/components/selection'
+import { VkTemplatesDefault } from '@vunk-x16/components/templates-default'
 import { setData } from '@vunk/core'
 import { VkRenderer } from '@vunk/core/components/renderer'
 import { VkRendererData } from '@vunk/core/components/renderer-data'
-import { VkGraph } from '@vunk-x6/components/graph'
-import { defaultData, VkRegisterLlmNode } from '@vunk-x6/components/register-llm-node'
-import { VkSelection } from '@vunk-x6/components/selection'
-import { VkTemplatesDefault } from '@vunk-x6/components/templates-default'
 import { cloneDeep } from 'lodash-es'
 import { reactive, ref } from 'vue'
 

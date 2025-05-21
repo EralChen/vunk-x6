@@ -1,4 +1,4 @@
-import type { __VkRegisterNode } from '@vunk-x6/components/register-node'
+import type { __VkRegisterNode } from '@vunk-x16/components/register-node'
 
 export * from './FormItem'
 export * from './InformationItem'

@@ -1,5 +1,5 @@
 import type { Graph, Node } from '@antv/x6'
-import type { __VkGraph } from '@vunk-x6/components/graph'
+import type { __VkGraph } from '@vunk-x16/components/graph'
 import type { __VkRenderer } from '@vunk/core/components/renderer'
 import type { ReturnVoid, VueComponentPropsType } from '@vunk/shared'
 import type Core from './index.vue'

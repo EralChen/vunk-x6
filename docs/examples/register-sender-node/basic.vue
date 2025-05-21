@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import type { Graph } from '@antv/x6'
-import { VkGraph } from '@vunk-x6/components/graph'
-import { VkNode } from '@vunk-x6/components/node'
-import { VkRegisterSenderNode } from '@vunk-x6/components/register-sender-node'
-import { VkSelection } from '@vunk-x6/components/selection'
+import { VkGraph } from '@vunk-x16/components/graph'
+import { VkNode } from '@vunk-x16/components/node'
+import { VkRegisterSenderNode } from '@vunk-x16/components/register-sender-node'
+import { VkSelection } from '@vunk-x16/components/selection'
 
 const graphOptions: Graph.Options = {}
 </script>

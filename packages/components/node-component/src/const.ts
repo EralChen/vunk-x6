@@ -1,4 +1,4 @@
-import { defaultAttrs, MagnetRule } from '@vunk-x6/components/port'
+import { defaultAttrs, MagnetRule } from '@vunk-x16/components/port'
 
 export const defaultGroups = {
   top: {

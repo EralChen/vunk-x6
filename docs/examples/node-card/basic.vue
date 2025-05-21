@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import type { PortManager } from '@antv/x6/es/model/port'
-import type { __VkNodeCard } from '@vunk-x6/components/node-card'
+import type { __VkNodeCard } from '@vunk-x16/components/node-card'
 import { Document } from '@element-plus/icons-vue'
-import { VkGraph } from '@vunk-x6/components/graph'
-import { VkNode } from '@vunk-x6/components/node'
-import { VkNodeCard } from '@vunk-x6/components/node-card'
-import { defaultAttrs } from '@vunk-x6/components/port'
+import { VkGraph } from '@vunk-x16/components/graph'
+import { VkNode } from '@vunk-x16/components/node'
+import { VkNodeCard } from '@vunk-x16/components/node-card'
+import { defaultAttrs } from '@vunk-x16/components/port'
 
 // 端口配置
 const ports: PortManager.PortMetadata[] = [

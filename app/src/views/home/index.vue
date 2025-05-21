@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { SplitGridSidebar } from '@/layouts/split-grid'
-import { VkGraph } from '@vunk-x6/components/graph'
+import { VkGraph } from '@vunk-x16/components/graph'
 import Core from './core.vue'
 import Dnd from './dnd.vue'
 import Registers from './registers.vue'

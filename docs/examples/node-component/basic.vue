@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import type { __VkNode } from '@vunk-x6/components/node'
-import { VkGraph } from '@vunk-x6/components/graph'
-import { VkNode } from '@vunk-x6/components/node'
-import { VkNodeComponent } from '@vunk-x6/components/node-component'
+import type { __VkNode } from '@vunk-x16/components/node'
+import { VkGraph } from '@vunk-x16/components/graph'
+import { VkNode } from '@vunk-x16/components/node'
+import { VkNodeComponent } from '@vunk-x16/components/node-component'
 import { reactive } from 'vue'
 
 const nodeData = reactive({
