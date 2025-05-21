@@ -12,7 +12,7 @@ import { VkSplitGrid } from '@vunk/core/components/split-grid'
         <slot name="sidebar"></slot>
       </div>
       <div v-bind="getGutterProps('column', 1)"></div>
-      <div w-full h-full overflow-hidden transform-gpu>
+      <div w-full h-full overflow-hidden transform-gpu pos-relative>
         <slot name="main"></slot>
       </div>
     </template>

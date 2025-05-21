@@ -40,5 +40,9 @@ onMounted(() => {
     </VkAsyncTeleport>
 
     <Registers></Registers>
+
+    <template #before>
+      <RouterView></RouterView>
+    </template>
   </VkGraph>
 </template>

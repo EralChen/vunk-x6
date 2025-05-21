@@ -5,6 +5,11 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 
 export const routes: Array<RouteRecordRaw> = [
   {
+    path: '/',
+    redirect: '/graph',
+  },
+
+  {
     path: '/graph',
     component: DefaultLayout,
     children: [
@@ -12,6 +17,14 @@ export const routes: Array<RouteRecordRaw> = [
         path: '',
         name: 'graph',
         component: () => import('_v/graph/index.vue'),
+
+        children: [
+          {
+            path: 'memory',
+            name: 'memory',
+            component: () => import('_v/memory/index.vue'),
+          },
+        ],
       },
     ],
   },
@@ -25,7 +38,6 @@ export const routes: Array<RouteRecordRaw> = [
         component: () => import('_v/home/index.vue'),
       },
     ],
-
   },
 ]
 
