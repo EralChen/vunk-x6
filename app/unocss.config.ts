@@ -13,7 +13,7 @@ const settings = createUnocssSettings({
    * class="gmt-m"
    * if you want to use like `mt-m`, you can set it to `''`
    */
-  presetGapPrefix: '',
+  presetGapPrefix: 'g',
   presetGapTheme: Object.keys(namedGap).reduce((a, c) => {
     const key = c.replace('--gap-', '')
     a[key] = namedGap[c]

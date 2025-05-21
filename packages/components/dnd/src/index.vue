@@ -7,6 +7,7 @@ import { VkTemplatesDefault } from '@vunk-x16/components/templates-default'
 import { useGraph } from '@vunk-x16/composables'
 import { VkRenderer } from '@vunk/core/components/renderer'
 import { Deferred } from '@vunk/core/shared/utils-promise'
+import { isNotEmptyObject } from '@vunk/shared/object'
 import { defineComponent, markRaw, onBeforeUnmount, onMounted, provide, ref, shallowRef } from 'vue'
 import { emits, props } from './ctx'
 
@@ -66,9 +67,11 @@ export default defineComponent({
         }) as HTMLDivElement
         if (!dndItem)
           return
-        const type = dndItem.getAttribute('data-type')
+        const type = dndItem.dataset.type
         if (!type)
           return
+
+        const data = JSON.parse(dndItem.dataset.data ?? '{}')
 
         const nodeDef = new Deferred<Node>()
 
@@ -81,6 +84,7 @@ export default defineComponent({
           },
           width: 300,
           height: 200,
+          data: isNotEmptyObject(data) ? data : undefined,
         }
         dndNodeSource.value.push(nodeSourceItem)
         nodeDef.promise.then((node) => {

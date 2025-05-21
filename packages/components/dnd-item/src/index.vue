@@ -9,7 +9,11 @@ export default defineComponent({
 </script>
 
 <template>
-  <div :data-type="shape" class="vk-dnd-item">
+  <div
+    :data-type="shape"
+    :data-data="JSON.stringify(data)"
+    class="vk-dnd-item"
+  >
     <slot></slot>
   </div>
 </template>

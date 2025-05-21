@@ -14,6 +14,7 @@ export default defineComponent({
       id: props.id,
       shape: props.shape,
       label: props.label,
+      data: props.data,
     })
 
     const handleAdded = () => {

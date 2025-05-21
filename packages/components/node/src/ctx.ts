@@ -45,6 +45,11 @@ export const props = {
     default: false,
   },
 
+  data: {
+    type: Object,
+    default: undefined,
+  },
+
 }
 
 export const emits = {

@@ -3,7 +3,11 @@ import type { PropType } from 'vue'
 export const props = {
   shape: {
     type: String,
-    required: true,
+    required: false,
+  },
+  data: {
+    type: Object,
+    default: () => ({}),
   },
 }
 
