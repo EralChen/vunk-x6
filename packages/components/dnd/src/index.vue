@@ -57,6 +57,9 @@ export default defineComponent({
       })
 
       dndNodeRef.value.addEventListener('mousedown', (e) => {
+        if (!props.draggable)
+          return
+
         // 如果拖拽的是.vk-dnd-item，则获取其data-type
         const path = e.composedPath()
         const dndItem = path.find((el) => {
@@ -112,7 +115,12 @@ export default defineComponent({
 </script>
 
 <template>
-  <div ref="dndNodeRef" class="vk-dnd">
+  <div
+    ref="dndNodeRef" class="vk-dnd"
+    :class="{
+      'is-draggable': draggable,
+    }"
+  >
     <div v-if="ready" class="vk-dnd__content">
       <slot></slot>
     </div>
@@ -124,7 +132,7 @@ export default defineComponent({
 </template>
 
 <style>
-.vk-dnd-item {
+.vk-dnd.is-draggable .vk-dnd-item {
   cursor: move;
 }
 </style>

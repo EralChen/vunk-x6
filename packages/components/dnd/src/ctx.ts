@@ -1,13 +1,19 @@
 import type { Dnd } from '@antv/x6-plugin-dnd'
-import type { NormalObject } from '@vunk/shared'
 import type { PropType } from 'vue'
-import type { DragEndEvent, DragStartEvent } from './types'
 
 export const props = {
   // 模板节点的配置
   defaultOptions: {
     type: Object as PropType<Partial<Dnd.Options>>,
     default: () => ({}),
+  },
+
+  /**
+   * 是否启用拖拽功能
+   */
+  draggable: {
+    type: Boolean,
+    default: true,
   },
 }
 
