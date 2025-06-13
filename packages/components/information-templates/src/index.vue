@@ -1,20 +1,24 @@
-<script lang="ts">
+<script lang="tsx">
 import { VkfInformationTemplatesDefault } from '@vunk/form/components/information-templates-default'
 import { defineComponent } from 'vue'
 import { emits, props } from './ctx'
+import PortTemp from './Port.vue'
 
 export default defineComponent({
   name: 'VkInformationTemplates',
   components: {
     VkfInformationTemplatesDefault,
+    PortTemp,
   },
   props,
   emits,
+
 })
 </script>
 
 <template>
   <VkfInformationTemplatesDefault />
+  <PortTemp />
 </template>
 
 <style>

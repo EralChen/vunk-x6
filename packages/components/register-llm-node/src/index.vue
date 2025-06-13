@@ -1,14 +1,16 @@
 <script lang="ts" setup>
 import type { PortManager } from '@antv/x6/es/model/port'
+import type { __VkInformationTemplates } from '@vunk-x16/components/information-templates'
 import type { __VkNodeComponent } from '@vunk-x16/components/node-component'
 import type { __VkfInformation } from '@vunk/form'
 import type { NodeData } from './types'
-import { VkInformationTemplates } from '@vunk-x16/components/information-templates'
+import { Markup } from '@antv/x6'
 
+import { VkInformationTemplates } from '@vunk-x16/components/information-templates'
 import { VkNodeCard } from '@vunk-x16/components/node-card'
 import { fieldInformationItem, fieldWithValueInformationItem } from '@vunk-x16/components/register-node'
-import { VkLlmIcon } from '@vunk-x16/icons/llm'
 
+import { VkLlmIcon } from '@vunk-x16/icons/llm'
 import { setData } from '@vunk/core'
 import { VkfInformation } from '@vunk/form'
 import { watchEffect } from 'vue'
@@ -27,7 +29,7 @@ watchEffect(() => {
   props.client.apiKey = props.apiKey
 })
 
-type CardFormItem = __VkfInformation.FormItem<keyof NodeData>
+type CardFormItem = __VkInformationTemplates.FormItem<keyof NodeData>
 
 const cardFormItems: CardFormItem[] = [
   {
@@ -47,13 +49,13 @@ const cardFormItems: CardFormItem[] = [
     prop: 'output',
     ...fieldInformationItem,
   },
+
 ]
 
 const ports: PortManager.PortMetadata[] = [
   {
     group: 'passiveTop' as __VkNodeComponent.DefaultGroup,
     id: RegisterLlmNodePort.input,
-
   },
   {
     group: 'activeBottom' as __VkNodeComponent.DefaultGroup,

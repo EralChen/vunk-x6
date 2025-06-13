@@ -4,24 +4,24 @@ import { VkDnd, VkDndItem } from '@vunk-x16/components/dnd'
 import { VkRegisterLlmNode } from '@vunk-x16/components/register-llm-node'
 import { VkRegisterSenderNode } from '@vunk-x16/components/register-sender-node'
 import { VkLlmAvatar } from '@vunk-x16/icons/llm'
-import { VkMindAvatar } from '@vunk-x16/icons/mind'
+// import { VkMindAvatar } from '@vunk-x16/icons/mind'
 import { VkSendAvatar } from '@vunk-x16/icons/send'
 import { ElCollapse, ElCollapseItem } from 'element-plus'
 import { ref, watch } from 'vue'
 import { useGraphVisible } from './useGraphVisible'
 
-const { routerNext, route } = useRouterTo()
+const { route } = useRouterTo()
 
 const [graphVisible, checkGraphVisible] = useGraphVisible()
 const collapseValue = ref(['Basic', 'NPC'])
 watch(route, checkGraphVisible, { immediate: true, flush: 'post' })
 
-function goMemory () {
-  routerNext({
-    path: 'memory',
-    mode: 'push',
-  })
-}
+// function goMemory () {
+//   routerNext({
+//     path: 'memory',
+//     mode: 'push',
+//   })
+// }
 </script>
 
 <template>
@@ -41,7 +41,7 @@ function goMemory () {
         </VkDndItem>
       </ElCollapseItem>
 
-      <ElCollapseItem name="NPC" title="NPC">
+      <!-- <ElCollapseItem name="NPC" title="NPC">
         <VkDndItem sk-flex="row-between">
           <el-text>
             Alex
@@ -51,7 +51,7 @@ function goMemory () {
             @click="goMemory"
           ></VkMindAvatar>
         </VkDndItem>
-      </ElCollapseItem>
+      </ElCollapseItem> -->
     </ElCollapse>
   </VkDnd>
 </template>

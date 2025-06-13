@@ -1,7 +1,5 @@
 <script lang="ts" setup>
 import type { __VkNode } from '@vunk-x16/components/node'
-import type { __VkPort } from '@vunk-x16/components/port'
-import type { __VkRegisterStartNode } from '@vunk-x16/components/register-start-node'
 import { VkGraph } from '@vunk-x16/components/graph'
 import { VkNode } from '@vunk-x16/components/node'
 import { VkPort } from '@vunk-x16/components/port'

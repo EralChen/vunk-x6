@@ -1,10 +1,12 @@
 <script lang="ts" setup>
 import type { Node } from '@antv/x6'
+import { VkInformationTemplates } from '@vunk-x16/components/information-templates'
 import { VkNodeComponent } from '@vunk-x16/components/node-component'
 import { VkNodeDrawer } from '@vunk-x16/components/node-drawer'
 import { VkNodeHeader } from '@vunk-x16/components/node-header'
 import { useGraph, useGraphEmitter, useMousewheelGuardClass } from '@vunk-x16/composables'
 import { SymbolNodeMovable } from '@vunk-x16/shared'
+import { VkfTemplateInstancesProvider } from '@vunk/form/components/template-instances-provider'
 import { ElCard } from 'element-plus'
 import { cloneDeep } from 'lodash-es'
 import { onBeforeUnmount, onMounted, ref } from 'vue'
@@ -108,7 +110,10 @@ for (const className of props.stopZoomClass) {
           </VkNodeHeader>
         </template>
 
-        <slot v-bind="args"></slot>
+        <VkfTemplateInstancesProvider>
+          <VkInformationTemplates />
+          <slot v-bind="args"></slot>
+        </VkfTemplateInstancesProvider>
       </ElCard>
     </template>
   </VkNodeComponent>

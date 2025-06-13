@@ -54,6 +54,11 @@ export default defineComponent({
         connecting: defaultConnecting,
         highlighting: defaultHighlighting,
         interacting: defaultInteracting,
+        onPortRendered (args) {
+          const selectors = args.contentSelectors
+          const container = selectors && selectors.foContent
+          console.log('onPortRendered', args, selectors, container)
+        },
         ...props.defaultOptions,
       })
       provide('vk_graph', graph.value)

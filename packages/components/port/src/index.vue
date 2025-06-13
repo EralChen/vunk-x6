@@ -14,6 +14,7 @@ export default defineComponent({
     })
     const node = useNode()
     const graph = useGraph()
+
     node.addPort({
       id: theId.value,
       group: props.group,

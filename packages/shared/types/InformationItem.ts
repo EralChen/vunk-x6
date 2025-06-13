@@ -1,4 +1,4 @@
-import type { __VkfInformation } from '@vunk/form/components/information'
+import type { __VkInformationTemplates } from '@vunk-x16/components/information-templates'
 
 export type InformationItem<P extends string = string>
-  = __VkfInformation.FormItem<P>
+  = __VkInformationTemplates.FormItem<P>

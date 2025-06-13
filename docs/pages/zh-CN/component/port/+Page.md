@@ -13,8 +13,8 @@ Port
 port/basic
 :::
 
-## Connecting
+<!-- ## Connecting
 
 :::demo
 port/connecting
-:::
+::: -->

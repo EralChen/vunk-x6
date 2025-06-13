@@ -6,7 +6,7 @@ import { useResizeObserver } from '@vueuse/core'
 import { useGraphEmitter } from '@vunk-x16/composables'
 import { isEmptyObject } from '@vunk/shared/object'
 import { cloneDeep } from 'lodash-es'
-import { defineComponent, onBeforeUnmount, onUnmounted, ref, watchEffect } from 'vue'
+import { defineComponent, onBeforeUnmount, onUnmounted, provide, ref, watchEffect } from 'vue'
 import { emits, props } from './ctx'
 
 export default defineComponent({
@@ -22,6 +22,8 @@ export default defineComponent({
           graph: null,
         },
         setup (nodeProps: { node: Node, graph: Graph }) {
+          provide('vk_node', nodeProps.node)
+
           const { graphEmitterOn } = useGraphEmitter()
 
           const initData = (function () {
@@ -39,6 +41,7 @@ export default defineComponent({
               overwrite: true,
             })
           })
+
           /* 当 node.data 改变时, 同步到响应式数据 */
           watchEffect(() => {
             nodeProps.node.setData(theData.value, {

@@ -2,7 +2,6 @@
 import type { __VkNodeCard } from '@vunk-x16/components/node-card'
 import type { __VkRegisterNode } from '@vunk-x16/components/register-node'
 import type { FormItem, InformationItem } from '@vunk-x16/shared'
-import type { __VkfForm, __VkfInformation } from '@vunk/form'
 import type { NodeData } from './types'
 import { VkNodeCard } from '@vunk-x16/components/node-card'
 import { fieldColumnMap } from '@vunk-x16/components/register-node'
@@ -25,9 +24,6 @@ export default defineComponent({
   emits,
   setup (props, { emit }) {
     const ports: __VkNodeCard.Port[] = [
-      // {
-      //   group: 'passiveTop',
-      // },
       {
         group: 'activeBottom',
       },
@@ -42,6 +38,12 @@ export default defineComponent({
           fieldColumnMap.type,
           fieldColumnMap.description,
         ] as __VkRegisterNode.FieldConlectionColumn[],
+      },
+
+      {
+        templateType: 'VkPort',
+        label: '大模型',
+        prop: 'llm',
       },
     ]
 
