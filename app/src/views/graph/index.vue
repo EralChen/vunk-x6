@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import type { Graph } from '@antv/x6'
+import type { __VkGraph } from '@vunk-x16/components/graph'
 import type { Ref } from 'vue'
 import { DocumentCopy } from '@element-plus/icons-vue'
 import { useAppSidebarSegmentViewContext, VkAppSidebarSegment } from '@vunk-x16/components/app-sidebar-segment'
@@ -9,9 +11,9 @@ import { onMounted, ref } from 'vue'
 import Dnd from './dnd.vue'
 import Registers from './registers.vue'
 
-const dndWrapper = ref() as Ref<HTMLDivElement>
-
 const { attrs } = useAppSidebarSegmentViewContext()
+
+const dndWrapper = ref() as Ref<HTMLDivElement>
 
 onMounted(() => {
   attrs['sidebar-props'].tabsModelValue || (

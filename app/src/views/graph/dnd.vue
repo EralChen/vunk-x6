@@ -7,10 +7,14 @@ import { VkLlmAvatar } from '@vunk-x16/icons/llm'
 import { VkMindAvatar } from '@vunk-x16/icons/mind'
 import { VkSendAvatar } from '@vunk-x16/icons/send'
 import { ElCollapse, ElCollapseItem } from 'element-plus'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+import { useGraphVisible } from './useGraphVisible'
 
-const { routerNext } = useRouterTo()
+const { routerNext, route } = useRouterTo()
+
+const [graphVisible, checkGraphVisible] = useGraphVisible()
 const collapseValue = ref(['Basic', 'NPC'])
+watch(route, checkGraphVisible, { immediate: true, flush: 'post' })
 
 function goMemory () {
   routerNext({
@@ -21,7 +25,7 @@ function goMemory () {
 </script>
 
 <template>
-  <VkDnd class="h-full home-page-dnd">
+  <VkDnd class="h-full home-page-dnd" :draggable="graphVisible">
     <ElCollapse v-model="collapseValue">
       <ElCollapseItem name="Basic" title="基础组件">
         <VkDndItem

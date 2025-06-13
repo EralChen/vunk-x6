@@ -79,7 +79,6 @@ export default defineComponent({
 
   <div class="vk-graph" v-bind="$attrs">
     <div
-      v-bind="$attrs"
       ref="graphMainNode"
     ></div>
 
