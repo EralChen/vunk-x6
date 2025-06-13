@@ -7,7 +7,7 @@ export const props = {
     default: undefined,
   },
   group: {
-    type: String as PropType<'top' | 'right' | 'bottom' | 'left'>,
+    type: String as PropType<'top' | 'right' | 'bottom' | 'left' | 'absolute'>,
     default: 'left',
   },
 }
